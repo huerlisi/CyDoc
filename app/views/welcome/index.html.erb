@@ -1,2 +1,13 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<div style="margin-left: 9em; margin-top: 5em">
+<table>
+  <tr>
+    <td style="vertical-align: top">
+      <%= render :partial => "item", :locals => { :title => "Resultate", :controller => 'results', :description => 'Aktuelle Resultate anzeigen' } %>
+      <%= render :partial => "item", :locals => { :title => "Nachricht senden", :controller => 'contact', :action => 'message', :description => 'Nachricht an ZytoLabor senden' } %>
+    </td>
+    <td style="vertical-align: top; padding-left: 5em">
+      <%= render :partial => "item", :locals => { :title => "Neue Bestellung", :url => 'http://shop.zyto-labor.com', :image => 'orders_new.png', :description => 'Verbrauchsmaterial bestellen' } %>
+    </td>
+   </tr>
+  </table>
+</div>
