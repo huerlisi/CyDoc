@@ -1,0 +1,190 @@
+.sheet_a5 {
+  background-color: white;
+  width: 14.8cm;
+  height: 21cm;
+}
+
+@media screen {
+  .sheet_a5 {
+    border: solid 1px black;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+  }
+
+  input[type=submit] {
+    border: none;
+    background: white;
+  }
+  
+  .report #finding_list input[type=button] {
+    display: none;
+  }
+}
+
+.title {
+  font-family: ChollaSansBold;
+}
+
+.sheet_a5 #subject {
+  position: absolute;
+  top: 3.4cm;
+  left: 0cm;
+  width: 10cm;
+}
+
+
+.report {
+  font-family: ChollaSansRegular,Arial;
+  font-size: 11pt;
+  position: absolute;
+  top: 2.2cm;
+  left: 2.2cm;
+}
+
+.report #patient {
+  position: absolute;
+  top: 0cm;
+  left: 0cm;
+  width: 5cm;
+}
+
+.report #insurance {
+  font-family: ChollaSansThin;
+  position: absolute;
+  top: 2.8cm;
+  left: 0cm;
+  width: 5cm;
+}
+
+.report #doctor {
+  position: absolute;
+  top: 0cm;
+  left: 6.5cm;
+  width: 5cm;
+}
+
+.report #case {
+  font-family: ChollaSansThin;
+  position: absolute;
+  top: 2.3cm;
+  left: 6.5cm;
+  width: 5cm;
+}
+
+.report #remarks {
+  position: absolute;
+  top: 4.2cm;
+  left: 0cm;
+}
+
+.report #finding_title {
+  position: absolute;
+  top: 9.4cm;
+  left: 0cm;
+}
+
+.report #hpv_finding_title {
+  position: absolute;
+  top: 7cm;
+  left: 0cm;
+}
+
+.finding_group_Kontrolle {
+  font-family: ChollaSansBold;
+}
+
+.finding_group_Zustand {
+  font-family: ChollaSansItalic;
+}
+
+.report #classification {
+  font-family: ChollaSansBold;
+  font-size: 12pt;
+  border: solid 1pt;
+  position: absolute;
+  top: 10cm;
+  left: 0cm;
+  width: 11cm;
+  padding: 4px;
+}
+
+.report #hpv_classification {
+  font-family: ChollaSansBold;
+  font-size: 12pt;
+  border: solid 1pt;
+  position: absolute;
+  top: 5.5cm;
+  left: 0cm;
+  width: 10.4cm;
+  padding: 4px;
+}
+
+.report #finding_list {
+  font-family: ChollaSansThin;
+  position: absolute;
+  top: 11cm;
+  left: 0cm;
+  width: 6.5cm;
+}
+
+.report #special_findings {
+  font-family: ChollaSansThin;
+  position: absolute;
+  top: 11cm;
+  left: 7cm;
+  width: 5cm;
+}
+
+.report #hpv_findings {
+  font-family: ChollaSansThin;
+  position: absolute;
+  top: 8cm;
+  left: 0cm;
+  width: 10.4cm;
+}
+
+.report #hpv_remarks {
+  font-family: ChollaSansThin;
+  position: absolute;
+  top: 11cm;
+  left: 0cm;
+  width: 10.4cm;
+}
+
+.report #signature {
+  position: absolute;
+  top: 14cm;
+  left: 5cm
+}
+
+.report #label1 {
+  font-size: 12pt;
+  position: absolute;
+  top: 15.5cm;
+  left: -1cm;
+  width: 6cm
+}
+
+.report #label2 {
+  font-size: 10pt;
+  position: absolute;
+  top: 15.5cm;
+  left: 5cm;
+  width: 3.5cm
+}
+
+.report #label3 {
+  font-size: 10pt;
+  position: absolute;
+  top: 15.5cm;
+  left: 8.5cm;
+  width: 3.5cm
+}
+
+.report #label1 .date_of_birth {
+  display: none;
+}
