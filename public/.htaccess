@@ -1,5 +1,5 @@
 # General Apache options
-AddHandler fastcgi-script .fcgi
+AddHandler fcgid-script .fcgi
 AddHandler cgi-script .cgi
 Options +FollowSymLinks +ExecCGI
 
@@ -29,7 +29,7 @@ RewriteEngine On
 RewriteRule ^$ index.html [QSA]
 RewriteRule ^([^.]+)$ $1.html [QSA]
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ dispatch.cgi [QSA,L]
+RewriteRule ^(.*)$ dispatch.fcgi [QSA,L]
 
 # In case Rails experiences terminal errors
 # Instead of displaying this message you can supply a file here which will be rendered instead
