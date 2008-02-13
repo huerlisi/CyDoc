@@ -6,6 +6,7 @@
       <%= render :partial => "item", :locals => { :title => "Nachricht senden", :controller => 'contact', :action => 'message', :description => 'Nachricht an ZytoLabor senden' } %>
     </td>
     <td style="vertical-align: top; padding-left: 5em">
+      <%= render :partial => "item", :locals => { :title => "Suchen", :controller => 'search', :image => 'search.png', :description => 'Resultat suchen' } %>
       <%= render :partial => "item", :locals => { :title => "Neue Bestellung", :url => 'http://shop.zyto-labor.com', :image => 'orders_new.png', :description => 'Verbrauchsmaterial bestellen' } %>
     </td>
    </tr>
