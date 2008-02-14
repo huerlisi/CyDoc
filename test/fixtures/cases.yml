@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  patient_id: 1
+  doctor_id: 1
+  screener_id: 1
+  insurance_id: 1
+  insurance_nr: MyString
+  classification_id: 1
+  needs_p16: false
+  finding_text: MyText
+  screened_at: 2008-02-14 10:41:40
+  examined_at: 2008-02-14 10:41:40
+  praxistar_eingangsnr: MyString
+
+two:
+  patient_id: 1
+  doctor_id: 1
+  screener_id: 1
+  insurance_id: 1
+  insurance_nr: MyString
+  classification_id: 1
+  needs_p16: false
+  finding_text: MyText
+  screened_at: 2008-02-14 10:41:40
+  examined_at: 2008-02-14 10:41:40
+  praxistar_eingangsnr: MyString
