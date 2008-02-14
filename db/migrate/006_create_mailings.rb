@@ -6,6 +6,8 @@ class CreateMailings < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :mailings, :doctor_id
   end
 
   def self.down
