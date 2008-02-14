@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  doctor_id: 1
+  printed_at: 2008-02-14 09:17:36
+
+two:
+  doctor_id: 1
+  printed_at: 2008-02-14 09:17:36
