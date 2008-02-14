@@ -1,9 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
+unprinted:
+  id: 1
   doctor_id: 1
-  printed_at: 2008-02-14 09:17:36
+  printed_at: nil
 
-two:
+printed:
+  id: 2
   doctor_id: 1
   printed_at: 2008-02-14 09:17:36
