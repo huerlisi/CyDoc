@@ -8,6 +8,7 @@ class MailingsController < ApplicationController
   end
 
   def list
+    @mailings = Mailing.find(:all)
   end
 
   def statistics

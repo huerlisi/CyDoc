@@ -1,2 +1,18 @@
-<h1>Mailings#list</h1>
-<p>Find me in app/views/mailings/list.html.erb</p>
+<h1>Letzte Resultate</h1>
+
+<table class="listing">
+<% for mailing in @mailings %>
+  <tr>
+    <td/>
+    <td style="text-align: right"><%= link_to mailing.cases.count, :action => 'overview', :id => mailing %></td>
+    <td>
+      <%=h mailing.doctor.nil? ? "Unbekannt" : mailing.doctor.name %>
+      <pre id="mailing_log_<%=h mailing.id %>"><%= loading_indicator_tag :id => "mailing_#{mailing.id}" %></pre>
+    </td>
+    <td><%=h mailing.printed_at.strftime('%d.%m.%Y') unless mailing.printed_at.nil? %></td>
+    <td>
+      <%= link_to_remote("Alle Resultate drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :print, :id => mailing }) %>
+      <%= link_to_remote("Nur Übersicht drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :print_overview, :id => mailing }) %>
+    </td>
+  </tr>
+<% end %>
