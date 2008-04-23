@@ -1,7 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class MailingsControllerTest < ActionController::TestCase
-  fixtures :mailings
+  set_fixture_class :vcards => "Vcards::Vcard"
+  fixtures :mailings, :doctors, :vcards
   
   def test_index
     get :index

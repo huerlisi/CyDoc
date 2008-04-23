@@ -1,6 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class MailTest < ActionMailer::TestCase
+  set_fixture_class :vcards => "Vcards::Vcard"
+
   tests Mail
   def test_message_to_zytolabor
     @expected.subject = 'Mail#message_to_zytolabor'

@@ -1,7 +1,16 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+doc_one:
+  code: one
+  speciality: none
+  praxis: doc_one_praxis
+  private: doc_one_private
+
+doc_two:
+  praxis: doc_two_praxis
+  private: doc_two_private
+
+slave:
+  billing_doctor: doc_one
+  praxis: doc_two_praxis
+  private: doc_slave_private
