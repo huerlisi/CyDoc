@@ -4,6 +4,8 @@ class Doctor < ActiveRecord::Base
 
   belongs_to :billing_doctor, :class_name => 'Doctor'
 
+  has_many :mailings
+
   # Proxy accessors
   def name
     praxis.full_name || ""
