@@ -1,6 +1,4 @@
 class MailingsController < ApplicationController
-  helper LoadingIndicatorHelper
-  
   def index
     redirect_to :action => :list
   end
