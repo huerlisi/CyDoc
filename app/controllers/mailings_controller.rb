@@ -4,6 +4,7 @@ class MailingsController < ApplicationController
   end
   
   def overview
+    @mailing = Mailing.find(params[:id])
   end
 
   def list
