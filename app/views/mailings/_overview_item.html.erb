@@ -1,0 +1,20 @@
+<%
+  a_case = overview_item
+%>
+<tr style="font-size: 0.8em; vertical-align: top; padding-bottom: 0.2em">
+  <td style="width: 30%; border-right: 0px; vertical-align: top">
+    <b><%= link_to h(a_case.patient.name), :controller => '/patients', :action => 'show', :id => a_case.patient %></b>
+  </td>
+  <td style="width: 10%; text-align: right; padding: 0.1em 1em;">
+    <%=h a_case.patient.birth_date %>
+  </td>
+  <td style="width: 40%; vertical-align: top">
+    <b><%= a_case.control_findings.map {|f| h(f.name)}.join('<br/>') %></b>
+  </td>
+  <td style="width: 10%; text-align: right; padding: 0.1em 1em;">
+    <%=h a_case.examination_date.strftime('%d.%m.%Y') unless a_case.examination_date.nil? %>
+  </td>
+  <td style="width: 10%; text-align: right">
+   <%=link_to h(a_case.praxistar_eingangsnr), :controller => 'cases', :action => 'result_report', :id => a_case %>
+  </td>
+</tr>

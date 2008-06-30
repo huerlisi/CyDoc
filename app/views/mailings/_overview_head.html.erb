@@ -1,0 +1,13 @@
+<%
+  cases = overview_head
+  case_class = cases[0].classification
+  class_group = case_class.classification_group
+%>
+
+<tr class="PAP_<%=h case_class.code %>" style="font-weight: bold; border: 1px">
+  <th style="font-size: 0.9em; font-weight: bold; padding: 0.1em 0.5em; border: 0px" ><%=h class_group.title %> <i style="font-size: 0.8em; font-weight: normal;">(<%= cases.size %>)</i></th>
+  <th style="text-align: right; font-weight: normal; padding: 0.1em 1em; border: 0px"><i>Geb.</i></th>
+  <th style="text-align: right; font-weight: bold; border: 0px"></th>
+  <th style="text-align: right; font-weight: normal; padding: 0.1em 1em; border: 0px"><i>Entn.</i></th>
+  <th style="text-align: right; font-weight: bold; border: 0px"></th>
+</tr>

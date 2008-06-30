@@ -1,2 +1,8 @@
-<h1>Mailings#overview</h1>
-<p>Find me in app/views/mailings/overview.html.erb</p>
+<table class="listing" style="margin-top: 0px">
+  <% for class_group in ClassificationGroup.find :all, :order => 'position DESC' %>
+    <% group_cases = @mailing.cases.select { |c| c.classification.classification_group == class_group and !(c.needs_p16? and c.screened_at.nil?) } %>
+    <%= render :partial => 'overview_group', :object => group_cases  unless group_cases.size == 0 %>
+  <% end %>
+  <% group_cases = @mailing.cases.select { |c| c.needs_p16? and c.screened_at.nil? } %>
+  <%= render :partial => 'overview_p16_group', :object => group_cases  unless group_cases.size == 0 %>
+</table>
