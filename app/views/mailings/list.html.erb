@@ -1,5 +1,8 @@
+<h1>Resultat Versand</h1>
 
-<h1>Letzte Resultate</h1>
+<p class="infobox">
+Hier finden Sie eine Liste der Ihnen zugesandten Resultate.
+</p>
 
 <table class="listing">
 <% for mailing in @mailings %>
@@ -8,13 +11,14 @@
     <td style="text-align: right"><%= link_to mailing.cases.count, :action => 'overview', :id => mailing %></td>
     <td>
       <%=h mailing.doctor.nil? ? "Unbekannter Arzt" : mailing.doctor.name %>
-      <pre id="mailing_log_<%=h mailing.id %>"><%= loading_indicator_tag :id => "mailing_#{mailing.id}" %></pre>
     </td>
     <td><%=h mailing.printed_at.strftime('%d.%m.%Y') unless mailing.printed_at.nil? %></td>
+<!--
     <td>
-      <%= link_to_remote("Alle Resultate drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :print, :id => mailing }) %><br/>
-      <%= link_to_remote("Nur Übersicht drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :print_overview, :id => mailing }) %>
+      <%= link_to_remote("Alle Resultate drucken", :update => "mailing_log_#{mailing.id}", :url => {:controller => :mailings, :action => :print, :id => mailing }) %><br/>
+      <%= link_to_remote("Nur Übersicht drucken", :update => "mailing_log_#{mailing.id}", :url => {:controller => :mailings, :action => :print_overview, :id => mailing }) %>
     </td>
+-->
   </tr>
 <% end %>
 </table>
