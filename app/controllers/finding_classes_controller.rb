@@ -1,0 +1,2 @@
+class FindingClassesController < ApplicationController
+end

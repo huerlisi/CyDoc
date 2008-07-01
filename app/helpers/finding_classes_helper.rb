@@ -1,0 +1,2 @@
+module FindingClassesHelper
+end
