@@ -7,6 +7,7 @@ class Case < ActiveRecord::Base
   belongs_to :order_form
   belongs_to :screened_by, :class_name => 'Employee', :foreign_key => :screener_id
   belongs_to :review_by, :class_name => 'Employee', :foreign_key => :review_by
+  belongs_to :examination_method
 
   def control_findings
     finding_classes.select { |finding| finding.belongs_to_group?('Kontrolle') }
