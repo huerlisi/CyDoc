@@ -36,8 +36,6 @@ $('vcard_honorific_prefix').focus()
       <%= patient.text_field :insurance_nr, :size => 15, :label => "Versicherungsnr." %>
       <%= select_doctors :form => patient %>
       <%= patient.text_field :doctor_patient_nr, :size => 15, :label => "Patientennr." %>
-      <%= patient.text_area :remarks, :label => "Bemerkungen", :cols => 30, :rows => 3 %>
-      <%= patient.check_box :dunning_stop, :label => "Mahnstopp aktiv" %>
     <% end %>
   </table>
 </fieldset>
