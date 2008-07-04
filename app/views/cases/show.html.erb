@@ -1,2 +1,9 @@
-<h1>Cases#show</h1>
-<p>Find me in app/views/cases/show.html.erb</p>
+<table style="width: 100%; height: 100%">
+  <tr>
+    <td>
+      <%= render :partial => 'result_report', :id => @case %>
+    </td>
+    <td id="personal-information" style="min-width: 200px; vertical-align: top">
+    </td>
+  </tr>
+</table>
