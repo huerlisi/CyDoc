@@ -26,7 +26,7 @@
 }
 
 .title {
-  font-family: ChollaSansBold;
+  font-family: ChollaSansBold,Arial,DejaVu Sans;
 }
 
 .sheet_a5 #subject {
@@ -38,7 +38,7 @@
 
 
 .report {
-  font-family: ChollaSansRegular,Arial;
+  font-family: ChollaSansRegular,Arial,DejaVu Sans;
   font-size: 11pt;
   position: absolute;
   top: 2.2cm;
@@ -53,7 +53,7 @@
 }
 
 .report #insurance {
-  font-family: ChollaSansThin;
+  font-family: ChollaSansThin,Arial,DejaVu Sans;
   position: absolute;
   top: 2.8cm;
   left: 0cm;
@@ -68,7 +68,7 @@
 }
 
 .report #case {
-  font-family: ChollaSansThin;
+  font-family: ChollaSansThin,Arial,DejaVu Sans;
   position: absolute;
   top: 2.3cm;
   left: 6.5cm;
@@ -94,15 +94,15 @@
 }
 
 .finding_group_Kontrolle {
-  font-family: ChollaSansBold;
+  font-family: ChollaSansBold,Arial,DejaVu Sans;
 }
 
 .finding_group_Zustand {
-  font-family: ChollaSansItalic;
+  font-family: ChollaSansItalic,Arial,DejaVu Sans;
 }
 
 .report #classification {
-  font-family: ChollaSansBold;
+  font-family: ChollaSansBold,Arial,DejaVu Sans;
   font-size: 12pt;
   border: solid 1pt;
   position: absolute;
@@ -113,7 +113,7 @@
 }
 
 .report #hpv_classification {
-  font-family: ChollaSansBold;
+  font-family: ChollaSansBold,Arial,DejaVu Sans;
   font-size: 12pt;
   border: solid 1pt;
   position: absolute;
@@ -124,7 +124,7 @@
 }
 
 .report #finding_list {
-  font-family: ChollaSansThin;
+  font-family: ChollaSansThin,Arial,DejaVu Sans;
   position: absolute;
   top: 11cm;
   left: 0cm;
@@ -132,7 +132,7 @@
 }
 
 .report #special_findings {
-  font-family: ChollaSansThin;
+  font-family: ChollaSansThin,Arial,DejaVu Sans;
   position: absolute;
   top: 11cm;
   left: 7cm;
@@ -140,7 +140,7 @@
 }
 
 .report #hpv_findings {
-  font-family: ChollaSansThin;
+  font-family: ChollaSansThin,Arial,DejaVu Sans;
   position: absolute;
   top: 8cm;
   left: 0cm;
@@ -148,7 +148,7 @@
 }
 
 .report #hpv_remarks {
-  font-family: ChollaSansThin;
+  font-family: ChollaSansThin,Arial,DejaVu Sans;
   position: absolute;
   top: 11cm;
   left: 0cm;
@@ -158,7 +158,8 @@
 .report #signature {
   position: absolute;
   top: 14cm;
-  left: 5cm
+  left: 5cm;
+  width: 8cm;
 }
 
 .report #label1 {
