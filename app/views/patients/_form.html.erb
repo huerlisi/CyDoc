@@ -1,0 +1,47 @@
+<script type="text/javascript">
+$('vcard_honorific_prefix').focus()
+</script>
+
+<%= error_messages_for 'patient' %>
+
+<!--[form:patient]-->
+<table>
+<tr>
+<td style="height: 100%">
+<fieldset style="min-height: 100%">
+  <legend>
+    <%= link_to_function "Adresse", "hide('vcard_billing_address'); show('vcard_vcard')" %>
+    <%= link_to_function "Rechnungsadresse", "hide('vcard_vcard'); show('vcard_billing_address')" %>
+  </legend>
+  <table id="vcard_vcard">
+    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'vcard', :vcard => @vcard } %>
+  </table>
+  <table id="vcard_billing_address" style="display: none">
+   <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'billing_vcard', :vcard => @billing_vcard } %>
+  </table>
+  <table>
+    <% fields_for :patient, @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
+      <%= patient.check_box :use_billing_address, :label => "Fakturaadresse aktiv" %>
+    <% end %>
+  </table>
+</fieldset>
+</td>
+<td style="height: 100%">
+<fieldset style="height: 100%">
+  <legend>Patient</legend>
+  <table>
+    <% fields_for :patient, @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
+      <%= patient.text_field :birth_date, :size => 15, :label => "Geburtsdatum" %>
+      <%= patient.select "insurance_id", Insurance.find(:all, :include => :vcard, :order => 'full_name').collect { |i| [i.vcard.full_name, i.id] }, :include_blank => true, :label => "Versicherung" %>
+      <%= patient.text_field :insurance_nr, :size => 15, :label => "Versicherungsnr." %>
+      <%= select_doctors :form => patient %>
+      <%= patient.text_field :doctor_patient_nr, :size => 15, :label => "Patientennr." %>
+      <%= patient.text_area :remarks, :label => "Bemerkungen", :cols => 30, :rows => 3 %>
+      <%= patient.check_box :dunning_stop, :label => "Mahnstopp aktiv" %>
+    <% end %>
+  </table>
+</fieldset>
+</td>
+</tr>
+</table>
+<!--[eoform:patient]-->

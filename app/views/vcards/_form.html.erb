@@ -1,0 +1,16 @@
+<script type="text/javascript">
+//<![CDATA[
+Event.observe(window, 'load', function() {$('vcard_honorific_prefix').focus()}, false);
+//]]>
+</script>
+
+<% auto_complete = true if auto_complete.nil? %>
+<% fields_for vcard_name, vcard, :builder => Rubaidh::TabularForm::TabularFormBuilder do |address| %>
+  <%= address.select :honorific_prefix, HonorificPrefix.find(:all).collect { |prefix| prefix.name }, :include_blank => true, :label => "Anrede"  %>
+  <%= address.text_field :family_name, :size => 23, :label => "Nachname" %>
+  <%= address.text_field :given_name, :size => 23, :label => "Vorname" %>
+  <%= address.text_field :street_address, :size => 23, :label => "Strasse" %>
+  <%= address.text_field :extended_address, :size => 23, :label => "c/o" %>
+  <%= address.text_field :postal_code, :size => 23, :label => "PLZ" %>
+  <%= address.text_field :locality, :size => 23, :label => "Ort" %>
+<% end %>
