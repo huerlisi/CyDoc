@@ -29,11 +29,11 @@
         </div>
         <div id="HeaderMenus">
           <ul>
-            <li><%= link_to "Home", "http://www.zytolabor.ch" %></li>
-            <li><%= link_to "Kontakt", "http://www.zytolabor.ch/page?kontakt:controller" %></li>
+            <li><%= link_to "Home", :controller => "/" %></li>
+            <li><%= link_to "Kontakt", "mailto:info@zyto-labor.com" %></li>
             <li><%= link_to "Suche", :controller => "/search" %></li>
             <li><%= link_to "Patienten", :controller => "/patients" %></li>
-            <li><%= link_to "Statistiken", :controller => "/reports" %></li>
+            <li><%= link_to "Bestellen", 'http://shop.zyto-labor.com' %></li>
           </ul>
         </div>
 

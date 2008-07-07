@@ -3,13 +3,13 @@ title ||= "Home"
 controller ||= 'welcome'
 action ||= 'index'
 image ||= "#{controller}_#{action}.png"
-link ||= {:controller => controller, :action => action} 
+url ||= {:controller => controller, :action => action} 
 -%>
 
 <div style="margin: 2em">
-<h2><%= link_to title, link %></h2>
+<h2><%= link_to title, url %></h2>
 <p style="width: 100%>
-  <%= link_to image_tag(image), link, :style => "float: left" %>
+  <%= link_to image_tag(image), url, :style => "float: left" %>
   <i style="font-size: 13pt"><%=h description %></i>
 </p>
 </div>

@@ -3,7 +3,7 @@
   <tr>
     <td style="vertical-align: top">
       <%= render :partial => "item", :locals => { :title => "Resultate", :controller => 'results', :description => 'Aktuelle Resultate anzeigen' } %>
-      <%= render :partial => "item", :locals => { :title => "Nachricht senden", :controller => 'contact', :action => 'message', :description => 'Nachricht an ZytoLabor senden' } %>
+      <%= render :partial => "item", :locals => { :title => "Nachricht senden", :url => 'mailto:info@zyto-labor.com', :description => 'Nachricht an ZytoLabor senden', :image => 'contact_message.png' } %>
     </td>
     <td style="vertical-align: top; padding-left: 5em">
       <%= render :partial => "item", :locals => { :title => "Suchen", :controller => 'search', :image => 'search.png', :description => 'Resultat suchen' } %>
