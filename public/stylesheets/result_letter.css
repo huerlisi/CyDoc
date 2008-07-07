@@ -22,7 +22,7 @@
 }
 
 .title {
-  font-family: ChollaSansBold;
+  font-family: ChollaSansBold,Arial,DejaVu Sans;
 }
 
 .sheet_a4 #subject {
@@ -34,7 +34,7 @@
 
 
 .letter {
-  font-family: ChollaSansRegular,Arial;
+  font-family: ChollaSansRegular,Arial,DejaVu Sans;
   font-size: 12pt;
   position: absolute;
   top: 5cm;
@@ -42,7 +42,7 @@
 }
 
 .letter_follow_page {
-  font-family: ChollaSansRegular,Arial;
+  font-family: ChollaSansRegular,Arial,DejaVu Sans;
   font-size: 12pt;
   position: relative;
   top: 5cm;
