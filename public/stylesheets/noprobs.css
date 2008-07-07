@@ -321,7 +321,7 @@ table.listing tbody tr:hover { background: #eed !important }
   font-weight: bold;
 }
 
-.address {
+/*.address {
   font-size: smaller;
 }
 
@@ -332,13 +332,14 @@ table.listing tbody tr:hover { background: #eed !important }
 .phone_number_type {
   font-variant: small-caps;
 }
+*/
 
 .full_name {
   font-weight: bold;
 }
 
-
 /* letters */
 h3 {
-  font-family: ChollaSansBold;
+  font-family: ChollaSansBold,Arial,DejaVu Sans;
+  font-weight: bold;
 }

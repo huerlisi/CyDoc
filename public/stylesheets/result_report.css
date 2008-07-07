@@ -27,6 +27,7 @@
 
 .title {
   font-family: ChollaSansBold,Arial,DejaVu Sans;
+  font-weight: bold;
 }
 
 .sheet_a5 #subject {
@@ -69,10 +70,11 @@
 
 .report #case {
   font-family: ChollaSansThin,Arial,DejaVu Sans;
+  font-size: 80%;
   position: absolute;
   top: 2.3cm;
   left: 6.5cm;
-  width: 5cm;
+  width: 5.5cm;
 }
 
 .report #remarks {
@@ -95,6 +97,7 @@
 
 .finding_group_Kontrolle {
   font-family: ChollaSansBold,Arial,DejaVu Sans;
+  font-weight: bold;
 }
 
 .finding_group_Zustand {
@@ -103,6 +106,7 @@
 
 .report #classification {
   font-family: ChollaSansBold,Arial,DejaVu Sans;
+  font-weight: bold;
   font-size: 12pt;
   border: solid 1pt;
   position: absolute;
@@ -114,6 +118,7 @@
 
 .report #hpv_classification {
   font-family: ChollaSansBold,Arial,DejaVu Sans;
+  font-weight: bold;
   font-size: 12pt;
   border: solid 1pt;
   position: absolute;
