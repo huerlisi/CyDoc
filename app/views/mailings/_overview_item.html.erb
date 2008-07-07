@@ -6,7 +6,7 @@
     <b><%= link_to h(a_case.patient.name), :controller => 'cases', :action => 'result_report', :id => a_case %></b>
   </td>
   <td style="width: 10%; text-align: right; padding: 0.1em 1em;">
-    <%=h a_case.patient.birth_date %>
+    <%=h a_case.patient.birth_date.strftime('%d.%m.%Y') %>
   </td>
   <td style="width: 40%; vertical-align: top">
     <b><%= a_case.control_findings.map {|f| h(f.name)}.join('<br/>') %></b>

@@ -3,10 +3,10 @@
 %>
 <tr style="font-size: 0.8em; vertical-align: top; padding-bottom: 0.2em">
   <td style="width: 30%; border-right: 0px; vertical-align: top">
-    <b><%= link_to h(a_case.patient.name), :controller => 'patients', :action => 'show', :id => a_case.patient %></b>
+    <b><%= link_to h(a_case.patient.name), :controller => 'cases', :action => 'show', :id => a_case %></b>
   </td>
   <td style="width: 10%; text-align: right; padding: 0.1em 1em;">
-    <%=h a_case.patient.birth_date %>
+    <%=h a_case.patient.birth_date.strftime('%d.%m.%Y') %>
   </td>
   <td style="width: 40%; vertical-align: top">
     <b>Resultat folgt innert Tagen</b>
