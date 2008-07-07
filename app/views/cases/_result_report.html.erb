@@ -5,7 +5,7 @@
 <%=h @case.patient.doctor_patient_nr %><br />
 <% end %>
 <%= render :partial => "vcards/show", :locals => {:vcard => @case.patient.vcard} %><br/>
-<%=h @case.patient.birth_date unless @case.patient.birth_date.nil? %><br />
+<%=h @case.patient.birth_date.strftime("%d.%m.%Y") unless @case.patient.birth_date.nil? %><br />
 </div>
 
 <div id="insurance">
