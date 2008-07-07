@@ -19,11 +19,6 @@ $('vcard_honorific_prefix').focus()
   <table id="vcard_billing_address" style="display: none">
    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'billing_vcard', :vcard => @billing_vcard } %>
   </table>
-  <table>
-    <% fields_for :patient, @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
-      <%= patient.check_box :use_billing_address, :label => "Fakturaadresse aktiv" %>
-    <% end %>
-  </table>
 </fieldset>
 </td>
 <td style="height: 100%">

@@ -1,11 +1,3 @@
 <% a_case = info %>
 
-<fieldset style="width: 100%; margin-top: 10px">
-  <legend>Aktueller Fall</legend>
-  <%= render :partial => 'cases/case_info', :object => a_case %>
-  <%= render :partial => 'patients/compact', :object => a_case.patient unless a_case.patient.nil? %>
-  <% unless a_case.doctor.nil? %>
-    <strong><%= link_to a_case.doctor.praxis.full_name, :controller => 'doctors', :action => :show, :id => a_case.doctor %>, <%=h a_case.doctor.praxis.locality %></strong>
-  <% end %>
-</fieldset>
 <%= render :partial => 'cases/compact_list', :object => a_case.patient.cases unless a_case.patient.nil? %>
