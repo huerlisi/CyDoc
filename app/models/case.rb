@@ -4,7 +4,7 @@ class Case < ActiveRecord::Base
   belongs_to :patient
   belongs_to :insurance
   belongs_to :doctor
-  belongs_to :order_form
+  has_one :order_form
   belongs_to :screened_by, :class_name => 'Employee', :foreign_key => :screener_id
   belongs_to :review_by, :class_name => 'Employee', :foreign_key => :review_by
   belongs_to :examination_method
