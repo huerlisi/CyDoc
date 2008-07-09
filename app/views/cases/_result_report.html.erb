@@ -1,28 +1,36 @@
-<div class="sheet_a5">
 <div class="report">
-<div id="patient">
-<% if !(@case.patient.doctor_patient_nr.nil? or @case.patient.doctor_patient_nr == '') %>
-<%=h @case.patient.doctor_patient_nr %><br />
-<% end %>
-<%= render :partial => "vcards/show", :locals => {:vcard => @case.patient.vcard} %><br/>
-<%=h @case.patient.birth_date.strftime("%d.%m.%Y") unless @case.patient.birth_date.nil? %><br />
-</div>
 
-<div id="insurance">
-<% if !@case.insurance.nil? %>
-<%=h @case.insurance.vcard.full_name %> <%=h "##{@case.insurance_nr}" unless @case.insurance_nr.nil? or @case.insurance_nr.strip == "0" or @case.insurance_nr.strip == "" %>
-<% end %>
-</div>
+<table>
+<tr>
+<td style="width: 6.5cm">
+  <div id="patient">
+  <% if !(@case.patient.doctor_patient_nr.nil? or @case.patient.doctor_patient_nr == '') %>
+  <%=h @case.patient.doctor_patient_nr %><br />
+  <% end %>
+  <%= render :partial => "vcards/show", :locals => {:vcard => @case.patient.vcard} %><br/>
+  </div>
+</td>
+<td>
+  <div id="doctor">
+  <%=h @case.doctor.praxis.honorific_prefix %><br />
+  <%= render :partial => "vcards/show", :locals => {:vcard => @case.doctor.praxis} %>
+  </div>
+</td>
+</tr>
+<tr>
+<td>
+  <%=h @case.patient.birth_date.strftime("%d.%m.%Y") unless @case.patient.birth_date.nil? %><br />
+  <% if !@case.insurance.nil? %>
+  <%=h @case.insurance.vcard.full_name %> <%=h "##{@case.insurance_nr}" unless @case.insurance_nr.nil? or @case.insurance_nr.strip == "0" or @case.insurance_nr.strip == "" %>
+  <% end %>
+</td>
+<td>
+  Entnahme vom: <%=h @case.examination_date ? @case.examination_date.strftime("%d.%m.%Y") : "Noch nicht gesetzt" %><br />
+  Eingang am: <%=h @case.entry_date ? @case.entry_date.strftime("%d.%m.%Y") : "Noch nicht gesetzt" %>
+</td>
+</tr>
+</table>
 
-<div id="doctor">
-<%=h @case.doctor.praxis.honorific_prefix %><br />
-<%= render :partial => "vcards/show", :locals => {:vcard => @case.doctor.praxis} %>
-</div>
-
-<div id="case">
-Entnahme vom: <%=h @case.examination_date ? @case.examination_date.strftime("%d.%m.%Y") : "Noch nicht gesetzt" %><br />
-Eingang am: <%=h @case.entry_date ? @case.entry_date.strftime("%d.%m.%Y") : "Noch nicht gesetzt" %>
-</div>
 
 <div id="subject" class="title">
 Ihr Auftrag Nr. <%=h @case.praxistar_eingangsnr %>
@@ -62,6 +70,5 @@ Befund
     <br/>
     <%= "Visum: #{@case.review_by.work_vcard.abbreviated_name}, #{@case.review_at.strftime("%d.%m.%Y") unless @case.review_at.nil?}" %>
   <% end %>
-</div>
 </div>
 </div>
