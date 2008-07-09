@@ -48,27 +48,28 @@ Befund
 <%=h @case.classification.name %>
 </div>
 
-<div id="findings">
-  <div id="finding_list">
+<table>
+<tr>
+  <td id="finding_list">
     <%= render :partial => 'list_findings' %>
-  </div>
-</div>
-
-<div id="special_findings">
-<% for finding in @case.control_findings %>
-<div class='<%= finding_css_class(finding) %>'><%=h finding.name %></div>
-<% end %>
-<br/>
-<% for finding in @case.quality_findings %>
-<div class='<%= finding_css_class(finding) %>'><%=h finding.name %></div>
-<% end %>
-</div>
+  </td>
+  <td id="special_findings">
+    <% for finding in @case.control_findings %>
+    <div class='finding_group_Kontrolle'><%=h finding.name %></div>
+    <% end %>
+    <br/>
+    <% for finding in @case.quality_findings %>
+    <div class='finding_group_Zustand'><%=h finding.name %></div>
+    <% end %>
+  </td>
+</tr>
+</table>
 
 <div id="signature">
-  <%= "Visum: #{@case.screened_by.work_vcard.abbreviated_name unless @case.screened_by.nil?}, #{@case.screened_at.strftime("%d.%m.%Y") unless @case.screened_at.nil?}" %>
+  <%= "<b>Visum:</b> #{@case.screened_by.work_vcard.abbreviated_name unless @case.screened_by.nil?}, #{@case.screened_at.strftime("%d.%m.%Y") unless @case.screened_at.nil?}" %>
   <% unless @case.review_by.nil? %>
     <br/>
-    <%= "Visum: #{@case.review_by.work_vcard.abbreviated_name}, #{@case.review_at.strftime("%d.%m.%Y") unless @case.review_at.nil?}" %>
+    <%= "<b>Visum:</b> #{@case.review_by.work_vcard.abbreviated_name}, #{@case.review_at.strftime("%d.%m.%Y") unless @case.review_at.nil?}" %>
   <% end %>
 </div>
 </div>

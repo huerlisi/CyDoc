@@ -1,7 +1,3 @@
-.sheet_a5 {
-  background-color: white;
-}
-
 td {
   vertical-align: top;
 }
@@ -13,7 +9,6 @@ td {
 
 .report {
   font-family: ChollaSansRegular,Arial,DejaVu Sans;
-  font-size: 11pt;
   margin-left: 0.5cm;
   margin-right: 0.5cm;
 }
@@ -40,52 +35,33 @@ td {
 .report #remarks {
 }
 
-.report #finding_title {
-}
-
-.report #hpv_finding_title {
-}
-
 .report #classification {
   font-family: ChollaSansBold,Arial,DejaVu Sans;
   font-weight: bold;
-  font-size: 12pt;
+  font-size: 110%;
   border: solid 1pt;
   left: 0cm;
   width: 11cm;
   padding: 4px;
 }
 
-.report #hpv_classification {
-  font-family: ChollaSansBold,Arial,DejaVu Sans;
-  font-weight: bold;
-  font-size: 12pt;
-  border: solid 1pt;
-  position: relative;
-  width: 10.4cm;
-  padding: 4px;
+.report #signature {
+  margin: 0.8cm 3cm;
+  font-family: ChollaSansItalic,Arial,DejaVu Sans;
+  font-style: italic;
+}
+
+/* Finding Classes */
+.report #special_findings {
+  font-family: ChollaSansThin,Arial,DejaVu Sans;
+  width: 5cm;
 }
 
 .report #finding_list {
   font-family: ChollaSansThin,Arial,DejaVu Sans;
-  position: relative;
   width: 6.5cm;
 }
 
-.report #signature {
-  position: relative;
-  left: 5cm;
-  width: 8cm;
-}
-
-.report #special_findings {
-  font-family: ChollaSansThin,Arial,DejaVu Sans;
-  position: relative;
-  left: 7cm;
-  width: 5cm;
-}
-
-/* Finding Classes */
 .finding_group_Kontrolle {
   font-family: ChollaSansBold,Arial,DejaVu Sans;
   font-weight: bold;
@@ -93,19 +69,25 @@ td {
 
 .finding_group_Zustand {
   font-family: ChollaSansItalic,Arial,DejaVu Sans;
+  font-style: italic;
 }
 
 /* HPV Result Report */
+.report #hpv_classification {
+  font-family: ChollaSansBold,Arial,DejaVu Sans;
+  font-weight: bold;
+  font-size: 110%;
+  border: solid 1pt;
+  width: 10.4cm;
+  padding: 4px;
+}
+
 .report #hpv_findings {
   font-family: ChollaSansThin,Arial,DejaVu Sans;
-  position: relative;
-  left: 0cm;
   width: 10.4cm;
 }
 
 .report #hpv_remarks {
   font-family: ChollaSansThin,Arial,DejaVu Sans;
-  position: relative;
-  left: 0cm;
   width: 10.4cm;
 }
