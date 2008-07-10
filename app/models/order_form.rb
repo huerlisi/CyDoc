@@ -1,5 +1,7 @@
 class OrderForm < ActiveRecord::Base
-  file_column :file, :magick => {
+  file_column :file,
+    :root_path => File.join(RAILS_ROOT, "data"),
+    :magick => {
     :versions => {
       :full => {:size => "550"},
       :address => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, image.rows, image.columns * 0.5, true) }, :size => "560"},
