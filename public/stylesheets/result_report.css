@@ -3,12 +3,12 @@ td {
 }
 
 .title {
-  font-family: ChollaSansBold,Arial,DejaVu Sans;
+  font-family: Arial,DejaVu Sans;
   font-weight: bold;
 }
 
 .report {
-  font-family: ChollaSansRegular,Arial,DejaVu Sans;
+  font-family: Arial,DejaVu Sans;
   margin-left: 0.5cm;
   margin-right: 0.5cm;
 }
@@ -22,21 +22,21 @@ td {
 }
 
 .report #insurance {
-  font-family: ChollaSansRegular,Arial,DejaVu Sans;
+  font-family: Arial,DejaVu Sans;
 }
 
 .report #doctor {
 }
 
 .report #case {
-  font-family: ChollaSansRegular,Arial,DejaVu Sans;
+  font-family: Arial,DejaVu Sans;
 }
 
 .report #remarks {
 }
 
 .report #classification {
-  font-family: ChollaSansBold,Arial,DejaVu Sans;
+  font-family: Arial,DejaVu Sans;
   font-weight: bold;
   font-size: 110%;
   border: solid 1pt;
@@ -47,34 +47,34 @@ td {
 
 .report #signature {
   margin: 0.8cm 3cm;
-  font-family: ChollaSansItalic,Arial,DejaVu Sans;
+  font-family: Arial,DejaVu Sans;
   font-style: italic;
 }
 
 /* Finding Classes */
 .report #special_findings {
-  font-family: ChollaSansRegular,Arial,DejaVu Sans;
+  font-family: Arial,DejaVu Sans;
   width: 5cm;
 }
 
 .report #finding_list {
-  font-family: ChollaSansRegular,Arial,DejaVu Sans;
+  font-family: Arial,DejaVu Sans;
   width: 6.5cm;
 }
 
 .finding_group_Kontrolle {
-  font-family: ChollaSansBold,Arial,DejaVu Sans;
+  font-family: Arial,DejaVu Sans;
   font-weight: bold;
 }
 
 .finding_group_Zustand {
-  font-family: ChollaSansItalic,Arial,DejaVu Sans;
+  font-family: Arial,DejaVu Sans;
   font-style: italic;
 }
 
 /* HPV Result Report */
 .report #hpv_classification {
-  font-family: ChollaSansBold,Arial,DejaVu Sans;
+  font-family: Arial,DejaVu Sans;
   font-weight: bold;
   font-size: 110%;
   border: solid 1pt;
@@ -83,16 +83,16 @@ td {
 }
 
 .report #hpv_findings {
-  font-family: ChollaSansRegular,Arial,DejaVu Sans;
+  font-family: Arial,DejaVu Sans;
   width: 10.4cm;
 }
 
 .report #hpv_remarks {
-  font-family: ChollaSansRegular,Arial,DejaVu Sans;
+  font-family: Arial,DejaVu Sans;
   width: 10.4cm;
 }
 
 .report #eg_remarks {
-  font-family: ChollaSansRegular,Arial,DejaVu Sans;
+  font-family: Arial,DejaVu Sans;
   width: 10.4cm;
 }
