@@ -22,14 +22,14 @@ td {
 }
 
 .report #insurance {
-  font-family: ChollaSansThin,Arial,DejaVu Sans;
+  font-family: ChollaSansRegular,Arial,DejaVu Sans;
 }
 
 .report #doctor {
 }
 
 .report #case {
-  font-family: ChollaSansThin,Arial,DejaVu Sans;
+  font-family: ChollaSansRegular,Arial,DejaVu Sans;
 }
 
 .report #remarks {
@@ -53,12 +53,12 @@ td {
 
 /* Finding Classes */
 .report #special_findings {
-  font-family: ChollaSansThin,Arial,DejaVu Sans;
+  font-family: ChollaSansRegular,Arial,DejaVu Sans;
   width: 5cm;
 }
 
 .report #finding_list {
-  font-family: ChollaSansThin,Arial,DejaVu Sans;
+  font-family: ChollaSansRegular,Arial,DejaVu Sans;
   width: 6.5cm;
 }
 
@@ -83,11 +83,16 @@ td {
 }
 
 .report #hpv_findings {
-  font-family: ChollaSansThin,Arial,DejaVu Sans;
+  font-family: ChollaSansRegular,Arial,DejaVu Sans;
   width: 10.4cm;
 }
 
 .report #hpv_remarks {
-  font-family: ChollaSansThin,Arial,DejaVu Sans;
+  font-family: ChollaSansRegular,Arial,DejaVu Sans;
+  width: 10.4cm;
+}
+
+.report #eg_remarks {
+  font-family: ChollaSansRegular,Arial,DejaVu Sans;
   width: 10.4cm;
 }

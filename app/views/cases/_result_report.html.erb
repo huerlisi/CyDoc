@@ -36,9 +36,11 @@
 Ihr Auftrag Nr. <%=h @case.praxistar_eingangsnr %>
 </div>
 
+<% unless @case.classification.code == "mam" %>
 <div id="remarks">
 <%= image_tag url_for(:action => :result_remarks, :id => @case), :size => '410x192' %>
 </div>
+<% end %>
 
 <div id="finding_title" class="title">
 Befund
@@ -48,6 +50,11 @@ Befund
 <%=h @case.classification.name %>
 </div>
 
+<% if @case.classification.code == "mam" %>
+<div id="eg_remarks">
+  <%= @case.finding_text %>
+</div>
+<% else %>
 <table>
 <tr>
   <td id="finding_list">
@@ -64,6 +71,7 @@ Befund
   </td>
 </tr>
 </table>
+<% end %>
 
 <div id="signature">
   <%= "<b>Visum:</b> #{@case.screened_by.work_vcard.abbreviated_name unless @case.screened_by.nil?}, #{@case.screened_at.strftime("%d.%m.%Y") unless @case.screened_at.nil?}" %>
