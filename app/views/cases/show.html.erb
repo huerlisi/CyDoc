@@ -13,6 +13,13 @@
           <%= render :partial => 'cases/compact', :collection => @case.patient.cases unless @case.patient.nil? %>
         </dl>
       </fieldset>
+      <fieldset style="font-size: 80%; line-height: 1.3em">
+        <legend>Aktionen</legend>
+        <ul>
+          <li><%= link_to "Auftragsformular", :action => :order_form, :id => @case %></li>
+          <li><%= link_to "Resultat als PDF (A4)", :action => :pdf_a4, :id => @case %></li>
+        </ul>
+      </fieldset>
     </td>
   </tr>
 </table>

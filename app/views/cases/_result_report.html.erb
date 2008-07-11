@@ -37,7 +37,7 @@ Ihr Auftrag Nr. <%=h @case.praxistar_eingangsnr %>
 </div>
 
 <div id="remarks">
-<%= image_tag url_for(:action => :order_form, :id => @case), :size => '410x192' unless @case.order_form.nil? or url_for_image_column(@case.order_form, "file", :result_remarks).nil? %>
+<%= image_tag url_for(:action => :result_remarks, :id => @case), :size => '410x192' %>
 </div>
 
 <div id="finding_title" class="title">
