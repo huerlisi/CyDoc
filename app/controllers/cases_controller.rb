@@ -16,6 +16,7 @@ class CasesController < ApplicationController
   public
   def show
     @case = Case.find(params[:id])
+    @related_cases = @case.patient.cases.find(:all, :conditions => ['doctor_id = ?', @current_doctor.id])
   end
 
   def result_report

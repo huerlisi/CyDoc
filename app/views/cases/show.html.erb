@@ -10,7 +10,7 @@
       <fieldset style="font-size: 80%; line-height: 1.3em">
         <legend>Geschichte</legend>
         <dl>
-          <%= render :partial => 'cases/compact', :collection => @case.patient.cases unless @case.patient.nil? %>
+          <%= render :partial => 'cases/compact', :collection => @related_cases %>
         </dl>
       </fieldset>
       <fieldset style="font-size: 80%; line-height: 1.3em">
