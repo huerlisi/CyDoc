@@ -3,13 +3,14 @@ class SearchController < ApplicationController
     value = params[:search][:query]
     case get_query_type(value)
     when "date"
-      conditions = ["(cases.entry_date = :value) OR (patients.birth_date = :value)", {:value => Date.parse(value)}]
+      value = Date.parse(value)
+      condition = "(cases.examination_date = :value) OR (patients.birth_date = :value)"
     when "entry_nr"
-      conditions = ["(cases.praxistar_eingangsnr = ?)", value]
+      condition = "(cases.praxistar_eingangsnr = :value)"
     when "text"
-      conditions = ["(cases.finding_text LIKE :value) OR (vcards.given_name LIKE :value) OR (vcards.family_name LIKE :value) OR (vcards.full_name LIKE :value)", {:value => value}]
+      condition = "(cases.finding_text LIKE :value) OR (vcards.given_name LIKE :value) OR (vcards.family_name LIKE :value) OR (vcards.full_name LIKE :value)"
     end
-    @cases = Case.find(:all, :include => [:patient => [ :vcard ] ], :conditions => conditions)
+    @cases = Case.find(:all, :include => [:patient => [ :vcard ] ], :conditions => ["(#{condition}) AND cases.doctor_id = :doctor_id", {:value => value, :doctor_id => @current_doctor.id}])
   end
 
   private
