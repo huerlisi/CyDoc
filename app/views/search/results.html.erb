@@ -1,5 +1,7 @@
 <h1>Resultate</h1>
 
+<%= render :partial => 'form' %>
+
 <table class="listing" style="margin-top: 0px">
   <%= render :partial => '/mailings/overview_item', :collection => @cases %>
 </table>

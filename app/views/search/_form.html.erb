@@ -1,0 +1,8 @@
+<% form_tag( :controller => :search, :action => "results" ) do %>
+<table>
+  <% fields_for :search, nil, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
+    <%= f.text_field :query, :label => "Suche", :size => 15 %>
+  <% end %>
+</table>
+<%= submit_tag "Suchen" %>
+<% end %>
