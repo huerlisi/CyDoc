@@ -29,6 +29,10 @@ class CasesController < ApplicationController
     send_file(@case.order_form.file('result_remarks'), :type => 'image/jpeg', :disposition => 'inline')
   end
 
+  def order_form_inline
+    render :text => "<img style='width: 100%' src='#{url_for( :action => :order_form, :id => params[:id])}'/>"
+  end
+
   def order_form
     @case = Case.find(params[:id])
     send_file(@case.order_form.file, :type => 'image/jpeg', :disposition => 'inline')

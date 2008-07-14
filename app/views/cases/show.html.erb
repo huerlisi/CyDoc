@@ -1,6 +1,6 @@
 <table style="height: 100%">
   <tr>
-    <td>
+    <td width="100%">
       <div id="result">
       <fieldset>
         <legend>Resultat</legend>
@@ -19,7 +19,7 @@
         <legend>Aktionen</legend>
         <%= render :partial => '/search/form' %>
         <ul>
-          <li><%= link_to "Auftragsformular", :action => :order_form, :id => @case %></li>
+          <li><%= link_to_remote "Auftragsformular", :update => 'result', :url => {:action => :order_form_inline, :id => @case} %></li>
           <li><%= link_to "Resultat als PDF (A4)", :action => :pdf_a4, :id => @case %></li>
         </ul>
       </fieldset>
