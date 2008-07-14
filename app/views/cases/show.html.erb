@@ -1,10 +1,12 @@
 <table style="height: 100%">
   <tr>
     <td>
+      <div id="result">
       <fieldset>
         <legend>Resultat</legend>
-        <div id="result"><%= render :partial => 'result_report', :id => @case %></div>
+        <%= render :partial => 'result_report', :id => @case %>
       </fieldset>
+      </div>
     </td>
     <td id="personal-information" style="min-width: 200px; vertical-align: top">
       <fieldset style="font-size: 80%; line-height: 1.3em">
