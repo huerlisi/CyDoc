@@ -8,7 +8,7 @@ class CasesController < ApplicationController
     begin
       Case.find(params[:id], :conditions => ['doctor_id = ?', @current_doctor.id])
     rescue ActiveRecord::RecordNotFound
-      render :text => 'Fall existiert nicht oder Sie haben keine Berechtigung', :status => 404
+      render :partial => 'shared/access_denied', :layout => 'cases', :status => 404
     end
   end
 
