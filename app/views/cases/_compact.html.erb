@@ -1,5 +1,5 @@
 <dt class="PAP_<%=h compact.classification.code unless compact.classification.nil? %>" style="font-weight: bold">
-  <%=h compact.screened_at.strftime('%b. %g') unless compact.screened_at.nil? %>: <%=link_to "#" + h(compact.praxistar_eingangsnr), :controller => 'cases', :action => :show, :id => compact unless compact.praxistar_eingangsnr.nil? %>
+  <%=h compact.screened_at.strftime('%b. %g') unless compact.screened_at.nil? %>: <%= link_to_remote "#" + h(compact.praxistar_eingangsnr), :update => 'result', :url => {:controller => 'cases', :action => :show_inline, :id => compact} unless compact.praxistar_eingangsnr.nil? %>
 </dt>
 <dd>
   <div style="font-weight: bold"><%=h compact.classification.name unless compact.classification.nil? %></div>

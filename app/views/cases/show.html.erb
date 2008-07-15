@@ -1,28 +1,4 @@
-<table style="height: 100%">
-  <tr>
-    <td width="100%">
-      <div id="result">
-      <fieldset>
-        <legend>Resultat</legend>
-        <%= render :partial => 'result_report', :id => @case %>
-      </fieldset>
-      </div>
-    </td>
-    <td id="personal-information" style="min-width: 200px; vertical-align: top">
-      <fieldset style="font-size: 80%; line-height: 1.3em">
-        <legend>Geschichte</legend>
-        <dl>
-          <%= render :partial => 'cases/compact', :collection => @related_cases %>
-        </dl>
-      </fieldset>
-      <fieldset style="font-size: 80%; line-height: 1.3em">
-        <legend>Aktionen</legend>
-        <%= render :partial => '/search/form' %>
-        <ul>
-          <li><%= link_to_remote "Auftragsformular", :update => 'result', :url => {:action => :order_form_inline, :id => @case} %></li>
-          <li><%= link_to "Resultat als PDF (A4)", :action => :pdf_a4, :id => @case %></li>
-        </ul>
-      </fieldset>
-    </td>
-  </tr>
-</table>
+<fieldset>
+  <legend>Resultat</legend>
+  <%= render :partial => 'result_report', :id => @case %>
+</fieldset>
