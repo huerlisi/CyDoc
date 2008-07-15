@@ -30,7 +30,7 @@ class CasesController < ApplicationController
   end
 
   def order_form_inline
-    render :text => "<img style='width: 100%' src='#{url_for( :action => :order_form, :id => params[:id])}'/>"
+    render :partial => 'order_form'
   end
 
   def order_form
