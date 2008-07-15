@@ -1,7 +1,7 @@
 <% a_case = list %>
 <tr style="font-size: 0.8em; vertical-align: top; padding-bottom: 0.2em">
   <td style="width: 30%; border-right: 0px; vertical-align: top">
-    <b><%= link_to h(a_case.patient.name), :controller => 'cases', :action => 'result_report', :id => a_case %></b>
+    <b><%= link_to_remote h(a_case.patient.name), :update => 'result', :url => {:controller => 'cases', :action => 'show_inline', :id => a_case} %></b>
   </td>
   <td style="width: 10%; text-align: right; padding: 0.1em 1em;">
     <%=h a_case.patient.birth_date.strftime('%d.%m.%Y') %>
@@ -16,6 +16,6 @@
     <%=h a_case.examination_date.strftime('%d.%m.%Y') unless a_case.examination_date.nil? %>
   </td>
   <td style="width: 10%; text-align: right">
-   <%=link_to h(a_case.praxistar_eingangsnr), :controller => 'cases', :action => 'result_report', :id => a_case %>
+   <%= link_to_remote h(a_case.praxistar_eingangsnr), :update => 'result', :url => {:controller => 'cases', :action => 'show_inline', :id => a_case} %>
   </td>
 </tr>
