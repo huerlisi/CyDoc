@@ -2,6 +2,7 @@ class CasesController < ApplicationController
   # Authorization
   # =============
   before_filter :authorize
+
   private
   def authorize
     begin
