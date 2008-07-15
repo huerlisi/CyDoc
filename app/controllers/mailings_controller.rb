@@ -20,6 +20,7 @@ class MailingsController < ApplicationController
   
   def overview
     @mailing = Mailing.find(params[:id])
+    render :layout => 'cases'
   end
 
   def list

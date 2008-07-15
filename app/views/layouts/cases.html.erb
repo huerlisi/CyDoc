@@ -44,12 +44,14 @@
       </div>
     </td>
     <td id="personal-information" style="min-width: 200px; vertical-align: top">
+      <% unless @related_cases.nil? %>
       <fieldset style="font-size: 80%; line-height: 1.3em">
         <legend>Geschichte</legend>
         <dl>
           <%= render :partial => 'cases/compact', :collection => @related_cases %>
         </dl>
       </fieldset>
+      <% end %>
       <fieldset style="font-size: 80%; line-height: 1.3em">
         <legend>Aktionen</legend>
         <%= render :partial => '/search/form' %>
