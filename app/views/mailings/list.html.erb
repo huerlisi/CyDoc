@@ -13,12 +13,6 @@ Hier finden Sie eine Liste der Ihnen zugesandten Resultate.
       <%=h mailing.doctor.nil? ? "Unbekannter Arzt" : mailing.doctor.name %>
     </td>
     <td><%=h mailing.printed_at.strftime('%d.%m.%Y') unless mailing.printed_at.nil? %></td>
-<!--
-    <td>
-      <%= link_to_remote("Alle Resultate drucken", :update => "mailing_log_#{mailing.id}", :url => {:controller => :mailings, :action => :print, :id => mailing }) %><br/>
-      <%= link_to_remote("Nur Übersicht drucken", :update => "mailing_log_#{mailing.id}", :url => {:controller => :mailings, :action => :print_overview, :id => mailing }) %>
-    </td>
--->
   </tr>
 <% end %>
 </table>
