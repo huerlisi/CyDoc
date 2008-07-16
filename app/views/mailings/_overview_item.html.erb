@@ -1,7 +1,7 @@
 <%
   a_case = overview_item
 %>
-<tr style="font-size: 0.8em; vertical-align: top; padding-bottom: 0.2em">
+<tr style="font-size: 0.8em; vertical-align: top; padding-bottom: 0.2em; cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'cases', :action => 'show', :id => a_case) %>'">
   <td style="width: 30%; border-right: 0px; vertical-align: top">
     <b><%= link_to h(a_case.patient.name), :controller => 'cases', :action => 'show', :id => a_case %></b>
   </td>
