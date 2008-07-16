@@ -24,35 +24,3 @@ input.PAP_3M-c1-2, input.PAP_3S-c2-3 {color: black; background-color: #7eafff }
 input.Finding_a {color: black; background-color: #00CC00; }
 input.Finding_b {color: black; background-color: yellow; }
 input.Finding_c {color: black; background-color: red; }
-
-tr.bill_state_cancelled {
-  color: grey;
-}
-
-td.bill_state_cancelled {
-  background-color: inherit;
-}
-
-td.embedded_bill_state_payed{
-  background-color: #99FF66;
-}
-
-td.bill_state_payed {
-  background-color: green;
-}
-
-td.embedded_bill_state_reminded{
-  background-color: #FFFF66;
-}
-
-td.bill_state_reminded {
-  background-color: yellow;
-}
-
-td.embedded_bill_state_prosecuted{
-  background-color: #FF99CC;
-}
-
-td.bill_state_prosecuted {
-  background-color: red;
-}
