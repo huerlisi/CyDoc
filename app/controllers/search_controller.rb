@@ -6,7 +6,7 @@ class SearchController < ApplicationController
       value = Date.parse(value)
       condition = "(cases.examination_date = :value) OR (patients.birth_date = :value)"
     when "entry_nr"
-      condition = "(cases.praxistar_eingangsnr = :value)"
+      condition = "(cases.praxistar_eingangsnr = :value OR cases.praxistar_eingangsnr REGEXP concat('../0*', :value) OR patients.doctor_patient_nr = :value)"
     when "text"
       condition = "(cases.finding_text LIKE :value) OR (vcards.given_name LIKE :value) OR (vcards.family_name LIKE :value) OR (vcards.full_name LIKE :value)"
     end
