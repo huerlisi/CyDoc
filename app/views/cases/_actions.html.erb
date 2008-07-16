@@ -1,0 +1,4 @@
+<ul>
+  <li><%= link_to_remote "Auftragsformular", :update => 'result', :url => {:action => :order_form_inline, :id => @case} %></li>
+  <li><%= link_to "Resultat als PDF (A4)", :action => :pdf_a4, :id => @case %></li>
+</ul>
