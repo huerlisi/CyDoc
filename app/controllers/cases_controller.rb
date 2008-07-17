@@ -46,11 +46,19 @@ class CasesController < ApplicationController
 
   def order_form
     @case = Case.find(params[:id])
-    send_file(@case.order_form.file, :type => 'image/jpeg', :disposition => 'inline')
+    unless @case.order_form.nil?
+      send_file(@case.order_form.file, :type => 'image/jpeg', :disposition => 'inline')
+    else
+      render :text => "Auftragsformular leider nicht verfügbar.", :layout => 'cases'
+    end
   end
 
   def pdf_a4
     @case = Case.find(params[:id])
-    send_file(File.join(RAILS_ROOT, '/data/result_reports/', "result_report-#{@case.id}.pdf"), :type => 'application/pdf', :disposition => 'inline')
+    begin
+      send_file(File.join(RAILS_ROOT, '/data/result_reports/', "result_report-#{@case.id}.pdf"), :type => 'application/pdf', :disposition => 'inline')
+    rescue ActionController::MissingFile
+      render :text => "PDF Dokument leider noch nicht verfügbar.", :layout => 'cases'
+    end
   end
 end
