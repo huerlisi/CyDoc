@@ -17,9 +17,12 @@ class ApplicationController < ActionController::Base
   private
   def authenticate
     authenticate_or_request_with_http_basic do |user_name, password|
-      logger.info("user: #{user_name}, pw: #{password}")
       @current_doctor = Doctor.find_by_login_and_password(user_name, Digest::SHA256.hexdigest(password))
-      return !@current_doctor.nil?
+      if @current_doctor.nil?
+        false
+      else
+        true
+      end
     end
   end
 end
