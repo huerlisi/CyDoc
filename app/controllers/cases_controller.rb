@@ -30,9 +30,9 @@ class CasesController < ApplicationController
     @related_cases = @case.patient.cases.find(:all, :conditions => ['doctor_id = ?', @current_doctor.id])
   end
 
-  def result_inline
-    result
-    render :action => 'result', :layout => false
+  def result_report_inline
+    result_report
+    render :action => 'result_report', :layout => false
   end
 
   def result_remarks
