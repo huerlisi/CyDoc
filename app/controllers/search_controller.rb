@@ -8,9 +8,9 @@ class SearchController < ApplicationController
     when "entry_nr"
       condition = "(cases.praxistar_eingangsnr = :value OR cases.praxistar_eingangsnr REGEXP concat('../0*', :value) OR patients.doctor_patient_nr = :value)"
     when "text"
-      condition = "(cases.finding_text LIKE :value) OR (vcards.given_name LIKE :value) OR (vcards.family_name LIKE :value) OR (vcards.full_name LIKE :value)"
+      condition = "(classifications.name REGEXP :value) OR (cases.finding_text LIKE :value) OR (vcards.given_name LIKE :value) OR (vcards.family_name LIKE :value) OR (vcards.full_name LIKE :value)"
     end
-    @cases = Case.find(:all, :include => [:patient => [ :vcard ] ], :conditions => ["(#{condition}) AND cases.doctor_id IN (:doctor_id)", {:value => value, :doctor_id => @current_doctor_ids}])
+    @cases = Case.find(:all, :include => [:classification => [], :patient => [ :vcard ]], :conditions => ["(#{condition}) AND cases.doctor_id IN (:doctor_id)", {:value => value, :doctor_id => @current_doctor_ids}])
 
     render :layout => false
   end
