@@ -2,7 +2,7 @@ td {
   vertical-align: top;
 }
 
-.title {
+.report .title {
   font-family: Arial,DejaVu Sans;
   font-weight: bold;
 }
@@ -102,4 +102,9 @@ td {
   text-align: right;
   font-weight: normal;
   font-style: italic;
+}
+
+#MainContent .report h2 {
+  font-size: 1em;
+  margin-bottom: 0;
 }
