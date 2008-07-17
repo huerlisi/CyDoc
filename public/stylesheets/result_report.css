@@ -65,6 +65,7 @@ td {
 .finding_group_Kontrolle {
   font-family: Arial,DejaVu Sans;
   font-weight: bold;
+  text-align: right;
 }
 
 .finding_group_Zustand {
@@ -95,4 +96,10 @@ td {
 .report #eg_remarks {
   font-family: Arial,DejaVu Sans;
   width: 10.4cm;
+}
+
+.info th {
+  text-align: right;
+  font-weight: normal;
+  font-style: italic;
 }

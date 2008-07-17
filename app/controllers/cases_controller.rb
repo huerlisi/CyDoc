@@ -25,6 +25,16 @@ class CasesController < ApplicationController
     render :action => 'show', :layout => false
   end
 
+  def result_report
+    @case = Case.find(params[:id])
+    @related_cases = @case.patient.cases.find(:all, :conditions => ['doctor_id = ?', @current_doctor.id])
+  end
+
+  def result_inline
+    result
+    render :action => 'result', :layout => false
+  end
+
   def result_remarks
     @case = Case.find(params[:id])
     send_file(@case.order_form.file('result_remarks'), :type => 'image/jpeg', :disposition => 'inline')
