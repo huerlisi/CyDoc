@@ -17,11 +17,9 @@ class ApplicationController < ActionController::Base
   private
   def authenticate
     authenticate_or_request_with_http_basic do |user_name, password|
-      @current_doctor = Doctor.find_by_login(user_name, Digest::SHA256.digest(password))
-#      if doctor.nil?
-#        render :text => 'Falsches Login oder Passwort!', :status => 401
-#        return false
-#      end
+      logger.info("user: #{user_name}, pw: #{password}")
+      @current_doctor = Doctor.find_by_login_and_password(user_name, Digest::SHA256.hexdigest(password))
+      return !@current_doctor.nil?
     end
   end
 end

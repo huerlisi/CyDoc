@@ -11,4 +11,8 @@ class Doctor < ActiveRecord::Base
   def name
     praxis.full_name || ""
   end
+
+  def password=(value)
+    write_attribute(:password, Digest::SHA256.hexdigest(value))
+  end
 end
