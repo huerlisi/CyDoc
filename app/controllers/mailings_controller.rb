@@ -5,7 +5,7 @@ class MailingsController < ApplicationController
   private
   def authorize
     begin
-      Mailing.find(params[:id], :conditions => ['doctor_id = ?', @current_doctor.id])
+      Mailing.find(params[:id], :conditions => { :doctor_id => @current_doctor_ids})
     rescue ActiveRecord::RecordNotFound
       render :partial => 'shared/access_denied', :layout => 'cases', :status => 404
     end
@@ -19,7 +19,7 @@ class MailingsController < ApplicationController
   end
   
   def latest_overview
-    @mailing = Mailing.find(:first, :order => 'printed_at desc', :conditions => ['doctor_id = ?', @current_doctor.id])
+    @mailing = Mailing.find(:first, :order => 'printed_at DESC', :conditions => {:doctor_id => @current_doctor_ids})
     render :action => 'overview', :layout => 'cases'
   end
 
@@ -33,7 +33,7 @@ class MailingsController < ApplicationController
   end
 
   def list
-    @mailings = Mailing.find(:all, :conditions => ['doctor_id = ?', @current_doctor.id])
+    @mailings = Mailing.find(:all, :order => 'printed_at DESC', :conditions => {:doctor_id => @current_doctor_ids})
     render :layout => 'cases'
   end
 

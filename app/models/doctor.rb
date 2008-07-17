@@ -12,6 +12,10 @@ class Doctor < ActiveRecord::Base
     praxis.full_name || ""
   end
 
+  def colleagues
+    offices.map{|o| o.doctors}.flatten
+  end
+
   def password=(value)
     write_attribute(:password, Digest::SHA256.hexdigest(value))
   end

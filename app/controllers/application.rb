@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
       if @current_doctor.nil?
         false
       else
+        @current_doctor_ids = @current_doctor.colleagues.map{|c| c.id}.uniq
         true
       end
     end

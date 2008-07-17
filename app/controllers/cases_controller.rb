@@ -6,7 +6,7 @@ class CasesController < ApplicationController
   private
   def authorize
     begin
-      Case.find(params[:id], :conditions => ['doctor_id = ?', @current_doctor.id])
+      Case.find(params[:id], :conditions => { :doctor_id => @current_doctor_ids})
     rescue ActiveRecord::RecordNotFound
       render :partial => 'shared/access_denied', :layout => 'cases', :status => 404
     end
@@ -17,7 +17,7 @@ class CasesController < ApplicationController
   public
   def show
     @case = Case.find(params[:id])
-    @related_cases = @case.patient.cases.find(:all, :conditions => ['doctor_id = ?', @current_doctor.id])
+    @related_cases = @case.patient.cases.find(:all, :conditions => {:doctor_id => @current_doctor_ids})
   end
 
   def show_inline
@@ -27,7 +27,7 @@ class CasesController < ApplicationController
 
   def result_report
     @case = Case.find(params[:id])
-    @related_cases = @case.patient.cases.find(:all, :conditions => ['doctor_id = ?', @current_doctor.id])
+    @related_cases = @case.patient.cases.find(:all, :conditions => {:doctor_id => @current_doctor_ids})
   end
 
   def result_report_inline
