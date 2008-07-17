@@ -1,14 +1,6 @@
 <fieldset>
 <legend><%= @cases.size %> Resultate f&uuml;r Suche nach '<%= params[:search][:query] %>'</legend>
   <table class="listing" style="margin-top: 0px">
-    <tr style="font-weight: bold; border: 1px">
-      <th></th>
-      <th style="text-align: right; font-weight: normal; padding: 0.1em 1em; border: 0px"><i>Geb.</i></th>
-      <th style="text-align: right; font-weight: bold; border: 0px"></th>
-      <th></th>
-      <th style="text-align: right; font-weight: normal; padding: 0.1em 1em; border: 0px"><i>Entn.</i></th>
-      <th style="text-align: right; font-weight: bold; border: 0px"></th>
-    </tr>
     <%= render :partial => '/cases/list', :collection => @cases %>
   </table>
 </fieldset>

@@ -1,7 +1,7 @@
 <% a_case = list %>
 <tr style="font-size: 0.8em; vertical-align: top; padding-bottom: 0.2em; cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'cases', :action => 'show', :id => a_case) %>'">
   <td style="width: 30%; border-right: 0px; vertical-align: top">
-    <b><%= link_to_remote h(a_case.patient.name), :update => 'result', :url => {:controller => 'cases', :action => 'show_inline', :id => a_case} %></b>
+    <b><%=h a_case.patient.name %><%=h "\##{a_case.patient.doctor_patient_nr}" if !(a_case.patient.doctor_patient_nr.nil? or a_case.patient.doctor_patient_nr == '') %></b>
   </td>
   <td style="width: 10%; text-align: right; padding: 0.1em 1em;">
     <%=h a_case.patient.birth_date.strftime('%d.%m.%Y') %>
@@ -9,7 +9,7 @@
   <td class="PAP_<%=h a_case.classification.code unless a_case.classification.nil? %>" style="width: 20%; vertical-align: top">
     <b><%= a_case.classification.name %></b>
   </td>
-  <td style="width: 40%; vertical-align: top">
+  <td class="PAP_<%=h a_case.classification.code unless a_case.classification.nil? %>" style="width: 40%; vertical-align: top">
     <b><%= a_case.control_findings.map {|f| h(f.name)}.join('<br/>') %></b>
   </td>
   <td style="width: 10%; text-align: right; padding: 0.1em 1em;">
