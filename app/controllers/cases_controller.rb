@@ -37,7 +37,11 @@ class CasesController < ApplicationController
 
   def result_remarks
     @case = Case.find(params[:id])
-    send_file(@case.order_form.file('result_remarks'), :type => 'image/jpeg', :disposition => 'inline')
+    unless @case.order_form.nil?
+      send_file(@case.order_form.file('result_remarks'), :type => 'image/jpeg', :disposition => 'inline')
+    else
+      render :text => "Auftragsformular leider nicht verfügbar.", :layout => 'cases'
+    end
   end
 
   def order_form_inline
