@@ -20,6 +20,7 @@ class MailingsController < ApplicationController
   
   def latest_overview
     @mailing = Mailing.find(:first, :order => 'printed_at DESC', :conditions => {:doctor_id => @current_doctor_ids})
+    @older_mailings = Mailing.find(:all, :order => 'printed_at DESC', :conditions => {:doctor_id => @current_doctor_ids}, :limit => 10)
     render :action => 'overview', :layout => 'cases'
   end
 
@@ -33,7 +34,7 @@ class MailingsController < ApplicationController
   end
 
   def list
-    @mailings = Mailing.find(:all, :order => 'printed_at DESC', :conditions => {:doctor_id => @current_doctor_ids})
+    @mailings = Mailing.find(:all, :order => 'printed_at DESC', :conditions => {:doctor_id => @current_doctor_ids}, :limit => 10)
     render :layout => 'cases'
   end
 

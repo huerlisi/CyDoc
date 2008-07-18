@@ -1,0 +1,9 @@
+<%= mailing = list %>
+<tr style="cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'mailings', :action => 'overview', :id => mailing) %>'">
+  <td/>
+  <td style="text-align: right"><%= mailing.cases.count %></td>
+  <td>
+    <%=h mailing.doctor.nil? ? "Unbekannter Arzt" : mailing.doctor.name %>
+  </td>
+  <td><%=h mailing.printed_at.strftime('%d.%m.%Y') unless mailing.printed_at.nil? %></td>
+</tr>
