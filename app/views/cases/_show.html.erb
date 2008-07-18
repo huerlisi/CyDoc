@@ -1,53 +1,52 @@
 <div style="width: 100%" class="report">
-
-<h2><%=h @case.patient.vcard.full_name %><%=h "\##{@case.patient.doctor_patient_nr}" if !(@case.patient.doctor_patient_nr.nil? or @case.patient.doctor_patient_nr == '') %></h2>
-
-<table style="width: 100%">
-<tr>
-<td style="width: 6.5cm; vertical-align: top">
-  <div id="patient">
-  <%=h @case.patient.birth_date.strftime("%d.%m.%Y") unless @case.patient.birth_date.nil? %><br />
-  <% if !@case.insurance.nil? %>
-  <%=h @case.insurance.vcard.full_name %> <%=h "##{@case.insurance_nr}" unless @case.insurance_nr.nil? or @case.insurance_nr.strip == "0" or @case.insurance_nr.strip == "" %><br />
-  <% end %>
-  <%=h @case.patient.vcard.street_address %><br />
-  <%=h @case.patient.vcard.postal_code %> <%=h @case.patient.vcard.locality %>
-  </div>
-</td>
-<td>
-  <table class="info">
+  <table cellspacing="0" cellpadding="0" class="info" style="width: 100%; margin: 0.8em">
     <tr>
+      <td style="width: 50%">
+        <b><%=h @case.patient.vcard.full_name %><%=h "\##{@case.patient.doctor_patient_nr}" if !(@case.patient.doctor_patient_nr.nil? or @case.patient.doctor_patient_nr == '') %></b><br />
+      </td>
+      <th style="width: 10%">Auftrag:</th>
+      <td style="width: 40%"><b><%=h @case.praxistar_eingangsnr %></b></td>
+    </tr>
+    <tr>
+      <td>
+        <%=h @case.patient.vcard.street_address %><br />
+      </td>
       <th>Arzt:</th>
       <td><%=h @case.doctor.praxis.full_name %></td>
     </tr>
     <tr>
+      <td>
+        <%=h @case.patient.vcard.postal_code %> <%=h @case.patient.vcard.locality %>
+      </td>
       <th>Entnahme:</th>
       <td><%=h @case.examination_date ? @case.examination_date.strftime("%d.%m.%Y") : "" %></td>
     </tr>
     <tr>
+      <td>
+        <%=h @case.patient.birth_date.strftime("%d.%m.%Y") unless @case.patient.birth_date.nil? %><br />
+      </td>
       <th>Eingang:</th>
       <td><%=h @case.entry_date ? @case.entry_date.strftime("%d.%m.%Y") : "Noch nicht gesetzt" %></td>
     </tr>
-    <% unless (@case.screened_at.nil? or @case.screened_by.nil?) %>
     <tr>
+      <td>
+        <% if !@case.insurance.nil? %>
+        <%=h @case.insurance.vcard.full_name %> <%=h "##{@case.insurance_nr}" unless @case.insurance_nr.nil? or @case.insurance_nr.strip == "0" or @case.insurance_nr.strip == "" %><br />
+        <% end %>
+      </td>
+      <% unless (@case.screened_at.nil? or @case.screened_by.nil?) %>
       <th>Visum:</th>
       <td><%=h @case.screened_by.work_vcard.abbreviated_name %>, <%=h @case.screened_at.strftime("%d.%m.%Y") %></td>
+      <% end %>
     </tr>
-    <% end %>
     <% unless (@case.review_at.nil? or @case.review_by.nil?) %>
     <tr>
+      <td/>
       <th>Visum:</th>
       <td><%=h @case.review_by.work_vcard.abbreviated_name %>, <%=h @case.review_at.strftime("%d.%m.%Y") %></td>
     </tr>
     <% end %>
   </table>
-</td>
-</tr>
-<tr>
-<td>
-</td>
-</tr>
-</table>
 
 <div id="classification" class="PAP_<%=h @case.classification.code %>">
   <table style="width: 100%">
@@ -61,7 +60,6 @@
     </tr>
   </table>
 </div>
-<h2>Befund <%=h @case.praxistar_eingangsnr %></h2>
 <% if @case.classification.code == "mam" %>
 <div id="finding_title" class="title" style="margin-top: 0.5em; margin-bottom: 1em">
 Befund
@@ -70,7 +68,7 @@ Befund
   <%= @case.finding_text %>
 </div>
 <% else %>
-<table>
+<table style="padding: 0.8em">
 <tr>
   <td id="finding_list">
     <%= render :partial => 'list_findings' %>
