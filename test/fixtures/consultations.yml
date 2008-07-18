@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  patient_id: 1
+  duration_from: 2008-07-18 22:40:52
+  duration_to: 2008-07-18 22:40:52
+  doctor_id: 1
+  remarks: MyText
+
+two:
+  patient_id: 1
+  duration_from: 2008-07-18 22:40:52
+  duration_to: 2008-07-18 22:40:52
+  doctor_id: 1
+  remarks: MyText
