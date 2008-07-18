@@ -3,4 +3,5 @@
   <table class="listing" style="margin-top: 0px">
     <%= render :partial => '/cases/list', :collection => @cases %>
   </table>
+  <p><%= "mehr als 100 Resultate..." if @cases.size == 100 %></p>
 </fieldset>

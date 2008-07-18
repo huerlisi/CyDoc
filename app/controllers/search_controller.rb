@@ -10,7 +10,7 @@ class SearchController < ApplicationController
     when "text"
       condition = "(classifications.name REGEXP :value) OR (cases.finding_text LIKE :value) OR (vcards.given_name LIKE :value) OR (vcards.family_name LIKE :value) OR (vcards.full_name LIKE :value)"
     end
-    @cases = Case.find(:all, :include => [:classification => [], :patient => [ :vcard ]], :conditions => ["(#{condition}) AND cases.doctor_id IN (:doctor_id)", {:value => value, :doctor_id => @current_doctor_ids}])
+    @cases = Case.find(:all, :include => [:classification => [], :patient => [ :vcard ]], :conditions => ["(#{condition}) AND cases.doctor_id IN (:doctor_id)", {:value => value, :doctor_id => @current_doctor_ids}], :limit => 100)
 
     render :layout => false
   end
