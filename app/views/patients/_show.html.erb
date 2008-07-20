@@ -1,0 +1,31 @@
+<div style="width: 100%" class="report">
+  <table cellspacing="0" cellpadding="0" class="info" style="width: 100%; margin: 0.8em">
+    <tr>
+      <td style="width: 50%">
+        <b><%=h @patient.vcard.full_name %><%=h "\##{@patient.doctor_patient_nr}" if !(@patient.doctor_patient_nr.nil? or @patient.doctor_patient_nr == '') %></b><br />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%=h @patient.vcard.street_address %><br />
+      </td>
+      <th>Arzt:</th>
+      <td><%=h @patient.doctor.praxis.full_name %></td>
+    </tr>
+    <tr>
+      <td>
+        <%=h @patient.vcard.postal_code %> <%=h @patient.vcard.locality %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%=h @patient.birth_date.strftime("%d.%m.%Y") unless @patient.birth_date.nil? %><br />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <% if !@patient.insurance.nil? %>
+        <%=h @patient.insurance.vcard.full_name %> <%=h "##{@patient.insurance_nr}" unless @patient.insurance_nr.nil? or @patient.insurance_nr.strip == "0" or @patient.insurance_nr.strip == "" %><br />
+        <% end %>
+      </td>
+  </table>
