@@ -1,0 +1,15 @@
+<%= error_messages_for :medical_cases %>
+
+<% form_for :medical_case, :url => {:action => 'create'} do |f| %>
+  <p>
+    Von: <%= f.text_field :duration_from %><br />
+    Bis: <%= f.text_field :duration_to %><br />
+    Bemerkungen: <%= f.text_area :remarks, :rows => 4 %><br />
+
+    <%= f.submit "Erfassen" %>
+
+    <%= f.hidden_field :type %>
+    <%= f.hidden_field :doctor_id %>
+    <%= f.hidden_field :patient_id %>
+  </p>
+<% end %>

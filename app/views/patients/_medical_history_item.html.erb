@@ -1,1 +1,5 @@
-<%= render :partial => medical_history_item.class.name.tableize.singularize, :object => medical_history_item %>
+<% begin %>
+  <%= render :partial => medical_history_item.class.name.tableize.singularize, :object => medical_history_item %>
+<% rescue ActionView::ActionViewError %>
+  <%= render :partial => 'medical_case', :object => medical_history_item %>
+<% end %>
