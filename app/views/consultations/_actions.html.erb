@@ -1,0 +1,9 @@
+<ul>
+  <li><%= link_to_remote "Neuer Termin", :update => 'result', :url => new_consultation_path %></li>
+  <li><%= link_to_remote "Konsultation", :update => 'result', :url => new_consultation_path(@consultation) if @consultation %></li>
+  <li><%= link_to_remote "Termin verschieben", :update => 'result', :url => edit_consultation_path %></li>
+  <li><%= link_to_remote "Diagnose hinzufügen", :update => 'result', :url => {:action => :order_form_inline, :id => @case} %></li>
+  <li><%= link_to_remote "Analyse hinzufügen", :update => 'result', :url => {:action => :order_form_inline, :id => @case} %></li>
+  <li><%= link_to_remote "Medikation hinzufügen", :update => 'result', :url => {:action => :order_form_inline, :id => @case} %></li>
+  <li><%= link_to_remote "Leistung hinzufügen", :update => 'result', :url => {:action => :order_form_inline, :id => @case} %></li>
+</ul>
