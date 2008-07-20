@@ -7,7 +7,7 @@ class MailingsController < ApplicationController
     begin
       Mailing.find(params[:id], :conditions => { :doctor_id => @current_doctor_ids})
     rescue ActiveRecord::RecordNotFound
-      render :partial => 'shared/access_denied', , :status => 404
+      render :partial => 'shared/access_denied', :status => 404
     end
   end
 
