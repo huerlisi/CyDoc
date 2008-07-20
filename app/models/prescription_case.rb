@@ -1,0 +1,2 @@
+class PrescriptionCase < MedicalCase
+end

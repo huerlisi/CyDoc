@@ -1,0 +1,2 @@
+class AnamnesisCase < MedicalCase
+end

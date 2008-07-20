@@ -1,0 +1,2 @@
+class AttestationCase < MedicalCase
+end

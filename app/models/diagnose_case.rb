@@ -1,0 +1,2 @@
+class DiagnoseCase < MedicalCase
+end
