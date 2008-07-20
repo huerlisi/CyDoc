@@ -1,0 +1,2 @@
+module MedicalCasesHelper
+end
