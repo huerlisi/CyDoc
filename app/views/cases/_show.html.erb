@@ -2,7 +2,7 @@
   <table cellspacing="0" cellpadding="0" class="info" style="width: 100%; margin: 0.8em">
     <tr>
       <td style="width: 50%">
-        <b><%=h @case.patient.vcard.full_name %><%=h "\##{@case.patient.doctor_patient_nr}" if !(@case.patient.doctor_patient_nr.nil? or @case.patient.doctor_patient_nr == '') %></b><br />
+        <b><%= link_to h(@case.patient.vcard.full_name), :controller => 'patients', :action => 'show', :id => @case.patient %><%=h "\##{@case.patient.doctor_patient_nr}" if !(@case.patient.doctor_patient_nr.nil? or @case.patient.doctor_patient_nr == '') %></b><br />
       </td>
       <th style="width: 10%">Auftrag:</th>
       <td style="width: 40%"><b><%=h @case.praxistar_eingangsnr %></b></td>
