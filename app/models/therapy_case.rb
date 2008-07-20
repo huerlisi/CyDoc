@@ -1,0 +1,2 @@
+class TherapyCase < MedicalCase
+end
