@@ -6,6 +6,9 @@ class Patient < ActiveRecord::Base
         
   has_many :cases, :order => 'id DESC'
 
+  # Medical history
+  has_many :medical_cases, :order => 'duration_from DESC'
+
   # Proxy accessors
   def name
     vcard.full_name || ""
