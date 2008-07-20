@@ -7,7 +7,7 @@ class MailingsController < ApplicationController
     begin
       Mailing.find(params[:id], :conditions => { :doctor_id => @current_doctor_ids})
     rescue ActiveRecord::RecordNotFound
-      render :partial => 'shared/access_denied', :layout => 'cases', :status => 404
+      render :partial => 'shared/access_denied', , :status => 404
     end
   end
 
@@ -21,7 +21,7 @@ class MailingsController < ApplicationController
   def latest_overview
     @mailing = Mailing.find(:first, :order => 'printed_at DESC', :conditions => {:doctor_id => @current_doctor_ids})
     @older_mailings = Mailing.find(:all, :order => 'printed_at DESC', :conditions => {:doctor_id => @current_doctor_ids}, :limit => 10)
-    render :action => 'overview', :layout => 'cases'
+    render :action => 'overview'
   end
 
   def overview
@@ -35,7 +35,6 @@ class MailingsController < ApplicationController
 
   def list
     @mailings = Mailing.find(:all, :order => 'printed_at DESC', :conditions => {:doctor_id => @current_doctor_ids}, :limit => 10)
-    render :layout => 'cases'
   end
 
   def statistics

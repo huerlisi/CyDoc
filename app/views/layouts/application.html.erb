@@ -30,13 +30,35 @@
           <ul>
             <li><%= link_to "Home", :controller => "/" %></li>
             <li><%= link_to "Kontakt", "mailto:info@zyto-labor.com" %></li>
-            <li><%= link_to "Suche", :controller => "/search" %></li>
             <li><%= link_to "Bestellen", 'http://shop.zyto-labor.com' %></li>
           </ul>
         </div>
 
         <div id="MainContent">
-            <%= @content_for_layout %>
+<table style="height: 100%">
+  <tr>
+    <td width="100%">
+      <div id="result">
+        <%= yield %>
+      </div>
+    </td>
+    <td id="personal-information" style="min-width: 200px; vertical-align: top">
+      <% unless @related_cases.nil? %>
+      <fieldset style="font-size: 80%; line-height: 1.3em">
+        <legend>Geschichte</legend>
+        <dl>
+          <%= render :partial => 'cases/compact', :collection => @related_cases %>
+        </dl>
+      </fieldset>
+      <% end %>
+      <fieldset style="font-size: 80%; line-height: 1.3em">
+        <legend>Aktionen</legend>
+        <%= render :partial => '/search/form' %>
+        <%= render :partial => '/cases/actions' if @case %>
+      </fieldset>
+    </td>
+  </tr>
+</table>
         </div>
     </div>
 </body>

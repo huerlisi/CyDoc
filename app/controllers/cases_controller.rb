@@ -8,7 +8,7 @@ class CasesController < ApplicationController
     begin
       Case.find(params[:id], :conditions => { :doctor_id => @current_doctor_ids})
     rescue ActiveRecord::RecordNotFound
-      render :partial => 'shared/access_denied', :layout => 'cases', :status => 404
+      render :partial => 'shared/access_denied', :status => 404
     end
   end
 
@@ -40,7 +40,7 @@ class CasesController < ApplicationController
     unless @case.order_form.nil?
       send_file(@case.order_form.file('result_remarks'), :type => 'image/jpeg', :disposition => 'inline')
     else
-      render :text => "Auftragsformular leider nicht verfügbar.", :layout => 'cases'
+      render :text => "Auftragsformular leider nicht verfügbar."
     end
   end
 
@@ -53,7 +53,7 @@ class CasesController < ApplicationController
     unless @case.order_form.nil?
       send_file(@case.order_form.file, :type => 'image/jpeg', :disposition => 'inline')
     else
-      render :text => "Auftragsformular leider nicht verfügbar.", :layout => 'cases'
+      render :text => "Auftragsformular leider nicht verfügbar."
     end
   end
 
@@ -62,7 +62,7 @@ class CasesController < ApplicationController
     begin
       send_file(File.join(RAILS_ROOT, '/data/result_reports/', "result_report-#{@case.id}.pdf"), :type => 'application/pdf', :disposition => 'inline')
     rescue ActionController::MissingFile
-      render :text => "PDF Dokument leider noch nicht verfügbar.", :layout => 'cases'
+      render :text => "PDF Dokument leider noch nicht verfügbar."
     end
   end
 end
