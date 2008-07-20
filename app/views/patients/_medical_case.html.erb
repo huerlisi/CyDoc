@@ -1,7 +1,3 @@
-<% if medical_case.is_a? ZytolaborCase -%>
-  <%= render :partial => 'zytolabor_case', :object => medical_case %>
-<% else -%>
 <tr>
-  <td><%= medical_case.class %><%= medical_case.duration_from.strftime('%d.%m.%Y') %></td><td><%= medical_case.remarks %></td>
+  <td><%= medical_case.duration_from.strftime('%d.%m.%Y') %></td><td><%= medical_case.remarks %></td>
 </tr>
-<% end -%>
