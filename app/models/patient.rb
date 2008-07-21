@@ -9,6 +9,9 @@ class Patient < ActiveRecord::Base
   # Medical history
   has_many :medical_cases, :order => 'duration_from DESC'
 
+  # Services
+  has_many :record_tarmeds, :order => 'date'
+
   # Proxy accessors
   def name
     vcard.full_name || ""

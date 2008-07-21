@@ -1,12 +1,14 @@
 class TariffItemsController < ApplicationController
-
   def new
     @record_tarmed = RecordTarmed.new
     @record_tarmed.provider_id = @current_doctor.id
 
     # Defaults
     @record_tarmed.date = DateTime.now
-    @record_tarmed.session = 1
+    @record_tarmed.quantity = 1
+    @record_tarmed.responsible_id = @current_doctor.id
+    @record_tarmed.unit_mt = 0.89
+
     @record_tarmed.patient_id = params[:patient_id]
   end
 

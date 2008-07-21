@@ -8,7 +8,12 @@
 
     <%= f.submit "Erfassen" %>
 
-    <%= f.hidden_field :provider_id %>
     <%= f.hidden_field :patient_id %>
+
+    <%= f.hidden_field :provider_id %>
+    <%= f.hidden_field :responsible_id %>
+    <%= f.hidden_field :quantity %>
+    <%= f.hidden_field :unit_mt %>
+    <%= f.hidden_field :unit_tt %>
   </p>
 <% end %>
