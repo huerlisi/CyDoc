@@ -5,7 +5,7 @@ class TariffItemsController < ApplicationController
 
   def new_inline
     new
-    render :layout => false
+    render :action => 'new', :layout => false
   end
 
   def edit
@@ -13,7 +13,7 @@ class TariffItemsController < ApplicationController
 
   def edit_inline
     edit
-    render :layout => false
+    render :action => 'edit', :layout => false
   end
 
   def destroy
@@ -21,6 +21,6 @@ class TariffItemsController < ApplicationController
 
   def destroy_inline
     destroy
-    render :layout => false
+    render :action => 'destroy', :layout => false
   end
 end
