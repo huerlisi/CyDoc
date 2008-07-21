@@ -1,6 +1,6 @@
 class InvoicesController < ApplicationController
 
   def tarmed
-    render :layout => false
+    render :layout => 'simple'
   end
 end
