@@ -7,6 +7,29 @@ class Tarmed::Leistung < Tarmed::Base
   has_many :leistung_hierarchie_masters, :class_name => 'LeistungHierarchie', :foreign_key => 'LNR_SLAVE'
   has_many :leistung_hierarchie_slaves, :class_name => 'LeistungHierarchie', :foreign_key => 'LNR_MASTER'
   
+  # Aliases to match Tarmed Invoicing
+  def code
+    read_attribute('LNR')
+  end
+
+  def amount_mt
+    read_attribute('TP_AL')
+  end
+
+  def unit_factor_mt
+    read_attribute('F_AL')
+  end
+
+  def amount_tt
+    read_attribute('TP_TL')
+  end
+
+  def unit_factor_tt
+    read_attribute('F_TL')
+  end
+
+
+  # From Hozr
   def name
     text.BEZ_255
   end
