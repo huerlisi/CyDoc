@@ -1,0 +1,14 @@
+<%= error_messages_for :record_tarmed %>
+
+<% form_for :record_tarmed, :url => {:action => 'create'} do |f| %>
+  <p>
+    Position: <%= f.text_field :code %><br />
+    Datum: <%= f.text_field :date %><br />
+    Sitzung: <%= f.text_field :session %><br />
+
+    <%= f.submit "Erfassen" %>
+
+    <%= f.hidden_field :provider_id %>
+    <%= f.hidden_field :patient_id %>
+  </p>
+<% end %>
