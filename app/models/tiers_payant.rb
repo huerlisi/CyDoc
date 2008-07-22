@@ -1,0 +1,2 @@
+class TiersPayant < Tiers
+end

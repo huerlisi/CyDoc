@@ -1,0 +1,2 @@
+class TiersGarant < Tiers
+end
