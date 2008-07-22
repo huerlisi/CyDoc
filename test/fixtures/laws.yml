@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  insured_id: MyString
+  case_id: MyString
+  case_date: 2008-07-22 16:32:26
+  ssn: MyString
+  nif: MyString
+  type: MyString
+
+two:
+  insured_id: MyString
+  case_id: MyString
+  case_date: 2008-07-22 16:32:26
+  ssn: MyString
+  nif: MyString
+  type: MyString

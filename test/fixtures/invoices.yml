@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  remark: MyText
+  tiers_id: 1
+  law_id: 1
+  treatment_id: 1
+  role_title: MyText
+  role_type: MyText
+  place_type: MyText
+
+two:
+  remark: MyText
+  tiers_id: 1
+  law_id: 1
+  treatment_id: 1
+  role_title: MyText
+  role_type: MyText
+  place_type: MyText
