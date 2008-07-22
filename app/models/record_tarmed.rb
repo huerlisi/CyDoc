@@ -1,6 +1,8 @@
 class RecordTarmed < ActiveRecord::Base
   belongs_to :tarmed_leistung, :class_name => 'Tarmed::Leistung', :foreign_key => :code
 
+  has_and_belongs_to_many :invoices
+
   # Lookup values from Tarmed DB when assigning code
   def code=(code)
     leistung = Tarmed::Leistung.find(code)
