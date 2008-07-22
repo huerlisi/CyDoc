@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  biller_id: 1
+  provider_id: 1
+  insurance_id: 1
+  patient_id: 1
+  guarantor_id: 1
+  referrer_id: 1
+  employer_id: 1
+  type: MyString
+  payment_periode: MyString
+  invoice_modification: false
+
+two:
+  biller_id: 1
+  provider_id: 1
+  insurance_id: 1
+  patient_id: 1
+  guarantor_id: 1
+  referrer_id: 1
+  employer_id: 1
+  type: MyString
+  payment_periode: MyString
+  invoice_modification: false
