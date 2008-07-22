@@ -7,8 +7,6 @@ class TariffItemsController < ApplicationController
     @record_tarmed.date = DateTime.now
     @record_tarmed.quantity = 1
     @record_tarmed.responsible_id = @current_doctor.id
-    @record_tarmed.unit_mt = 0.89
-    @record_tarmed.unit_tt = 0.89
 
     @record_tarmed.patient_id = params[:patient_id]
   end

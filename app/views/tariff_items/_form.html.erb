@@ -2,9 +2,10 @@
 
 <% form_for :record_tarmed, :url => {:action => 'create'} do |f| %>
   <p>
-    Position: <%= f.text_field :code %><br />
-    Datum: <%= f.text_field :date %><br />
-    Sitzung: <%= f.text_field :session %><br />
+    Datum: <%= f.text_field :date %>
+    Anzahl: <%= f.text_field :quantity %>
+    Tarmed-Code: <%= f.text_field :code %>
+    Sitzung: <%= f.text_field :session %>
 
     <%= f.submit "Erfassen" %>
 
@@ -13,7 +14,5 @@
     <%= f.hidden_field :provider_id %>
     <%= f.hidden_field :responsible_id %>
     <%= f.hidden_field :quantity %>
-    <%= f.hidden_field :unit_mt %>
-    <%= f.hidden_field :unit_tt %>
   </p>
 <% end %>
