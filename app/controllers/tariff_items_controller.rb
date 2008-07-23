@@ -1,4 +1,5 @@
 class TariffItemsController < ApplicationController
+  # CRUD actions
   def new
     @record_tarmed = RecordTarmed.new
     @record_tarmed.provider_id = @current_doctor.id

@@ -1,0 +1,11 @@
+<%= error_messages_for :invoice %>
+
+<% form_for :invoice, :url => {:action => 'create'} do |f| %>
+  <p>
+    Datum: <%= f.text_field :date %>
+
+    <%= f.submit "Erfassen" %>
+
+    <%= hidden_field 'tiers', :patient_id %>
+  </p>
+<% end %>

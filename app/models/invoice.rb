@@ -38,4 +38,8 @@ class Invoice < ActiveRecord::Base
   def date
     created_at
   end
+
+  def date=(value)
+    write_attribute(:created_at, value)
+  end
 end
