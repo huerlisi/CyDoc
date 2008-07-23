@@ -64,7 +64,7 @@ class InvoicesController < ApplicationController
     @invoice.record_tarmeds = @tiers.patient.record_tarmeds
     
     if @invoice.save
-      flash[:notice] = 'Erfolgreich generiert.'
+      flash[:notice] = 'Erfolgreich erstellt.'
       redirect_to :controller => 'invoices', :action => 'insurance_recipe', :id => @invoice
     else
       render :action => 'new'
