@@ -16,4 +16,12 @@ class Patient < ActiveRecord::Base
   def name
     vcard.full_name || ""
   end
+
+  def sex
+    case read_attribute(:sex)
+      when 1: "M"
+      when 2: "F"
+      else "unbekannt"
+    end
+  end
 end
