@@ -1,0 +1,2 @@
+class DiagnoseDRG < Diagnose
+end

@@ -1,0 +1,2 @@
+class DiagnoseBirthdefect < Diagnose
+end

@@ -1,0 +1,2 @@
+class DiagnoseICPC < Diagnose
+end

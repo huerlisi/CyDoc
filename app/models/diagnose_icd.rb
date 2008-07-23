@@ -1,0 +1,2 @@
+class DiagnoseICD < Diagnose
+end

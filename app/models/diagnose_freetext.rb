@@ -1,0 +1,2 @@
+class DiagnoseFreetext < Diagnose
+end

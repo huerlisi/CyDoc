@@ -1,0 +1,2 @@
+class DiagnoseCantonal < Diagnose
+end
