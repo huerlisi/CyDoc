@@ -1,2 +1,2 @@
-class DiagnoseDRG < Diagnose
+class DiagnosisDRG < Diagnosis
 end

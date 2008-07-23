@@ -1,2 +1,2 @@
-class DiagnoseCantonal < Diagnose
+class DiagnosisCantonal < Diagnosis
 end

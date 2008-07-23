@@ -1,2 +1,2 @@
-class DiagnoseCase < MedicalCase
+class DiagnosisCase < MedicalCase
 end

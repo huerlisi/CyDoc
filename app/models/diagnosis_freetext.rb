@@ -1,2 +1,2 @@
-class DiagnoseFreetext < Diagnose
+class DiagnosisFreetext < Diagnosis
 end

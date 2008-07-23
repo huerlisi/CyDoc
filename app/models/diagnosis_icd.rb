@@ -1,2 +1,2 @@
-class DiagnoseICD < Diagnose
+class DiagnosisICD < Diagnosis
 end

@@ -1,2 +1,2 @@
-class DiagnoseByContract < Diagnose
+class DiagnosisByContract < Diagnosis
 end

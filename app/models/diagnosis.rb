@@ -1,8 +1,8 @@
-class Diagnose < ActiveRecord::Base
+class Diagnosis< ActiveRecord::Base
   has_and_belongs_to_many :treatments
 
   def type
-    class_subname = read_attribute(:type).to_s.gsub(/^Diagnose/, '')
+    class_subname = read_attribute(:type).to_s.gsub(/^Diagnosis/, '')
     if class_subname.upcase == class_subname
       return class_subname
     else
