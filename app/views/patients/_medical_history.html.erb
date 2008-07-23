@@ -1,4 +1,5 @@
 <h2>Krankengeschichte</h2>
+<div id="new_medical_case"></div>
 <% if @patient.medical_cases.empty? %>
   <p>Keine Krankengeschichte</p>
 <% else %>
@@ -6,4 +7,3 @@
     <%= render :partial => 'medical_history_item', :collection => @patient.medical_cases %>
   </table>
 <% end %>
-<div id="new_medical_case"/>

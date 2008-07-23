@@ -7,7 +7,7 @@ class Patient < ActiveRecord::Base
   has_many :cases, :order => 'id DESC'
 
   # Medical history
-  has_many :medical_cases, :order => 'duration_from DESC'
+  has_many :medical_cases, :order => 'duration_to DESC'
 
   # Services
   has_many :record_tarmeds, :order => 'date'

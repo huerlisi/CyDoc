@@ -13,6 +13,8 @@ class MedicalCasesController < ApplicationController
 
   def new
     @medical_case = Object.const_get(params[:type]).new
+
+    @medical_case.date = Date.today
     @medical_case.doctor = @current_doctor
     @medical_case.patient_id = params[:patient_id]
   end
