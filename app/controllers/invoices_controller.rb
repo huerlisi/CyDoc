@@ -18,6 +18,10 @@ class InvoicesController < ApplicationController
   end
 
   # CRUD actions
+  def show
+    @invoice = Invoice.find(params[:id])
+  end
+
   def new
     @invoice = Invoice.new
     @invoice.date = DateTime.now
@@ -58,7 +62,7 @@ class InvoicesController < ApplicationController
     
     if @invoice.save
       flash[:notice] = 'Erfolgreich generiert.'
-      redirect_to :controller => 'patients', :action => 'show', :id => @tiers.patient_id
+      redirect_to :controller => 'invoices', :action => 'insurance_recipe', :id => @invoice
     else
       render :action => 'new'
     end
