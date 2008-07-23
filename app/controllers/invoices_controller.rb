@@ -30,6 +30,8 @@ class InvoicesController < ApplicationController
     @tiers.patient_id = params[:patient_id]
 
     @law = Law.new
+
+    @treatment = Treatment.new
   end
 
   def new_inline
@@ -51,13 +53,16 @@ class InvoicesController < ApplicationController
     # Law, TODO
     @law = Object.const_get(params[:law][:name]).new
     @law.insured_id = @tiers.patient.insurance_nr
+
     @law.save
     @invoice.law = @law
     
     # Treatment
-    @treatment = Treatment.new(:reason => 'disease', :canton => 'ZH')
-    @treatment.date_begin = DateTime.now
-    @treatment.date_end = DateTime.now
+    @treatment = Treatment.new(params[:treatment])
+    # TODO make selectable
+    @treatment.canton ||= @tiers.provider.praxis.address.region
+
+    # TODO deduce from services
     @invoice.treatment = @treatment
 
     # Services

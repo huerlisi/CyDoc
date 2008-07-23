@@ -3,8 +3,16 @@ class Invoice < ActiveRecord::Base
   belongs_to :law
   belongs_to :treatment
 
-  has_and_belongs_to_many :record_tarmeds
+  has_and_belongs_to_many :record_tarmeds, :after_add => :add_record_tarmed
 
+  # Association callbacks
+  def add_record_tarmed(record_tarmed)
+    return true if treatment.nil?
+    
+    treatment.date_begin = record_tarmed.date if (treatment.date_begin.nil? or record_tarmed.date < treatment.date_begin)
+    treatment.date_end = record_tarmed.date if (treatment.date_end.nil? or record_tarmed.date > treatment.date_end)
+  end
+  
   # Convenience methods
   def biller
     tiers.biller

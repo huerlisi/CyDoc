@@ -11,6 +11,10 @@
       <td><%= select 'law', :name, [['KVG', LawKvg], ['UVG', LawUvg], ['IVG', LawIvg], ['MVG', LawMvg], ['VVG', LawVvg], ['ORG', LawOrg]] %></td>
     </tr>
     <tr>
+      <th>Behandlungsgrund:</th>
+      <td><%= select 'treatment', :reason,  ['Krankheit', 'Mutterschaft', 'Prävention'] %></td>
+    </tr>
+    <tr>
       <th>Bemerkungen:</th>
       <td><%= f.text_area :remark, :rows => 2 %></td>
     </tr>
