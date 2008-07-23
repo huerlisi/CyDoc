@@ -2,7 +2,7 @@
 #invoice {
   font-family: Arial,DejaVu Sans;
   font-size:   8pt;
-  margin:      1.2cm;
+  margin-top:  0.5cm;
   position:    absolute;
   width:       18.2cm;
   height:      26cm;
@@ -15,8 +15,8 @@
   font-size:   12pt;
   font-family: ocr-b,Helvetica,Arial,sans-serif;
   position:    absolute;
-  bottom:      1.6cm;
-  right:       0.7cm;
+  top:         27.7cm;
+  left:        6.7cm;
 }
 #billingaddress {
   font-size:   12pt;
@@ -28,7 +28,7 @@
   left:        1.5cm;
 }
 #biller {
-  top:         2.5cm;
+  top:         3cm;
   left:        1.5cm;
 }
 #referrer {
@@ -36,18 +36,58 @@
   left:        1.5cm;
 }
 #provider {
-  top:         2.5cm;
+  top:         3cm;
   left:        5.5cm;
 }
 #patient {
   top:         6cm;
   left:        5.5cm;
 }
-#paymentfor {
-  bottom:      9.6cm;
+#paymentfor1 {
+  top:         20cm;
   left:        0.6cm;
 }
+#account1 {
+  top:         23.3cm;
+  left:        2.7cm;
+}
+#paymentby1 {
+  top:         25.5cm;
+  left:        0.6cm;
+}
+#paymentamount1 {
+  top:         24.2cm;
+  left:        4cm;
+}
+#paymentfor2 {
+  top:         20cm;
+  left:        6.6cm;
+}
+#account2 {
+  top:         23.3cm;
+  left:        8.7cm;
+}
+#paymentby2 {
+  top:         25.5cm;
+  left:        6.6cm;
+}
+#paymentby3 {
+  top:         24.5cm;
+  left:        12.5cm;
+}
+#paymentamount2 {
+  top:         24.2cm;
+  left:        10cm;
+}
+#reference {
+  top:         22.5cm;
+  left:        14cm;
+}
 .block {
+  font-size:   9pt;
+  position:    absolute;
+}
+.line {
   font-size:   9pt;
   position:    absolute;
 }
@@ -106,20 +146,33 @@ Tel. 044 272 60 80
 <h3>Patient</h3>
   <%= address(@invoice.patient.vcard) %>
   <br/>
-  Geburtsdatum <%= @invoice.patient.birth_date.strftime('%d.%m.%Y') %>
+  Geburtsdatum <%= @invoice.patient.birth_date.strftime('%d.%m.%Y') %>			
 </div>
 
 <div id="billingaddress" class="block">
   <%= address(@invoice.patient.vcard) %>
 </div>
 
-<div id="paymentfor" class="block">
+<div id="paymentfor1" class="block">
 BANK<br />
 9999<br />
 <br />
   <%= address(@invoice.biller.praxis) %>
 </div>
-
+<div id="account1" class="line">27-021-2</div>
+<div id="paymentamount1" class="line">000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;00</div>
+<div id="paymentby1" class="block"><%= address(@invoice.patient.vcard) %></div>
+<div id="paymentfor2" class="block">
+BANK<br />
+9999<br />
+<br />
+  <%= address(@invoice.biller.praxis) %>
+</div>
+<div id="account2" class="line">27-021-2</div>
+<div id="paymentamount2" class="line">000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;00</div>
+<div id="paymentby2" class="block"><%= address(@invoice.patient.vcard) %></div>
+<div id="paymentby3" class="block"><%= address(@invoice.patient.vcard) %></div>
+<div id="reference" class="line">93&nbsp;53590&nbsp;00000&nbsp;00399&nbsp;99001&nbsp;15948</div>
 <div id="vesr"> 0100000742559>935359000000003999900115948+&nbsp;012000272></div>
 </div>
 
