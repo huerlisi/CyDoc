@@ -24,4 +24,8 @@ class Patient < ActiveRecord::Base
       else "unbekannt"
     end
   end
+
+  def ssn
+    "ssn not yet available" 
+  end
 end
