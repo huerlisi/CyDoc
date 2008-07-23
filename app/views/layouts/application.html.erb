@@ -55,7 +55,7 @@
         <legend>Aktionen</legend>
         <%= render :partial => '/search/form' %>
         <%= render :partial => '/cases/actions' if @case %>
-        <%= render :partial => 'consultations/actions' if @patient %>
+        <%= render :partial => '/patients/actions' if @patient %>
       </fieldset>
     </td>
   </tr>
