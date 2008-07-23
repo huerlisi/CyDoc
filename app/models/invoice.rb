@@ -17,4 +17,9 @@ class Invoice < ActiveRecord::Base
   def patient
     tiers.patient
   end
+
+  def case_id
+    law.case_id
+  end
+
 end
