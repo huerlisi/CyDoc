@@ -5,7 +5,7 @@ class Invoice < ActiveRecord::Base
 
   has_and_belongs_to_many :record_tarmeds
 
-  # convenience accessors
+  # Convenience methods
   def biller
     tiers.biller
   end
@@ -14,16 +14,28 @@ class Invoice < ActiveRecord::Base
     tiers.provider
   end
 
+  def insurance
+    tiers.insurance
+  end
+
   def patient
     tiers.patient
+  end
+
+  def referrer
+    tiers.provider
+  end
+
+  def employer
+    tiers.employer
   end
 
   def case_id
     law.case_id
   end
 
+  # Generalization
   def date
     created_at
   end
-
 end
