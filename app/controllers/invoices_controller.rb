@@ -61,13 +61,12 @@ class InvoicesController < ApplicationController
     @treatment = Treatment.new(params[:treatment])
     # TODO make selectable
     @treatment.canton ||= @tiers.provider.praxis.address.region
-
-    # TODO deduce from services
     @invoice.treatment = @treatment
 
     # Services
     @invoice.record_tarmeds = @tiers.patient.record_tarmeds
     
+    # Saving
     if @invoice.save
       flash[:notice] = 'Erfolgreich erstellt.'
       redirect_to :controller => 'invoices', :action => 'insurance_recipe', :id => @invoice

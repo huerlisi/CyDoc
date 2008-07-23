@@ -5,7 +5,7 @@ class TariffItemsController < ApplicationController
     @record_tarmed.provider_id = @current_doctor.id
 
     # Defaults
-    @record_tarmed.date = DateTime.now
+    @record_tarmed.date = Date.today
     @record_tarmed.quantity = 1
     @record_tarmed.responsible_id = @current_doctor.id
 

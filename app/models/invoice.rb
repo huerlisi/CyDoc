@@ -5,14 +5,6 @@ class Invoice < ActiveRecord::Base
 
   has_and_belongs_to_many :record_tarmeds, :after_add => :add_record_tarmed
 
-  # Association callbacks
-  def add_record_tarmed(record_tarmed)
-    return true if treatment.nil?
-    
-    treatment.date_begin = record_tarmed.date if (treatment.date_begin.nil? or record_tarmed.date < treatment.date_begin)
-    treatment.date_end = record_tarmed.date if (treatment.date_end.nil? or record_tarmed.date > treatment.date_end)
-  end
-  
   # Convenience methods
   def biller
     tiers.biller
@@ -49,5 +41,19 @@ class Invoice < ActiveRecord::Base
 
   def date=(value)
     write_attribute(:created_at, value)
+  end
+
+  private
+  # Association callbacks
+  def add_record_tarmed(record_tarmed)
+    return true if treatment.nil?
+    
+    # Expand treatmend duration to include this tarmed record
+    treatment.date_begin = record_tarmed.date if (treatment.date_begin.nil? or record_tarmed.date < treatment.date_begin)
+    treatment.date_end = record_tarmed.date if (treatment.date_end.nil? or record_tarmed.date > treatment.date_end)
+
+    # Add diagnoses on the same as this tarmed record
+    diagnose_cases = DiagnosisCase.find(:all, :conditions => {:patient_id => patient.id, :duration_to => record_tarmed.date})
+    treatment.diagnoses << diagnose_cases.map{|d| d.diagnosis}
   end
 end
