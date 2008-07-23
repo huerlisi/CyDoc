@@ -1,0 +1,2 @@
+class LawVvg < Law
+end

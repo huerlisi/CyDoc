@@ -1,0 +1,2 @@
+class LawKvg < Law
+end

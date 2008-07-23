@@ -1,0 +1,2 @@
+class LawMvg < Law
+end

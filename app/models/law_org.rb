@@ -1,0 +1,2 @@
+class LawOrg < Law
+end
