@@ -28,6 +28,8 @@ class InvoicesController < ApplicationController
     
     @tiers = Tiers.new
     @tiers.patient_id = params[:patient_id]
+
+    @law = Law.new
   end
 
   def new_inline
@@ -47,7 +49,8 @@ class InvoicesController < ApplicationController
     @invoice.tiers = @tiers
 
     # Law, TODO
-    @law = Law.new(:insured_id => @tiers.patient.insurance_nr)
+    @law = Object.const_get(params[:law][:name]).new
+    @law.insured_id = @tiers.patient.insurance_nr
     @law.save
     @invoice.law = @law
     
