@@ -9,7 +9,4 @@
   <td class="PAP_<%=h a_case.classification.code unless a_case.classification.nil? %>">
     <b><%= a_case.control_findings.map {|f| h(f.name)}.join('<br/>') %></b>
   </td>
-  <td>
-   <%=h a_case.praxistar_eingangsnr %>
-  </td>
 </tr>
