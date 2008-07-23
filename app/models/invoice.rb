@@ -4,4 +4,13 @@ class Invoice < ActiveRecord::Base
 
   has_and_belongs_to_many :treatment
   has_and_belongs_to_many :record_tarmeds
+
+  # convenience accessors
+  def biller
+    tiers.biller
+  end
+
+  def patient
+    tiers.patient
+  end
 end
