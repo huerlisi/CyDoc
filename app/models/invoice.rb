@@ -10,6 +10,10 @@ class Invoice < ActiveRecord::Base
     tiers.biller
   end
 
+  def provider
+    tiers.provider
+  end
+
   def patient
     tiers.patient
   end
