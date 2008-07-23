@@ -1,7 +1,7 @@
 <tr>
   <td />
   <td />
-  <td colspan="8"><%=h record.text %></td>
+  <td colspan="14"><%=h record.text %></td>
 </tr>
 <tr>
   <td>&#9632;&nbsp;<%=h record.date.strftime("%d.%m.%Y") %></td>
@@ -9,7 +9,6 @@
   <td><%=h record.code %></td>
   <td><%=h record.ref_code %></td>
   <td><%=h record.session %></td>
-  <td></td>
   <td><%=h sprintf('%.2f', record.quantity) %></td>
   <td><%=h sprintf('%.2f', record.amount_mt) %></td>
   <td><%=h sprintf('%.2f', record.unit_factor_mt) %></td>
@@ -21,5 +20,5 @@
   <td>1</td>
   <td>0</td>
   <td>0</td>
-  <td><%=h sprintf('%.2f', record.amount) %></td>
+  <td style="text-align:right"><%=h sprintf('%.2f', record.amount) %></td>
 </tr>

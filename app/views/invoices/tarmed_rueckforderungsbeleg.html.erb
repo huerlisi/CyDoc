@@ -241,187 +241,25 @@ th {
 </table>
 <table>
   <tr>
-    <th>
-	Datum
-    </th>
-    <th>
-	Tarif
-    </th>
-    <th>
-	Tarifziffer
-    </th>
-    <th>
-	Bezugsziffer
-    </th>
-    <th>
-	Si
-    </th>
-    <th>
-	St
-    </th>
-    <th>
-	Anzahl
-    </th>
-    <th>
-	TP AL/Preis
-    </th>
-    <th>
-	f AL
-    </th>
-    <th>
-	TPW AL
-    </th>
-    <th>
-	TP TL
-    </th>
-    <th>
-	f TL
-    </th>
-    <th>
-	TPW TL
-    </th>
-    <th>
-	A
-    </th>
-    <th>
-	V
-    </th>
-    <th>
-	P
-    </th>
-    <th>
-	M
-    </th>
-    <th>
-	Betrag
-    </th>
+    <th style="width:2cm">Datum</th>
+    <th style="width:1cm">Tarif</th>
+    <th style="width:1.5cm">Tarifziffer</th>
+    <th style="width:1.5cm">Bezugsziffer</th>
+    <th style="width:0.8cm">Si&nbsp;St</th>
+    <th style="width:1cm">Anzahl</th>
+    <th style="width:1.5cm">TP&nbsp;AL/Preis</th>
+    <th style="width:0.8cm">f&nbsp;AL</th>
+    <th style="width:1cm">TPW&nbsp;AL</th>
+    <th style="width:1cm">TP&nbsp;TL</th>
+    <th style="width:0.8cm">f&nbsp;TL</th>
+    <th style="width:1.5cm">TPW&nbsp;TL</th>
+    <th style="width:0.4cm">A</th>
+    <th style="width:0.4cm">V</th>
+    <th style="width:0.4cm">P</th>
+    <th style="width:0.4cm">M</th>
+    <th style="width:2cm; text-align:right">Betrag</th>
   </tr>
-  <tr>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td colspan="8">
-        Blutentnahme kapill&auml;r, jede Lokalisation durch nicht&auml;rztliches Personal
-    </td>
-  </tr>
-  <tr>
-    <td>
-	<span class="bullet">&#9632;</span>&nbsp;11.05.2007
-    </td>
-    <td>
-	001
-    </td>
-    <td>
-	00.0716
-    </td>
-    <td>
-    </td>
-    <td>
-	1
-    </td>
-    <td>
-    </td>
-    <td>
-	1.00
-    </td>
-    <td>
-	0.00
-    </td>
-    <td>
-	1.00
-    </td>
-    <td>
-	0.90
-    </td>
-    <td>
-	4.92
-    </td>
-    <td>
-	1.00
-    </td>
-    <td>
-	0.90
-    </td>
-    <td>
-	1
-    </td>
-    <td>
-	1
-    </td>
-    <td>
-	0
-    </td>
-    <td>
-	0
-    </td>
-    <td>
-	4.43
-    </td>
-  </tr>
-  <tr>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td colspan="8">
-        Blutentnahme kapill&auml;r, jede Lokalisation durch nicht&auml;rztliches Personal
-    </td>
-  </tr>
-  <tr>
-    <td>
-        <span class="bullet">&#9632;</span>&nbsp;11.05.2007
-    </td>
-    <td>
-        001
-    </td>
-    <td>
-        00.0716
-    </td>
-    <td>
-    </td>
-    <td>
-        1
-    </td>
-    <td>
-    </td>
-    <td>
-        1.00
-    </td>
-    <td>
-        0.00
-    </td>
-    <td>
-        1.00
-    </td>
-    <td>
-        0.90
-    </td>
-    <td>
-        4.92
-    </td>
-    <td>
-        1.00
-    </td>
-    <td>
-        0.90
-    </td>
-    <td>
-        1
-    </td>
-    <td>
-        1
-    </td>
-    <td>
-        0
-    </td>
-    <td>
-        0
-    </td>
-    <td>
-        4.43
-    </td>
-  </tr>
+  <%= render :partial => 'tariff_items/record', :collection => @invoice.record_tarmeds %>
 </table>
 
 <br />
