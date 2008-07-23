@@ -24,7 +24,7 @@ class InvoicesController < ApplicationController
 
   def new
     @invoice = Invoice.new
-    @invoice.date = DateTime.now
+    @invoice.date = Date.today
     
     @tiers = Tiers.new
     @tiers.patient_id = params[:patient_id]
