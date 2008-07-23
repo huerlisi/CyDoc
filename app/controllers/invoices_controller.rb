@@ -9,12 +9,12 @@ class InvoicesController < ApplicationController
 
   def tarmed_for_pdf
     tarmed
-    render :layout => 'simple'
+    render :action => 'tarmed', :layout => 'simple'
   end
 
   def tarmed_rueckforderungsbeleg_for_pdf
     tarmed_rueckforderungsbeleg
-    render :layout => 'simple'
+    render :action => 'tarmed_rueckforderungsbeleg', :layout => 'simple'
   end
 
 end
