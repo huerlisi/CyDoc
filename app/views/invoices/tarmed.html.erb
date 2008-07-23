@@ -106,7 +106,7 @@ Tel. 044 272 60 80
 <h3>Patient</h3>
   <%= address(@invoice.patient.vcard) %>
   <br/>
-  Geburtsdatum <%= @invoice.patient.birth_date %>
+  Geburtsdatum <%= @invoice.patient.birth_date.strftime('%d.%m.%Y') %>
 </div>
 
 <div id="billingaddress" class="block">
