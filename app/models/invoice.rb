@@ -21,4 +21,9 @@ class Invoice < ActiveRecord::Base
   def case_id
     law.case_id
   end
+
+  def date
+    created_at
+  end
+
 end
