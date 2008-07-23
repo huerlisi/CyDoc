@@ -219,10 +219,10 @@ th {
   </tr>
   <tr>
     <td class="subhead" style="border-top:thin solid black">Diagnose</td>
-    <td style="border-top:thin solid black"><span class="bullet">&#9632;</span>&nbsp;Contract</td>
-    <td style="border-top:thin solid black"><span class="bullet">&#9632;</span>&nbsp;A1; A4; T2; F1</td>
-    <td style="border-top:thin solid black"></td>
-    <td style="border-top:thin solid black"></td>
+    <td colspan="4" style="border-top:thin solid black">
+      <span class="bullet">&#9632;</span>&nbsp;<%= @invoice.treatment.diagnoses.map {|d| d.type}.uniq.join('; ') %>
+      <span class="bullet">&#9632;</span>&nbsp;<%= @invoice.treatment.diagnoses.map {|d| d.code}.join('; ') %>
+    </td>
   </tr>
   <tr>
     <td class="subhead"  style="border-top:thin solid black">EAN-Liste</td>
