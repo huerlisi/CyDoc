@@ -22,7 +22,11 @@ class Doctor < ActiveRecord::Base
 
   # Convenience function
   def compact_address
-    praxis.honorific_prefix + " " + praxis.full_name + ", " + praxis.street_address + ", " + praxis.postal_code + " " + praxis.locality
+    praxis.compact_address
+  end
+
+  def compact_contact
+    praxis.compact_contact
   end
 
   # ZSR sanitation
