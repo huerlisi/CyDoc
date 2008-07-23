@@ -7,11 +7,6 @@
     <meta name="keywords" content="zytologie labor limmatplatz zürich arzt zelle" />
     <meta name="description" content="Hozr - Zytolabor Limmatplatz" />
     
-    <%= stylesheet_link_tag 'noprobs' %>
-    <%= stylesheet_link_tag 'cyto' %>
-    <%= stylesheet_link_tag 'result_report' %>
-    
-    <%= javascript_include_tag :defaults %>
 
     <title>Hozr - <%= controller.action_name %></title>
     <style>
@@ -22,17 +17,6 @@
   </head>
   <body>
     <div id="MainWrapper">
-        <div id="Header" style="background-color: #AEB9CF">
-          <%= image_tag 'logo-left-small.png' %>
-          <%= image_tag 'logo-right-small.png' %>
-        </div>
-        <div id="HeaderMenus">
-          <ul>
-            <li><%= link_to "Home", :controller => "/" %></li>
-            <li><%= link_to "Kontakt", "mailto:info@zyto-labor.com" %></li>
-            <li><%= link_to "Bestellen", 'http://shop.zyto-labor.com' %></li>
-          </ul>
-        </div>
 
         <div id="MainContent">
 <table style="height: 100%">
@@ -46,5 +30,6 @@
 </table>
         </div>
     </div>
+
 </body>
 </html>
