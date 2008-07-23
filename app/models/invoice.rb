@@ -1,8 +1,8 @@
 class Invoice < ActiveRecord::Base
   belongs_to :tiers
   belongs_to :law
+  belongs_to :treatment
 
-  has_and_belongs_to_many :treatment
   has_and_belongs_to_many :record_tarmeds
 
   # convenience accessors
@@ -21,5 +21,4 @@ class Invoice < ActiveRecord::Base
   def case_id
     law.case_id
   end
-
 end
