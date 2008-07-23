@@ -1,20 +1,20 @@
 class InvoicesController < ApplicationController
-  def tarmed_rueckforderungsbeleg
+  def insurance_recipe
     @invoice = Invoice.find(params[:id])
   end
 
-  def tarmed
+  def patient_letter
     @invoice = Invoice.find(params[:id])
   end
 
-  def tarmed_for_pdf
-    tarmed
-    render :action => 'tarmed', :layout => 'simple'
+  def patient_letter_for_pdf
+    patient_letter
+    render :action => 'patient_letter', :layout => 'simple'
   end
 
-  def tarmed_rueckforderungsbeleg_for_pdf
-    tarmed_rueckforderungsbeleg
-    render :action => 'tarmed_rueckforderungsbeleg', :layout => 'simple'
+  def insurance_recipe_for_pdf
+    insurance_recipe
+    render :action => 'insurance_recipe', :layout => 'simple'
   end
 
   # CRUD actions
