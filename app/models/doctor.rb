@@ -19,4 +19,9 @@ class Doctor < ActiveRecord::Base
   def password=(value)
     write_attribute(:password, Digest::SHA256.hexdigest(value))
   end
+
+  # ZSR sanitation
+  def zsr=(value)
+    write_attribute(:zsr, value.delete(' .'))
+  end
 end
