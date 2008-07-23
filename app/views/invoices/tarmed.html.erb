@@ -1,2 +1,126 @@
-<h1>Invoices#tarmed</h1>
-<p>Find me in app/views/invoices/tarmed.html.erb</p>
+<style>
+#invoice {
+  font-family: Arial,DejaVu Sans;
+  font-size:   8pt;
+  margin:      1.2cm;
+  position:    absolute;
+  width:       18.2cm;
+  height:      26cm;
+  top:         0cm;
+  left:        0cm;
+}
+#vesr {
+  text-align:  right;
+  width:       18.2cm;
+  font-size:   12pt;
+  font-family: ocr-b,Helvetica,Arial,sans-serif;
+  position:    absolute;
+  bottom:      1.6cm;
+  right:       0.7cm;
+}
+#billingaddress {
+  font-size:   12pt;
+  top:         5cm;
+  left:        11.3cm;
+}
+#info {
+  top:         0cm;
+  left:        1.5cm;
+}
+#biller {
+  top:         2.5cm;
+  left:        1.5cm;
+}
+#referrer {
+  top:         6cm;
+  left:        1.5cm;
+}
+#provider {
+  top:         2.5cm;
+  left:        5.5cm;
+}
+#patient {
+  top:         6cm;
+  left:        5.5cm;
+}
+#paymentfor {
+  bottom:      9.6cm;
+  left:        0.6cm;
+}
+.block {
+  font-size:   9pt;
+  position:    absolute;
+}
+h2 {
+  font-size:   12pt;
+}
+h3 {
+  font-size:   8pt;
+  color:       grey;
+}
+
+th {
+  text-align:  left;
+}
+
+</style>
+
+<div id="invoice">
+<div id="info" class="block">
+  <h2>Patienten-Rechnung Nr. <%= @invoice.id %></h2>
+  <table>
+    <tr>
+      <th>Rechnungs-Datum:</th><td><%= @invoice.date.strftime('%d.%m.%Y') %></td>
+    </tr>
+    <tr>
+      <th>Behandlungen von:</th><td><%= @invoice.treatment.date_begin.strftime('%d.%m.%Y') %></td>
+    </tr>
+    <tr>
+      <th>Behandlungen bis:</th><td><%= @invoice.treatment.date_end.strftime('%d.%m.%Y') %></td>
+    </tr>
+  </table>
+</div>
+
+<div id="biller" class="block">
+  <h3>Rechnungssteller</h3>
+  <%= address(@invoice.biller.praxis) %>
+  <br/>
+  Tel. 044 272 60 80
+</div>
+
+<div id="referrer" class="block">
+<h3>Zuweisender Arzt</h3>
+  <%= address(@invoice.referrer.praxis) %>
+<br />
+Tel. 099 888 77 66
+</div>
+
+<div id="provider" class="block">
+<h3>Leistungserbringer</h3>
+  <%= address(@invoice.provider.praxis) %>
+<br />
+Tel. 044 272 60 80
+</div>
+
+<div id="patient" class="block">
+<h3>Patient</h3>
+  <%= address(@invoice.patient.vcard) %>
+  <br/>
+  Geburtsdatum <%= @invoice.patient.birth_date %>
+</div>
+
+<div id="billingaddress" class="block">
+  <%= address(@invoice.patient.vcard) %>
+</div>
+
+<div id="paymentfor" class="block">
+BANK<br />
+9999<br />
+<br />
+  <%= address(@invoice.biller.praxis) %>
+</div>
+
+<div id="vesr"> 0100000742559>935359000000003999900115948+&nbsp;012000272></div>
+</div>
+
+

@@ -4,6 +4,6 @@ class InvoicesController < ApplicationController
   end
 
   def tarmed
-    render :layout => 'simple'
+    @invoice = Invoice.find(params[:id])
   end
 end
