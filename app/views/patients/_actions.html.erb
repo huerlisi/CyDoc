@@ -1,12 +1,14 @@
 <ul>
-  <li><%= link_to_remote "Neuer Termin", :update => 'result', :url => new_consultation_path %></li>
+<!--  <li><%= link_to_remote "Neuer Termin", :update => 'result', :url => new_consultation_path %></li>
   <li><%= link_to_remote "Konsultation", :update => 'result', :url => new_consultation_path(@consultation) if @consultation %></li>
   <li><%= link_to_remote "Termin verschieben", :update => 'result', :url => edit_consultation_path %></li>
   <li><%= link_to_remote "Anamnese erfassen", :update => 'new_medical_case', :url => {:controller => :medical_cases, :action => :new_inline, :patient_id => @patient, :type => 'AnamnesisCase'} %></li>
+-->
   <li><%= link_to_remote "Diagnose erfassen", :update => 'new_medical_case', :url => {:controller => :medical_cases, :action => :new_inline, :patient_id => @patient, :type => 'DiagnosisCase'} %></li>
+<!--
   <li><%= link_to_remote "Analyse erfassen", :update => 'new_medical_case', :url => {:controller => :medical_cases, :action => :new_inline, :patient_id => @patient, :type => 'AnalysisCase'} %></li>
   <li><%= link_to_remote "Medikation erfassen", :update => 'result', :url => {:action => :order_form_inline, :id => @case} %></li>
-
+-->
   <li><%= link_to_remote "Leistung erfassen", :update => 'new_service_record', :url => {:controller => :tariff_items, :action => :new_inline, :patient_id => @patient} %></li>
   <li><%= link_to_remote "Rechnung erstellen", :update => 'new_service_record', :url => {:controller => :invoices, :action => :new_inline, :patient_id => @patient} %></li>
 </ul>

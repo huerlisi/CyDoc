@@ -34,6 +34,21 @@ class Invoice < ActiveRecord::Base
     law.case_id
   end
 
+  # Calculated fields
+  def amount_mt
+    # TODO: unit_mt's no constant
+    record_tarmeds.sum('quantity * amount_mt * unit_factor_mt').to_f * 0.89
+  end
+  
+  def amount_tt
+    # TODO: unit_tt's no constant
+    record_tarmeds.sum('quantity * amount_tt * unit_factor_tt').to_f * 0.89
+  end
+  
+  def amount
+    amount_mt + amount_tt
+  end
+
   # Generalization
   def date
     created_at
