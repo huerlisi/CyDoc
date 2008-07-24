@@ -1,18 +1,36 @@
+<script type="text/javascript">
+  $('record_tarmed_code').focus()
+</script>
+
 <%= error_messages_for :record_tarmed %>
 
 <% form_for :record_tarmed, :url => {:action => 'create'} do |f| %>
-  <p>
-    Datum: <%= f.text_field :date %>
-    Anzahl: <%= f.text_field :quantity %>
-    Tarmed-Code: <%= f.text_field :code %>
-    Sitzung: <%= f.text_field :session %>
+  <table>
+    <tr>
+      <th>Tarmed-Code:</th>
+      <td><%= f.text_field :code %></td>
+    </tr>
+    <tr>
+      <th>Datum:</th>
+      <td><%= f.text_field :date %></td>
+    </tr>
+    <tr>
+      <th>Anzahl:</th>
+      <td><%= f.text_field :quantity %></td>
+    </tr>
+    <tr>
+      <th>Sitzung:</th>
+      <td><%= f.text_field :session %></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <%= f.submit "Erfassen" %>
 
-    <%= f.submit "Erfassen" %>
-
-    <%= f.hidden_field :patient_id %>
-
-    <%= f.hidden_field :provider_id %>
-    <%= f.hidden_field :responsible_id %>
-    <%= f.hidden_field :quantity %>
-  </p>
+        <%= f.hidden_field :patient_id %>
+        <%= f.hidden_field :provider_id %>
+        <%= f.hidden_field :responsible_id %>
+        <%= f.hidden_field :quantity %>
+      </td>
+    </tr>
+  </table>
 <% end %>
