@@ -10,7 +10,7 @@ class Patient < ActiveRecord::Base
   has_many :medical_cases, :order => 'duration_to DESC'
 
   # Services
-  has_many :record_tarmeds, :order => 'date'
+  has_many :record_tarmeds, :order => 'date DESC'
 
   # Proxy accessors
   def name
