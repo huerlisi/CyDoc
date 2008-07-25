@@ -1,8 +1,8 @@
 class TariffItemsController < ApplicationController
   def auto_complete_for_record_tarmed_code
     @tarmed_texts = Tarmed::LeistungText.find(:all,
-      :conditions => [ 'LNR LIKE :query OR BEZ_255 LIKE :query',
-      {:query => '%' + params[:record_tarmed][:code].downcase + '%'}],
+      :conditions => [ 'LNR LIKE :query OR BEZ_255 LIKE :query AND GUELTIG_BIS = :valid_to',
+      {:query => '%' + params[:record_tarmed][:code].downcase + '%', :valid_to => '12/31/99 00:00:00'}],
       :order => 'LNR',
       :limit => 8)
     render :inline => "<ul>#{@tarmed_texts.map{|t| '<li>' + t.leistung.code + ' - ' + t.BEZ_255 + '</li>'}}</ul>"
