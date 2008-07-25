@@ -4,33 +4,13 @@
 
 <%= error_messages_for :record_tarmed %>
 
-<% form_for :record_tarmed, :url => {:action => 'create'} do |f| %>
-  <table>
-    <tr>
-      <th>Tarmed-Code:</th>
-      <td><%= text_field_with_auto_complete :record_tarmed, :code %></td>
-    </tr>
-    <tr>
-      <th>Datum:</th>
-      <td><%= f.text_field :date %></td>
-    </tr>
-    <tr>
-      <th>Anzahl:</th>
-      <td><%= f.text_field :quantity %></td>
-    </tr>
-    <tr>
-      <th>Sitzung:</th>
-      <td><%= f.text_field :session %></td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <%= f.submit "Erfassen" %>
+<% form_for :record_tarmed, :url => {:controller => 'tariff_items', :action => 'create'} do |f| %>
+Tarmed Leistung:&nbsp;<%= text_field_with_auto_complete :record_tarmed, :code, {}, {:url => {:controller => 'tariff_items', :action => "auto_complete_for_record_tarmed_code"}, :min_chars => 2} %>
+Datum:&nbsp;<%= f.text_field :date, :size => 9 %>
+<%= f.submit "Erfassen" %>
 
-        <%= f.hidden_field :patient_id %>
-        <%= f.hidden_field :provider_id %>
-        <%= f.hidden_field :responsible_id %>
-        <%= f.hidden_field :quantity %>
-      </td>
-    </tr>
-  </table>
+<%= f.hidden_field :patient_id %>
+<%= f.hidden_field :provider_id %>
+<%= f.hidden_field :responsible_id %>
+<%= f.hidden_field :quantity %>
 <% end %>
