@@ -8,7 +8,7 @@
   <table>
     <tr>
       <th>Tarmed-Code:</th>
-      <td><%= f.text_field :code %></td>
+      <td><%= text_field_with_auto_complete :record_tarmed, :code %></td>
     </tr>
     <tr>
       <th>Datum:</th>

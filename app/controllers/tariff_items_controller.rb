@@ -1,4 +1,13 @@
 class TariffItemsController < ApplicationController
+  def auto_complete_for_record_tarmed_code
+    @tarmed_texts = Tarmed::LeistungText.find(:all,
+      :conditions => [ 'LNR LIKE :query OR BEZ_255 LIKE :query',
+      {:query => '%' + params[:record_tarmed][:code].downcase + '%'}],
+      :order => 'LNR',
+      :limit => 8)
+    render :inline => "<ul>#{@tarmed_texts.map{|t| '<li>' + t.leistung.code + ' - ' + t.BEZ_255 + '</li>'}}</ul>"
+  end
+
   # CRUD actions
   def new
     @record_tarmed = RecordTarmed.new
@@ -18,6 +27,7 @@ class TariffItemsController < ApplicationController
   end
 
   def create
+    params[:record_tarmed][:code] = params[:record_tarmed][:code].split(' ')[0]
     @record_tarmed = RecordTarmed.new(params[:record_tarmed])
     if @record_tarmed.save
       flash[:notice] = 'Erfolgreich erfasst.'
