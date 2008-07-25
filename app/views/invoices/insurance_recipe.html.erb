@@ -74,25 +74,23 @@ th {
     <td class="subhead" rowspan="2" style="width:1.8cm">Rechnungs-<br />steller</td>
     <td class="listing">EAN-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.biller.ean_party %></td>
-    <td colspan="3" class="listing"><%=h @invoice.biller.compact_address %></td>
+    <td colspan="3" class="listing"><%= full_address(@invoice.biller.praxis, ', ') %></td>
   </tr>
   <tr>
     <td class="listing">ZSR-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.biller.zsr %></td>
-    <td colspan="3" class="listing">Tel:&nbsp;044&nbsp;272&nbsp;60&nbsp;80&nbsp;Fax:&nbsp;044&nbsp;273&nbsp;36&nbsp;60&nbsp;E-Mail:&nbsp;praxis@zyto-labor.com</td>
-    <td></td>
+    <td colspan="4" class="listing">Tel:&nbsp;044&nbsp;272&nbsp;60&nbsp;80&nbsp;Fax:&nbsp;044&nbsp;273&nbsp;36&nbsp;60&nbsp;E-Mail:&nbsp;praxis@zyto-labor.com</td>
   </tr>
   <tr>
     <td class="subhead" rowspan="2">Leistungs-<br />erbringer</td>
     <td class="listing">EAN-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.provider.ean_party %></td>
-    <td class="listing"><%=h @invoice.provider.compact_address %></td>
+    <td colspan="3" class="listing"><%=h full_address(@invoice.provider.praxis, ', ') %></td>
   </tr>
   <tr>
     <td class="listing">ZSR-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.provider.zsr %></td>
-    <td class="listing">Tel:&nbsp;044&nbsp;272&nbsp;60&nbsp;80&nbsp;Fax:&nbsp;044&nbsp;273&nbsp;36&nbsp;60&nbsp;E-Mail:&nbsp;praxis@zyto-labor.com</td>
-    <td></td>
+    <td colspan="4" class="listing">Tel:&nbsp;044&nbsp;272&nbsp;60&nbsp;80&nbsp;Fax:&nbsp;044&nbsp;273&nbsp;36&nbsp;60&nbsp;E-Mail:&nbsp;praxis@zyto-labor.com</td>
   </tr>
 </table>
 <table style="width: 100%; border:thin solid black">
@@ -226,17 +224,11 @@ th {
   </tr>
   <tr>
     <td class="subhead"  style="border-top:thin solid black">EAN-Liste</td>
-    <td style="border-top:thin solid black"><span class="bullet">&#9632;</span>&nbsp;1/7601000203090</td>
-    <td style="border-top:thin solid black"></td>
-    <td style="border-top:thin solid black"></td>
-    <td style="border-top:thin solid black"></td>
+    <td colspan ="4" style="border-top:thin solid black"><span class="bullet">&#9632;</span>&nbsp;1/7601000203090</td>
   </tr>
   <tr>
     <td class="subhead" style="border-top:thin solid black">Bemerkung</td>
-    <td style="border-top:thin solid black"><%=h @invoice.remark %></td>
-    <td style="border-top:thin solid black"></td>
-    <td style="border-top:thin solid black"></td>
-    <td style="border-top:thin solid black"></td>
+    <td colspan="4" style="border-top:thin solid black"><%=h @invoice.remark %></td>
   </tr>
 </table>
 <table>
@@ -280,6 +272,7 @@ th {
     <td style="width:1.3cm" />
     <td class="listing" style="width:1.9cm">&Uuml;brige</td>
     <td class="amount" style="width:1.7">0.00</td>
+    <td />
   </tr>
   <tr>
     <td style="width:1.2cm" />
@@ -295,30 +288,33 @@ th {
     <td style="width:1.3cm" />
     <td class="listing" style="width:1.9cm">Kantonal</td>
     <td class="amount" style="width:1.7">0.00</td>
+    <td />
   </tr>
   <tr>
-    <td colspan="2" class="subhead" style="width:2.5cm"	><span class="bullet">&#9632;</span>&nbsp;Gesamtbetrag/CHF</td>
+    <td colspan="3" class="subhead" style="width:2.5cm"	><span class="bullet">&#9632;</span>&nbsp;Gesamtbetrag/CHF</td>
     <td class="totalamount" style="width:1.7cm"><%=h sprintf('%0.2f', @invoice.amount) %></td>
     <td style="width:1.3cm"></td>
-    <td style="width:1cm"></td>
     <td class="subhead" style="width:1.3cm">davon&nbsp;PFL</td>
     <td class="totalamount"><%=h sprintf('%0.2f', @invoice.amount) %></td>
-    <td colspan="2" class="subhead">Anzahlung</td>
+    <td />
+    <td class="subhead">Anzahlung</td>
     <td class="totalamount">0.00</td>
-    <td colspan="2" class="subhead">F&auml;lliger&nbsp;Betrag</td>
+    <td />
+    <td class="subhead">F&auml;lliger&nbsp;Betrag</td>
+    <td />
     <td class="totalamount"><%=h sprintf('%0.2f', @invoice.amount) %></td>
   </tr>
   <tr>
     <td class="subhead"><span class="bullet">&#9632;</span>&nbsp;MWSt.Nr.</td>
   </tr>
   <tr>
-    <td class="subhead"><span class="bullet">&#9632;</span>&nbsp;Code</td>
+    <td class="subhead">Code</td>
     <td class="subhead">Satz</td>
     <td class="subhead">Betrag</td>
     <td class="subhead">MWSt</td>
   </tr>
   <tr>
-    <td>0</td>
+    <td class="text-align: right"><span class="bullet">&#9632;</span>&nbsp;0</td>
     <td>0.00</td>
     <td><%=h sprintf('%0.2f', @invoice.amount) %></td>
     <td>0.00</td>
@@ -326,7 +322,7 @@ th {
   <tr>
     <td class="total">Total</td>
     <td></td>
-    <td class="totalamount"><%=h sprintf('%0.2f', @invoice.amount) %></td>
+    <td class="totalamount"></td>
     <td class="totalamount">0.00</td>
   </tr>
 </table>

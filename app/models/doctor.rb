@@ -20,15 +20,6 @@ class Doctor < ActiveRecord::Base
     write_attribute(:password, Digest::SHA256.hexdigest(value))
   end
 
-  # Convenience function
-  def compact_address
-    praxis.compact_address
-  end
-
-  def compact_contact
-    praxis.compact_contact
-  end
-
   # ZSR sanitation
   def zsr=(value)
     write_attribute(:zsr, value.delete(' .'))
