@@ -2,6 +2,7 @@
 <div id="new_service_record">
   <%= render :partial => 'tariff_items/form' %>
 </div>
-<div id="tariff_items_list">
+
+<div id="services_list">
   <%= render :partial => 'tariff_items/list', :locals => { :items => @patient.record_tarmeds } %>
 </div>

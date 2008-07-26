@@ -1,7 +1,7 @@
 class TariffItemsController < ApplicationController
   def auto_complete_for_record_tarmed_code
     @tarmed_texts = Tarmed::LeistungText.find(:all,
-      :conditions => [ 'LNR LIKE :query OR BEZ_255 LIKE :query AND GUELTIG_BIS = :valid_to',
+      :conditions => [ 'LNR LIKE :query OR BEZ_255 LIKE :query AND GUELTIG_BIS = :valid_to AND SPRACHE = \'D\'',
       {:query => '%' + params[:record_tarmed][:code].downcase + '%', :valid_to => '12/31/99 00:00:00'}],
       :order => 'LNR',
       :limit => 5)
@@ -11,6 +11,15 @@ class TariffItemsController < ApplicationController
   end
 
   # CRUD actions
+  def list
+  end
+  
+  def list_inline
+    @patient = Patient.find(params[:patient_id])
+    @record_tarmeds = RecordTarmed.find(:all, :conditions => {:patient_id => @patient})
+    render :partial => 'list', :locals => {:items => @record_tarmeds}
+  end
+
   def new
     @record_tarmed = RecordTarmed.new
     @record_tarmed.provider_id = @current_doctor.id
@@ -47,11 +56,13 @@ class TariffItemsController < ApplicationController
     render :action => 'edit', :layout => false
   end
 
-  def destroy
+  def delete
+    RecordTarmed.destroy(params[:id])
+    redirect_to :action => 'list'
   end
 
-  def destroy_inline
-    destroy
-    render :action => 'destroy', :layout => false
+  def delete_inline
+    RecordTarmed.destroy(params[:id])
+    redirect_to :action => 'list_inline', :patient_id => params[:patient_id]
   end
 end
