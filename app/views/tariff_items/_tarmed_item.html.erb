@@ -2,5 +2,4 @@
   <% for t in @tarmed_texts %>
     <li><%=h t.leistung.code %> - <%=h t.BEZ_255 %></li>
   <% end %>
-  <%= "<li>...und #{@hidden_item_count} weitere</li>" if @hidden_item_count > 0 %>
 </ul>

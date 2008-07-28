@@ -1,12 +1,24 @@
 class TariffItemsController < ApplicationController
   def auto_complete_for_record_tarmed_code
-    @tarmed_texts = Tarmed::LeistungText.find(:all,
-      :conditions => [ 'LNR LIKE :query OR BEZ_255 LIKE :query AND GUELTIG_BIS = :valid_to AND SPRACHE = \'D\'',
-      {:query => '%' + params[:record_tarmed][:code].downcase + '%', :valid_to => '12/31/99 00:00:00'}],
-      :order => 'LNR',
-      :limit => 5)
+    code = params[:record_tarmed][:code].downcase
+    if code.split(' ').size > 1
+      query = code.split(' ').join('%')
+      query_switched = code.split(' ').reverse.join('%')
+    else
+      query = code
+      query_switched = code
+    end
+    
+    @tarmed_texts = Tarmed::LeistungText.find(:all, :include => :digniquali,
+      :conditions => [ "( LEISTUNG_TEXT.LNR LIKE :query OR BEZ_255 LIKE :query OR BEZ_255 LIKE :query_switched )AND LEISTUNG_TEXT.GUELTIG_BIS = :valid_to AND SPRACHE = 'D' AND QL_DIGNITAET IN ('0400', '9999')",
+      {:query => '%' + query + '%', :query_switched => '%' + query_switched + '%', :valid_to => '12/31/99 00:00:00'}],
+      :order => 'LEISTUNG_TEXT.LNR',
+      :limit => 10)
 
-    @hidden_item_count = @tarmed_texts.size - 5
+#    @hidden_item_count = Tarmed::LeistungText.count(:all, :include => :digniquali,
+#      :conditions => [ "LEISTUNG_TEXT.LNR LIKE :query OR BEZ_255 LIKE :query OR BEZ_255 LIKE :query_switched AND LEISTUNG_TEXT.GUELTIG_BIS = :valid_to AND SPRACHE = 'D' AND QL_DIGNITAET IN ('0400', '9999')",
+#      {:query => '%' + query + '%', :query_switched => '%' + query_switched + '%', :valid_to => '12/31/99 00:00:00'}],
+#      :order => 'LEISTUNG_TEXT.LNR') - 10
     render :partial => 'tarmed_item'
   end
 
