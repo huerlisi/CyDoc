@@ -17,7 +17,8 @@ class CasesController < ApplicationController
   public
   def show
     @case = Case.find(params[:id])
-    @related_cases = @case.patient.cases.find(:all, :conditions => {:doctor_id => @current_doctor_ids})
+    @patient = @case.patient
+    @related_cases = @patient.cases.find(:all, :conditions => {:doctor_id => @current_doctor_ids})
   end
 
   def show_inline
@@ -27,7 +28,8 @@ class CasesController < ApplicationController
 
   def result_report
     @case = Case.find(params[:id])
-    @related_cases = @case.patient.cases.find(:all, :conditions => {:doctor_id => @current_doctor_ids})
+    @patient = @case.patient
+    @related_cases = @patient.cases.find(:all, :conditions => {:doctor_id => @current_doctor_ids})
   end
 
   def result_report_inline
@@ -37,6 +39,7 @@ class CasesController < ApplicationController
 
   def result_remarks
     @case = Case.find(params[:id])
+    @patient = @case.patient
     unless @case.order_form.nil?
       send_file(@case.order_form.file('result_remarks'), :type => 'image/jpeg', :disposition => 'inline')
     else
@@ -50,6 +53,7 @@ class CasesController < ApplicationController
 
   def order_form
     @case = Case.find(params[:id])
+    @patient = @case.patient
     unless @case.order_form.nil?
       send_file(@case.order_form.file, :type => 'image/jpeg', :disposition => 'inline')
     else
@@ -59,6 +63,7 @@ class CasesController < ApplicationController
 
   def pdf_a4
     @case = Case.find(params[:id])
+    @patient = @case.patient
     begin
       send_file(File.join(RAILS_ROOT, '/data/result_reports/', "result_report-#{@case.id}.pdf"), :type => 'application/pdf', :disposition => 'inline')
     rescue ActionController::MissingFile

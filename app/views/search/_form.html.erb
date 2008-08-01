@@ -1,8 +1,4 @@
 <% form_remote_tag( :url => {:controller => :search, :action => "results"}, :update => 'result' ) do %>
-<table>
-  <% fields_for :search, nil, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
-    <%= f.text_field :query, :label => "Suche", :size => 15 %>
-  <% end %>
-</table>
-<%= submit_tag "Suchen" %>
+  <%= text_field :search, :query, :label => "Suche", :size => 15 %>
+  <%= submit_tag "Suchen" %>
 <% end %>

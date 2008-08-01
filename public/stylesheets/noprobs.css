@@ -83,33 +83,25 @@ body
 {
 	float:right;
 	width:170px;
-	color: #333300;
 	padding:0 6px 0 7px;
 	line-height:1.4em;
-/*	background-color:#ffffff;
-*/
 }
 #SideContents h3, #metanav h2
 {
-	color: #4D6E8F;
 	font-size: 1.1em;
 	margin: 0 auto;
 	padding: 0.8em 0 0.2em 0;
-	background-color:inherit;
 }
 #SideContents p, #metanav p
 {
 	font-size: 80%;
-	text-align: justify;
 	background-color:inherit;
-	color: #333300;
 	margin: 0 0 12px 0;
 }
 #SideContents a, #metanav a
 {
         font-size: 90%;
 	text-decoration: none;
-	background-color:inherit;
 	color: #660000;
 }
 
@@ -343,3 +335,34 @@ h3 {
   font-family: ChollaSansBold,Arial,DejaVu Sans;
   font-weight: bold;
 }
+
+
+/* Sidebar */
+#SideContents {
+	list-style-type: none;
+	border:          solid 2px #a9a9a9;
+	padding:         0;
+	margin:          0;
+}
+
+#SideContents h3 {
+	font-weight: bold;
+	padding: 0.2em;
+	margin: 0;
+}
+
+#SideMenu h3 {
+	color: white;
+	background-color: #AEB9CF;
+}
+
+#SideContents p {
+	margin: 0;
+	padding-left: 1.5em;
+}
+
+#SideMenu p {
+	color: black;
+	background-color: #dcdcdc;
+}
+
