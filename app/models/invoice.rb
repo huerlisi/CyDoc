@@ -62,6 +62,10 @@ class Invoice < ActiveRecord::Base
     esr9_build(amount, id, '01-200027-2') # TODO: it's biller.esr_id
   end
 
+  def esr9_reference
+    esr9_format(esr9_add_validation_digit(sprintf('%015i', id)))
+  end
+
   private
   # Association callbacks
   def add_record_tarmed(record_tarmed)
@@ -86,6 +90,14 @@ class Invoice < ActiveRecord::Base
     
     digit = (10 - digit) % 10
     return "#{value}#{digit}"
+  end
+
+  def esr9_format(reference_code)
+    # Drop all leading zeroes
+    reference_code.gsub!(/^0*/, '')
+
+    # Group by 5 digit blocks, beginning at the right side
+    reference_code.reverse.gsub(/(.....)/, '\1 ').reverse
   end
 
   def esr9_build(amount, id, biller_id)
