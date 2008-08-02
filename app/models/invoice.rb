@@ -58,6 +58,10 @@ class Invoice < ActiveRecord::Base
     write_attribute(:created_at, value)
   end
 
+  def esr9
+    esr9_build(amount, id, '01-200027-2') # TODO: it's biller.esr_id
+  end
+
   private
   # Association callbacks
   def add_record_tarmed(record_tarmed)
@@ -70,5 +74,27 @@ class Invoice < ActiveRecord::Base
     # Add diagnoses on the same as this tarmed record
     diagnose_cases = DiagnosisCase.find(:all, :conditions => {:patient_id => patient.id, :duration_to => record_tarmed.date})
     treatment.diagnoses << diagnose_cases.map{|d| d.diagnosis}
+  end
+
+  # ESR helpers
+  def esr9_add_validation_digit(value)
+    # Defined at http://www.pruefziffernberechnung.de/E/Einzahlungsschein-CH.shtml
+    esr9_table = [0, 9, 4, 6, 8, 2, 7, 1, 3, 5]
+    
+    digit = 0
+    value.split('').map{|c| digit = esr9_table[(digit + c.to_i) % 10]}
+    
+    digit = (10 - digit) % 10
+    return "#{value}#{digit}"
+  end
+
+  def esr9_build(amount, id, biller_id)
+    # 01 is type 'Einzahlung in CHF'
+    amount_string = "01#{sprintf('%011.2f', amount).delete('.')}"
+
+    id_string = sprintf('%015i', id).delete(' ')
+
+    biller_string = biller_id.delete('-')
+    return "#{esr9_add_validation_digit(amount_string)}>#{esr9_add_validation_digit(id_string)}+ #{biller_string}>"
   end
 end
