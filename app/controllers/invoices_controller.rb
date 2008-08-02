@@ -1,10 +1,12 @@
 class InvoicesController < ApplicationController
   def insurance_recipe
     @invoice = Invoice.find(params[:id])
+    @patient = @invoice.patient
   end
 
   def patient_letter
     @invoice = Invoice.find(params[:id])
+    @patient = @invoice.patient
   end
 
   def patient_letter_for_pdf
@@ -20,6 +22,7 @@ class InvoicesController < ApplicationController
   # CRUD actions
   def show
     @invoice = Invoice.find(params[:id])
+    @patient = @invoice.patient
   end
 
   def new
@@ -74,6 +77,4 @@ class InvoicesController < ApplicationController
       render :action => 'new'
     end
   end
-
-
 end
