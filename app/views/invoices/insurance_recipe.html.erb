@@ -79,7 +79,7 @@ th {
   <tr>
     <td class="listing">ZSR-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.biller.zsr %></td>
-    <td colspan="4" class="listing">Tel:&nbsp;044&nbsp;272&nbsp;60&nbsp;80&nbsp;Fax:&nbsp;044&nbsp;273&nbsp;36&nbsp;60&nbsp;E-Mail:&nbsp;praxis@zyto-labor.com</td>
+    <td colspan="4" class="listing"><%= contact(@invoice.biller.praxis, ' ') %></td>
   </tr>
   <tr>
     <td class="subhead" rowspan="2">Leistungs-<br />erbringer</td>
@@ -90,7 +90,7 @@ th {
   <tr>
     <td class="listing">ZSR-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.provider.zsr %></td>
-    <td colspan="4" class="listing">Tel:&nbsp;044&nbsp;272&nbsp;60&nbsp;80&nbsp;Fax:&nbsp;044&nbsp;273&nbsp;36&nbsp;60&nbsp;E-Mail:&nbsp;praxis@zyto-labor.com</td>
+    <td colspan="4" class="listing"><%= contact(@invoice.provider.praxis, ' ') %></td>
   </tr>
 </table>
 <table style="width: 100%; border:thin solid black">
@@ -224,7 +224,9 @@ th {
   </tr>
   <tr>
     <td class="subhead"  style="border-top:thin solid black">EAN-Liste</td>
-    <td colspan ="4" style="border-top:thin solid black"><span class="bullet">&#9632;</span>&nbsp;1/7601000203090</td>
+    <td colspan ="4" style="border-top:thin solid black">
+      <span class="bullet">&#9632;</span>&nbsp;1/<%= @invoice.biller.ean_party %>
+    </td>
   </tr>
   <tr>
     <td class="subhead" style="border-top:thin solid black">Bemerkung</td>
