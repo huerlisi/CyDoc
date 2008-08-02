@@ -47,6 +47,7 @@
           <%= render :partial => '/search/actions' %>
           <%= render :partial => '/patients/actions' if @patient %>
           <%= render :partial => '/cases/actions' if @case %>
+          <%= render :partial => '/invoices/actions' if @invoice %>
         </div>
         <% unless @related_cases.nil? %>
           <h3>Geschichte</h3>
