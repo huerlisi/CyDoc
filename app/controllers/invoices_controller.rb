@@ -2,32 +2,21 @@ class InvoicesController < ApplicationController
   def insurance_recipe
     @invoice = Invoice.find(params[:id])
     @patient = @invoice.patient
+
+    respond_to do |format|
+      format.html {}
+      format.pdf { render_pdf }
+    end
   end
 
   def patient_letter
     @invoice = Invoice.find(params[:id])
     @patient = @invoice.patient
-  end
 
-  def patient_letter_for_pdf
-    patient_letter
-    render :action => 'patient_letter', :layout => 'simple'
-  end
-
-  def insurance_recipe_for_pdf
-    insurance_recipe
-    render :action => 'insurance_recipe', :layout => 'simple'
-  end
-
-  def insurance_recipe_pdf
-    insurance_recipe
-
-    add_variables_to_assigns
-    generator = IO.popen("html2ps.php", "w+")
-    generator.puts @template.render("invoices/insurance_recipe")
-    generator.close_write
-
-    send_data(generator.read, :filename => "insurance_recipe-#{@invoice.id}.pdf", :type => "application/pdf")
+    respond_to do |format|
+      format.html {}
+      format.pdf { render_pdf }
+    end
   end
 
   # CRUD actions

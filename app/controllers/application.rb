@@ -26,4 +26,18 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  # PDF generation
+  # ==============
+  def render_to_pdf(options = nil)
+    generator = IO.popen("html2ps.php", "w+")
+    generator.puts render_to_string(options)
+    generator.close_write
+
+    return generator.read
+  end
+
+  def render_pdf
+    send_data(render_to_pdf(:template => "#{controller_name}/#{action_name}.html.erb"), :layout => 'simple') 
+  end
 end
