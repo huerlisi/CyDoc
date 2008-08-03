@@ -19,6 +19,17 @@ class InvoicesController < ApplicationController
     render :action => 'insurance_recipe', :layout => 'simple'
   end
 
+  def insurance_recipe_pdf
+    insurance_recipe
+
+    add_variables_to_assigns
+    generator = IO.popen("html2ps.php", "w+")
+    generator.puts @template.render("invoices/insurance_recipe")
+    generator.close_write
+
+    send_data(generator.read, :filename => "insurance_recipe-#{@invoice.id}.pdf", :type => "application/pdf")
+  end
+
   # CRUD actions
   def show
     @invoice = Invoice.find(params[:id])
