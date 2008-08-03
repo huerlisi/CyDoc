@@ -1,4 +1,7 @@
 class InvoicesController < ApplicationController
+  print_action_for :insurance_recipe
+  print_action_for :patient_letter
+
   def insurance_recipe
     @invoice = Invoice.find(params[:id])
     @patient = @invoice.patient

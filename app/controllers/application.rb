@@ -41,3 +41,25 @@ class ApplicationController < ActionController::Base
     send_data(render_to_pdf(:template => "#{controller_name}/#{action_name}.html.erb"), :layout => 'simple') 
   end
 end
+
+module Print
+  def self.included(base)
+    base.extend(ClassMethods)
+  end
+
+  module ClassMethods
+    def print_action_for(method = {})
+      define_method("print_#{method}") do
+        self.send("#{method}")
+        # TODO: generalize
+        generator = IO.popen("lp -h drakul.intern.zyto-labor.com -d oki_b2600", "w+")
+        generator.puts render_to_pdf(:template => "#{controller_name}/#{method}.html.erb")
+        generator.close
+
+        render :text => "<p>Gedruckt.</p>"
+      end
+    end
+  end
+end
+
+ActionController::Base.send :include, Print
