@@ -5,7 +5,6 @@ class SearchController < ApplicationController
     when "date"
       value = Date.parse(value)
       condition = "(cases.examination_date = :value) OR (patients.birth_date = :value)"
-      patient_condition = "(patients.birth_date = :value)"
     when "entry_nr"
       condition = "(cases.praxistar_eingangsnr = :value OR cases.praxistar_eingangsnr REGEXP concat('../0*', :value) OR patients.doctor_patient_nr = :value)"
       patient_condition = "(patients.doctor_patient_nr = :value)"
@@ -21,7 +20,7 @@ class SearchController < ApplicationController
 
   private
   def get_query_type(value)
-    if value.match(/([[:digit:]]{1,2}\.){2}[[:digit:]]{2,4}/)
+    if value.match(/([[:digit:]]{1,2}\.){2}/)
       return "date"
     elsif value.match(/^([[:digit:]]{0,2}\/)?[[:digit:]]*$/)
       return "entry_nr"
