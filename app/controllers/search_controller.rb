@@ -3,8 +3,9 @@ class SearchController < ApplicationController
     value = params[:search][:query]
     case get_query_type(value)
     when "date"
-      value = Date.parse(value)
-      condition = "(cases.examination_date = :value) OR (patients.birth_date = :value)"
+      value = Date.parse_europe(value).strftime('%%%y-%m-%d')
+      condition = "(cases.examination_date LIKE :value) OR (patients.birth_date LIKE :value)"
+      patient_condition = "(patients.birth_date LIKE :value)"
     when "entry_nr"
       condition = "(cases.praxistar_eingangsnr = :value OR cases.praxistar_eingangsnr REGEXP concat('../0*', :value) OR patients.doctor_patient_nr = :value)"
       patient_condition = "(patients.doctor_patient_nr = :value)"
