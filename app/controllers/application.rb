@@ -34,11 +34,14 @@ class ApplicationController < ActionController::Base
     generator.puts render_to_string(options)
     generator.close_write
 
-    return generator.read
+    data = generator.read
+    generator.close
+    
+    return data
   end
 
   def render_pdf
-    send_data(render_to_pdf(:template => "#{controller_name}/#{action_name}.html.erb"), :layout => 'simple') 
+    send_data(render_to_pdf(:template => "#{controller_name}/#{action_name}.html.erb", :layout => 'simple'))
   end
 end
 
@@ -52,8 +55,12 @@ module Print
       define_method("print_#{method}") do
         self.send("#{method}")
         # TODO: generalize
-        generator = IO.popen("lp -h drakul.intern.zyto-labor.com -d oki_b2600", "w+")
-        generator.puts render_to_pdf(:template => "#{controller_name}/#{method}.html.erb")
+        generator = IO.popen("pdf2ps - - | lp -h drakul.intern.zyto-labor.com -d oki_b2600", "w+")
+        generator.puts render_to_pdf(:template => "#{controller_name}/#{method}.html.erb", :layout => 'simple')
+        generator.close_write
+
+        # Just read to not create zombie processes... TODO: fix
+        data = generator.read
         generator.close
 
         render :text => "<p>Gedruckt.</p>"
