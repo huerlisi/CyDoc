@@ -5,17 +5,16 @@
   margin-top:  0.5cm;
   position:    absolute;
   width:       18.2cm;
-  height:      26cm;
+  height:      29cm;
   top:         0cm;
   left:        0cm;
 }
 #vesr {
-  text-align:  right;
   width:       18.2cm;
   font-size:   12pt;
   font-family: ocr-b,Helvetica,Arial,sans-serif;
   position:    absolute;
-  top:         27.7cm;
+  top:         26.6cm;
   left:        6.7cm;
 }
 #billingaddress {
@@ -44,44 +43,46 @@
   left:        5.5cm;
 }
 #paymentfor1 {
-  top:         20cm;
-  left:        0.6cm;
+  top:         19.4cm;
+  left:        0.2cm;
 }
 #account1 {
-  top:         23.3cm;
+  top:         22.5cm;
   left:        2.7cm;
 }
 #paymentby1 {
-  top:         25.5cm;
-  left:        0.6cm;
+  top:         24.5cm;
+  left:        0.2cm;
 }
 #paymentamount1 {
-  top:         24.2cm;
-  left:        4cm;
+  top:         23.5cm;
+  right:       12.8cm;
+  text-align:  right;
 }
 #paymentfor2 {
-  top:         20cm;
-  left:        6.6cm;
+  top:         19.4cm;
+  left:        6.2cm;
 }
 #account2 {
-  top:         23.3cm;
+  top:         22.5cm;
   left:        8.7cm;
 }
 #paymentby2 {
-  top:         25.5cm;
-  left:        6.6cm;
+  top:         24.0cm;
+  left:        6.2cm;
 }
 #paymentby3 {
-  top:         24.5cm;
+  top:         23.0cm;
   left:        12.5cm;
 }
 #paymentamount2 {
-  top:         24.2cm;
-  left:        10cm;
+  top:         23.5cm;
+  right:       6.7cm;
+  text-align:  right;
 }
 #reference {
-  top:         22.5cm;
-  left:        14cm;
+  top:         21.7cm;
+  left:        13.2cm;
 }
 .block {
   font-size:   9pt;
@@ -162,7 +163,7 @@ BANK<br />
 </div>
 
 <div id="account1" class="line">27-021-2</div>
-<div id="paymentamount1" class="line"><%= sprintf('%.0f', @invoice.amount) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= sprintf('%2i', @invoice.amount % 100) %></div>
+<div id="paymentamount1" class="line"><%= sprintf('%.0f', @invoice.amount) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= sprintf('%02i', @invoice.amount % 100) %></div>
 <div id="paymentby1" class="block"><%= full_address(@invoice.patient.vcard) %></div>
 
 <div id="paymentfor2" class="block">
@@ -173,7 +174,7 @@ BANK<br />
 </div>
 
 <div id="account2" class="line">27-021-2</div>
-<div id="paymentamount2" class="line"><%= sprintf('%.0f', @invoice.amount) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= sprintf('%2i', @invoice.amount % 100) %></div>
+<div id="paymentamount2" class="line"><%= sprintf('%.0f', @invoice.amount) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= sprintf('%02i', @invoice.amount % 100) %></div>
 <div id="paymentby3" class="block"><%= full_address(@invoice.patient.vcard) %></div>
 <div id="reference" class="line"><%= @invoice.esr9_reference %></div>
 <div id="vesr"><%= @invoice.esr9 %></div>

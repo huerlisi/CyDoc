@@ -6,30 +6,11 @@
     <meta name="author" content="Simon Huerlimann &lt;huerlisi@gmail.com&gt;" />
     <meta name="keywords" content="zytologie labor limmatplatz zürich arzt zelle" />
     <meta name="description" content="Hozr - Zytolabor Limmatplatz" />
-    
 
     <title>Hozr - <%= controller.action_name %></title>
-    <style>
-      img {
-        border: 0px
-      }
     </style>
   </head>
   <body>
-    <div id="MainWrapper">
-
-        <div id="MainContent">
-<table style="height: 100%">
-  <tr>
-    <td width="100%">
-      <div id="result">
-        <%= yield %>
-      </div>
-    </td>
-  </tr>
-</table>
-        </div>
-    </div>
-
-</body>
+    <%= yield %>
+  </body>
 </html>
