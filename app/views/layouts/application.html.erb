@@ -45,7 +45,7 @@
       <div id="SideContents">
         <div id="SideMenu">
           <%= render :partial => '/search/actions' %>
-          <%= render :partial => '/patients/actions' if @patient %>
+          <%= render :partial => '/patients/actions' if (@patient and @controller.is_a?(PatientsController))%>
           <%= render :partial => '/cases/actions' if @case %>
           <%= render :partial => '/invoices/actions' if @invoice %>
         </div>
