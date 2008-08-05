@@ -1,0 +1,8 @@
+<%= render :partial => 'overview' %>
+
+<% if @older_mailings %>
+<h2>Ältere Versande</h2>
+<table class="listing">
+  <%= render :partial => 'list', :collection => @older_mailings %>
+</table>
+<% end %>

@@ -19,9 +19,11 @@ class MailingsController < ApplicationController
   end
   
   def latest_overview
+    @open_cases = Mailing.new(:doctor_id => @current_doctor_id)
+    @open_cases.cases = Case.find(:all, :conditions => {:result_report_printed_at => nil, :doctor_id => @current_doctor_ids})
+
     @mailing = Mailing.find(:first, :order => 'printed_at DESC', :conditions => {:doctor_id => @current_doctor_ids})
     @older_mailings = Mailing.find(:all, :order => 'printed_at DESC', :conditions => {:doctor_id => @current_doctor_ids}, :limit => 10)
-    render :action => 'overview'
   end
 
   def overview
