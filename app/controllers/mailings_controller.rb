@@ -36,7 +36,4 @@ class MailingsController < ApplicationController
   def list
     @mailings = Mailing.find(:all, :order => 'printed_at DESC', :conditions => {:doctor_id => @current_doctor_ids}, :limit => 10)
   end
-
-  def statistics
-  end
 end
