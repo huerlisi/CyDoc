@@ -346,6 +346,8 @@ h3 {
 }
 
 #SideContents h3 {
+	color: white;
+	background-color: #AEB9CF;
 	font-weight: bold;
 	padding: 0.2em;
 	margin: 0;

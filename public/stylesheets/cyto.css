@@ -14,6 +14,39 @@ input.PAP_3M-c1-2, input.PAP_3S-c2-3 {color: black; background-color: #7eafff }
 .PAP_mam, input.PAP_mam {color: black; background-color: #00CC00; }
 .PAP_sput, input.PAP_sput {color: black; background-color: #00CC00; }
 
+.pap_1, .pap_2, .pap_2_3,
+#SideContents p.pap_1, #SideContents p.pap_2, #SideContents p.pap_2_3,
+{
+  color:            black;
+  background-color: white;
+}
+.pap_2a, .pap_2_3a,
+#SideContents p.pap_2a, #SideContents p.pap_2_3a
+{
+  color:            black;
+  background-color: yellow;
+}
+.pap_3,
+#SideContents p.pap_3
+{
+  color:            black;
+  background-color: #0066FF;
+}
+.pap_4, .pap_5,
+#SideContents p.pap_4, #SideContents p.pap_5
+{
+  color:            black;
+  background-color: red;
+}
+
+.pap_hpv, .pap_sput, .pap_mam,
+#SideContents p.pap_hpv, #SideContents p.pap_sput, #SideContents p.pap_mam
+{
+  color:            black;
+  background-color: #00CC00;
+}
+
+
 @media print {
   .PAP_2A, .PAP_2AG, .PAP_2AS, .PAP_2AG_AS, .PAP_2-3A, .PAP_2-3AG, .PAP_2-3AS, .PAP_2-3AG_AS {color: black; background-color: #FFFF88; }
   .PAP_3L, .PAP_3M-c1-2, .PAP_3M, .PAP_3S-c2-3, .PAP_3S {color: black; background-color: #BBAAFF; }
