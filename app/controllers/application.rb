@@ -79,11 +79,13 @@ module Print
   end
 
   module ClassMethods
-    def print_action_for(method = {})
+    def print_action_for(method, options = {})
       define_method("print_#{method}") do
         self.send("#{method}")
-        # TODO: generalize
-        generator = IO.popen("pdf2ps - - | lp -h drakul.intern.zyto-labor.com -d oki_b2600", "w+")
+        # You probably need the pdftops filter from xpdf, not poppler on the cups host
+        # In my setup it generated an empty page otherwise
+        # TODO: make printing host dynamic
+        generator = IO.popen("lp -h drakul.intern.zyto-labor.com -d #{options[:device]}", "w+")
         generator.puts render_to_pdf(:template => "#{controller_name}/#{method}.html.erb", :layout => 'simple')
         generator.close_write
 
