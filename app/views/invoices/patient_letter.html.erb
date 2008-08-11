@@ -11,10 +11,10 @@
 }
 #vesr {
   width:       18.2cm;
-  font-size:   12pt;
+  font-size:   10pt;
   font-family: ocr-b,Helvetica,Arial,sans-serif;
   position:    absolute;
-  top:         26.6cm;
+  top:         27.0cm;
   left:        6.7cm;
 }
 #billingaddress {
@@ -50,8 +50,13 @@
   top:         22.5cm;
   left:        2.7cm;
 }
-#paymentby1 {
+#paymentreference1 {
+  font-size:   95%;
   top:         24.5cm;
+  left:        0.2cm;
+}
+#paymentby1 {
+  top:         25.0cm;
   left:        0.2cm;
 }
 #paymentamount1 {
@@ -81,8 +86,10 @@
   text-align:  right;
 }
 #reference {
+  font-size:   11pt;
   top:         21.7cm;
-  left:        13.2cm;
+  left:        12.6cm;
+  width:       10cm;
 }
 .block {
   font-size:   9pt;
@@ -155,28 +162,33 @@ th {
   <%= full_address(@invoice.patient.vcard) %>
 </div>
 
+<%
+@bank_account = BankAccount.new
+%>
+
 <div id="paymentfor1" class="block">
-BANK<br />
-9999<br />
+<%= @bank_account.name %><br />
+<%= @bank_account.zip %><br />
 <br />
   <%= full_address(@invoice.biller.praxis) %>
 </div>
 
-<div id="account1" class="line">27-021-2</div>
+<div id="account1" class="line"><%= @bank_account.number %></div>
 <div id="paymentamount1" class="line"><%= sprintf('%.0f', @invoice.amount) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= sprintf('%02i', @invoice.amount % 100) %></div>
+<div id="paymentreference1" class="line"><%= @invoice.esr9_reference(@bank_account) %></div>
 <div id="paymentby1" class="block"><%= full_address(@invoice.patient.vcard) %></div>
 
 <div id="paymentfor2" class="block">
-BANK<br />
-9999<br />
+<%= @bank_account.name %><br />
+<%= @bank_account.zip %><br />
 <br />
   <%= full_address(@invoice.biller.praxis) %>
 </div>
 
-<div id="account2" class="line">27-021-2</div>
+<div id="account2" class="line"><%= @bank_account.number %></div>
 <div id="paymentamount2" class="line"><%= sprintf('%.0f', @invoice.amount) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= sprintf('%02i', @invoice.amount % 100) %></div>
 <div id="paymentby3" class="block"><%= full_address(@invoice.patient.vcard) %></div>
-<div id="reference" class="line"><%= @invoice.esr9_reference %></div>
-<div id="vesr"><%= @invoice.esr9 %></div>
+<div id="reference" class="line"><%= @invoice.esr9_reference(@bank_account) %></div>
+<div id="vesr"><%= @invoice.esr9(@bank_account) %></div>
 </div>
 <div>

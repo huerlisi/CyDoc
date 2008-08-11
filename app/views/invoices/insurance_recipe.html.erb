@@ -333,6 +333,10 @@ th {
 <br />
 <br />
 
+<%
+@bank_account = BankAccount.new
+%>
 
-<div id="vesr"><%= @invoice.esr9 %></div>
+
+<div id="vesr"><%= @invoice.esr9(@bank_account) %></div>
 </div>

@@ -58,12 +58,12 @@ class Invoice < ActiveRecord::Base
     write_attribute(:created_at, value)
   end
 
-  def esr9
-    esr9_build(amount, id, '01-200027-2') # TODO: it's biller.esr_id
+  def esr9(bank_account)
+    esr9_build(amount, id, bank_account.number, bank_account.esr_id) # TODO: it's biller.esr_id
   end
 
-  def esr9_reference
-    esr9_format(esr9_add_validation_digit(sprintf('%015i', id)))
+  def esr9_reference(bank_account)
+    esr9_format(esr9_add_validation_digit(sprintf(bank_account.esr_id + '%020i', id)))
   end
 
   private
@@ -100,13 +100,18 @@ class Invoice < ActiveRecord::Base
     reference_code.reverse.gsub(/(.....)/, '\1 ').reverse
   end
 
-  def esr9_build(amount, id, biller_id)
+  def esr9_format_account_id(account_id)
+    (pre, main, post) = account_id.split('-')
+    sprintf('%02i%06i%1i', pre, main, post)
+  end
+
+  def esr9_build(amount, id, biller_id, esr_id)
     # 01 is type 'Einzahlung in CHF'
     amount_string = "01#{sprintf('%011.2f', amount).delete('.')}"
 
-    id_string = sprintf('%015i', id).delete(' ')
+    id_string = esr_id + sprintf('%020i', id).delete(' ')
 
-    biller_string = biller_id.delete('-')
+    biller_string = esr9_format_account_id(biller_id)
     return "#{esr9_add_validation_digit(amount_string)}>#{esr9_add_validation_digit(id_string)}+ #{biller_string}>"
   end
 end
