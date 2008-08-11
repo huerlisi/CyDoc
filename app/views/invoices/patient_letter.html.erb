@@ -174,7 +174,7 @@ th {
 </div>
 
 <div id="account1" class="line"><%= @bank_account.number %></div>
-<div id="paymentamount1" class="line"><%= sprintf('%.0f', @invoice.amount) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= sprintf('%02i', @invoice.amount % 100) %></div>
+<div id="paymentamount1" class="line"><%= sprintf('%.0f', @invoice.rounded_amount) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= sprintf('%02i', @invoice.rounded_amount * 100 % 100) %></div>
 <div id="paymentreference1" class="line"><%= @invoice.esr9_reference(@bank_account) %></div>
 <div id="paymentby1" class="block"><%= full_address(@invoice.patient.vcard) %></div>
 
@@ -186,7 +186,7 @@ th {
 </div>
 
 <div id="account2" class="line"><%= @bank_account.number %></div>
-<div id="paymentamount2" class="line"><%= sprintf('%.0f', @invoice.amount) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= sprintf('%02i', @invoice.amount % 100) %></div>
+<div id="paymentamount2" class="line"><%= sprintf('%.0f', @invoice.rounded_amount) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= sprintf('%02i', @invoice.rounded_amount * 100 % 100) %></div>
 <div id="paymentby3" class="block"><%= full_address(@invoice.patient.vcard) %></div>
 <div id="reference" class="line"><%= @invoice.esr9_reference(@bank_account) %></div>
 <div id="vesr"><%= @invoice.esr9(@bank_account) %></div>

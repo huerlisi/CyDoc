@@ -49,6 +49,14 @@ class Invoice < ActiveRecord::Base
     amount_mt + amount_tt
   end
 
+  def rounded_amount
+    if amount.nil?
+      return 0
+    else
+      return (amount * 20).round / 20.0
+    end
+  end
+
   # Generalization
   def date
     created_at
@@ -59,7 +67,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def esr9(bank_account)
-    esr9_build(amount, id, bank_account.number, bank_account.esr_id) # TODO: it's biller.esr_id
+    esr9_build(rounded_amount, id, bank_account.number, bank_account.esr_id) # TODO: it's biller.esr_id
   end
 
   def esr9_reference(bank_account)
