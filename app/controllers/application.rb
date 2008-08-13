@@ -22,7 +22,8 @@ class ApplicationController < ActionController::Base
         false
       else
         @current_doctor_ids = @current_doctor.colleagues.map{|c| c.id}.uniq
-        @printers = @current_doctor.office.printers
+
+        @printers = @current_doctor.office.printers if @current_doctor.office
         true
       end
     end
