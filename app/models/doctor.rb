@@ -6,6 +6,8 @@ class Doctor < ActiveRecord::Base
   belongs_to :account, :class_name => 'Accounting::Account'
 
   has_many :mailings
+  has_many :patients
+
   has_and_belongs_to_many :offices
 
   # Proxy accessors
