@@ -1,17 +1,20 @@
-<fieldset>
-<legend>Resultatversand <%= @mailing.printed_at.nil? ? "in Vorbereitung" : "vom #{@mailing.printed_at.strftime('%d.%m.%Y')}" %></legend>
+<% if @mailing %>
+  <fieldset>
+  <legend>Resultatversand <%= @mailing.printed_at.nil? ? "in Vorbereitung" : "vom #{@mailing.printed_at.strftime('%d.%m.%Y')}" %></legend>
+    <% for class_group in ClassificationGroup.find :all, :order => 'position DESC' %>
+      <% group_cases = @mailing.cases.sort {|x,y| x.praxistar_eingangsnr <=> y.praxistar_eingangsnr}.select { |c| c.classification.classification_group == class_group and !(c.needs_p16? and c.screened_at.nil?) } %>
+      <%= render :partial => 'overview_group', :object => group_cases  unless group_cases.size == 0 %>
+    <% end %>
+    <% group_cases = @mailing.cases.sort {|x,y| x.praxistar_eingangsnr <=> y.praxistar_eingangsnr}.select { |c| c.needs_p16? and c.screened_at.nil? } %>
+    <%= render :partial => 'overview_p16_group', :object => group_cases  unless group_cases.size == 0 %>
+  </fieldset>
+<% else %>
+  <h2>Bisher keine Resultate versandt</h2>
+<% end %>
 
-  <% for class_group in ClassificationGroup.find :all, :order => 'position DESC' %>
-    <% group_cases = @mailing.cases.sort {|x,y| x.praxistar_eingangsnr <=> y.praxistar_eingangsnr}.select { |c| c.classification.classification_group == class_group and !(c.needs_p16? and c.screened_at.nil?) } %>
-    <%= render :partial => 'overview_group', :object => group_cases  unless group_cases.size == 0 %>
-  <% end %>
-  <% group_cases = @mailing.cases.sort {|x,y| x.praxistar_eingangsnr <=> y.praxistar_eingangsnr}.select { |c| c.needs_p16? and c.screened_at.nil? } %>
-  <%= render :partial => 'overview_p16_group', :object => group_cases  unless group_cases.size == 0 %>
-</fieldset>
-
-<% if @older_mailings %>
-<h2>Ältere Versande</h2>
-<table class="listing">
-  <%= render :partial => 'list', :collection => @older_mailings %>
-</table>
+<% unless @older_mailings.empty? %>
+  <h2>Ältere Versande</h2>
+  <table class="listing">
+    <%= render :partial => 'list', :collection => @older_mailings %>
+  </table>
 <% end %>
