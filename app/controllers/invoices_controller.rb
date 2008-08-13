@@ -1,6 +1,6 @@
 class InvoicesController < ApplicationController
-  print_action_for :insurance_recipe, :device => 'oki_b6200_tray2'
-  print_action_for :patient_letter, :device => 'oki_b6200_tray1'
+  print_action_for :insurance_recipe, :tray => :plain
+  print_action_for :patient_letter, :tray => :invoice
 
   def insurance_recipe
     @invoice = Invoice.find(params[:id])

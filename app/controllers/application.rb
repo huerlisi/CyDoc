@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
         false
       else
         @current_doctor_ids = @current_doctor.colleagues.map{|c| c.id}.uniq
+        @printers = @current_doctor.office.printers
         true
       end
     end
@@ -82,10 +83,13 @@ module Print
     def print_action_for(method, options = {})
       define_method("print_#{method}") do
         self.send("#{method}")
+        cups_host = options[:cups_host] || @printers[:cups_host]
+        tray = options[:tray].to_sym || :plain
+        device = options[:device] || @printers[:trays][tray]
         # You probably need the pdftops filter from xpdf, not poppler on the cups host
         # In my setup it generated an empty page otherwise
-        # TODO: make printing host dynamic
-        generator = IO.popen("lp -h drakul.intern.zyto-labor.com -d #{options[:device]}", "w+")
+        logger.info("lp -h #{cups_host} -d #{device}")
+        generator = IO.popen("lp -h #{cups_host} -d #{device}", "w+")
         generator.puts render_to_pdf(:template => "#{controller_name}/#{method}.html.erb", :layout => 'simple')
         generator.close_write
 
