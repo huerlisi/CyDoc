@@ -67,7 +67,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def esr9(bank_account)
-    esr9_build(rounded_amount, id, bank_account.number, bank_account.esr_id) # TODO: it's biller.esr_id
+    esr9_build(rounded_amount, id, bank_account.pc_id, bank_account.esr_id) # TODO: it's biller.esr_id
   end
 
   def esr9_reference(bank_account)

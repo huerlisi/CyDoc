@@ -3,6 +3,7 @@ class Doctor < ActiveRecord::Base
   belongs_to :private, :class_name => 'Vcards::Vcard', :foreign_key => 'private_vcard'
 
   belongs_to :billing_doctor, :class_name => 'Doctor'
+  belongs_to :account, :class_name => 'Accounting::Account'
 
   has_many :mailings
   has_and_belongs_to_many :offices
