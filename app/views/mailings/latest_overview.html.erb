@@ -1,3 +1,8 @@
+<h2>PAPs in Verarbeitung</h2>
+<table class="listing">
+  <%= render :partial => 'cases/list', :collection => @open_cases if @open_cases %>
+</table>
+
 <%= render :partial => 'overview' %>
 
 <% if @older_mailings %>

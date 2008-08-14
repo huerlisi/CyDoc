@@ -19,8 +19,7 @@ class MailingsController < ApplicationController
   end
   
   def latest_overview
-    @open_cases = Mailing.new(:doctor_id => @current_doctor_id)
-    @open_cases.cases = Case.find(:all, :conditions => {:result_report_printed_at => nil, :doctor_id => @current_doctor_ids})
+    @open_cases = Case.find(:all, :conditions => ['result_report_printed_at = ? AND doctor_id IN (?) AND examination_date > ?', nil, @current_doctor_ids, '2008-01-01'])
 
     @mailing = Mailing.find(:first, :order => 'printed_at DESC', :conditions => {:doctor_id => @current_doctor_ids})
     @older_mailings = Mailing.find(:all, :order => 'printed_at DESC', :conditions => {:doctor_id => @current_doctor_ids}, :limit => 10)
