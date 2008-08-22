@@ -12,9 +12,9 @@
   <h2>Bisher keine Resultate versandt</h2>
 <% end %>
 
-<% if @older_mailings %>
-<h2>Ältere Versande</h2>
-<table class="listing">
-  <%= render :partial => 'list', :collection => @older_mailings %>
-</table>
+<% unless (@older_mailings.nil? or @older_mailings.empty?) %>
+  <h2>Ältere Versande</h2>
+  <table class="listing">
+    <%= render :partial => 'list', :collection => @older_mailings %>
+  </table>
 <% end %>

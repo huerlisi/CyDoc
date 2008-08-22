@@ -27,6 +27,7 @@ class MailingsController < ApplicationController
 
   def overview
     @mailing = Mailing.find(params[:id])
+    @older_mailings = Mailing.find(:all, :order => 'printed_at DESC', :conditions => {:doctor_id => @current_doctor_ids}, :limit => 10)
   end
 
   def overview_inline
