@@ -1,0 +1,41 @@
+<div id="search_result">
+  <table class="listing">
+    <%= loading_indicator_tag :id => 'search' %>
+    <tr>
+      <th />
+      <th>Nachname</th>
+      <th>Vorname</th>
+      <th>Strasse</th>
+      <th>PLZ</th>
+      <th>Ort</th>
+      <th>Geburtsdatum</th>
+      <th>Arzt</th>
+      <th>PatientenNr.</th>
+      <th>Versicherung</th>
+      <th>VersicherungsNr.</th>
+    </tr>
+
+  <% for patient in @patients %>
+    <% @patient = patient %>
+    <% @vcard = patient.vcard %>
+    <tr>
+      <td>
+        <%= link_to_remote image_tag("select.png"), :update => 'edit_form', :url => { :controller => 'patients', :action => 'edit_inline', :id => @patient } %>
+      </td>
+      <td><%= in_place_editor_field :vcard, :family_name %></td>
+      <td><%= in_place_editor_field :vcard, :given_name %></td>
+      <td><%= in_place_editor_field :vcard, :street_address %></td>
+      <td><%= in_place_editor_field :vcard, :postal_code %></td>
+      <td><%= in_place_editor_field :vcard, :locality %></td>
+      <td><%= in_place_editor_field :patient, :birth_date %></td>
+      <td><%=h patient.doctor.name if patient.doctor %></td>
+      <td><%= in_place_editor_field :patient, :doctor_patient_nr %></td>
+      <td><%= patient.insurance.vcard.full_name if patient.insurance %></td>
+      <td><%= in_place_editor_field :patient, :insurance_nr %></td>
+      <td>
+        <%= link_to image_tag("show.png"), :controller => 'patients', :action => 'show', :id => @patient %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+</div>
