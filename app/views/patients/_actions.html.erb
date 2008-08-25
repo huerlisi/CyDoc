@@ -1,11 +1,5 @@
 <h3>Patient</h3>
 
-<!--
-<p><%= link_to_remote "Neuer Termin", :update => 'result', :url => new_consultation_path %></p>
-<p><%= link_to_remote "Konsultation", :update => 'result', :url => new_consultation_path(@consultation) if @consultation %></p>
-<p><%= link_to_remote "Termin verschieben", :update => 'result', :url => edit_consultation_path %></p>
-<p><%= link_to_remote "Anamnese erfassen", :update => 'new_medical_case', :url => {:controller => :medical_cases, :action => :new_inline, :patient_id => @patient, :type => 'AnamnesisCase'} %></p>
--->
 <p><%= link_to_remote "Diagnose erfassen", :update => 'new_medical_case', :url => {:controller => :medical_cases, :action => :new_inline, :patient_id => @patient, :type => 'DiagnosisCase'} %></p>
 <!--
 <p><%= link_to_remote "Analyse erfassen", :update => 'new_medical_case', :url => {:controller => :medical_cases, :action => :new_inline, :patient_id => @patient, :type => 'AnalysisCase'} %></p>
