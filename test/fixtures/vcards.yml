@@ -12,3 +12,7 @@ us_person:
   honorific_prefix: Mr.
   honorific_suffix: Jr.
 
+de_person:
+  given_name: Céline
+  family_name: Müller
+  nickname: Ändi

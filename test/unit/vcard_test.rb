@@ -15,4 +15,10 @@ class VcardTest < ActiveSupport::TestCase
     assert_equal Vcards::Vcard.find_by_name('joe'), vcards(:us_person)
     assert_equal Vcards::Vcard.find_all_by_name('Doe'), vcards(:us_person, :simple_person)
   end
+
+  def test_find_collate
+    assert_equal Vcards::Vcard.find_by_name('celine'), vcards(:de_person)
+    assert_equal Vcards::Vcard.find_by_name('Müller'), vcards(:de_person)
+    assert_equal Vcards::Vcard.find_by_name('ändi'), vcards(:de_person)
+  end
 end
