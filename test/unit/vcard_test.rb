@@ -21,4 +21,8 @@ class VcardTest < ActiveSupport::TestCase
     assert_equal Vcards::Vcard.find_by_name('Müller'), vcards(:de_person)
     assert_equal Vcards::Vcard.find_by_name('ändi'), vcards(:de_person)
   end
+
+  def test_active
+    assert_equal Vcards::Vcard.active.count, Vcards::Vcard.count - 1
+  end
 end

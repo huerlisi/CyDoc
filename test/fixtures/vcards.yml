@@ -16,3 +16,7 @@ de_person:
   given_name: Céline
   family_name: Müller
   nickname: Ändi
+
+inactive:
+  full_name: Inactive
+  active: false
