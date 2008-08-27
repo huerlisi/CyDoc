@@ -22,6 +22,26 @@ class VcardTest < ActiveSupport::TestCase
     assert_equal Vcards::Vcard.find_by_name('ändi'), vcards(:de_person)
   end
 
+  def test_object
+    assert_equal patients(:joe), Vcards::Vcard.find_by_name('Patient').object
+    
+    patient = Patient.new
+    patient.save
+    vcard = Vcards::Vcard.new(:full_name => 'vcard patient')
+    vcard.object = patient
+    vcard.save
+    assert_equal patient, Vcards::Vcard.find_by_name('vcard patient').object
+
+    patient = Patient.new
+    patient.save
+    vcard = Vcards::Vcard.new(:full_name => 'patient vcards')
+    vcard.save
+    patient.vcards << vcard
+    patient.save
+    
+    assert_equal patient, Vcards::Vcard.find_by_name('patient vcards').object
+  end
+
   def test_active
     assert_equal Vcards::Vcard.active.count, Vcards::Vcard.count - 1
   end

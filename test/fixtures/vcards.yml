@@ -20,3 +20,8 @@ de_person:
 inactive:
   full_name: Inactive
   active: false
+
+
+patient:
+  full_name: Patient
+  object: joe (Patient)
