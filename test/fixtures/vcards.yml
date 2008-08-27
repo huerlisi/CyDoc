@@ -1,0 +1,14 @@
+full_name:
+  full_name: Full Name
+
+simple_person:
+  given_name: John
+  family_name: Doe
+
+us_person:
+  given_name: John W.
+  family_name: Doe
+  nickname: Joe
+  honorific_prefix: Mr.
+  honorific_suffix: Jr.
+
