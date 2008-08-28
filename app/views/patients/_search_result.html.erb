@@ -18,15 +18,15 @@
   <% for patient in @patients %>
     <% @patient = patient %>
     <% @vcard = patient.vcard %>
-    <tr>
+    <tr class="search_result" id="search_result_patient_<%=h @patient.id %>">
       <td>
         <%= link_to_remote image_tag("select.png"), :update => 'edit_form', :url => { :controller => 'patients', :action => 'edit_inline', :id => @patient } %>
       </td>
-      <td><%= in_place_editor_field :vcard, :family_name %></td>
-      <td><%= in_place_editor_field :vcard, :given_name %></td>
-      <td><%= in_place_editor_field :vcard, :street_address %></td>
-      <td><%= in_place_editor_field :vcard, :postal_code %></td>
-      <td><%= in_place_editor_field :vcard, :locality %></td>
+      <td><%= in_place_editor_field :vcard, :family_name if @vcard %></td>
+      <td><%= in_place_editor_field :vcard, :given_name if @vcard %></td>
+      <td><%= in_place_editor_field :vcard, :street_address if @vcard %></td>
+      <td><%= in_place_editor_field :vcard, :postal_code if @vcard %></td>
+      <td><%= in_place_editor_field :vcard, :locality if @vcard %></td>
       <td><%= in_place_editor_field :patient, :birth_date %></td>
       <td><%=h patient.doctor.name if patient.doctor %></td>
       <td><%= in_place_editor_field :patient, :doctor_patient_nr %></td>
