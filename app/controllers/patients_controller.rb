@@ -96,15 +96,6 @@ class PatientsController < ApplicationController
 
 
   def search
-    @case = Cyto::Case.find(params[:case_id]) unless params[:case_id].nil?
-  
-    # If entry_nr is given, take it as the only condition
-    eingangsnr = params[:search][:praxistar_eingangsnr]
-    if !eingangsnr.empty?
-      search_by_eingangsnr
-      return
-    end
-
     keys = []
     values = []
     
