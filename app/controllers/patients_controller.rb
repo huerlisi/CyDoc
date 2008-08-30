@@ -69,26 +69,8 @@ class PatientsController < ApplicationController
     end
 
     unless parameters[:birth_date].nil? or parameters[:birth_date].empty?
-      if parameters[:birth_date].match /bis/
-        lower_bound, higher_bound = parameters[:birth_date].split('-')
-        if Date.date_only_year?(lower_bound)
-            keys.push "YEAR(birth_date) BETWEEN ? AND ?"
-            values.push Date.expand_year(lower_bound.strip)
-            values.push Date.expand_year(higher_bound.strip)
-        else
-            keys.push "birth_date BETWEEN ? AND ?"
-            values.push Date.parse_europe(lower_bound.strip)
-            values.push Date.parse_europe(higher_bound.strip)
-        end
-      else
-        if Date.date_only_year?(parameters[:birth_date])
-            keys.push "YEAR(birth_date) = ?"
-            values.push Date.expand_year(parameters[:birth_date].strip)
-        else
-            keys.push "birth_date = ? "
-            values.push Date.parse_europe(parameters[:birth_date])
-        end
-      end
+      keys.push "birth_date LIKE ? "
+      values.push Date.parse_europe(parameters[:birth_date]).strftime('%%%y-%m-%d')
     end
 
     return !keys.empty? ? [ keys.join(" AND "), *values ] : nil
