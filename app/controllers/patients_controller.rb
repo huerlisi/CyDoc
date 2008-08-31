@@ -102,10 +102,12 @@ class PatientsController < ApplicationController
 #      @patients = Patient.find :all, :conditions => conditions, :include => [:vcard => [:address], :billing_vcard => [:address]], :order => 'vcards.family_name'
 #    end
 
-    if params[:patient][:name]
+    if !(params[:patient][:name].nil? or params[:patient][:name].empty?)
       @patients = Patient.by_name(params[:patient][:name])
-    elsif params[:patient][:birth_date]
+    elsif !(params[:patient][:birth_date].nil? or params[:patient][:birth_date].empty?)
       @patients = Patient.by_date(params[:patient][:birth_date])
+    else
+      @patients = []
     end
 
     render :partial => 'search_result'

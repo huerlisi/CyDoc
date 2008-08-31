@@ -1,0 +1,3 @@
+test:
+  login: test
+  password: <%= Digest::SHA256.hexdigest("nixda") %>

@@ -19,8 +19,7 @@ Event.observe(window, 'load', function() {$('patient_birth_date').focus()}, fals
       <% fields_for vcard_name, vcard, :builder => Rubaidh::TabularForm::TabularFormBuilder do |address| %>
         <tr>
           <td>Name:</td>
-          <td><%= text_field 'vcard', :family_name, :size => 15, :label => "Nachname" %></td>
-          <td>Vorname:</td><td><%= text_field 'vcard', :given_name, :size => 15, :label => "Vorname" %></td>
+          <td><%= text_field 'patient', :name, :size => 15, :label => "Name" %></td>
           <td>PatNr.:</td><td><%= text_field 'patient', :doctor_patient_nr, :label => "Patientennr.", :size => 15 %></td>
         </tr>
         <tr>

@@ -20,7 +20,11 @@ class Patient < ActiveRecord::Base
 
   # Proxy accessors
   def name
-    vcard.full_name || ""
+    if vcard.nil?
+      ""
+    else
+      vcard.full_name || ""
+    end
   end
 
   def sex
