@@ -4,6 +4,7 @@ full_name:
 simple_person:
   given_name: John
   family_name: Doe
+  object: simple_patient (Patient)
 
 us_person:
   given_name: John W.
@@ -11,6 +12,7 @@ us_person:
   nickname: Joe
   honorific_prefix: Mr.
   honorific_suffix: Jr.
+  object: us_patient (Patient)
 
 de_person:
   given_name: Céline

@@ -58,7 +58,7 @@ class PatientsController < ApplicationController
     keys = []
     values = []
 
-    unless parameters[:full_name].nil? or parameters[:full_name].empty?
+    unless parameters[:name].nil? or parameters[:name].empty?
       keys.push "patient_id = ?"
       values.push parameters[:full_name].split(' ')[0].strip
     end
@@ -81,27 +81,33 @@ class PatientsController < ApplicationController
     keys = []
     values = []
     
-    default_vcard_keys, *default_vcard_values = vcard_conditions('vcards')
-    billing_vcard_keys, *billing_vcard_values = vcard_conditions('billing_vcards_patients')
+#    default_vcard_keys, *default_vcard_values = vcard_conditions('vcards')
+#    billing_vcard_keys, *billing_vcard_values = vcard_conditions('billing_vcards_patients')
     
-    unless default_vcard_keys.nil?
-      keys.push "( ( #{default_vcard_keys} ) OR ( #{billing_vcard_keys} ) )"
-      values.push *default_vcard_values
-      values.push *billing_vcard_values
-    end
+#    unless default_vcard_keys.nil?
+#      keys.push "( ( #{default_vcard_keys} ) )"
+#      values.push *default_vcard_values
+#      values.push *billing_vcard_values
+#    end
     
-    patient_keys, *patient_values = patient_conditions
-    keys.push patient_keys
-    values.push *patient_values
+#    patient_keys, *patient_values = patient_conditions
+#    keys.push patient_keys
+#    values.push *patient_values
     
     # Build conditions array
-    if keys.compact.empty?
-      @patients = []
-    else
-      conditions = !keys.compact.empty? ? [  keys.compact.join(" AND "), *values ] : nil
-      @patients = Patient.find :all, :conditions => conditions, :include => [:vcard, :billing_vcard], :order => 'vcards.family_name'
+#    if keys.compact.empty?
+#      @patients = []
+#    else
+#      conditions = !keys.compact.empty? ? [  keys.compact.join(" AND "), *values ] : nil
+#      @patients = Patient.find :all, :conditions => conditions, :include => [:vcard => [:address], :billing_vcard => [:address]], :order => 'vcards.family_name'
+#    end
+
+    if params[:patient][:name]
+      @patients = Patient.by_name(params[:patient][:name])
+    elsif params[:patient][:birth_date]
+      @patients = Patient.by_date(params[:patient][:birth_date])
     end
-  
+
     render :partial => 'search_result'
   end
   

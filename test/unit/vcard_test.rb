@@ -45,4 +45,11 @@ class VcardTest < ActiveSupport::TestCase
   def test_active
     assert_equal Vcards::Vcard.active.count, Vcards::Vcard.count - 1
   end
+
+  def test_scope_by_name
+    assert_equal [vcards(:patient)], Vcards::Vcard.by_name('Patient')
+    assert_equal 1, Vcards::Vcard.by_name('Patient').count
+    
+    assert_equal 2, Vcards::Vcard.by_name('Doe').count
+  end
 end

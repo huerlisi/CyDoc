@@ -36,4 +36,13 @@ class PatientsControllerTest < ActionController::TestCase
     assert_select "#search_result_patient_#{patients(:twin_one).id}", 1
     assert_select "#search_result_patient_#{patients(:twin_two).id}", 1
   end
+
+  def test_name
+    xml_http_request :post, :search, {:patient => {:name => 'Doe'}}
+    assert_response :success
+    assert_select ".search_result", 2
+    assert_select "#search_result_patient_#{patients(:us_patient).id}", 1
+    assert_select "#search_result_patient_#{patients(:simple_patient).id}", 1
+    assert_select "#search_result_patient_#{patients(:joe).id}", 0
+  end
 end
