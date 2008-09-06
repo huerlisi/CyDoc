@@ -9,7 +9,7 @@ class TariffItemsController < ApplicationController
       query_switched = code
     end
     
-    @tarmed_texts = Tarmed::LeistungText.find(:all, :include => :digniquali,
+    @tarmed_texts = Tarmed::LeistungText.find(:all, :joins => :digniquali,
       :conditions => [ "( LEISTUNG_TEXT.LNR LIKE :query OR BEZ_255 LIKE :query OR BEZ_255 LIKE :query_switched )AND LEISTUNG_TEXT.GUELTIG_BIS = :valid_to AND SPRACHE = 'D' AND QL_DIGNITAET IN ('0400', '9999')",
       {:query => '%' + query + '%', :query_switched => '%' + query_switched + '%', :valid_to => '12/31/99 00:00:00'}],
       :order => 'LEISTUNG_TEXT.LNR',
