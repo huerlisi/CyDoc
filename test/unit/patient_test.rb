@@ -20,8 +20,33 @@ class PatientTest < ActiveSupport::TestCase
     vcard.save
     patient.vcards << vcard
     patient.save
-    
     assert_equal patient, Vcards::Vcard.find_by_name('patient vcards').object
+  end
+
+  def test_new_with_vcard_attributes
+#    patient = Patient.new(:full_name => 'address patient')
+#    patient.save
+    
+#    found_patient = Patient.by_name('address patient')
+#    assert_equal patient, found_patient
+#    assert_equal 'address patient', patient.name
+  end
+
+  def test_vcard_delegation
+    patient = Patient.new(:full_name => 'address patient')
+    assert_equal 'address patient', patient.vcard.full_name
+    assert_equal 'address patient', patient.full_name
+  end
+
+  def test_vcard_address
+#    patient = Patient.new(:full_name => 'address patient', :street_address => 'Street 1')
+#    assert_equal 'Street 1', patient.vcard.street_address
+#    patient.save
+    
+#    found_patient = Patient.by_name('address patient')
+#    assert_equal patient, found_patient
+#    assert_equal 'address patient', patient.name
+#    assert_equal 'Street 1', patient.vcard.street_address
   end
 
   def test_by_name

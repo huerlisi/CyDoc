@@ -2,6 +2,31 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 include Vcards
 class VcardTest < ActiveSupport::TestCase
+  def test_new
+    empty_new = Vcards::Vcard.new
+    assert_kind_of(Vcards::Vcard, empty_new)
+    
+    empty_new.full_name = 'Empty Name'
+    empty_new.save
+    assert_equal empty_new, Vcards::Vcard.find_by_full_name('Empty Name')
+
+    vcard_new = Vcards::Vcard.new(:full_name => 'Vcard Name', :nickname => 'Nick', :active => true)
+    vcard_new.save
+    assert_kind_of(Vcards::Vcard, vcard_new)
+    
+    address_new = Vcards::Vcard.new(:full_name => 'Address Name', :street_address => 'Strasse 1')
+    address_new.save
+    address_new.reload
+    assert_kind_of(Vcards::Vcard, address_new)
+    assert_equal 'Strasse 1', address_new.street_address
+    
+    address_new.postal_code = "3333"
+    address_new.save
+    address_new.reload
+    assert_equal 'Strasse 1', address_new.street_address
+    assert_equal '3333', address_new.postal_code
+  end
+
   def test_find
     assert_equal Vcards::Vcard.find_by_full_name('Full Name'), vcards(:full_name)
     assert_equal Vcards::Vcard.find_by_full_name('full name'), vcards(:full_name)
