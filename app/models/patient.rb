@@ -7,7 +7,14 @@ class Patient < ActiveRecord::Base
   named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcards, :conditions => Vcards::Vcard.by_name_conditions(name)}}
   named_scope :by_date, lambda {|date| {:conditions => ['birth_date LIKE ?', Date.parse_europe(date).strftime('%%%y-%m-%d')] }}
 
-  belongs_to :vcard, :class_name => 'Vcards::Vcard', :foreign_key => 'vcard_id'
+#  belongs_to :vcard, :class_name => 'Vcards::Vcard', :foreign_key => 'vcard_id'
+  def vcard
+    vcards.build if vcards.active.first.nil?
+    vcards.active.first
+  end
+  delegate :full_name, :full_name=, :to => :vcard
+  delegate :street_address=, :to => :vcard
+
   belongs_to :billing_vcard, :class_name => 'Vcards::Vcard', :foreign_key => 'billing_vcard_id'
         
   has_many :cases, :order => 'id DESC'
@@ -24,6 +31,13 @@ class Patient < ActiveRecord::Base
       ""
     else
       vcard.full_name || ""
+    end
+  end
+
+  def name=(value)
+    if v = vcards.active.first
+      v.full_name = value
+      v.save
     end
   end
 

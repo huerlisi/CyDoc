@@ -11,8 +11,6 @@ Event.observe(window, 'load', function() {$('patient_birth_date').focus()}, fals
       <% fields_for 'patient', @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
         <tr>
           <td>Geb.:</td><td><%= text_field 'patient', :birth_date, :label => "Geburtsdat.", :size => 15 %></td>
-          <td/><td/>
-          <td>EingNr.:</td><td><%= text_field 'search', :praxistar_eingangsnr, :size => 15, :label => "Eingangsnr." %></td>
         </tr>
       <% end %>
       <% vcard_name = 'vcard'; vcard = nil %>
@@ -32,7 +30,7 @@ Event.observe(window, 'load', function() {$('patient_birth_date').focus()}, fals
       <% end %>
     </table>
     <%= submit_tag "Suchen" %>
-    <%= submit_to_remote "submit", "Neu anlegen", { :url => { :controller => '/patients', :action => 'new', :case_id => params[:id] }, :update => 'edit_form' } %>
+    <%= submit_to_remote "submit", "Neu anlegen", { :url => { :controller => '/patients', :action => 'create', :case_id => params[:id] }, :update => 'edit_form' } %>
     <input type="reset"/>
   <% end -%>
 </fieldset>

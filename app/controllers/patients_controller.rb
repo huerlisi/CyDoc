@@ -23,6 +23,19 @@ class PatientsController < ApplicationController
     render :action => 'list'
   end
 
+  def create
+    @patient = Patient.new(params[:patient])
+    @vcard = Vcards::Vcard.new(params[:vcard])
+    @patient.vcards << @vcard
+
+    if @patient.save
+      flash[:notice] = 'Patient erfasst.'
+      redirect_to :action => :show, :id => @patient
+    else
+      render :action => :new
+    end
+  end
+
   def show
     @patient = Patient.find(params[:id])
 

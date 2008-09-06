@@ -209,13 +209,13 @@ input, select { vertical-align: middle }
 select {
  border: 1px solid #d7d7d7;
 }
-input[type=submit], input[type=reset] {
+input[type=submit], input[type=reset], input[type=button] {
  background: #eee;
  color: #222;
  border: 1px outset #ccc;
  padding: .1em .5em;
 }
-input[type=submit]:hover, input[type=reset]:hover { background: #ccb }
+input[type=submit]:hover, input[type=reset]:hover, input[type=button]:hover { background: #ccb }
 input[type=text], input.textwidget, textarea {
  background: #fff;
  color: #000;
