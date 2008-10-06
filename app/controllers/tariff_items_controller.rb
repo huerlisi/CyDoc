@@ -1,6 +1,6 @@
 class TariffItemsController < ApplicationController
-  def auto_complete_for_record_tarmed_code
-    code = params[:record_tarmed][:code].downcase
+  def list_for_record_tarmed_code
+    code = params[:query].downcase
     if code.split(' ').size > 1
       query = code.split(' ').join('%')
       query_switched = code.split(' ').reverse.join('%')
@@ -13,13 +13,9 @@ class TariffItemsController < ApplicationController
       :conditions => [ "( LEISTUNG_TEXT.LNR LIKE :query OR BEZ_255 LIKE :query OR BEZ_255 LIKE :query_switched )AND LEISTUNG_TEXT.GUELTIG_BIS = :valid_to AND SPRACHE = 'D' AND QL_DIGNITAET IN ('0400', '9999')",
       {:query => '%' + query + '%', :query_switched => '%' + query_switched + '%', :valid_to => '12/31/99 00:00:00'}],
       :order => 'LEISTUNG_TEXT.LNR',
-      :limit => 10)
+      :limit => 15)
 
-#    @hidden_item_count = Tarmed::LeistungText.count(:all, :include => :digniquali,
-#      :conditions => [ "LEISTUNG_TEXT.LNR LIKE :query OR BEZ_255 LIKE :query OR BEZ_255 LIKE :query_switched AND LEISTUNG_TEXT.GUELTIG_BIS = :valid_to AND SPRACHE = 'D' AND QL_DIGNITAET IN ('0400', '9999')",
-#      {:query => '%' + query + '%', :query_switched => '%' + query_switched + '%', :valid_to => '12/31/99 00:00:00'}],
-#      :order => 'LEISTUNG_TEXT.LNR') - 10
-    render :partial => 'tarmed_item'
+    render :partial => 'tarmed_table_item'
   end
 
   # CRUD actions
@@ -50,8 +46,15 @@ class TariffItemsController < ApplicationController
   end
 
   def create
-    params[:record_tarmed][:code] = params[:record_tarmed][:code].split(' ')[0]
+    params[:record_tarmed][:code] = params[:record_tarmed][:code]
     @record_tarmed = RecordTarmed.new(params[:record_tarmed])
+
+    # Defaults
+    @record_tarmed.date = Date.today
+    @record_tarmed.quantity = 1
+    @record_tarmed.responsible_id = @current_doctor.id
+    @record_tarmed.provider_id = @current_doctor.id
+
     if @record_tarmed.save
       flash[:notice] = 'Erfolgreich erfasst.'
       redirect_to :controller => 'patients', :action => 'show', :id => @record_tarmed.patient_id

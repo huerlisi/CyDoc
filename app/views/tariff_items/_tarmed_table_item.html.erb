@@ -1,0 +1,5 @@
+<% for t in @tarmed_texts %>
+  <tr style="cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'tariff_items', :action => 'create', 'record_tarmed[code]' => t.leistung.code, 'record_tarmed[patient_id]' => params[:patient_id]) %>'">
+    <td><%=h t.leistung.code %></td><td><%=h t.BEZ_255 %></td>
+  </tr>
+<% end %>

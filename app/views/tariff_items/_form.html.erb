@@ -1,16 +1,25 @@
 <script type="text/javascript">
-  $('record_tarmed_code').focus()
+  $('query').focus()
 </script>
 
 <%= error_messages_for :record_tarmed %>
 
-<% form_for :record_tarmed, :url => {:controller => 'tariff_items', :action => 'create'} do |f| %>
-Tarmed Leistung:&nbsp;<%= text_field_with_auto_complete :record_tarmed, :code, {}, {:url => {:controller => 'tariff_items', :action => "auto_complete_for_record_tarmed_code"}, :min_chars => 2} %>
-Datum:&nbsp;<%= f.text_field :date, :size => 11 %>
-<%= f.submit "Erfassen" %>
+<form name="tarmed_query" action="" >
+Tarmed Leistung:&nbsp;<%= text_field_tag("query", params['query'], :size => 10 ) %>
+<%= image_tag("indicator.gif",
+              :align => "absmiddle",
+              :border => 0,
+              :id => "spinner",
+              :style =>"display: none;" ) %>
+</form>
 
-<%= f.hidden_field :patient_id %>
-<%= f.hidden_field :provider_id %>
-<%= f.hidden_field :responsible_id %>
-<%= f.hidden_field :quantity %>
-<% end %>
+<%= observe_field 'query',  :frequency => 2,
+         :update => 'table',
+         :before => "Element.show('spinner')",
+         :success => "Element.hide('spinner')",
+         :url => {:controller => :tariff_items, :action => 'list_for_record_tarmed_code', :patient_id => params[:id]},
+         :with => 'query' %>
+
+
+<table id="table" class="listing">
+</table>
