@@ -27,3 +27,7 @@ inactive:
 patient:
   full_name: Patient
   object: joe (Patient)
+
+doctor_test:
+  full_name: Test Doktor
+  object: test (Doctor)
