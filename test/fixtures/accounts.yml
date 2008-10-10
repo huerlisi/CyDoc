@@ -5,10 +5,3 @@ tst_account:
   esr_id: 999999
   pc_id: 01-01234-1
   type: BankAccount
-tst_account:
-  number: 777
-  bank_id: test_bank
-  holder_vcard_id: <%= Fixtures.identify(:doctor_test) %>
-  esr_id: 999999
-  pc_id: 01-01234-1
-  type: BankAccount
