@@ -16,7 +16,7 @@ class Doctor < ActiveRecord::Base
   end
 
   def colleagues
-    offices.map{|o| o.doctors}.flatten
+    offices.map{|o| o.doctors}.flatten.uniq
   end
 
   def password=(value)
