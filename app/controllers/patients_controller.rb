@@ -37,6 +37,11 @@ class PatientsController < ApplicationController
   end
 
   def show
+    unless Patient.exists?(params[:id])
+      render :inline => "<h1>Patient existiert nicht</h1>", :layout => 'application', :status => 404
+      return
+    end
+    
     @patient = Patient.find(params[:id])
 
     @record_tarmed = RecordTarmed.new

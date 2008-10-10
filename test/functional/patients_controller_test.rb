@@ -50,6 +50,9 @@ class PatientsControllerTest < ActionController::TestCase
     get :show, :id => patients(:simple_patient).id
     assert_response :success
 
+    get :show, :id => 777
+    assert_response :missing
+
     get :show, :id => patients(:joe).id
     assert_response :success
   end
