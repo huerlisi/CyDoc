@@ -17,7 +17,7 @@
 
   <% for patient in @patients %>
     <% @patient = patient %>
-    <% @vcard = patient.vcard %>
+    <% @vcard = patient.vcards.first %>
     <tr class="search_result" id="search_result_patient_<%=h @patient.id %>">
       <td>
         <%= link_to_remote image_tag("select.png"), :update => 'edit_form', :url => { :controller => 'patients', :action => 'edit_inline', :id => @patient } %>
