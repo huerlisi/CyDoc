@@ -5,8 +5,8 @@ class PatientsController < ApplicationController
   in_place_edit_for :vcard, :postal_code
   in_place_edit_for :vcard, :locality
   in_place_edit_for :patient, :birth_date
-  in_place_edit_for :patient, :in_place_doctor_patient_nr
-  in_place_edit_for :patient, :in_place_insurance_nr
+  in_place_edit_for :patient, :doctor_patient_nr
+  in_place_edit_for :patient, :insurance_nr
                 
   # CRUD Actions
   def index
