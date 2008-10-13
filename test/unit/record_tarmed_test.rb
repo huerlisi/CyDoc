@@ -1,8 +1,10 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class RecordTarmedTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+  def test_defaults
+    rec = RecordTarmed.new
+
+    assert_equal 1, rec.quantity
+    assert_equal Date.today, rec.date
   end
 end

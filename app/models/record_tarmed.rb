@@ -2,6 +2,12 @@ class RecordTarmed < ActiveRecord::Base
   belongs_to :tarmed_leistung, :class_name => 'Tarmed::Leistung', :foreign_key => :code
 
   has_and_belongs_to_many :invoices
+  
+  def initialize(attributes = nil)
+    super(attributes)
+
+    self.date = Date.today
+  end
 
   # Lookup values from Tarmed DB when assigning code
   def code=(code)
