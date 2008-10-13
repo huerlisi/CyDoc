@@ -24,10 +24,47 @@ inactive:
   active: false
 
 
-patient:
-  full_name: Patient
-  object: joe (Patient)
-
 doctor_test:
   full_name: Test Doktor
   object: test (Doctor)
+
+patient:
+  given_name: Joe
+  family_name: Smith
+  full_name: Patient
+  object: joe (Patient)
+
+old_one:
+  object: old_one (Patient)
+  given_name: $LABEL
+  family_name: $LABEL
+
+old_two:
+  object: old_two (Patient)
+  given_name: $LABEL
+  family_name: $LABEL
+
+young_one:
+  object: young_one (Patient)
+  given_name: $LABEL
+  family_name: $LABEL
+
+twin_one:
+  object: twin_one (Patient)
+  given_name: $LABEL
+  family_name: $LABEL
+
+twin_two:
+  object: twin_two (Patient)
+  given_name: $LABEL
+  family_name: $LABEL
+
+us_patient:
+  object: us_patient (Patient)
+  given_name: $LABEL
+  family_name: $LABEL
+
+no_vcard:
+  object: no_vcard (Patient)
+  given_name: $LABEL
+  family_name: $LABEL
