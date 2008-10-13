@@ -68,3 +68,6 @@ no_vcard:
   object: no_vcard (Patient)
   given_name: $LABEL
   family_name: $LABEL
+
+bank:
+  full_name: Rich Corp.
