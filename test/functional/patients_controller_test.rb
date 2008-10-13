@@ -50,10 +50,14 @@ class PatientsControllerTest < ActionController::TestCase
     get :show, :id => patients(:simple_patient).id
     assert_response :success
 
+    # Return 404, but nice error if not found
     get :show, :id => 777
     assert_response :missing
 
     get :show, :id => patients(:joe).id
     assert_response :success
+
+#    get :show, :id => patients(:no_vcard).id
+#    assert_response :success
   end
 end

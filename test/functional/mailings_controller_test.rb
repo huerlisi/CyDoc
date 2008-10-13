@@ -6,6 +6,11 @@ class MailingsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  def test_latest_overview
+    get :latest_overview
+    assert_response :success
+  end
+
   def test_list
     get :list
     assert_response :success

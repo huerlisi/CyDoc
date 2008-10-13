@@ -22,3 +22,5 @@ simple_patient:
 us_patient:
   birth_date: 1979-02-03
 
+no_vcard:
+  birth_date: 1980-05-05
