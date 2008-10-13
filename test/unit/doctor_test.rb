@@ -38,4 +38,8 @@ class DoctorTest < ActiveSupport::TestCase
     assert_equal [doctors(:colleague_one), doc1], doc1.colleagues
     assert_equal [doctors(:colleague_one), doctors(:test)], doctors(:test).colleagues
   end
+
+  def test_account
+    assert_kind_of(Accounting::Account, doctors(:test).account)
+  end
 end

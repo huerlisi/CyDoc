@@ -33,7 +33,8 @@ class Test::Unit::TestCase
 
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
   set_fixture_class :vcards => Vcards::Vcard
-  set_fixture_class :addresses => "Vcards::Address"
+  set_fixture_class :addresses => Vcards::Address
+  set_fixture_class :accounts => Accounting::Account
 
   #
   # Note: You'll currently still have to declare fixtures explicitly in integration tests

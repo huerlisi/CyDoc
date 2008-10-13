@@ -4,6 +4,7 @@ test:
   praxis: doctor_test
   zsr: 1234567
   ean_party: 1122334455667
+  account: test_account
 
 colleague_one:
   login: colleague
