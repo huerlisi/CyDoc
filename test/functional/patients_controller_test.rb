@@ -1,6 +1,16 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class PatientsControllerTest < ActionController::TestCase
+  def test_list
+    get :list
+    assert_response :success
+  end
+  
+  def test_index
+    get :index
+    assert_response :redirect
+  end
+
   def test_new
     get :new
     assert_response :success

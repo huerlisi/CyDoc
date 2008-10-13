@@ -9,7 +9,12 @@ class PatientsController < ApplicationController
   in_place_edit_for :patient, :insurance_nr
                 
   # CRUD Actions
+  def list
+    @patients = Patient.find :all
+  end
+
   def index
+    redirect_to :action => :list
   end
   
   def new
