@@ -1,0 +1,31 @@
+first_5min:
+  patient: old_one
+  provider: test
+  responsible: test
+  amount_tt: "8.19"
+  contract_number:
+  tariff_type: "001"
+  remark:
+  vat_rate: "0"
+  scale_factor_mt: "1"
+  quantity: "1"
+  session: "1"
+  code: "00.0010"
+  external_factor_mt: "1"
+  validate: "0"
+  scale_factor_tt: "1"
+  date: 2008-10-14 00:00:00
+  ref_code:
+  external_factor_tt: "1"
+  unit_factor_mt: "1"
+  medical_role: self_employed
+  treatment: ambulatory
+  amount_mt: "9.57"
+  location_id:
+  billing_role: both
+  section_code:
+  body_location: none
+  tariff_version:
+  obligation: "1"
+  splitting_factor: "1"
+  unit_factor_tt: "1"

@@ -1,8 +1,10 @@
 joe:
   birth_date: 1990-02-03
+  doctor: test
 
 old_one:
   birth_date: 1892-02-04
+  doctor: test
 
 old_two:
   birth_date: 1901-02-04

@@ -50,8 +50,8 @@ class InvoicesController < ApplicationController
     
     # Tiers
     @tiers = TiersGarant.new(params[:tiers])
-    @tiers.biller_id = @current_doctor.id
-    @tiers.provider_id = @current_doctor.id
+    @tiers.biller = @current_doctor
+    @tiers.provider = @current_doctor
 
     @tiers.save
     @invoice.tiers = @tiers

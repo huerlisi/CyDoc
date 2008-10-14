@@ -47,4 +47,15 @@ class RecordTarmedTest < ActiveSupport::TestCase
     assert_equal patients(:joe).doctor, rec.biller
     assert_equal patients(:joe).doctor, rec.responsible
   end
+
+  def test_duplicate_record
+    # old_one has a fixtured tarmed record
+    assert_equal 1, patients(:old_one).record_tarmeds.size
+
+    rec = RecordTarmed.new(:code => '01.0010')
+    patients(:old_one).record_tarmeds << rec
+    
+    # Now there's a second record
+    assert_equal 2, patients(:old_one).record_tarmeds.size
+  end
 end
