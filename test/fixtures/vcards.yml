@@ -1,3 +1,5 @@
+# Vcards
+# ======
 full_name:
   full_name: Full Name
 
@@ -18,26 +20,27 @@ de_person:
   given_name: Céline
   family_name: Müller
   nickname: Ändi
+  object: old_one (Patient)
 
 inactive:
   full_name: Inactive
   active: false
 
 
+# Doctors
+# =======
 doctor_test:
   full_name: Test Doktor
   object: test (Doctor)
 
+
+# Patients
+# ========
 patient:
   given_name: Joe
   family_name: Smith
   full_name: Patient
   object: joe (Patient)
-
-old_one:
-  object: old_one (Patient)
-  given_name: $LABEL
-  family_name: $LABEL
 
 old_two:
   object: old_two (Patient)
@@ -64,10 +67,7 @@ us_patient:
   given_name: $LABEL
   family_name: $LABEL
 
-no_vcard:
-  object: no_vcard (Patient)
-  given_name: $LABEL
-  family_name: $LABEL
-
+# Banks
+# =====
 bank:
   full_name: Rich Corp.
