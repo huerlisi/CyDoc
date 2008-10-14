@@ -23,7 +23,7 @@ class Patient < ActiveRecord::Base
   has_many :medical_cases, :order => 'duration_to DESC'
 
   # Services
-  has_many :record_tarmeds, :order => 'date DESC'
+  has_many :record_tarmeds, :order => 'date DESC', :before_add => :before_add_record_tarmed
 
   # Proxy accessors
   def name
@@ -47,5 +47,13 @@ class Patient < ActiveRecord::Base
       when 2: "F"
       else "unbekannt"
     end
+  end
+
+  private
+  # Association callbacks
+  def before_add_record_tarmed(record_tarmed)
+    record_tarmed.provider ||= self.doctor
+    record_tarmed.biller ||= self.doctor
+    record_tarmed.responsible ||= self.doctor
   end
 end

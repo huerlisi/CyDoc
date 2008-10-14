@@ -1,6 +1,12 @@
 class RecordTarmed < ActiveRecord::Base
   belongs_to :tarmed_leistung, :class_name => 'Tarmed::Leistung', :foreign_key => :code
 
+  belongs_to :provider, :class_name => 'Doctor'
+  belongs_to :biller, :class_name => 'Doctor'
+  belongs_to :responsible, :class_name => 'Doctor'
+
+  belongs_to :patient
+
   has_and_belongs_to_many :invoices
   
   def initialize(attributes = nil)
