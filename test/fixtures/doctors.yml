@@ -7,7 +7,7 @@ test:
   account: test_account
 
 single:
-  login: test
+  login: $LABEL
   password: <%= Digest::SHA256.hexdigest("nixda") %>
   praxis: doctor_test
   zsr: 1234567
