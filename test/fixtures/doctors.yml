@@ -6,6 +6,13 @@ test:
   ean_party: 1122334455667
   account: test_account
 
+single:
+  login: test
+  password: <%= Digest::SHA256.hexdigest("nixda") %>
+  praxis: doctor_test
+  zsr: 1234567
+  ean_party: 1122334455667
+
 colleague_one:
   login: colleague
   password: <%= Digest::SHA256.hexdigest("nixda") %>

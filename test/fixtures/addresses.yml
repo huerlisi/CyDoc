@@ -10,8 +10,30 @@ simple_address:
   vcard: simple_person
 
 de_address:
-  region: ZG
+  region: 
   street_address: Münchnerstr. 66
   postal_code: DE-55555
   locality: Berlin
   vcard: de_person
+
+us_address:
+  region: FL
+  street_address: Riverside
+  postal_code: 66666
+  locality: Florida
+  vcard: simple_person
+
+simple_address:
+  region: ZG
+  street_address: Chamerstr. 55b
+  postal_code: 6300
+  locality: Zug
+  vcard: simple_person
+
+simple_address:
+  region: ZG
+  street_address: Chamerstr. 55b
+  postal_code: 6300
+  locality: Zug
+  vcard: simple_person
+

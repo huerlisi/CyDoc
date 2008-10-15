@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class DoctorTest < ActiveSupport::TestCase
   def test_offices
-    doctor = doctors(:test)
+    doctor = doctors(:single)
     assert_kind_of(Doctor, doctor)
     
     assert_equal [], doctor.offices
@@ -20,7 +20,7 @@ class DoctorTest < ActiveSupport::TestCase
 
   def test_colleagues
     # :test is not part of any office
-    assert_equal [], doctors(:test).colleagues
+    assert_equal [doctors(:test)], doctors(:test).colleagues
     
     # :colleague_one's only colleague of himself
     assert_equal [doctors(:colleague_one)], doctors(:colleague_one).colleagues
@@ -35,8 +35,8 @@ class DoctorTest < ActiveSupport::TestCase
     assert_equal 2, off2.doctors.count
 
     doc1.reload
-    assert_equal [doctors(:colleague_one), doc1], doc1.colleagues
-    assert_equal [doctors(:colleague_one), doctors(:test)], doctors(:test).colleagues
+    assert_equal [doctors(:colleague_one), doc1].sort{|x, y| y.id <=> x.id}, doc1.colleagues.sort{|x, y| y.id <=> x.id}
+    assert_equal [doctors(:colleague_one), doctors(:test)].sort{|x, y| y.id <=> x.id}, doctors(:test).colleagues.sort{|x, y| y.id <=> x.id}
   end
 
   def test_account
