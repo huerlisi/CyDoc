@@ -14,12 +14,14 @@ Tarmed Leistung:&nbsp;<%= text_field_tag("query", params['query'], :size => 10 )
 </form>
 
 <%= observe_field 'query',  :frequency => 2,
-         :update => 'table',
+         :update => 'search_results',
          :before => "Element.show('spinner')",
          :success => "Element.hide('spinner')",
          :url => {:controller => :tariff_items, :action => 'list_for_record_tarmed_code', :patient_id => params[:id]},
          :with => 'query' %>
 
 
+<div id="search_results">
 <table id="table" class="listing">
 </table>
+</div>
