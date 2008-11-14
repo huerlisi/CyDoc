@@ -13,6 +13,35 @@ class PatientsController < ApplicationController
     @patients = Patient.find :all
   end
 
+  def search
+    value = params[:query]
+    case get_query_type(value)
+    when "date"
+      value = Date.parse_europe(value).strftime('%%%y-%m-%d')
+      patient_condition = "(patients.birth_date LIKE :value)"
+    when "entry_nr"
+      patient_condition = "(patients.doctor_patient_nr = :value)"
+    when "text"
+      patient_condition = "(vcards.given_name LIKE :value) OR (vcards.family_name LIKE :value) OR (vcards.full_name LIKE :value)"
+    end
+    @patients = Patient.find(:all, :include => [:vcards ], :conditions => ["(#{patient_condition}) AND patients.doctor_id IN (:doctor_id)", {:value => value, :doctor_id => @current_doctor_ids}], :limit => 100)
+
+    render :partial => 'search_result', :layout => false
+  end
+
+  private
+  def get_query_type(value)
+    if value.match(/([[:digit:]]{1,2}\.){2}/)
+      return "date"
+    elsif value.match(/^([[:digit:]]{0,2}\/)?[[:digit:]]*$/)
+      return "entry_nr"
+    else
+      return "text"
+    end
+  end
+
+  public
+  
   def index
     redirect_to :action => :list
   end
@@ -91,7 +120,7 @@ class PatientsController < ApplicationController
   end
 
 
-  def search
+  def old_search
     keys = []
     values = []
     

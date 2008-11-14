@@ -1,0 +1,36 @@
+<script type="text/javascript">
+//<![CDATA[
+Event.observe(window, 'load', function() {$('patient_birth_date').focus()}, false);
+//]]>
+</script>
+
+<fieldset style="width: 98%">
+  <legend>Personalien</legend>
+  <% form_remote_tag( :update => 'search_result', :success => "$('vcard_family_name').focus()", :loading => "Element.show('#{loading_indicator_id({:id => 'search'})}')", :url => {:controller => '/patients', :action => "search", :case_id => params[:id] } ) do -%>
+    <table>
+      <% fields_for 'patient', @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
+        <tr>
+          <td>Geb.:</td><td><%= text_field 'patient', :birth_date, :label => "Geburtsdat.", :size => 15 %></td>
+        </tr>
+      <% end %>
+      <% vcard_name = 'vcard'; vcard = nil %>
+      <% fields_for vcard_name, vcard, :builder => Rubaidh::TabularForm::TabularFormBuilder do |address| %>
+        <tr>
+          <td>Name:</td>
+          <td><%= text_field 'patient', :name, :size => 15, :label => "Name" %></td>
+          <td>PatNr.:</td><td><%= text_field 'patient', :doctor_patient_nr, :label => "Patientennr.", :size => 15 %></td>
+        </tr>
+        <tr>
+          <td>Strasse:</td>
+          <td><%= text_field 'vcard', :street_address, :size => 15, :label => "Strasse" %></td>
+          <td>PLZ:</td>
+          <td><%= text_field 'vcard', 'postal_code', :label => "PLZ", :size => 15 %></td>
+          <td>Ort:</td><td><%= text_field_with_auto_complete 'vcard', :locality, :label => "Ort", :size => 15 %></td>
+        </tr>
+      <% end %>
+    </table>
+    <%= submit_tag "Suchen" %>
+    <%= submit_tag "Neu anlegen" %>
+    <input type="reset"/>
+  <% end -%>
+</fieldset>

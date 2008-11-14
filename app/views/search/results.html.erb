@@ -1,5 +1,5 @@
 <fieldset>
-<legend><%= @patients.size %> Patienten f&uuml;r Suche nach '<%= params[:search][:query] %>'</legend>
+<legend><%= @patients.size %> Patienten f&uuml;r Suche nach '<%= params[:query] || params[:search][:query] %>'</legend>
   <table class="listing" style="margin-top: 0px">
     <%= render :partial => '/patients/list_head' %>
     <%= render :partial => '/patients/list', :collection => @patients %>
@@ -8,7 +8,7 @@
 </fieldset>
 
 <fieldset>
-<legend><%= @cases.size %> Resultate f&uuml;r Suche nach '<%= params[:search][:query] %>'</legend>
+<legend><%= @cases.size %> Resultate f&uuml;r Suche nach '<%= params[:query] || params[:search][:query] %>'</legend>
   <table class="listing" style="margin-top: 0px">
     <%= render :partial => '/cases/list', :collection => @cases %>
   </table>

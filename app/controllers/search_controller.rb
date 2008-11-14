@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
   def results
-    value = params[:search][:query]
+    value = params[:query] || params[:search][:query]
     case get_query_type(value)
     when "date"
       value = Date.parse_europe(value).strftime('%%%y-%m-%d')

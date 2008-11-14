@@ -12,6 +12,10 @@ class Patient < ActiveRecord::Base
     vcards.build if vcards.active.first.nil?
     vcards.active.first
   end
+  def vcard=(value)
+    vcards << value
+  end
+
   delegate :full_name, :full_name=, :to => :vcard
   delegate :street_address=, :to => :vcard
 
