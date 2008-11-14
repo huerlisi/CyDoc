@@ -30,7 +30,7 @@
       <td><%= in_place_editor_field :patient, :birth_date %></td>
       <td><%=h patient.doctor.name unless (patient.doctor.nil? or patient.doctor.praxis.nil?) %></td>
       <td><%= in_place_editor_field :patient, :doctor_patient_nr %></td>
-      <td><%= patient.insurance.vcard.full_name if (patient.insurance and !patient.insurance.vcard.nil?)%></td>
+      <td><%=h patient.insurance.vcard.full_name if (patient.insurance and !patient.insurance.praxis.nil?) %></td>
       <td><%= in_place_editor_field :patient, :insurance_nr %></td>
       <td>
         <%= link_to image_tag("show.png"), :controller => 'patients', :action => 'show', :id => @patient %>
