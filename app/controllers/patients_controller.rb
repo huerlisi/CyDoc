@@ -22,6 +22,7 @@ class PatientsController < ApplicationController
     when "entry_nr"
       patient_condition = "(patients.doctor_patient_nr = :value)"
     when "text"
+      value = "%#{value}%"
       patient_condition = "(vcards.given_name LIKE :value) OR (vcards.family_name LIKE :value) OR (vcards.full_name LIKE :value)"
     end
     @patients = Patient.find(:all, :include => [:vcards ], :conditions => ["(#{patient_condition}) AND patients.doctor_id IN (:doctor_id)", {:value => value, :doctor_id => @current_doctor_ids}], :limit => 100)
