@@ -1,9 +1,7 @@
 <h1>Patienten</h1>
 
 <script type="text/javascript">
-//<![CDATA[
-Event.observe(window, 'load', function() {$('search_query').focus()}, false);
-//]]>
+  Event.observe(window, 'load', function() {$('search_query').focus()}, false);
 </script>
 <div id="search_form">
   <%= render :partial => 'search_form' %>
@@ -13,17 +11,7 @@ Event.observe(window, 'load', function() {$('search_query').focus()}, false);
 <div id="search_results">
   <table class="listing">
     <tr>
-      <th />
-      <th>Nachname</th>
-      <th>Vorname</th>
-      <th>Strasse</th>
-      <th>PLZ</th>
-      <th>Ort</th>
-      <th>Geburtsdatum</th>
-      <th>Arzt</th>
-      <th>PatientenNr.</th>
-      <th>Versicherung</th>
-      <th>VersicherungsNr.</th>
+      <%= render :partial => 'list_header' %>
     </tr>
   </table>
 </div>
