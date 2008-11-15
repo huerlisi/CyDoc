@@ -2,7 +2,8 @@
 <table>
   <tr>
     <td style="vertical-align: top">
-      <%= render :partial => "item", :locals => { :title => "Patienten", :controller => 'patients', :image => 'patient.png', :description => 'Neuen Patienten erfassen' } %>
+      <%= render :partial => "item", :locals => { :title => "Patienten", :controller => 'patients', :image => 'system-users.png', :description => 'Neuen Patienten erfassen' } %>
+      <%= render :partial => "item", :locals => { :title => "Rechnungen", :controller => 'invoices', :image => 'gnucash.png', :description => 'Rechnungen anzeigen' } %>
       <%= render :partial => "item", :locals => { :title => "Resultate", :controller => 'mailings', :image => 'results_index.png', :description => 'Aktuelle Resultate anzeigen' } %>
     </td>
     <td style="vertical-align: top; padding-left: 4em">
