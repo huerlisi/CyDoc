@@ -10,27 +10,16 @@ class PatientsController < ApplicationController
                 
   # CRUD Actions
   def list
-    search
+    query = params[:query]
+    query ||= params[:search][:query] if params[:search]
+
+    @patients = Patient.clever_find(query)
   end
 
   def search
-    value = params[:query]
-    if value.nil?
-      @patients = []
-      return
-    end
-    
-    case get_query_type(value)
-    when "date"
-      value = Date.parse_europe(value).strftime('%%%y-%m-%d')
-      patient_condition = "(patients.birth_date LIKE :value)"
-    when "entry_nr"
-      patient_condition = "(patients.doctor_patient_nr = :value)"
-    when "text"
-      value = "%#{value}%"
-      patient_condition = "(vcards.given_name LIKE :value) OR (vcards.family_name LIKE :value) OR (vcards.full_name LIKE :value)"
-    end
-    @patients = Patient.find(:all, :include => [:vcards ], :conditions => ["(#{patient_condition}) AND patients.doctor_id IN (:doctor_id)", {:value => value, :doctor_id => @current_doctor_ids}], :limit => 100)
+    query = params[:query] || params[:search][:query]
+    query ||= params[:search][:query] if params[:search]
+    @patients = Patient.clever_find(query)
 
     render :partial => 'list', :layout => false
   end
@@ -47,7 +36,6 @@ class PatientsController < ApplicationController
   end
 
   public
-  
   def index
     redirect_to :action => :list
   end

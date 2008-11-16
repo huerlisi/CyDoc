@@ -53,7 +53,33 @@ class Patient < ActiveRecord::Base
     end
   end
 
+  def self.clever_find(query)
+    return [] if query.nil? or query.empty?
+    
+    case get_query_type(query)
+    when "date"
+      query = Date.parse_europe(query).strftime('%%%y-%m-%d')
+      patient_condition = "(patients.birth_date LIKE :query)"
+    when "entry_nr"
+      patient_condition = "(patients.doctor_patient_nr = :query)"
+    when "text"
+      query = "%#{query}%"
+      patient_condition = "(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)"
+    end
+    return find(:all, :include => [:vcards ], :conditions => ["#{patient_condition}", {:query => query}], :limit => 100)
+  end
+
   private
+  def self.get_query_type(value)
+    if value.match(/([[:digit:]]{1,2}\.){2}/)
+      return "date"
+    elsif value.match(/^([[:digit:]]{0,2}\/)?[[:digit:]]*$/)
+      return "entry_nr"
+    else
+      return "text"
+    end
+  end
+
   # Association callbacks
   def before_add_record_tarmed(record_tarmed)
     record_tarmed.provider ||= self.doctor
