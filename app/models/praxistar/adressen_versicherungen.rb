@@ -6,22 +6,18 @@ class Praxistar::AdressenVersicherungen < Praxistar::Base
     Insurance
   end
 
-  def self.import
-    Insurance.delete_all
-
-    for a in find_all
-      i = Insurance.new(
-        :phone_number => a.tx_Telefon,
+  def self.import_attributes(a)
+    {
+      :vcard => Vcards::Vcard.new(
+#        :phone_number => a.tx_Telefon,
         :locality => a.tx_Ort,
-        :fax_number => a.tx_FAX,
+#        :fax_number => a.tx_FAX,
         :extended_address => a.tx_ZuHanden,
         :postal_code => a.tx_PLZ,
         :street_address => a.tx_Strasse,
-        :name => a.tx_Name
+        :full_name => a.tx_Name
       )
-      i.id = a.ID_Versicherung
-      i.save
-    end
+   }
   end
 
   def self.export_attributes(hozr_record, new_record)

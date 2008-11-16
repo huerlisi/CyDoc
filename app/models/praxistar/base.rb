@@ -7,6 +7,31 @@ class Praxistar::Base < ActiveRecord::Base
   
   establish_connection(praxistar_connection)
 
+  def self.import(mandant_id, selection = :all)
+    records = find(selection, :order => "#{primary_key} DESC", :conditions =>  ['Mandant_ID = ?', mandant_id])
+    
+    for praxistar_record in records
+      begin
+        attributes = import_attributes(praxistar_record)
+
+        if hozr_model.exists?(praxistar_record.id)
+          hozr_model.update(praxistar_record.id, attributes)
+        else
+          hozr_record = hozr_model.new(attributes)
+          hozr_record.id = praxistar_record.id
+          hozr_record.save
+          logger.info "Imported #{praxistar_record.id}\n"
+        end
+        
+      rescue Exception => ex
+        print "ID: #{praxistar_record.id} => #{ex.message}\n\n"
+        logger.info "ID: #{praxistar_record.id} => #{ex.message}\n\n"
+        logger.info ex.backtrace.join("\n\t")
+        logger.info "\n"
+      end
+    end
+  end
+
   def self.export(record_id = :all)
     last_export = Exports.find(:first, :conditions => "model = '#{self.name}'", :order => "finished_at DESC")
     
