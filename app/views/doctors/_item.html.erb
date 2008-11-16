@@ -1,0 +1,6 @@
+<tr style="cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'doctors', :action => 'show', :id => item) %>'">
+  <td><b/><%=h item.praxis.full_name %></b></td>
+  <td><%= address(item.praxis, ', ') %></td>
+  <td><%=h item.zsr %></td>
+  <td><%=h item.ean_party %></td>
+</tr>

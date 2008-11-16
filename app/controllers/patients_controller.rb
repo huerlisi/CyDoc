@@ -9,6 +9,10 @@ class PatientsController < ApplicationController
   in_place_edit_for :patient, :insurance_nr
                 
   # CRUD Actions
+  def index
+    redirect_to :action => :list
+  end
+  
   def list
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
@@ -36,10 +40,6 @@ class PatientsController < ApplicationController
   end
 
   public
-  def index
-    redirect_to :action => :list
-  end
-  
   def new
     patient = params[:patient]
     @patient = Patient.new(patient)

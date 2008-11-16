@@ -1,6 +1,7 @@
 class Doctor < ActiveRecord::Base
   belongs_to :praxis, :class_name => 'Vcards::Vcard', :foreign_key => 'praxis_vcard'
   belongs_to :private, :class_name => 'Vcards::Vcard', :foreign_key => 'private_vcard'
+  named_scope :by_name, lambda {|name| {:select => '*, doctors.id', :joins => :praxis, :conditions => Vcards::Vcard.by_name_conditions(name)}}
 
   belongs_to :billing_doctor, :class_name => 'Doctor'
   belongs_to :account, :class_name => 'Accounting::Account'
@@ -35,4 +36,16 @@ class Doctor < ActiveRecord::Base
   def zsr=(value)
     write_attribute(:zsr, value.delete(' .'))
   end
+
+  def self.clever_find(query)
+    return [] if query.nil? or query.empty?
+    
+    case get_query_type(query)
+    when "text"
+      query = "%#{query}%"
+      patient_condition = "(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)"
+    end
+    return find(:all, :include => [:vcards ], :conditions => ["#{patient_condition}", {:query => query}], :limit => 100)
+  end
+
 end
