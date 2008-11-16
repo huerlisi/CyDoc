@@ -10,11 +10,16 @@ class PatientsController < ApplicationController
                 
   # CRUD Actions
   def list
-    @patients = Patient.find :all
+    search
   end
 
   def search
     value = params[:query]
+    if value.nil?
+      @patients = []
+      return
+    end
+    
     case get_query_type(value)
     when "date"
       value = Date.parse_europe(value).strftime('%%%y-%m-%d')
@@ -27,7 +32,7 @@ class PatientsController < ApplicationController
     end
     @patients = Patient.find(:all, :include => [:vcards ], :conditions => ["(#{patient_condition}) AND patients.doctor_id IN (:doctor_id)", {:value => value, :doctor_id => @current_doctor_ids}], :limit => 100)
 
-    render :partial => 'search_result', :layout => false
+    render :partial => 'list', :layout => false
   end
 
   private

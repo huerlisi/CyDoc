@@ -1,0 +1,6 @@
+<tr style="cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'patients', :action => 'show', :id => item) %>'">
+  <td><b/><%=h item.vcards.first.full_name %></b></td>
+  <td><%= address(item.vcards.first, ', ') %></td>
+  <td><%=h item.doctor_patient_nr %></td>
+  <td><%=h item.birth_date.strftime('%d.%m.%Y') %></td>
+</tr>
