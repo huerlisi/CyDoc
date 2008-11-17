@@ -1,14 +1,12 @@
 <div style="text-align: center; margin-top: 3em; width: 100%">
-<table>
+<table style="width: 100%">
   <tr>
     <td style="vertical-align: top">
-      <%= render :partial => "item", :locals => { :title => "Patienten", :controller => 'patients', :image => 'system-users.png', :description => 'Patienten suchen' } %>
+      <%= navigation_section('Patienten', {"Erfassen" => {:controller => 'patients', :action => 'new'}, "Suchen" => :patients }, 'system-users.png') %>
       <%= render :partial => "item", :locals => { :title => "Rechnungen", :controller => 'invoices', :image => 'gnucash.png', :description => 'Rechnungen anzeigen' } %>
-      <%= render :partial => "item", :locals => { :title => "Resultate", :controller => 'mailings', :image => 'results_index.png', :description => 'Aktuelle Resultate anzeigen' } %>
     </td>
     <td style="vertical-align: top; padding-left: 4em">
-      <%= render :partial => "item", :locals => { :title => "Neue Bestellung", :url => 'http://shop.zyto-labor.com', :image => 'orders_new.png', :description => 'Verbrauchsmaterial bestellen' } %>
-      <%= render :partial => "item", :locals => { :title => "Nachricht senden", :url => 'mailto:info@zyto-labor.com', :description => 'Nachricht an ZytoLabor senden', :image => 'view-pim-mail.png' } %>
+      <%= navigation_section('Stammdaten', {"Ärzte anzeigen" => :doctors, "Versicherungen anzeigen" => :insurances }, 'gnucash.png') %>
     </td>
    </tr>
   </table>
