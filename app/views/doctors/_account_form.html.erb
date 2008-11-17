@@ -1,0 +1,14 @@
+<% fields_for :account, :url => {:action => 'create'} do |f| %>
+  <tr>
+    <th>Number:</th>
+    <td><%= f.text_field :number %></td>
+  </tr>
+  <tr>
+    <th>ESR:</th>
+    <td><%= f.text_field :esr_id %></td>
+  </tr>
+  <tr>
+    <th>PostCheck Konto:</th>
+    <td><%= f.text_field :pc_id %></td>
+  </tr>
+<% end %>

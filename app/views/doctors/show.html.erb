@@ -1,0 +1,10 @@
+<div style="width: 100%" class="report">
+  <%= full_address(@doctor.praxis) %>
+  <% form_for :doctor, :url => {:action => 'update'} do |f| %>
+    <table>
+      <%= render :partial => 'form' %>
+      <%= render :partial => 'account_form' %>
+    </table>
+    <%= f.submit %>
+  <% end %>
+</div>

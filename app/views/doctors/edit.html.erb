@@ -1,0 +1,8 @@
+<% form_for :doctor, :url => {:action => 'update', :id => @doctor} do |f| %>
+  <table>
+    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'praxis', :vcard => @praxis } %>
+    <%= render :partial => 'form' %>
+    <%= render :partial => 'account_form' %>
+  </table>
+  <%= f.submit %>
+<% end %>

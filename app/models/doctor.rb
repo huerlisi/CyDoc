@@ -47,5 +47,4 @@ class Doctor < ActiveRecord::Base
     end
     return find(:all, :include => [:vcards ], :conditions => ["#{patient_condition}", {:query => query}], :limit => 100)
   end
-
 end

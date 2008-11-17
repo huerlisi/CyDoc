@@ -1,0 +1,10 @@
+<% fields_for :doctor do |f| %>
+  <tr>
+    <th>ZSR:</th>
+    <td><%= f.text_field :zsr %></td>
+  </tr>
+  <tr>
+    <th>EAN:</th>
+    <td><%= f.text_field :ean_party %></td>
+  </tr>
+<% end %>
