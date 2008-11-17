@@ -1,0 +1,17 @@
+div.navigation_section {
+  margin:          2em;
+  margin-bottom:   3.5em;
+}
+.navigation_section img {
+  margin-right:    1em;
+  float:           left;
+}
+
+.navigation_section ul {
+  list-style-type: none;
+}
+.navigation_section li {
+  text-align:      left;
+  font-weight:     bold;
+  font-style:      italic
+}
