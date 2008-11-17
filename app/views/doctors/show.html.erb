@@ -2,9 +2,8 @@
   <%= full_address(@doctor.praxis) %>
   <% form_for :doctor, :url => {:action => 'update'} do |f| %>
     <table>
-      <%= render :partial => 'form' %>
-      <%= render :partial => 'account_form' %>
+      <%= render :partial => 'show' %>
+      <%= render :partial => 'account_show' %>
     </table>
-    <%= f.submit %>
   <% end %>
 </div>
