@@ -8,7 +8,7 @@ class DoctorsController < ApplicationController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    @doctors = Doctor.by_name(query)
+    @doctors = Doctor.find :all, :joins => :praxis, :order => 'family_name'
   end
 
   def search
