@@ -1,9 +1,6 @@
 <div style="width: 100%" class="report">
-  <%= full_address(@doctor.praxis) %>
-  <% form_for :doctor, :url => {:action => 'update'} do |f| %>
-    <table>
-      <%= render :partial => 'show' %>
-      <%= render :partial => 'account_show' %>
-    </table>
-  <% end %>
+  <table>
+    <%= render :partial => 'show' %>
+    <%= render :partial => 'account_show' %>
+  </table>
 </div>
