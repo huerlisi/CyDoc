@@ -8,7 +8,7 @@ class InsurancesController < ApplicationController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    @insurances = Insurance.all
+    @insurances = Insurance.find :all, :joins => :vcard, :order => 'full_name'
   end
 
   def search
