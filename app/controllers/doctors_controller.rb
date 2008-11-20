@@ -48,6 +48,9 @@ class DoctorsController < ApplicationController
   def update
     @doctor = Doctor.find(params[:id])
 
+    @doctor.build_account unless @doctor.account
+    @doctor.build_praxis unless @doctor.praxis
+
     if @doctor.update_attributes(params[:doctor]) && @doctor.account.update_attributes(params[:account]) && @doctor.praxis.update_attributes(params[:praxis])
       flash[:notice] = 'Arzt gespeichert.'
       redirect_to :action => :show, :id => @doctor
