@@ -1,0 +1,4 @@
+<tr style="cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'tariff_item_groups', :action => 'show', :id => item) %>'">
+  <td><b/><%=h item.code %></b></td>
+  <td><%=h item.name %></td>
+</tr>
