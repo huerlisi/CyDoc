@@ -1,13 +1,5 @@
 <table class="listing">
-  <tr>
-    <th>Datum</th>
-    <th>Anzahl</th>
-    <th style="text-align: right">Code</th>
-    <th>Text</th>
-    <th style="text-align: right">TP&nbsp;AL/Preis</th>
-    <th style="text-align: right">TP&nbsp;TL</th>
-    <th style="text-align: right">Betrag</th>
-  </tr>
+<%= render :partial => 'tariff_items/list_header' %>
 <%= render :partial => 'tariff_items/item', :collection => items %>
 <% unless items.empty? %>
   <tr>
