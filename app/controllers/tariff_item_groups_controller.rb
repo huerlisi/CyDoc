@@ -1,0 +1,2 @@
+class TariffItemGroupsController < ApplicationController
+end
