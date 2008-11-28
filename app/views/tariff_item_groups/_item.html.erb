@@ -2,3 +2,4 @@
   <td><b/><%=h item.code %></b></td>
   <td><%=h item.name %></td>
 </tr>
+<%= render :partial => 'tariff_items/item', :collection => item.tariff_items %>
