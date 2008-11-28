@@ -1,6 +1,6 @@
 <table class="listing">
-<%= render :partial => 'tariff_items/list_header' %>
-<%= render :partial => 'tariff_items/item', :collection => items %>
+<%= render :partial => 'service_records/list_header' %>
+<%= render :partial => 'service_records/item', :collection => items %>
 <% unless items.empty? %>
   <tr>
     <td colspan="3"><%= duration(items) %></td>
