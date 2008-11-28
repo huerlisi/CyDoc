@@ -19,13 +19,29 @@ class TariffItemsController < ApplicationController
   end
 
   # CRUD actions
+  def index
+    redirect_to :action => :list
+  end
+
   def list
+    query = params[:query]
+    query ||= params[:search][:query] if params[:search]
+
+    @tariff_items = TariffItem.find :all, :order => 'code'
   end
   
   def list_inline
     @patient = Patient.find(params[:patient_id])
     @record_tarmeds = RecordTarmed.find(:all, :conditions => {:patient_id => @patient})
     render :partial => 'list', :locals => {:items => @record_tarmeds}
+  end
+
+  def search
+    query = params[:query] || params[:search][:query]
+    query ||= params[:search][:query] if params[:search]
+    @tariff_items = TariffItem.find(:all, :conditions => ['code LIKE :query OR remark LIKE :query', {:query => "%#{query}%"}])
+
+    render :partial => 'list', :layout => false
   end
 
   def new
