@@ -1,11 +1,7 @@
 include Praxistar
 
 class Praxistar::Base < ActiveRecord::Base
-  require 'yaml'
-  
-  praxistar_connection = YAML.load(File.open(File.join(RAILS_ROOT,"config/database.yml"),"r"))["praxis_" + ( ENV['RAILS_ENV'] || 'development' )]
-  
-  establish_connection(praxistar_connection)
+  use_db :prefix => "praxis_"
 
   def self.import(mandant_id, selection = :all)
     records = find(selection, :order => "#{primary_key} DESC", :conditions =>  ['Mandant_ID = ?', mandant_id])
