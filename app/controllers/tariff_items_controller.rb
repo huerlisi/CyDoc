@@ -39,7 +39,7 @@ class TariffItemsController < ApplicationController
   def search
     query = params[:query] || params[:search][:query]
     query ||= params[:search][:query] if params[:search]
-    @tariff_items = TariffItem.find(:all, :conditions => ['code LIKE :query OR remark LIKE :query', {:query => "%#{query}%"}])
+    @tariff_items = TariffItem.find(:all, :conditions => ['code LIKE :query OR remark LIKE :query', {:query => "%#{query}%"}], :order => 'code')
 
     render :partial => 'list', :layout => false
   end
