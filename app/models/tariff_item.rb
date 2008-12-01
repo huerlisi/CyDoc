@@ -18,6 +18,15 @@ class TariffItem < ActiveRecord::Base
     1.0
   end
 
+  # Fallbacks
+  def amount_mt
+    read_attribute(:amount_mt) || 0
+  end
+
+  def amount_tt
+    read_attribute(:amount_tt) || 0
+  end
+
   # Calculated field
   def amount
     (self.amount_mt * self.unit_factor_mt * self.unit_mt) + (self.amount_tt * self.unit_factor_tt * self.unit_tt)
