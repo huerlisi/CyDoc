@@ -1,13 +1,13 @@
-class LabTariffItem < TariffItem
+class DrugTariffItem < TariffItem
   def unit_mt
     0.0
   end
 
   def unit_tt
-    1.0
+    0.0
   end
 
   def tariff_type
-    316
+    400
   end
 end
