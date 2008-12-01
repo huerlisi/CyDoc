@@ -1,6 +1,6 @@
 class Tarmed::Importer
   def self.import
-    for tarmed_tariff_item in Tarmed::Leistung.find(:all)
+    for tarmed_tariff_item in Tarmed::Leistung.find(:all, :conditions => "GUELTIG_BIS = '12/31/99 00:00:00'")
       begin
         tariff_item = TarmedTariffItem.new
 
@@ -10,7 +10,7 @@ class Tarmed::Importer
         tariff_item.remark = tarmed_tariff_item.name
         
         tariff_item.save
-        print "ID: #{tarmed_tariff_item} OK"
+        print "ID: #{tarmed_tariff_item} OK\n"
       rescue Exception => ex
         print "ID: #{tarmed_tariff_item.id} => #{ex.message}\n\n"
       end
