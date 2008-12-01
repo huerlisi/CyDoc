@@ -10,7 +10,7 @@ class Tarmed::Importer
         tariff_item.remark = tarmed_tariff_item.name
         
         tariff_item.save
-        print "ID: #{tarmed_tariff_item} OK\n"
+        print "ID: #{tarmed_tariff_item.id} OK\n"
       rescue Exception => ex
         print "ID: #{tarmed_tariff_item.id} => #{ex.message}\n\n"
       end
