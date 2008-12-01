@@ -46,12 +46,12 @@ class TariffItemsController < ApplicationController
 
   def new
     @record_tarmed = RecordTarmed.new
-    @record_tarmed.provider_id = @current_doctor.id
 
     # Defaults
     @record_tarmed.date = Date.today
     @record_tarmed.quantity = 1
-    @record_tarmed.responsible_id = @current_doctor.id
+    @record_tarmed.provider = @current_doctor
+    @record_tarmed.responsible = @current_doctor
 
     @record_tarmed.patient_id = params[:patient_id]
   end
@@ -68,8 +68,8 @@ class TariffItemsController < ApplicationController
     # Defaults
     @record_tarmed.date = Date.today
     @record_tarmed.quantity = 1
-    @record_tarmed.responsible_id = @current_doctor.id
-    @record_tarmed.provider_id = @current_doctor.id
+    @record_tarmed.responsible = @current_doctor
+    @record_tarmed.provider = @current_doctor
 
     if @record_tarmed.save
       flash[:notice] = 'Erfolgreich erfasst.'
