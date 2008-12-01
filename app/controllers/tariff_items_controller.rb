@@ -62,7 +62,6 @@ class TariffItemsController < ApplicationController
   end
 
   def create
-    params[:record_tarmed][:code] = params[:record_tarmed][:code]
     @record_tarmed = RecordTarmed.new(params[:record_tarmed])
 
     # Defaults
