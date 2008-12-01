@@ -1,6 +1,4 @@
 class RecordTarmed < ActiveRecord::Base
-  belongs_to :tarmed_leistung, :class_name => 'Tarmed::Leistung', :foreign_key => :code
-
   belongs_to :provider, :class_name => 'Doctor'
   belongs_to :biller, :class_name => 'Doctor'
   belongs_to :responsible, :class_name => 'Doctor'
@@ -15,9 +13,9 @@ class RecordTarmed < ActiveRecord::Base
     self.date = Date.today
   end
 
-  # Lookup values from Tarmed DB when assigning code
+  # Lookup values from Tarmed Tariff when assigning code
   def code=(code)
-    leistung = Tarmed::Leistung.find(code)
+    leistung = TariffItem.find_by_code(code)
     
     write_attribute(:code, code)
     
@@ -25,15 +23,10 @@ class RecordTarmed < ActiveRecord::Base
     self.unit_factor_mt = leistung.unit_factor_mt
     self.amount_tt = leistung.amount_tt || 0.0
     self.unit_factor_tt = leistung.unit_factor_tt
-  end
-
-  # "Constant" fields
-  def unit_mt
-    0.89
-  end
-
-  def unit_tt
-    0.89
+    self.remark = leistung.remark
+    
+    self.unit_mt = leistung.unit_mt
+    self.unit_tt = leistung.unit_tt
   end
 
   # Calculated field
@@ -42,6 +35,6 @@ class RecordTarmed < ActiveRecord::Base
   end
 
   def text
-    tarmed_leistung.name
+    remark
   end
 end

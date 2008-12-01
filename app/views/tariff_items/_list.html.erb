@@ -1,6 +1,6 @@
 <div id="search_result">
   <table class="listing">
   <%= render :partial => 'tariff_items/list_header' %>
-  <%= render :partial => 'tariff_items/item', :collection => @tariff_items %>
+  <%= render :partial => 'tariff_items/item', :collection => (@tariff_items || []), :locals => {:onclick_params => {:controller => 'tariff_items', :action => 'create'}} %>
   </table>
 </div>

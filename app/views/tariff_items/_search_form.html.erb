@@ -1,5 +1,5 @@
 <% form_tag do %>
-  <%= text_field :search, :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
+  Suche: <%= text_field :search, :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
   <%= image_tag("indicator.gif",
                 :align => "absmiddle",
                 :border => 0,
@@ -11,6 +11,6 @@
            :update => 'search_results',
            :before => "Element.show('spinner')",
            :success => "Element.hide('spinner')",
-           :url => {:controller => :tariff_items, :action => 'search'},
+           :url => {:controller => :tariff_items, :action => 'search', :patient_id => @patient},
            :with => 'query' %>
 <% end %>
