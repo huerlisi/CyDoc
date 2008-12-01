@@ -1,13 +1,13 @@
-class LabTariffItem < TariffItem
+class TarmedTariffItem < TariffItem
   def unit_mt
-    0.0
+    0.89
   end
 
   def unit_tt
-    1.0
+    0.89
   end
 
   def tariff_type
-    001
+    316
   end
 end
