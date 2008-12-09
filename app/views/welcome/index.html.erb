@@ -6,7 +6,7 @@
       <%= render :partial => "item", :locals => { :title => "Rechnungen", :controller => 'invoices', :image => 'gnucash.png', :description => 'Rechnungen anzeigen' } %>
     </td>
     <td style="vertical-align: top; padding-left: 4em">
-      <%= navigation_section('Stammdaten', {"Ärzte anzeigen" => :doctors, "Versicherungen anzeigen" => :insurances }, 'gnucash.png') %>
+      <%= navigation_section('Stammdaten', {"Ärzte anzeigen" => :doctors, "Versicherungen anzeigen" => :insurances, "Leistungen anzeigen" => :tariff_items }, 'gnucash.png') %>
     </td>
    </tr>
   </table>
