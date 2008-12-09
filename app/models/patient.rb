@@ -28,6 +28,7 @@ class Patient < ActiveRecord::Base
 
   # Services
   has_many :record_tarmeds, :order => 'date DESC', :before_add => :before_add_record_tarmed
+  has_many :service_records, :class_name => 'RecordTarmed', :order => 'date DESC', :before_add => :before_add_record_tarmed
 
   # Proxy accessors
   def name

@@ -36,8 +36,8 @@ class TariffItemsController < ApplicationController
   
   def list_inline
     @patient = Patient.find(params[:patient_id])
-    @record_tarmeds = RecordTarmed.find(:all, :conditions => {:patient_id => @patient})
-    render :partial => 'list', :locals => {:items => @record_tarmeds}
+    @tariff_items = @patient.service_records
+    render :partial => 'service_records/list', :locals => {:items => @tariff_items}
   end
 
   def search
