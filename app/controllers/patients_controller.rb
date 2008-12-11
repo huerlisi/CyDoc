@@ -17,13 +17,13 @@ class PatientsController < ApplicationController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    @patients = Patient.clever_find(query)
+    @patients = Patient.clever_find(query, @current_doctor_ids)
   end
 
   def search
     query = params[:query] || params[:search][:query]
     query ||= params[:search][:query] if params[:search]
-    @patients = Patient.clever_find(query)
+    @patients = Patient.clever_find(query, @current_doctor_ids)
 
     render :partial => 'list', :layout => false
   end
