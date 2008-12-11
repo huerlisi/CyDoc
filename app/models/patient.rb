@@ -54,6 +54,8 @@ class Patient < ActiveRecord::Base
     end
   end
 
+  # Search
+  # ======
   def self.clever_find(query)
     return [] if query.nil? or query.empty?
     
@@ -81,6 +83,8 @@ class Patient < ActiveRecord::Base
     end
   end
 
+  # Tarmed
+  # ======
   # Association callbacks
   def before_add_record_tarmed(record_tarmed)
     record_tarmed.provider ||= self.doctor
