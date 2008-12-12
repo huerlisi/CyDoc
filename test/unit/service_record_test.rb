@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class RecordTarmedTest < ActiveSupport::TestCase
+class ServiceRecordTest < ActiveSupport::TestCase
   def test_defaults
-    rec = RecordTarmed.new
+    rec = ServiceRecord.new
 
     assert_equal 1, rec.quantity
     assert_equal Date.today, rec.date
@@ -17,7 +17,7 @@ class RecordTarmedTest < ActiveSupport::TestCase
   end
 
   def test_create
-    rec = RecordTarmed.new(:code => '01.0010')
+    rec = ServiceRecord.new(:code => '01.0010')
 
     # Override defaults
     rec.quantity = 2
@@ -36,11 +36,11 @@ class RecordTarmedTest < ActiveSupport::TestCase
   end
   
   def test_patient_assignment
-    rec = RecordTarmed.new(:code => '01.0010')
-    patients(:joe).record_tarmeds << rec
+    rec = ServiceRecord.new(:code => '01.0010')
+    patients(:joe).service_records << rec
     
     # Now there's a record
-    assert_equal 1, patients(:joe).record_tarmeds.size
+    assert_equal 1, patients(:joe).service_records.size
 
     # Take provider, biller, responsible from patient
     assert_equal patients(:joe).doctor, rec.provider
@@ -50,12 +50,12 @@ class RecordTarmedTest < ActiveSupport::TestCase
 
   def test_duplicate_record
     # old_one has a fixtured tarmed record
-    assert_equal 1, patients(:old_one).record_tarmeds.size
+    assert_equal 1, patients(:old_one).service_records.size
 
-    rec = RecordTarmed.new(:code => '01.0010')
-    patients(:old_one).record_tarmeds << rec
+    rec = ServiceRecord.new(:code => '01.0010')
+    patients(:old_one).service_records << rec
     
     # Now there's a second record
-    assert_equal 2, patients(:old_one).record_tarmeds.size
+    assert_equal 2, patients(:old_one).service_records.size
   end
 end
