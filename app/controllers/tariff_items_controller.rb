@@ -43,7 +43,12 @@ class TariffItemsController < ApplicationController
   def search
     query = params[:query] || params[:search][:query]
     query ||= params[:search][:query] if params[:search]
-    @tariff_items = TariffItem.find(:all, :conditions => ['code LIKE :query OR remark LIKE :query', {:query => "%#{query}%"}], :order => 'code')
+
+    unless query.nil? or query.empty?
+      @tariff_items = TariffItem.find(:all, :conditions => ['code LIKE :query OR remark LIKE :query', {:query => "%#{query}%"}], :order => 'code')
+    else
+      @tariff_items = []
+    end
 
     render :partial => 'list', :layout => false
   end
