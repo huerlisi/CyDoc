@@ -1,4 +1,4 @@
-<tr style="cursor: pointer" onclick="window.location='<%= url_for({:only_path => false, 'service_record' => {:patient_id => params[:patient_id], :code => item.code}}.merge(onclick_params)) %>'">
+<tr style="cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'tariff_items', :action => 'create', :patient_id => params[:patient_id], :id => item) %>'">
   <td style="text-align:right"><%=h item.code %></td>
   <td><b><%=h item.remark %></b></td>
   <td style="text-align:right"><%=h sprintf('%.2f', item.amount_mt) %>&nbsp;TP</td>

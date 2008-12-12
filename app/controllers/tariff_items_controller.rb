@@ -71,13 +71,10 @@ class TariffItemsController < ApplicationController
   end
 
   def create
-    @service_record = ServiceRecord.new(params[:service_record])
+    tariff_item = TariffItem.find(params[:id])
+    patient = Patient.find(params[:patient_id])
 
-    # Defaults
-    @service_record.date = Date.today
-    @service_record.quantity = 1
-    @service_record.responsible = @current_doctor
-    @service_record.provider = @current_doctor
+    @service_record = tariff_item.create_service_record(patient, @current_doctor)
 
     if @service_record.save
       flash[:notice] = 'Erfolgreich erfasst.'

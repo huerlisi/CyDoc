@@ -5,7 +5,7 @@ class TariffItem < ActiveRecord::Base
     ServiceRecord
   end
 
-  def create_service_record(patient, provider, responsible = nil)
+  def create_service_record(provider, responsible)
     # Type information
     service_record = service_record_class.new
     service_record.tariff_type = tariff_type
@@ -18,7 +18,7 @@ class TariffItem < ActiveRecord::Base
     service_record.unit_factor_mt = unit_factor_mt
 
     service_record.amount_tt = amount_tt
-    service_record.unit_tt = unit_tt
+    service_record.unit_mt = unit_mt
     service_record.unit_factor_tt = unit_factor_tt
 
     service_record.remark = remark
@@ -26,10 +26,7 @@ class TariffItem < ActiveRecord::Base
     # Defaults
     responsible ||= provider
 
-    service_record.quantity = 1
     service_record.date = DateTime.now
-
-    service_record.patient = patient
     service_record.provider = provider
     service_record.responsible = responsible
     
