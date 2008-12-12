@@ -1,5 +1,5 @@
 class TariffItemsController < ApplicationController
-  def list_for_record_tarmed_code
+  def list_for_service_record_code
     code = params[:query].downcase
     if code.split(' ').size > 1
       query = code.split(' ').join('%')
@@ -54,15 +54,15 @@ class TariffItemsController < ApplicationController
   end
 
   def new
-    @record_tarmed = RecordTarmed.new
+    @service_record = ServiceRecord.new
 
     # Defaults
-    @record_tarmed.date = Date.today
-    @record_tarmed.quantity = 1
-    @record_tarmed.provider = @current_doctor
-    @record_tarmed.responsible = @current_doctor
+    @service_record.date = Date.today
+    @service_record.quantity = 1
+    @service_record.provider = @current_doctor
+    @service_record.responsible = @current_doctor
 
-    @record_tarmed.patient_id = params[:patient_id]
+    @service_record.patient_id = params[:patient_id]
   end
 
   def new_inline
@@ -71,17 +71,17 @@ class TariffItemsController < ApplicationController
   end
 
   def create
-    @record_tarmed = RecordTarmed.new(params[:record_tarmed])
+    @service_record = ServiceRecord.new(params[:service_record])
 
     # Defaults
-    @record_tarmed.date = Date.today
-    @record_tarmed.quantity = 1
-    @record_tarmed.responsible = @current_doctor
-    @record_tarmed.provider = @current_doctor
+    @service_record.date = Date.today
+    @service_record.quantity = 1
+    @service_record.responsible = @current_doctor
+    @service_record.provider = @current_doctor
 
-    if @record_tarmed.save
+    if @service_record.save
       flash[:notice] = 'Erfolgreich erfasst.'
-      redirect_to :controller => 'patients', :action => 'show', :id => @record_tarmed.patient_id
+      redirect_to :controller => 'patients', :action => 'show', :id => @service_record.patient_id
     else
       render :action => 'new'
     end
@@ -96,12 +96,12 @@ class TariffItemsController < ApplicationController
   end
 
   def delete
-    RecordTarmed.destroy(params[:id])
+    ServiceRecord.destroy(params[:id])
     redirect_to :action => 'list'
   end
 
   def delete_inline
-    RecordTarmed.destroy(params[:id])
+    ServiceRecord.destroy(params[:id])
     redirect_to :action => 'list_inline', :patient_id => params[:patient_id]
   end
 end

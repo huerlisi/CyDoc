@@ -3,7 +3,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :law
   belongs_to :treatment
 
-  has_and_belongs_to_many :record_tarmeds, :after_add => :add_record_tarmed
+  has_and_belongs_to_many :service_records, :after_add => :add_service_record
 
   # Convenience methods
   def biller
@@ -37,12 +37,12 @@ class Invoice < ActiveRecord::Base
   # Calculated fields
   def amount_mt
     # TODO: unit_mt's no constant
-    record_tarmeds.sum('quantity * amount_mt * unit_factor_mt').to_f * 0.89
+    service_records.sum('quantity * amount_mt * unit_factor_mt').to_f * 0.89
   end
   
   def amount_tt
     # TODO: unit_tt's no constant
-    record_tarmeds.sum('quantity * amount_tt * unit_factor_tt').to_f * 0.89
+    service_records.sum('quantity * amount_tt * unit_factor_tt').to_f * 0.89
   end
   
   def amount
@@ -76,15 +76,15 @@ class Invoice < ActiveRecord::Base
 
   private
   # Association callbacks
-  def add_record_tarmed(record_tarmed)
+  def add_service_record(service_record)
     return true if treatment.nil?
     
     # Expand treatmend duration to include this tarmed record
-    treatment.date_begin = record_tarmed.date if (treatment.date_begin.nil? or record_tarmed.date < treatment.date_begin)
-    treatment.date_end = record_tarmed.date if (treatment.date_end.nil? or record_tarmed.date > treatment.date_end)
+    treatment.date_begin = service_record.date if (treatment.date_begin.nil? or service_record.date < treatment.date_begin)
+    treatment.date_end = service_record.date if (treatment.date_end.nil? or service_record.date > treatment.date_end)
 
     # Add diagnoses on the same as this tarmed record
-    diagnose_cases = DiagnosisCase.find(:all, :conditions => {:patient_id => patient.id, :duration_to => record_tarmed.date})
+    diagnose_cases = DiagnosisCase.find(:all, :conditions => {:patient_id => patient.id, :duration_to => service_record.date})
     treatment.diagnoses << diagnose_cases.map{|d| d.diagnosis}
   end
 

@@ -71,7 +71,7 @@ class PatientsController < ApplicationController
     end
     
     @patient = Patient.find(params[:id])
-    @record_tarmed = RecordTarmed.new
+    @service_record = ServiceRecord.new
   end
 
   # Search
@@ -153,11 +153,11 @@ class PatientsController < ApplicationController
   # Services
   def list_services
     @patient = Patient.find(params[:id])
-    render :partial => 'tariff_items/list', :locals => {:items => @patient.record_tarmeds}
+    render :partial => 'tariff_items/list', :locals => {:items => @patient.service_records}
   end
 
   def delete_service
-    RecordTarmed.destroy(params[:id])
+    ServiceRecord.destroy(params[:id])
     redirect_to :action => 'list_services'
   end
 end

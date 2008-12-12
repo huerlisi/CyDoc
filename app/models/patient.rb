@@ -27,8 +27,7 @@ class Patient < ActiveRecord::Base
   has_many :medical_cases, :order => 'duration_to DESC'
 
   # Services
-  has_many :record_tarmeds, :order => 'date DESC', :before_add => :before_add_record_tarmed
-  has_many :service_records, :class_name => 'RecordTarmed', :order => 'date DESC', :before_add => :before_add_record_tarmed
+  has_many :service_records, :order => 'date DESC', :before_add => :before_add_service_record
 
   # Proxy accessors
   def name
@@ -86,9 +85,9 @@ class Patient < ActiveRecord::Base
   # Tarmed
   # ======
   # Association callbacks
-  def before_add_record_tarmed(record_tarmed)
-    record_tarmed.provider ||= self.doctor
-    record_tarmed.biller ||= self.doctor
-    record_tarmed.responsible ||= self.doctor
+  def before_add_service_record(service_record)
+    service_record.provider ||= self.doctor
+    service_record.biller ||= self.doctor
+    service_record.responsible ||= self.doctor
   end
 end

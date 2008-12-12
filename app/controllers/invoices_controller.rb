@@ -70,7 +70,7 @@ class InvoicesController < ApplicationController
     @invoice.treatment = @treatment
 
     # Services
-    @invoice.record_tarmeds = @tiers.patient.record_tarmeds
+    @invoice.service_records = @tiers.patient.service_records
     
     # Saving
     if @invoice.save

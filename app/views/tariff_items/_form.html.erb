@@ -2,7 +2,7 @@
   $('query').focus()
 </script>
 
-<%= error_messages_for :record_tarmed %>
+<%= error_messages_for :service_record %>
 
 <form name="tarmed_query" action="" >
 Tarmed Leistung:&nbsp;<%= text_field_tag("query", params['query'], :size => 10 ) %>
@@ -17,7 +17,7 @@ Tarmed Leistung:&nbsp;<%= text_field_tag("query", params['query'], :size => 10 )
          :update => 'search_results',
          :before => "Element.show('spinner')",
          :success => "Element.hide('spinner')",
-         :url => {:controller => :tariff_items, :action => 'list_for_record_tarmed_code', :patient_id => params[:id]},
+         :url => {:controller => :tariff_items, :action => 'list_for_service_record_code', :patient_id => params[:id]},
          :with => 'query' %>
 
 
