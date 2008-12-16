@@ -74,14 +74,16 @@ class TariffItemsController < ApplicationController
     tariff_item = TariffItem.find(params[:id])
     patient = Patient.find(params[:patient_id])
 
-    @service_record = tariff_item.create_service_record(patient, @current_doctor)
+    service_record = tariff_item.create_service_record(patient, @current_doctor)
 
-    if @service_record.save
-      flash[:notice] = 'Erfolgreich erfasst.'
-      redirect_to :controller => 'patients', :action => 'show', :id => @service_record.patient_id
+    # Handle TariffItemGroups
+    if service_record.is_a? Array
+      service_record.map{|record| record.save!}
     else
-      render :action => 'new'
+      service_record.save
     end
+    flash[:notice] = 'Erfolgreich erfasst.'
+    redirect_to :controller => 'patients', :action => 'show', :id => patient
   end
 
   def edit
