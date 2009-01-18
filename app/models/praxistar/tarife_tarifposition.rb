@@ -1,4 +1,4 @@
-class Praxistar::TariffItemImporter < Praxistar::Base
+class Praxistar::TariffeTarifposition < Praxistar::Base
   set_table_name "Tarife_Tarifposition"
   set_primary_key "id_Position"
 

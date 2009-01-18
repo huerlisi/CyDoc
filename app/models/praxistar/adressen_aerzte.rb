@@ -51,5 +51,4 @@ class Praxistar::AdressenAerzte < Praxistar::Base
         :Mandant_ID => 1
       }
   end
-
 end
