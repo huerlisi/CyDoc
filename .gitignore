@@ -1,0 +1,38 @@
+# Boring files
+# ============
+*~
+.#*
+_darcs
+DEADJOE
+
+# Rails
+# =====
+# Vendor
+config/boot.rb
+config/initializers/new_rails_defaults.rb
+Rakefile
+public/dispatch.*
+public/images/rails.png
+public/javascripts/
+script/
+vendor/
+lib/
+
+# Volatile
+log/
+tmp/
+db/*.sqlite3
+db/schema.rb
+doc/api
+
+# Local
+config/database.yml
+
+# Rails Plugins
+# =============
+# restful-authentication
+config/initializers/site_keys.rb
+
+# CyDoc
+# =====
+data/
