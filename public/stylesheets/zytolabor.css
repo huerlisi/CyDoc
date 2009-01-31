@@ -1,0 +1,31 @@
+/**** ZytoLabor ****/
+#header { background-color: #AEB9CF; }
+
+/* Welcome */
+.welcome { margin: 2em; margin-bottom: 3.5em; }
+.welcome p { width: 100%; font-size: 13pt; font-variant:italic }
+.welcome p img { margin-right: 0.5em; float: left; }
+
+/* Forms */
+.fieldWithErrors input { border-color:#dd0000; }
+form.box {background:#ffffdd; padding:6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
+form { display: block; }
+
+/* Cases */
+div.case_info { background:#ffffdd; padding:6px; margin-bottom:6px; border:1px solid #d7d7d7; }
+table.overview-group { margin-bottom:1.8em; border-width:2px}
+table.overview-group tr th { border-bottom:1px solid #888888; font-size:0.9em;}
+.box {background:#ffffdd; padding:6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
+
+ul.case-history { list-style: none; padding-left: 1em; }
+ul.case-history li { margin: 0; padding-left: 1em; background-color: white; }
+
+/* restful-authentication */
+#right-menu { float:right; }
+#right-menu div { margin: 0.2em; }
+#user-bar-greeting, #user-bar-action { display:inline; }
+#user-bar-greeting a, #user-bar-action a { font-weight:bold; }
+
+@media print {
+  div.case_info { background:white; border:0 }
+}
