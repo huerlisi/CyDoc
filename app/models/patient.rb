@@ -61,6 +61,12 @@ class Patient < ActiveRecord::Base
     end
   end
 
+  def self.create(attributes = nil, &block)
+    with_scope(:create => {:doctor_id => Thread.current["doctor_id"]}) do
+      super
+    end
+  end
+
   # Search
   # ======
   def self.clever_find(query, doctor_ids)

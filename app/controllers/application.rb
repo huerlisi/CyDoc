@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
       Thread.current["doctor_ids"] = @current_doctor_ids
 
       @current_doctor = doctor
+      Thread.current["doctor_id"] = @current_doctor.id
       return true
     end
 
@@ -36,7 +37,10 @@ class ApplicationController < ActionController::Base
       logger.info("  Praxis login: '#{office.name}'")
 
       @current_doctor_ids = office.doctors.map{|c| c.id}.uniq
+      Thread.current["doctor_ids"] = @current_doctor_ids
+
       @current_doctor = office
+      Thread.current["doctor_id"] = @current_doctor.id
       return true
     end
   end
