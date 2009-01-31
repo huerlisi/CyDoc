@@ -12,7 +12,9 @@ class ApplicationController < ActionController::Base
 
   # Authentication
   # ==============
-  before_filter :authenticate
+  include AuthenticatedSystem
+  filter_parameter_logging :password
+  before_filter :login_required
 
   private
   def authenticate

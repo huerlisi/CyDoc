@@ -56,4 +56,9 @@ Rails::Initializer.run do |config|
 
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
+
+  # restful-authentication
+  # ======================
+  config.gem "rubyist-aasm", :source => "http://gems.github.com", :lib => "aasm"
+  config.active_record.observers = :user_observer
 end
