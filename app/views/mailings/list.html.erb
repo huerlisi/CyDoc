@@ -4,7 +4,7 @@
 Hier finden Sie eine Liste der Ihnen zugesandten Resultate.
 </p>
 
-<table class="listing">
+<table class="list">
 <% for mailing in @mailings %>
   <tr style="cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'mailings', :action => 'overview', :id => mailing) %>'">
     <td/>

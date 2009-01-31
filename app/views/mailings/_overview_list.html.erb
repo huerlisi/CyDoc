@@ -1,7 +1,7 @@
 <% unless overview_list.classification == @old_classification %>
   <% unless @old_classification.nil? %>
     </table>
-    <table class="listing">
+    <table class="list">
   <% end %>
   <% @old_classification = overview_list.classification %>
   <tr class="PAP_<%=h overview_list.classification.code unless overview_list.classification.nil? %>" style="font-weight: bold; border: 0px">

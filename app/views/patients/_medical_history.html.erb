@@ -3,7 +3,7 @@
 <% if @patient.medical_cases.empty? %>
   <p>Keine Krankengeschichte</p>
 <% else %>
-  <table class="listing">
+  <table class="list">
     <%= render :partial => 'medical_history_item', :collection => @patient.medical_cases %>
   </table>
 <% end %>

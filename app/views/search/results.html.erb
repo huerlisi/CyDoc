@@ -1,6 +1,6 @@
 <fieldset>
 <legend><%= @patients.size %> Patienten f&uuml;r Suche nach '<%=h params[:query] %>'</legend>
-  <table class="listing" style="margin-top: 0px">
+  <table class="list" style="margin-top: 0px">
     <%= render :partial => '/patients/list_header' %>
     <%= render :partial => '/patients/list', :collection => @patients %>
   </table>
@@ -9,7 +9,7 @@
 
 <fieldset>
 <legend><%= @cases.size %> Resultate f&uuml;r Suche nach '<%=h params[:query] %>'</legend>
-  <table class="listing" style="margin-top: 0px">
+  <table class="list" style="margin-top: 0px">
     <%= render :partial => '/cases/list', :collection => @cases %>
   </table>
   <p><%= "mehr als 100 Resultate..." if @cases.size == 100 %></p>

@@ -1,5 +1,5 @@
 <h2>PAPs in Verarbeitung</h2>
-<table class="listing">
+<table class="list">
   <%= render :partial => 'cases/list', :collection => @open_cases if @open_cases %>
 </table>
 
@@ -7,7 +7,7 @@
 
 <% if @older_mailings %>
 <h2>Ältere Versande</h2>
-<table class="listing">
+<table class="list">
   <%= render :partial => 'list', :collection => @older_mailings %>
 </table>
 <% end %>

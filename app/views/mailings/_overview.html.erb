@@ -14,7 +14,7 @@
 
 <% unless (@older_mailings.nil? or @older_mailings.empty?) %>
   <h2>Ältere Versande</h2>
-  <table class="listing">
+  <table class="list">
     <%= render :partial => 'list', :collection => @older_mailings %>
   </table>
 <% end %>
