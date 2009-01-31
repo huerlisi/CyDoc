@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   # ==============
   include AuthenticatedSystem
   filter_parameter_logging :password
-  before_filter :login_required
+  before_filter :login_required, :authenticate
 
   private
   def authenticate
@@ -24,6 +24,8 @@ class ApplicationController < ActionController::Base
       logger.info("  Doctor login: '#{doctor.name}'")
 
       @current_doctor_ids = doctor.colleagues.map{|c| c.id}.uniq
+      Thread.current["doctor_ids"] = @current_doctor_ids
+
       @current_doctor = doctor
       return true
     end
