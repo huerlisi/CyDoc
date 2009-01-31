@@ -3,7 +3,7 @@
   <tr>
     <td style="vertical-align: top">
       <%= navigation_section('Patienten', {"Erfassen" => {:controller => 'patients', :action => 'new'}, "Suchen" => :patients }, 'system-users.png') %>
-      <%= render :partial => "item", :locals => { :title => "Rechnungen", :controller => 'invoices', :image => 'gnucash.png', :description => 'Rechnungen anzeigen' } %>
+      <%= navigation_section('Rechnungen', {"Rechnungen anzeigen" => :invoices}, 'gnucash.png') %>
     </td>
     <td style="vertical-align: top; padding-left: 4em">
       <%= navigation_section('Stammdaten', {"Ärzte anzeigen" => :doctors, "Versicherungen anzeigen" => :insurances, "Leistungen anzeigen" => :tariff_items }, 'gnucash.png') %>
