@@ -66,6 +66,9 @@ class UsersController < ApplicationController
   # There's no page here to update or destroy a user.  If you add those, be
   # smart -- make sure you check that the visitor is authorized to do so, that they
   # supply their old password along with a new one to update it, etc.
+  def show
+    redirect_to :controller => :doctors, :action => :show, :id => @current_doctor.id
+  end
 
 protected
   def find_user
