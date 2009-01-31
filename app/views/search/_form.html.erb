@@ -1,4 +1,4 @@
-<% form_tag( :controller => :patients, :action => "list" ) do %>
-  <%= text_field :search, :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
+<% form_tag( :controller => :search, :action => "results" ) do %>
+  <%= text_field :quick_search, :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
   <%= submit_tag "Suchen" %>
 <% end %>

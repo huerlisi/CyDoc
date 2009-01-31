@@ -1,7 +1,16 @@
 class SearchController < ApplicationController
   def results
-    value = params[:query] || params[:search][:query]
+    value = params[:query]
+    value ||= params[:search][:query] if params[:search]
+    value ||= params[:quick_search][:query] if params[:quick_search]
+
+    # Set default param for rendering in result view
+    params[:query] = value
+
     case get_query_type(value)
+    when "none"
+      redirect_to :action => :index
+      return
     when "date"
       value = Date.parse_europe(value).strftime('%%%y-%m-%d')
       condition = "(cases.examination_date LIKE :value) OR (patients.birth_date LIKE :value)"
@@ -15,12 +24,12 @@ class SearchController < ApplicationController
     end
     @patients = Patient.find(:all, :include => [:vcards ], :conditions => ["(#{patient_condition})", {:value => value}], :limit => 100)
     @cases = Case.find(:all, :include => [:classification => [], :patient => [ :vcards ]], :conditions => ["(#{condition})", {:value => value}], :limit => 100)
-
-    render :layout => false
   end
 
   private
   def get_query_type(value)
+    return "none" if value.nil?
+
     if value.match(/([[:digit:]]{1,2}\.){2}/)
       return "date"
     elsif value.match(/^([[:digit:]]{0,2}\/)?[[:digit:]]*$/)
