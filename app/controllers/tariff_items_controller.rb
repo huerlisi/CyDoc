@@ -27,10 +27,15 @@ class TariffItemsController < ApplicationController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    unless query.nil? or query.empty?
-      @tariff_items = TariffItem.find(:all, :conditions => ['code LIKE :query OR remark LIKE :query', {:query => "%#{query}%"}], :order => 'code')
-    else
-      @tariff_items = []
+    @tariff_items = TariffItem.paginate(:page => params['page'], :per_page => 20, :conditions => ['code LIKE :query OR remark LIKE :query', {:query => "%#{query}%"}], :order => 'code')
+
+    respond_to do |format|
+      format.html
+      format.js {
+        render :update do |page|
+          page.replace_html 'search_results', :partial => 'list'
+        end
+      }
     end
   end
   
@@ -41,16 +46,23 @@ class TariffItemsController < ApplicationController
   end
 
   def search
-    query = params[:query] || params[:search][:query]
+    query = params[:query]
     query ||= params[:search][:query] if params[:search]
+    params[:query] = query
 
-    unless query.nil? or query.empty?
-      @tariff_items = TariffItem.find(:all, :conditions => ['code LIKE :query OR remark LIKE :query', {:query => "%#{query}%"}], :order => 'code')
-    else
-      @tariff_items = []
+    @tariff_items = TariffItem.paginate(:page => params['page'], :per_page => 10, :conditions => ['code LIKE :query OR remark LIKE :query', {:query => "%#{query}%"}], :order => 'code')
+
+    respond_to do |format|
+      format.html
+        render :partial => 'list'
+        return
+      format.js {
+        render :update do |page|
+          page.replace_html 'search_results', :partial => 'list'
+          return
+        end
+      }
     end
-
-    render :partial => 'list', :layout => false
   end
 
   def new

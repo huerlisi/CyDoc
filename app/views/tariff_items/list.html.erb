@@ -3,11 +3,12 @@
 <script type="text/javascript">
   Event.observe(window, 'load', function() {$('search_query').focus()}, false);
 </script>
+
 <div id="search_form">
-  <%= render :partial => 'search_form' %>
+  <%= render :partial => 'tariff_items/search_form' %>
   <%= loading_indicator_tag :id => 'search' %>
 </div>
 
 <div id="search_results">
-  <%= render :partial => 'list' %>
+  <%= render :partial => 'tariff_items/list' %>
 </div>

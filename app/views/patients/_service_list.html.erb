@@ -1,6 +1,9 @@
-<h2>Offene Leistungen</h2>
-<div id="new_service_record">
+<h3>Leistungen</h3>
+<div class="box" id="new_service_record">
+<div id="search_form">
   <%= render :partial => 'tariff_items/search_form' %>
+  <%= loading_indicator_tag :id => 'search' %>
+</div>
 
 <div id="search_results">
   <%= render :partial => 'tariff_items/list' %>

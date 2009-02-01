@@ -61,4 +61,8 @@ Rails::Initializer.run do |config|
   # ======================
   config.gem "rubyist-aasm", :source => "http://gems.github.com", :lib => "aasm"
   config.active_record.observers = :user_observer
+
+  # will_paginate
+  # =============
+  config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'
 end

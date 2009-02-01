@@ -1,4 +1,4 @@
-<% form_tag '#', {:class => 'tabular box'} do %>
+<% form_tag '#', {:class => 'tabular'} do %>
   Suche: <%= text_field :search, :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
   <%= image_tag("indicator.gif",
                 :align => "absmiddle",
@@ -6,11 +6,10 @@
                 :id => "spinner",
                 :style =>"display: none;" ) %>
   </form>
+<% end %>
 
   <%= observe_field 'search_query',  :frequency => 2,
-           :update => 'search_results',
            :before => "Element.show('spinner')",
            :success => "Element.hide('spinner')",
-           :url => {:controller => :tariff_items, :action => 'search', :patient_id => @patient},
+           :url => {:controller => :tariff_items, :action => 'list', :patient_id => @patient},
            :with => 'query' %>
-<% end %>
