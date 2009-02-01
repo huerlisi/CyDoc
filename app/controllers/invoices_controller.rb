@@ -23,6 +23,10 @@ class InvoicesController < ApplicationController
   end
 
   # CRUD actions
+  def index
+    redirect_to :action => :list
+  end
+
   def show
     @invoice = Invoice.find(params[:id])
     @patient = @invoice.patient
