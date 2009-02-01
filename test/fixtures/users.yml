@@ -1,0 +1,7 @@
+test_user:
+  login: "test"
+  name: "Test User"
+  state: "active"
+  email: "test@example.com"
+  crypted_password: "bec2d1bd3a0b0f83a81fe847f718606a20388087"
+  salt: "1e475e590ab144107f44977488183210e386b936"
