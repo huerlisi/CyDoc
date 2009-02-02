@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   # Authentication
   # ==============
   include AuthenticatedSystem
-  filter_parameter_logging :password
+  filter_parameter_logging :password, :password_confirmation, :old_password
   before_filter :login_required, :authenticate
 
   private
