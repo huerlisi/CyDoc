@@ -1,10 +1,12 @@
-<h2>Log In</h2>
+<h2>Anmelden</h2>
 
-<% form_tag session_path do -%>
-<p><%= label_tag 'login' %><br />
+<% if flash[:error] %><div class="warning"><%= flash[:error] %></div><% end %>
+
+<% form_tag session_path, {:class => 'tabular box'} do -%>
+<p><%= label_tag 'login', 'Login' %><br />
 <%= text_field_tag 'login', @login %></p>
 
-<p><%= label_tag 'password' %><br/>
+<p><%= label_tag 'passwort', 'Passwort' %><br/>
 <%= password_field_tag 'password', nil %></p>
 
 <!-- Uncomment this if you want this functionality
@@ -12,5 +14,5 @@
 <%= check_box_tag 'remember_me', '1', @remember_me %></p>
 -->
 
-<p><%= submit_tag 'Log in' %></p>
+<p><%= submit_tag 'Anmelden' %></p>
 <% end -%>
