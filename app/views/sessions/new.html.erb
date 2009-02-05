@@ -1,18 +1,25 @@
 <h2>Anmelden</h2>
 
 <% if flash[:error] %><div class="warning"><%= flash[:error] %></div><% end %>
-
-<% form_tag session_path, {:class => 'tabular box'} do -%>
-<p><%= label_tag 'login', 'Login' %><br />
-<%= text_field_tag 'login', @login %></p>
-
-<p><%= label_tag 'passwort', 'Passwort' %><br/>
-<%= password_field_tag 'password', nil %></p>
-
-<!-- Uncomment this if you want this functionality
-<p><%= label_tag 'remember_me', 'Remember me' %>
-<%= check_box_tag 'remember_me', '1', @remember_me %></p>
--->
-
-<p><%= submit_tag 'Anmelden' %></p>
-<% end -%>
+<div id="login-form">
+  <% form_tag session_path do -%>
+    <table>
+      <tr>
+          <td align="right"><label for="username">Login:</label></td>
+          <td align="left"><p><%= text_field_tag 'login', @login, :size => 40 %></p></td>
+      </tr>
+      <tr>
+          <td align="right"><label for="password">Passwort:</label></td>
+          <td align="left"><%= password_field_tag 'password', nil, :size => 40 %></td>
+      </tr>
+      <tr>
+          <td align="left">
+          </td>
+          <td align="right">
+              <input type="submit" name="login" value="Anmelden &#187;" />
+          </td>
+      </tr>
+    </table>
+    <%= javascript_tag "Form.Element.focus('login');" %>
+  <% end -%>
+</div>
