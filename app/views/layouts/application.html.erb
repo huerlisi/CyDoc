@@ -42,21 +42,11 @@
         </div>
       </div>
       <div id="sidebar">
-        <% unless @related_cases.nil? %>
-          <h3>Geschichte</h3>
-          <dl>
-            <%= render :partial => 'cases/compact', :collection => @related_cases %>
-          </dl>
-        <% end %>
         <div id="SideMenu">
           <%= render :partial => '/patients/actions' if (@patient and @controller.is_a?(PatientsController))%>
           <%= render :partial => '/cases/actions' if @case %>
           <%= render :partial => '/invoices/actions' if @invoice %>
         </div>
-        <% unless @related_cases.nil? %>
-          <h3>Geschichte</h3>
-          <%= render :partial => 'cases/compact', :collection => @related_cases %>
-        <% end %>
         <%= yield :sidebar %>
       </div>
       <div id="content">

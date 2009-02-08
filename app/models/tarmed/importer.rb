@@ -15,5 +15,7 @@ class Tarmed::Importer
         print "ID: #{tarmed_tariff_item.id} => #{ex.message}\n\n"
       end
     end
+
+    return TarmedTariffItem.count
   end
 end
