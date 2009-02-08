@@ -18,6 +18,8 @@ class ApplicationController < ActionController::Base
 
   private
   def authenticate
+    return if current_user.nil?
+    
     # Authenticate doctor login
     doctor = Doctor.find_by_login(current_user.login)
     unless doctor.nil?
