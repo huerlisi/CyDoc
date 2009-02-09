@@ -20,10 +20,6 @@ class Doctor < ActiveRecord::Base
     offices.map{|o| o.doctors}.flatten.uniq
   end
 
-  def password=(value)
-    write_attribute(:password, Digest::SHA256.hexdigest(value))
-  end
-
   # TODO:
   # This is kind of a primary office providing printers etc.
   # But it undermines the assumption that a doctor may belong/

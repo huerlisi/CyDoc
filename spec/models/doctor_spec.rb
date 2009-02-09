@@ -37,7 +37,7 @@ describe Doctor do
   # Validations
 protected
   def create_doctor(options = {})
-    record = Doctor.new({ :login => 'quire', :password => 'quire69' }.merge(options))
+    record = Doctor.new({ :login => 'quire' }.merge(options))
     record.save! if record.valid?
     record
   end
