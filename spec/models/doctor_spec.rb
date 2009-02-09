@@ -1,6 +1,8 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Doctor do
+  fixtures :doctors
+
   describe 'being created' do
     before do
       @doctor = nil
@@ -18,6 +20,17 @@ describe Doctor do
       @creating_doctor.call
       @doctor.reload
       @doctor.should be_active
+    end
+  end
+  
+  describe 'should sanitize valid ZSR:' do
+    ['R777777', 'R77.7777', 'R 77.7777'
+    ].each do |zsr_str|
+      it 'should sanitize ZSR' do
+        @doctor = create_doctor
+        @doctor.zsr = zsr_str
+        @doctor.zsr.should == 'R777777'
+      end
     end
   end
 
