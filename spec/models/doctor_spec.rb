@@ -26,11 +26,18 @@ describe Doctor do
   describe 'should sanitize valid ZSR:' do
     ['R777777', 'R77.7777', 'R 77.7777'
     ].each do |zsr_str|
-      it 'should sanitize ZSR' do
+      it zsr_str do
         @doctor = create_doctor
         @doctor.zsr = zsr_str
         @doctor.zsr.should == 'R777777'
       end
+    end
+  end
+
+  describe 'should return valid name' do
+    it "using login when no praxis set" do
+      doctor = doctors(:test)
+      doctor.name.should == doctor.login
     end
   end
 

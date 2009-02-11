@@ -1,10 +1,26 @@
 require File.dirname(__FILE__) + '/../spec_helper'
   
+include AuthenticatedTestHelper
+
 describe WelcomeController do
+  fixtures :users, :doctors
+
   describe "for anonymous users" do
     it 'should redirect to login page' do
       get :index
       response.should redirect_to('/session/new')
+    end
+  end
+
+  describe "for logged in test user" do
+    before( :each ) do
+      login_as :test
+    end
+
+    it 'should render index page' do
+      get :index
+      response.should be_success
+      response.should render_template('welcome/index')
     end
   end
 

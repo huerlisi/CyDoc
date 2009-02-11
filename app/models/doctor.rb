@@ -13,7 +13,11 @@ class Doctor < ActiveRecord::Base
 
   # Proxy accessors
   def name
-    praxis.full_name || ""
+    if praxis.nil?
+      login
+    else
+      praxis.full_name
+    end
   end
 
   def colleagues
