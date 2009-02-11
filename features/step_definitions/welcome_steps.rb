@@ -4,19 +4,27 @@ Given "an anonymous user" do
   follow_redirect!
 end
 
-When /^she goes toI delete the (\d+)(?:st|nd|rd|th) welcome$/ do |pos|
-  visit welcomes_url
-  within("table > tr:nth-child(#{pos.to_i+1})") do
-    click_link "Destroy"
-  end
-end
-
-Then /^I should see the following welcomes:$/ do |welcomes|
+Then /^I should see the following sections:$/ do |welcomes|
   welcomes.raw[1..-1].each_with_index do |row, i|
     row.each_with_index do |cell, j|
-      response.should have_selector("table > tr:nth-child(#{i+2}) > td:nth-child(#{j+1})") { |td|
+      response.should have_selector("h3") { |td|
         td.inner_text.should == cell
       }
     end
   end
 end
+
+  # please note: this enforces the use of a <label> field
+  Then "$actor should see a <$container> containing a $attributes" do |_, container, attributes|
+    attributes = attributes.to_hash_from_story
+    response.should have_tag(container) do
+      attributes.each do |tag, label|
+        case tag
+        when "textfield" then with_tag "input[type='text']";     with_tag("label", label)
+        when "password"  then with_tag "input[type='password']"; with_tag("label", label)
+        when "submit"    then with_tag "input[type='submit'][value='#{label}']"
+        else with_tag tag, label
+        end
+      end
+    end
+  end
