@@ -4,6 +4,12 @@ Given "an anonymous user" do
   follow_redirect!
 end
 
+Given /^a user "(.*)" with password "(.*)"$/ do |user, password|
+  @new_user = User.create!(:login => user, :email => 'test@example.com', :password => password, :password_confirmation => password )
+  @new_user.register!
+  @new_user.activate!
+end
+
 Then /^I should see the following sections:$/ do |welcomes|
   welcomes.raw[1..-1].each_with_index do |row, i|
     row.each_with_index do |cell, j|

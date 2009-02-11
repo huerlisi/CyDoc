@@ -1,6 +1,5 @@
 test:
   login: test
-  password: <%= Digest::SHA256.hexdigest("nixda") %>
   praxis: doctor_test
   zsr: 1234567
   ean_party: 1122334455667
@@ -8,14 +7,12 @@ test:
 
 single:
   login: $LABEL
-  password: <%= Digest::SHA256.hexdigest("nixda") %>
   praxis: doctor_test
   zsr: 1234567
   ean_party: 1122334455667
 
 colleague_one:
   login: colleague
-  password: <%= Digest::SHA256.hexdigest("nixda") %>
   praxis: doctor_test
   zsr: 7654321
   ean_party: 9911223344556
