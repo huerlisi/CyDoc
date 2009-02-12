@@ -5,6 +5,7 @@ Given "an anonymous user" do
 end
 
 Given /^a user "(.*)" with password "(.*)"$/ do |user, password|
+  User.delete(:conditions => {:login => user})
   @new_user = User.create!(:login => user, :email => 'test@example.com', :password => password, :password_confirmation => password )
   @new_user.register!
   @new_user.activate!
