@@ -21,17 +21,20 @@ Then /^I should see the following sections:$/ do |welcomes|
   end
 end
 
-  # please note: this enforces the use of a <label> field
-  Then "$actor should see a <$container> containing a $attributes" do |_, container, attributes|
-    attributes = attributes.to_hash_from_story
-    response.should have_tag(container) do
-      attributes.each do |tag, label|
-        case tag
-        when "textfield" then with_tag "input[type='text']";     with_tag("label", label)
-        when "password"  then with_tag "input[type='password']"; with_tag("label", label)
-        when "submit"    then with_tag "input[type='submit'][value='#{label}']"
-        else with_tag tag, label
-        end
+# restful_authentication
+# ======================
+# Shameless copy
+# please note: this enforces the use of a <label> field
+Then "$actor should see a <$container> containing a $attributes" do |_, container, attributes|
+  attributes = attributes.to_hash_from_story
+  response.should have_tag(container) do
+    attributes.each do |tag, label|
+      case tag
+      when "textfield" then with_tag "input[type='text']";     with_tag("label", label)
+      when "password"  then with_tag "input[type='password']"; with_tag("label", label)
+      when "submit"    then with_tag "input[type='submit'][value='#{label}']"
+      else with_tag tag, label
       end
     end
   end
+end
