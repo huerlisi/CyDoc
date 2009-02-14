@@ -1,4 +1,5 @@
-<% form_tag '#', {:class => 'tabular box'} do %>
+<% form_tag '#', {:class => 'box'} do %>
+  <label for="search_query">Suche</label>
   <%= text_field :search, :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
   <%= image_tag("indicator.gif",
                 :align => "absmiddle",

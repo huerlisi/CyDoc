@@ -30,20 +30,20 @@ class Patient < ActiveRecord::Base
   has_many :service_records, :order => 'date DESC', :before_add => :before_add_service_record
 
   # Proxy accessors
-  def name
-    if vcard.nil?
-      ""
-    else
-      vcard.full_name || ""
-    end
-  end
-
-  def name=(value)
-    if v = vcards.active.first
-      v.full_name = value
-      v.save
-    end
-  end
+#  def name
+#    if vcard.nil?
+#      ""
+#    else
+#      vcard.full_name || ""
+#    end
+#  end
+#
+#  def name=(value)
+#    if v = vcards.active.first
+#      v.full_name = value
+#      v.save
+#    end
+#  end
 
   def sex
     case read_attribute(:sex)

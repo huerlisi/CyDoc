@@ -1,6 +1,6 @@
 Given "an anonymous user" do
   get '/sessions/destroy'
-  response.should redirect_to('/session/new')
+  response.should redirect_to('/')
   follow_redirect!
 end
 

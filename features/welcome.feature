@@ -3,11 +3,11 @@ Feature: Manage welcomes
   we provide an overview page.
   
   Scenario: A logged out user requests the homepage
-    Given a user "test" with password "monkey"
+    Given a doctor is logged in as "test"
     And an anonymous user
     When  I go to the homepage
     Then  I should see "Anmelden"
-    And   I should see a <form> containing a textfield: Login, password: Passwort, and submit: 'Anmelden &#187;'
+    And   I should see a <form> containing a textfield: Login, password: Passwort, and submit: 'Anmelden'
     Then  I fill in "login" with "test"
     Then  I fill in "password" with "monkey"
     Then  I press "Anmelden"
