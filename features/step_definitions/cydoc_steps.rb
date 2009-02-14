@@ -1,15 +1,12 @@
-Given /^a doctor is logged in as "(.*)"$/ do |login|
-  User.destroy_all(:login => login)
-  @current_user = User.create!(
-    :login => login,
-    :password => 'monkey',
-    :password_confirmation => 'monkey',
-    :email => "#{login}@example.com" 
-  )
+Given /^a user "(.*)" with password "(.*)"$/ do |user, password|
+  User.destroy_all(:login => user)
+  @new_user = User.create!(:login => user, :email => "#{user}@example.com", :password => password, :password_confirmation => password )
+  @new_user.register!
+  @new_user.activate!
+end
 
-  # :create syntax for restful_authentication w/ aasm. Tweak as needed.
-  @current_user.state = 'active'
-  @current_user.save
+Given /^a doctor is logged in as "(.*)"$/ do |login|
+  Given "a user \"#{login}\" with password \"monkey\""
   
   # Doctor
   Doctor.destroy_all(:login => login)
