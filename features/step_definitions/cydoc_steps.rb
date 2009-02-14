@@ -5,18 +5,22 @@ Given /^a user "(.*)" with password "(.*)"$/ do |user, password|
   @new_user.activate!
 end
 
-Given /^a doctor is logged in as "(.*)"$/ do |login|
-  Given "a user \"#{login}\" with password \"monkey\""
-  
+Given /^a doctor "(.*)" belonging to office "(.*)"/ do |doctor, office|
   # Doctor
-  Doctor.destroy_all(:login => login)
-  doctor = Doctor.create!(:login => login)
+  Doctor.destroy_all(:login => doctor)
+  doctor = Doctor.create!(:login => doctor)
 
   # Office
-  o = Office.create!(:login => login)
+  Office.destroy_all(:login => office)
+  office = Office.create!(:login => office)
 
-  doctor.offices << o
+  doctor.offices << office
   doctor.save!
+end
+
+Given /^a doctor is logged in as "(.*)"$/ do |login|
+  Given "a user \"#{login}\" with password \"monkey\""
+  Given "a doctor \"#{login}\" belonging to office \"#{login}\""
 
   # Login
   visit "/login" 
