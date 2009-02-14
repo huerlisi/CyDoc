@@ -3,7 +3,7 @@ Feature: Manage welcomes
   we provide an overview page.
   
   Scenario: A logged out user requests the homepage
-    Given a doctor is logged in as "test"
+    Given a doctor "test" belonging to office "test office"
     And an anonymous user
     When  I go to the homepage
     Then  I should see "Anmelden"

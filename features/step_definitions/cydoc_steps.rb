@@ -6,6 +6,8 @@ Given /^a user "(.*)" with password "(.*)"$/ do |user, password|
 end
 
 Given /^a doctor "(.*)" belonging to office "(.*)"/ do |doctor, office|
+  Given "a user \"#{doctor}\" with password \"monkey\""
+
   # Doctor
   Doctor.destroy_all(:login => doctor)
   doctor = Doctor.create!(:login => doctor)
@@ -19,7 +21,6 @@ Given /^a doctor "(.*)" belonging to office "(.*)"/ do |doctor, office|
 end
 
 Given /^a doctor is logged in as "(.*)"$/ do |login|
-  Given "a user \"#{login}\" with password \"monkey\""
   Given "a doctor \"#{login}\" belonging to office \"#{login}\""
 
   # Login
