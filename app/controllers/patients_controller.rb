@@ -17,13 +17,13 @@ class PatientsController < ApplicationController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    @patients = Patient.clever_find(query, @current_doctor_ids)
+    @patients = Patient.clever_find(query)
   end
 
   def search
     query = params[:query] || params[:search][:query]
     query ||= params[:search][:query] if params[:search]
-    @patients = Patient.clever_find(query, @current_doctor_ids)
+    @patients = Patient.clever_find(query)
 
     render :partial => 'list', :layout => false
   end
@@ -44,6 +44,7 @@ class PatientsController < ApplicationController
     patient = params[:patient]
     @patient = Patient.new(patient)
     @vcard = Vcards::Vcard.new(params[:vcard])
+    # TODO: Should be doctor specific preferences, default nothing.
     @vcard.honorific_prefix = 'Frau'
     @vcard.address = Vcards::Address.new
 
@@ -65,6 +66,7 @@ class PatientsController < ApplicationController
   end
 
   def show
+    # TODO: Check if .exists? recognizes the finder conditions
     unless Patient.exists?(params[:id])
       render :inline => "<h1>Patient existiert nicht</h1>", :layout => 'application', :status => 404
       return

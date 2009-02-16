@@ -69,7 +69,7 @@ class Patient < ActiveRecord::Base
 
   # Search
   # ======
-  def self.clever_find(query, doctor_ids)
+  def self.clever_find(query)
     return [] if query.nil? or query.empty?
     
     case get_query_type(query)
