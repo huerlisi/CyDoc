@@ -52,7 +52,7 @@ class PatientsController < ApplicationController
   def create
     @patient = Patient.new(params[:patient])
     @vcard = Vcards::Vcard.new(params[:vcard])
-    @patient.vcards << @vcard
+    @patient.vcard = @vcard
 
     if @patient.save
       flash[:notice] = 'Patient erfasst.'

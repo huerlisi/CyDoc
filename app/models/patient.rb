@@ -2,19 +2,11 @@ class Patient < ActiveRecord::Base
   belongs_to :insurance
   belongs_to :doctor
 
-  has_many :vcards, :class_name => 'Vcards::Vcard', :as => 'object'
   # FIX: This buggily needs this :select hack
   named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcards, :conditions => Vcards::Vcard.by_name_conditions(name)}}
   named_scope :by_date, lambda {|date| {:conditions => ['birth_date LIKE ?', Date.parse_europe(date).strftime('%%%y-%m-%d')] }}
 
-#  belongs_to :vcard, :class_name => 'Vcards::Vcard', :foreign_key => 'vcard_id'
-  def vcard
-    vcards.build if vcards.active.first.nil?
-    vcards.active.first
-  end
-  def vcard=(value)
-    vcards << value
-  end
+  belongs_to :vcard, :class_name => 'Vcards::Vcard', :foreign_key => 'vcard_id'
 
   delegate :full_name, :full_name=, :to => :vcard
   delegate :street_address=, :to => :vcard

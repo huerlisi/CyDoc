@@ -16,7 +16,28 @@ describe Patient do
 
     it 'starts in active state' do
       @creating_patient.call
-      @patient.reload
+      @patient.should be_active
+    end
+
+    it 'takes some arguments' do
+      @patient = create_patient(
+        :birth_date => '1998-02-05',
+        :sex => 2,
+        :remarks => 'Just a simple test patient. Äuä scho no öppis!!!',
+        :doctor_patient_nr => 'a777.7',
+        :name => 'Ursina Wiederkehr'
+      )
+      @patient.birth_date.should == Date.parse('1998-02-05')
+      @patient.sex.should == 'F'
+      @patient.doctor_patient_nr == 'a777.7'
+      @patient.name == 'Ursina Wiederkehr'
+    end
+
+    it 'should have sane defaults' do
+      @patient = create_patient
+      @patient.should_not be_dunning_stop
+      @patient.should_not be_use_billing_address
+      @patient.should_not be_deceased
       @patient.should be_active
     end
   end
