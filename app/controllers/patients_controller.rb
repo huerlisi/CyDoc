@@ -10,14 +10,11 @@ class PatientsController < ApplicationController
                 
   # CRUD Actions
   def index
-    redirect_to :action => :list
-  end
-  
-  def list
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
     @patients = Patient.clever_find(query)
+    render :action => 'list'
   end
 
   def search
