@@ -35,6 +35,8 @@ describe Patient do
 
     it 'should have sane defaults' do
       @patient = create_patient
+      @patient.stub!(:find).and_return @patient
+      @patient.reload
       @patient.should_not be_dunning_stop
       @patient.should_not be_use_billing_address
       @patient.should_not be_deceased
