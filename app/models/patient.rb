@@ -75,7 +75,7 @@ class Patient < ActiveRecord::Base
       query = "%#{query}%"
       patient_condition = "(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)"
     end
-    return find(:all, :include => [:vcards ], :conditions => ["(#{patient_condition})", {:query => query}], :limit => 100)
+    return find(:all, :include => [:vcard ], :conditions => ["(#{patient_condition})", {:query => query}], :limit => 100)
   end
 
   private

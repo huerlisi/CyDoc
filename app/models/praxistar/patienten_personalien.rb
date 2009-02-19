@@ -39,7 +39,7 @@ class Praxistar::PatientenPersonalien < Praxistar::Base
   end
   
   def self.import(mandant_id, selection = :all)
-    records = find(selection, :order => '#{primary_key} DESC', :conditions =>  ['Mandant_ID = ?', mandant_id])
+    records = find(selection, :order => "#{primary_key} DESC", :conditions =>  ['Mandant_ID = ?', mandant_id])
     
     for praxistar_record in records
       begin
