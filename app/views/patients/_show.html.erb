@@ -1,9 +1,9 @@
 <div class="box">
-  <b><%=h @patient.vcard.full_name %><%=h "\##{@patient.doctor_patient_nr}" if !(@patient.doctor_patient_nr.nil? or @patient.doctor_patient_nr == '') %></b><br />
-  <%=h @patient.vcard.street_address %><br />
-  <%=h @patient.vcard.postal_code %> <%=h @patient.vcard.locality %><br />
+  <b><%=h @patient.full_name %><%=h "\##{@patient.doctor_patient_nr}" unless @patient.doctor_patient_nr.blank? %></b><br />
+  <%=h @patient.street_address %><br />
+  <%=h @patient.postal_code %> <%=h @patient.locality %><br />
   <%=h @patient.birth_date.strftime("%d.%m.%Y") unless @patient.birth_date.nil? %><br />
   <% if !@patient.insurance.nil? %>
-  <%=h @patient.insurance.vcard.full_name %> <%=h "##{@patient.insurance_nr}" unless @patient.insurance_nr.blank? or @patient.insurance_nr.strip == "0" %><br />
+  <%=h @patient.insurance.vcard.full_name %> <%=h "##{@patient.insurance_nr}" unless @patient.insurance_nr.blank? %><br />
   <% end %>
 </div>

@@ -9,7 +9,8 @@ class Patient < ActiveRecord::Base
   has_one :vcard, :class_name => 'Vcards::Vcard', :foreign_key => 'object_id'
 
   delegate :full_name, :full_name=, :to => :vcard
-  delegate :street_address=, :to => :vcard
+  delegate :street_address, :street_address=, :to => :vcard
+  delegate :postal_code, :locality, :to => :vcard
 
   belongs_to :billing_vcard, :class_name => 'Vcards::Vcard', :foreign_key => 'billing_vcard_id'
         
