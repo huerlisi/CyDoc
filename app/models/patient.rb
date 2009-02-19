@@ -48,17 +48,17 @@ class Patient < ActiveRecord::Base
 
   # Authorization
   # =============
-  def self.find(*args)
-    with_scope(:find => {:conditions => {:doctor_id => Thread.current["doctor_ids"]}}) do
-      super
-    end
-  end
+#  def self.find(*args)
+#    with_scope(:find => {:conditions => {:doctor_id => Thread.current["doctor_ids"]}}) do
+#      super
+#    end
+#  end
 
-  def self.create(attributes = nil, &block)
-    with_scope(:create => {:doctor_id => Thread.current["doctor_id"]}) do
-      super
-    end
-  end
+#  def self.create(attributes = nil, &block)
+#    with_scope(:create => {:doctor_id => Thread.current["doctor_id"]}) do
+#      super
+#    end
+#  end
 
   # Search
   # ======
