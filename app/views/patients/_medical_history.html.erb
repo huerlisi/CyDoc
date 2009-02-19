@@ -1,4 +1,8 @@
-<h2>Krankengeschichte</h2>
+<div class="contextual">
+    <%= link_to_remote "Diagnose erfassen", {:update => 'new_medical_case', :url => {:controller => :medical_cases, :action => :new_inline, :patient_id => @patient, :type => 'DiagnosisCase'}}, :class => "icon icon-add" %>
+</div>
+
+<h3>Krankengeschichte</h3>
 <div id="new_medical_case"></div>
 <% if @patient.medical_cases.empty? %>
   <p>Keine Krankengeschichte</p>

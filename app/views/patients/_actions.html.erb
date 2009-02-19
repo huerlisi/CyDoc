@@ -1,9 +1,0 @@
-<h3>Patient</h3>
-
-<p><%= link_to_remote "Diagnose erfassen", :update => 'new_medical_case', :url => {:controller => :medical_cases, :action => :new_inline, :patient_id => @patient, :type => 'DiagnosisCase'} %></p>
-<!--
-<p><%= link_to_remote "Analyse erfassen", :update => 'new_medical_case', :url => {:controller => :medical_cases, :action => :new_inline, :patient_id => @patient, :type => 'AnalysisCase'} %></p>
-<p><%= link_to_remote "Medikation erfassen", :update => 'result', :url => {:action => :order_form_inline, :id => @case} %></p>
--->
-<p><%= link_to_remote "Leistung erfassen", :update => 'new_service_record', :url => {:controller => :tariff_items, :action => :new_inline, :patient_id => @patient} %></p>
-<p><%= link_to_remote "Rechnung erstellen", :update => 'new_service_record', :url => {:controller => :invoices, :action => :new_inline, :patient_id => @patient} %></p>
