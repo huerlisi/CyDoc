@@ -12,6 +12,7 @@ class PatientsController < ApplicationController
   def index
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
+    query ||= params[:quick_search][:query] if params[:quick_search]
 
     @patients = Patient.clever_find(query)
     render :action => 'list'
@@ -20,6 +21,7 @@ class PatientsController < ApplicationController
   def search
     query = params[:query] || params[:search][:query]
     query ||= params[:search][:query] if params[:search]
+    query ||= params[:quick_search][:query] if params[:quick_search]
     @patients = Patient.clever_find(query)
 
     render :partial => 'list', :layout => false
