@@ -1,6 +1,11 @@
 class TariffItemsController < ApplicationController
   def list_for_service_record_code
-    code = params[:query].downcase
+    if params[:search_query].blank?
+      render :text => 'Kein Suchbegriff angegeben.'
+      return
+    end
+    
+    code = params[:search_query].downcase
     if code.split(' ').size > 1
       query = code.split(' ').join('%')
       query_switched = code.split(' ').reverse.join('%')

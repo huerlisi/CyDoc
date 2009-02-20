@@ -1,27 +1,25 @@
 <script type="text/javascript">
-  $('query').focus()
+  $('tariff_items_query').focus()
 </script>
 
-<%= error_messages_for :service_record %>
+<div class="box">
+  <%= error_messages_for :service_record %>
+  <% form_for 'tariff_items' do |f| %>
+    <%= f.label 'query', 'Leistungssuche' %> <%= f.text_field(:query, :size => 10) %>
+    <%= image_tag("indicator.gif",
+                :align => "absmiddle",
+                :border => 0,
+                :id => "spinner",
+                :style =>"display: none;" ) %>
 
-<form name="tarmed_query" action="" >
-Leistung:&nbsp;<%= text_field_tag("query", params['query'], :size => 10 ) %>
-<%= image_tag("indicator.gif",
-              :align => "absmiddle",
-              :border => 0,
-              :id => "spinner",
-              :style =>"display: none;" ) %>
-</form>
+    <%= observe_field 'tariff_items_query',  :frequency => 2,
+           :update => 'search_results',
+           :before => "Element.show('spinner')",
+           :success => "Element.hide('spinner')",
+           :url => {:controller => :tariff_items, :action => 'list_for_service_record_code', :patient_id => params[:id]},
+           :with => 'tariff_items_query' %>
 
-<%= observe_field 'query',  :frequency => 2,
-         :update => 'search_results',
-         :before => "Element.show('spinner')",
-         :success => "Element.hide('spinner')",
-         :url => {:controller => :tariff_items, :action => 'list_for_service_record_code', :patient_id => params[:id]},
-         :with => 'query' %>
-
-
-<div id="search_results">
-<table id="table" class="list">
-</table>
+    <div id="search_results"></div>
+  <% end %>
 </div>
+ 
