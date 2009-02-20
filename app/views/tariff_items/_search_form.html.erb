@@ -1,7 +1,7 @@
 <div class="box">
-  <% remote_form_for 'search', :url => {:controller => :tariff_items, :action => 'list', :patient_id => @patient} do |f| %>
+  <% remote_form_for 'search', :url => {:action => 'list', :patient_id => @patient}, :method => :get do |f| %>
     <%= f.label 'query', 'Suche' %>
     <%= f.text_field :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
-    <%= f.submit 'Suchen' %>
+    <%= image_submit_tag 'find.png', :title => 'Suchen' %>
   <% end %>
 </div>
