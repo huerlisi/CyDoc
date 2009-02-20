@@ -3,12 +3,12 @@
 <%= render :partial => 'service_records/item', :collection => items %>
 <% unless items.empty? %>
   <tr>
-    <td colspan="3"><%= duration(items) %></td>
-    <th><%= items.size %>&nbsp;Positionen</th>
+    <th style="text-align: left" colspan="3"><%= duration(items) %></th>
+    <th style="text-align: left"><%= items.size %>&nbsp;Positionen</th>
     <th style="text-align: right"><%= sprintf('%.2f', items.collect {|item| item.amount_mt}.sum) %>&nbsp;AL</th>
     <th style="text-align: right"><%= sprintf('%.2f', items.collect {|item| item.amount_tt}.sum) %>&nbsp;TL</th>
     <th style="text-align: right"><%= sprintf('%.2f', items.collect {|item| item.amount}.sum) %>&nbsp;CHF</th>
-    <td style="border: none"><%= link_to_remote(image_tag('invoice_create.png'), :update => 'new_service_record', :url => {:controller => :invoices, :action => :new_inline, :patient_id => @patient}) %></td>
+    <th />
   </tr>
 <% end %>
 </table>
