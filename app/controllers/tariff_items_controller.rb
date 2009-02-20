@@ -44,32 +44,6 @@ class TariffItemsController < ApplicationController
     end
   end
   
-  def list_inline
-    @patient = Patient.find(params[:patient_id])
-    @tariff_items = @patient.service_records
-    render :partial => 'service_records/list', :locals => {:items => @tariff_items}
-  end
-
-  def search
-    query = params[:query]
-    query ||= params[:search][:query] if params[:search]
-    params[:query] = query
-
-    @tariff_items = TariffItem.paginate(:page => params['page'], :per_page => 10, :conditions => ['code LIKE :query OR remark LIKE :query', {:query => "%#{query}%"}], :order => 'code')
-
-    respond_to do |format|
-      format.html
-        render :partial => 'list'
-        return
-      format.js {
-        render :update do |page|
-          page.replace_html 'search_results', :partial => 'list'
-          return
-        end
-      }
-    end
-  end
-
   def new
     @service_record = ServiceRecord.new
 
