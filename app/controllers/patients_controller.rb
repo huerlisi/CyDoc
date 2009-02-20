@@ -15,7 +15,17 @@ class PatientsController < ApplicationController
     query ||= params[:quick_search][:query] if params[:quick_search]
 
     @patients = Patient.clever_find(query)
-    render :action => 'list'
+    respond_to do |format|
+      format.html {
+        render :action => 'list'
+        return
+      }
+      format.js {
+        render :update do |page|
+          page.replace_html 'search_results', :partial => 'list'
+        end
+      }
+    end
   end
 
   def search
