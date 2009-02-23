@@ -1,5 +1,5 @@
 <div class="contextual">
-    <%= link_to_remote "Leistung erfassen", {:update => 'new_service_record', :url => {:controller => :tariff_items, :action => :new_inline, :patient_id => @patient}}, :class => "icon icon-add" %>
+    <%= link_to_remote "Leistung erfassen", {:update => 'new_service_record', :url => {:controller => :tariff_items, :action => :new, :patient_id => @patient}}, :class => "icon icon-add" %>
     <%= link_to_remote "Rechnung erstellen", {:update => 'new_service_record', :url => {:controller => :invoices, :action => :new_inline, :patient_id => @patient}}, :class => "icon icon-invoice" %>
 </div>
 

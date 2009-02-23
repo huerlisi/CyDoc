@@ -35,7 +35,10 @@ class TariffItemsController < ApplicationController
     @tariff_items = TariffItem.paginate(:page => params['page'], :per_page => 20, :conditions => ['code LIKE :query OR remark LIKE :query', {:query => "%#{query}%"}], :order => 'code')
 
     respond_to do |format|
-      format.html
+      format.html {
+        render :action => 'list'
+        return
+      }
       format.js {
         render :update do |page|
           page.replace_html 'search_results', :partial => 'list'
@@ -54,11 +57,16 @@ class TariffItemsController < ApplicationController
     @service_record.responsible = @current_doctor
 
     @service_record.patient_id = params[:patient_id]
-  end
 
-  def new_inline
-    new
-    render :action => 'new', :layout => false
+    respond_to do |format|
+      format.html {
+        render
+        return
+      }
+      format.js {
+        render :layout => false
+      }
+    end
   end
 
   def create
