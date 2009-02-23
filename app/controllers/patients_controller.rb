@@ -22,7 +22,6 @@ class PatientsController < ApplicationController
       }
       format.js {
         render :update do |page|
-	  page.call 'alert', 'My message!'
           page.replace_html 'search_results', :partial => 'list'
         end
       }
