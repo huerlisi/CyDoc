@@ -62,7 +62,7 @@ class Patient < ActiveRecord::Base
 
   # Search
   # ======
-  def self.clever_find(query)
+  def self.clever_find(query, *args)
     return [] if query.nil? or query.empty?
     
     case get_query_type(query)
@@ -75,7 +75,8 @@ class Patient < ActiveRecord::Base
       query = "%#{query}%"
       patient_condition = "(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)"
     end
-    return find(:all, :include => [:vcard ], :conditions => ["(#{patient_condition})", {:query => query}], :limit => 100)
+
+    return find(:all, :include => [:vcard ], :conditions => ["(#{patient_condition})", {:query => query}], :order => 'family_name, given_name', :limit => 100)
   end
 
   private
