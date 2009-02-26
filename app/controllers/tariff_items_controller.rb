@@ -47,6 +47,8 @@ class TariffItemsController < ApplicationController
     end
   end
   
+  alias :search :list
+
   def new
     @service_record = ServiceRecord.new
 
