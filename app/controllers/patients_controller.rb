@@ -62,6 +62,25 @@ class PatientsController < ApplicationController
     end
   end
 
+  # GET /patients/1/edit
+  def edit
+    @patient = Patient.find(params[:id])
+  end
+
+  # PUT /patients/1
+  def update
+    @patient = Patient.find(params[:id])
+
+    respond_to do |format|
+      if @patient.update_attributes(params[:patient]) and @patient.vcard.save
+        flash[:notice] = 'Patient wurde geändert.'
+        format.html { redirect_to(@patient) }
+      else
+        format.html { render :action => "edit" }
+      end
+    end
+  end
+
   def show
     # TODO: Check if .exists? recognizes the finder conditions
     unless Patient.exists?(params[:id])
