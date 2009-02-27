@@ -43,8 +43,7 @@ class InvoicesController < ApplicationController
   end
 
   def show
-    @invoice = Invoice.find(params[:id])
-    @patient = @invoice.patient
+    redirect_to :action => 'patient_letter', :id => params[:id]
   end
 
   def new
