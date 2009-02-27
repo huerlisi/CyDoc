@@ -25,10 +25,6 @@ class TariffItemsController < ApplicationController
 
   # CRUD actions
   def index
-    redirect_to :action => :list
-  end
-
-  def list
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
@@ -47,7 +43,7 @@ class TariffItemsController < ApplicationController
     end
   end
   
-  alias :search :list
+  alias :search :index
 
   def new
     @service_record = ServiceRecord.new

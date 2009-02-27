@@ -1,6 +1,6 @@
-<tr style="cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'tariff_items', :action => 'create', :patient_id => params[:patient_id], :id => item) %>'">
+<tr title="<%=h item.remark %>" style="cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'tariff_items', :action => 'create', :patient_id => params[:patient_id], :id => item) %>'">
   <td style="text-align:right"><%=h item.code %></td>
-  <td><b><%=h truncate(item.remark, 60) %></b></td>
+  <td><span style="font-weight: bold"><%=h truncate(item.remark, 100) %></span></td>
   <td style="text-align:right"><%=h sprintf('%.2f', item.amount_mt) %>&nbsp;TP</td>
   <td style="text-align:right"><%=h sprintf('%.2f', item.amount_tt) %>&nbsp;TP</td>
   <td style="text-align:right"><b><%=h sprintf('%.2f', item.amount) %></b>&nbsp;CHF</td>
