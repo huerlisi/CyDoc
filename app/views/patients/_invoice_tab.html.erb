@@ -7,5 +7,6 @@
 <div id="new_service_record"></div>
 
 <div id="services_list">
-  <%= render :partial => 'service_records/list', :locals => { :items => @patient.service_records } %>
+  <% @invoices = @patient.invoices %>
+  <%= render :partial => 'invoices/list' %>
 </div>
