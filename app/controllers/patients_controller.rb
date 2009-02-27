@@ -41,17 +41,16 @@ class PatientsController < ApplicationController
   def new
     patient = params[:patient]
     @patient = Patient.new(patient)
-    @vcard = Vcards::Vcard.new(params[:vcard])
-
-    render :action => 'form'
+    @patient.vcard = Vcards::Vcard.new(params[:patient])
+    
   end
 
+  # POST /posts
   def create
-    @patient = Patient.new(params[:patient])
-    @vcard = Vcards::Vcard.new(params[:vcard])
-    @patient.vcard = @vcard
+    @patient = Patient.new
+    @patient.vcard = Vcards::Vcard.new
 
-    if @patient.save
+    if @patient.update_attributes(params[:patient]) and @patient.vcard.save
       flash[:notice] = 'Patient erfasst.'
       redirect_to :action => :show, :id => @patient
     else
