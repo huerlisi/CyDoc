@@ -95,6 +95,7 @@ class TariffItemsController < ApplicationController
 
   def delete_inline
     ServiceRecord.destroy(params[:id])
-    redirect_to :action => 'list_inline', :patient_id => params[:patient_id]
+    patient = Patient.find(params[:patient_id])
+    render :partial => 'service_records/list', :locals => { :items => patient.service_records}
   end
 end
