@@ -43,7 +43,8 @@ class InvoicesController < ApplicationController
   end
 
   def show
-    redirect_to :action => 'patient_letter', :id => params[:id]
+    @invoice = Invoice.find(params[:id])
+    @patient = @invoice.patient
   end
 
   def new
@@ -93,7 +94,7 @@ class InvoicesController < ApplicationController
     # Saving
     if @invoice.save
       flash[:notice] = 'Erfolgreich erstellt.'
-      redirect_to :controller => 'invoices', :action => 'insurance_recipe', :id => @invoice
+      redirect_to :controller => 'invoices', :action => 'show', :id => @invoice
     else
       render :action => 'new'
     end
