@@ -77,7 +77,7 @@ class TariffItemsController < ApplicationController
       service_record.save
     end
     flash[:notice] = 'Erfolgreich erfasst.'
-    redirect_to :controller => 'patients', :action => 'show', :id => patient
+    redirect_to :controller => 'patients', :action => 'show', :id => patient, :tab => 'services'
   end
 
   def edit
