@@ -34,6 +34,13 @@ class Invoice < ActiveRecord::Base
     law.case_id
   end
 
+  # Search
+  def self.clever_find(query, *args)
+    return [] if query.nil? or query.empty?
+
+    Patient.clever_find(query).collect{|patient| patient.invoices}.flatten
+  end
+  
   # Calculated fields
   def amount_mt
     # TODO: unit_mt's no constant
@@ -59,7 +66,7 @@ class Invoice < ActiveRecord::Base
 
   # Generalization
   def date
-    created_at
+    created_at.to_date
   end
 
   def date=(value)

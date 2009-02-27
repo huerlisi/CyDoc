@@ -1,0 +1,6 @@
+<tr style="cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'incoives', :action => 'show', :id => item) %>'">
+  <td><b/><%=h item.patient.full_name %></b></td>
+  <td><%=h item.date %></td>
+  <td><%=h item.id %></td>
+  <td><%=h item.rounded_amount %></td>
+</tr>

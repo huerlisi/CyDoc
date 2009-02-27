@@ -18,9 +18,11 @@ class Patient < ActiveRecord::Base
   delegate :honorific_prefix, :honorific_prefix=, :to => :vcard
 
   belongs_to :billing_vcard, :class_name => 'Vcards::Vcard', :foreign_key => 'billing_vcard_id'
-        
+  has_many :tiers
+  has_many :invoices, :through => :tiers
+      
   has_many :cases, :order => 'id DESC'
-
+  
 
   def birth_date_formatted
     birth_date

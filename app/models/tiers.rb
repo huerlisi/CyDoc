@@ -1,5 +1,5 @@
 class Tiers < ActiveRecord::Base
-  has_one :invoice
+  has_many :invoices
   
   belongs_to :biller, :class_name => 'Doctor'
   belongs_to :provider, :class_name => 'Doctor'

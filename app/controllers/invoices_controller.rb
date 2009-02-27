@@ -24,7 +24,22 @@ class InvoicesController < ApplicationController
 
   # CRUD actions
   def index
-    redirect_to :action => :list
+    query = params[:query]
+    query ||= params[:search][:query] if params[:search]
+    query ||= params[:quick_search][:query] if params[:quick_search]
+
+    @invoices = Invoice.clever_find(query)
+    respond_to do |format|
+      format.html {
+        render :action => 'list'
+        return
+      }
+      format.js {
+        render :update do |page|
+          page.replace_html 'search_results', :partial => 'list'
+        end
+      }
+    end
   end
 
   def show
