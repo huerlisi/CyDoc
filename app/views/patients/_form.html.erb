@@ -1,5 +1,5 @@
 <% fields_for @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
-  <%= patient.text_field :birth_date, :label => 'Geburtstag', :size => 12 %>
+  <%= patient.date_field :birth_date, :label => 'Geburtstag', :size => 12 %>
   <%= patient.select "insurance_id", Insurance.find(:all, :include => :vcard, :order => 'vcards.full_name').collect { |i| [i.name, i.id] }, :include_blank => true, :label => "Versicherung" %>
   <%= patient.text_field :insurance_nr, :size => 15, :label => "Versicherungsnr." %>
   <%= patient.text_field :doctor_patient_nr, :size => 15, :label => "Patientennr." %>

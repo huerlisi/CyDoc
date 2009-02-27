@@ -10,3 +10,4 @@ module ApplicationHelper
     render :partial => 'shared/navigation_section', :locals => {:section_title => section_title, :items => items, :image => image}
   end
 end
+

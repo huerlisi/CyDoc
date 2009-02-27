@@ -84,6 +84,21 @@ class ApplicationController < ActionController::Base
   end
 end
 
+module ActionView
+  module Helpers
+    module FormHelper
+      def date_field(object_name, method, options = {})
+        text_field object_name, method, options
+      end
+    end
+
+    class FormBuilder
+      def date_field(method, options = {})
+        @template.date_field(@object_name, method + "_formatted", objectify_options(options))
+      end
+    end
+  end
+end
 
 class Date
   # Date helpers

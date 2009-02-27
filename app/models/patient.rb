@@ -21,6 +21,15 @@ class Patient < ActiveRecord::Base
         
   has_many :cases, :order => 'id DESC'
 
+
+  def birth_date_formatted
+    birth_date
+  end
+
+  def birth_date_formatted=(value)
+    write_attribute(:birth_date, Date.parse_europe(value))
+  end
+  
   # Medical history
   has_many :medical_cases, :order => 'duration_to DESC'
 
