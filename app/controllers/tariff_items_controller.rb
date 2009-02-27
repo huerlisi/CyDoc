@@ -57,10 +57,7 @@ class TariffItemsController < ApplicationController
     @service_record.patient_id = params[:patient_id]
 
     respond_to do |format|
-      format.html {
-        render
-        return
-      }
+      format.html { }
       format.js {
         render :layout => false
       }
