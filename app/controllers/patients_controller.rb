@@ -37,16 +37,13 @@ class PatientsController < ApplicationController
     render :partial => 'list', :layout => false
   end
 
+  # GET /posts/new
   def new
     patient = params[:patient]
     @patient = Patient.new(patient)
     @vcard = Vcards::Vcard.new(params[:vcard])
-    # TODO: Should be doctor specific preferences, default nothing.
-    @vcard.honorific_prefix = 'Frau'
-    @vcard.address = Vcards::Address.new
 
-    @patients = []
-    render :action => 'list'
+    render :action => 'form'
   end
 
   def create
