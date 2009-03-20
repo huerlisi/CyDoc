@@ -94,7 +94,7 @@ module ActionView
 
     class FormBuilder
       def date_field(method, options = {})
-        @template.date_field(@object_name, method + "_formatted", objectify_options(options))
+        @template.date_field(@object_name, method.to_s + "_formatted", objectify_options(options))
       end
     end
   end
