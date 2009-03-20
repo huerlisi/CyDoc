@@ -1,8 +1,13 @@
+<div class="contextual">
+    <%= link_to "Ändern", edit_patient_path(@patient), :class => "icon icon-edit" %>
+</div>
+
+<h3>Adresse</h3>
 <div class="box">
   <b><%=h @patient.full_name %><%=h "\##{@patient.doctor_patient_nr}" unless @patient.doctor_patient_nr.blank? %></b><br />
   <%=h @patient.street_address %><br />
   <%=h @patient.postal_code %> <%=h @patient.locality %><br />
-  <%=h @patient.birth_date.strftime("%d.%m.%Y") unless @patient.birth_date.nil? %><br />
+  <%=h @patient.birth_date %><br />
   <% if !@patient.insurance.nil? %>
   <%=h @patient.insurance.vcard.full_name %> <%=h "##{@patient.insurance_nr}" unless @patient.insurance_nr.blank? %><br />
   <% end %>

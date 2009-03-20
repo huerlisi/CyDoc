@@ -9,7 +9,16 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :consultations
 
-  map.resources :patients
+  map.resources :tariff_items, :collection => {:search => :get}
+
+  map.resources :invoices
+  map.resources :insurances
+
+  map.resources :patients do |patient|
+    patient.resources :tariff_items
+    patient.resources :invoices
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

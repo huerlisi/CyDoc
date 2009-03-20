@@ -25,10 +25,6 @@ class TariffItemsController < ApplicationController
 
   # CRUD actions
   def index
-    redirect_to :action => :list
-  end
-
-  def list
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
@@ -47,6 +43,8 @@ class TariffItemsController < ApplicationController
     end
   end
   
+  alias :search :index
+
   def new
     @service_record = ServiceRecord.new
 
@@ -59,10 +57,7 @@ class TariffItemsController < ApplicationController
     @service_record.patient_id = params[:patient_id]
 
     respond_to do |format|
-      format.html {
-        render
-        return
-      }
+      format.html { }
       format.js {
         render :layout => false
       }
@@ -82,7 +77,7 @@ class TariffItemsController < ApplicationController
       service_record.save
     end
     flash[:notice] = 'Erfolgreich erfasst.'
-    redirect_to :controller => 'patients', :action => 'show', :id => patient
+    redirect_to :controller => 'patients', :action => 'show', :id => patient, :tab => 'services'
   end
 
   def edit
@@ -100,6 +95,7 @@ class TariffItemsController < ApplicationController
 
   def delete_inline
     ServiceRecord.destroy(params[:id])
-    redirect_to :action => 'list_inline', :patient_id => params[:patient_id]
+    patient = Patient.find(params[:patient_id])
+    render :partial => 'service_records/list', :locals => { :items => patient.service_records}
   end
 end

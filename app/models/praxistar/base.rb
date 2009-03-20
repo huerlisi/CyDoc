@@ -3,8 +3,9 @@ include Praxistar
 class Praxistar::Base < ActiveRecord::Base
   use_db :prefix => "praxis_"
 
-  def self.import(mandant_id, selection = :all)
-    records = find(selection, :order => "#{primary_key} DESC", :conditions =>  ['Mandant_ID = ?', mandant_id])
+  def self.import(mandant_id = nil, selection = :all)
+    conditions = ['Mandant_ID = ?', mandant_id] if mandant_id
+    records = find(selection, :order => "#{primary_key} DESC", :conditions => conditions)
     
     for praxistar_record in records
       begin

@@ -1,6 +1,10 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  # CyDoc
+  belongs_to :object, :polymorphic => true
+
+  # Default
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken

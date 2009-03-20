@@ -1,0 +1,17 @@
+<div class="contextual">
+    <%= link_to "Anzeigen", @patient, :class => "icon icon-show" %>
+</div>
+
+<h3>Adresse ändern</h3>
+
+<div class="box">
+  <table>
+    <% form_for @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
+      <%= render :partial => '/vcards/form', :locals => {:vcard_name => 'patient', :vcard => @patient} %>
+
+      <%= render :partial => 'form' %>
+
+      <%= patient.submit 'Speichern' %>
+    <% end %>
+  </table>
+</div>

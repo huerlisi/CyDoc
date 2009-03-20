@@ -37,28 +37,43 @@ class PatientsController < ApplicationController
     render :partial => 'list', :layout => false
   end
 
+  # GET /posts/new
   def new
     patient = params[:patient]
     @patient = Patient.new(patient)
-    @vcard = Vcards::Vcard.new(params[:vcard])
-    # TODO: Should be doctor specific preferences, default nothing.
-    @vcard.honorific_prefix = 'Frau'
-    @vcard.address = Vcards::Address.new
-
-    @patients = []
-    render :action => 'list'
+    @patient.vcard = Vcards::Vcard.new(params[:patient])
+    
   end
 
+  # POST /posts
   def create
-    @patient = Patient.new(params[:patient])
-    @vcard = Vcards::Vcard.new(params[:vcard])
-    @patient.vcard = @vcard
+    @patient = Patient.new
+    @patient.vcard = Vcards::Vcard.new
 
-    if @patient.save
+    if @patient.update_attributes(params[:patient]) and @patient.vcard.save
       flash[:notice] = 'Patient erfasst.'
       redirect_to :action => :show, :id => @patient
     else
       render :action => :new
+    end
+  end
+
+  # GET /patients/1/edit
+  def edit
+    @patient = Patient.find(params[:id])
+  end
+
+  # PUT /patients/1
+  def update
+    @patient = Patient.find(params[:id])
+
+    respond_to do |format|
+      if @patient.update_attributes(params[:patient]) and @patient.vcard.save
+        flash[:notice] = 'Patient wurde geändert.'
+        format.html { redirect_to(@patient) }
+      else
+        format.html { render :action => "edit" }
+      end
     end
   end
 

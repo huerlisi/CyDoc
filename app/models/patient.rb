@@ -9,13 +9,29 @@ class Patient < ActiveRecord::Base
   has_one :vcard, :class_name => 'Vcards::Vcard', :foreign_key => 'object_id'
 
   delegate :full_name, :full_name=, :to => :vcard
+  delegate :family_name, :family_name=, :to => :vcard
+  delegate :given_name, :given_name=, :to => :vcard
   delegate :street_address, :street_address=, :to => :vcard
-  delegate :postal_code, :locality, :to => :vcard
+  delegate :extended_address, :extended_address=, :to => :vcard
+  delegate :postal_code, :postal_code=, :to => :vcard
+  delegate :locality, :locality=, :to => :vcard
+  delegate :honorific_prefix, :honorific_prefix=, :to => :vcard
 
   belongs_to :billing_vcard, :class_name => 'Vcards::Vcard', :foreign_key => 'billing_vcard_id'
-        
+  has_many :tiers
+  has_many :invoices, :through => :tiers
+      
   has_many :cases, :order => 'id DESC'
+  
 
+  def birth_date_formatted
+    birth_date
+  end
+
+  def birth_date_formatted=(value)
+    write_attribute(:birth_date, Date.parse_europe(value))
+  end
+  
   # Medical history
   has_many :medical_cases, :order => 'duration_to DESC'
 

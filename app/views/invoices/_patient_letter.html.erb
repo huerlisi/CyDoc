@@ -1,0 +1,194 @@
+<style>
+#invoice {
+  font-family: Arial,DejaVu Sans;
+  font-size:   8pt;
+  margin-top:  0.5cm;
+  position:    absolute;
+  width:       18.2cm;
+  height:      29cm;
+  top:         0cm;
+  left:        0cm;
+}
+#vesr {
+  width:       18.2cm;
+  font-size:   10pt;
+  font-family: ocr-b,Helvetica,Arial,sans-serif;
+  position:    absolute;
+  top:         26.9cm;
+  left:        6.7cm;
+}
+#billingaddress {
+  font-size:   12pt;
+  top:         5cm;
+  left:        11.3cm;
+}
+#info {
+  top:         0cm;
+  left:        1.5cm;
+}
+#biller {
+  top:         3cm;
+  left:        1.5cm;
+}
+#referrer {
+  top:         6cm;
+  left:        1.5cm;
+}
+#provider {
+  top:         3cm;
+  left:        5.5cm;
+}
+#patient {
+  top:         6cm;
+  left:        5.5cm;
+}
+#paymentfor1 {
+  top:         19.4cm;
+  left:        0.2cm;
+}
+#account1 {
+  top:         22.5cm;
+  left:        2.7cm;
+}
+#paymentreference1 {
+  font-size:   95%;
+  top:         24.5cm;
+  left:        0.2cm;
+}
+#paymentby1 {
+  top:         25.0cm;
+  left:        0.2cm;
+}
+#paymentamount1 {
+  top:         23.5cm;
+  right:       12.8cm;
+  text-align:  right;
+}
+#paymentfor2 {
+  top:         19.4cm;
+  left:        6.2cm;
+}
+#account2 {
+  top:         22.5cm;
+  left:        8.7cm;
+}
+#paymentby2 {
+  top:         24.0cm;
+  left:        6.2cm;
+}
+#paymentby3 {
+  top:         23.0cm;
+  left:        12.5cm;
+}
+#paymentamount2 {
+  top:         23.5cm;
+  right:       6.7cm;
+  text-align:  right;
+}
+#reference {
+  font-size:   11pt;
+  top:         21.8cm;
+  left:        12.6cm;
+  width:       10cm;
+}
+.block {
+  font-size:   9pt;
+  position:    absolute;
+}
+.line {
+  font-size:   9pt;
+  position:    absolute;
+}
+h2 {
+  font-size:   12pt;
+}
+h3 {
+  font-size:   8pt;
+  color:       grey;
+}
+
+th {
+  text-align:  left;
+}
+
+</style>
+
+<div style="position: relative">
+<div id="invoice">
+<div id="info" class="block">
+  <h2>Patienten-Rechnung Nr. <%= @invoice.id %></h2>
+  <table>
+    <tr>
+      <th>Rechnungs-Datum:</th><td><%= @invoice.date.strftime('%d.%m.%Y') %></td>
+    </tr>
+    <tr>
+      <th>Behandlungen von:</th><td><%= @invoice.treatment.date_begin.strftime('%d.%m.%Y') %></td>
+    </tr>
+    <tr>
+      <th>Behandlungen bis:</th><td><%= @invoice.treatment.date_end.strftime('%d.%m.%Y') %></td>
+    </tr>
+  </table>
+</div>
+
+<div id="biller" class="block">
+  <h3>Rechnungssteller</h3>
+  <%= full_address(@invoice.biller.praxis) %>
+  <br/>
+  <%= contact(@invoice.biller.praxis) %>
+</div>
+
+<div id="referrer" class="block">
+<h3>Zuweisender Arzt</h3>
+  <%= full_address(@invoice.referrer.praxis) %>
+<br />
+  <%= contact(@invoice.referrer.praxis) %>
+</div>
+
+<div id="provider" class="block">
+<h3>Leistungserbringer</h3>
+  <%= full_address(@invoice.provider.praxis) %>
+<br />
+  <%= contact(@invoice.provider.praxis) %>
+</div>
+
+<div id="patient" class="block">
+<h3>Patient</h3>
+  <%= full_address(@invoice.patient.vcard) %>
+  <br/>
+  Geburtsdatum <%= @invoice.patient.birth_date.strftime('%d.%m.%Y') %>			
+</div>
+
+<div id="billingaddress" class="block">
+  <%= full_address(@invoice.patient.vcard) %>
+</div>
+
+<%
+@bank_account = @invoice.biller.account
+%>
+
+<div id="paymentfor1" class="block">
+<%= @bank_account.bank.vcard.full_name %><br />
+<%= @bank_account.bank.vcard.postal_code %> <%= @bank_account.bank.vcard.locality %><br />
+<div style="font-size: 80%; margin-top: 0.2cm">Zugunsten von</div>
+  <%= full_address(@bank_account.holder_vcard) %>
+</div>
+
+<div id="account1" class="line"><%= @bank_account.pc_id %></div>
+<div id="paymentamount1" class="line"><%= sprintf('%.0f', @invoice.amount.floor) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= sprintf('%02i', @invoice.rounded_amount * 100 % 100) %></div>
+<div id="paymentreference1" class="line"><%= @invoice.esr9_reference(@bank_account) %></div>
+<div id="paymentby1" class="block"><%= full_address(@invoice.patient.vcard) %></div>
+
+<div id="paymentfor2" class="block">
+<%= @bank_account.bank.vcard.full_name %><br />
+<%= @bank_account.bank.vcard.postal_code %> <%= @bank_account.bank.vcard.locality %><br />
+<div style="font-size: 80%; margin-top: 0.2cm">Zugunsten von</div>
+  <%= full_address(@bank_account.holder_vcard) %>
+</div>
+
+<div id="account2" class="line"><%= @bank_account.pc_id %></div>
+<div id="paymentamount2" class="line"><%= sprintf('%.0f', @invoice.amount.floor) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= sprintf('%02i', @invoice.rounded_amount * 100 % 100) %></div>
+<div id="paymentby3" class="block"><%= full_address(@bank_account.holder_vcard) %></div>
+<div id="reference" class="line"><%= @invoice.esr9_reference(@bank_account) %></div>
+<div id="vesr"><%= @invoice.esr9(@bank_account) %></div>
+</div>
+<div>

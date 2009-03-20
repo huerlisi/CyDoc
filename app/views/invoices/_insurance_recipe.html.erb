@@ -1,0 +1,342 @@
+<style>
+#invoice {
+  font-family: Arial,DejaVu Sans;
+  font-size:   8pt;
+  margin:      1.2cm;
+}
+#vesr {
+  text-align:  right;
+  width:       18.2cm;
+  font-size:   12pt;
+  font-family: ocr-b,Helvetica,Arial,sans-serif;
+}
+.head {
+  font-size:   16pt;
+  font-weight: bold;
+}
+.subhead {
+  font-size:   7pt;
+  font-weight: bold;
+}
+.list {
+  font-size:   7pt;
+}
+.total {
+  font-weight: bold;
+}
+.amount {
+  font-size:   8pt;
+  text-align:  right;
+}
+.totalamount {
+  font-size:   8pt;
+  font-weight: bold;
+  text-align:  right;
+}
+.bullet {
+  font-size:   8pt;
+  font-weight: none;
+}
+table {
+  border-spacing: 0;
+}
+th {
+  font-size:   7pt;
+  font-weight: none;
+  text-align:  left;
+}
+
+</style>
+
+<%
+  page = 1
+%>
+
+
+<div id="invoice" style="width: 18.2cm; height: 26cm; position: relative">
+<table style="width:100%">
+  <tr>
+    <td class="head" style="width:13.8cm">R&uuml;ckforderungsbeleg</td>
+    <td class="list" style="width:4.7cm">Release&nbsp;<span class="bullet">&#9632;</span>&nbsp;4.0M/de</td>
+    <td class="head">M</td>
+  </tr>
+</table>
+
+<table style="width:18.2cm; border:thin solid black; border-bottom:none">
+  <tr>
+    <td class="subhead" style="width:1.8cm">Dokument</td>
+    <td style="width:2.3cm"> </td>
+    <td style="width:2.8cm"><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.id %></td>
+    <td style="width:5.7cm"><%= @invoice.date.strftime('%d.%m.%Y') %></td>
+    <td class="subhead" style="width:2cm">Seite&nbsp;<span class="bullet">&#9632;</span>&nbsp;<%=h page %></td>
+  </tr>
+  <tr>
+    <td class="subhead" rowspan="2" style="width:1.8cm">Rechnungs-<br />steller</td>
+    <td class="list">EAN-Nr.</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.biller.ean_party %></td>
+    <td colspan="3" class="list"><%= full_address(@invoice.biller.praxis, ', ') %></td>
+  </tr>
+  <tr>
+    <td class="list">ZSR-Nr.</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.biller.zsr %></td>
+    <td colspan="4" class="list"><%= contact(@invoice.biller.praxis, ' ') %></td>
+  </tr>
+  <tr>
+    <td class="subhead" rowspan="2">Leistungs-<br />erbringer</td>
+    <td class="list">EAN-Nr.</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.provider.ean_party %></td>
+    <td colspan="3" class="list"><%=h full_address(@invoice.provider.praxis, ', ') %></td>
+  </tr>
+  <tr>
+    <td class="list">ZSR-Nr.</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.provider.zsr %></td>
+    <td colspan="4" class="list"><%= contact(@invoice.provider.praxis, ' ') %></td>
+  </tr>
+</table>
+<table style="width: 100%; border:thin solid black">
+  <tr>
+    <td class="subhead" style="width:1.8cm">Patient</td>
+    <td class="list" style="width:2.3cm">Name</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.vcard.family_name %></td>
+    <td class="list">EAN-Nr.&nbsp;<span class="bullet">&#9632;</span></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Vorname</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.vcard.given_name %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Strasse</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.vcard.street_address %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">PLZ</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.vcard.postal_code %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Ort</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.vcard.locality %></td>
+    <td><%=h @invoice.patient.vcard.honorific_prefix %></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Geburtsdatum</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.birth_date.strftime('%d.%m.%Y') %></td>
+    <td><%=h @invoice.patient.vcard.full_name %></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Geschlecht</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.sex %></td>
+    <td><%=h @invoice.patient.vcard.street_address %></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Unfalldatum</td>
+    <td><span class="bullet">&#9632;</span></td>
+    <td><%=h @invoice.patient.vcard.postal_code %>&nbsp;<%=h @invoice.patient.vcard.locality %></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Unfall-/Verf&uuml;g.Nr.</td>
+    <td><span class="bullet">&#9632;</span><%=h @invoice.law.case_id %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">AHV-Nr.</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.law.ssn %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Versicherten-Nr.</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.insurance_nr %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Betriebs-Nr./-Name</td>
+    <td><span class="bullet">&#9632;</span></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Kanton</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.treatment.canton %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Rechnungskopie</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;Ja</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Verg&uuml;tungsart</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.tiers.name %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Gesetz</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.law.name %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Behandlungsgrund</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.treatment.reason %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Behandlung</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.treatment.date_begin.strftime('%d.%m.%Y') %>&nbsp;-&nbsp;<%=h @invoice.treatment.date_end.strftime('%d.%m.%Y') %></td>
+    <td class="list">Rechnungsnr.</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.id %></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="list">Erbringungsort</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;Praxis<%=h @invoice.place_type %></td>
+    <td class="list">Rechnungs-/Mahndatum</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.date.strftime('%d.%m.%Y') %></td>
+  </tr>
+  <tr>
+    <td class="subhead" style="border-top:thin solid black">Auftraggeber</td>
+    <td class="list" style=" border-top:thin solid black">EAN-Nr./ZSR-Nr.</td>
+    <td colspan="3" style=" border-top:thin solid black"><span class="bullet">&#9632;</span></td>
+  </tr>
+  <tr>
+    <td class="subhead" style="border-top:thin solid black">Diagnose</td>
+    <td colspan="4" style="border-top:thin solid black">
+      <span class="bullet">&#9632;</span>&nbsp;<%= @invoice.treatment.diagnoses.map {|d| d.type}.uniq.join('; ') %>
+      <span class="bullet">&#9632;</span>&nbsp;<%= @invoice.treatment.diagnoses.map {|d| d.code}.join('; ') %>
+    </td>
+  </tr>
+  <tr>
+    <td class="subhead"  style="border-top:thin solid black">EAN-Liste</td>
+    <td colspan ="4" style="border-top:thin solid black">
+      <span class="bullet">&#9632;</span>&nbsp;1/<%= @invoice.biller.ean_party %>
+    </td>
+  </tr>
+  <tr>
+    <td class="subhead" style="border-top:thin solid black">Bemerkung</td>
+    <td colspan="4" style="border-top:thin solid black"><%=h @invoice.remark %></td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th style="width:2cm">Datum</th>
+    <th style="width:1cm">Tarif</th>
+    <th style="width:1.5cm">Tarifziffer</th>
+    <th style="width:1.5cm">Bezugsziffer</th>
+    <th style="width:0.8cm">Si&nbsp;St</th>
+    <th style="width:1cm">Anzahl</th>
+    <th style="width:1.5cm">TP&nbsp;AL/Preis</th>
+    <th style="width:0.8cm">f&nbsp;AL</th>
+    <th style="width:1cm">TPW&nbsp;AL</th>
+    <th style="width:1cm">TP&nbsp;TL</th>
+    <th style="width:0.8cm">f&nbsp;TL</th>
+    <th style="width:1.5cm">TPW&nbsp;TL</th>
+    <th style="width:0.4cm">A</th>
+    <th style="width:0.4cm">V</th>
+    <th style="width:0.4cm">P</th>
+    <th style="width:0.4cm">M</th>
+    <th style="width:2cm; text-align:right">Betrag</th>
+  </tr>
+  <%= render :partial => 'tariff_items/record', :collection => @invoice.service_records %>
+</table>
+
+<br />
+<br />
+<br />
+<table>
+  <tr>
+    <td class="subhead" style="width:1.2cm"><span class="bullet">&#9632;</span>&nbsp;PFL</td>
+    <td class="list" style="width:1.3cm">Tarmed&nbsp;AL</td>
+    <td class="amount" style="width:1.7cm"><%=h sprintf('%0.2f', @invoice.amount_mt ) %></td>
+    <td class="amount" style="width:1.3cm">(<%=h sprintf('%0.2f', @invoice.amount_mt / 0.89 ) %>)</td>
+    <td style="width:1cm" />
+    <td class="list" style="width:1.3cm">Physio</td>
+    <td class="amount" style="width:1.7cm">0.00</td>
+    <td style="width:1.2cm" />
+    <td class="list" style="width:1.3cm">MiGel</td>
+    <td class="amount" style="width:1.5cm">0.00</td>
+    <td style="width:1.3cm" />
+    <td class="list" style="width:1.9cm">&Uuml;brige</td>
+    <td class="amount" style="width:1.7">0.00</td>
+    <td />
+  </tr>
+  <tr>
+    <td style="width:1.2cm" />
+    <td class="list" style="width:1.3cm">Tarmed&nbsp;TL</td>
+    <td class="amount" style="width:1.7cm"><%=h sprintf('%0.2f', @invoice.amount_tt) %></td>
+    <td class="amount" style="width:1.3cm">(<%=h sprintf('%0.2f', @invoice.amount_tt / 0.89) %>)</td>
+    <td style="width:1cm" />
+    <td class="list" style="width:1.3cm">Labor</td>
+    <td class="amount" style="width:1.7cm">0.00</td>
+    <td style="width:1.2cm" />
+    <td class="list" style="width:1.3cm">Medi</td>
+    <td class="amount" style="width:1.5cm">0.00</td>
+    <td style="width:1.3cm" />
+    <td class="list" style="width:1.9cm">Kantonal</td>
+    <td class="amount" style="width:1.7">0.00</td>
+    <td />
+  </tr>
+  <tr>
+    <td colspan="3" class="subhead" style="width:2.5cm"	><span class="bullet">&#9632;</span>&nbsp;Gesamtbetrag/CHF</td>
+    <td class="totalamount" style="width:1.7cm"><%=h sprintf('%0.2f', @invoice.amount) %></td>
+    <td style="width:1.3cm"></td>
+    <td class="subhead" style="width:1.3cm">davon&nbsp;PFL</td>
+    <td class="totalamount"><%=h sprintf('%0.2f', @invoice.amount) %></td>
+    <td />
+    <td class="subhead">Anzahlung</td>
+    <td class="totalamount">0.00</td>
+    <td />
+    <td class="subhead">F&auml;lliger&nbsp;Betrag</td>
+    <td />
+    <td class="totalamount"><%=h sprintf('%0.2f', @invoice.amount) %></td>
+  </tr>
+  <tr>
+    <td class="subhead"><span class="bullet">&#9632;</span>&nbsp;MWSt.Nr.</td>
+  </tr>
+  <tr>
+    <td class="subhead">Code</td>
+    <td class="subhead">Satz</td>
+    <td class="subhead">Betrag</td>
+    <td class="subhead">MWSt</td>
+  </tr>
+  <tr>
+    <td class="text-align: right"><span class="bullet">&#9632;</span>&nbsp;0</td>
+    <td>0.00</td>
+    <td><%=h sprintf('%0.2f', @invoice.amount) %></td>
+    <td>0.00</td>
+  </tr>
+  <tr>
+    <td class="total">Total</td>
+    <td></td>
+    <td class="totalamount"></td>
+    <td class="totalamount">0.00</td>
+  </tr>
+</table>
+
+<br />
+<br />
+<br />
+
+<%
+@bank_account = @invoice.biller.account
+%>
+
+
+<div id="vesr"><%= @invoice.esr9(@bank_account) %></div>
+</div>

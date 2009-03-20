@@ -1,0 +1,7 @@
+<h3>Rechnungen</h3>
+<div id="new_service_record"></div>
+
+<div id="services_list">
+  <% @invoices = @patient.invoices %>
+  <%= render :partial => 'invoices/list' %>
+</div>
