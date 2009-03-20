@@ -29,7 +29,7 @@ class PatientsController < ApplicationController
   end
 
   def search
-    query = params[:query] || params[:search][:query]
+    query = params[:query] || params[:search]
     query ||= params[:search][:query] if params[:search]
     query ||= params[:quick_search][:query] if params[:quick_search]
     @patients = Patient.clever_find(query)
@@ -77,6 +77,7 @@ class PatientsController < ApplicationController
     end
   end
 
+  # GET /patients/1
   def show
     # TODO: Check if .exists? recognizes the finder conditions
     unless Patient.exists?(params[:id])
