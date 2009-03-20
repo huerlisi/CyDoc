@@ -1,6 +1,6 @@
 class Praxidata::PatientenPersonalien < Praxidata::Base
-  set_table_name "Patienten_Personalien"
-  set_primary_key "ID_Patient"
+  set_table_name "cyPatient"
+  set_primary_key "IDStamm"
   
   def self.hozr_model
     Patient
@@ -9,32 +9,36 @@ class Praxidata::PatientenPersonalien < Praxidata::Base
   def self.import_attributes(a)
     {
       :vcard => Vcards::Vcard.new(
-        :locality => a.tx_Ort,
-        :postal_code => a.tx_PLZ,
-        :street_address => a.tx_Strasse,
-        :family_name => a.tx_Name,
-        :given_name => a.tx_Vorname,
-        :honorific_prefix => [a.tx_Anrede, a.tx_Titel].join(' ')
+        :locality => a.txOrt,
+        :postal_code => a.txPLZ,
+        :street_address => a.txAdresse1,
+        :family_name => a.txName1,
+        :given_name => a.txName2,
+        :honorific_prefix => [a.txAnrede, a.txTitel].join(' ')
+        
       ),
-      :billing_vcard => Vcards::Vcard.new(
-        :locality => a.tx_fakt_Ort,
-        :postal_code => a.tx_fakt_PLZ,
-        :street_address => a.tx_fakt_Strasse,
-        :family_name => a.tx_fakt_Name,
-        :given_name => a.tx_fakt_Vorname,
-        :extended_address => a.tx_fakt_ZuHanden,
-        :honorific_prefix => [a.tx_fakt_Anrede, a.tx_fakt_Titel].join('')
-      ),
-      :insurance_id => a.KK_Garant_ID,
-      :insurance_nr => a.tx_KK_MitgliedNr,
-      :doctor_id => a.ZuwArzt_ID,
-      :birth_date => a.tx_Geburtsdatum,
-      :created_at => a.tx_Aufnahmedatum,
-      :remarks => a.mo_Bemerkung,
-      :sex => a.Geschlecht_ID,
-      :dunning_stop => a.tf_Mahnen,
-      :use_billing_address => a.tf_fakt_Aktiv,
-      :deceased => a.tf_Exitus,
+# I have not yet found out how Triamun handles billing addresses
+#      :billing_vcard => Vcards::Vcard.new(
+#        :locality => a.tx_fakt_Ort,
+#        :postal_code => a.tx_fakt_PLZ,
+#        :street_address => a.tx_fakt_Strasse,
+#        :family_name => a.tx_fakt_Name,
+#        :given_name => a.tx_fakt_Vorname,
+#        :extended_address => a.tx_fakt_ZuHanden,
+#        :honorific_prefix => [a.tx_fakt_Anrede, a.tx_fakt_Titel].join('')
+#      ),
+
+
+#      :insurance_id => a.KK_Garant_ID,        # probably insurances are stored in TadrStamm as well as Doctors and Patients
+      :insurance_nr => a.txVersichertenNummer, # we will have to check if the join clause is correct
+#      :doctor_id => a.ZuwArzt_ID,
+      :birth_date => a.dtGeburtstag,
+      :created_at => a.dtAufnahmedatum,
+      :remarks => a.moBemerkungen,
+      :sex => a.shSexID,
+      :dunning_stop => a.tfMahnSperre,
+#      :use_billing_address => a.tf_fakt_Aktiv,  # have not yet found the billing-address information
+      :deceased => a.dtExitus, #Attention in Triamun it is a date not boolean
     }
   end
   
