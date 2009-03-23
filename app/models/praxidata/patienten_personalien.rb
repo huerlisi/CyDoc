@@ -14,7 +14,8 @@ class Praxidata::PatientenPersonalien < Praxidata::Base
         :street_address => a.txAdresse1,
         :family_name => a.txName1,
         :given_name => a.txName2,
-        :honorific_prefix => [a.txAnrede, a.txTitel].join(' ')
+#        :honorific_prefix => [a.txAnrede, a.txTitel].join(' ')
+        :honorific_prefix => a.txAnrede
         
       ),
 # I have not yet found out how Triamun handles billing addresses
@@ -42,8 +43,8 @@ class Praxidata::PatientenPersonalien < Praxidata::Base
     }
   end
   
-  def self.import(mandant_id, selection = :all)
-    records = find(selection, :order => "#{primary_key} DESC", :conditions =>  ['Mandant_ID = ?', mandant_id])
+  def self.import(selection = :all)
+    records = find(selection, :order => "#{primary_key} DESC")
     
     for praxistar_record in records
       begin
