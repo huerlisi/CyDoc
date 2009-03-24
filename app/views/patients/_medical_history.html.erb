@@ -3,11 +3,15 @@
 </div>
 
 <h3>Krankengeschichte</h3>
+
 <div id="new_medical_case"></div>
+
+<table class="list">
 <% if @patient.medical_cases.empty? %>
-  <p>Keine Krankengeschichte</p>
+  <tr>
+    <td>Keine Krankengeschichte</td>
+  </tr>
 <% else %>
-  <table class="list">
     <%= render :partial => 'medical_history_item', :collection => @patient.medical_cases %>
-  </table>
 <% end %>
+</table>
