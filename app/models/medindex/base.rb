@@ -14,5 +14,9 @@ module Medindex
     def self.all
       xml.root.elements
     end
+
+    def self.import
+      Insurance.import
+    end
   end
 end
