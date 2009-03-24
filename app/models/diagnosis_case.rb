@@ -3,6 +3,10 @@ class DiagnosisCase < MedicalCase
   
   before_save :create_or_set_diagnosis
   
+  def self.to_s
+    "Diagnose"
+  end
+
   private
   def create_or_set_diagnosis
     # TODO: generalize
