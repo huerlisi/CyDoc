@@ -4,7 +4,7 @@
 
 <h3>Adresse</h3>
 <div class="box">
-  <b><%=h @patient.full_name %><%=h "\##{@patient.doctor_patient_nr}" unless @patient.doctor_patient_nr.blank? %></b><br />
+  <b><%=h @patient.name %></b><br />
   <%=h @patient.street_address %><br />
   <%=h @patient.postal_code %> <%=h @patient.locality %><br />
   <%=h @patient.birth_date %><br />
