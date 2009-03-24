@@ -11,6 +11,10 @@ class Doctor < ActiveRecord::Base
 
   has_and_belongs_to_many :offices
 
+  def to_s
+    [praxis.honorific_prefix, praxis.given_name, praxis.family_name].compact.join(" ")
+  end
+
   # Proxy accessors
   def name
     if praxis.nil?
