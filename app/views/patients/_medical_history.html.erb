@@ -7,11 +7,13 @@
 <div id="new_medical_case"></div>
 
 <table class="list">
+  <%= render :partial => 'medical_history_header' %>
 <% if @patient.medical_cases.empty? %>
   <tr>
-    <td>Keine Krankengeschichte</td>
+    <td colspan="2">Keine Krankengeschichte</td>
   </tr>
 <% else %>
     <%= render :partial => 'medical_history_item', :collection => @patient.medical_cases %>
 <% end %>
+  <%= render :partial => 'medical_history_footer' %>
 </table>
