@@ -8,6 +8,7 @@ module Medindex
         int_record.vcard = Vcards::Vcard.new(
         	:full_name => ext_record.field('DESCR1'),
         	:street_address => [ext_record.field('ADDR/STREET'), ext_record.field('ADDR/STRNO')].compact.join(" "),
+              	:extended_address => ext_record.field('ADDR/POBOX'),
               	:postal_code => ext_record.field('ADDR/ZIP'),
         	:locality => ext_record.field('ADDR/CITY')
         )
