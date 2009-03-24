@@ -20,9 +20,3 @@ module Medindex
     end
   end
 end
-
-class REXML::Element
-  def field(selector)
-    elements[selector + '/text()'].to_s
-  end
-end
