@@ -4,13 +4,24 @@ module Medindex
       for ext_record in self.all
         int_record = Kernel::Insurance.new
         
-        int_record.ean_party = ext_record.elements['EAN/text()'].to_s
-        int_record.vcard = Vcards::Vcard.new(:full_name => ext_record.elements['DESCR1/text()'].to_s)
+        int_record.ean_party = ext_record.field('EAN')
+        int_record.vcard = Vcards::Vcard.new(
+        	:full_name => ext_record.field('DESCR1'),
+        	:street_address => [ext_record.field('ADDR/STREET'), ext_record.field('ADDR/STRNO')].compact.join(" "),
+              	:postal_code => ext_record.field('ADDR/ZIP'),
+        	:locality => ext_record.field('ADDR/CITY')
+        )
 
         puts int_record.ean_party
         
         int_record.save!
       end
     end
+  end
+end
+
+class REXML::Element
+  def field(selector)
+    elements[selector + '/text()'].to_s
   end
 end
