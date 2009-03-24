@@ -24,7 +24,7 @@ class Patient < ActiveRecord::Base
   has_many :cases, :order => 'id DESC'
   
   def to_s
-    "#{name} ##{doctor_patient_nr}, #{birth_date.strftime('%d.%m.%Y')}"
+    "#{name}#{' #' + doctor_patient_nr if doctor_patient_nr}, #{birth_date.strftime('%d.%m.%Y')}"
   end
 
   def birth_date_formatted
@@ -42,14 +42,14 @@ class Patient < ActiveRecord::Base
   has_many :service_records, :order => 'date DESC', :before_add => :before_add_service_record
 
   # Proxy accessors
-#  def name
-#    if vcard.nil?
-#      ""
-#    else
-#      vcard.full_name || ""
-#    end
-#  end
-#
+  def name
+    if vcard.nil?
+      ""
+    else
+      vcard.full_name || ""
+    end
+  end
+
 #  def name=(value)
 #    if v = vcards.active.first
 #      v.full_name = value

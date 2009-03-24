@@ -1,6 +1,4 @@
-<h2><%=h @patient.full_name %></h2>
-
-<% tabs = patient_tabs %>
+<% tabs = patient_tabs(@patient) %>
 <% selected_tab = params[:tab] ? params[:tab].to_s : tabs.first[:name] %>
 
 <div class="tabs">
