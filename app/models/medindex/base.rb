@@ -16,7 +16,7 @@ module Medindex
     end
 
     def self.import
-      Insurance.import
+      Medindex::Insurance.import
     end
   end
 end
