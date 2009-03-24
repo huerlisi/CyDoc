@@ -13,6 +13,28 @@ table th { text-align: left; }
 form.box {background:#ffffdd; padding:6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
 form { display: block; }
 
+/* Tabs */
+#content .tabs ul li a#{
+line-height: 1.6em;
+}
+
+#content .tabs ul li a#tab-overview{
+display:block;
+font-size: 1.2em;
+font-style: italic;
+text-decoration: none;
+line-height: 0.9em;
+padding: 4px 6px 4px 6px;
+border: 0px;
+color: #777;
+background-color: #fff;
+font-weight: bold;
+}
+
+#content .tabs ul li a.selected#tab-overview{
+background-color: #fff;
+}
+
 /* Cases */
 div.case_info { background:#ffffdd; padding:6px; margin-bottom:6px; border:1px solid #d7d7d7; }
 table.overview-group { margin-bottom:1.8em; border-width:2px}
