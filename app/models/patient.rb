@@ -3,7 +3,7 @@ class Patient < ActiveRecord::Base
   belongs_to :doctor
 
   # FIX: This buggily needs this :select hack
-  named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcards, :conditions => Vcards::Vcard.by_name_conditions(name)}}
+  named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcard, :conditions => Vcards::Vcard.by_name_conditions(name)}}
   named_scope :by_date, lambda {|date| {:conditions => ['birth_date LIKE ?', Date.parse_europe(date).strftime('%%%y-%m-%d')] }}
 
   has_one :vcard, :class_name => 'Vcards::Vcard', :foreign_key => 'object_id'
