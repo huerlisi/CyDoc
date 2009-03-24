@@ -1,2 +1,5 @@
-<h2>Neue <%= @medical_case.class.to_s %></h2>
-<%= render :partial => @medical_case.class.name.underscore + '_form' %>
+<div class="box">
+  <h3>Neue <%= @medical_case.class.to_s %></h3>
+
+  <%= render :partial => @medical_case.class.name.underscore + '_form' %>
+</div>

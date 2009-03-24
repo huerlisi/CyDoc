@@ -1,6 +1,8 @@
-<h3>Patient erfassen</h3>
+<h2>Patienten</h2>
 
 <div class="box">
+  <h3>Patient erfassen</h3>
+
   <table>
     <% form_for @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
       <%= render :partial => '/vcards/form', :locals => {:vcard_name => 'patient', :vcard => @patient} %>
