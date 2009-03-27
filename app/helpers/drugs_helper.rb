@@ -1,0 +1,2 @@
+module DrugsHelper
+end

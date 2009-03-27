@@ -19,6 +19,10 @@ ActionController::Routing::Routes.draw do |map|
     patient.resources :invoices
   end
 
+  # Medindex
+  # ========
+  map.resources :drugs
+  
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

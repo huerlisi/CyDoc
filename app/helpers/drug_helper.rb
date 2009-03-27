@@ -1,2 +1,0 @@
-module DrugHelper
-end
