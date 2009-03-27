@@ -8,7 +8,7 @@ class PatientsController < ApplicationController
   in_place_edit_for :patient, :doctor_patient_nr
   in_place_edit_for :patient, :insurance_nr
                 
-  # CRUD Actions
+  # GET /patients
   def index
     query = params[:query]
     query ||= params[:search][:query] if params[:search]

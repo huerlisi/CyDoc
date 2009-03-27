@@ -1,12 +1,9 @@
 class InsurancesController < ApplicationController
-  # CRUD Actions
-
   # GET /insurances
   def index
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-#    @insurances = Insurance.find :all, :joins => :vcard, :order => 'full_name'
     @insurances = Insurance.by_name("%#{query}%")
     respond_to do |format|
       format.html {
