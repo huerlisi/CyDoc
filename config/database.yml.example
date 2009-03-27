@@ -1,0 +1,99 @@
+# Main Database
+# =============
+development:
+  database: cydoc_development
+  adapter: mysql
+  host: localhost
+  username: 
+  password: 
+  encoding: utf8
+
+production:
+  database: cydoc_production
+  adapter: mysql
+  host: localhost
+  username: 
+  password: 
+  encoding: utf8
+
+test:
+  database: cydoc_test
+  adapter: mysql
+  host: localhost
+  username: 
+  password: 
+  encoding: utf8
+
+# Tarmed Database
+# ===============
+tarmed_development:
+  adapter: sqlite3
+  database: db/tarmed_development.sqlite3
+
+tarmed_test:
+  adapter: sqlite3
+  database: db/tarmed_test.sqlite3
+
+tarmed_production:
+  adapter: sqlite3
+  database: db/tarmed_production.sqlite3
+
+# Medindex Database
+# =================
+medindex_development:
+  adapter: sqlite3
+  database: db/medindex_development.sqlite3
+
+medindex_test:
+  adapter: sqlite3
+  database: db/medindex_test.sqlite3
+
+medindex_production:
+  adapter: sqlite3
+  database: db/medindex_production.sqlite3
+
+# Praxistar
+# =========
+praxis_production:
+  adapter: sqlserver
+  mode: odbc
+  dsn: praxistar_production
+  username: 
+  password: 
+
+praxis_development:
+  adapter: sqlserver
+  mode: odbc
+  dsn: praxistar_development
+  username: 
+  password: 
+
+praxis_test:
+  adapter: sqlserver
+  mode: odbc
+  dsn: praxistar_test
+  username: 
+  password: 
+
+# Praxidata
+# =========
+praxidata_production:
+  adapter: sqlserver
+  mode: odbc
+  dsn: praxidata_production
+  username: 
+  password: 
+
+praxidata_development:
+  adapter: sqlserver
+  mode: odbc
+  dsn: praxidata_development
+  username: 
+  password: 
+
+praxidata_test:
+  adapter: sqlserver
+  mode: odbc
+  dsn: praxidata_test
+  username: 
+  password: 
