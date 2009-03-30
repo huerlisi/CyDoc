@@ -14,6 +14,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :invoices
   map.resources :insurances
 
+  map.resources :doctors
+
   map.resources :patients do |patient|
     patient.resources :tariff_items
     patient.resources :invoices

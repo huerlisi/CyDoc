@@ -1,8 +1,12 @@
+<div class="contextual">
+    <%= link_to "Erfassen", new_doctor_path, :class => "icon icon-add" %>
+</div>
 <h2>&Auml;rzte</h2>
 
 <script type="text/javascript">
   Event.observe(window, 'load', function() {$('search_query').focus()}, false);
 </script>
+
 <div id="search_form">
   <%= render :partial => 'search_form' %>
   <%= loading_indicator_tag :id => 'search' %>

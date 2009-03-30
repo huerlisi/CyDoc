@@ -1,17 +1,12 @@
-<% form_tag '#', {:class => 'box'} do %>
-  <label for="search_query">Suche</label>
-  <%= text_field :search, :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
-  <%= image_tag("indicator.gif",
-                :align => "absmiddle",
-                :border => 0,
-                :id => "spinner",
-                :style =>"display: none;" ) %>
-  </form>
-
-  <%= observe_field 'search_query',  :frequency => 2,
-           :update => 'search_results',
-           :before => "Element.show('spinner')",
-           :success => "Element.hide('spinner')",
-           :url => {:controller => :doctors, :action => 'search'},
-           :with => 'query' %>
-<% end %>
+<div class="box">
+  <% remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => doctors_path, :html => {:method => :get}, :method => :get do |f| %>
+    <%= f.label 'query', 'Suche' %>
+    <%= f.text_field :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
+    <%= image_submit_tag 'find.png', :title => 'Suchen' %>
+    <%= image_tag("indicator.gif",
+                  :align => "absmiddle",
+                  :border => 0,
+                  :id => "spinner",
+                  :style =>"display: none;" ) %>
+  <% end %>
+</div>

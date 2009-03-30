@@ -6,7 +6,7 @@ class Patient < ActiveRecord::Base
   named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcard, :conditions => Vcards::Vcard.by_name_conditions(name)}}
   named_scope :by_date, lambda {|date| {:conditions => ['birth_date LIKE ?', Date.parse_europe(date).strftime('%%%y-%m-%d')] }}
 
-  has_one :vcard, :class_name => 'Vcards::Vcard', :foreign_key => 'object_id'
+  has_one :vcard, :class_name => 'Vcards::Vcard', :as => 'object'
 
   delegate :full_name, :full_name=, :to => :vcard
   delegate :family_name, :family_name=, :to => :vcard
