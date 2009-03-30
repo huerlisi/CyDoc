@@ -3,7 +3,7 @@
 # Convert an MS Access database file to a PostgreSQL script file.
 # This script uses the MDB Tools (http://mdbtools.sourceforge.net)
 # Copyright (c) 2006, Daniel Lutz and Elexis
-# $Id: mdb2sql 2386 2007-05-18 12:26:04Z danlutz $
+# Copyright (c) 2009, Simon Huerlimann <simon.huerlimann@cyt.ch> and ZytoLabor
 
 TYPE=postgresql
 
