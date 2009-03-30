@@ -32,14 +32,21 @@ class DoctorsController < ApplicationController
     @account = @doctor.account
   end
 
+  # GET /posts/new
+  def new
+    doctor = params[:doctor]
+    @doctor = Doctor.new(doctor)
+    @doctor.vcard = Vcards::Vcard.new(params[:doctor])
+  end
+
   def create
     @doctor = Doctor.new(params[:doctor])
-    @account = @doctor.build_account(params[:account])
-    @vcard = @doctor.build_vcard(params[:vcard])
+    @doctor.build_account(params[:account])
+    @doctor.build_vcard(params[:vcard])
 
     if @doctor.save
       flash[:notice] = 'Arzt gespeichert.'
-      redirect_to :action => :show, :id => @doctor
+      redirect_to @doctor
     else
       render :action => :new
     end

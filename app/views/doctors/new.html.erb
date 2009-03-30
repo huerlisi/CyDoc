@@ -1,8 +1,14 @@
-<% form_for :doctor, :url => {:action => 'create'} do |f| %>
-  <table>
-    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'praxis', :vcard => @praxis } %>
-    <%= render :partial => 'form' %>
-    <%= render :partial => 'account_form' %>
-  </table>
-  <%= f.submit %>
-<% end %>
+<h2>Arzt</h2>
+
+<div class="box">
+  <h3>Personalien</h3>
+
+  <% form_for @doctor do |f| %>
+    <table>
+      <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'vcard', :vcard => @vcard } %>
+      <%= render :partial => 'form' %>
+      <%= render :partial => 'account_form' %>
+    </table>
+    <%= f.submit 'Speichern' %>
+  <% end %>
+</div>

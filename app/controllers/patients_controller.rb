@@ -42,7 +42,6 @@ class PatientsController < ApplicationController
     patient = params[:patient]
     @patient = Patient.new(patient)
     @patient.vcard = Vcards::Vcard.new(params[:patient])
-    
   end
 
   # POST /posts
