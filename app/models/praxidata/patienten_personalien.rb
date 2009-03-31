@@ -66,5 +66,7 @@ class Praxidata::PatientenPersonalien < Praxidata::Base
         logger.info "\n"
       end
     end
+    
+    return true
   end
 end
