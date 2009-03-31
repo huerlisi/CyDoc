@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     return if current_user.nil?
     
     # Authenticate doctor login
-    doctor = Doctor.find_by_login(current_user.login)
+    doctor = current_user.object
     unless doctor.nil?
       logger.info("  Doctor login: '#{doctor.name}'")
 
