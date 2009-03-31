@@ -24,7 +24,7 @@ class Patient < ActiveRecord::Base
   has_many :cases, :order => 'id DESC'
   
   def to_s
-    "#{name}#{' #' + doctor_patient_nr if doctor_patient_nr}, #{birth_date.strftime('%d.%m.%Y')}"
+    "#{name}#{' #' + doctor_patient_nr if doctor_patient_nr}, #{birth_date.strftime('%d.%m.%Y') if birth_date}"
   end
 
   def birth_date_formatted
