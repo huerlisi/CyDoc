@@ -155,7 +155,7 @@ th {
 <h3>Patient</h3>
   <%= full_address(@invoice.patient.vcard) %>
   <br/>
-  Geburtsdatum <%= @invoice.patient.birth_date.strftime('%d.%m.%Y') %>			
+  Geburtsdatum <%= @invoice.patient.birth_date.strftime('%d.%m.%Y') if @invoice.patient.birth_date %>			
 </div>
 
 <div id="billingaddress" class="block">
