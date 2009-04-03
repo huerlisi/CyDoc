@@ -101,7 +101,7 @@ class Patient < ActiveRecord::Base
       patient_condition = "#{name_condition} OR #{given_family_condition} or #{family_given_condition}"
     end
 
-    return find(:all, :include => [:vcard ], :conditions => ["(#{patient_condition})", query_params], :order => 'vcards.family_name, vcards.given_name', :limit => 100)
+    return find(:all, :include => [:vcard ], :conditions => ["(#{patient_condition})", query_params], :order => 'vcards.family_name, vcards.given_name')
   end
 
   private
