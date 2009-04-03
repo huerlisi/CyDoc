@@ -30,6 +30,8 @@ class ApplicationController < ActionController::Base
 
       @current_doctor = doctor
       Thread.current["doctor_id"] = @current_doctor.id
+
+      @printers = doctor.office.printers
       return true
     end
 
