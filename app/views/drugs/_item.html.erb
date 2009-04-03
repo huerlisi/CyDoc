@@ -1,4 +1,4 @@
-<tr style="cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'insurances', :action => 'show', :id => item) %>'">
+<tr style="cursor: pointer" onclick="window.location='<%= drug_path(item) %>'">
   <td><b/><%=h item.name %></b></td>
   <td><%=h item.description %></td>
 </tr>

@@ -19,4 +19,9 @@ class DrugsController < ApplicationController
       }
     end
   end
+
+  # GET /drugs/1
+  def show
+    @drug = DrugSubstance.find(params[:id])
+  end
 end
