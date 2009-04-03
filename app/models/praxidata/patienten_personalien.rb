@@ -30,7 +30,7 @@ class Praxidata::PatientenPersonalien < Praxidata::Base
 #      ),
 
 
-#      :insurance_id => a.KK_Garant_ID,        # probably insurances are stored in TadrStamm as well as Doctors and Patients
+      :insurance_id => a.inVersicherungID,        # inVersicherungID links to IDStamm of insurance
       :insurance_nr => a.txVersichertenNummer, # we will have to check if the join clause is correct
 #      :doctor_id => a.ZuwArzt_ID,
       :birth_date => a.dtGeburtstag,
