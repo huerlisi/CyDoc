@@ -132,30 +132,30 @@ th {
 
 <div id="biller" class="block">
   <h3>Rechnungssteller</h3>
-  <%= full_address(@invoice.biller.praxis) %>
+  <%= full_address(@invoice.biller.vcard) %>
   <br/>
-  <%= contact(@invoice.biller.praxis) %>
+  <%= contact(@invoice.biller.vcard) %>
 </div>
 
 <div id="referrer" class="block">
 <h3>Zuweisender Arzt</h3>
-  <%= full_address(@invoice.referrer.praxis) %>
+  <%= full_address(@invoice.referrer.vcard) %>
 <br />
-  <%= contact(@invoice.referrer.praxis) %>
+  <%= contact(@invoice.referrer.vcard) %>
 </div>
 
 <div id="provider" class="block">
 <h3>Leistungserbringer</h3>
-  <%= full_address(@invoice.provider.praxis) %>
+  <%= full_address(@invoice.provider.vcard) %>
 <br />
-  <%= contact(@invoice.provider.praxis) %>
+  <%= contact(@invoice.provider.vcard) %>
 </div>
 
 <div id="patient" class="block">
 <h3>Patient</h3>
   <%= full_address(@invoice.patient.vcard) %>
   <br/>
-  Geburtsdatum <%= @invoice.patient.birth_date.strftime('%d.%m.%Y') %>			
+  Geburtsdatum <%= @invoice.patient.birth_date.strftime('%d.%m.%Y') if @invoice.patient.birth_date %>			
 </div>
 
 <div id="billingaddress" class="block">

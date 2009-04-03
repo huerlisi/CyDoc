@@ -1,8 +1,5 @@
 <h3>Rechnung</h3>
 
-<p><%= link_to "Rechnung anzeigen", :controller => :invoices, :action => :patient_letter, :id => @invoice %></p>
-<p><%= link_to "Rückforderungsbeleg anzeigen", :controller => :invoices, :action => :insurance_recipe, :id => @invoice %></p>
-
 <p><%= link_to_remote "Rechnung drucken", :update => 'result', :url => {:controller => :invoices, :action => :print_patient_letter, :id => @invoice} %></p>
 <p><%= link_to_remote "Rückforderungsbeleg drucken", :update => 'result', :url => {:controller => :invoices, :action => :print_insurance_recipe, :id => @invoice} %></p>
 

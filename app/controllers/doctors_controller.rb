@@ -1,20 +1,28 @@
 class DoctorsController < ApplicationController
-  # CRUD Actions
+  # GET /patients
   def index
-    redirect_to :action => :list
-  end
-  
-  def list
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
+    query ||= params[:quick_search][:query] if params[:quick_search]
 
-    @doctors = Doctor.find :all, :joins => :praxis, :order => 'family_name'
+    @doctors = Doctor.clever_find(query)
+    respond_to do |format|
+      format.html {
+        render :action => 'list'
+        return
+      }
+      format.js {
+        render :update do |page|
+          page.replace_html 'search_results', :partial => 'list'
+        end
+      }
+    end
   end
 
   def search
     query = params[:query] || params[:search][:query]
     query ||= params[:search][:query] if params[:search]
-    @doctors = Doctor.by_name("%#{query}%")
+    @doctors = Doctor.clever_find(query)
 
     render :partial => 'list', :layout => false
   end
@@ -22,17 +30,23 @@ class DoctorsController < ApplicationController
   def show
     @doctor = Doctor.find(params[:id])
     @account = @doctor.account
-    @praxis = @doctor.praxis
+  end
+
+  # GET /posts/new
+  def new
+    doctor = params[:doctor]
+    @doctor = Doctor.new(doctor)
+    @doctor.vcard = Vcards::Vcard.new(params[:doctor])
   end
 
   def create
     @doctor = Doctor.new(params[:doctor])
-    @account = @doctor.build_account(params[:account])
-    @praxis = @doctor.build_praxis(params[:praxis])
+    @doctor.build_account(params[:account])
+    @doctor.build_vcard(params[:vcard])
 
     if @doctor.save
       flash[:notice] = 'Arzt gespeichert.'
-      redirect_to :action => :show, :id => @doctor
+      redirect_to @doctor
     else
       render :action => :new
     end
@@ -41,7 +55,6 @@ class DoctorsController < ApplicationController
   def edit
     @doctor = Doctor.find(params[:id])
     @account = @doctor.account
-    @praxis = @doctor.praxis
     render :action => 'edit'
   end
   
@@ -49,9 +62,9 @@ class DoctorsController < ApplicationController
     @doctor = Doctor.find(params[:id])
 
     @doctor.account = Accounting::BankAccount.new unless @doctor.account
-    @doctor.build_praxis unless @doctor.praxis
+    @doctor.build_vcard unless @doctor.vcard
 
-    if @doctor.update_attributes(params[:doctor]) && @doctor.account.update_attributes(params[:account]) && @doctor.praxis.update_attributes(params[:praxis])
+    if @doctor.update_attributes(params[:doctor]) && @doctor.account.update_attributes(params[:account]) && @doctor.vcard.update_attributes(params[:vcard])
       flash[:notice] = 'Arzt gespeichert.'
       redirect_to :action => :show, :id => @doctor
     else

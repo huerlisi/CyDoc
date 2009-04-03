@@ -6,7 +6,7 @@ class Patient < ActiveRecord::Base
   named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcard, :conditions => Vcards::Vcard.by_name_conditions(name)}}
   named_scope :by_date, lambda {|date| {:conditions => ['birth_date LIKE ?', Date.parse_europe(date).strftime('%%%y-%m-%d')] }}
 
-  has_one :vcard, :class_name => 'Vcards::Vcard', :foreign_key => 'object_id'
+  has_one :vcard, :class_name => 'Vcards::Vcard', :as => 'object'
 
   delegate :full_name, :full_name=, :to => :vcard
   delegate :family_name, :family_name=, :to => :vcard
@@ -24,7 +24,7 @@ class Patient < ActiveRecord::Base
   has_many :cases, :order => 'id DESC'
   
   def to_s
-    "#{name}#{' #' + doctor_patient_nr if doctor_patient_nr}, #{birth_date.strftime('%d.%m.%Y')}"
+    "#{name}#{' #' + doctor_patient_nr if doctor_patient_nr}, #{birth_date.strftime('%d.%m.%Y') if birth_date}"
   end
 
   def birth_date_formatted

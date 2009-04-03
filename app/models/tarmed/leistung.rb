@@ -2,7 +2,7 @@ class Tarmed::Leistung < Tarmed::Base
   set_table_name "LEISTUNG"
   set_primary_key "LNR"
 
-  has_one :text, :class_name => 'LeistungText', :conditions => "SPRACHE = 'D' AND GUELTIG_BIS = '12/31/99 00:00:00'", :foreign_key => 'LNR'
+  has_one :text, :class_name => 'LeistungText', :conditions => "SPRACHE = 'D' AND #{self.condition_validity}", :foreign_key => 'LNR'
   has_one :digniquali, :class_name => 'LeistungDigniquali', :foreign_key => 'LNR'
   
   has_many :leistung_hierarchie_masters, :class_name => 'LeistungHierarchie', :foreign_key => 'LNR_SLAVE'

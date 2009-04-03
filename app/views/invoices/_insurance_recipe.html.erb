@@ -74,23 +74,23 @@ th {
     <td class="subhead" rowspan="2" style="width:1.8cm">Rechnungs-<br />steller</td>
     <td class="list">EAN-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.biller.ean_party %></td>
-    <td colspan="3" class="list"><%= full_address(@invoice.biller.praxis, ', ') %></td>
+    <td colspan="3" class="list"><%= full_address(@invoice.biller.vcard, ', ') %></td>
   </tr>
   <tr>
     <td class="list">ZSR-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.biller.zsr %></td>
-    <td colspan="4" class="list"><%= contact(@invoice.biller.praxis, ' ') %></td>
+    <td colspan="4" class="list"><%= contact(@invoice.biller.vcard, ' ') %></td>
   </tr>
   <tr>
     <td class="subhead" rowspan="2">Leistungs-<br />erbringer</td>
     <td class="list">EAN-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.provider.ean_party %></td>
-    <td colspan="3" class="list"><%=h full_address(@invoice.provider.praxis, ', ') %></td>
+    <td colspan="3" class="list"><%=h full_address(@invoice.provider.vcard, ', ') %></td>
   </tr>
   <tr>
     <td class="list">ZSR-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.provider.zsr %></td>
-    <td colspan="4" class="list"><%= contact(@invoice.provider.praxis, ' ') %></td>
+    <td colspan="4" class="list"><%= contact(@invoice.provider.vcard, ' ') %></td>
   </tr>
 </table>
 <table style="width: 100%; border:thin solid black">
@@ -127,7 +127,7 @@ th {
   <tr>
     <td></td>
     <td class="list">Geburtsdatum</td>
-    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.birth_date.strftime('%d.%m.%Y') %></td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.birth_date.strftime('%d.%m.%Y') if @invoice.patient.birth_date %></td>
     <td><%=h @invoice.patient.vcard.full_name %></td>
   </tr>
   <tr>

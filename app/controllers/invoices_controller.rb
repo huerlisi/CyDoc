@@ -69,8 +69,8 @@ class InvoicesController < ApplicationController
     
     # Tiers
     @tiers = TiersGarant.new(params[:tiers])
-    @tiers.biller = @current_doctor
-    @tiers.provider = @current_doctor
+    @tiers.biller = Doctor.find(Thread.current["doctor_id"])
+    @tiers.provider = Doctor.find(Thread.current["doctor_id"])
 
     @tiers.save
     @invoice.tiers = @tiers
@@ -85,7 +85,7 @@ class InvoicesController < ApplicationController
     # Treatment
     @treatment = Treatment.new(params[:treatment])
     # TODO make selectable
-    @treatment.canton ||= @tiers.provider.praxis.address.region
+    @treatment.canton ||= @tiers.provider.vcard.address.region
     @invoice.treatment = @treatment
 
     # Services

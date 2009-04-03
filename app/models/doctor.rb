@@ -3,6 +3,8 @@ class Doctor < ActiveRecord::Base
   belongs_to :private, :class_name => 'Vcards::Vcard', :foreign_key => 'private_vcard'
   named_scope :by_name, lambda {|name| {:select => '*, doctors.id', :joins => :praxis, :order => 'family_name', :conditions => Vcards::Vcard.by_name_conditions(name)}}
 
+  has_one :vcard, :class_name => 'Vcards::Vcard', :as => 'object'
+
   belongs_to :billing_doctor, :class_name => 'Doctor'
   belongs_to :account, :class_name => 'Accounting::Account'
 
@@ -44,11 +46,11 @@ class Doctor < ActiveRecord::Base
   def self.clever_find(query)
     return [] if query.nil? or query.empty?
     
-    case get_query_type(query)
-    when "text"
-      query = "%#{query}%"
-      patient_condition = "(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)"
-    end
-    return find(:all, :include => [:vcards ], :conditions => ["#{patient_condition}", {:query => query}], :limit => 100)
+    query_params = {}
+    query_params[:query] = "%#{query}%"
+
+    patient_condition = "(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)"
+
+    return find(:all, :include => [:vcard], :conditions => ["#{patient_condition}", query_params], :order => 'full_name, family_name, given_name')
   end
 end
