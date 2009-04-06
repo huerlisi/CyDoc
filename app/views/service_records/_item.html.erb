@@ -6,5 +6,5 @@
   <td style="text-align:right"><%=h sprintf('%.2f', item.amount_mt) %>&nbsp;AL</td>
   <td style="text-align:right"><%=h sprintf('%.2f', item.amount_tt) %>&nbsp;TL</td>
   <td style="text-align:right"><b><%=h sprintf('%.2f', item.amount) %></b>&nbsp;CHF</td>
-  <td><%= link_to_remote(image_tag('delete.png'), {:update => 'services_list', :url => {:controller => 'tariff_items', :action => 'delete_inline', :id => item, :patient_id => @patient.id, :method => :delete}}, :method => :delete, :href => tariff_item_path(item)) %></td>
+  <td><%= link_to_remote(image_tag('delete.png'), {:update => 'service_list', :url => tariff_item_path(item), :method => :delete}, :method => :delete, :href => tariff_item_path(item)) %></td>
 </tr>
