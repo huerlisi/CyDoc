@@ -57,11 +57,13 @@ class InvoicesController < ApplicationController
     @law = Law.new
 
     @treatment = Treatment.new
-  end
 
-  def new_inline
-    new
-    render :action => 'new', :layout => false
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :action => 'new', :layout => false
+      }
+    end
   end
 
   def create
