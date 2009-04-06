@@ -43,6 +43,7 @@ class Doctor < ActiveRecord::Base
     write_attribute(:zsr, value.delete(' .'))
   end
 
+  # Search
   def self.clever_find(query)
     return [] if query.nil? or query.empty?
     
@@ -51,6 +52,6 @@ class Doctor < ActiveRecord::Base
 
     patient_condition = "(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)"
 
-    return find(:all, :include => [:vcard], :conditions => ["#{patient_condition}", query_params], :order => 'full_name, family_name, given_name')
+    find(:all, :include => [:vcard], :conditions => ["#{patient_condition}", query_params], :order => 'full_name, family_name, given_name')
   end
 end
