@@ -6,7 +6,7 @@ class DrugsController < ApplicationController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    @substances = DrugSubstance.all
+    @substances = DrugSubstance.clever_find(query)
     respond_to do |format|
       format.html {
         render :action => 'list'
@@ -18,5 +18,10 @@ class DrugsController < ApplicationController
         end
       }
     end
+  end
+
+  # GET /drugs/1
+  def show
+    @drug = DrugSubstance.find(params[:id])
   end
 end

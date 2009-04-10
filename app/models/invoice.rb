@@ -38,7 +38,7 @@ class Invoice < ActiveRecord::Base
   def self.clever_find(query, *args)
     return [] if query.nil? or query.empty?
 
-    Patient.clever_find(query).collect{|patient| patient.invoices}.flatten
+    Patient.clever_find(query, args).collect{|patient| patient.invoices}.flatten
   end
   
   # Calculated fields

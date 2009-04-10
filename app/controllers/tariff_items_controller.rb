@@ -64,7 +64,7 @@ class TariffItemsController < ApplicationController
     end
   end
 
-  def create
+  def assign
     tariff_item = TariffItem.find(params[:id])
     patient = Patient.find(params[:patient_id])
 
@@ -77,7 +77,19 @@ class TariffItemsController < ApplicationController
       service_record.save
     end
     flash[:notice] = 'Erfolgreich erfasst.'
-    redirect_to :controller => 'patients', :action => 'show', :id => patient, :tab => 'services'
+
+    respond_to do |format|
+      format.html {
+        redirect_to :controller => 'patients', :action => 'show', :id => patient, :tab => 'services'
+        return
+      }
+      format.js {
+        render :update do |page|
+          @patient = patient
+          page.replace_html 'service_list', :partial => 'service_records/list', :locals => { :items => patient.service_records}
+        end
+      }
+    end
   end
 
   def edit
@@ -88,14 +100,20 @@ class TariffItemsController < ApplicationController
     render :action => 'edit', :layout => false
   end
 
-  def delete
-    ServiceRecord.destroy(params[:id])
-    redirect_to :action => 'list'
-  end
-
-  def delete_inline
-    ServiceRecord.destroy(params[:id])
-    patient = Patient.find(params[:patient_id])
-    render :partial => 'service_records/list', :locals => { :items => patient.service_records}
+  # DELETE 
+  def destroy
+    service_record = ServiceRecord.find(params[:id])
+    patient = service_record.patient
+    service_record.destroy
+    
+    respond_to do |format|
+      format.html {
+        redirect_to :controller => 'patients', :action => 'show', :id => patient, :tab => 'services'
+        return
+      }
+      format.js {
+        render :partial => 'service_records/list', :locals => { :items => patient.service_records}
+      }
+    end
   end
 end

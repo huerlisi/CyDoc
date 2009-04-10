@@ -87,15 +87,4 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
     @service_record = ServiceRecord.new
   end
-
-  # Services
-  def list_services
-    @patient = Patient.find(params[:id])
-    render :partial => 'tariff_items/list', :locals => {:items => @patient.service_records}
-  end
-
-  def delete_service
-    ServiceRecord.destroy(params[:id])
-    redirect_to :action => 'list_services'
-  end
 end
