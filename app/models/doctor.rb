@@ -50,8 +50,8 @@ class Doctor < ActiveRecord::Base
     query_params = {}
     query_params[:query] = "%#{query}%"
 
-    patient_condition = "(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)"
+    vcard_condition = "(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)"
 
-    find(:all, :include => [:vcard], :conditions => ["#{patient_condition}", query_params], :order => 'full_name, family_name, given_name')
+    find(:all, :include => [:vcard], :conditions => ["#{vcard_condition}", query_params], :order => 'full_name, family_name, given_name')
   end
 end
