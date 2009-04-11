@@ -1,0 +1,22 @@
+<div class="contextual">
+    <%= link_to "Ändern", edit_doctor_path(@doctor), :class => "icon icon-edit" %>
+</div>
+
+<h3>Drucker</h3>
+
+<div class="box">
+  <% printers = @doctor.office.printers %>
+  Druckserver: <%=h printers[:cups_host] %>
+  <table>
+    <tr>
+      <th>Zweck</th>
+      <th>Schacht</th>
+    </tr>
+    <% printers[:trays].each do |ident, value| %>
+    <tr>
+      <th><%=h ident %></th>
+      <td><%=h value %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
