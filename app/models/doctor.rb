@@ -1,7 +1,5 @@
 class Doctor < ActiveRecord::Base
-  belongs_to :praxis, :class_name => 'Vcards::Vcard', :foreign_key => 'praxis_vcard'
-  belongs_to :private, :class_name => 'Vcards::Vcard', :foreign_key => 'private_vcard'
-  named_scope :by_name, lambda {|name| {:select => '*, doctors.id', :joins => :praxis, :order => 'family_name', :conditions => Vcards::Vcard.by_name_conditions(name)}}
+  named_scope :by_name, lambda {|name| {:select => '*, doctors.id', :joins => :vcard, :order => 'family_name', :conditions => Vcards::Vcard.by_name_conditions(name)}}
 
   has_one :vcard, :class_name => 'Vcards::Vcard', :as => 'object'
 
@@ -14,15 +12,15 @@ class Doctor < ActiveRecord::Base
   has_and_belongs_to_many :offices
 
   def to_s
-    [praxis.honorific_prefix, praxis.given_name, praxis.family_name].compact.join(" ")
+    [vcard.honorific_prefix, vcard.given_name, vcard.family_name].compact.select{|f| not f.empty?}.join(" ")
   end
 
   # Proxy accessors
   def name
-    if praxis.nil?
+    if vcard.nil?
       login
     else
-      praxis.full_name
+      vcard.full_name
     end
   end
 
