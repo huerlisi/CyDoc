@@ -1,9 +1,15 @@
 module Medindex
   class Insurance < Base
-    def self.import
+    def self.import(do_clean = true)
       puts "Importing #{self.name}..."
 
       int_class = ("Kernel::" + self.name.demodulize).constantize
+
+      if do_clean
+        puts "  Deleting all #{int_class.count} records..."
+        int_class.delete_all
+        puts "  Done."
+      end
 
       success = 0
       skip = 0
