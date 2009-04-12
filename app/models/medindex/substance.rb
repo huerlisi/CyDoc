@@ -1,16 +1,16 @@
 module Medindex
   class Substance < Base
-    def self.import
-      for ext_record in self.all
-        int_record = Kernel::DrugSubstance.new
-        
-        int_record.id = ext_record.field('SUBNO')
-        int_record.name = ext_record.field('NAMD')
+    def self.int_class
+      Kernel::DrugSubstance
+    end
 
-        puts int_record.to_s
-        
-        int_record.save!
-      end
+    def self.import_record(ext_record)
+      int_record = Kernel::DrugSubstance.new
+      
+      int_record.id = ext_record.field('SUBNO')
+      int_record.name = ext_record.field('NAMD')
+
+      return int_record
     end
   end
 end

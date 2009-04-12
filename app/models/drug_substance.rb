@@ -1,4 +1,8 @@
 class DrugSubstance < ActiveRecord::Base
+  def to_s
+    name
+  end
+
   def self.clever_find(query, *args)
     return [] if query.nil? or query.empty?
 
