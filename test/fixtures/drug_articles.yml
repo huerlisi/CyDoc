@@ -1,0 +1,63 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  code: MyString
+  group_code: MyString
+  assort_key1: MyString
+  assort_key2: MyString
+  drug_product_id: 1
+  swissmedic_cat: MyString
+  swissmedic_no: MyString
+  hospital_only: false
+  clinical: false
+  article_type: MyString
+  vat_class_id: 1
+  active: false
+  insurance_limited: false
+  insurance_limitation_points: 
+  grand_frere: false
+  stock_fridge: false
+  stock_temperature: 
+  narcotic: false
+  under_bg: false
+  expires: 1
+  quantity: 
+  describtion: MyText
+  name: MyText
+  quantity_unit: MyString
+  package_type: MyString
+  multiply: MyString
+  alias: MyString
+  higher_co_payment: false
+  number_of_pieces: 1
+
+two:
+  code: MyString
+  group_code: MyString
+  assort_key1: MyString
+  assort_key2: MyString
+  drug_product_id: 1
+  swissmedic_cat: MyString
+  swissmedic_no: MyString
+  hospital_only: false
+  clinical: false
+  article_type: MyString
+  vat_class_id: 1
+  active: false
+  insurance_limited: false
+  insurance_limitation_points: 
+  grand_frere: false
+  stock_fridge: false
+  stock_temperature: 
+  narcotic: false
+  under_bg: false
+  expires: 1
+  quantity: 
+  describtion: MyText
+  name: MyText
+  quantity_unit: MyString
+  package_type: MyString
+  multiply: MyString
+  alias: MyString
+  higher_co_payment: false
+  number_of_pieces: 1
