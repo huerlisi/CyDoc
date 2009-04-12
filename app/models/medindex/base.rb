@@ -3,7 +3,7 @@ module Medindex
     @@xml = nil
     
     def self.load
-      path = File.join(RAILS_ROOT, 'test', 'fixtures', 'medindex', "DownloadMedindex#{self.name.demodulize}_out.xml")
+      path = File.join(RAILS_ROOT, 'data', 'Medindex', "DownloadMedindex#{self.name.demodulize}_out.xml")
       @@xml = REXML::Document.new(File.new(path))
     end
 
