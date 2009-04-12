@@ -6,6 +6,7 @@ module Medindex
       int_class = ("Kernel::" + self.name.demodulize).constantize
 
       success = 0
+      skip = 0
       errors = 0
       for ext_record in self.all
         begin
@@ -30,7 +31,7 @@ module Medindex
       end
       
       puts
-      puts "  Success: #{success}, errors: #{errors}"
+      puts "  Success: #{success}; skipped: #{skipped}; errors: #{errors}"
       puts "Import done."
     end
   end

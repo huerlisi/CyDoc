@@ -8,9 +8,16 @@ module Analyseliste
       int_class.delete_all if clean
 
       success = 0
+      skipped = 0
       errors = 0
       for ext_record in self.all
         begin
+          if ext_record[2].nil?
+            puts "Skip #{ext_record[5]}"
+            skipped += 1
+            next
+          end
+          
           int_record = int_class.new(
                   :code => ext_record[2],
                   :amount_tt => ext_record[4],
@@ -27,7 +34,7 @@ module Analyseliste
       end
       
       puts
-      puts "  Success: #{success}, errors: #{errors}"
+      puts "  Success: #{success}; skipped : #{skipped}; errors: #{errors}"
       puts "Import done."
     end
   end
