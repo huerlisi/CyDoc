@@ -1,6 +1,8 @@
 module Medindex
   class Insurance < Base
     def self.import
+      puts "Importing #{self.name}..."
+
       int_class = ("Kernel::" + self.name.demodulize).constantize
 
       success = 0
@@ -18,7 +20,7 @@ module Medindex
                   :locality => ext_record.field('ADDR/CITY')
           )
 
-          puts int_record.to_s
+          puts "  " + int_record.to_s
           
           int_record.save!
           success += 1
@@ -28,7 +30,7 @@ module Medindex
       end
       
       puts
-      puts "Success: #{success}, errors: #{errors}"
+      puts "  Success: #{success}, errors: #{errors}"
       puts "Import done."
     end
   end
