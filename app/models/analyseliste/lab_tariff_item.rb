@@ -10,7 +10,7 @@ module Analyseliste
 		:remark => ext_record[5]
         )
         
-        puts int_record.remark
+        puts int_record.to_s
         
         int_record.save!
       end

@@ -1,6 +1,10 @@
 class TariffItem < ActiveRecord::Base
   has_and_belongs_to_many :tariff_item_groups, :join_table => 'tariff_items_tariff_items', :class_name => 'TariffItem'
 
+  def to_s
+    [code, remark].compact.select{|item| not item.empty?}.join ' - '
+  end
+
   def service_record_class
     ServiceRecord
   end
