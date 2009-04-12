@@ -5,7 +5,7 @@ module Medindex
     end
 
     def self.import_record(ext_record)
-      int_record = Kernel::DrugSubstance.new
+      int_record = self.int_class.new
       
       int_record.id = ext_record.field('SUBNO')
       int_record.name = ext_record.field('NAMD')
