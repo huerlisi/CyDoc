@@ -1,18 +1,18 @@
 module Medindex
   class Base
-    @@xml = nil
+    @@data = nil
     
     def self.load
       path = File.join(RAILS_ROOT, 'data', 'Medindex', "DownloadMedindex#{self.name.demodulize}_out.xml")
-      @@xml = REXML::Document.new(File.new(path))
+      @@data = REXML::Document.new(File.new(path))
     end
 
-    def self.xml
-      @@xml || self.load
+    def self.data
+      @@data || self.load
     end
 
     def self.all
-      xml.root.elements
+      data.root.elements
     end
 
     def self.int_class
