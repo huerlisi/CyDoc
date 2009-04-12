@@ -14,29 +14,32 @@
 
 URL='http://www.bag.admin.ch/themen/krankenversicherung/02874/index.html?lang=de&download=M3wBUQCu/8ulmKDu36WenojQ1NTTjaXZnqWfVpzLhmfhnapmmc7Zi6rZnqCkkId4gX1/bKbXrZ2lhtTN34al3p6YrY7P1oah162apo3X1cjYh2+hoJVn6w=='
 
+NAME="analyseliste"
+
 # Download MS Excel
 function get() {
 local url="${1:-$URL}"
-local output="${2:-analyseliste.xls}"
-	wget "$url" -O "$output"
+local output="${2:-$NAME.xls}"
+	wget --no-verbose "$url" --output-document "$output"
 }
 
 function convert() {
-local input="${1:-analyseliste.xls}"
-local output="${2:-analyseliste.csv}"
+local input="${1:-$NAME.xls}"
+local output="${2:-$NAME.csv}"
 
 	xls2csv "$input" >"$output"
 }
 
 function import() {
-local input="${2:-analyseliste.csv}"
+local input="${2:-$NAME.csv}"
 
 	# Import as TariffItems
 	echo "Analyseliste::LabTariffItem.import(true)" | ../script/console
 }
 
 function cleanup() {
-	true
+	rm "$NAME.xls"
+	rm "$NAME.csv"
 }
 
 
