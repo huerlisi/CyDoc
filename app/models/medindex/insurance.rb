@@ -1,8 +1,10 @@
 module Medindex
   class Insurance < Base
     def self.import
+      int_class = ("Kernel::" + self.name.demodulize).constantize
+
       for ext_record in self.all
-        int_record = Kernel::Insurance.new
+        int_record = int_class.new
         
         int_record.ean_party = ext_record.field('EAN')
         int_record.vcard = Vcards::Vcard.new(
