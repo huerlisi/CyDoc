@@ -12,8 +12,12 @@ module Medindex
       end
 
       success = 0
-      skip = 0
+      skipped = 0
       errors = 0
+
+      ext_records = self.all
+      
+      puts "  Importing #{ext_records.count} records..."
       for ext_record in self.all
         begin
           int_record = int_class.new
@@ -27,7 +31,7 @@ module Medindex
                   :locality => ext_record.field('ADDR/CITY')
           )
 
-          puts "  " + int_record.to_s
+          puts "    " + int_record.to_s
           
           int_record.save!
           success += 1
