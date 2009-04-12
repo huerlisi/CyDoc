@@ -1,0 +1,95 @@
+"Kapitel","Rev","Pos.-Nr.","Pos.-Nr. bisher","TP","Bezeichnung","Limitation","Fach-bereich",
+"1",,"1000.00","8188.11","85","1,25-Dihydroxycholecalciferol",,"C",
+"1",,"1001.00","8303.00","93","17-Hydroxycorticoide (17-OHCS)",,"C",
+"1",,"1002.00","8305.00","68","17-Hydroxyprogesteron",,"C",
+"1",,"1003.00","8354.00","155","17-Ketosteroide, fraktioniert",,"C",
+"1",,"1004.00","8355.00","42","17-Ketosteroide, gesamt",,"C",
+"1",,"1005.00","8189.00","93","2,3-Diphosphoglycerat (2,3-DPG), in Erythrozyten",,"C",
+"1",,"1006.00","8302.00","53","25-Hydroxycholecalciferol (Calcidiol)",,"C",
+"1",,"1007.00","8626.12","280","3-Methylcrotonyl-CoA-Carboxylase bei angeborenen Biotin-Stoffwechselkrankheiten mittels radioaktiv markiertem Substrat und einfacher Trennung von Substrat und Produkt","Limitation: in Stoffwechsellaboratorien der Universitätskliniken","C",
+"1",,"1008.00","8301.00","81","4-Hydroxy-3-Methoxymandelsäure",,"C",
+"1",,"1009.00","8442.00","15.900009765625","5' -Nukleotidase (NTP)",,"C",
+"1",,"1010.00","8626.09","320","5,10-Methylen-Tetrahydrofolat-Reduktase bei angeborenen Methionin-Stoffwechselkrankheiten mittels radioaktiv markiertem Substrat und einfacher Trennung von Substrat und Produkt","Limitation: in Stoffwechsellaboratorien der Universitätskliniken","C",
+"1","C 1.8.07","1022.00","8008.00","11.200009765625","Albumin, immunologisch, qn",,"CI",
+"1",,"1034.00","8017.00","19.300009765625","Alpha-1-Fetoprotein (AFP)",,"CI",
+"1",,"1099.00","8110.00-
+8111.01","36","Autoantikörper gegen Beta-2-Glykoprotein-I, IgA, ql",,"HI",
+"1",,"1100.00","8110.00-
+8111.01","36","Autoantikörper gegen Beta-2-Glykoprotein-I, IgA, qn",,"HI",
+"1",,"1192.00","8110.00","52","Autoantikörper seltene, ql, erste 2 Parameter, je","Limitation:
+Autoantikörper gegen 21-Hydroxylase
+Autoantikörper gegen 68 KD (hsp-70)
+Autoantikörper gegen Becherzellen
+Autoantikörper gegen BPI, IgA
+Autoantikörper gegen BPI, IgG
+Autoantikörper gegen Chondrozyten
+Autoantikörper gegen Chromatin
+Autoantikörper gegen Colon-Epithel
+Autoantikörper gegen Cytokeratin 8/18
+Autoantikörper gegen Desmoglein 1
+Autoantikörper gegen Desmoglein 3
+Autoantikörper gegen Elastase
+Autoantikörper gegen Filaggrin (Keratin)
+Autoantikörper gegen Fodrin
+Autoantikörper gegen Gangliosid GQ1B
+Autoantikörper gegen G-S-T
+Autoantikörper gegen Herzmuskel
+Autoantikörper gegen Hodengewebe
+Autoantikörper gegen Hu, Yo, Ri
+Autoantikörper gegen IA2
+Autoantikörper gegen Kathepsin
+Autoantikörper gegen Ku
+Autoantikörper gegen Laktoferrin
+Autoantikörper gegen MAG IgM
+Autoantikörper gegen Mi 2
+Autoantikörper gegen Myelin
+Autoantikörper gegen Nebennierengewebe
+Autoantikörper gegen Nukleosomen
+Autoantikörper gegen p53
+Autoantikörper gegen Parathyreoidea
+Autoantikörper gegen PM-Scl
+Autoantikörper gegen Recoverin
+Autoantikörper gegen Retikulin
+Autoantikörper gegen Retina
+Autoantikörper gegen ribosomale P-Proteine
+Autoantikörper gegen RNA
+Autoantikörper gegen Sulfatidil
+Autoantikörper gegen Titin
+Autoantikörper gegen Vestibularis
+Autoantikörper gegen VGCC","I",
+"1",,"1773.00","8638.01","44","Zytostatika der SL/ALT, immunologisch, inkl. Metaboliten, Blut",,"C",
+"2.2.1.1",,"2000.00","8800.01","305","Zell- oder Gewebekultur und Chromosomenpräparation, konstitutioneller Karyotyp",,"G",
+"2.2.1.1","N","2007.00",,"300","Zuschlag für labortechnischen und logistischen Mehraufwand bei zytogenetischen pränatalen Untersuchungen: manuelle Reinigung von Biopsiematerial, Kontaminationskontrolle mittels Mikrosatellitenanalyse, Doppel- oder Mehrfachanalysen. Die postnatale Nachkontrolle als Qualitätsmanagement ist bereits inbegriffen.","Limitation: Nur bei Chorionzotten; nur einmal pro Primärprobe; nicht kumulierbar mit Position 2900.00 Zuschlag für labortechnischen und logistischen Mehraufwand bei molekulargenetischen pränatalen Untersuchungen","G",
+"2.2.2",,"2320.00",,,"Mitochondriale Erkrankungen",,,
+"9115.02","610","HIV-Resistenz gegen antiretrovirale Substanzen: Testung inklusive Interpretationshilfe","Limitation: Indikation und Durchführung gemäss den ""2006 European HIV Drug Resistance Guidelines"" (http://www.rega.kuleuven.be/cev/index.php?id=26).
+In folgenden Laboratorien:
+1. Universität Basel, Institut für Medizinische Mikrobiologie
+2. HUG, Laboratoire Central de Virologie
+3. CHUV, Dép. de médecine de laboratoire, Service d’immunologie et d’allergie
+4. Universität Zürich, Nationales Zentrum für Retroviren","IM",
+"4.1",,"4700.00","9700.00","24","Auftragstaxe für Auftragnehmer von externen Aufträgen, pro Auftrag; nur anwendbar durch Laboratorien nach Artikel 54 Absatz 3 KVV
+
+Ein Auftrag entspricht einer Verordnung von Analysen durch einen Auftraggeber an ein Laboratorium, unabhängig von der Anzahl der Analysen, der Untersuchungsproben, der ausgefüllten Auftragsformulare und der betroffenen Laborfachbereiche (klin. Chemie, Hämatologie, klin. Immunologie, med. Genetik, med. Mikrobiologie). Die Arbeit eines Auftrags kann sich auf den ganzen Tag (z.B. Glukose-Tagesprofil) oder auf mehrere Tage (z.B. okkultes Blut in drei verschiedenen Stuhlproben) verteilen. Ein Auftrag kann sich auch auf mehrere Patienten bzw. Personen beziehen (z.B. Kopplungsuntersuchung in der Genetik).
+
+Bei Weiterleitung eines Teilauftrags unter Laboratorien kann nur das Erstlaboratorium, das den Auftrag erhalten hat, die Auftrags-Taxe verrechnen.",,,
+"4.1","N","4707.00",,"4","Präsenztaxe für das ärztliche Praxislaboratorium, pro Patient mit Konsultation inkl. Laboranalysen und pro Tag; nur anwendbar bei Durchführung der Laboruntersuchungen im eigenen Praxislaboratorium nach Artikel 54 Absatz 1 Buchstabe a Ziffer 3 KVV und in Form der Präsenzdiagnostik nach Artikel 54 Absatz 1 Buchstabe a Ziffer 2 KVV;
+
+pro Auftrag ebenfalls anwendbar bei Durchführung der Laboruntersuchungen für den Eigenbedarf sowie im Fremdauftrag durch Spitallaboratorien nach Artikel 54 Absatz 1 Buchstabe b und c sowie Absatz 2 KVV und von der Offizin eines Apothekers oder einer Apothekerin nach Artikel 54 Absatz 1 Buchstabe c KVV
+
+Definition des Auftrags siehe Position 4700.00","
+Limitation: kumulierbar mit den Positionen 4707.10 und 4707.20 Zuschläge für Analysen mit und ohne Suffix C, bis maximal 24 Taxpunkte",,
+"4.1","N","4707.10",,"2","Zuschlag für jede Analyse, die das Suffix C aufweist; nur anwendbar in Verbindung mit der Präsenztaxe nach 4707.00 bei Durchführung der Laboruntersuchungen im eigenen Praxislaboratorium nach Artikel 54 Absatz 1 Buchstabe a Ziffer 3 KVV und in Form der Präsenzdiagnostik nach Artikel 54 Absatz 1 Buchstabe a Ziffer 2 KVV;
+
+ebenfalls anwendbar in Verbindung mit der Präsenztaxe nach 4707.00 bei Durchführung der Laboruntersuchungen für den Eigenbedarf sowie im Fremdauftrag durch Spitallaboratorien nach Artikel 54 Absatz 1 Buchstabe b und c sowie Absatz 2 KVV und von der Offizin eines Apothekers oder einer Apothekerin nach Artikel 54 Absatz 1 Buchstabe c KVV","
+Limitation: kumulierbar mit den Positionen 4707.00 Präsenztaxe und 4707.20 Zuschlag für Analysen ohne Suffix C, bis maximal 24 Taxpunkte",,
+"4.1","N","4707.20",,"1","Zuschlag für jede Analyse, die kein Suffix C aufweist; nur anwendbar in Verbindung mit der Präsenztaxe nach 4707.00 bei Durchführung der Laboruntersuchungen im eigenen Praxislaboratorium nach Artikel 54 Absatz 1 Buchstabe a Ziffer 3 KVV und in Form der Präsenzdiagnostik nach Artikel 54 Absatz 1 Buchstabe a Ziffer 2 KVV;
+
+ebenfalls anwendbar in Verbindung mit der Präsenztaxe nach 4707.00 bei Durchführung der Laboruntersuchungen für den Eigenbedarf sowie im Fremdauftrag durch Spitallaboratorien nach Artikel 54 Absatz 1 Buchstabe b und c sowie Absatz 2 KVV und von der Offizin eines Apothekers oder einer Apothekerin nach Artikel 54 Absatz 1 Buchstabe c KVV","
+Limitation: kumulierbar mit den Positionen 4707.00 Präsenztaxe und 4707.10 Zuschlag für Analysen mit Suffix C, bis maximal 24 Taxpunkte",,
+"4.1","N","4708.00",,"1","Übergangszuschlag, pro Analyse","Limitation: Gültig ab 1.7.2009 bis 31.12.2011",,
+"5.4","S",,"9509.16","32","Chlamydia psittaci IgA, qn",,"M",
+"5.4","S",,"9509.21","24","Chlamydia Spezies IG oder IgG, ql",,"M",
+"5.4","S",,"9509.26","32","Chlamydia Spezies IgA, qn",,"M",
+,,,,,,,
+,,,,,,,
+
