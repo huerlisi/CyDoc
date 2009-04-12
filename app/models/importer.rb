@@ -1,4 +1,7 @@
 class Importer
+  class SkipException < StandardError
+  end
+
   @@data = nil
   
   # Abstract methods
@@ -53,9 +56,13 @@ class Importer
         success += 1
 
       # If something goes wrong...
+      rescue SkipException => ex
+        puts "  Skip #{ext_record[5]}"
+        skipped += 1
+
+      # If something goes wrong...
       rescue Exception => ex
         puts "Error: #{ex.message}"
-        
         errors += 1
       end
     end
