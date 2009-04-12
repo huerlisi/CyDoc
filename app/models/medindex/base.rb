@@ -1,7 +1,13 @@
 module Medindex
   class Base < Importer
+    def self.path
+      case ENV['RAILS_ENV']
+        when 'production': File.join(RAILS_ROOT, 'data', 'Medindex', "DownloadMedindex#{self.name.demodulize}_out.xml")
+        when 'development', 'test': File.join(RAILS_ROOT, 'test', 'fixtures', 'medindex', "DownloadMedindex#{self.name.demodulize}_out.xml")
+      end
+    end
+
     def self.load
-      path = File.join(RAILS_ROOT, 'data', 'Medindex', "DownloadMedindex#{self.name.demodulize}_out.xml")
       @@data = REXML::Document.new(File.new(path))
     end
 

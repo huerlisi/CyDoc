@@ -1,24 +1,20 @@
 require 'fastercsv'
 
 module Analyseliste
-  class Base
-    @@data = nil
-    
+  class Base < Importer
+    def self.path
+      case ENV['RAILS_ENV']
+        when 'production': File.join(RAILS_ROOT, 'data', 'analyseliste.csv')
+        when 'development', 'test': File.join(RAILS_ROOT, 'test', 'fixtures', 'analyseliste', 'analyseliste.csv')
+      end
+    end
+
     def self.load
-      path = File.join(RAILS_ROOT, 'data', 'analyseliste.csv')
       @@data = FasterCSV.read(path, :headers => true)
     end
 
-    def self.data
-      @@data || self.load
-    end
-
-    def self.all
-      data
-    end
-
-    def self.import
-      Medindex::TariffItem.import
+    def self.import_all(do_clean = false)
+      LabTariffItem.import(do_clean)
     end
   end
 end
