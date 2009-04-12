@@ -32,7 +32,7 @@ function import() {
 local input="${2:-analyseliste.csv}"
 
 	# Import as TariffItems
-	echo "LabTariffItem.import" | ../script/console
+	echo "Analyseliste::LabTariffItem.import(true)" | ../script/console
 }
 
 function cleanup() {
@@ -42,6 +42,11 @@ function cleanup() {
 
 # Main
 # ====
-#get
-#convert
-#import
+function main() {
+	get
+	convert
+	import
+	cleanup
+}
+
+main

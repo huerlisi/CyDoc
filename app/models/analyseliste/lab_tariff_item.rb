@@ -1,8 +1,10 @@
 module Analyseliste
   class LabTariffItem < Base
-    def self.import
+    def self.import(clean = false)
       int_class = ("Kernel::" + self.name.demodulize).constantize
       
+      int_class.delete_all if clean
+
       success = 0
       errors = 0
       for ext_record in self.all

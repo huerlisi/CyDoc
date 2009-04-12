@@ -6,7 +6,7 @@ module Analyseliste
     
     def self.load
       path = File.join(RAILS_ROOT, 'data', 'analyseliste.csv')
-      @@data = FasterCSV.read(path)
+      @@data = FasterCSV.read(path, :headers => true)
     end
 
     def self.data
