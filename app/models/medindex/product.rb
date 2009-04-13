@@ -7,7 +7,7 @@ module Medindex
     def self.import_record(ext_record)
       int_record = self.int_class.new
       
-      int_record.id = ext_record.field('PRODNO')
+      int_record.id = ext_record.field('PRDNO').to_i
       int_record.description = ext_record.field('DSCRD') # TODO: Language support
       int_record.name = ext_record.field('BNAMD') # TODO: Language support
       int_record.second_name = ext_record.field('ADNAMD') # TODO: Language support
@@ -28,7 +28,8 @@ module Medindex
       int_record.active = ext_record.field('TRADE') == 'iH'
       int_record.partner_id = ext_record.field('PRTNO').to_i
       int_record.drug_monograph_id = ext_record.field('MONO').to_i
-      int_record.galenic = ext_record.field('CDGALD') # TODO: Language support
+      int_record.galenic = ext_record.field('CDGALD') == 'Y' # TODO: Language support
+      int_record.galenic_code_id = ext_record.field('GALF') # TODO: Language support
       int_record.concentration = ext_record.field('DOSE').to_f
       int_record.concentration_unit = ext_record.field('DOSEU')
       int_record.special_drug_group_code = ext_record.field('DRGGRPCD')

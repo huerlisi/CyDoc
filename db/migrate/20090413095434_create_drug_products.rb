@@ -21,7 +21,8 @@ class CreateDrugProducts < ActiveRecord::Migration
       t.boolean :active
       t.integer :partner_id
       t.integer :drug_monograph_id
-      t.string :galenic
+      t.boolean :galenic
+      t.integer :galenic_code_id
       t.float :concentration
       t.string :concentration_unit
       t.string :special_drug_group_code
