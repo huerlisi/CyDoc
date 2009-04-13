@@ -17,12 +17,12 @@ class CreateDrugArticles < ActiveRecord::Migration
       t.float :insurance_limitation_points
       t.boolean :grand_frere
       t.boolean :stock_fridge
-      t.float :stock_temperature
+      t.string :stock_temperature
       t.boolean :narcotic
       t.boolean :under_bg
       t.integer :expires
       t.float :quantity
-      t.text :describtion
+      t.text :description, :limit => 50
       t.text :name
       t.string :quantity_unit
       t.string :package_type
