@@ -1,0 +1,65 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  description: MyText
+  name: MyString
+  second_name: MyString
+  size: MyString
+  info: MyString
+  original: false
+  generic_group: MyString
+  drug_code1_id: 1
+  drug_code2_id: 1
+  therap_code1_id: 1
+  therap_code2_id: 1
+  application_code: MyString
+  dose_amount: 1.5
+  dose_units: MyString
+  dose_application: MyString
+  interaction_relevance: 1
+  active: false
+  partner_id: 1
+  drug_monograph_id: 1
+  galenic: MyString
+  concentration: 1.5
+  concentration_unit: MyString
+  special_drug_group_code: MyString
+  drug_for: MyString
+  probe_suited: false
+  life_span: 1.5
+  application_time: 1.5
+  excip_text: MyString
+  excip_quantity: MyString
+  excip_comment: MyString
+
+two:
+  description: MyText
+  name: MyString
+  second_name: MyString
+  size: MyString
+  info: MyString
+  original: false
+  generic_group: MyString
+  drug_code1_id: 1
+  drug_code2_id: 1
+  therap_code1_id: 1
+  therap_code2_id: 1
+  application_code: MyString
+  dose_amount: 1.5
+  dose_units: MyString
+  dose_application: MyString
+  interaction_relevance: 1
+  active: false
+  partner_id: 1
+  drug_monograph_id: 1
+  galenic: MyString
+  concentration: 1.5
+  concentration_unit: MyString
+  special_drug_group_code: MyString
+  drug_for: MyString
+  probe_suited: false
+  life_span: 1.5
+  application_time: 1.5
+  excip_text: MyString
+  excip_quantity: MyString
+  excip_comment: MyString
