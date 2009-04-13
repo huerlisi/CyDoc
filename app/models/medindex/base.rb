@@ -14,6 +14,8 @@ module Medindex
     def self.import_all(do_clean = false)
       Medindex::Insurance.import(do_clean)
       Medindex::Substance.import(do_clean)
+      Medindex::Product.import(do_clean)
+      Medindex::Article.import(do_clean)
     end
 
     def self.all
