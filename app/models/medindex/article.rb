@@ -28,7 +28,7 @@ module Medindex
       int_record.under_bg = ext_record.field('BG') == 'Y'
       int_record.expires = ext_record.field('EXP').to_i
       int_record.quantity = ext_record.field('QTY').to_f
-      int_record.description = ext_record.field('DSRCD') # TODO: Language support
+      int_record.description = ext_record.field('DSCRD') # TODO: Language support
       int_record.name = ext_record.field('SORTD')# TODO: Language support
       int_record.quantity_unit = ext_record.field('QTYUD') # TODO: Language support
       int_record.package_type = ext_record.field('PCKTYPD') # TODO: Language support
