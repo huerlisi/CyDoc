@@ -1,0 +1,5 @@
+<% item = article_item %>
+<tr style="cursor: pointer" onclick="window.location='<%= drug_path(item) %>'">
+  <td><b/><%=h item.description %></b></td>
+  <td><%=h "#{item.number_of_pieces} x #{item.quantity} #{item.quantity_unit}" %></td>
+</tr>

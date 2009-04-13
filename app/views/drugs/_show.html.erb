@@ -1,8 +1,19 @@
-  <tr>
-    <th>Name:</th>
-    <td><%=h @drug.name %></td>
-  </tr>
-  <tr>
-    <th>Beschreibung:</th>
-    <td><%=h @drug.description %></td>
-  </tr>
+<div class="box">
+  <h3>Information</h3>
+  <table>
+    <tr>
+      <th>Name:</th>
+      <td><%=h @drug.name %></td>
+    </tr>
+    <tr>
+      <th>Beschreibung:</th>
+      <td><%=h @drug.description %></td>
+    </tr>
+  </table>
+
+  <h3>Packungen</h3>
+  <table class="list">
+    <%= render :partial => 'article_list_header' %>
+    <%= render :partial => 'article_item', :collection => @drug.drug_articles %>
+  </table>
+</div>
