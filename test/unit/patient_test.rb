@@ -18,7 +18,7 @@ class PatientTest < ActiveSupport::TestCase
     patient.save
     vcard = Vcards::Vcard.new(:full_name => 'patient vcards')
     vcard.save
-    patient.vcards << vcard
+    patient.vcard = vcard
     patient.save
     assert_equal patient, Vcards::Vcard.find_by_name('patient vcards').object
   end
