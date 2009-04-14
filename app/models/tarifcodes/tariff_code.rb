@@ -1,7 +1,7 @@
 module Tarifcodes
   class TariffCode < Base
-    def self.sheet_number
-      0
+    def self.sheet_range
+      0..3
     end
 
     def self.footer_rows

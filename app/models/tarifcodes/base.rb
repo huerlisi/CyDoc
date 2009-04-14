@@ -21,12 +21,20 @@ module Tarifcodes
       # Sheets are seperated using form feed (\f) by xls2csv
       sheets = File.read(path).split("\f")
       
-      # Subclasses shall define @@sheet_number
-      sheet = sheets[sheet_number]
+      # Subclasses shall define sheet_number
+      selected_sheets = sheets[sheet_range]
       
-      # Strip headers
-      data = FasterCSV.parse(sheet)
-      @@data = data[header_rows..-(1+footer_rows)]
+      # Dirty hack... Should probably some heuristics
+      rows = [2..-5, 2..-1, 2..-1, 2..-1, 2..-1]
+
+      @@data = []
+      selected_sheets.each_with_index{|sheet, i|
+        # Strip headers
+        data = FasterCSV.parse(sheet)
+
+        puts "  Importing #{data[0][0]}"
+        @@data += data[rows[i]]
+      }
     end
 
     def self.import_all(do_clean = false)
