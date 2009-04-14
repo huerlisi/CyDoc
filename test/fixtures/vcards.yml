@@ -33,6 +33,14 @@ doctor_test:
   full_name: Test Doktor
   object: test (Doctor)
 
+doctor_single:
+  full_name: Single Doktor
+  object: single (Doctor)
+
+doctor_colleague_one:
+  full_name: Colleague One Doktor
+  object: colleague_one (Doctor)
+
 
 # Patients
 # ========

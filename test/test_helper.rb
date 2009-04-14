@@ -35,11 +35,12 @@ class Test::Unit::TestCase
   set_fixture_class :vcards => Vcards::Vcard
   set_fixture_class :addresses => Vcards::Address
   set_fixture_class :accounts => Accounting::Account
+  set_fixture_class :banks => Accounting::Bank
 
   #
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
   # -- they do not yet inherit this setting
-  fixtures :all
+  fixtures :vcards, :doctors, :offices, :addresses, :banks, :accounts
 
   # Add more helper methods to be used by all tests here...
 end

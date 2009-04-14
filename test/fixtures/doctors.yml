@@ -1,18 +1,15 @@
 test:
   login: test
-  praxis: doctor_test
   zsr: 1234567
   ean_party: 1122334455667
   account: test_account
 
 single:
   login: $LABEL
-  praxis: doctor_test
   zsr: 1234567
   ean_party: 1122334455667
 
 colleague_one:
   login: colleague
-  praxis: doctor_test
   zsr: 7654321
   ean_party: 9911223344556
