@@ -3,10 +3,12 @@ class DrugArticle < ActiveRecord::Base
   belongs_to :vat_class
   has_many :drug_prices
   
+  # General
   def to_s
     "#{code} - #{name}"
   end
 
+  # Search
   def self.clever_find(query, *args)
     return [] if query.nil? or query.empty?
 
@@ -15,5 +17,10 @@ class DrugArticle < ActiveRecord::Base
     query_params[:query] = "%#{query}%"
     
     find(:all, :conditions => ["name LIKE :query OR description LIKE :query", query_params], :order => 'name')
+  end
+  
+  # Prices
+  def price
+    drug_prices.valid.public.current.first.price
   end
 end
