@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  valid_from: 2009-04-13
+  price: 1.5
+  price_type: MyString
+  article_id: 1
+
+two:
+  valid_from: 2009-04-13
+  price: 1.5
+  price_type: MyString
+  article_id: 1

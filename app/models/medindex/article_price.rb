@@ -37,18 +37,6 @@ module Medindex
       int_record.higher_co_payment = ext_record.field('SLOPLUS')
       int_record.number_of_pieces = ext_record.field('NOPCS').to_i
       
-      # Prices
-      ext_record.each_element('ARTPRI') { |ext_price|
-        int_price = DrugPrice.new
-        int_price.valid_from = ext_price.field('VDAT').to_date
-        int_price.price = ext_price.field('PRICE').to_f
-        int_price.price_type = ext_price.field('PTYP')
-
-        int_price.drug_article = int_record
-
-        int_price.save!
-      }
-       
       return int_record
     end
   end

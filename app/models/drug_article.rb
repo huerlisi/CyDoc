@@ -1,6 +1,7 @@
 class DrugArticle < ActiveRecord::Base
   belongs_to :drug_product
   belongs_to :vat_class
+  has_many :drug_prices
   
   def to_s
     "#{code} - #{name}"
