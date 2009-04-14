@@ -30,7 +30,7 @@ module Tarifcodes
     end
 
     def self.import_all(do_clean = false)
-      Codes.import(do_clean)
+      TariffCode.import(do_clean)
     end
   end
 end

@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tariff_code: MyString
+  record_type_v4: MyString
+  record_type_v5: MyString
+  description: MyString
+  valid_from: 2009-04-14
+  valid_to: 2009-04-14
+
+two:
+  tariff_code: MyString
+  record_type_v4: MyString
+  record_type_v5: MyString
+  description: MyString
+  valid_from: 2009-04-14
+  valid_to: 2009-04-14
