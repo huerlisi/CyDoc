@@ -1,8 +1,19 @@
-  <tr>
-    <th>Name:</th>
-    <td><%=h @insurance.vcard.full_name %></td>
-  </tr>
-  <tr>
-    <th>Adresse:</th>
-    <td><%=h address(@insurance.vcard, ', ') %></td>
-  </tr>
+<div class="box">
+  <h3>Kontakt</h3>
+  <table>
+    <tr>
+      <th>Name:</th>
+      <td><%=h @insurance.vcard.full_name %></td>
+    </tr>
+    <tr>
+      <th>Adresse:</th>
+      <td><%=h address(@insurance.vcard, ', ') %></td>
+    </tr>
+  </table>
+
+  <% if @insurance.group -%>
+  <h3>Gruppe</h3>
+  <% @insurances = @insurance.group.members %>
+  <%= render :partial => 'list' %>
+  <% end -%>
+</div>
