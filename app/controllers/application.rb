@@ -105,6 +105,7 @@ end
 class Date
   # Date helpers
   def self.parse_europe(value)
+    return nil if value.empty?
     if value.is_a?(String)
       if value.match /.*-.*-.*/
         return Date.parse(value)
