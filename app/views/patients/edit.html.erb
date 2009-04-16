@@ -7,11 +7,7 @@
 
 <% form_for @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
   <div class="box">
-    <table>
-      <%= render :partial => '/vcards/form', :locals => {:vcard_name => 'patient', :vcard => @patient} %>
-
-      <%= render :partial => 'form' %>
-    </table>
+    <%= render :partial => 'form' %>
     <%= patient.submit 'Speichern' %>
   </div>
 <% end %>

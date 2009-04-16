@@ -2,22 +2,7 @@
 
 <% form_for @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
 <div class="box">
-  <h3>Personalien</h3>
-  <table>
-    <%= render :partial => 'form' %>
-  </table>
-
-  <h3>Kontakt</h3>
-  <table>
-    <%= render :partial => '/vcards/form', :locals => {:vcard_name => 'patient', :vcard => @patient} %>
-  </table>
-
-  <h3>Versicherungen</h3>
-  <table>
-    <%= render :partial => 'insurance_form' %>
-  </table>
-
+  <%= render :partial => 'form' %>
   <%= patient.submit 'Speichern' %>
 </div>
-
 <% end %>

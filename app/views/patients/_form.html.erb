@@ -1,5 +1,14 @@
-<% fields_for @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
-  <%= patient.date_field :birth_date, :label => 'Geburtstag', :size => 12 %>
-  <%= patient.text_field :doctor_patient_nr, :size => 15, :label => "Patientennr." %>
-  <%= patient.text_area :remarks, :label => "Bemerkungen", :cols => 30, :rows => 3 %>
-<% end %>
+<h3>Personalien</h3>
+<table>
+  <%= render :partial => 'personal_form' %>
+</table>
+
+<h3>Kontakt</h3>
+<table>
+  <%= render :partial => '/vcards/form', :locals => {:vcard_name => 'patient', :vcard => @patient} %>
+</table>
+
+<h3>Versicherungen</h3>
+<table>
+  <%= render :partial => 'insurance_form' %>
+</table>
