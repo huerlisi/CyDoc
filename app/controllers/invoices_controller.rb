@@ -61,7 +61,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html { }
       format.js {
-        render :action => 'new', :layout => false
+        render :partial => 'form'
       }
     end
   end

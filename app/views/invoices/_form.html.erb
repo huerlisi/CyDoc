@@ -1,28 +1,31 @@
+<h3>Neue Rechnung</h3>
 <%= error_messages_for :invoice %>
 
-<% form_for :invoice, :url => {:action => 'create'} do |f| %>
-  <table>
-    <tr>
-      <th>Datum:</th>
-      <td><%= f.text_field :date %></td>
-    </tr>
-    <tr>
-      <th>Gesetz:</th>
-      <td><%= select 'law', :name, [['KVG', LawKvg], ['UVG', LawUvg], ['IVG', LawIvg], ['MVG', LawMvg], ['VVG', LawVvg], ['ORG', LawOrg]] %></td>
-    </tr>
-    <tr>
-      <th>Behandlungsgrund:</th>
-      <td><%= select 'treatment', :reason,  ['Krankheit', 'Mutterschaft', 'Prävention'] %></td>
-    </tr>
-    <tr>
-      <th>Bemerkungen:</th>
-      <td><%= f.text_area :remark, :rows => 2 %></td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <%= f.submit "Erstellen" %>
-        <%= hidden_field 'tiers', :patient_id %>
-      </td>
-    </tr>
-  </table>
-<% end %>
+<div class="box">
+  <% form_for :invoice, :url => {:action => 'create'} do |f| %>
+    <table>
+      <tr>
+        <th>Datum:</th>
+        <td><%= f.text_field :date %></td>
+      </tr>
+      <tr>
+        <th>Gesetz:</th>
+        <td><%= select 'law', :name, [['KVG', LawKvg], ['UVG', LawUvg], ['IVG', LawIvg], ['MVG', LawMvg], ['VVG', LawVvg], ['ORG', LawOrg]] %></td>
+      </tr>
+      <tr>
+        <th>Behandlungsgrund:</th>
+        <td><%= select 'treatment', :reason,  ['Krankheit', 'Mutterschaft', 'Prävention'] %></td>
+      </tr>
+      <tr>
+        <th>Bemerkungen:</th>
+        <td><%= f.text_area :remark, :rows => 2 %></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <%= f.submit "Erstellen" %>
+          <%= hidden_field 'tiers', :patient_id %>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+</div>
