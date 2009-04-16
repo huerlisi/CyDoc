@@ -1,5 +1,9 @@
-<h2>Patient erfassen</h2>
+<div class="contextual">
+    <%= link_to "Suchen", patients_path, :class => "icon icon-search" %>
+    <%= link_to "Erfassen", new_patient_path, :class => "icon icon-add" %>
+</div>
 
+<h2>Patient erfassen</h2>
 <% form_for @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
 <div class="box">
   <%= render :partial => 'form' %>
