@@ -5,12 +5,8 @@ module Medindex
 
       int_record = int_class.new
       
-      int_record.id = ext_record.field('EAN')
-      if ext_record.field('GROUP_EAN').empty?
-        int_record.group_id = ext_record.field('EAN')
-      else
-        int_record.group_id = ext_record.field('GROUP_EAN')
-      end
+      int_record.ean_party = ext_record.field('EAN')
+      int_record.group_ean_party = ext_record.field('GROUP_EAN')
       int_record.role = ext_record.field('ROLE')
 
       # TODO: import REFNO

@@ -10,10 +10,6 @@ class Insurance < ActiveRecord::Base
   delegate :locality, :locality=, :to => :vcard
   delegate :honorific_prefix, :honorific_prefix=, :to => :vcard
 
-  # Groups
-  belongs_to :group, :class_name => 'Insurance'
-  has_many :members, :class_name => 'Insurance', :foreign_key => 'group_id', :conditions => "group_id != id"
-
   def to_s
     [vcard.full_name, vcard.locality].compact.join(', ')
   end
@@ -22,8 +18,12 @@ class Insurance < ActiveRecord::Base
     to_s
   end
 
-  # Aliases
-  def ean_party
-    id
+  # Group
+  def members
+    Insurance.find(:all, :conditions => {:group_ean_party => ean_party})
+  end
+  
+  def group
+    Insurance.find(:first, :conditions => {:ean_party => group_ean_party})
   end
 end
