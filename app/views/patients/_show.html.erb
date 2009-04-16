@@ -3,13 +3,23 @@
 </div>
 
 <h3>Adresse</h3>
-
 <div class="box">
   <b><%=h @patient.name %></b><br />
   <%=h @patient.street_address %><br />
   <%=h @patient.postal_code %> <%=h @patient.locality %><br />
   <%=h @patient.birth_date %><br />
-  <% if !@patient.insurance.nil? %>
-  <%=h @patient.insurance.vcard.full_name %> <%=h "##{@patient.insurance_nr}" unless @patient.insurance_nr.blank? %><br />
-  <% end %>
+</div>
+
+<h3>Versicherung</h3>
+<div class="box">
+  <table>
+    <tr>
+      <th>Krankenversicherung</th>
+      <td>
+        <% if !@patient.insurance.nil? %>
+          <%=h @patient.insurance.to_s %> <%=h "##{@patient.insurance_nr}" unless @patient.insurance_nr.blank? %><br />
+        <% end %>
+      </td>
+    </tr>
+  </table>
 </div>
