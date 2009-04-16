@@ -1,19 +1,25 @@
-<div class="box">
-  <h3>Kontakt</h3>
-  <table>
-    <tr>
-      <th>Name:</th>
-      <td><%=h @insurance.vcard.full_name %></td>
-    </tr>
-    <tr>
-      <th>Adresse:</th>
-      <td><%=h address(@insurance.vcard, ', ') %></td>
-    </tr>
-  </table>
+<% show ||= @insurance -%>
 
-  <% if @insurance.group -%>
-  <h3>Gruppe</h3>
-  <% @insurances = @insurance.group.members %>
-  <%= render :partial => 'list' %>
-  <% end -%>
-</div>
+<h3>Kontakt</h3>
+<table>
+  <tr>
+    <th>Name:</th>
+    <td><%=h show.full_name %></td>
+  </tr>
+  <tr>
+    <th>Adresse:</th>
+    <td><%=h address(show.vcard, ', ') %></td>
+  </tr>
+</table>
+
+<h3>Information</h3>
+<table>
+  <tr>
+    <th>Rolle:</th>
+    <td><%=h show.role %></td>
+  </tr>
+  <tr>
+    <th>EAN:</th>
+    <td><%=h show.ean_party %></td>
+  </tr>
+</table>

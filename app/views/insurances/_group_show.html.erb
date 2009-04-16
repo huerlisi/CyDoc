@@ -1,0 +1,4 @@
+<%= render :partial => 'show', :object => @insurance.group %>
+<h3>Mitglieder</h3>
+<% @insurances = @insurance.group.members %>
+<%= render :partial => 'list' %>

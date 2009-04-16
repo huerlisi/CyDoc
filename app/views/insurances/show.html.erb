@@ -1,2 +1,11 @@
 <h2><%=h @insurance.name %></h2>
-<%= render :partial => 'show' %>
+<div class="box">
+  <%= render :partial => 'show' %>
+</div>
+
+<% if @insurance.group -%>
+<h2>Gruppe</h2>
+<div class="box">
+  <%= render :partial => 'group_show' %>
+</div>
+<% end -%>

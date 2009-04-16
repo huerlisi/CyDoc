@@ -1,5 +1,7 @@
 class Insurance < ActiveRecord::Base
   has_one :vcard, :class_name => 'Vcards::Vcard', :as => 'object'
+  has_many :vcards, :class_name => 'Vcards::Vcard', :as => 'object'
+
   named_scope :by_name, lambda {|name| {:include => :vcard, :order => 'full_name', :conditions => Vcards::Vcard.by_name_conditions(name)}}
   delegate :full_name, :full_name=, :to => :vcard
   delegate :family_name, :family_name=, :to => :vcard
@@ -15,7 +17,15 @@ class Insurance < ActiveRecord::Base
   end
 
   def name
-    to_s
+    vcard.full_name
+  end
+
+  # Override
+  def role
+    case read_attribute(:role)
+      when 'H': "Krankenversicherung (KVG)"
+      when 'A': "Unfallversicherung (UVG)"
+    end
   end
 
   # Group
