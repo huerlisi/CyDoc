@@ -2,9 +2,9 @@
     <%= link_to_remote "Leistung erfassen", {:update => 'new_service_record', :url => new_patient_tariff_item_url(@patient), :method => :get}, :class => "icon icon-add" %>
 </div>
 
-<h3>Leistungen</h3>
 <div id="new_service_record"></div>
 
+<h3>Offene Leistungen</h3>
 <div id="service_list">
   <%= render :partial => 'service_records/list', :locals => { :items => @patient.service_records } %>
 </div>

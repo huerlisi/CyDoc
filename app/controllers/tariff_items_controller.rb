@@ -59,7 +59,7 @@ class TariffItemsController < ApplicationController
     respond_to do |format|
       format.html { }
       format.js {
-        render :layout => false
+        render :partial => 'form'
       }
     end
   end
@@ -87,6 +87,7 @@ class TariffItemsController < ApplicationController
         render :update do |page|
           @patient = patient
           page.replace_html 'service_list', :partial => 'service_records/list', :locals => { :items => patient.service_records}
+          page.replace_html 'search_results', ''
         end
       }
     end

@@ -2,24 +2,19 @@
   $('tariff_items_query').focus()
 </script>
 
+<h3>Neue Leistung</h3>
 <div class="box">
-  <%= error_messages_for :service_record %>
-  <% form_for 'tariff_items' do |f| %>
-    <%= f.label 'query', 'Leistungssuche' %> <%= f.text_field(:query, :size => 10) %>
+  <% remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => patient_tariff_items_path(params['patient_id']), :html => {:method => :get}, :method => :get do |f| %>
+    <%= f.label 'query', 'Suche' %>
+    <%= f.text_field :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
+    <%= image_submit_tag 'find.png', :title => 'Suchen' %>
     <%= image_tag("indicator.gif",
-                :align => "absmiddle",
-                :border => 0,
-                :id => "spinner",
-                :style =>"display: none;" ) %>
-
-    <%= observe_field 'tariff_items_query',  :frequency => 2,
-           :update => 'search_results',
-           :before => "Element.show('spinner')",
-           :success => "Element.hide('spinner')",
-           :url => {:controller => :tariff_items, :action => 'list_for_service_record_code', :patient_id => params[:id]},
-           :with => 'tariff_items_query' %>
-
-    <div id="search_results"></div>
+                  :align => "absmiddle",
+                  :border => 0,
+                  :id => "spinner",
+                  :style =>"display: none;" ) %>
   <% end %>
+
+  <div id="search_results"></div>
 </div>
  
