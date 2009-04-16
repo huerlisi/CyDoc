@@ -1,4 +1,5 @@
 <tr style="cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'insurances', :action => 'show', :id => item) %>'">
   <td><b/><%=h item.vcard.full_name %></b></td>
   <td><%= address(item.vcard, ', ') %></td>
+  <td><%= item.role_code %></td>
 </tr>

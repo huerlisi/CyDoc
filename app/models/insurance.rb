@@ -12,6 +12,9 @@ class Insurance < ActiveRecord::Base
   delegate :locality, :locality=, :to => :vcard
   delegate :honorific_prefix, :honorific_prefix=, :to => :vcard
 
+  named_scope :health_care, :conditions => {:role => 'H'}
+  named_scope :accident, :conditions => {:role => 'A'}
+  
   def to_s
     [vcard.full_name, vcard.locality].compact.join(', ')
   end
@@ -20,8 +23,17 @@ class Insurance < ActiveRecord::Base
     vcard.full_name
   end
 
-  # Override
+  # Overrides
+  def role_code
+    case read_attribute(:role)
+      when 'H': "KVG"
+      when 'A': "UVG"
+    end
+  end
+
   def role
+    # TODO: should support multiple formats.
+    # TODO: should probably use Law model.
     case read_attribute(:role)
       when 'H': "Krankenversicherung (KVG)"
       when 'A': "Unfallversicherung (UVG)"
