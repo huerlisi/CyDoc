@@ -2,12 +2,9 @@
 <%= error_messages_for :invoice %>
 
 <div class="box">
-  <% form_for :invoice, :url => {:action => 'create'} do |f| %>
+  <% form_for @invoice, :builder => Rubaidh::TabularForm::TabularFormBuilder do |invoice| %>
     <table>
-      <tr>
-        <th>Datum:</th>
-        <td><%= f.text_field :date %></td>
-      </tr>
+      <%= invoice.text_field :date, :label => 'Datum' %>
       <tr>
         <th>Gesetz:</th>
         <td><%= select 'law', :name, [['KVG', LawKvg], ['UVG', LawUvg], ['IVG', LawIvg], ['MVG', LawMvg], ['VVG', LawVvg], ['ORG', LawOrg]] %></td>
@@ -16,16 +13,9 @@
         <th>Behandlungsgrund:</th>
         <td><%= select 'treatment', :reason,  ['Krankheit', 'Mutterschaft', 'Prävention'] %></td>
       </tr>
-      <tr>
-        <th>Bemerkungen:</th>
-        <td><%= f.text_area :remark, :rows => 2 %></td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <%= f.submit "Erstellen" %>
-          <%= hidden_field 'tiers', :patient_id %>
-        </td>
-      </tr>
+      <%= invoice.text_area :remark, :rows => 2, :label =>  'Bemerkungen' %>
+      <%= invoice.submit "Erstellen" %>
+      <%= hidden_field 'tiers', :patient_id %>
     </table>
   <% end %>
 </div>
