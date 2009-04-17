@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+full:
+  valid_from: 2001-01-01
+  rate: 7.6
+  code: full
+
+reduced:
+  valid_from: 2001-01-01
+  rate: 2.4
+  code: reduced
+
+excluded:
+  valid_from: 2001-01-01
+  rate: 0.0
+  code: excluded
+
