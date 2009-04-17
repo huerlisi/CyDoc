@@ -1,0 +1,18 @@
+<div class="contextual">
+    <%= link_to "Ändern", edit_doctor_path(@doctor), :class => "icon icon-edit" %>
+</div>
+
+<h3>Arzt Information</h3>
+
+<div class="box">
+  <table>
+    <tr>
+      <th>ZSR:</th>
+      <td><%=h @doctor.zsr %></td>
+    </tr>
+    <tr>
+      <th>EAN:</th>
+      <td><%=h @doctor.ean_party %></td>
+    </tr>
+  </table>
+</div>

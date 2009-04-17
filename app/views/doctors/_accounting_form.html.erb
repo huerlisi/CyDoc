@@ -1,0 +1,8 @@
+<h3>Konten</h3>
+<% fields_for @account, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
+  <table>
+    <%= f.text_field :number, :label => 'Kontonummer' %>
+    <%= f.text_field :pc_id, :label => "PC-Nummer" %>
+    <%= f.text_field :esr_id, :label => "ESR-Nummer" %>
+  </table>
+<% end %>

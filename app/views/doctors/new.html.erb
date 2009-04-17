@@ -1,14 +1,12 @@
-<h2>Arzt</h2>
-
-<div class="box">
-  <h3>Personalien</h3>
-
-  <% form_for @doctor do |f| %>
-    <table>
-      <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'vcard', :vcard => @vcard } %>
-      <%= render :partial => 'form' %>
-      <%= render :partial => 'account_form' %>
-    </table>
-    <%= f.submit 'Speichern' %>
-  <% end %>
+<div class="contextual">
+    <%= link_to "Suchen", doctors_path, :class => "icon icon-search" %>
+    <%= link_to "Erfassen", new_doctor_path, :class => "icon icon-add" %>
 </div>
+
+<h2>Arzt erfassen</h2>
+<% form_for @doctor, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
+<div class="box">
+  <%= render :partial => 'form' %>
+  <%= f.submit 'Speichern' %>
+</div>
+<% end %>

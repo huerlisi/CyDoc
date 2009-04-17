@@ -4,7 +4,7 @@
     <%= link_to "Erfassen", new_patient_path, :class => "icon icon-add" %>
 </div>
 
-<h3>Patient ändern</h3>
+<h3>Patient anpassen</h3>
 <% form_for @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
   <div class="box">
     <%= render :partial => 'form' %>

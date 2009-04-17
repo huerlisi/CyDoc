@@ -1,16 +1,13 @@
 <div class="contextual">
+    <%= link_to "Suchen", doctors_path, :class => "icon icon-search" %>
     <%= link_to "Anzeigen", @doctor, :class => "icon icon-show" %>
+    <%= link_to "Erfassen", new_doctor_path, :class => "icon icon-add" %>
 </div>
 
-<h3>Adresse ändern</h3>
-
-<div class="box">
-  <% form_for @doctor, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
-    <table>
-      <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'vcard', :vcard => @doctor.vcard } %>
-      <%= render :partial => 'form' %>
-      <%= render :partial => 'account_form' %>
-    </table>
+<h3>Arzt anpassen</h3>
+<% form_for @doctor, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
+  <div class="box">
+    <%= render :partial => 'form' %>
     <%= f.submit 'Speichern' %>
-  <% end %>
-</div>
+  </div>
+<% end %>
