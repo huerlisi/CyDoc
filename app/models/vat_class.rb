@@ -1,11 +1,25 @@
 class VatClass < ActiveRecord::Base
-  named_scope :valid, :conditions => ['valid_from <= ?', Date.today]
-  named_scope :current, :conditions => ['valid_from <= ?', Date.today], :order => 'valid_from DESC', :limit => 1
+  named_scope :valid, :conditions => ['valid_from <= ?', Date.today], :order => 'valid_from DESC'
+  named_scope :full, :conditions => {:code => 'full'}
+  named_scope :reduced, :conditions => {:code => 'reduced'}
+  named_scope :excluded, :conditions => {:code => 'excluded'}
 
+  def self.full
+    valid.full.first
+  end
+  
+  def self.reduced
+    valid.reduced.first
+  end
+  
+  def self.excluded
+    valid.excluded.first
+  end
+  
   def code_name
     case code
-      when 'reduced': "Reduziert"
       when 'full': "Normal"
+      when 'reduced': "Reduziert"
       when 'excluded': "Ausgenommen"
     end
   end
