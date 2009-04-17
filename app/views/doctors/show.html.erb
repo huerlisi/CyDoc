@@ -1,6 +1,11 @@
+<div class="contextual">
+    <%= link_to "Suchen", doctors_path, :class => "icon icon-search" %>
+    <%= link_to "Erfassen", new_doctor_path, :class => "icon icon-add" %>
+</div>
+
+<h2><%=h @doctor.to_s %></h2>
 <% tabs = doctor_tabs(@doctor) %>
 <% selected_tab = params[:tab] ? params[:tab].to_s : tabs.first[:name] %>
-
 <div class="tabs">
   <ul>
   <% tabs.each do |tab| -%>
@@ -12,9 +17,11 @@
   </ul>
 </div>
 
-<% tabs.each do |tab| -%>
-<%= content_tag('div', render(:partial => tab[:partial]),
-                       :id => "tab-content-#{tab[:name]}",
-                       :style => (tab[:name] != selected_tab ? 'display:none' : nil),
-                       :class => 'tab-content') %>
-<% end -%>
+<div class="box tab-box">
+  <% tabs.each do |tab| -%>
+  <%= content_tag('div', render(:partial => tab[:partial]),
+                         :id => "tab-content-#{tab[:name]}",
+                         :style => (tab[:name] != selected_tab ? 'display:none' : nil),
+                         :class => 'tab-content') %>
+  <% end -%>
+</div>
