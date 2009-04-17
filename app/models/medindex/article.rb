@@ -4,6 +4,14 @@ module Medindex
       DrugArticle
     end
     
+    def self.lookup_vat_class(code)
+      case code
+        when '1': VatClass.full
+        when '2': VatClass.reduced
+        when '3': VatClass.excluded
+      end
+    end
+
     def self.import_record(ext_record)
       int_record = int_class.new
       
@@ -17,11 +25,11 @@ module Medindex
       int_record.hospital_only = ext_record.field('HOSPCD') == 'Y'
       int_record.clinical = ext_record.field('CLINCD') == 'Y'
       int_record.article_type = ext_record.field('ARTTYP')
-      int_record.vat_class_id = ext_record.field('VAT')
+      int_record.vat_class = lookup_vat_class(ext_record.field('VAT'))
       int_record.active = ext_record.field('SALECD') == 'N'
       int_record.insurance_limited = ext_record.field('INSLIM') == 'Y'
       int_record.insurance_limitation_points = ext_record.field('LIMPTS').to_f
-      int_record.grand_frere = ext_record.field('GRDFR') == 'Y'
+      int_record.grand_frere = ext_record.field('GRDFR') == 'Y' # A smaller package may be payed by insurance
       int_record.stock_fridge = ext_record.field('COOL') == '1'
       int_record.stock_temperature = ext_record.field('TEMP') # TODO: Should be range
       int_record.narcotic = ext_record.field('CDBG') # TODO: check boolean
