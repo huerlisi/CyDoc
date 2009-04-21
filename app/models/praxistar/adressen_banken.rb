@@ -2,7 +2,7 @@ class Praxistar::AdressenBanken < Praxistar::Base
   set_table_name "Adressen_Banken"
   set_primary_key "ID_Bank"
 
-  def self.hozr_model
+  def self.int_class
     Accounting::Bank
   end
 

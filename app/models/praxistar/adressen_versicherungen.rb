@@ -2,7 +2,7 @@ class Praxistar::AdressenVersicherungen < Praxistar::Base
   set_table_name "Adressen_Versicherungen"
   set_primary_key "ID_Versicherung"
 
-  def self.hozr_model
+  def self.int_class
     Insurance
   end
 

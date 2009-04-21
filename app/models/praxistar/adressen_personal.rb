@@ -2,7 +2,7 @@ class Praxistar::AdressenPersonal < Praxistar::Base
   set_table_name "Adressen_Personal"
   set_primary_key "ID_Personal"
 
-  def self.hozr_model
+  def self.int_class
     Employee
   end
 
