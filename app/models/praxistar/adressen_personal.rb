@@ -7,7 +7,12 @@ module Praxistar
       Employee
     end
 
-    def self.import_attributes(a)
+    def self.clean
+      super
+      super(User)
+    end
+
+    def self.import_record(a)
       vcard = Vcards::Vcard.new(
           :locality => a.tx_Ort,
   #        :fax_number => a.tx_Prax_Fax,
@@ -19,23 +24,31 @@ module Praxistar
       )
       vcard.save!
       
+      # User
+      # TODO: Password needs to be at least 6 chars!
       user = User.new(
           :login => a.tx_User,
           :password => a.tx_Kennwort,
           :password_confirmation => a.tx_Kennwort,
-          :name => [a.tx_Vorname, a.tx_Name].compact.join(' '),
-          :state => 'active',
+          :name => [a.tx_Vorname, a.tx_Name].select{|f| !f.blank?}.join(' '),
           # TODO: don't hardcode domain
           :email => a.tx_User + '@zytolabor.ch'
         )
       user.save!
-      
-      {
+      if a.tf_Aktiv?
+        user.register!
+        user.activate!
+      end
+
+      # Employee
+      int_record = int_class.new({
         :vcard => vcard,
         :user => user,
         :active => a.tf_Aktiv?,
         :born_on => a.dt_Geburtsdatum
-      }
+      })
+      
+      return int_record
     end
   end
 end

@@ -1,9 +1,18 @@
 module Importer
+  class SkipException < StandardError
+  end
+
   def self.included(klass)
     klass.extend(ClassMethods)
   end
 
   module ClassMethods
+    def clean(klass = int_class)
+        puts "  Deleting all #{klass.count} #{klass.name.humanize} records..."
+        klass.delete_all
+        puts "  Done."
+    end
+
     def import(do_clean = false, search_options = {})
 #      search_options.merge!({:conditions => {'Mandant_ID' => mandant_id}}) if mandant_id
       search_options.merge!({:order => "#{primary_key} DESC"})
@@ -11,11 +20,7 @@ module Importer
       puts "Importing #{self.name}..."
 
       # Clear all entries if demanded
-      if do_clean
-        puts "  Deleting all #{int_class.count} records..."
-        int_class.delete_all
-        puts "  Done."
-      end
+      clean if do_clean
 
       # Prepare counter variables
       success = 0
@@ -38,7 +43,7 @@ module Importer
           success += 1
 
         # If something goes wrong...
-        rescue SkipException => ex
+        rescue Importer::SkipException => ex
           puts "  Skip #{ext_record[5]}"
           skipped += 1
 
@@ -61,8 +66,6 @@ module Importer
 end
 
 class Importer::Data
-  class SkipException < StandardError
-  end
 
   @@data = nil
   

@@ -15,7 +15,7 @@ module Praxistar
           :street_address => a.tx_Strasse,
           :family_name => a.tx_Name,
           :given_name => a.tx_Vorname,
-          :honorific_prefix => [a.tx_Anrede, a.tx_Titel].join(' ')
+          :honorific_prefix => [a.tx_Anrede, a.tx_Titel].select{|f| !f.blank?}.join(' ')
         ),
         :billing_vcard => Vcards::Vcard.new(
           :locality => a.tx_fakt_Ort,
@@ -24,9 +24,9 @@ module Praxistar
           :family_name => a.tx_fakt_Name,
           :given_name => a.tx_fakt_Vorname,
           :extended_address => a.tx_fakt_ZuHanden,
-          :honorific_prefix => [a.tx_fakt_Anrede, a.tx_fakt_Titel].join('')
+          :honorific_prefix => [a.tx_fakt_Anrede, a.tx_fakt_Titel].select{|f| !f.blank?}.join('')
         ),
-        :insurance_id => a.KK_Garant_ID,
+#        :insurance_id => a.KK_Garant_ID,
         :insurance_nr => a.tx_KK_MitgliedNr,
         :doctor_id => a.ZuwArzt_ID,
         :birth_date => a.tx_Geburtsdatum,
