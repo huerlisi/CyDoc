@@ -7,8 +7,8 @@ module Praxistar
       Patient
     end
     
-    def self.import_attributes(a)
-      {
+    def self.import_record(a)
+      int_record = int_class.new({
         :vcard => Vcards::Vcard.new(
           :locality => a.tx_Ort,
           :postal_code => a.tx_PLZ,
@@ -36,7 +36,9 @@ module Praxistar
         :dunning_stop => a.tf_Mahnen,
         :use_billing_address => a.tf_fakt_Aktiv,
         :deceased => a.tf_Exitus,
-      }
+      })
+      
+      return int_record
     end
   end
 end

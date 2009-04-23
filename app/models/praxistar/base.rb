@@ -1,8 +1,11 @@
+require "importer"
+
 module Praxistar
-  class Base < Base
+  class Base < ActiveRecord::Base
+    include Importer
     use_db :prefix => "praxis_"
 
-    def self.import(mandant_id = nil, search_options = {})
+    def self.import_old(mandant_id = nil, search_options = {})
       search_options.merge!({:conditions => {'Mandant_ID' => mandant_id}}) if mandant_id
       search_options.merge!({:order => "#{primary_key} DESC"})
 
