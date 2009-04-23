@@ -8,20 +8,21 @@ module Praxistar
     end
 
     def self.import_record(a)
-      int_record = int_class.new({
-        :vcard => Vcards::Vcard.new(
-  #        :phone_number => a.tx_Telefon,
-          :locality => a.tx_Ort,
-  #        :fax_number => a.tx_FAX,
-          :extended_address => a.tx_ZuHanden,
-          :postal_code => a.tx_PLZ,
-          :street_address => a.tx_Strasse,
-          :full_name => a.tx_Name
-        ),
+      int_record = int_class.new(
         :ean_party => a.tx_EANNr
-     })
+      )
+
+      int_record.vcards.build(
+        :phone_number => a.tx_Telefon,
+        :locality => a.tx_Ort,
+        :fax_number => a.tx_FAX,
+        :extended_address => a.tx_ZuHanden,
+        :postal_code => a.tx_PLZ,
+        :street_address => a.tx_Strasse,
+        :full_name => a.tx_Name
+      )
      
-     return int_record
+      return int_record
     end
   end
 end

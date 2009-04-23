@@ -9,13 +9,12 @@ module Praxistar
 
     def self.import_record(a)
       int_record = int_class.new(
-      {
         :code => a.tx_ErfassungsNr,
         :speciality => a.tx_Fachgebiet,
         :remarks => a.tx_Bemerkung,
         :zsr => a.tx_ZSRNr,
         :ean_party => a.tx_EANNr
-      })
+      )
       
       praxis_vcard = int_record.vcards.build(
         :locality => a.tx_Prax_Ort,
