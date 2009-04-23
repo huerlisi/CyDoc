@@ -1,7 +1,8 @@
 class Doctor < ActiveRecord::Base
-  named_scope :by_name, lambda {|name| {:select => '*, doctors.id', :joins => :vcard, :order => 'family_name', :conditions => Vcards::Vcard.by_name_conditions(name)}}
+  named_scope :by_name, lambda {|name| {:select => 'DISTINCT doctors.*', :joins => :vcard, :order => 'family_name', :conditions => Vcards::Vcard.by_name_conditions(name)}}
 
   has_one :vcard, :class_name => 'Vcards::Vcard', :as => 'object'
+  has_many :vcards, :class_name => 'Vcards::Vcard', :as => 'object'
 
   belongs_to :billing_doctor, :class_name => 'Doctor'
   belongs_to :account, :class_name => 'Accounting::Account'
@@ -38,7 +39,9 @@ class Doctor < ActiveRecord::Base
 
   # ZSR sanitation
   def zsr=(value)
-    write_attribute(:zsr, value.delete(' .'))
+    value.delete!(' .') unless value.nil?
+    
+    write_attribute(:zsr, value)
   end
 
   # Search

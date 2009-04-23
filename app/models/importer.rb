@@ -36,10 +36,11 @@ module Importer
           # Do the actual import as specified by sub-classes
           int_record = self.import_record(ext_record)
 
-          puts "    " + int_record.to_s
-          
           # Save new record
           int_record.save!
+          int_record.reload
+          
+          puts "    " + int_record.to_s
           success += 1
 
         # If something goes wrong...
@@ -49,7 +50,8 @@ module Importer
 
         # If something goes wrong...
         rescue Exception => ex
-          puts "Error: #{ex.message}"
+          puts "Error (#{ext_record.id}): #{ex.message}"
+          puts ex.backtrace.join("\n\t")
           errors += 1
         end
       end
