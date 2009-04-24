@@ -13,20 +13,25 @@ module Praxistar
     end
 
     def self.import_record(a)
-      vcard = Vcards::Vcard.new(
+      # Employee
+      int_record = int_class.new(
+        :active => a.tf_Aktiv?,
+        :born_on => a.dt_Geburtsdatum
+      )
+
+      int_record.vcards.build(
           :locality => a.tx_Ort,
-  #        :fax_number => a.tx_Prax_Fax,
-  #        :phone_number => a.tx_Prax_Telefon1,
+          :mobile_number => a.Telefon_N,
+          :phone_number => a.Telefon_P,
           :postal_code => a.tx_PLZ,
           :street_address => a.tx_Strasse,
           :family_name => a.tx_Name,
           :given_name => a.tx_Vorname
       )
-      vcard.save!
       
       # User
       # TODO: Password needs to be at least 6 chars!
-      user = User.new(
+      user = int_record.build_user(
           :login => a.tx_User,
           :password => a.tx_Kennwort,
           :password_confirmation => a.tx_Kennwort,
@@ -39,14 +44,6 @@ module Praxistar
         user.register!
         user.activate!
       end
-
-      # Employee
-      int_record = int_class.new({
-        :vcard => vcard,
-        :user => user,
-        :active => a.tf_Aktiv?,
-        :born_on => a.dt_Geburtsdatum
-      })
       
       return int_record
     end
