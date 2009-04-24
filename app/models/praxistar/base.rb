@@ -9,6 +9,7 @@ module Praxistar
       # Adresses
       AdressenVersicherungen.import(do_clean, options)
       AdressenBanken.import(do_clean, options)
+      AdressenAerzte.import(do_clean, options)
       AdressenPersonal.import(do_clean, options)
       
       # Patients
