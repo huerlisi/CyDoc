@@ -18,6 +18,13 @@ module Praxistar
         :full_name => a.tx_Bank
       )
 
+      int_record.bank_accounts.build(
+        :esr_id => a.tx_Bankreferenz_Nr,
+        :pc_id  => a.tx_Konto
+        # TODO: Bankzeile*, Arztzeile*
+        # TODO: holder
+      )
+
       return int_record
     end
   end
