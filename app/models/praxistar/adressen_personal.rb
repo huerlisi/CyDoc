@@ -13,6 +13,8 @@ module Praxistar
     end
 
     def self.import_record(a)
+      raise SkipException unless a.tf_Aktiv?
+
       # Employee
       int_record = int_class.new(
         :active => a.tf_Aktiv?,
