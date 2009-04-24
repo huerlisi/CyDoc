@@ -1,8 +1,0 @@
-<%= render :partial => 'show', :id => @case %>
-
-<% content_for :sidebar do %>
-  <h3>Geschichte</h3>
-  <dl>
-    <%= render :partial => 'cases/compact', :collection => @related_cases %>
-  </dl>
-<% end %>

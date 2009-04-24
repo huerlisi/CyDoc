@@ -1,2 +1,0 @@
-class FindingClassesController < ApplicationController
-end

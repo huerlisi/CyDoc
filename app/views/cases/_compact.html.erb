@@ -1,4 +1,0 @@
-<p style="cursor: pointer" class="<%=h compact.classification.classification_group.code unless compact.classification.nil? %>" onclick="<%= remote_function :update => 'result', :url => {:controller => 'cases', :action => :show_inline, :id => compact} %>">
-  <%=h compact.examination_date.strftime('%d.%m.%g') unless compact.examination_date.nil? %>:
-  <%=h(compact.classification.nil? ? "unklassifiziert" : compact.classification.name)  %>
-</p>
