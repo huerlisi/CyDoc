@@ -6,23 +6,14 @@ class Patient < ActiveRecord::Base
   named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcard, :conditions => Vcards::Vcard.by_name_conditions(name)}}
   named_scope :by_date, lambda {|date| {:conditions => ['birth_date LIKE ?', Date.parse_europe(date).strftime('%%%y-%m-%d')] }}
 
-  has_one :vcard, :class_name => 'Vcards::Vcard', :as => 'object'
+  has_vcards
 
-  delegate :full_name, :full_name=, :to => :vcard
-  delegate :family_name, :family_name=, :to => :vcard
-  delegate :given_name, :given_name=, :to => :vcard
-  delegate :street_address, :street_address=, :to => :vcard
-  delegate :extended_address, :extended_address=, :to => :vcard
-  delegate :postal_code, :postal_code=, :to => :vcard
-  delegate :locality, :locality=, :to => :vcard
-  delegate :honorific_prefix, :honorific_prefix=, :to => :vcard
-
+  # TODO: drop
   belongs_to :billing_vcard, :class_name => 'Vcards::Vcard', :foreign_key => 'billing_vcard_id'
+
   has_many :tiers
   has_many :invoices, :through => :tiers
       
-  has_many :cases, :order => 'id DESC'
-  
   def to_s
     "#{name}#{' #' + doctor_patient_nr if doctor_patient_nr}, #{birth_date.strftime('%d.%m.%Y') if birth_date}"
   end
