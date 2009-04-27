@@ -9,7 +9,7 @@ class Tarmed::Base < ActiveRecord::Base
     'D'
   end
 
-  def self.import
+  def self.import_all
     for tarmed_tariff_item in Tarmed::Leistung.find(:all, :conditions => self.condition_validity)
       begin
         tariff_item = TarmedTariffItem.new
