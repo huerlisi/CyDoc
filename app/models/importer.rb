@@ -15,7 +15,7 @@ module Importer
 
     def import(do_clean = false, search_options = {})
 #      search_options.merge!({:conditions => {'Mandant_ID' => mandant_id}}) if mandant_id
-      search_options.merge!({:order => "#{primary_key} DESC"})
+#      search_options.merge!({:order => "#{primary_key} DESC"})
 
       puts "Importing #{self.name}..."
 

@@ -16,6 +16,23 @@ URL='http://www.bag.admin.ch/themen/krankenversicherung/02874/index.html?lang=de
 
 NAME="analyseliste"
 
+function check_cmd() {
+local cmd=$1
+
+	if which $cmd >/dev/null ; then
+		echo "Found '$cmd'"
+	else
+		echo "[ERROR] $cmd not found"
+		exit 1
+	fi
+}
+
+function check() {
+	for cmd in wget xls2csv ; do
+		check_cmd $cmd
+	done
+}
+
 # Download MS Excel
 function get() {
 local url="${1:-$URL}"
@@ -34,7 +51,7 @@ function import() {
 local input="${2:-$NAME.csv}"
 
 	# Import as TariffItems
-	echo "Analyseliste::LabTariffItem.import(true)" | ../script/console
+	echo "Analyseliste::LabTariffItem.import_all(true)" | ../script/console
 }
 
 function cleanup() {
@@ -46,10 +63,16 @@ function cleanup() {
 # Main
 # ====
 function main() {
+	check
 	get
 	convert
 	import
 	cleanup
 }
 
-main
+if [ $# == 0 ] ; then
+	main
+else
+	$1
+fi
+
