@@ -1,10 +1,10 @@
 <script type="text/javascript">
-  $('tariff_items_query').focus()
+  $('search_query').focus()
 </script>
 
 <h3>Neue Leistung</h3>
 <div class="box">
-  <% remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => patient_tariff_items_path(params['patient_id']), :html => {:method => :get}, :method => :get do |f| %>
+  <% remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => patient_tariff_items_path(params['patient_id'] || @patient.id), :html => {:method => :get}, :method => :get do |f| %>
     <%= f.label 'date', 'Datum' %>
     <%= f.text_field :date, :label => "Datum", :size => 8, :autocomplete => 'off' %>
 
