@@ -1,5 +1,7 @@
 module Medindex
-  class Base < Importer
+  class Base
+    include Importer
+
     def self.path
       case ENV['RAILS_ENV']
         when 'production': File.join(RAILS_ROOT, 'data', 'Medindex', "DownloadMedindex#{self.name.demodulize}_out.xml")
@@ -18,8 +20,9 @@ module Medindex
       Medindex::Article.import(do_clean)
     end
 
-    def self.all
-      data.root.elements
+    def self.find(selector, options = {})
+      load
+      @@data.root.elements
     end
   end
 end
