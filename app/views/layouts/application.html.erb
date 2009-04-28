@@ -46,7 +46,6 @@
       </div>
       <div id="sidebar">
         <div id="SideMenu">
-          <%= render :partial => '/cases/actions' if @case %>
           <%= render :partial => '/invoices/actions' if @invoice %>
         </div>
         <%= yield :sidebar %>
