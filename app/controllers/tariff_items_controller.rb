@@ -67,8 +67,9 @@ class TariffItemsController < ApplicationController
   def assign
     tariff_item = TariffItem.find(params[:id])
     patient = Patient.find(params[:patient_id])
-
-    service_record = tariff_item.create_service_record(patient, @current_doctor)
+    date = params[:date].blank? ? DateTime.now : Date.parse_europe(params[:date])
+    
+    service_record = tariff_item.create_service_record(patient, @current_doctor, date)
 
     # Handle TariffItemGroups
     if service_record.is_a? Array

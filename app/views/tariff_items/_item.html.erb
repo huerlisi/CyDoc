@@ -1,4 +1,4 @@
-<tr title="<%=h item.remark %>" style="cursor: pointer" onclick="<%= remote_function(:method => 'post', :url => assign_patient_tariff_item_path(params[:patient_id], item)) %>">
+<tr title="<%=h item.remark %>" style="cursor: pointer" onclick="<%= remote_function(:method => 'post', :url => assign_patient_tariff_item_path(params[:patient_id], item, :date => params[:search][:date])) %>">
   <td style="text-align:right"><%=h item.code %></td>
   <td><span style="font-weight: bold"><%=h truncate(item.remark, 100) %></span></td>
   <td style="text-align:right"><%=h sprintf('%.2f', item.amount_mt) %>&nbsp;TP</td>
