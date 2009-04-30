@@ -5,7 +5,7 @@
 </tr>
 <tr>
   <td>&#9632;&nbsp;<%=h record.date.strftime("%d.%m.%Y") %></td>
-  <td><%=h record.tariff_type %></td>
+  <td><%=h sprintf('%03i', record.tariff_type) %></td>
   <td><%=h record.code %></td>
   <td><%=h record.ref_code %></td>
   <td><%=h record.session %></td>
