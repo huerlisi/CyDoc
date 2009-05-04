@@ -127,6 +127,6 @@ class Invoice < ActiveRecord::Base
     id_string = esr_id + sprintf('%020i', id).delete(' ')
 
     biller_string = esr9_format_account_id(biller_id)
-    return "#{esr9_add_validation_digit(amount_string)}>#{esr9_add_validation_digit(id_string)}+ #{biller_string}>"
+    return "#{esr9_add_validation_digit(amount_string)}>#{esr9_add_validation_digit(id_string)}+&nbsp;#{biller_string}>"
   end
 end
