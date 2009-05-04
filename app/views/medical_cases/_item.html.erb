@@ -1,0 +1,5 @@
+<% begin %>
+  <%= render :partial => item.class.name.tableize.singularize, :object => item %>
+<% rescue ActionView::ActionViewError %>
+  <%= render :partial => 'medical_case', :object => item %>
+<% end %>

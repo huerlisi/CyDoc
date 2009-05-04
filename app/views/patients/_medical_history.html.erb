@@ -1,19 +1,14 @@
 <div class="contextual">
-    <%= link_to_remote "Diagnose erfassen", {:update => 'new_medical_case', :url => {:controller => :medical_cases, :action => :new_inline, :patient_id => @patient, :type => 'DiagnosisCase'}}, :class => "icon icon-add" %>
+    <%= link_to_remote "Diagnose erfassen", {:update => 'new_medical_case', :url => new_patient_diagnosis_url(@patient), :method => :get}, :class => "icon icon-add" %>
 </div>
 
 <h3>Krankengeschichte</h3>
 
-<div id="new_medical_case"></div>
+<div id="new_medical_case">
+  <%= render :partial => 'medical_cases/form' %>
+</div>
 
-<table class="list">
-  <%= render :partial => 'medical_history_header' %>
-<% if @patient.medical_cases.empty? %>
-  <tr>
-    <td colspan="2">Keine Krankengeschichte</td>
-  </tr>
-<% else %>
-    <%= render :partial => 'medical_history_item', :collection => @patient.medical_cases %>
-<% end %>
-  <%= render :partial => 'medical_history_footer' %>
-</table>
+<h3>Aktuelle Diagnosen</h3>
+<div id="medical_case_list">
+  <%= render :partial => 'medical_cases/list', :locals => { :items => @patient.medical_cases } %>
+</div>
