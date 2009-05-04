@@ -2,7 +2,7 @@
 module PatientsHelper
   def patient_tabs(patient)
     tabs = [{:name => 'personal', :partial => 'patients/show', :label => 'Personalien'},
-            {:name => 'history', :partial => 'patients/medical_history', :label => 'Krankengeschichte'},
+            {:name => 'medical_history', :partial => 'patients/medical_history', :label => 'Krankengeschichte'},
             {:name => 'services', :partial => 'patients/service_list', :label => 'Leistungen'},
             {:name => 'invoices', :partial => 'patients/invoice_tab', :label => 'Rechnungen'},
             ]

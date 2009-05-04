@@ -1,0 +1,5 @@
+<tr>
+  <td style="width: 14em"><%= medical_case.duration_from.strftime('%d.%m.%Y') if medical_case.duration_from %></td>
+  <td><%= medical_case.diagnosis.type %></td>
+  <td><%= medical_case.to_s %></td>
+</tr>

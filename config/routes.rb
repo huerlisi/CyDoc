@@ -18,7 +18,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :patients do |patient|
     patient.resources :tariff_items, :member => {:assign => :post}
-    patient.resources :diagnoses, :member => {:assign => :post}
+    patient.resources :medical_cases, :member => {:assign => :post}
+    patient.resources :diagnoses
     patient.resources :invoices
   end
 
