@@ -8,6 +8,6 @@ class LabTariffItem < TariffItem
   end
 
   def tariff_type
-    316
+    tariff_type || "317"
   end
 end

@@ -13,7 +13,7 @@ module Importer
         puts "  Done."
     end
 
-    def import(do_clean = false, search_options = {})
+    def import(do_clean = false, options = {})
 #      search_options.merge!({:conditions => {'Mandant_ID' => mandant_id}}) if mandant_id
 #      search_options.merge!({:order => "#{primary_key} DESC"})
 
@@ -28,13 +28,13 @@ module Importer
       errors = 0
 
       # Assure our data is loaded
-      ext_records = self.find(:all, search_options)
+      ext_records = self.find(:all, options)
       
       puts "  Importing #{ext_records.count} records..."
       for ext_record in ext_records
         begin
           # Do the actual import as specified by sub-classes
-          int_record = self.import_record(ext_record)
+          int_record = self.import_record(ext_record, options)
 
           # Save new record
           int_record.save!
