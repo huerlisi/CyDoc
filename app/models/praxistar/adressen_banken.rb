@@ -19,6 +19,7 @@ module Praxistar
       )
 
       int_record.bank_accounts.build(
+        # TODO: drop trailing zeros
         :esr_id => a.tx_Bankreferenz_Nr,
         :pc_id  => a.tx_Konto
         # TODO: Bankzeile*, Arztzeile*
