@@ -13,7 +13,7 @@ class DiagnosesController < ApplicationController
       }
       format.js {
         render :update do |page|
-          page.replace_html 'search_results', :partial => 'list'
+          page.replace_html 'medical_case_search_results', :partial => 'list'
         end
       }
     end
