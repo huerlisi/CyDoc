@@ -64,13 +64,10 @@ class InvoicesController < ApplicationController
     @patient = Patient.find(params[:patient_id])
     
     # Tiers
-    @tiers = TiersGarant.new(params[:tiers])
+    @tiers = @invoice.build_tiers(params[:tiers])
     @tiers.patient = @patient
     @tiers.biller = Doctor.find(Thread.current["doctor_id"])
     @tiers.provider = Doctor.find(Thread.current["doctor_id"])
-
-    @tiers.save
-    @invoice.tiers = @tiers
 
     # Law, TODO
     @law = Object.const_get(params[:law][:name]).new
@@ -99,7 +96,7 @@ class InvoicesController < ApplicationController
     # Saving
     if @invoice.save
       flash[:notice] = 'Erfolgreich erstellt.'
-      redirect_to :controller => 'invoices', :action => 'show', :id => @invoice
+      redirect_to @invoice
     else
       render :action => 'new'
     end
