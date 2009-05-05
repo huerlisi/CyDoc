@@ -3,7 +3,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :law
   belongs_to :treatment
 
-  has_and_belongs_to_many :service_records, :after_add => :add_service_record
+  has_and_belongs_to_many :service_records
 
   # Convenience methods
   def biller
@@ -82,18 +82,6 @@ class Invoice < ActiveRecord::Base
   end
 
   private
-  # Association callbacks
-  def add_service_record(service_record)
-    return true if treatment.nil?
-    
-    # Expand treatmend duration to include this tarmed record
-    treatment.date_begin = service_record.date if (treatment.date_begin.nil? or service_record.date < treatment.date_begin)
-    treatment.date_end = service_record.date if (treatment.date_end.nil? or service_record.date > treatment.date_end)
-
-    # Add diagnoses on the same as this tarmed record
-    diagnose_cases = DiagnosisCase.find(:all, :conditions => {:patient_id => patient.id, :duration_to => service_record.date})
-    treatment.diagnoses << diagnose_cases.map{|d| d.diagnosis}
-  end
 
   # ESR helpers
   def esr9_add_validation_digit(value)

@@ -2,7 +2,7 @@
 <%= error_messages_for :invoice %>
 
 <div class="box">
-  <% form_for @invoice, :builder => Rubaidh::TabularForm::TabularFormBuilder do |invoice| %>
+  <% form_for [:patient, @invoice], :builder => Rubaidh::TabularForm::TabularFormBuilder do |invoice| %>
     <table>
       <%= invoice.text_field :date, :label => 'Datum', :size => 12 %>
       <tr>
@@ -15,7 +15,6 @@
       </tr>
       <%= invoice.text_area :remark, :rows => 2, :label =>  'Bemerkungen' %>
       <%= invoice.submit "Erstellen" %>
-      <%= hidden_field 'tiers', :patient_id %>
     </table>
   <% end %>
 </div>
