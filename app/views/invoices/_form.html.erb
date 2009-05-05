@@ -4,7 +4,7 @@
 <div class="box">
   <% form_for @invoice, :builder => Rubaidh::TabularForm::TabularFormBuilder do |invoice| %>
     <table>
-      <%= invoice.text_field :date, :label => 'Datum' %>
+      <%= invoice.text_field :date, :label => 'Datum', :size => 12 %>
       <tr>
         <th>Gesetz:</th>
         <td><%= select 'law', :name, [['KVG', LawKvg], ['UVG', LawUvg], ['IVG', LawIvg], ['MVG', LawMvg], ['VVG', LawVvg], ['ORG', LawOrg]] %></td>
