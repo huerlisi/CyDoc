@@ -60,7 +60,7 @@ class Invoice < ActiveRecord::Base
     if amount.nil?
       return 0
     else
-      return (amount * 20).round / 20.0
+      return amount.currency_round
     end
   end
 

@@ -263,7 +263,7 @@ th {
   <tr>
     <td class="subhead" style="width:1.2cm"><span class="bullet">&#9632;</span>&nbsp;PFL</td>
     <td class="list" style="width:1.3cm">Tarmed&nbsp;AL</td>
-    <td class="amount" style="width:1.7cm"><%=h sprintf('%0.2f', @invoice.amount_mt ) %></td>
+    <td class="amount" style="width:1.7cm"><%=h sprintf('%0.2f', @invoice.amount_mt.currency_round) %></td>
     <td class="amount" style="width:1.3cm">(<%=h sprintf('%0.2f', @invoice.amount_mt / 0.89 ) %>)</td>
     <td style="width:1cm" />
     <td class="list" style="width:1.3cm">Physio</td>
@@ -279,7 +279,7 @@ th {
   <tr>
     <td style="width:1.2cm" />
     <td class="list" style="width:1.3cm">Tarmed&nbsp;TL</td>
-    <td class="amount" style="width:1.7cm"><%=h sprintf('%0.2f', @invoice.amount_tt) %></td>
+    <td class="amount" style="width:1.7cm"><%=h sprintf('%0.2f', @invoice.amount_tt.currency_round) %></td>
     <td class="amount" style="width:1.3cm">(<%=h sprintf('%0.2f', @invoice.amount_tt / 0.89) %>)</td>
     <td style="width:1cm" />
     <td class="list" style="width:1.3cm">Labor</td>
@@ -293,18 +293,18 @@ th {
     <td />
   </tr>
   <tr>
-    <td colspan="3" class="subhead" style="width:2.5cm"	><span class="bullet">&#9632;</span>&nbsp;Gesamtbetrag/CHF</td>
-    <td class="totalamount" style="width:1.7cm"><%=h sprintf('%0.2f', @invoice.amount) %></td>
+    <td colspan="2" class="subhead" style="width:2.5cm"	><span class="bullet">&#9632;</span>&nbsp;Gesamtbetrag/CHF</td>
+    <td class="totalamount" style="width:1.7cm"><%=h sprintf('%0.2f', @invoice.amount.currency_round) %></td>
     <td style="width:1.3cm"></td>
+    <td />
     <td class="subhead" style="width:1.3cm">davon&nbsp;PFL</td>
-    <td class="totalamount"><%=h sprintf('%0.2f', @invoice.amount) %></td>
+    <td class="totalamount"><%=h sprintf('%0.2f', @invoice.amount.currency_round) %></td>
     <td />
     <td class="subhead">Anzahlung</td>
     <td class="totalamount">0.00</td>
     <td />
     <td class="subhead">F&auml;lliger&nbsp;Betrag</td>
-    <td />
-    <td class="totalamount"><%=h sprintf('%0.2f', @invoice.amount) %></td>
+    <td class="totalamount"><%=h sprintf('%0.2f', @invoice.amount.currency_round) %></td>
   </tr>
   <tr>
     <td colspan="3" class="subhead"><span class="bullet">&#9632;</span>&nbsp;MWSt.Nr.</td>
@@ -324,7 +324,7 @@ th {
   <tr>
     <td class="total">Total</td>
     <td></td>
-    <td class="totalamount" style="text-align: left"><%=h sprintf('%0.2f', @invoice.amount) %></td>
+    <td class="totalamount" style="text-align: left"><%=h sprintf('%0.2f', @invoice.amount.currency_round) %></td>
     <td class="totalamount" style="text-align: left">0.00</td>
   </tr>
 </table>
