@@ -51,11 +51,9 @@ function get_all() {
 		NAME="${ident}_${version}"
 		get "${URL}${NAME}.xls"
 		convert
-		cleanup
 	done
-
-	import
 }
+
 
 # Main
 # ====
