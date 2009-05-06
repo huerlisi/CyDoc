@@ -43,13 +43,11 @@ class Invoice < ActiveRecord::Base
   
   # Calculated fields
   def amount_mt
-    # TODO: unit_mt's no constant
-    service_records.sum('quantity * amount_mt * unit_factor_mt').to_f * 0.89
+    service_records.sum('quantity * amount_mt * unit_factor_mt * unit_mt').to_f
   end
   
   def amount_tt
-    # TODO: unit_tt's no constant
-    service_records.sum('quantity * amount_tt * unit_factor_tt').to_f * 0.89
+    service_records.sum('quantity * amount_tt * unit_factor_tt * unit_tt').to_f
   end
   
   def amount
