@@ -7,7 +7,7 @@ class DrugTariffItem < TariffItem
     0.0
   end
 
-  def tariff_type
-    400
+  def self.tariff_type
+    "400"
   end
 end

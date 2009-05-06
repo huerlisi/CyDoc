@@ -66,6 +66,10 @@ class TariffItem < ActiveRecord::Base
     read_attribute(:amount_tt) || 0
   end
 
+  def tariff_type
+    read_attribute(:tariff_type) || self.tariff_type
+  end
+  
   # Calculated field
   def amount
     (self.amount_mt * self.unit_factor_mt * self.unit_mt) + (self.amount_tt * self.unit_factor_tt * self.unit_tt)

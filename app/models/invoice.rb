@@ -42,16 +42,18 @@ class Invoice < ActiveRecord::Base
   end
   
   # Calculated fields
-  def amount_mt
-    service_records.sum('quantity * amount_mt * unit_factor_mt * unit_mt').to_f
+  def amount_mt(tariff_type = nil, options = {})
+    options.merge!(:conditions => {:tariff_type => tariff_type}) if tariff_type
+    service_records.sum('quantity * amount_mt * unit_factor_mt * unit_mt', options).to_f
   end
   
-  def amount_tt
-    service_records.sum('quantity * amount_tt * unit_factor_tt * unit_tt').to_f
+  def amount_tt(tariff_type = nil, options = {})
+    options.merge!(:conditions => {:tariff_type => tariff_type}) if tariff_type
+    service_records.sum('quantity * amount_tt * unit_factor_tt * unit_tt', options).to_f
   end
   
-  def amount
-    amount_mt + amount_tt
+  def amount(tariff_type = nil, options = {})
+    amount_mt(tariff_type, options) + amount_tt(tariff_type, options)
   end
 
   def rounded_amount

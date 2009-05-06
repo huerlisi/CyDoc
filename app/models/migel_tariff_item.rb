@@ -7,7 +7,7 @@ class MigelTariffItem < TariffItem
     0.0
   end
 
-  def tariff_type
-    452
+  def self.tariff_type
+    "452"
   end
 end

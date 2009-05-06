@@ -7,7 +7,7 @@ class TarmedTariffItem < TariffItem
     0.89
   end
 
-  def tariff_type
-    001
+  def self.tariff_type
+    "001"
   end
 end
