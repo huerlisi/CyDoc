@@ -72,7 +72,7 @@ class Patient < ActiveRecord::Base
 
   # Search
   # ======
-  def self.clever_find(query, *args)
+  def self.clever_find(query, args = {})
     return [] if query.nil? or query.empty?
     
     query_params = {}
@@ -92,7 +92,8 @@ class Patient < ActiveRecord::Base
       patient_condition = "#{name_condition} OR #{given_family_condition} or #{family_given_condition}"
     end
 
-    find(:all, :include => [:vcard ], :conditions => ["(#{patient_condition})", query_params], :order => 'vcards.family_name, vcards.given_name')
+    args.merge!(:include => [:vcard ], :conditions => ["(#{patient_condition})", query_params], :order => 'vcards.family_name, vcards.given_name')
+    find(:all, args)
   end
 
   private
