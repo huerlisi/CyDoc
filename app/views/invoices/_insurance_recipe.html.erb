@@ -46,6 +46,10 @@ th {
   text-align:  left;
 }
 
+.col1 {
+  width: 1.8cm;
+}
+
 </style>
 
 <%
@@ -64,8 +68,8 @@ th {
 
 <table style="width:18.2cm; border:thin solid black; border-bottom:none">
   <tr>
-    <td class="subhead" style="width:1.8cm">Dokument</td>
-    <td style="width:2.3cm"> </td>
+    <td class="subhead col1">Dokument</td>
+    <td class="list" style="width:2.3cm"> </td>
     <td style="width:2.8cm"><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.id %></td>
     <td style="width:5.7cm"><%= @invoice.date.strftime('%d.%m.%Y') %></td>
     <td class="subhead" style="width:2cm">Seite&nbsp;<span class="bullet">&#9632;</span>&nbsp;<%=h page %></td>
@@ -74,78 +78,79 @@ th {
     <td class="subhead" rowspan="2" style="width:1.8cm">Rechnungs-<br />steller</td>
     <td class="list">EAN-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.biller.ean_party %></td>
-    <td colspan="3" class="list"><%= full_address(@invoice.biller.vcard, ', ') %></td>
+    <td colspan="2" class="list"><%= full_address(@invoice.biller.vcard, ', ') %></td>
   </tr>
   <tr>
     <td class="list">ZSR-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.biller.zsr %></td>
-    <td colspan="4" class="list"><%= contact(@invoice.biller.vcard, ' ') %></td>
+    <td colspan="3" class="list"><%= contact(@invoice.biller.vcard, ' ') %></td>
   </tr>
   <tr>
     <td class="subhead" rowspan="2">Leistungs-<br />erbringer</td>
     <td class="list">EAN-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.provider.ean_party %></td>
-    <td colspan="3" class="list"><%=h full_address(@invoice.provider.vcard, ', ') %></td>
+    <td colspan="2" class="list"><%=h full_address(@invoice.provider.vcard, ', ') %></td>
   </tr>
   <tr>
     <td class="list">ZSR-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.provider.zsr %></td>
-    <td colspan="4" class="list"><%= contact(@invoice.provider.vcard, ' ') %></td>
+    <td colspan="3" class="list"><%= contact(@invoice.provider.vcard, ' ') %></td>
   </tr>
 </table>
-<table style="width: 100%; border:thin solid black">
+<table style="width: 18.2cm; border:thin solid black">
   <tr>
-    <td class="subhead" style="width:1.8cm">Patient</td>
+    <td class="subhead col1">Patient</td>
     <td class="list" style="width:2.3cm">Name</td>
-    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.vcard.family_name %></td>
-    <td class="list">EAN-Nr.&nbsp;<span class="bullet">&#9632;</span></td>
+    <td style="width:6.5cm"><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.vcard.family_name %></td>
+    <td colspan="2" class="list" style="width:2cm">EAN-Nr.&nbsp;<span class="bullet">&#9632;</span></td>
   </tr>
   <tr>
     <td></td>
     <td class="list">Vorname</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.vcard.given_name %></td>
-    <td></td>
+    <td colspan="2"></td>
   </tr>
   <tr>
     <td></td>
     <td class="list">Strasse</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.vcard.street_address %></td>
-    <td></td>
+    <td colspan="2"></td>
   </tr>
   <tr>
     <td></td>
     <td class="list">PLZ</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.vcard.postal_code %></td>
-    <td></td>
+    <td colspan="2"></td>
   </tr>
   <tr>
     <td></td>
     <td class="list">Ort</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.vcard.locality %></td>
-    <td><%=h @invoice.patient.vcard.honorific_prefix %></td>
+    <td colspan="2"><%=h @invoice.patient.vcard.honorific_prefix %></td>
   </tr>
   <tr>
     <td></td>
     <td class="list">Geburtsdatum</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.birth_date.strftime('%d.%m.%Y') if @invoice.patient.birth_date %></td>
-    <td><%=h @invoice.patient.vcard.full_name %></td>
+    <td colspan="2"><%=h @invoice.patient.vcard.full_name %></td>
   </tr>
   <tr>
     <td></td>
     <td class="list">Geschlecht</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.sex %></td>
-    <td><%=h @invoice.patient.vcard.street_address %></td>
+    <td colspan="2"><%=h @invoice.patient.vcard.street_address %></td>
   </tr>
   <tr>
     <td></td>
     <td class="list">Unfalldatum</td>
     <td><span class="bullet">&#9632;</span></td>
-    <td><%=h @invoice.patient.vcard.postal_code %>&nbsp;<%=h @invoice.patient.vcard.locality %></td>
+    <td colspan="2"><%=h @invoice.patient.vcard.postal_code %>&nbsp;<%=h @invoice.patient.vcard.locality %></td>
   </tr>
   <tr>
     <td></td>
     <td class="list">Unfall-/Verf&uuml;g.Nr.</td>
     <td><span class="bullet">&#9632;</span><%=h @invoice.law.case_id %></td>
+    <td></td>
     <td></td>
   </tr>
   <tr>
@@ -153,11 +158,13 @@ th {
     <td class="list">AHV-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.law.ssn %></td>
     <td></td>
+    <td></td>
   </tr>
   <tr>
     <td></td>
     <td class="list">Versicherten-Nr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.insurance_nr %></td>
+    <td></td>
     <td></td>
   </tr>
   <tr>
@@ -165,11 +172,13 @@ th {
     <td class="list">Betriebs-Nr./-Name</td>
     <td><span class="bullet">&#9632;</span></td>
     <td></td>
+    <td></td>
   </tr>
   <tr>
     <td></td>
     <td class="list">Kanton</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.treatment.canton %></td>
+    <td></td>
     <td></td>
   </tr>
   <tr>
@@ -177,11 +186,13 @@ th {
     <td class="list">Rechnungskopie</td>
     <td><span class="bullet">&#9632;</span>&nbsp;Nein</td>
     <td></td>
+    <td></td>
   </tr>
   <tr>
     <td></td>
     <td class="list">Verg&uuml;tungsart</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.tiers.name %></td>
+    <td></td>
     <td></td>
   </tr>
   <tr>
@@ -189,11 +200,13 @@ th {
     <td class="list">Gesetz</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.law.name %></td>
     <td></td>
+    <td></td>
   </tr>
   <tr>
     <td></td>
     <td class="list">Behandlungsgrund</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.treatment.reason %></td>
+    <td></td>
     <td></td>
   </tr>
   <tr>
