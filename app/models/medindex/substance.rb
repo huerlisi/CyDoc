@@ -1,16 +1,26 @@
 module Medindex
-  class Substance < Base
-    def self.int_class
+  class Substance < Listener
+    def int_class
       Kernel::DrugSubstance
     end
 
-    def self.import_record(ext_record)
-      int_record = self.int_class.new
-      
-      int_record.id = ext_record.field('SUBNO')
-      int_record.name = ext_record.field('NAMD')
+    def tag_start(name, attrs)
+      @attribute = nil
+      case name
+        when 'SB': @record = int_class.new
 
-      return int_record
+        when 'SUBNO': @attribute = :id
+        when 'NAMD': @attribute = :name
+      end
+    end
+    
+    def tag_end(name)
+      @attribute = nil
+      case name
+        when 'SB':
+          @record.save!
+          puts @record
+      end
     end
   end
 end
