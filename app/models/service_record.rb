@@ -9,6 +9,7 @@ class ServiceRecord < ActiveRecord::Base
   
   # Calculated field
   def amount
+    # TODO: round as requested by standard
     self.quantity * ((self.amount_mt * self.unit_factor_mt * self.unit_mt) + (self.amount_tt * self.unit_factor_tt * self.unit_tt))
   end
 

@@ -44,12 +44,12 @@ class Invoice < ActiveRecord::Base
   # Calculated fields
   def amount_mt(tariff_type = nil, options = {})
     options.merge!(:conditions => {:tariff_type => tariff_type}) if tariff_type
-    service_records.sum('quantity * amount_mt * unit_factor_mt * unit_mt', options).to_f
+    service_records.sum('truncate(quantity * amount_mt * unit_factor_mt * unit_mt + 0.005, 2)', options).to_f
   end
   
   def amount_tt(tariff_type = nil, options = {})
     options.merge!(:conditions => {:tariff_type => tariff_type}) if tariff_type
-    service_records.sum('quantity * amount_tt * unit_factor_tt * unit_tt', options).to_f
+    service_records.sum('truncate(quantity * amount_tt * unit_factor_tt * unit_tt + 0.005, 2)', options).to_f
   end
   
   def amount(tariff_type = nil, options = {})
