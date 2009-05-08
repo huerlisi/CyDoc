@@ -21,6 +21,10 @@ class DrugArticle < ActiveRecord::Base
   
   # Prices
   def price
-    drug_prices.valid.public.current.first.price
+    begin
+      return drug_prices.valid.public.current.first.price
+    rescue
+      return 0.0
+    end
   end
 end
