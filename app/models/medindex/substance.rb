@@ -5,21 +5,21 @@ module Medindex
     end
 
     def tag_start(name, attrs)
-      @attribute = nil
-      case name
-        when 'SB': @record = int_class.new
-
-        when 'SUBNO': @attribute = :id
-        when 'NAMD': @attribute = :name
-      end
-    end
-    
-    def tag_end(name)
-      @attribute = nil
       case name
         when 'SB':
-          @record.save!
-          puts @record
+          @int_record = int_class.new
+      end
+      @text = ""
+    end
+
+    def tag_end(name)
+      case name
+        when 'SB':
+          @int_record.save!
+          puts @int_record
+          
+        when 'SUBNO': @int_record.id = @text.to_i
+        when 'NAMD': @int_record.name = @text
       end
     end
   end

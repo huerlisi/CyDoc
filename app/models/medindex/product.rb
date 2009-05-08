@@ -1,48 +1,58 @@
 module Medindex
-  class Product < Base
-    def self.int_class
+  class Product < Listener
+    def int_class
       Kernel::DrugProduct
     end
 
-    def self.import_record(ext_record)
-      int_record = self.int_class.new
-      
-      int_record.id = ext_record.field('PRDNO').to_i
-      int_record.description = ext_record.field('DSCRD') # TODO: Language support
-      int_record.name = ext_record.field('BNAMD') # TODO: Language support
-      int_record.second_name = ext_record.field('ADNAMD') # TODO: Language support
-      int_record.size = ext_record.field('SIZE')
-      int_record.info = ext_record.field('ADINFOD') # TODO: Language support
-      int_record.original = ext_record.field('GENCD') == 'O'
-      int_record.generic_group = ext_record.field('GENGRP')
-      int_record.drug_code1_id = ext_record.field('ATC1')
-      int_record.drug_code2_id = ext_record.field('ATC2')
-      int_record.therap_code1_id = ext_record.field('IT1')
-      int_record.therap_code2_id = ext_record.field('IT2')
-      int_record.drug_compendium_id = ext_record.field('KONO').to_i
-      int_record.application_code = ext_record.field('IDXIND')
-      int_record.dose_amount = ext_record.field('DDDD').to_f
-      int_record.dose_units = ext_record.field('DDDU')
-      int_record.dose_application = ext_record.field('DDDA')
-      int_record.interaction_relevance = ext_record.field('IXREL').to_i
-      int_record.active = ext_record.field('TRADE') == 'iH'
-      int_record.partner_id = ext_record.field('PRTNO').to_i
-      int_record.drug_monograph_id = ext_record.field('MONO').to_i
-      int_record.galenic = ext_record.field('CDGALD') == 'Y' # TODO: Language support
-      int_record.galenic_code_id = ext_record.field('GALF') # TODO: Language support
-      int_record.concentration = ext_record.field('DOSE').to_f
-      int_record.concentration_unit = ext_record.field('DOSEU')
-      int_record.special_drug_group_code = ext_record.field('DRGGRPCD')
-      int_record.drug_for = ext_record.field('DRGFD') # TODO: Language support
-      int_record.probe_suited = ext_record.field('PRBSUIT') == 'yes'
-      # TODO: *SOL* attributes not implemented
-      int_record.life_span = ext_record.field('LSPNSOL').to_f
-      int_record.application_time = ext_record.field('APDURSOL').to_f
-      int_record.excip_text = ext_record.field('EXCIP')
-      int_record.excip_quantity = ext_record.field('EXCIPQ')
-      int_record.excip_comment = ext_record.field('EXCIPCD')
+    def tag_start(name, attrs)
+      case name
+        when 'PRD':
+          @int_record = int_class.new
+      end
+      @text = ""
+    end
 
-      return int_record
+    def tag_end(name)
+      case name
+        when 'PRD':
+          @int_record.save!
+          puts @int_record
+          
+        when 'PRDNO': @int_record.id = @text.to_i
+        when 'DSCRD': @int_record.description = @text
+        when 'BNAMD': @int_record.name = @text
+        when 'ADNAMD': @int_record.second_name = @text
+        when 'SIZE': @int_record.size = @text
+        when 'ADINFOD': @int_record.info = @text
+        when 'GENCD': @int_record.original = @text == 'O'
+        when 'GENGRP': @int_record.generic_group = @text
+        when 'ATC1': @int_record.drug_code1_id = @text
+        when 'ATC2': @int_record.drug_code2_id = @text
+        when 'IT1': @int_record.therap_code1_id = @text
+        when 'IT2': @int_record.therap_code2_id = @text
+        when 'KONO': @int_record.drug_compendium_id = @text.to_i
+        when 'IDXIND': @int_record.application_code = @text
+        when 'DDDD': @int_record.dose_amount = @text.to_f
+        when 'DDDU': @int_record.dose_units = @text
+        when 'DDDA': @int_record.dose_application = @text
+        when 'IXREL': @int_record.interaction_relevance = @text.to_i
+        when 'TRADE': @int_record.active = @text == 'iH'
+        when 'PRTNO': @int_record.partner_id = @text.to_i
+        when 'MONO': @int_record.drug_monograph_id = @text.to_i
+        when 'CDGALD': @int_record.galenic = @text == 'Y'
+        when 'GALF': @int_record.galenic_code_id = @text
+        when 'DOSE': @int_record.concentration = @text.to_f
+        when 'DOSEU': @int_record.concentration_unit = @text
+        when 'DRGGRPCD': @int_record.special_drug_group_code = @text
+        when 'DRGFD': @int_record.drug_for = @text
+        when 'PRBSUIT': @int_record.probe_suited = @text == 'yes'
+        # TODO: *SOL* attributes not implemented
+        when 'LSPNSOL': @int_record.life_span = @text.to_f
+        when 'APDURSOL': @int_record.application_time = @text.to_f
+        when 'EXCIP': @int_record.excip_text = @text
+        when 'EXCIPQ': @int_record.excip_quantity = @text
+        when 'EXCIPCD': @int_record.excip_comment = @text
+     end
     end
   end
 end

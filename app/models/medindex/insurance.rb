@@ -1,26 +1,40 @@
 module Medindex
-  class Insurance < Base
-    def self.import_record(ext_record)
-      raise SkipException if ext_record.field('EAN').empty?
+  class Insurance < Listener
+    def tag_start(name, attrs)
+      @attribute = nil
+      case name
+        when 'INS': @record = Kernel::Insurance.new
 
-      int_record = int_class.new
-      
-      int_record.ean_party = ext_record.field('EAN')
-      int_record.group_ean_party = ext_record.field('GROUP_EAN')
-      int_record.role = ext_record.field('ROLE')
+        when 'EAN': @attribute = :ean_party
+        when 'GROUP_EAN': @attribute = :group_ean_party
+        when 'ROLE': @attribute = :role
+        when 'GROUP_EAN': @attribute = :group_ean_party
 
-      # TODO: import REFNO
-      # TODO: import LANG
+        when 'DESCR1': @attribute = :full_name
 
-      int_record.vcard = Vcards::Vcard.new(
-              :full_name => ext_record.field('DESCR1'),
-              :street_address => [ext_record.field('ADDR/STREET'), ext_record.field('ADDR/STRNO')].compact.join(" "),
-              :extended_address => ext_record.field('ADDR/POBOX'),
-              :postal_code => ext_record.field('ADDR/ZIP'),
-              :locality => ext_record.field('ADDR/CITY')
-      )
-      
-      return int_record
+        when 'ADDR':
+          @insurance = @record
+          @record = Vcards::Vcard.new
+
+        when 'ZIP': @attribute = :postal_code
+        when 'CITY': @attribute = :locality
+        when 'POBOX': @attribute = :extended_address
+
+      end
     end
+    
+    def tag_end(name)
+      @attribute = nil
+      case name
+        when 'INS':
+          @record.save!
+        when 'ADDR':
+          @record.save!
+          @record.object = @insurance
+
+          @record = @insurance
+      end
+    end
+    
   end
 end
