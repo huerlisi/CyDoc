@@ -1,5 +1,5 @@
 module Praxistar
-  class TariffeTarifposition < Base
+  class TarifeTarifposition < Base
     set_table_name "Tarife_Tarifposition"
     set_primary_key "id_Position"
 
