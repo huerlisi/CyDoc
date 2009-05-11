@@ -25,7 +25,7 @@
     <td class="amount" style="width:1.7cm"><%=h sprintf('%0.2f', (@invoice.amount("316") + @invoice.amount("317")).currency_round) %></td>
     <td style="width:1.2cm" />
     <td class="list" style="width:1.3cm">Medi</td>
-    <td class="amount" style="width:1.5cm"><%=h sprintf('%0.2f', @invoice.amount_tt(DrugTariffItem.tariff_type).currency_round) %></td>
+    <td class="amount" style="width:1.5cm"><%=h sprintf('%0.2f', @invoice.amount_tt("400").currency_round) %></td>
     <td style="width:1.3cm" />
     <td class="list" style="width:1.9cm">Kantonal</td>
     <td class="amount" style="width:1.7" style="text-align: right">0.00</td>

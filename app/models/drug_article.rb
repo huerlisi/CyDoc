@@ -27,4 +27,14 @@ class DrugArticle < ActiveRecord::Base
       return 0.0
     end
   end
+
+  # Tariff Items
+  def build_tariff_item
+    tariff_item = DrugTariffItem.new(
+      :amount_mt  => price,
+      :obligation => !insurance_limited,
+      :code       => code,
+      :remark     => description
+    )
+  end
 end
