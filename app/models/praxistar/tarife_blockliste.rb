@@ -1,9 +1,0 @@
-module Praxistar
-  class TarifeBlockliste < Base
-    set_table_name "Tarife_Blockliste"
-    set_primary_key "Block_ID"
-    
-    belongs_to :group, :class_name => 'TarifeBloecke', :foreign_key => 'Block_ID'
-    belongs_to :position, :class_name => 'TariffItemImporter', :foreign_key => 'tx_Code1'
-  end
-end
