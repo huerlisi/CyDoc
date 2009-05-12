@@ -31,10 +31,11 @@ class DrugArticle < ActiveRecord::Base
   # Tariff Items
   def build_tariff_item
     tariff_item = DrugTariffItem.new(
-      :amount_mt  => price,
-      :obligation => !insurance_limited,
-      :code       => code,
-      :remark     => description
+      :amount_mt   => price,
+      :obligation  => !insurance_limited,
+      :code        => code,
+      :remark      => description,
+      :tariff_type => "400"
     )
   end
 end
