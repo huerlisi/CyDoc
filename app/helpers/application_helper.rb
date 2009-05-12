@@ -9,5 +9,14 @@ module ApplicationHelper
 
     render :partial => 'shared/navigation_section', :locals => {:section_title => section_title, :items => items, :image => image}
   end
+
+  # PDF
+  def render_inline_stylesheet(name)
+    stylesheet = "<style>\n"
+    stylesheet += controller.send(:render_to_string, :file => File.join(RAILS_ROOT, 'public', 'stylesheets', "#{name}.css"))
+    stylesheet += "\n</style>\n"
+    
+    return stylesheet
+  end
 end
 

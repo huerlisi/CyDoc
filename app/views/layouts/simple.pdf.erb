@@ -10,7 +10,7 @@
     <title>Hozr - <%= controller.action_name %></title>
   </head>
   <body>
-    <%= render :file => '/invoices/invoice.html.erb' %>
+    <%= render_inline_stylesheet 'invoice' %>
     <%= yield %>
   </body>
 </html>
