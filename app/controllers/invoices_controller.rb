@@ -70,7 +70,10 @@ class InvoicesController < ApplicationController
     @patient = Patient.find(params[:patient_id])
     
     # Tiers
-    @tiers = @invoice.build_tiers(params[:tiers])
+    # TODO: something like:
+    #@tiers = @invoice.build_tiers(params[:tiers])
+    @tiers = TiersGarant.new
+    @invoice.tiers = @tiers
     @tiers.patient = @patient
     @tiers.biller = Doctor.find(Thread.current["doctor_id"])
     @tiers.provider = Doctor.find(Thread.current["doctor_id"])
