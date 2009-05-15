@@ -1,5 +1,6 @@
   </table>
   <%= render :partial => 'insurance_recipe_subtotal' %>
+  <div class="insurance-recipe-vesr"><%= @invoice.esr9(@invoice.biller.account) %></div>
 </div>
 
 <%
