@@ -20,6 +20,16 @@
 % No headers/footers
 \pagestyle{empty}
 
+\newenvironment{headerbox}
+  {
+    \begin{tabular}{@{} p{1.5cm} p{2.2cm} @{ ■ } p{2.9cm} p{4cm} p{5.8cm} @{}}
+  }
+  {
+    \end{tabular}
+  }
+
+
+
 % Main document
 \begin{document}
 
@@ -29,17 +39,17 @@
 
 \begin{tabular}{| l |}
   \hline\\
-  \begin{tabular}{@{} p{1.5cm} p{2.2cm} @{ ■ } p{2.9cm} p{4cm} p{5.8cm} @{}}
+  \begin{headerbox}
     \multicolumn{2}{@{} l @{ ■ }}{\textbf{Dokument}}                   & 12.05.2009 15:30:56 & &\textbf{Seite} ■ \thepage\\
     \multirow{2}{1.6cm}{\textbf{Rechnungs-steller}}   & EAN-Nr. & 7601000203090 & \multicolumn{2}{l @{}}{Praxis Dr. med., Christen Lucia, Limmatstrasse 119, 8005 Zürich}\\
                                                       & ZSR-Nr. & R098601       & \multicolumn{2}{l @{}}{Fax: 044 273 36 60 Tel: 044 272 60 80}\\
     \multirow{2}{1.6cm}{\textbf{Leistungs-erbringer}} & EAN-Nr. & 7601000203090 & \multicolumn{2}{l @{}}{Praxis Dr. med., Christen Lucia, Limmatstrasse 119, 8005 Zürich}\\
                                                       & ZSR-Nr. & R098601       & \multicolumn{2}{l @{}}{Fax: 044 273 36 60 Tel: 044 272 60 80}\\
 
-  \end{tabular}\\
+  \end{headerbox}\\
   \hline\\
 
-  \begin{tabular}{@{} p{1.5cm} p{2.2cm} @{ ■ } p{2.9cm} p{4cm} p{5.8cm} @{}}
+  \begin{headerbox}
     \textbf{Patient}          & Name                & \multicolumn{2}{l @{}}{ROOZEBOOM} & EAN-Nr. ■ \\
                               & Vorname             & & \\
                               & Strasse             & \\
@@ -54,7 +64,7 @@
                               & Betriebs-Nr./Name   & \\
                               & Kanton              & \\
                               & Rechnungskopie      & \\
-  \end{tabular}\\
+  \end{headerbox}\\
   \hline
 \end{tabular}
 
