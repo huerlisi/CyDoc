@@ -1,10 +1,12 @@
 <%
-  page = 1
+  @page           = 1
+  @record_counter = 0
+  @subtotal       = 0.0
 %>
 
 <div id="insurance-recipe">
 
-<%= render :partial => 'insurance_recipe_head', :locals => {:page => page} %>
+<%= render :partial => 'insurance_recipe_head' %>
 
 <table style="width: 100%; border:thin solid black">
   <tr>
@@ -159,25 +161,7 @@
 </table>
 
 <table width="100%">
-  <tr>
-    <th style="width:2cm">Datum</th>
-    <th style="width:1cm">Tarif</th>
-    <th style="width:1.5cm">Tarifziffer</th>
-    <th style="width:1.5cm">Bezugsziffer</th>
-    <th style="width:0.8cm">Si&nbsp;St</th>
-    <th style="width:1cm">Anzahl</th>
-    <th style="width:1.7cm">TP&nbsp;AL/Preis</th>
-    <th style="width:0.8cm">f&nbsp;AL</th>
-    <th style="width:1cm">TPW&nbsp;AL</th>
-    <th style="width:1cm">TP&nbsp;TL</th>
-    <th style="width:0.8cm">f&nbsp;TL</th>
-    <th style="width:1.3cm">TPW&nbsp;TL</th>
-    <th style="width:0.4cm">A</th>
-    <th style="width:0.4cm">V</th>
-    <th style="width:0.4cm">P</th>
-    <th style="width:0.4cm">M</th>
-    <th style="width:2cm; text-align:right">Betrag</th>
-  </tr>
+  <%= render :partial => 'service_record_head' %>
   <%= render :partial => 'tariff_items/record', :collection => @invoice.service_records %>
 </table>
 

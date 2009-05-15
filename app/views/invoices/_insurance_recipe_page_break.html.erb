@@ -1,0 +1,14 @@
+  </table>
+  <%= render :partial => 'insurance_recipe_subtotal' %>
+</div>
+
+<%
+  @record_counter = 0
+  @page          += 1
+%>
+<?page-break>
+
+<div id="insurance-recipe">
+  <%= render :partial => 'insurance_recipe_head' %>
+  <table style="width: 100%">
+    <%= render :partial => 'service_record_head' %>

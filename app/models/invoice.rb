@@ -3,7 +3,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :law
   belongs_to :treatment
 
-  has_and_belongs_to_many :service_records
+  has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC'
 
   # Convenience methods
   def biller
