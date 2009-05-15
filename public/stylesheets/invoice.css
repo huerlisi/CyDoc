@@ -63,7 +63,8 @@
 }
 
 table {
-  border-spacing: 0;
+  border-spacing:	0;
+  border-collapse:	collapse;
 }
 th {
   font-size:   7pt;
