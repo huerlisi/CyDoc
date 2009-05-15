@@ -1,0 +1,45 @@
+% Use extletter to use 9pt
+\documentclass[a4paper,oneside,8pt]{extletter}
+
+% Use most of sheet
+\usepackage[
+  hmargin=1.5cm,
+  vmargin=1.2cm,
+  head=1cm,
+  headsep=0pt,
+  foot=0cm
+  ]{geometry}
+\usepackage[ngerman]{babel}
+\usepackage{fontspec}
+\usepackage{multirow}
+
+% Font setup
+\fontspec[BoldFont={Liberation Sans}, BoldFeatures={Weight=1.4}]{Liberation Sans}
+\setromanfont{Liberation Sans}
+
+% No headers/footers
+\pagestyle{empty}
+
+% Main document
+\begin{document}
+
+\begin{tabular}{@{} p{14cm} p{3cm} p{1cm} @{}}
+ \Huge \textbf{Rückforderungsbeleg} & \small Release ■ 4.0M/de & \Huge \textbf{M}\\
+\end{tabular}
+
+\begin{framebox}{
+\begin{tabular}{@{} p{1.6cm} p{1.6cm} p{2.9cm} p{4cm} p{6cm} @{}}
+ \multicolumn{2}{@{} l}{\textbf{Dokument}} & ■ 27    & 12.05.2009 15:30:56&\textbf{Seite} ■ 1\\
+ \multirow{2}{1.6cm}{Rechnungs-steller}   & EAN-Nr. & ■ 7601000203090 & \multicolumn{2}{l @{}}{Praxis Dr. med., Christen Lucia, Limmatstrasse 119, 8005 Zürich}\\
+                     & ZSR-Nr. & ■ R098601       & \multicolumn{2}{l @{}}{Fax: 044 273 36 60 Tel: 044 272 60 80}\\
+ \multirow{2}{1.6cm}{Leistungs-erbringer} & EAN-Nr. & ■ 7601000203090 & \multicolumn{2}{l @{}}{Praxis Dr. med., Christen Lucia, Limmatstrasse 119, 8005 Zürich}\\
+                     & ZSR-Nr. & ■ R098601       & \multicolumn{2}{l @{}}{Fax: 044 273 36 60 Tel: 044 272 60 80}\\
+\end{tabular}
+}
+\end{framebox}
+
+\begin{tabular}{lllll}
+  Dokument\\
+\end{tabular}
+
+\end{document}
