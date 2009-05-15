@@ -1,5 +1,5 @@
 /* Invoices */
-#insurance-recipe {
+.insurance-recipe {
   font-family: Liberation,Arial,DejaVu Sans;
   font-size:   8pt;
   margin:      1.2cm;
@@ -9,9 +9,9 @@
   top:         0cm;
   left:        0cm;
 }
-#insurance-recipe-footer {
+.insurance-recipe-footer {
   position:	absolute;
-  top:		21.2cm;
+  top:		22.7cm;
   width:	width: 18.2cm;
 }
 
