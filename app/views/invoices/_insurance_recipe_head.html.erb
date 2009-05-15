@@ -37,3 +37,9 @@
     <td colspan="3" class="list"><%= contact(@invoice.provider.vcard, ' ') %></td>
   </tr>
 </table>
+
+<% if @page == 1 %>
+  <%= render :partial => 'insurance_recipe_patient_head' %>
+<% else %>
+  <%= render :partial => 'insurance_recipe_patient_head_following_page' %>
+<% end %>

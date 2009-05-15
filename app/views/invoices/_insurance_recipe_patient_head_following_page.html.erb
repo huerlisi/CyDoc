@@ -1,0 +1,6 @@
+<table style="width: 100%; border:thin solid black">
+  <tr>
+    <td class="subhead col1">Patient</td>
+    <td class="list"><%=h [@invoice.patient.full_name, @invoice.patient.birth_date.strftime('%d.%m.%Y')].join(', ') %></td>
+  </tr>
+</table>
