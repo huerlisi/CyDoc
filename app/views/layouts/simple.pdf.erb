@@ -8,9 +8,9 @@
     <meta name="description" content="Hozr - Zytolabor Limmatplatz" />
 
     <title>Hozr - <%= controller.action_name %></title>
+    <%= render_inline_stylesheet 'invoice' %>
   </head>
   <body>
-    <%= render_inline_stylesheet 'invoice' %>
     <%= yield %>
   </body>
 </html>
