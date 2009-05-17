@@ -23,7 +23,7 @@
 
 \newenvironment{headerbox}
   {
-    \begin{tabular}{@{} p{1.5cm} p{2.2cm} @{ ■ } p{2.9cm} p{4cm} p{5.8cm} @{}}
+    \begin{tabular}{p{2.0cm} p{2.6cm} @{ ■ } p{2.9cm} p{4cm} p{5.8cm}}
   }
   {
     \end{tabular}
@@ -42,11 +42,12 @@
  \Huge \textbf{Rückforderungsbeleg} & \small Release ■ 4.0M/de & \Huge \textbf{M}\\
 \end{tabular}
 
+\setlength{\tabcolsep}{0.1em}
 \begin{tabular}{| l |}
   \hline
   \begin{headerbox}
-    \multicolumn{2}{@{} l @{ ■ }}{\textbf{Dokument}}            & 12.05.2009 15:30:56 & &\textbf{Seite} ■ \thepage\\
-    \multirow{2}{1.6cm}{\textbf{Rechnungs-steller}}   & EAN-Nr. & 7601000203090 & \multicolumn{2}{l @{}}{Praxis Dr. med., Christen Lucia, Limmatstrasse 119, 8005 Zürich}\\
+    \multicolumn{2}{l @{ ■ }}{\textbf{Dokument}}            & 12.05.2009 15:30:56 & &\textbf{Seite} ■ \thepage\\
+    \multirow{2}{1.6cm}{\textbf{Rechnungs-steller}}   & EAN-Nr. & 7601000203090 & \multicolumn{2}{l}{Praxis Dr. med., Christen Lucia, Limmatstrasse 119, 8005 Zürich}\\
                                                       & ZSR-Nr. & R098601       & \multicolumn{2}{l @{}}{Fax: 044 273 36 60 Tel: 044 272 60 80}\\
     \multirow{2}{1.6cm}{\textbf{Leistungs-erbringer}} & EAN-Nr. & 7601000203090 & \multicolumn{2}{l @{}}{Praxis Dr. med., Christen Lucia, Limmatstrasse 119, 8005 Zürich}\\
                                                       & ZSR-Nr. & R098601       & \multicolumn{2}{l @{}}{Fax: 044 273 36 60 Tel: 044 272 60 80}\\
@@ -54,7 +55,7 @@
   \headerboxend
 
   \begin{headerbox}
-    \textbf{Patient}          & Name                & \multicolumn{2}{@{} l}{ROOZEBOOM} & EAN-Nr. ■ \\
+    \textbf{Patient}          & Name                & \multicolumn{2}{l}{ROOZEBOOM} & EAN-Nr. ■ \\
                               & Vorname             & & \\
                               & Strasse             & \\
                               & PLZ                 & \\
@@ -71,7 +72,7 @@
   \headerboxend
 
   \begin{headerbox}
-    \textbf{Auftraggeber}          & EAN-Nr./ZSR-Nr. & \multicolumn{3}{@{} l}{}\\
+    \textbf{Auftraggeber}          & EAN-Nr./ZSR-Nr. & \multicolumn{3}{l}{}\\
   \headerboxend
 
   \begin{headerbox}
@@ -86,6 +87,35 @@
     \textbf{Bemerkung}\\
     \\
   \headerboxend
+\end{tabular}
+
+\newcommand{\head}[1]{
+  \textbf{#1}&
+}
+
+\setlength{\tabcolsep}{0.5em}
+\begin{tabular}{@{} lllllrrrrrrrccccr @{}}
+\head{Datum}
+\head{Tarif}
+\head{Tarifziffer}
+\head{Bezugsziffer}
+\head{Si St}
+\head{Anzahl}
+\head{TP AL/Preis}
+\head{f AL}
+\head{TPW AL}
+\head{TP TL}
+\head{f TL}
+\head{TPW TL}
+\head{A}
+\head{V}
+\head{P}
+\head{M}
+\textbf{Betrag}
+\\
+\multicolumn{2}{l}{}&
+\multicolumn{15}{l}{Konsultation, erste 5 Min. (Grundkonsultation)}
+\\
 \end{tabular}
 
 \end{document}
