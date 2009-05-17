@@ -28,6 +28,10 @@
     \end{tabular}
   }
 
+\newcommand{\headerboxend}{
+  \end{headerbox}\\
+  \hline
+}
 
 
 % Main document
@@ -38,19 +42,18 @@
 \end{tabular}
 
 \begin{tabular}{| l |}
-  \hline\\
+  \hline
   \begin{headerbox}
-    \multicolumn{2}{@{} l @{ ■ }}{\textbf{Dokument}}                   & 12.05.2009 15:30:56 & &\textbf{Seite} ■ \thepage\\
+    \multicolumn{2}{@{} l @{ ■ }}{\textbf{Dokument}}            & 12.05.2009 15:30:56 & &\textbf{Seite} ■ \thepage\\
     \multirow{2}{1.6cm}{\textbf{Rechnungs-steller}}   & EAN-Nr. & 7601000203090 & \multicolumn{2}{l @{}}{Praxis Dr. med., Christen Lucia, Limmatstrasse 119, 8005 Zürich}\\
                                                       & ZSR-Nr. & R098601       & \multicolumn{2}{l @{}}{Fax: 044 273 36 60 Tel: 044 272 60 80}\\
     \multirow{2}{1.6cm}{\textbf{Leistungs-erbringer}} & EAN-Nr. & 7601000203090 & \multicolumn{2}{l @{}}{Praxis Dr. med., Christen Lucia, Limmatstrasse 119, 8005 Zürich}\\
                                                       & ZSR-Nr. & R098601       & \multicolumn{2}{l @{}}{Fax: 044 273 36 60 Tel: 044 272 60 80}\\
 
-  \end{headerbox}\\
-  \hline\\
+  \headerboxend
 
   \begin{headerbox}
-    \textbf{Patient}          & Name                & \multicolumn{2}{l @{}}{ROOZEBOOM} & EAN-Nr. ■ \\
+    \textbf{Patient}          & Name                & \multicolumn{2}{@{} l}{ROOZEBOOM} & EAN-Nr. ■ \\
                               & Vorname             & & \\
                               & Strasse             & \\
                               & PLZ                 & \\
@@ -64,8 +67,24 @@
                               & Betriebs-Nr./Name   & \\
                               & Kanton              & \\
                               & Rechnungskopie      & \\
-  \end{headerbox}\\
-  \hline
+  \headerboxend
+
+  \begin{headerbox}
+    \textbf{Auftraggeber}          & EAN-Nr./ZSR-Nr. & \multicolumn{3}{@{} l}{}\\
+  \headerboxend
+
+  \begin{headerbox}
+    \textbf{Diagnose}          & ■ Contract & A4\\
+  \headerboxend
+
+  \begin{headerbox}
+    \textbf{EAN-Liste}          & \multicolumn{2}{l}{■ 1/76010000203090}\\
+  \headerboxend
+
+  \begin{headerbox}
+    \textbf{Bemerkung}\\
+    \\
+  \headerboxend
 \end{tabular}
 
 \end{document}
