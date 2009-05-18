@@ -49,15 +49,28 @@ xml.request :role => "test",
       end
     end
 
-    xml.esr9 :participant_number => "01-11111-2",
+    xml.esr9 :participant_number => @invoice.biller.account.pc_id,
              :type => "16or27",
-             :reference_number => "15 45300 00000 00001 39902 62104",
-             :coding_line => "0100000079151&gt;154530000000000010000000014+ 010126482&gt;" do
+             :reference_number => @invoice.esr9_reference(@invoice.biller.account),
+             :coding_line => @invoice.esr9(@invoice.biller.account) do
       xml.bank do
         xml.company do
-          xml.companyname @invoice.biller.account.bank.vcard.full_name
+          xml.companyname @invoice.biller.account.bank.full_name
+          xml.postal do
+            xml.street @invoice.biller.account.bank.street_address
+            xml.zip @invoice.biller.account.bank.postal_code
+            xml.city @invoice.biller.account.bank.locality
+          end
+          # Check XSD if telecom with no .phone or .fax is valid
+          xml.telecom do
+            xml.phone @invoice.biller.account.bank.phone_number.number if @invoice.biller.account.bank.phone_number
+            xml.fax @invoice.biller.account.bank.fax_number.number if @invoice.biller.account.bank.fax_number
+          end
+#          xml.online do
+#            xml.email @invoice.biller.account.bank.phone_number.number if @invoice.biller.account.bank.phone_number
+#            xml.url @invoice.biller.account.bank.fax_number.number if @invoice.biller.account.bank.fax_number
+#          end
         end
-        xml << @invoice.biller.to_xml(:skip_instruct => true)
       end
     end
   end
