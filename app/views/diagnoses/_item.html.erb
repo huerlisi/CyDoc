@@ -1,0 +1,5 @@
+<tr style="cursor: pointer" onclick="<%= remote_function(:method => 'post', :url => assign_patient_medical_case_path(params[:patient_id], item, :date => params[:search].nil? ? nil : params[:search][:date])) %>">
+  <td><%= item.type %></td>
+  <td><%= item.code %></td>
+  <td><%= item.text %></td>
+</tr>

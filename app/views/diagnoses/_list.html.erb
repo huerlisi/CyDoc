@@ -1,0 +1,5 @@
+<table class="list" id="medical_case_table">
+  <%= render :partial => 'diagnoses/list_header' %>
+  <%= render :partial => 'diagnoses/item', :collection => @diagnoses %>
+  <%= render :partial => 'diagnoses/list_footer' %>
+</table>
