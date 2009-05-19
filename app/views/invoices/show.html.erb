@@ -1,5 +1,5 @@
 
-<h2>Rechnung #<%=h @invoice.id %> für <%= @invoice.patient.full_name %></h2>
+<h2>Rechnung #<%=h @invoice.id %> für <%= link_to @invoice.patient.full_name, @invoice.patient %></h2>
 
 <% tabs = invoice_tabs %>
 <% selected_tab = params[:tab] ? params[:tab].to_s : tabs.first[:name] %>
