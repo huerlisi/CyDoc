@@ -1,13 +1,12 @@
+<div class="contextual">
+  <%= link_to "Patient anzeigen", @invoice.patient, :class => "icon icon-show" %>
+</div>
 
 <h2>Rechnung #<%=h @invoice.id %> für <%= link_to @invoice.patient.full_name, @invoice.patient %></h2>
 
 <% tabs = invoice_tabs %>
 <% selected_tab = params[:tab] ? params[:tab].to_s : tabs.first[:name] %>
 
-<div class="contextual">
-   <%= link_to_remote "Drucken", :update => 'result', :url => {:controller => :invoices, :action => :print_patient_letter, :id => @invoice} %>
-   <%= link_to_remote "PDF", :update => 'result', :url => {:controller => :invoices, :action => :patient_letter, :id => @invoice, :format => :pdf} %>
-</div>
 
 <div class="tabs">
 <ul>
