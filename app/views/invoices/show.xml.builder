@@ -6,8 +6,9 @@ def company_to_xml(xml, company)
 end
 
 def person_to_xml(xml, person)
-  # TODO: check what to do if honorific_prefix empty
-  xml.person :salutation => person.honorific_prefix do
+  opt_attrs = {}
+  opt_attrs[:salutation] = person.honorific_prefix unless person.honorific_prefix.blank?
+  xml.person opt_attrs do
     xml.familyname person.family_name
     xml.givenname person.given_name
     vcard_to_xml(xml, person.vcard)
@@ -16,14 +17,15 @@ end
 
 def vcard_to_xml(xml, vcard)
   xml.postal do
-    xml.street vcard.street_address
+    xml.street vcard.street_address unless vcard.street_address.blank?
     xml.zip vcard.postal_code
     xml.city vcard.locality
   end
-  # Check XSD if telecom with no .phone or .fax is valid
-  xml.telecom do
-    xml.phone vcard.phone_number.number if vcard.phone_number
-    xml.fax vcard.fax_number.number if vcard.fax_number
+  unless vcard.phone_numbers.select{|number| !(number.number.blank?)}.empty?
+    xml.telecom do
+      xml.phone vcard.phone_number.number if (vcard.phone_number and !(vcard.phone_number.number.blank?))
+      xml.fax vcard.fax_number.number if (vcard.fax_number and !(vcard.fax_number.number.blank?))
+    end
   end
 #          xml.online do
 #            xml.email vcard.phone_number.number if vcard.phone_number
@@ -82,8 +84,8 @@ xml.request :role => "test",
   xml.header do
     # TODO: support TG and TP
     xml.sender :ean_party => @invoice.tiers.biller.ean_party
-#    xml.intermediate :ean_party => @invoice.tiers.intermediate.ean_party
-#    xml.recipient :ean_party => @invoice.tiers.recipient.ean_party
+    xml.intermediate :ean_party => @invoice.tiers.intermediate.ean_party
+    xml.recipient :ean_party => (@invoice.tiers.is_a?(TiersGarant) ? "unknown" : @invoice.tiers.recipient.group_ean_party)
   end
 
   xml.prolog do
@@ -92,11 +94,13 @@ xml.request :role => "test",
     end
   end
 
+  opt_attrs = {}
+  opt_attrs[:case_id] = @invoice.case_id unless @invoice.case_id.blank?
   xml.invoice :invoice_timestamp => @invoice.date.to_time.to_i,
               :invoice_id => @invoice.id,
               :invoice_date => @invoice.date.xmlschema, # TODO: Drop timezone info
               :resend => false, # TODO: implement for mahnung etc.
-              :case_id => "" do # TODO
+              *opt_attrs do # TODO: no case_id in cydoc, yet
 
     xml.remark @invoice.remark unless @invoice.remark.empty?
 
@@ -126,7 +130,7 @@ xml.request :role => "test",
     xml.esr9 :participant_number => @invoice.biller.account.pc_id,
              :type => "16or27",
              :reference_number => @invoice.esr9_reference(@invoice.biller.account),
-             :coding_line => @invoice.esr9(@invoice.biller.account) do
+             :coding_line => @invoice.esr9(@invoice.biller.account).gsub('&nbsp;', ' ') do
       xml.bank do
         company_to_xml xml, @invoice.biller.account.bank
       end
@@ -134,17 +138,18 @@ xml.request :role => "test",
 
     # TODO: payment_period not hardcoded
     xml.tiers_garant :payment_periode => "P30D" do
-      # TODO: check what to do if speciality empty
-      xml.biller :ean_party => @invoice.biller.ean_party, :zsr => @invoice.biller.zsr, :specialty => @invoice.biller.speciality do
+      opt_attrs = {}
+      opt_attrs[:speciality] = @invoice.biller.speciality unless @invoice.biller.speciality.blank?
+      xml.biller :ean_party => @invoice.biller.ean_party, :zsr => @invoice.biller.zsr, *opt_attrs do
         person_to_xml xml, @invoice.biller
       end
-      # TODO: check what to do if speciality empty
-      xml.provider :ean_party => @invoice.provider.ean_party, :zsr => @invoice.provider.zsr, :specialty => @invoice.provider.speciality do
+      opt_attrs = {}
+      opt_attrs[:speciality] = @invoice.provider.speciality unless @invoice.provider.speciality.blank?
+      xml.provider :ean_party => @invoice.provider.ean_party, :zsr => @invoice.provider.zsr, *opt_attrs do
         person_to_xml xml, @invoice.provider
       end
 
-      # TODO: check unknown gender
-      xml.patient :gender => @invoice.patient.sex, :birthdate => @invoice.patient.birth_date.xmlschema do
+      xml.patient :gender => @invoice.patient.sex_xml, :birthdate => @invoice.patient.birth_date.xmlschema do
         person_to_xml xml, @invoice.patient
       end
       xml.guarantor do
@@ -157,20 +162,27 @@ xml.request :role => "test",
       end
     end
 
-    xml.detail :date_begin => @invoice.treatment.date_begin.xmlschema, :date_end => @invoice.treatment.date_end.xmlschema, :canton => @invoice.treatment.canton, :service_locality => @invoice.place_type do
+    xml.detail :date_begin => @invoice.treatment.date_begin.xmlschema, :date_end => @invoice.treatment.date_end.xmlschema, :canton => @invoice.treatment.canton, :service_locality => (@invoice.place_type || "practice") do
       # TODO: check for support of multiple diagnosis
       @invoice.treatment.diagnoses.each{|diagnosis|
-        xml.diagnosis :type => diagnosis.type, :code => diagnosis.code
+        xml.diagnosis :type => diagnosis.type_xml, :code => diagnosis.code
       }
 
-      # TODO: check what patient_id means
       # TODO: check what case_date means
-      # TODO: don't hardcode kvg
-      xml.kvg :reason => @invoice.treatment.reason, :patient_id => @invoice.patient.insurance_id, :case_date => @invoice.treatment.date_begin.xmlschema
+      # TODO: support more laws
+      opt_attrs = {}
+      opt_attrs[:patient_id] = @invoice.patient.insurance_id unless @invoice.patient.insurance_id.blank?
+      case @invoice.law.name.downcase
+        when 'kvg': xml.kvg :reason => @invoice.treatment.reason_xml, :case_date => @invoice.treatment.date_begin.xmlschema, *opt_attrs
+        when 'mvg': xml.kvg :reason => @invoice.treatment.reason_xml, :case_date => @invoice.treatment.date_begin.xmlschema, *opt_attrs
+        when 'uvg': xml.uvg :reason => @invoice.treatment.reason_xml, :case_date => @invoice.treatment.date_begin.xmlschema, *opt_attrs
+      end
 
-      @invoice.service_records.each{|service_record|
-        service_record_to_xml xml, service_record
-      }
+      xml.services do
+        @invoice.service_records.each{|service_record|
+          service_record_to_xml xml, service_record
+        }
+      end
     end
   end
 end

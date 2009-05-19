@@ -11,7 +11,7 @@
       </tr>
       <tr>
         <th>Behandlungsgrund:</th>
-        <td><%= select 'treatment', :reason,  ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall'] %></td>
+        <td><%= select 'treatment', :reason,  ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'] %></td>
       </tr>
       <%= invoice.text_area :remark, :rows => 2, :label =>  'Bemerkungen' %>
       <%= invoice.submit "Erstellen" %>

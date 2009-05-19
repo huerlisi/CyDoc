@@ -56,6 +56,14 @@ class Patient < ActiveRecord::Base
     end
   end
 
+  def sex_xml
+    case read_attribute(:sex)
+      when 1: "male"
+      when 2: "female"
+      else nil
+    end
+  end
+
   # Authorization
   # =============
 #  def self.find(*args)
