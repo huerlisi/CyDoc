@@ -1,21 +1,34 @@
-def vcard_to_xml(xml, vcard)
+def company_to_xml(xml, company)
   xml.company do
-    xml.companyname vcard.full_name
-    xml.postal do
-      xml.street vcard.street_address
-      xml.zip vcard.postal_code
-      xml.city vcard.locality
-    end
-    # Check XSD if telecom with no .phone or .fax is valid
-    xml.telecom do
-      xml.phone vcard.phone_number.number if vcard.phone_number
-      xml.fax vcard.fax_number.number if vcard.fax_number
-    end
+    xml.companyname company.vcard.full_name
+    vcard_to_xml(xml, company.vcard)
+  end
+end
+
+def person_to_xml(xml, person)
+  # TODO: check what to do if honorific_prefix empty
+  xml.person :salutation => person.honorific_prefix do
+    xml.familyname person.family_name
+    xml.givenname person.given_name
+    vcard_to_xml(xml, person.vcard)
+  end
+end
+
+def vcard_to_xml(xml, vcard)
+  xml.postal do
+    xml.street vcard.street_address
+    xml.zip vcard.postal_code
+    xml.city vcard.locality
+  end
+  # Check XSD if telecom with no .phone or .fax is valid
+  xml.telecom do
+    xml.phone vcard.phone_number.number if vcard.phone_number
+    xml.fax vcard.fax_number.number if vcard.fax_number
+  end
 #          xml.online do
 #            xml.email vcard.phone_number.number if vcard.phone_number
 #            xml.url vcard.number if vcard.fax_number
 #          end
-  end
 end
 
 # Main Document
@@ -76,17 +89,33 @@ xml.request :role => "test",
              :reference_number => @invoice.esr9_reference(@invoice.biller.account),
              :coding_line => @invoice.esr9(@invoice.biller.account) do
       xml.bank do
-        vcard_to_xml xml, @invoice.biller.account.bank.vcard
+        company_to_xml xml, @invoice.biller.account.bank
       end
 
       # TODO: payment_period not hardcoded
       xml.tiers_garant :payment_period => "P30D" do
+        # TODO: check what to do if speciality empty
         xml.biller :ean_party => @invoice.biller.ean_party, :zsr => @invoice.biller.zsr, :specialty => @invoice.biller.speciality do
-          vcard_to_xml xml, @invoice.biller.vcard
+          person_to_xml xml, @invoice.biller
         end
+        # TODO: check what to do if speciality empty
         xml.provider :ean_party => @invoice.provider.ean_party, :zsr => @invoice.provider.zsr, :specialty => @invoice.provider.speciality do
-          vcard_to_xml xml, @invoice.provider.vcard
+          person_to_xml xml, @invoice.provider
         end
+
+        # TODO: check unknown gender
+        xml.patient :gender => @invoice.patient.sex, :birthdate => @invoice.patient.birth_date.xmlschema do
+          person_to_xml xml, @invoice.patient
+        end
+        xml.guarantor do
+          # TODO: Patient not always == guarantor
+          person_to_xml xml, @invoice.patient
+        end
+
+        xml.referrer do
+          person_to_xml xml, @invoice.referrer
+        end
+
       end
     end
   end
