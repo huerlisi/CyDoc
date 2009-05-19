@@ -78,6 +78,16 @@ xml.request :role => "test",
       xml.bank do
         vcard_to_xml xml, @invoice.biller.account.bank.vcard
       end
+
+      # TODO: payment_period not hardcoded
+      xml.tiers_garant :payment_period => "P30D" do
+        xml.biller :ean_party => @invoice.biller.ean_party, :zsr => @invoice.biller.zsr, :specialty => @invoice.biller.speciality do
+          vcard_to_xml xml, @invoice.biller.vcard
+        end
+        xml.provider :ean_party => @invoice.provider.ean_party, :zsr => @invoice.provider.zsr, :specialty => @invoice.provider.speciality do
+          vcard_to_xml xml, @invoice.provider.vcard
+        end
+      end
     end
   end
 end
