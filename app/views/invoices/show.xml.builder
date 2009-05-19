@@ -31,6 +31,44 @@ def vcard_to_xml(xml, vcard)
 #          end
 end
 
+# TODO: call with index
+def tarmed_record_to_xml(xml, service_record, index = 1)
+  # Don't hardcode ambulatory
+  xml.record_tarmed service_record.text,
+                    :tariff_type         => service_record.tariff_type,
+                    :treatment           => "ambulatory", # TODO: no hardcoding
+                    :ean_provider        => service_record.provider.ean_party,
+                    :ean_responsible     => service_record.responsible.ean_party,
+                    :billing_role        => "both", # TODO: check what means
+                    :medical_role        => "self_employed", # TODO: check what means
+                    :body_location       => "none", # TODO: implement in service_record
+                    'unit.mt'            => service_record.unit_mt,
+                    'unit_factor.mt'     => service_record.unit_factor_mt,
+                    'scale_factor.mt'    => service_record.scale_factor_mt,
+                    'external_factor.mt' => service_record.external_factor_mt,
+                    'amount.mt'          => service_record.amount_mt,
+                    'unit.tt'            => service_record.unit_tt,
+                    'unit_factor.tt'     => service_record.unit_factor_tt,
+                    'scale_factor.tt'    => service_record.scale_factor_tt,
+                    'external_factor.tt' => service_record.external_factor_tt,
+                    'amount.tt'          => service_record.amount_tt,
+                    'amount'             => service_record.amount,
+                    'vat_rate'           => service_record.vat_rate, # TODO: support in service_record creation
+                    'validate'           => "true", # TODO: check what means
+                    'obligation'         => service_record.obligation,
+                    'record_id'          => index,
+                    'number'             => 1, # TODO: check what means
+                    'quantity'           => service_record.quantity,
+                    'date_begin'         => service_record.date.xmlschema,
+                    'code'               => service_record.code
+end
+
+def service_record_to_xml(xml, service_record)
+  case service_record.tariff_type
+    when "001": tarmed_record_to_xml(xml, service_record)
+  end
+end
+
 # Main Document
 # =============
 xml.instruct! :xml, :version => "1.0", :encoding => "UTF-8", :standalone => "no"
@@ -92,37 +130,47 @@ xml.request :role => "test",
       xml.bank do
         company_to_xml xml, @invoice.biller.account.bank
       end
+    end
 
-      # TODO: payment_period not hardcoded
-      xml.tiers_garant :payment_period => "P30D" do
-        # TODO: check what to do if speciality empty
-        xml.biller :ean_party => @invoice.biller.ean_party, :zsr => @invoice.biller.zsr, :specialty => @invoice.biller.speciality do
-          person_to_xml xml, @invoice.biller
-        end
-        # TODO: check what to do if speciality empty
-        xml.provider :ean_party => @invoice.provider.ean_party, :zsr => @invoice.provider.zsr, :specialty => @invoice.provider.speciality do
-          person_to_xml xml, @invoice.provider
-        end
-
-        # TODO: check unknown gender
-        xml.patient :gender => @invoice.patient.sex, :birthdate => @invoice.patient.birth_date.xmlschema do
-          person_to_xml xml, @invoice.patient
-        end
-        xml.guarantor do
-          # TODO: Patient not always == guarantor
-          person_to_xml xml, @invoice.patient
-        end
-
-        xml.referrer do
-          person_to_xml xml, @invoice.referrer
-        end
+    # TODO: payment_period not hardcoded
+    xml.tiers_garant :payment_periode => "P30D" do
+      # TODO: check what to do if speciality empty
+      xml.biller :ean_party => @invoice.biller.ean_party, :zsr => @invoice.biller.zsr, :specialty => @invoice.biller.speciality do
+        person_to_xml xml, @invoice.biller
+      end
+      # TODO: check what to do if speciality empty
+      xml.provider :ean_party => @invoice.provider.ean_party, :zsr => @invoice.provider.zsr, :specialty => @invoice.provider.speciality do
+        person_to_xml xml, @invoice.provider
       end
 
-      xml.detail :date_begin => @invoice.treatment.date_begin, :date_end => @invoice.treatment.date_end, :canton => @invoice.treatment.canton, :service_locality => @invoice.place_type do
-        @invoice.treatment.diagnoses.each{|diagnosis|
-          xml.diagnosis :type => diagnosis.type, :code => diagnosis.code
-        }
+      # TODO: check unknown gender
+      xml.patient :gender => @invoice.patient.sex, :birthdate => @invoice.patient.birth_date.xmlschema do
+        person_to_xml xml, @invoice.patient
       end
+      xml.guarantor do
+        # TODO: Patient not always == guarantor
+        person_to_xml xml, @invoice.patient
+      end
+
+      xml.referrer do
+        person_to_xml xml, @invoice.referrer
+      end
+    end
+
+    xml.detail :date_begin => @invoice.treatment.date_begin.xmlschema, :date_end => @invoice.treatment.date_end.xmlschema, :canton => @invoice.treatment.canton, :service_locality => @invoice.place_type do
+      # TODO: check for support of multiple diagnosis
+      @invoice.treatment.diagnoses.each{|diagnosis|
+        xml.diagnosis :type => diagnosis.type, :code => diagnosis.code
+      }
+
+      # TODO: check what patient_id means
+      # TODO: check what case_date means
+      # TODO: don't hardcode kvg
+      xml.kvg :reason => @invoice.treatment.reason, :patient_id => @invoice.patient.insurance_id, :case_date => @invoice.treatment.date_begin.xmlschema
+
+      @invoice.service_records.each{|service_record|
+        service_record_to_xml xml, service_record
+      }
     end
   end
 end
