@@ -1,3 +1,25 @@
+def vcard_to_xml(xml, vcard)
+  xml.company do
+    xml.companyname vcard.full_name
+    xml.postal do
+      xml.street vcard.street_address
+      xml.zip vcard.postal_code
+      xml.city vcard.locality
+    end
+    # Check XSD if telecom with no .phone or .fax is valid
+    xml.telecom do
+      xml.phone vcard.phone_number.number if vcard.phone_number
+      xml.fax vcard.fax_number.number if vcard.fax_number
+    end
+#          xml.online do
+#            xml.email vcard.phone_number.number if vcard.phone_number
+#            xml.url vcard.number if vcard.fax_number
+#          end
+  end
+end
+
+# Main Document
+# =============
 xml.instruct! :xml, :version => "1.0", :encoding => "UTF-8", :standalone => "no"
 
 xml.request :role => "test",
@@ -54,23 +76,7 @@ xml.request :role => "test",
              :reference_number => @invoice.esr9_reference(@invoice.biller.account),
              :coding_line => @invoice.esr9(@invoice.biller.account) do
       xml.bank do
-        xml.company do
-          xml.companyname @invoice.biller.account.bank.full_name
-          xml.postal do
-            xml.street @invoice.biller.account.bank.street_address
-            xml.zip @invoice.biller.account.bank.postal_code
-            xml.city @invoice.biller.account.bank.locality
-          end
-          # Check XSD if telecom with no .phone or .fax is valid
-          xml.telecom do
-            xml.phone @invoice.biller.account.bank.phone_number.number if @invoice.biller.account.bank.phone_number
-            xml.fax @invoice.biller.account.bank.fax_number.number if @invoice.biller.account.bank.fax_number
-          end
-#          xml.online do
-#            xml.email @invoice.biller.account.bank.phone_number.number if @invoice.biller.account.bank.phone_number
-#            xml.url @invoice.biller.account.bank.fax_number.number if @invoice.biller.account.bank.fax_number
-#          end
-        end
+        vcard_to_xml xml, @invoice.biller.account.bank.vcard
       end
     end
   end
