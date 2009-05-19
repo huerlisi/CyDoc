@@ -136,8 +136,8 @@ xml.request :role => "test",
       end
     end
 
-    # TODO: payment_period not hardcoded
-    xml.tiers_garant :payment_periode => "P30D" do
+
+    def tiers(xml)
       opt_attrs = {}
       opt_attrs[:speciality] = @invoice.biller.speciality unless @invoice.biller.speciality.blank?
       xml.biller :ean_party => @invoice.biller.ean_party, :zsr => @invoice.biller.zsr, *opt_attrs do
@@ -160,6 +160,12 @@ xml.request :role => "test",
       xml.referrer do
         person_to_xml xml, @invoice.referrer
       end
+    end
+
+    # TODO: payment_period not hardcoded
+    case @invoice.tiers
+      when TiersGarant: xml.tiers_garant :payment_periode => 'P30D' do tiers(xml) end
+      when TiersPayant: xml.tiers_payant do tiers(xml) end
     end
 
     xml.detail :date_begin => @invoice.treatment.date_begin.xmlschema, :date_end => @invoice.treatment.date_end.xmlschema, :canton => @invoice.treatment.canton, :service_locality => (@invoice.place_type || "practice") do
