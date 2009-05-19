@@ -84,6 +84,7 @@ xml.request :role => "test",
       end
     end
 
+    # TODO: Use ' ', not &nbsp; in esr9
     xml.esr9 :participant_number => @invoice.biller.account.pc_id,
              :type => "16or27",
              :reference_number => @invoice.esr9_reference(@invoice.biller.account),
@@ -115,7 +116,12 @@ xml.request :role => "test",
         xml.referrer do
           person_to_xml xml, @invoice.referrer
         end
+      end
 
+      xml.detail :date_begin => @invoice.treatment.date_begin, :date_end => @invoice.treatment.date_end, :canton => @invoice.treatment.canton, :service_locality => @invoice.place_type do
+        @invoice.treatment.diagnoses.each{|diagnosis|
+          xml.diagnosis :type => diagnosis.type, :code => diagnosis.code
+        }
       end
     end
   end
