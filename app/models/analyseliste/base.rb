@@ -17,7 +17,11 @@ module Analyseliste
     end
 
     def self.find(selector, options = {})
-      FasterCSV.read(path(options), :headers => true)
+      # Sheets are seperated using form feed (\f) by xls2csv
+      sheets = File.read(path(options)).split("\f")
+
+      # First sheet is german
+      FasterCSV.parse(sheets[0], :headers => true)
     end
 
     def self.import_all(do_clean = false, options = {})
