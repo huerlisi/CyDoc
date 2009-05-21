@@ -1,40 +1,35 @@
 module Medindex
   class Insurance < Listener
+    def int_class
+      Kernel::Insurance
+    end
+    
+    def record_name
+      'INS'
+    end
+    
     def tag_start(name, attrs)
-      @attribute = nil
+      super
+      
       case name
-        when 'INS': @record = Kernel::Insurance.new
-
-        when 'EAN': @attribute = :ean_party
-        when 'GROUP_EAN': @attribute = :group_ean_party
-        when 'ROLE': @attribute = :role
-        when 'GROUP_EAN': @attribute = :group_ean_party
-
-        when 'DESCR1': @attribute = :full_name
-
-        when 'ADDR':
-          @insurance = @record
-          @record = Vcards::Vcard.new
-
-        when 'ZIP': @attribute = :postal_code
-        when 'CITY': @attribute = :locality
-        when 'POBOX': @attribute = :extended_address
-
+        when 'ADDR': @vcard = @int_record.vcards.build
       end
     end
     
     def tag_end(name)
-      @attribute = nil
       case name
-        when 'INS':
-          @record.save!
-        when 'ADDR':
-          @record.save!
-          @record.object = @insurance
+        when record_name:
+          @int_record.save!
+          puts @int_record
 
-          @record = @insurance
+        when 'EAN': @int_record.ean_party = @text
+        when 'GROUP_EAN': @int_record.group_ean_party = @text
+        when 'ROLE': @int_record.role = @text
+        when 'DESCR1': @int_record.full_name = @text
+        when 'ZIP': @int_record.postal_code = @text
+        when 'CITY': @int_record.locality = @text
+        when 'POBOX': @int_record.extended_address = @text
       end
     end
-    
   end
 end
