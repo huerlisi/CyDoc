@@ -57,9 +57,7 @@ class MedicalCasesController < ApplicationController
         return
       }
       format.js {
-        render :update do |page|
-          page.replace_html 'medical_case_list', partial => 'medical_cases/list', :locals => { :items => patient.medical_cases}
-        end
+        render :partial => 'medical_cases/list', :locals => { :items => patient.medical_cases}
       }
     end
   end
