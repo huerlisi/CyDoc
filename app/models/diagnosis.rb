@@ -1,6 +1,10 @@
 class Diagnosis< ActiveRecord::Base
   has_and_belongs_to_many :treatments
 
+  def to_s
+    [code, text].join(' - ')
+  end
+
   def type
     class_subname = read_attribute(:type).to_s.gsub(/^Diagnosis/, '')
     if class_subname.upcase == class_subname
