@@ -67,7 +67,7 @@ class TariffItem < ActiveRecord::Base
   end
 
   def tariff_type
-    read_attribute(:tariff_type) || self.tariff_type
+    read_attribute(:tariff_type) || self.class.tariff_type
   end
   
   # Calculated field
