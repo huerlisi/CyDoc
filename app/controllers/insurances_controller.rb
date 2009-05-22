@@ -4,7 +4,7 @@ class InsurancesController < ApplicationController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    @insurances = Insurance.by_name("%#{query}%")
+    @insurances = Insurance.by_name("%#{query}%").paginate(:page => params['page'])
     respond_to do |format|
       format.html {
         render :action => 'list'
@@ -16,14 +16,6 @@ class InsurancesController < ApplicationController
         end
       }
     end
-  end
-
-  def search
-    query = params[:query] || params[:search]
-    query ||= params[:search][:query] if params[:search]
-    @insurances = Insurance.by_name("%#{query}%")
-
-    render :partial => 'list', :layout => false
   end
 
   # GET /insurances/1

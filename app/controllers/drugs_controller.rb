@@ -6,7 +6,7 @@ class DrugsController < ApplicationController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    @drugs = DrugProduct.clever_find(query)
+    @drugs = DrugProduct.clever_find(query).paginate(:page => params['page'], :order => 'id DESC')
     respond_to do |format|
       format.html {
         render :action => 'list'

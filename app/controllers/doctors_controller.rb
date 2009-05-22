@@ -5,7 +5,7 @@ class DoctorsController < ApplicationController
     query ||= params[:search][:query] if params[:search]
     query ||= params[:quick_search][:query] if params[:quick_search]
 
-    @doctors = Doctor.clever_find(query)
+    @doctors = Doctor.clever_find(query).paginate(:page => params['page'])
     respond_to do |format|
       format.html {
         render :action => 'list'
