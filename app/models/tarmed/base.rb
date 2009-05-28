@@ -10,6 +10,8 @@ class Tarmed::Base < ActiveRecord::Base
   end
 
   def self.import_all(do_clean)
+    TarmedTariffItem.delete_all if do_clean
+    
     for tarmed_tariff_item in Tarmed::Leistung.find(:all, :conditions => self.condition_validity)
       begin
         tariff_item = TarmedTariffItem.new
