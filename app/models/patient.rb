@@ -85,11 +85,12 @@ class Patient < ActiveRecord::Base
     
     query_params = {}
     case get_query_type(query)
+    when "number"
+      query_params[:query] = query
+      patient_condition = "patients.doctor_patient_nr = :query"
     when "date"
       query_params[:query] = Date.parse_europe(query).strftime('%%%y-%m-%d')
       patient_condition = "(patients.birth_date LIKE :query)"
-    when "entry_nr"
-      query_params[:query] = patient_condition = "(patients.doctor_patient_nr = :query)"
     when "text"
       query_params[:query] = "%#{query}%"
       query_params[:wildcard_value] = '%' + query.gsub(/[ -.]+/, '%') + '%'
@@ -106,10 +107,10 @@ class Patient < ActiveRecord::Base
 
   private
   def self.get_query_type(value)
-    if value.match(/([[:digit:]]{1,2}\.){2}/)
+    if value.match(/[[:digit:]]*/)
+      return "number"
+    elsif value.match(/([[:digit:]]{1,2}\.){2}/)
       return "date"
-    elsif value.match(/^([[:digit:]]{0,2}\/)?[[:digit:]]*$/)
-      return "entry_nr"
     else
       return "text"
     end
