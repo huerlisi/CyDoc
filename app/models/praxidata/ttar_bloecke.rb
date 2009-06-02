@@ -1,4 +1,4 @@
-class Praxidata::TarifeBlockliste < Praxidata::Base
+class Praxidata::TtarBloecke < Praxidata::Base
   set_table_name "Tarife_Blockliste"
   
   belongs_to :group, :class_name => 'TariffItemGroupImporter', :foreign_key => 'Block_ID'
