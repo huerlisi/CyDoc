@@ -15,6 +15,9 @@ module Praxistar
       
       # Patients
       PatientenPersonalien.import(do_clean, options)
+      
+      # Tariffs
+      TarifeBloecke.import(do_clean, options)
     end
   end
 end
