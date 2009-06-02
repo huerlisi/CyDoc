@@ -29,6 +29,7 @@ class Praxidata::PatientenPersonalien < Praxidata::Base
 #        :honorific_prefix => [a.tx_fakt_Anrede, a.tx_fakt_Titel].join('')
 #      ),
 
+      :doctor_patient_nr => a.inNummer,
 
       :insurance_id => a.inVersicherungID,        # inVersicherungID links to IDStamm of insurance
       :insurance_nr => a.txVersichertenNummer, # we will have to check if the join clause is correct
