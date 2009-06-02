@@ -11,8 +11,9 @@ module Praxistar
     
     def self.import_record(a, options)
       int_record = int_class.new(
-        :code   => a.tx_Erfassungscode.strip,
-        :remark => a.tx_Bezeichnung.strip
+        :code        => a.tx_Erfassungscode.strip,
+        :remark      => a.tx_Bezeichnung.strip,
+        :tariff_code => '000'
       )
 
       int_record.service_items = a.items.map {|item|

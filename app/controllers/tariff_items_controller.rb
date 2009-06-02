@@ -28,7 +28,7 @@ class TariffItemsController < ApplicationController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    @tariff_items = TariffItem.paginate(:page => params['page'], :per_page => 20, :conditions => ['code LIKE :query OR remark LIKE :query', {:query => "%#{query}%"}], :order => 'code')
+    @tariff_items = TariffItem.paginate(:page => params['page'], :per_page => 20, :conditions => ['code LIKE :query OR remark LIKE :query', {:query => "%#{query}%"}], :order => 'tariff_type, code')
 
     respond_to do |format|
       format.html {
