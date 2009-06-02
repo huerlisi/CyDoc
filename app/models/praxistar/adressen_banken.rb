@@ -7,7 +7,7 @@ module Praxistar
       Accounting::Bank
     end
 
-    def self.import_record(a)
+    def self.import_record(a, options)
       int_record = int_class.new(
         :phone_number => a.tx_Telefon,
         :locality => a.tx_Ort,

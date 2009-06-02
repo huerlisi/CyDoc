@@ -7,7 +7,7 @@ module Praxistar
       Patient
     end
     
-    def self.import_record(a)
+    def self.import_record(a, options)
       int_record = int_class.new({
         :vcard => Vcards::Vcard.new(
           :locality => a.tx_Ort,
@@ -27,6 +27,9 @@ module Praxistar
           :honorific_prefix => [a.tx_fakt_Anrede, a.tx_fakt_Titel].select{|f| !f.blank?}.join('')
         ),
 #        :insurance_id => a.KK_Garant_ID,
+
+	:doctor_patient_nr => a.ln_Patienten_Nr,
+
         :insurance_nr => a.tx_KK_MitgliedNr,
         :doctor_id => a.ZuwArzt_ID,
         :birth_date => a.tx_Geburtsdatum,

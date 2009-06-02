@@ -12,7 +12,7 @@ module Praxistar
       super(User)
     end
 
-    def self.import_record(a)
+    def self.import_record(a, options)
       raise SkipException unless a.tf_Aktiv?
 
       # Employee

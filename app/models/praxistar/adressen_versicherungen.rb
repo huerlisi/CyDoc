@@ -7,7 +7,7 @@ module Praxistar
       Insurance
     end
 
-    def self.import_record(a)
+    def self.import_record(a, options)
       int_record = int_class.new(
         :ean_party => a.tx_EANNr
       )

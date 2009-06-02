@@ -7,7 +7,7 @@ module Praxistar
       Doctor
     end
 
-    def self.import_record(a)
+    def self.import_record(a, options)
       int_record = int_class.new(
         :code => a.tx_ErfassungsNr,
         :speciality => a.tx_Fachgebiet,
