@@ -107,7 +107,7 @@ class Patient < ActiveRecord::Base
 
   private
   def self.get_query_type(value)
-    if value.match(/[[:digit:]]*/)
+    if value.match(/^[[:digit:]]*$/)
       return "number"
     elsif value.match(/([[:digit:]]{1,2}\.){2}/)
       return "date"
