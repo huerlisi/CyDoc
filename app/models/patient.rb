@@ -8,9 +8,6 @@ class Patient < ActiveRecord::Base
 
   has_vcards
 
-  # TODO: drop
-  belongs_to :billing_vcard, :class_name => 'Vcards::Vcard', :foreign_key => 'billing_vcard_id'
-
   has_many :tiers
   has_many :invoices, :through => :tiers
       
