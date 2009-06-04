@@ -42,11 +42,11 @@ class TariffItem < ActiveRecord::Base
 
   # "Constant" fields
   def unit_mt
-    1.89
+    0.89
   end
 
   def unit_tt
-    1.89
+    0.89
   end
 
   def unit_factor_mt
