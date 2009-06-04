@@ -126,7 +126,6 @@ xml.request :role => "test",
       end
     end
 
-    # TODO: Use ' ', not &nbsp; in esr9
     xml.esr9 :participant_number => @invoice.biller.account.pc_id,
              :type => "16or27",
              :reference_number => @invoice.esr9_reference(@invoice.biller.account),
@@ -169,7 +168,6 @@ xml.request :role => "test",
     end
 
     xml.detail :date_begin => @invoice.treatment.date_begin.xmlschema, :date_end => @invoice.treatment.date_end.xmlschema, :canton => @invoice.treatment.canton, :service_locality => (@invoice.place_type || "practice") do
-      # TODO: check for support of multiple diagnosis
       @invoice.treatment.diagnoses.each{|diagnosis|
         xml.diagnosis :type => diagnosis.type_xml, :code => diagnosis.code
       }
