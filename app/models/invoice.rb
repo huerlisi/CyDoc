@@ -3,6 +3,9 @@ class Invoice < ActiveRecord::Base
   belongs_to :law
   belongs_to :treatment
 
+  named_scope :prepared, :conditions => "state = 'prepared'"
+  named_scope :open, :conditions => "state = 'open'"
+
   has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC'
 
   def to_s

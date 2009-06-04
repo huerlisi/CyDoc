@@ -12,3 +12,7 @@
 <div id="search_results">
   <%= render :partial => 'list' %>
 </div>
+
+<h2>Rechnungen zum Drucken</h2>
+<% @invoices = Invoice.prepared %>
+<%= render :partial => 'list' %>
