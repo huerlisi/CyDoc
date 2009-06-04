@@ -1,6 +1,8 @@
 class Patient < ActiveRecord::Base
-  belongs_to :insurance
   belongs_to :doctor
+
+  belongs_to :insurance
+  has_many :sessions
 
   # FIX: This buggily needs this :select hack
   named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcard, :conditions => Vcards::Vcard.by_name_conditions(name)}}
