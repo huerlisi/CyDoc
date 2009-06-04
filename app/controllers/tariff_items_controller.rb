@@ -1,5 +1,5 @@
 class TariffItemsController < ApplicationController
-  # CRUD actions
+  # GET /tariff_items
   def index
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
@@ -21,6 +21,7 @@ class TariffItemsController < ApplicationController
   
   alias :search :index
 
+  # GET /tariff_items/new
   def new
     @service_record = ServiceRecord.new
 
