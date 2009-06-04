@@ -13,8 +13,8 @@ class TariffItem < ActiveRecord::Base
     query_params = {}
     case get_query_type(query)
     when "code"
-      query_params[:query] = query
-      condition = "code = :query"
+      query_params[:query] = query.delete('.')
+      condition = "REPLACE(code, '.', '') = :query"
     when "text"
       query_params[:query] = "%#{query}%"
 
