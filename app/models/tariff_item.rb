@@ -5,6 +5,36 @@ class TariffItem < ActiveRecord::Base
     [code, remark].compact.select{|item| not item.empty?}.join ' - '
   end
 
+  # Search
+  # ======
+  def self.clever_find(query, args = {})
+    return [] if query.nil? or query.empty?
+    
+    query_params = {}
+    case get_query_type(query)
+    when "code"
+      query_params[:query] = query
+      condition = "code = :query"
+    when "text"
+      query_params[:query] = "%#{query}%"
+
+      condition = "remark LIKE :query"
+    end
+
+    args.merge!(:conditions => ["(#{condition})", query_params], :order => 'tariff_type, code')
+    find(:all, args)
+  end
+
+  private
+  def self.get_query_type(value)
+    if value.match(/^[[:digit:].]*$/)
+      return "code"
+    else
+      return "text"
+    end
+  end
+
+  public
   def service_record_class
     ServiceRecord
   end
