@@ -6,6 +6,7 @@ class ServiceRecord < ActiveRecord::Base
   belongs_to :patient
 
   has_and_belongs_to_many :invoices
+  has_and_belongs_to_many :sessions
   
   # Calculated field
   def amount
