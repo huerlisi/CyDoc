@@ -2,7 +2,7 @@ class Diagnosis< ActiveRecord::Base
   has_and_belongs_to_many :treatments
 
   def to_s
-    [code, text].join(' - ')
+    [code, text].compact.join(' - ')
   end
 
   def type

@@ -12,6 +12,10 @@ class Session < ActiveRecord::Base
     "#{diagnoses.map{|d| d.to_s}.join(', ')} for #{patient.name} #{duration_from.strftime('%d.%m.%Y')} - #{duration_to.strftime('%d.%m.%Y')}, #{service_records.count} pos: #{state}"
   end
   
+  def date
+    duration_from.to_date
+  end
+  
   def self.build_from_invoice(invoice)
     session = self.new
     

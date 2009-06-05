@@ -8,6 +8,10 @@ class ServiceRecord < ActiveRecord::Base
   has_and_belongs_to_many :invoices
   has_and_belongs_to_many :sessions
   
+  def to_s
+    "#{sprintf('%03i', tariff_type)} - #{quantity}x #{code} #{!ref_code.nil? ? '(' + ref_code + ') ' : ''} - #{text}"
+  end
+  
   # Calculated field
   def amount
     # TODO: round as requested by standard
