@@ -154,7 +154,7 @@ module Print
         data = generator.read
         generator.close
 
-        render :text => "<p>Gedruckt.</p>"
+#        render :text => "<p>Gedruckt.</p>"
       end
     end
   end

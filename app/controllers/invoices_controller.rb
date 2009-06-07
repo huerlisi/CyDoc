@@ -2,6 +2,17 @@ class InvoicesController < ApplicationController
   print_action_for :insurance_recipe, :tray => :plain
   print_action_for :patient_letter, :tray => :invoice
 
+  def print
+    @invoice = Invoice.find(params[:id])
+    print_patient_letter
+    print_insurance_recipe
+    
+    respond_to do |format|
+      format.html { redirect_to @invoice}
+      format.js {}
+    end
+  end
+  
   def insurance_recipe
     @invoice = Invoice.find(params[:id])
     @patient = @invoice.patient
