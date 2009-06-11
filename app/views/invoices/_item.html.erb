@@ -4,5 +4,5 @@
   <td style="text-align: right"><%=h item.id %></td>
   <td style="text-align: right"><%=h sprintf("%0.2f", item.rounded_amount) %></td>
   <td><%=h item.state %></td>
-  <td></td>
+  <td><%= link_to "Drucken", print_invoice_path(item), :method => :post %></td>
 </tr>

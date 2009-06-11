@@ -13,7 +13,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :medical_cases
   map.resources :diagnoses
 
-  map.resources :invoices
+  map.resources :invoices, :member => {:print => :post}
   map.resources :insurances
 
   map.resources :doctors
