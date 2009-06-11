@@ -11,13 +11,30 @@ class InvoicesController < ApplicationController
     @invoice.save!
     
     respond_to do |format|
-      format.html { redirect_to invoices_path}
-      format.js {}
+      format.html { redirect_to invoices_path }
+      format.js { redirect_to invoices_path }
     end
   end
   
+  def print_all
+    @invoices = Invoice.prepared
+    
+    for @invoice in @invoices
+      print_patient_letter
+      print_insurance_recipe
+      
+      @invoice.state = 'printed'
+      @invoice.save!
+    end
+
+    respond_to do |format|
+      format.html { redirect_to invoices_path }
+      format.js { redirect_to invoices_path }
+    end
+  end
+
   def insurance_recipe
-    @invoice = Invoice.find(params[:id])
+    @invoice ||= Invoice.find(params[:id])
     @patient = @invoice.patient
 
     respond_to do |format|
@@ -27,7 +44,7 @@ class InvoicesController < ApplicationController
   end
 
   def patient_letter
-    @invoice = Invoice.find(params[:id])
+    @invoice ||= Invoice.find(params[:id])
     @patient = @invoice.patient
 
     respond_to do |format|

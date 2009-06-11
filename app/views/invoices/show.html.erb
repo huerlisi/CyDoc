@@ -1,5 +1,6 @@
 <div class="contextual">
   <%= link_to "Patient anzeigen", @invoice.patient, :class => "icon icon-show" %>
+  <%= link_to "Drucken", print_invoice_path(@invoice), :method => :post, :class => "icon icon-print" %>
 </div>
 
 <h2>Rechnung #<%=h @invoice.id %> für <%= link_to @invoice.patient.full_name, @invoice.patient %></h2>
