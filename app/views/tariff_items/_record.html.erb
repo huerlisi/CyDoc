@@ -6,9 +6,9 @@
 
 <% 
   @subtotal       += record.amount
-  @record_counter += 1
+  @line_counter   += 1
 %>
 
-<% if @record_counter == 10 %>
+<% if @line_counter == 26 %>
   <%= render :partial => 'insurance_recipe_page_break' %>
 <% end %>
