@@ -7,8 +7,11 @@ class InvoicesController < ApplicationController
     print_patient_letter
     print_insurance_recipe
     
+    @invoice.state = 'printed'
+    @invoice.save!
+    
     respond_to do |format|
-      format.html { redirect_to @invoice}
+      format.html { redirect_to invoices_path}
       format.js {}
     end
   end
