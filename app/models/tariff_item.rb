@@ -12,6 +12,9 @@ class TariffItem < ActiveRecord::Base
     
     query_params = {}
     case get_query_type(query)
+    when "lab"
+      query_params[:query] = "#{query}%"
+      condition = "code LIKE :query"
     when "code"
       query_params[:query] = query.delete('.')
       condition = "REPLACE(code, '.', '') = :query"
@@ -27,7 +30,10 @@ class TariffItem < ActiveRecord::Base
 
   private
   def self.get_query_type(value)
-    if value.match(/^[[:digit:].]*$/)
+    # Analyseliste: code ~ 1234.56
+    if value.match(/^[[:digit:]]{4}$/)
+      return "lab"
+    elsif value.match(/^[[:digit:].]*$/)
       return "code"
     else
       return "text"
