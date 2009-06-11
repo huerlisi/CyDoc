@@ -77,6 +77,44 @@ class Patient < ActiveRecord::Base
 #    end
 #  end
 
+  # Build an invoice containing all open sessions
+  def build_invoice(options)
+    invoice = invoices.new(options)
+
+    # Tiers
+    # TODO: something like:
+    #@tiers = @invoice.build_tiers(params[:tiers])
+    @tiers = TiersGarant.new
+    invoice.tiers = @tiers
+    #@tiers.biller = Doctor.find(Thread.current["doctor_id"])
+    #@tiers.provider = Doctor.find(Thread.current["doctor_id"])
+
+    # Law, TODO
+    #@law = Object.const_get(options[:law][:name]).new
+    #@law.insured_id = @patient.insurance_nr
+
+    #@law.save
+    #invoice.law = @law
+    
+    # Treatment
+    @treatment = invoice.build_treatment()
+
+    # TODO make selectable
+#    @treatment.canton ||= @tiers.provider.vcard.address.region
+
+    # Services
+    # TODO: only open records
+
+    invoice.service_records = service_records
+    @treatment.date_begin = service_records.minimum(:date)
+    @treatment.date_end = service_records.maximum(:date)
+
+    medical_case = medical_cases.find(:all, ["duration_from >= ? OR duration_to <= ?", @treatment.date_begin, @treatment.date_end])
+    @treatment.diagnoses = medical_case.map{|medical_case| medical_case.diagnosis}
+
+    return invoice
+  end
+  
   # Search
   # ======
   def self.clever_find(query, args = {})
