@@ -8,7 +8,7 @@ function showTab(name) {
         for(var i=0; i<f.length; i++){
                 Element.hide(f[i]);
         }
-    var f = $$('div.tabs a');
+    var f = $$('td.tabs a');
         for(var i=0; i<f.length; i++){
                 Element.removeClassName(f[i], "selected");
         }

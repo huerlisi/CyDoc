@@ -1,12 +1,14 @@
-<div class="contextual">
+<div class="contextual48">
     <%= link_to "Suchen", doctors_path, :class => "icon icon-search" %>
     <%= link_to "Erfassen", new_doctor_path, :class => "icon icon-add" %>
 </div>
 
-<h2><%=h @doctor.to_s %></h2>
+<h2 class="icon48 icon-doctor48"><%=h @doctor.to_s %></h2>
 <% tabs = doctor_tabs(@doctor) %>
 <% selected_tab = params[:tab] ? params[:tab].to_s : tabs.first[:name] %>
-<div class="tabs">
+<table class="tab-container">
+<tr>
+<td class="tabs">
   <ul>
   <% tabs.each do |tab| -%>
     <li><%= link_to tab[:label], { :tab => tab[:name] },
@@ -15,8 +17,8 @@
                                    :onclick => "showTab('#{tab[:name]}'); this.blur(); return false;" %></li>
   <% end -%>
   </ul>
-</div>
-
+</td>
+<td class="tab-frame">
 <div class="box tab-box">
   <% tabs.each do |tab| -%>
   <%= content_tag('div', render(:partial => tab[:partial]),
@@ -25,3 +27,4 @@
                          :class => 'tab-content') %>
   <% end -%>
 </div>
+</td>
