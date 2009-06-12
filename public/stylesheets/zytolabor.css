@@ -1,7 +1,16 @@
 /**** ZytoLabor ****/
 #header { background-color: #AEB9CF; }
 
-table th { text-align: left; }
+table th { text-align: left; font-size:90%}
+
+h3 {
+  padding-top: 0.2em;
+  padding-bottom: 0.1em;
+}
+
+h4 {
+  margin-top: 0;
+}
 
 /* Welcome */
 .welcome { margin: 2em; margin-bottom: 3.5em; }

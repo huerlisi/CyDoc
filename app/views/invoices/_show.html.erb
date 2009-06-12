@@ -1,0 +1,42 @@
+<div class="contextual">
+    <%= link_to "Ändern", edit_invoice_path(@invoice), :class => "icon icon-edit" %>
+</div>
+
+<h3>Kopfdaten</h3>
+<div class="box">
+<table style="width: 100%">
+  <tr>
+    <th>Adressat:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>
+    <th>Vergütungsart:</th><td><%= @invoice.tiers.name %></td>
+  </tr>
+  <tr>
+    <th>Rechnungsdatum:</th><td><%= @invoice.date.strftime('%d.%m.%Y') %></td>
+    <th>Gesetz:</th><td><%= @invoice.law.name %></td>
+  </tr>
+  <tr>
+    <th>Zuweisender Arzt:</th><td><%= @invoice.referrer.to_s %></td>
+    <th>Behandlungsgrund:</th><td><%= @invoice.treatment.reason %></td>
+  </tr>
+  <tr>
+    <th>Diagnosen:</th><td colspan="3"><%= @invoice.treatment.diagnoses.map {|d| d.code}.join('; ') %></td>
+  </tr>
+</table>
+</div>
+
+<h3>Journal</h3>
+  <table class="list" style="width: 100%">
+    <tr>
+      <td style="width: 10em"><%= @invoice.date.strftime('%d.%m.%Y') %></td>
+      <td>Rechnung</td>
+      <td style="text-align: right"><%= sprintf("%0.2f", @invoice.rounded_amount) %>&nbsp;CHF</td>
+    </tr>
+    <tr>
+      <th>Offener Betrag</th>
+      <th colspan="2" style="text-align: right"><%= sprintf("%0.2f", @invoice.rounded_amount) %>&nbsp;CHF</th>
+    </tr>
+  </table>
+
+<h3>Leistungen</h3>
+<div id="service_list" class="box">
+  <%= render :partial => 'sessions/list', :locals => { :items => @invoice.patient.service_records } %>
+</div>
