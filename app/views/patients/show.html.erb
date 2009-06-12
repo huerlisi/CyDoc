@@ -3,11 +3,12 @@
   <%= link_to "Erfassen", new_patient_path, :class => "icon icon-add" %>
 </div>
 
-<h2><%=h @patient.to_s %></h2>
+<%= image_tag 'patient.png', :style => 'float: left; width: 50px' %>
+<h2 style="margin-left: 60px; margin-bottom: 0px"><%=h @patient.to_s %></h2>
 <% tabs = patient_tabs(@patient) %>
 <% selected_tab = params[:tab] ? params[:tab].to_s : tabs.first[:name] %>
 <div class="tabs">
-  <ul>
+  <ul style="margin-left: 50px">
   <% tabs.each do |tab| -%>
     <li><%= link_to tab[:label], { :tab => tab[:name] },
                                    :id => "tab-#{tab[:name]}",
