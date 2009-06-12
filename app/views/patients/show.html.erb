@@ -3,30 +3,4 @@
   <%= link_to "Erfassen", new_patient_path, :class => "icon icon-add" %>
 </div>
 
-<h2 class="icon48 icon-patient48"><%=h @patient.to_s %></h2>
-<% tabs = patient_tabs(@patient) %>
-<% selected_tab = params[:tab] ? params[:tab].to_s : tabs.first[:name] %>
-<table class="tab-container">
-<tr>
-<td class="tabs">
-  <ul>
-  <% tabs.each do |tab| -%>
-    <li><%= link_to tab[:label], { :tab => tab[:name] },
-                                   :id => "tab-#{tab[:name]}",
-                                   :class => (tab[:name] != selected_tab ? nil : 'selected'),
-                                   :onclick => "showTab('#{tab[:name]}'); this.blur(); return false;" %></li>
-  <% end -%>
-  </ul>
-</td>
-<td class="tab-frame">
-<div class="box tab-box">
-  <% tabs.each do |tab| -%>
-  <%= content_tag('div', render(:partial => tab[:partial]),
-                         :id => "tab-content-#{tab[:name]}",
-                         :style => (tab[:name] != selected_tab ? 'display:none' : nil),
-                         :class => 'tab-content') %>
-  <% end -%>
-</div>
-</td>
-</tr>
-</table>
+<%= tab_container 'patient', @patient.to_s, patient_tabs(@patient) %>

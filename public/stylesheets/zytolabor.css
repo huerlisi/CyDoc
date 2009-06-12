@@ -14,7 +14,7 @@ form.box {background:#ffffdd; padding:6px; margin-bottom:6px;border: 1px solid #
 form { display: block; }
 
 /* Icons */
-.contextual48 {float:right; white-space: nowrap; line-height:1.4em;margin-top:35px; padding-left: 10px; font-size:0.9em;}
+.contextual48 {float:right; white-space: nowrap; line-height:1.4em;margin-top:30px; padding-left: 10px; font-size:0.9em;}
 
 .icon48 {
 background-position: 0% 40%;
@@ -26,6 +26,7 @@ vertical-align: middle;
 
 .icon-doctor48 { background-image: url(../images/48x48/doctor.png); }
 .icon-patient48 { background-image: url(../images/48x48/patient.png); }
+.icon-invoice48 { background-image: url(../images/48x48/invoice.png); }
 
 .icon-add { background-image: url(../images/add.png); }
 .icon-print { background-image: url(../images/print.png); }

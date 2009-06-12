@@ -1,28 +1,6 @@
-<div class="contextual">
+<div class="contextual48">
   <%= link_to "Patient anzeigen", @invoice.patient, :class => "icon icon-show" %>
   <%= link_to "Drucken", print_invoice_path(@invoice), :method => :post, :class => "icon icon-print" %>
 </div>
 
-<h2>Rechnung #<%=h @invoice.id %> für <%= link_to @invoice.patient.full_name, @invoice.patient %></h2>
-
-<% tabs = invoice_tabs %>
-<% selected_tab = params[:tab] ? params[:tab].to_s : tabs.first[:name] %>
-
-
-<div class="tabs">
-<ul>
-<% tabs.each do |tab| -%>
-    <li><%= link_to tab[:label], { :tab => tab[:name] },
-                                    :id => "tab-#{tab[:name]}",
-                                    :class => (tab[:name] != selected_tab ? nil : 'selected'),
-                                    :onclick => "showTab('#{tab[:name]}'); this.blur(); return false;" %></li>
-<% end -%>
-</ul>
-</div>
-
-<% tabs.each do |tab| -%>
-<%= content_tag('div', render(:partial => tab[:partial]),
-                       :id => "tab-content-#{tab[:name]}",
-                       :style => (tab[:name] != selected_tab ? 'display:none' : nil),
-                       :class => 'tab-content') %>
-<% end -%>
+<%= tab_container 'invoice', "Rechnung ##{@invoice.id} für #{link_to @invoice.patient.full_name, @invoice.patient}", invoice_tabs %>
