@@ -1,6 +1,6 @@
 <h4><%=h item.date %>: <%=h item.diagnoses.map{|d| d.text}.join(', ') %></h4>
-<ul>
+<ul class="session">
   <% for service_record in item.service_records %>
-    <li><%=h service_record.to_s %></li>
+    <li><b><%=h sprintf('%g', service_record.quantity) %>x <%=h service_record.code %></b>: <%=h service_record.text %></li>
   <% end %>
 </ul>
