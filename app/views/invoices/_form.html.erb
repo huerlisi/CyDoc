@@ -6,11 +6,11 @@
     <table>
       <%= invoice.text_field :date, :label => 'Datum', :size => 12 %>
       <tr>
-        <th>Gesetz:</th>
+        <td><label for="law[name]">Gesetz:</label></td>
         <td><%= select 'law', :name, [['KVG', LawKvg], ['UVG', LawUvg], ['IVG', LawIvg], ['MVG', LawMvg], ['VVG', LawVvg], ['ORG', LawOrg]] %></td>
       </tr>
       <tr>
-        <th>Behandlungsgrund:</th>
+        <td><label for="treatment[reason]">Behandlungsgrund:</label></td>
         <td><%= select 'treatment', :reason,  ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'] %></td>
       </tr>
       <%= invoice.text_area :remark, :rows => 2, :label =>  'Bemerkungen' %>
