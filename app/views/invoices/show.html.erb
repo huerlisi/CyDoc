@@ -3,4 +3,8 @@
   <%= link_to "Drucken", print_invoice_path(@invoice), :method => :post, :class => "icon icon-print" %>
 </div>
 
-<%= tab_container 'invoice', "Rechnung ##{@invoice.id} für #{link_to @invoice.patient.full_name, @invoice.patient}", invoice_tabs %>
+<%= tab_container 'invoice', "Rechnung ##{@invoice.id} für #{link_to @invoice.patient.full_name, @invoice.patient}",
+      [{:name => 'overview', :partial => 'invoices/show', :label => 'Übersicht'},
+       {:name => 'insurance_recipe', :partial => 'invoices/insurance_recipe', :label => 'Rückforderungsbeleg'},
+       {:name => 'patient_letter', :partial => 'invoices/patient_letter', :label => 'Rechnung'}
+      ] %>

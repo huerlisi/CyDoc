@@ -3,4 +3,9 @@
   <%= link_to "Erfassen", new_patient_path, :class => "icon icon-add" %>
 </div>
 
-<%= tab_container 'patient', @patient.to_s, patient_tabs(@patient) %>
+<%= tab_container 'patient', @patient.to_s,
+      [{:name => 'personal', :partial => 'patients/show', :label => 'Personalien'},
+       {:name => 'medical_history', :partial => 'patients/medical_history', :label => 'Diagnosen'},
+       {:name => 'services', :partial => 'patients/service_list', :label => 'Leistungen'},
+       {:name => 'invoices', :partial => 'patients/invoice_tab', :label => 'Rechnungen'},
+      ] %>
