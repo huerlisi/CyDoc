@@ -1,5 +1,1 @@
-<div class="contextual">
-  <%= link_to_remote "Rechnung erstellen", {:update => 'new_invoice', :url => new_patient_invoice_url(@patient), :method => :get}, :class => "icon icon-invoice" %>
-</div>
-
 <%= sub_tab_container 'invoices', @patient.invoices %>
