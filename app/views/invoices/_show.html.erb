@@ -1,5 +1,7 @@
 <div class="contextual">
-    <%= link_to "Ändern", edit_invoice_path(@invoice), :class => "icon icon-edit" %>
+  <%= link_to "Ändern", edit_invoice_path(@invoice), :class => "icon icon-edit" %>
+  <%= link_to "Patient anzeigen", @invoice.patient, :class => "icon icon-show" %>
+  <%= link_to "Drucken", print_invoice_path(@invoice), :method => :post, :class => "icon icon-print" %>
 </div>
 
 <h3>Kopfdaten</h3>
