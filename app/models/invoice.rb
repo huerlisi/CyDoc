@@ -45,7 +45,29 @@ class Invoice < ActiveRecord::Base
   def self.clever_find(query, args = {})
     return [] if query.nil? or query.empty?
 
-    Patient.clever_find(query).collect{|patient| patient.invoices}.flatten
+    query_params = {}
+    case query
+    when /^[[:digit:]]*$/
+      query_params[:query] = query
+      patient_condition = "patients.doctor_patient_nr = :query"
+      invoice_condition = "invoices.id = :query"
+    when /([[:digit:]]{1,2}\.){2}/
+      query_params[:query] = Date.parse_europe(query).strftime('%%%y-%m-%d%')
+      patient_condition = "patients.birth_date LIKE :query"
+      invoice_condition = "invoices.created_at LIKE :query"
+    else
+      query_params[:query] = "%#{query}%"
+      query_params[:wildcard_value] = '%' + query.gsub(/[ -.]+/, '%') + '%'
+      name_condition = "(vcards.given_name LIKE :wildcard_value) OR (vcards.family_name LIKE :wildcard_value) OR (vcards.full_name LIKE :wildcard_value)"
+      given_family_condition = "( concat(vcards.given_name, ' ', vcards.family_name) LIKE :wildcard_value)"
+      family_given_condition = "( concat(vcards.family_name, ' ', vcards.given_name) LIKE :wildcard_value)"
+
+      patient_condition = "#{name_condition} OR #{given_family_condition} or #{family_given_condition}"
+      invoice_condition = "invoices.remark LIKE :wildcard_value"
+    end
+
+    args.merge!(:include => {:tiers => {:patient => [:vcard]}}, :conditions => ["(#{patient_condition}) OR (#{invoice_condition})", query_params], :order => 'vcards.family_name, vcards.given_name')
+    find(:all, args)
   end
   
   # Calculated fields
