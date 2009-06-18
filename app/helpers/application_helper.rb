@@ -15,6 +15,10 @@ module ApplicationHelper
     render :partial => 'shared/tabs', :locals => {:name => name, :heading => heading, :tabs => tabs}
   end
 
+  def sub_tab_container(type, tabs)
+    render :partial => 'shared/sub_tabs', :locals => {:tabs => tabs, :type => type}
+  end
+
   # PDF
   def render_inline_stylesheet(name)
     stylesheet = "<style type='text/css'>\n"

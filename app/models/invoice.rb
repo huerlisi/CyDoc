@@ -8,8 +8,13 @@ class Invoice < ActiveRecord::Base
 
   has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC'
 
-  def to_s
-    "#{patient.name} ##{id}, #{date.strftime('%d.%m.%Y')} à #{sprintf('%0.2f', rounded_amount)} CHF"
+  def to_s(format = :default)
+    case format
+    when :short
+      "##{id} #{date.strftime('%d.%m.%Y')}"
+    else
+      "#{patient.name} ##{id}, #{date.strftime('%d.%m.%Y')} à #{sprintf('%0.2f', rounded_amount)} CHF"
+    end
   end
   
   # Convenience methods

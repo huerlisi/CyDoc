@@ -41,6 +41,45 @@ vertical-align: middle;
 .icon-print { background-image: url(../images/print.png); }
 .icon-search { background-image: url(../images/search.png); }
 
+/* SubTabs */
+#content .sub-tabs {height: 2.6em; border-bottom: 1px solid #bbbbbb; margin-bottom:1.2em; position:relative;}
+#content .sub-tabs ul {margin:0; position:absolute; bottom:-2px; padding-left:1em;}
+#content .sub-tabs>ul { bottom:-1px; } /* others */
+#content .sub-tabs ul li {
+float:left;
+list-style-type:none;
+white-space:nowrap;
+}
+
+#content .sub-tabs ul li a{
+display:block;
+font-size: 0.9em;
+text-decoration:none;
+line-height:1.3em;
+padding:4px 6px 4px 6px;
+border: 1px solid #ccc;
+border-bottom: 1px solid #bbbbbb;
+background-color: #eeeeee;
+color:#777;
+font-weight:bold;
+}
+
+#content .sub-tabs ul li a:hover {
+background-color: #ffffdd;
+text-decoration:none;
+}
+
+#content .sub-tabs ul li a.selected {
+background-color: #fff;
+border: 1px solid #bbbbbb;
+border-bottom: 1px solid #fff;
+}
+
+#content .sub-tabs ul li a.selected:hover {
+background-color: #fff;
+}
+
+
 /* Tabs */
 #content .tab-container{
 border-collapse: collapse;

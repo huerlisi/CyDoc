@@ -2,10 +2,4 @@
   <%= link_to_remote "Rechnung erstellen", {:update => 'new_invoice', :url => new_patient_invoice_url(@patient), :method => :get}, :class => "icon icon-invoice" %>
 </div>
 
-<div id="new_invoice"></div>
-
-<h3>Offene Rechnungen</h3>
-<div id="invoices_list">
-  <% @invoices = @patient.invoices %>
-  <%= render :partial => 'invoices/list' %>
-</div>
+<%= sub_tab_container 'invoices', @patient.invoices %>
