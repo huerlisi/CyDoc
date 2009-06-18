@@ -6,19 +6,20 @@
 <div class="box">
 <table style="width: 100%">
   <tr>
-    <th>Adressat:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>
+    <th>Patient:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>
     <th>Vergütungsart:</th><td><%= @invoice.tiers.name %></td>
   </tr>
   <tr>
-    <th>Rechnungsdatum:</th><td><%= @invoice.date.strftime('%d.%m.%Y') %></td>
+    <th>Rechnungsadressat:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>
     <th>Gesetz:</th><td><%= @invoice.law.name %></td>
   </tr>
   <tr>
-    <th>Zuweisender Arzt:</th><td><%= @invoice.referrer.to_s %></td>
+    <th>Rechnungsdatum:</th><td><%= @invoice.date.strftime('%d.%m.%Y') %></td>
     <th>Behandlungsgrund:</th><td><%= @invoice.treatment.reason %></td>
   </tr>
   <tr>
-    <th>Diagnosen:</th><td colspan="3"><%= @invoice.treatment.diagnoses.map {|d| d.code}.join('; ') %></td>
+    <th>Zuweisender Arzt:</th><td><%= @invoice.referrer.to_s %></td>
+    <th>Diagnosen:</th><%= @invoice.treatment.diagnoses.map {|d| d.code}.join('; ') %></td>
   </tr>
 </table>
 </div>
