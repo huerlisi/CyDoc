@@ -1,4 +1,10 @@
-<% selected_tab = params[:sub_tab] ? params[:sub_tab].to_s : "#{type}_#{tabs.first.id}" %>
+<%
+if params[:sub_tab]
+  selected_tab = params[:sub_tab].to_s
+elsif tabs.first
+  selected_tab = "#{type}_#{tabs.first.id}"
+end
+%>
 <div class="sub-tab-container sub-tab-<%= type %>">
   <div class="sub-tabs">
     <ul>
