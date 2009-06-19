@@ -1,6 +1,7 @@
 class Session < ActiveRecord::Base
   belongs_to :patient
   belongs_to :invoice
+  belongs_to :treatment
   has_and_belongs_to_many :diagnoses
   has_and_belongs_to_many :service_records
 

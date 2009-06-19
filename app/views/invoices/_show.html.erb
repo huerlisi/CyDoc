@@ -44,5 +44,5 @@
 
 <h3>Leistungen</h3>
 <div id="service_list" class="box">
-  <%= render :partial => 'sessions/list', :locals => { :items => @invoice.patient.service_records } %>
+  <%= render :partial => 'sessions/list', :object => @invoice.treatment.sessions %>
 </div>
