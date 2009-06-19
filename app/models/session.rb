@@ -9,8 +9,13 @@ class Session < ActiveRecord::Base
   named_scope :open, :conditions => "state = 'open'"
   named_scope :closed, :conditions => "state = 'closed'"
 
-  def to_s
-    "#{diagnoses.map{|d| d.to_s}.join(', ')} for #{patient.name} #{duration_from.strftime('%d.%m.%Y')} - #{duration_to.strftime('%d.%m.%Y')}, #{service_records.count} pos: #{state}"
+  def to_s(format = :default)
+    case format
+    when :short
+      [date ? date : '00.00.0000', diagnoses.map{|d| d.text}.join(', ')].compact.join(': ')
+    else
+      "#{diagnoses.map{|d| d.to_s}.join(', ')} for #{patient.name} #{duration_from.strftime('%d.%m.%Y')} - #{duration_to.strftime('%d.%m.%Y')}, #{service_records.count} pos: #{state}"
+    end
   end
   
   def date

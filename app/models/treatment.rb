@@ -10,7 +10,7 @@ class Treatment < ActiveRecord::Base
   def to_s(format = :default)
     case format
     when :short
-      "#{reason}: #{date_begin.strftime('%d.%m.%Y')}"
+      [reason, date_begin.strftime('%d.%m.%Y')].join(': ')
     else
       "#{patient.name} #{reason}: #{date_begin.strftime('%d.%m.%Y')} - #{date_end.strftime('%d.%m.%Y')}"
     end
