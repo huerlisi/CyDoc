@@ -11,9 +11,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :tariff_items, :collection => {:search => :get}
   map.resources :medical_cases
-  map.resources :treatments
   map.resources :diagnosis_cases
   map.resources :diagnoses
+  map.resources :treatments
 
   map.resources :invoices, :collection => {:print_all => :post}, :member => {:print => :post}
   map.resources :insurances
@@ -25,7 +25,10 @@ ActionController::Routing::Routes.draw do |map|
     patient.resources :medical_cases, :member => {:assign => :post}
     patient.resources :diagnoses
     patient.resources :invoices
-    patient.resources :treatments
+    patient.resources :treatments do |treatment|
+      treatment.resources :invoices
+      treatment.resources :sessions
+    end
   end
 
   # Medindex

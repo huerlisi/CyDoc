@@ -87,6 +87,7 @@ class InvoicesController < ApplicationController
   def new
     @invoice = Invoice.new
     @invoice.date = Date.today
+    @treatment = Treatment.find(params[:treatment_id])
     
     respond_to do |format|
       format.html { }
@@ -99,39 +100,21 @@ class InvoicesController < ApplicationController
   def create
     @invoice = Invoice.new(params[:invoice])
     @patient = Patient.find(params[:patient_id])
+    @treatment = Treatment.find(params[:treatment_id])
     
     # Tiers
-    # TODO: something like:
-    #@tiers = @invoice.build_tiers(params[:tiers])
-    @tiers = TiersGarant.new
-    @invoice.tiers = @tiers
+    @tiers = Object.const_get(params[:tiers][:name]).new
     @tiers.patient = @patient
     @tiers.biller = Doctor.find(Thread.current["doctor_id"])
     @tiers.provider = Doctor.find(Thread.current["doctor_id"])
 
-    # Law, TODO
-    @law = Object.const_get(params[:law][:name]).new
-    @law.insured_id = @patient.insurance_nr
+    @tiers.save
+    @invoice.tiers = @tiers
 
-    @law.save
-    @invoice.law = @law
-    
-    # Treatment
-    @treatment = @invoice.build_treatment(params[:treatment])
-
-    # TODO make selectable
-    @treatment.canton ||= @tiers.provider.vcard.address.region
-
-    # Services
-    # TODO: only open records
-    service_records = @patient.service_records
-
-    @invoice.service_records = service_records
-    @treatment.date_begin = service_records.minimum(:date)
-    @treatment.date_end = service_records.maximum(:date)
-
-    medical_cases = @patient.medical_cases.find(:all, ["duration_from >= ? OR duration_to <= ?", @treatment.date_begin, @treatment.date_end])
-    @treatment.diagnoses = medical_cases.map{|medical_case| medical_case.diagnosis}
+    # Law
+    @invoice.law = @treatment.law
+    @invoice.treatment = @treatment
+    @invoice.service_records = @treatment.sessions.collect{|s| s.service_records}.flatten
 
     # Saving
     if @invoice.save

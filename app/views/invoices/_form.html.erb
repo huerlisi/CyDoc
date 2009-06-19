@@ -2,19 +2,17 @@
 <%= error_messages_for :invoice %>
 
 <div class="box">
-  <% form_for [:patient, @invoice], :builder => Rubaidh::TabularForm::TabularFormBuilder do |invoice| %>
+  <% form_for [:patient, :treatment, @invoice], :builder => Rubaidh::TabularForm::TabularFormBuilder do |invoice| %>
     <table>
-      <%= invoice.text_field :date, :label => 'Datum', :size => 12 %>
+      <%= invoice.text_field :date, :label => 'Fälligkeitsdatum', :size => 12 %>
       <tr>
-        <td><label for="law[name]">Gesetz:</label></td>
-        <td><%= select 'law', :name, [['KVG', LawKvg], ['UVG', LawUvg], ['IVG', LawIvg], ['MVG', LawMvg], ['VVG', LawVvg], ['ORG', LawOrg]] %></td>
-      </tr>
-      <tr>
-        <td><label for="treatment[reason]">Behandlungsgrund:</label></td>
-        <td><%= select 'treatment', :reason,  ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'] %></td>
+        <td><label for="tiers[name]">Vergütungsart:</label></td>
+        <td><%= select 'tiers', :name, [['Tiers Garant', TiersGarant], ['Tiers Payant', TiersPayant]] %></td>
       </tr>
       <%= invoice.text_area :remark, :rows => 2, :label =>  'Bemerkungen' %>
       <%= invoice.submit "Erstellen" %>
     </table>
   <% end %>
 </div>
+
+<%= render :partial => 'treatments/show' %>

@@ -1,0 +1,18 @@
+<h3>Neuer Fall</h3>
+<%= error_messages_for :treatment %>
+
+<div class="box">
+  <% form_for [:patient, @treatment], :builder => Rubaidh::TabularForm::TabularFormBuilder do |treatment| %>
+    <table>
+      <%= treatment.text_field :date_from, :label => 'Behandlung von', :size => 12 %>
+      <tr>
+        <td><label for="law[name]">Gesetz:</label></td>
+        <td><%= select 'law', :name, [['KVG', LawKvg], ['UVG', LawUvg], ['IVG', LawIvg], ['MVG', LawMvg], ['VVG', LawVvg], ['ORG', LawOrg]] %></td>
+      </tr>
+      <%= treatment.select :reason, ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'], :label => 'Behandlungsgrund' %>
+      <%= treatment.select :place_type, ['Praxis', 'Spital'], :label => 'Erbringungsort' %>
+      <%= treatment.text_area :remark, :rows => 2, :label => 'Bemerkungen' %>
+      <%= treatment.submit "Eröffnen" %>
+    </table>
+  <% end %>
+</div>
