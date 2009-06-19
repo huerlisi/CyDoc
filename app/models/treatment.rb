@@ -5,7 +5,7 @@ class Treatment < ActiveRecord::Base
   belongs_to :referrer, :class_name => 'Doctor'
   belongs_to :law
 
-  has_many :sessions
+  has_many :sessions, :order => 'duration_from DESC'
   
   def to_s(format = :default)
     case format
