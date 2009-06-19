@@ -16,7 +16,7 @@ class Patient < ActiveRecord::Base
   has_many :treatments, :order => 'date_begin DESC'
       
   def to_s(format = :default)
-    "#{name}#{' #' + doctor_patient_nr if doctor_patient_nr}, #{birth_date.strftime('%d.%m.%Y') if birth_date}"
+    ["#{name}#{(' #' + doctor_patient_nr) unless doctor_patient_nr.blank?}", (birth_date.strftime('%d.%m.%Y') if birth_date)].compact.join(', ')
   end
 
   def birth_date_formatted
