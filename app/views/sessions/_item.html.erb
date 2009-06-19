@@ -1,3 +1,8 @@
+<div class="contextual">
+  <%= link_to "Ändern", edit_session_path(item), :class => "icon icon-edit" %>
+  <%= link_to "Leistung erfassen", new_session_tariff_item_path(item), :class => "icon icon-add" %>
+</div>
+
 <h4><%=h item.to_s(:short) %></h4>
 <ul class="session">
   <% for service_record in item.service_records %>

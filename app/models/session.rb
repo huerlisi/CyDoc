@@ -12,7 +12,7 @@ class Session < ActiveRecord::Base
   def to_s(format = :default)
     case format
     when :short
-      [date ? date : '00.00.0000', diagnoses.map{|d| d.text}.join(', ')].compact.join(': ')
+      [date, remarks.blank? ? "Sitzung" : remarks].compact.join(': ')
     else
       "#{diagnoses.map{|d| d.to_s}.join(', ')} for #{patient.name} #{duration_from.strftime('%d.%m.%Y')} - #{duration_to.strftime('%d.%m.%Y')}, #{service_records.count} pos: #{state}"
     end
