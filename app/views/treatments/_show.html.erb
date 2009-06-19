@@ -2,3 +2,24 @@
   <%= link_to "Ändern", edit_treatment_path(@treatment), :class => "icon icon-edit" %>
   <%= link_to "Rechung erstellen", new_invoice_path, :method => :post, :class => "icon icon-add" %>
 </div>
+
+<h3>Kopfdaten</h3>
+<div class="box">
+<table style="width: 100%">
+  <tr>
+    <th>Patient:</th><td><%= full_address(@treatment.patient.vcard, ', ') %></td>
+  </tr>
+  <tr>
+    <th>Behandlung von:</th><td><%= @treatment.date_begin.strftime('%d.%m.%Y') %></td>
+    <th>Gesetz:</th><td><%= @treatment.invoice.law.name %></td>
+  </tr>
+  <tr>
+    <th>Behandlung bis:</th><td><%= @treatment.date_end.strftime('%d.%m.%Y') %></td>
+    <th>Behandlungsgrund:</th><td><%= @treatment.reason %></td>
+  </tr>
+  <tr>
+    <th>Zuweisender Arzt:</th><td><%= @treatment.invoice.referrer.to_s %></td>
+    <th>Diagnosen:</th><%= @treatment.diagnoses.map {|d| d.code}.join('; ') %></td>
+  </tr>
+</table>
+</div>
