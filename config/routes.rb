@@ -11,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :tariff_items, :collection => {:search => :get}
   map.resources :medical_cases
+  map.resources :diagnosis_cases
   map.resources :diagnoses
 
   map.resources :invoices, :collection => {:print_all => :post}, :member => {:print => :post}

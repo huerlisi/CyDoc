@@ -3,7 +3,7 @@ class DiagnosisCase < MedicalCase
   
   before_save :create_or_set_diagnosis
   
-  def to_s
+  def to_s(format = :default)
     [diagnosis.code, diagnosis.text].compact.join ' - '
   end
 

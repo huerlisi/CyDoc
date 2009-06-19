@@ -13,7 +13,7 @@ class Patient < ActiveRecord::Base
   has_many :tiers
   has_many :invoices, :through => :tiers
       
-  def to_s
+  def to_s(format = :default)
     "#{name}#{' #' + doctor_patient_nr if doctor_patient_nr}, #{birth_date.strftime('%d.%m.%Y') if birth_date}"
   end
 
