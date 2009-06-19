@@ -12,7 +12,7 @@
   </div>
 <% tabs.each do |tab| -%>
 <% @invoice = tab %>
-<% @medical_case = tab %>
+<% @treatment= tab %>
 <%= content_tag('div', render(:partial => "#{type}/show"),
                        :id => "sub-tab-content-#{type}-#{tab.id}",
                        :style => ("#{type}_#{tab.id}" != selected_tab ? 'display:none' : nil),
