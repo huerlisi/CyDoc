@@ -8,17 +8,18 @@
 <table style="width: 100%">
   <tr>
     <th>Patient:</th><td><%= full_address(@treatment.patient.vcard, ', ') %></td>
+    <th>Gesetz:</th><td><%= @treatment.law.name %></td>
   </tr>
   <tr>
     <th>Behandlung von:</th><td><%= @treatment.date_begin.strftime('%d.%m.%Y') %></td>
-    <th>Gesetz:</th><td><%= @treatment.invoice.law.name %></td>
+    <th>Erbringungsort:</th><td><%= @treatment.place_type %></td>
   </tr>
   <tr>
     <th>Behandlung bis:</th><td><%= @treatment.date_end.strftime('%d.%m.%Y') %></td>
     <th>Behandlungsgrund:</th><td><%= @treatment.reason %></td>
   </tr>
   <tr>
-    <th>Zuweisender Arzt:</th><td><%= @treatment.invoice.referrer.to_s %></td>
+    <th>Zuweisender Arzt:</th><td><%= @treatment.referrer.to_s %></td>
     <th>Diagnosen:</th><%= @treatment.diagnoses.map {|d| d.code}.join('; ') %></td>
   </tr>
 </table>

@@ -3,7 +3,8 @@ class AddPatientIdToTreatments < ActiveRecord::Migration
     add_column :treatments, :patient_id, :integer
     
     Treatment.all.map {|t|
-      t.patient = t.invoice.patient
+      i = t.invoices.first
+      t.patient = i.patient
       t.save
     }
   end
