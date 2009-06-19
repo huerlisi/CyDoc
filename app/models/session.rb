@@ -14,7 +14,7 @@ class Session < ActiveRecord::Base
   end
   
   def date
-    duration_from.to_date
+    duration_from.to_date unless duration_from.nil?
   end
   
   def self.build_from_invoice(invoice)

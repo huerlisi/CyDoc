@@ -1,6 +1,7 @@
 <div class="contextual48">
   <%= link_to "Suchen", patients_path, :class => "icon icon-search" %>
   <%= link_to "Erfassen", new_patient_path, :class => "icon icon-add" %>
+  <%= link_to "Neuer Fall", new_patient_treatment_path(@patient), :class => "icon icon-add" %>
 </div>
 
 <%= tab_container 'patient', @patient.to_s,
