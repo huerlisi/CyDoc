@@ -1,6 +1,7 @@
 <div class="contextual">
   <%= link_to "Ändern", edit_treatment_path(@treatment), :class => "icon icon-edit" %>
-  <%= link_to "Rechung erstellen", new_patient_treatment_invoice_path(@patient, @treatment), :class => "icon icon-add" %>
+  <%= link_to "Fall eröffnen", new_patient_treatment_path(@patient), :class => "icon icon-add" %>
+  <%= link_to "Rechung stellen", new_patient_treatment_invoice_path(@patient, @treatment), :class => "icon icon-add" %>
 </div>
 
 <h3>Behandlung</h3>
