@@ -6,19 +6,22 @@ elsif tabs.first
 end
 %>
 <div class="sub-tab-container sub-tab-<%= type %>">
-  <div class="sub-tabs">
-    <ul>
-    <% tabs.each do |tab| -%>
-      <li><%= link_to "#{tab.to_s(:short)}", tab,
-                             :id => "sub-tab-#{type}-#{tab.id}",
-                             :class => ("#{type}_#{tab.id}" != selected_tab ? nil : 'selected'),
-                             :onclick => "showSubTab('#{type}-#{tab.id}', '#{type}'); this.blur(); return false;" %></li>
-    <% end -%>
-    </ul>
-  </div>
+  <% content_for :sidebar do %>
+    <div class="sub-tabs">
+      <h3><%= type.classify %></h3>
+      <ul>
+      <% tabs.each do |tab| -%>
+        <li><%= link_to "#{tab.to_s(:short)}", tab,
+                               :id => "sub-tab-#{type}-#{tab.id}",
+                               :class => ("#{type}_#{tab.id}" != selected_tab ? nil : 'selected'),
+                               :onclick => "showSubTab('#{type}-#{tab.id}', '#{type}'); this.blur(); return false;" %></li>
+      <% end -%>
+      </ul>
+    </div>
+  <% end %>
+
 <% tabs.each do |tab| -%>
-<% @invoice = tab %>
-<% @treatment= tab %>
+<% eval "@#{type.singularize} = tab" %>
 <%= content_tag('div', render(:partial => "#{type}/show"),
                        :id => "sub-tab-content-#{type}-#{tab.id}",
                        :style => ("#{type}_#{tab.id}" != selected_tab ? 'display:none' : nil),

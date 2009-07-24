@@ -18,6 +18,8 @@ function showTab(name) {
 }
 
 function showSubTab(name, type) {
+    showTab(type);
+
     var tab_class = '.sub-tab-' + type;
 
     var f = $$(tab_class + ' .sub-tab-content');
