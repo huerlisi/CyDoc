@@ -13,7 +13,7 @@ class Invoice < ActiveRecord::Base
   def to_s(format = :default)
     case format
     when :short
-      "#{date.strftime('%d.%m.%Y')} - ##{id}"
+      "##{id}: #{date.strftime('%d.%m.%Y')}"
     else
       "#{patient.name} ##{id}, #{date.strftime('%d.%m.%Y')} à #{sprintf('%0.2f', rounded_amount)} CHF"
     end
