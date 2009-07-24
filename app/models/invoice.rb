@@ -8,6 +8,8 @@ class Invoice < ActiveRecord::Base
 
   has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC'
 
+  validates_presence_of :service_records
+  
   def to_s(format = :default)
     case format
     when :short
