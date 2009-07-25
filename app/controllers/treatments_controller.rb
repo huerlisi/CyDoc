@@ -1,4 +1,10 @@
 class TreatmentsController < ApplicationController
+  def show
+    @treatment = Treatment.find(params[:id])
+    
+    redirect_to :controller => :patients, :action => :show, :id => @treatment.patient_id, :tab => 'treatments', :sub_tab => "treatments_#{@treatment.id}"
+  end
+
   def new
     @treatment = Treatment.new
     @treatment.date_begin = Date.today

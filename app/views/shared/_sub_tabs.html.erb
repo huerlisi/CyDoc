@@ -1,5 +1,5 @@
 <%
-if params[:sub_tab]
+if params[:sub_tab].starts_with?(type)
   selected_tab = params[:sub_tab].to_s
 elsif tabs.first
   selected_tab = "#{type}_#{tabs.first.id}"
@@ -8,7 +8,11 @@ end
 <div class="sub-tab-container sub-tab-<%= type %>">
   <% content_for :sidebar do %>
     <div class="sub-tabs">
-      <h3><%= type.classify %></h3>
+      <% begin %>
+        <%= render :partial => "#{type}/sub_tab_head" %>
+      <% rescue %>
+        <h3><%= type.classify %></h3>
+      <% end %>
       <ul>
       <% tabs.each do |tab| -%>
         <li><%= link_to "#{tab.to_s(:short)}", tab,
