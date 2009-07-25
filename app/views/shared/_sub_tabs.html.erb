@@ -1,5 +1,5 @@
 <%
-if params[:sub_tab].starts_with?(type)
+if params[:sub_tab] and params[:sub_tab].starts_with?(type)
   selected_tab = params[:sub_tab].to_s
 elsif tabs.first
   selected_tab = "#{type}_#{tabs.first.id}"
