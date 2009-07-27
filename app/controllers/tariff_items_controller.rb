@@ -21,28 +21,9 @@ class TariffItemsController < ApplicationController
   
   alias :search :index
 
-  # GET /tariff_items/new
-  def new
-    @service_record = ServiceRecord.new
-
-    # Defaults
-    @service_record.date = Date.today
-    @service_record.quantity = 1
-    @service_record.provider = @current_doctor
-    @service_record.responsible = @current_doctor
-
-    @service_record.patient_id = params[:patient_id]
-
-    respond_to do |format|
-      format.html { }
-      format.js {
-        render :partial => 'form'
-      }
-    end
-  end
-
   def assign
     tariff_item = TariffItem.find(params[:id])
+    session = Session.find(params[:session_id])
     patient = Patient.find(params[:patient_id])
     date = params[:date].blank? ? DateTime.now : Date.parse_europe(params[:date])
     
@@ -64,8 +45,8 @@ class TariffItemsController < ApplicationController
       format.js {
         render :update do |page|
           @patient = patient
-          page.replace_html 'service_list', :partial => 'service_records/list', :locals => { :items => patient.service_records}
-          page.replace_html 'search_results', ''
+          page.replace_html "session_#{session.id}", :partial => 'sessions/item', :object => session
+#          page.replace_html 'search_results', ''
         end
       }
     end

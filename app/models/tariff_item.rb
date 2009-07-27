@@ -45,7 +45,7 @@ class TariffItem < ActiveRecord::Base
     ServiceRecord
   end
 
-  def create_service_record(patient, provider, date, responsible = nil)
+  def create_service_record()
     # Type information
     service_record = service_record_class.new
     service_record.tariff_type = tariff_type
@@ -63,16 +63,6 @@ class TariffItem < ActiveRecord::Base
 
     service_record.remark = remark
 
-    # Defaults
-    responsible ||= provider
-
-    service_record.quantity = 1
-    service_record.date = date
-
-    service_record.patient = patient
-    service_record.provider = provider
-    service_record.responsible = responsible
-    
     return service_record
   end
 

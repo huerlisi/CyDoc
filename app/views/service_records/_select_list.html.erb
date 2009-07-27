@@ -1,0 +1,5 @@
+<% unless @tariff_items.nil? -%>
+<table class="list">
+  <%= render :partial => 'service_records/select_item', :collection => @tariff_items %>
+</table>
+<% end %>

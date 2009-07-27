@@ -22,6 +22,19 @@ class Session < ActiveRecord::Base
     duration_from.to_date unless duration_from.nil?
   end
   
+  def build_service_record(tariff_item)
+    # Type information
+    service_record = tariff_item.create_service_record
+
+    # Defaults
+    service_record.date = date || Date.today
+
+    service_record.patient = patient
+    
+    service_records << service_record
+    return service_record
+  end
+  
   def self.build_from_invoice(invoice)
     session = self.new
     

@@ -4,7 +4,7 @@
 
 <h3>Neue Leistung</h3>
 <div class="box">
-  <% remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => patient_session_tariff_items_path(params['patient_id'] || @patient.id, params[:session_id]), :html => {:method => :get}, :method => :get do |f| %>
+  <% remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => select_patient_session_service_records_path(params['patient_id'] || @patient.id, params[:session_id]), :html => {:method => :get}, :method => :get do |f| %>
     <%= f.label 'date', 'Datum' %>
     <%= f.text_field :date, :label => "Datum", :size => 8, :autocomplete => 'off' %>
 
@@ -21,4 +21,3 @@
 
   <div id="search_results"></div>
 </div>
- 

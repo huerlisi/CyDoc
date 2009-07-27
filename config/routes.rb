@@ -24,14 +24,18 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :doctors
 
   map.resources :patients do |patient|
-    patient.resources :tariff_items, :member => {:assign => :post}
     patient.resources :medical_cases, :member => {:assign => :post}
+    patient.resources :tariff_items, :member => {:assign => :post}
     patient.resources :diagnoses
     patient.resources :invoices
+    patient.resources :sessions do |session|
+      session.resources :tariff_items
+      session.resources :service_records, :collection => {:select => :get}
+    end
     patient.resources :treatments do |treatment|
       treatment.resources :invoices
       treatment.resources :sessions do |session|
-        session.resources :tariff_items
+        session.resources :tariff_items, :collection => {:search => :get}, :member => {:assign => :post}
       end
     end
   end

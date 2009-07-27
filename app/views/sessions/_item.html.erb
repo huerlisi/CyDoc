@@ -1,11 +1,14 @@
-<div class="contextual">
-  <%= link_to "Ändern", edit_session_path(item), :class => "icon icon-edit" %>
-  <%= link_to "Leistung erfassen", new_session_tariff_item_path(item), :class => "icon icon-add" %>
-</div>
+<div id="session_<%= item.id %>">
+  <div class="contextual">
+    <%= link_to "Ändern", edit_session_path(item), :class => "icon icon-edit" %>
+    <%= link_to_remote "Leistung erfassen", {:update => "new_session_#{item.id}_service_record", :url => new_patient_session_service_record_url(@patient, item), :method => :get}, :class => "icon icon-add" %>
+  </div>
 
-<h4><%=h item.to_s(:short) %></h4>
-<ul class="session">
-  <% for service_record in item.service_records %>
-    <li><b><%=h sprintf('%g', service_record.quantity) %>x <%=h service_record.code %></b>: <%=h service_record.text %></li>
-  <% end %>
-</ul>
+  <h4><%=h item.to_s(:short) %></h4>
+  <div id="new_session_<%= item.id %>_service_record"></div>
+  <ul class="session">
+    <% for service_record in item.service_records %>
+      <li><b><%=h sprintf('%g', service_record.quantity) %>x <%=h service_record.code %></b>: <%=h service_record.text %></li>
+    <% end %>
+  </ul>
+</div>
