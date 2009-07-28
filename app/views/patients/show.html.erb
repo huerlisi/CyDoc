@@ -6,6 +6,5 @@
 <%= tab_container 'patient', @patient.to_s,
       [{:name => 'personal', :partial => 'patients/show', :label => 'Personalien'},
        {:name => 'treatments', :partial => 'patients/treatment_tab', :label => 'Fälle'},
-       {:name => 'services', :partial => 'patients/service_list', :label => 'Leistungen'},
        {:name => 'invoices', :partial => 'patients/invoice_tab', :label => 'Rechnungen'},
       ] %>
