@@ -24,6 +24,8 @@ end
     </div>
   <% end %>
 
+<div id="new-sub-tab-content-<%= type %>"></div>
+
 <% tabs.each do |tab| -%>
 <% eval "@#{type.singularize} = tab" %>
 <%= content_tag('div', render(:partial => "#{type}/show"),

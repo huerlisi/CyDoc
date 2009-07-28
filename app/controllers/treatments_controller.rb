@@ -12,7 +12,13 @@ class TreatmentsController < ApplicationController
     respond_to do |format|
       format.html { }
       format.js {
-        render :partial => 'form'
+        render :update do |page|
+          page.insert_html :after, 'new-sub-tab-content-treatments', :partial => 'form'
+          page.select('.sub-tab-treatments .sub-tab-content').each do |tab|
+            tab.hide
+          end
+          page.call 'showTab', 'treatments'
+        end
       }
     end
   end
