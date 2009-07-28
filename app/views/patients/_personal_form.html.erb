@@ -1,5 +1,6 @@
 <% fields_for @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
   <%= patient.date_field :birth_date, :label => 'Geburtstag', :size => 12 %>
+  <%= patient.select :sex, {'Weiblich' => 'F', 'Männlich' => 'M'}, :include_blank => true, :label => 'Geschlecht', :size => 12 %>
   <%= patient.text_field :doctor_patient_nr, :size => 15, :label => "Patientennr." %>
   <%= patient.text_area :remarks, :label => "Bemerkungen", :cols => 30, :rows => 3 %>
 <% end %>

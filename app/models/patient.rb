@@ -57,6 +57,14 @@ class Patient < ActiveRecord::Base
     end
   end
 
+  def sex=(value)
+    case value
+      when "M": write_attribute(:sex, 1)
+      when "F": write_attribute(:sex, 2)
+      else write_attribute(:sex, nil)
+    end
+  end
+
   def sex_xml
     case read_attribute(:sex)
       when 1: "male"
