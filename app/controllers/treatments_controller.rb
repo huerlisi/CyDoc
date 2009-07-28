@@ -52,7 +52,7 @@ class TreatmentsController < ApplicationController
 #    @treatment.canton ||= @tiers.provider.vcard.address.region
 
     # Services
-    @treatment.sessions.build
+    @treatment.sessions.build(:duration_from => DateTime.now)
 #    @treatment.diagnoses = medical_cases.map{|medical_case| medical_case.diagnosis}
 
     # Saving
