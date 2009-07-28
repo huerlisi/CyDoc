@@ -5,13 +5,16 @@ class AddStaticInvoiceFieldsToTreatments < ActiveRecord::Migration
     add_column :treatments, :place_type, :string
     
     Treatment.all.map{|t|
-      i = t.invoices.first
+      begin
+        i = t.invoices.first
 
-      t.law        = i.law
-      t.referrer   = i.referrer
-      t.place_type = i.place_type
+        t.law        = i.law
+        t.referrer   = i.referrer
+        t.place_type = i.place_type
 
-      t.save
+        t.save
+      rescue
+      end
     }
   end
 
