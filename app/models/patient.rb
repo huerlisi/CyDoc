@@ -11,7 +11,7 @@ class Patient < ActiveRecord::Base
   has_vcards
 
   has_many :tiers
-  has_many :invoices, :through => :tiers
+  has_many :invoices, :through => :tiers, :order => 'created_at DESC'
   
   has_many :treatments, :order => 'date_begin DESC'
       
