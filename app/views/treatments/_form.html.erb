@@ -1,4 +1,3 @@
-<h3>Neuer Fall</h3>
 <%= error_messages_for :treatment %>
 
 <div class="box">
@@ -11,7 +10,7 @@
       </tr>
       <%= treatment.select :reason, ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'], :label => 'Behandlungsgrund' %>
       <%= treatment.select :place_type, ['Praxis', 'Spital'], :label => 'Erbringungsort' %>
-      <%= treatment.submit "Eröffnen" %>
+      <%= treatment.submit "Speichern" %>
     </table>
   <% end %>
 </div>

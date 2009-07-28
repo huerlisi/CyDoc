@@ -5,6 +5,20 @@ class TreatmentsController < ApplicationController
     redirect_to :controller => :patients, :action => :show, :id => @treatment.patient_id, :tab => 'treatments', :sub_tab => "treatments_#{@treatment.id}"
   end
 
+  def edit
+    @treatment = Treatment.find(params[:id])
+
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.call 'showSubTab', "treatments-#{@treatment.id}", 'treatments'
+          page.replace "treatment-#{@treatment.id}", :partial => 'form'
+        end
+      }
+    end
+  end
+
   def new
     @treatment = Treatment.new
     @treatment.date_begin = Date.today
@@ -13,7 +27,7 @@ class TreatmentsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.insert_html :after, 'new-sub-tab-content-treatments', :partial => 'form'
+          page.insert_html :after, 'new-sub-tab-content-treatments', :partial => 'edit'
           page.select('.sub-tab-treatments .sub-tab-content').each do |tab|
             tab.hide
           end
@@ -44,9 +58,21 @@ class TreatmentsController < ApplicationController
     # Saving
     if @treatment.save
       flash[:notice] = 'Erfolgreich erstellt.'
-      redirect_to @patient, :tab => 'treatments', 'sub-tab' => "treatment-#{@treatment.id}"
+      redirect_to @treatment
     else
       render :action => 'new'
+    end
+  end
+
+  def update
+    @treatment = Treatment.find(params[:id])
+
+    # Saving
+    if @treatment.update_attributes(params[:treatment])
+      flash[:notice] = 'Erfolgreich erstellt.'
+      redirect_to @treatment
+    else
+      render :action => ''
     end
   end
 end
