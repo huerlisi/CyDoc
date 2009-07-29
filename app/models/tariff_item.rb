@@ -21,7 +21,7 @@ class TariffItem < ActiveRecord::Base
     when "text"
       query_params[:query] = "%#{query}%"
 
-      condition = "remark LIKE :query"
+      condition = "remark LIKE :query OR code LIKE :query"
     end
 
     args.merge!(:conditions => ["(#{condition})", query_params], :order => 'tariff_type, code')
