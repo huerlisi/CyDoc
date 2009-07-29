@@ -1,5 +1,4 @@
 class Treatment < ActiveRecord::Base
-  has_and_belongs_to_many :diagnoses
   has_many :invoices
   belongs_to :patient
   belongs_to :referrer, :class_name => 'Doctor'

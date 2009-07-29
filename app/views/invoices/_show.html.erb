@@ -24,9 +24,13 @@
   </tr>
   <tr>
     <th>Zuweisender Arzt:</th><td><%= @invoice.referrer.to_s %></td>
-    <th>Diagnosen:</th><%= @invoice.treatment.diagnoses.map {|d| d.code}.join('; ') %></td>
   </tr>
 </table>
+</div>
+
+<h3>Diagnosen</h3>
+<div id="medical_cases_list" class="box">
+  <%= render :partial => 'medical_cases/list', :locals => {:items => @invoice.treatment.medical_cases} %>
 </div>
 
 <h3>Journal</h3>

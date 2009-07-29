@@ -135,10 +135,10 @@
   <tr>
     <td class="subhead" style="border-top:thin solid black">Diagnose</td>
     <td style="border-top:thin solid black">
-      <span class="bullet">&#9632;</span>&nbsp;<%= @invoice.treatment.diagnoses.map {|d| d.type}.uniq.join('; ') %>
+      <span class="bullet">&#9632;</span>&nbsp;<%= @invoice.treatment.medical_cases.map {|d| d.diagnosis.type}.uniq.join('; ') %>
     </td>
     <td colspan="3" style="border-top:thin solid black">
-      <span class="bullet">&#9632;</span>&nbsp;<%= @invoice.treatment.diagnoses.map {|d| d.code}.join('; ') %>
+      <span class="bullet">&#9632;</span>&nbsp;<%= @invoice.treatment.medical_cases.map {|d| d.diagnosis.code}.join('; ') %>
     </td>
   </tr>
   <tr>
