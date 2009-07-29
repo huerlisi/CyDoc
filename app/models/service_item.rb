@@ -6,9 +6,9 @@ class ServiceItem < ActiveRecord::Base
     "#{quantity} x #{tariff_item.to_s}"
   end
 
-  def create_service_record(patient, provider, responsible = nil)
+  def create_service_record
     # Create service_record based on associated tariff_item
-    service_record = tariff_item.create_service_record(patient, provider, responsible)
+    service_record = tariff_item.create_service_record
 
     # Fill in instance attributes
     service_record.ref_code = ref_code if ref_code

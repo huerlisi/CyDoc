@@ -45,7 +45,7 @@ class TariffItem < ActiveRecord::Base
     ServiceRecord
   end
 
-  def create_service_record()
+  def create_service_record
     # Type information
     service_record = service_record_class.new
     service_record.tariff_type = tariff_type

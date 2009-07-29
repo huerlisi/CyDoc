@@ -6,9 +6,9 @@ class TariffItemGroup < TariffItem
     group_s + " (#{service_items.count} pos.):\n" + service_items.map{|item| "      " + item.to_s}.join("\n")
   end
 
-  def create_service_record(patient, provider, responsible = nil)
+  def create_service_record
     service_items.collect{|item|
-      item.create_service_record(patient, provider, responsible)
+      item.create_service_record
     }
   end
 end

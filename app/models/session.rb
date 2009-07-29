@@ -30,11 +30,16 @@ class Session < ActiveRecord::Base
     # Type information
     service_record = tariff_item.create_service_record
 
-    # Defaults
-    service_record.date = date || Date.today
+    if service_record.is_a? Array
+      service_record.map{|s|
+        s.date = date
+        s.patient = patient
+      }
+    else
+      service_record.date = date
+      service_record.patient = patient
+    end
 
-    service_record.patient = patient
-    
     service_records << service_record
     return service_record
   end
