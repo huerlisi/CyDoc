@@ -14,14 +14,16 @@
   <% end %>
   </div>
 
-  <ul class="session">
+  <table class="session">
     <% for service_record in item.service_records %>
-      <li>
-        <b><%=h sprintf('%g', service_record.quantity) %>x <%=h service_record.code %></b>: <%=h service_record.text %>
+      <tr>
+        <td style="text-align: right"><b><%=h sprintf('%g', service_record.quantity) %>x</b></td>
+        <td style="width: 6em"><b><%=h service_record.code %></b>:</td>
+        <td><%=h service_record.text %></td>
         <% if item == item.treatment.sessions.first %>
-        <span><%= link_to_remote image_tag('delete.png'), {:url => patient_session_service_record_path(@patient, item, service_record), :method => :delete} %></span>
+        <td><span><%= link_to_remote image_tag('delete.png'), {:url => patient_session_service_record_path(@patient, item, service_record), :method => :delete} %></span></td>
         <% end %>
-      </li>
+      </tr>
     <% end %>
-  </ul>
+  </table>
 </div>

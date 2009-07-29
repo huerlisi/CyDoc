@@ -154,12 +154,10 @@ margin-left: 0;
 }
 
 /* Sessions */
-ul.session {
-  padding-left: 1em;
-}
-
-ul.session li {
-  list-style-type: none;
+table.session {
+  margin-left:  1em;
+  margin-right: 1em;
+  width:        100%;
 }
 
 /* Cases */
