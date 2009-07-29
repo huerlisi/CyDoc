@@ -28,7 +28,7 @@
   <%= link_to_remote "Neue Diagnose", {:url => new_patient_treatment_medical_case_path(@patient, @treatment), :method => :get}, :class => "icon icon-add" %>
 </div>
 <h3>Diagnosen</h3>
-<div id="medical_cases_list" class="box">
+<div id="treatment_<%= @treatment.id %>_medical_cases_list" class="box">
   <%= render :partial => 'medical_cases/list', :locals => {:items => @treatment.medical_cases} %>
 </div>
 

@@ -35,7 +35,7 @@ class MedicalCasesController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.insert_html :top, 'medical_cases_list', :partial => 'form'
+          page.insert_html :top, "treatment_#{@treatment.id}_medical_cases_list", :partial => 'form'
         end
       }
     end
@@ -64,7 +64,7 @@ class MedicalCasesController < ApplicationController
         }
         format.js {
           render :update do |page|
-            page.replace_html 'medical_cases_list', :partial => 'medical_cases/list', :locals => { :items => @treatment.medical_cases}
+            page.replace_html "treatment_#{@treatment.id}_medical_cases_list", :partial => 'medical_cases/list', :locals => { :items => @treatment.medical_cases}
           end
         }
       end
@@ -87,7 +87,7 @@ class MedicalCasesController < ApplicationController
       }
       format.js {
         render :update do |page|
-          page.replace_html 'medical_cases_list', :partial => 'medical_cases/list', :locals => { :items => @treatment.medical_cases}
+          page.replace_html "treatment_#{@treatment.id}_medical_cases_list", :partial => 'medical_cases/list', :locals => { :items => @treatment.medical_cases}
         end
       }
     end
