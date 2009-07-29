@@ -3,7 +3,7 @@
 </script>
 
 <div class="box">
-  <% remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => select_patient_session_service_records_path(params['patient_id'] || @patient.id, params[:session_id]), :html => {:method => :get}, :method => :get do |f| %>
+  <% remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => select_patient_session_service_records_path(params[:patient_id] || @patient.id, params[:session_id] || @session.id), :html => {:method => :get}, :method => :get do |f| %>
     <%= f.label 'query', 'Leistung' %>
     <%= f.text_field :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
 
