@@ -63,4 +63,24 @@ class ServiceRecordsController < ApplicationController
     end
   end
 
+  # DELETE 
+  def destroy
+    service_record = ServiceRecord.find(params[:id])
+    @patient = Patient.find(params[:patient_id])
+    @session = Session.find(params[:session_id])
+
+    service_record.destroy
+    
+    respond_to do |format|
+      format.html {
+        redirect_to :controller => 'patients', :action => 'show', :id => @patient, :tab => 'services'
+        return
+      }
+      format.js {
+        render :update do |page|
+          page.replace_html "session_#{@session.id}", :partial => 'sessions/item', :object => @session
+        end
+      }
+    end
+  end
 end

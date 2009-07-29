@@ -59,21 +59,4 @@ class TariffItemsController < ApplicationController
     edit
     render :action => 'edit', :layout => false
   end
-
-  # DELETE 
-  def destroy
-    service_record = ServiceRecord.find(params[:id])
-    patient = service_record.patient
-    service_record.destroy
-    
-    respond_to do |format|
-      format.html {
-        redirect_to :controller => 'patients', :action => 'show', :id => patient, :tab => 'services'
-        return
-      }
-      format.js {
-        render :partial => 'service_records/list', :locals => { :items => patient.service_records}
-      }
-    end
-  end
 end
