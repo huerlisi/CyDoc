@@ -1,3 +1,5 @@
+<% editable = @invoice.nil? %>
+
 <div id="session_<%= item.id %>">
   <div class="contextual">
   <% if item == item.treatment.sessions.first %>
@@ -9,18 +11,18 @@
   <h4><%= in_place_editor_field :session, :date %>: <%= item.remarks.blank? ? "Konsultation" : item.remarks %></h4>
 
   <div id="new_session_<%= item.id %>_service_record">
-  <% if item == item.treatment.sessions.first %>
-    <%= render :partial => 'service_records/form' %>
-  <% end %>
+  <% editable &&= item == item.treatment.sessions.first %>
+  <%= render :partial => 'service_records/form' if editable %>
   </div>
 
   <table class="session">
     <% for service_record in item.service_records %>
+      <% @service_record = service_record %>
       <tr>
         <td style="width: 2em; text-align: right"><b><%=h sprintf('%g', service_record.quantity) %>x</b></td>
-        <td style="width: 6em"><%=h service_record.ref_code.nil? ? service_record.code : "  " + service_record.ref_code %></td>
-        <td><%=h service_record.text %></td>
-        <% if item == item.treatment.sessions.first %>
+        <td style="width: 6em"><%=h service_record.code %></td>
+        <td><%= "(#{in_place_editor_field :service_record, :ref_code}) " unless service_record.ref_code.blank? %><%=h service_record.text %></td>
+        <% if editable %>
         <td><span><%= link_to_remote image_tag('delete.png'), {:url => patient_session_service_record_path(@patient, item, service_record), :method => :delete} %></span></td>
         <% end %>
       </tr>

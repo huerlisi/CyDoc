@@ -9,6 +9,7 @@ class PatientsController < ApplicationController
   in_place_edit_for :patient, :insurance_nr
 
   in_place_edit_for :session, :date
+  in_place_edit_for :service_record, :ref_code
                 
   # GET /patients
   def index
