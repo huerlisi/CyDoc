@@ -24,4 +24,14 @@ class DrugsController < ApplicationController
   def show
     @drug = DrugProduct.find(params[:id])
   end
+
+  def create_tariff_item
+    @drug = DrugProduct.find(params[:id])
+    
+    for drug_article in @drug.drug_articles
+      tariff_item = drug_article.build_tariff_item
+      tariff_item.save!
+    end
+    redirect_to :action => :show
+  end
 end
