@@ -4,7 +4,6 @@ class ServiceRecordsController < ApplicationController
     @service_record = ServiceRecord.new
 
     # Defaults
-    @service_record.date = Date.today
     @service_record.quantity = 1
 
     respond_to do |format|
@@ -21,8 +20,6 @@ class ServiceRecordsController < ApplicationController
     @session = Session.find(params[:session_id])
 
     service_record = @session.build_service_record(tariff_item)
-
-    service_record.date = params[:date].blank? ? DateTime.now : Date.parse_europe(params[:date])
     
     # Handle TariffItemGroups
     if service_record.is_a? Array
