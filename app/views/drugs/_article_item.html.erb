@@ -3,5 +3,6 @@
   <td><b/><%=h item.description %></b></td>
   <td><%=h "#{item.number_of_pieces} x #{item.quantity} #{item.quantity_unit}" %></td>
   <td><%=h item.vat_class.rate %> %</td>
+  <td>CHF <%=h sprintf("%0.2f", item.doctors_price) %></td>
   <td>CHF <%=h sprintf("%0.2f", item.price) %></td>
 </tr>
