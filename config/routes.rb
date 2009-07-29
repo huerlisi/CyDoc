@@ -18,7 +18,7 @@ ActionController::Routing::Routes.draw do |map|
     session.resources :tariff_items
   end
 
-  map.resources :invoices, :collection => {:print_all => :post}, :member => {:print => :post}
+  map.resources :invoices, :collection => {:print_all => :post}, :member => {:print => :post, :insurance_recipe => :get, :patient_letter => :get}
   map.resources :insurances
 
   map.resources :doctors
