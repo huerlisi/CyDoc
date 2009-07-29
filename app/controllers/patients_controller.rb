@@ -9,6 +9,7 @@ class PatientsController < ApplicationController
   in_place_edit_for :patient, :insurance_nr
 
   in_place_edit_for :session, :date
+  # TODO: is duplicated in ServiceRecordsController
   in_place_edit_for :service_record, :ref_code
                 
   # GET /patients

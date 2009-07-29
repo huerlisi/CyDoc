@@ -14,6 +14,17 @@ class ServiceRecord < ActiveRecord::Base
     "#{sprintf('%03i', tariff_type)} - #{quantity}x #{code} #{!ref_code.nil? ? '(' + ref_code + ') ' : ''} - #{text}"
   end
   
+  # TODO: lookup in tarmed db
+  def needs_ref_code?
+    text.starts_with?('+')
+  end
+  
+  def ref_code
+    value = read_attribute(:ref_code)
+    value = "Fehlende Referenz" if value.nil? and needs_ref_code?
+    return value
+  end
+  
   # Calculated field
   def amount
     # TODO: round as requested by standard
