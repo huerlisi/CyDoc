@@ -6,6 +6,7 @@ class Treatment < ActiveRecord::Base
   belongs_to :law
 
   has_many :sessions, :order => 'duration_from DESC'
+  has_many :medical_cases, :order => 'type'
   
   validates_presence_of :date_begin
   

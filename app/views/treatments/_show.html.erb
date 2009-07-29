@@ -20,9 +20,16 @@
   </tr>
   <tr>
     <th>Zuweisender Arzt:</th><td><%= @treatment.referrer.to_s if @treatment.referrer %></td>
-    <th>Diagnosen:</th><%= @treatment.diagnoses.map {|d| d.code}.join('; ') %></td>
   </tr>
 </table>
+</div>
+
+<div class="contextual">
+  <%= link_to_remote "Neue Diagnose", {:url => new_patient_treatment_medical_case_path(@patient, @treatment), :method => :get}, :class => "icon icon-add" %>
+</div>
+<h3>Diagnosen</h3>
+<div id="medical_cases_list" class="box">
+  <%= render :partial => 'medical_cases/list', :locals => {:items => @treatment.medical_cases} %>
 </div>
 
 <div class="contextual">

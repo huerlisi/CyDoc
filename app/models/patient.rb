@@ -27,9 +27,6 @@ class Patient < ActiveRecord::Base
     write_attribute(:birth_date, Date.parse_europe(value))
   end
   
-  # Medical history
-  has_many :medical_cases, :order => 'duration_to DESC'
-
   # Services
   has_many :service_records, :order => 'date DESC', :before_add => :before_add_service_record
 
@@ -118,9 +115,6 @@ class Patient < ActiveRecord::Base
     invoice.service_records = service_records
     @treatment.date_begin = service_records.minimum(:date)
     @treatment.date_end = service_records.maximum(:date)
-
-    medical_case = medical_cases.find(:all, ["duration_from >= ? OR duration_to <= ?", @treatment.date_begin, @treatment.date_end])
-    @treatment.diagnoses = medical_case.map{|medical_case| medical_case.diagnosis}
 
     return invoice
   end

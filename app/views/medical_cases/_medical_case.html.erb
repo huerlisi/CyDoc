@@ -1,7 +1,5 @@
-<% logger.warn item.inspect %>
 <tr>
-  <td style="width: 14em"><%= item.duration_from.strftime('%d.%m.%Y') if item.duration_from %></td>
-  <td><%= item.diagnosis.type %></td>
+  <td><%= item.type %></td>
   <td><%= item.to_s %></td>
-  <td><%= link_to_remote(image_tag('delete.png'), {:update => 'medical_case_list', :url => medical_case_path(item), :method => :delete}, :method => :delete, :href => medical_case_path(item)) %></td>
+  <td><%= link_to_remote(image_tag('delete.png'), {:url => patient_treatment_medical_case_path(@patient, @treatment, item), :method => :delete}, :method => :delete, :href => medical_case_path(item)) %></td>
 </tr>

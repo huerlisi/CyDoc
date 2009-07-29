@@ -1,6 +1,6 @@
 class MedicalCase < ActiveRecord::Base
-  belongs_to :patient
   belongs_to :doctor
+  belongs_to :treatment
 
   def to_s(format = :default)
     "#{code}"

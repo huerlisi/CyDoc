@@ -4,12 +4,8 @@
   $('search_query').focus()
 </script>
 
-<h3>Neue Diagnose</h3>
 <div class="box">
-  <% remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => patient_diagnoses_path(params['patient_id'] || @patient.id), :html => {:method => :get}, :method => :get do |f| %>
-    <%= f.label 'date', 'Datum' %>
-    <%= f.text_field :date, :label => "Datum", :size => 8, :autocomplete => 'off' %>
-
+  <% remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => patient_treatment_medical_cases_path(@patient, @treatment), :html => {:method => :get}, :method => :get do |f| %>
     <%= f.label 'query', 'Suche' %>
     <%= f.text_field :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
 

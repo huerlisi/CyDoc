@@ -24,9 +24,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :doctors
 
   map.resources :patients do |patient|
-    patient.resources :medical_cases, :member => {:assign => :post}
     patient.resources :tariff_items, :member => {:assign => :post}
-    patient.resources :diagnoses
     patient.resources :invoices
     patient.resources :sessions do |session|
       session.resources :tariff_items
@@ -34,6 +32,8 @@ ActionController::Routing::Routes.draw do |map|
     end
     patient.resources :treatments do |treatment|
       treatment.resources :invoices
+      treatment.resources :diagnoses
+      treatment.resources :medical_cases, :member => {:assign => :post}
       treatment.resources :sessions do |session|
         session.resources :tariff_items, :collection => {:search => :get}, :member => {:assign => :post}
       end
