@@ -1,5 +1,6 @@
 class ServiceRecordsController < ApplicationController
   in_place_edit_for :service_record, :ref_code
+  in_place_edit_for :service_record, :quantity
 
   # GET /service_records/new
   def new

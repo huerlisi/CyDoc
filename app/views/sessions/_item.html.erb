@@ -19,9 +19,22 @@
     <% for service_record in item.service_records %>
       <% @service_record = service_record %>
       <tr>
-        <td style="width: 2em; text-align: right"><b><%=h sprintf('%g', service_record.quantity) %>x</b></td>
+        <td style="width: 2em; text-align: right">
+        <% if editable %>
+          <b><%= in_place_editor_field :service_record, :quantity, {}, :size => 3 %>x</b>
+        <% else %>
+          <b><%=h @service_record.quantity %>x</b>
+        <% end %>
+        </td>
         <td style="width: 6em"><%=h service_record.code %></td>
-        <td><%= "(#{in_place_editor_field :service_record, :ref_code}) " unless service_record.ref_code.blank? %><%=h service_record.text %></td>
+        <td>
+        <% if editable %>
+          <%= "(#{in_place_editor_field :service_record, :ref_code, {}, :size => 8}) " unless service_record.ref_code.blank? %>
+        <% else %>
+          <%=h "(#{@service_record.ref_code}) " unless service_record.ref_code.blank? %>
+        <% end %>
+        <%=h service_record.text %>
+        </td>
         <% if editable %>
         <td><span><%= link_to_remote image_tag('delete.png'), {:url => patient_session_service_record_path(@patient, item, service_record), :method => :delete} %></span></td>
         <% end %>
