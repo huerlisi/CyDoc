@@ -6,7 +6,7 @@ class Invoice < ActiveRecord::Base
   named_scope :prepared, :conditions => "state = 'prepared'"
   named_scope :open, :conditions => "state = 'open'"
 
-  has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC'
+  has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC, if(ref_code IS NULL, code, ref_code), concat(code,ref_code)'
 
   validates_presence_of :service_records
   
