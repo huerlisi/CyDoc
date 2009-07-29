@@ -9,6 +9,8 @@ class Session < ActiveRecord::Base
   named_scope :open, :conditions => "state = 'open'"
   named_scope :closed, :conditions => "state = 'closed'"
 
+  validates_presence_of :duration_from
+  
   def to_s(format = :default)
     case format
     when :short

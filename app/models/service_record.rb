@@ -8,6 +8,8 @@ class ServiceRecord < ActiveRecord::Base
   has_and_belongs_to_many :invoices
   has_and_belongs_to_many :sessions
   
+  validates_presence_of :date
+
   def to_s
     "#{sprintf('%03i', tariff_type)} - #{quantity}x #{code} #{!ref_code.nil? ? '(' + ref_code + ') ' : ''} - #{text}"
   end
