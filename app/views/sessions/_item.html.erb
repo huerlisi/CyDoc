@@ -19,6 +19,7 @@
       <tr>
         <td style="text-align: right"><b><%=h sprintf('%g', service_record.quantity) %>x</b></td>
         <td style="width: 6em"><b><%=h service_record.code %></b>:</td>
+        <td style="text-align:right"><%=h service_record.ref_code.nil? ? service_record.code : "  " + service_record.ref_code %></td>
         <td><%=h service_record.text %></td>
         <% if item == item.treatment.sessions.first %>
         <td><span><%= link_to_remote image_tag('delete.png'), {:url => patient_session_service_record_path(@patient, item, service_record), :method => :delete} %></span></td>
