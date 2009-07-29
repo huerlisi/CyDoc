@@ -3,8 +3,8 @@
 <div class="box">
   <% form_for [:patient, @treatment], :builder => Rubaidh::TabularForm::TabularFormBuilder do |treatment| %>
     <table>
-      <%= treatment.text_field :date_begin, :label => 'Behandlung von', :size => 12 %>
-      <%= treatment.text_field :date_end, :label => 'Behandlung bis', :size => 12 %>
+      <%= treatment.text_field :date_begin_formatted, :label => 'Behandlung von', :size => 12 %>
+      <%= treatment.text_field :date_end_formatted, :label => 'Behandlung bis', :size => 12 %>
       <tr>
         <td><label for="law[name]">Gesetz:</label></td>
         <td><%= select 'law', :name, [['KVG', LawKvg], ['UVG', LawUvg], ['IVG', LawIvg], ['MVG', LawMvg], ['VVG', LawVvg], ['ORG', LawOrg]] %></td>
