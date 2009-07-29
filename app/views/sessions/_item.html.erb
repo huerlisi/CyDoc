@@ -5,10 +5,10 @@
   <% end %>
   </div>
 
-  <h4><%=h item.to_s(:short) %></h4>
+  <% @session = item %>
+  <h4><%= in_place_editor_field :session, :date %>: <%= item.remarks.blank? ? "Konsultation" : item.remarks %></h4>
 
   <div id="new_session_<%= item.id %>_service_record">
-  <% @session = item %>
   <% if item == item.treatment.sessions.first %>
     <%= render :partial => 'service_records/form' %>
   <% end %>

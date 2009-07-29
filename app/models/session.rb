@@ -22,6 +22,10 @@ class Session < ActiveRecord::Base
     duration_from.to_date unless duration_from.nil?
   end
   
+  def date=(value)
+    write_attribute(:duration_from, Date.parse_europe(value))
+  end
+  
   def build_service_record(tariff_item)
     # Type information
     service_record = tariff_item.create_service_record
