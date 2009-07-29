@@ -28,6 +28,15 @@ class DrugArticle < ActiveRecord::Base
     end
   end
 
+  def doctors_price
+    begin
+      # TODO: there could be more than one price (PPHA + PEXF etc.)
+      return drug_prices.valid.doctor.current.first.price
+    rescue
+      return 0.0
+    end
+  end
+
   # Tariff Items
   def build_tariff_item
     tariff_item = DrugTariffItem.new(
