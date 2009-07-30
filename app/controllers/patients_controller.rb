@@ -48,6 +48,9 @@ class PatientsController < ApplicationController
     @patient.vcard = Vcards::Vcard.new(params[:patient])
 
     @patient.doctor_patient_nr = Patient.maximum('CAST(doctor_patient_nr AS UNSIGNED INTEGER)').to_i + 1
+
+    # TODO: probably doctor specific...
+    @patient.sex = 'F'
   end
 
   # POST /posts
