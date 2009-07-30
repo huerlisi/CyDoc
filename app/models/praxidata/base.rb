@@ -1,9 +1,12 @@
+require "importer"
+
 include Praxidata
 
 class Praxidata::Base < ActiveRecord::Base
+  include Importer
   use_db :prefix => "praxidata_"
 
-  def self.import(mandant_id, selection = :all)
+  def self.old_import(mandant_id, selection = :all)
     records = find(selection, :order => "#{primary_key} DESC", :conditions =>  ['Mandant_ID = ?', mandant_id])
     
     for praxistar_record in records
@@ -28,60 +31,18 @@ class Praxidata::Base < ActiveRecord::Base
     end
   end
 
-  def self.export(record_id = :all)
-    last_export = Exports.find(:first, :conditions => "model = '#{self.name}'", :order => "finished_at DESC")
+  def self.import_all(do_clean, options = {})
+    # Adresses
+    AdressenMandanten.import(do_clean, options)
+    AdressenVersicherungen.import(do_clean, options)
+    AdressenBanken.import(do_clean, options)
+    AdressenAerzte.import(false, options) # no clean because it would be cleaned by AdressenMandant
+    AdressenPersonal.import(do_clean, options)
     
-    find_params = {
-      :conditions => [ "updated_at >= ?", last_export.started_at ]
-    } unless last_export.nil?
+    # Patients
+    PatientenPersonalien.import(do_clean, options)
     
-    export = Exports.new(:started_at => Time.now, :find_params => find_params, :model => self.name)
-
-    if record_id == :all
-    	records = hozr_model.find(:all, find_params)
-    else
-    	records = [hozr_model.find(record_id)]
-    end
-    
-    export.record_count = records.size
-    export.error_ids = 'none'
-    export.save
-    
-    for h in records
-      begin
-        if exists?(h.id)
-          attributes = export_attributes(h, false)
-          update(h.id, attributes)
-          export.update_count += 1
-        else
-          attributes = export_attributes(h, true)
-          p = new(attributes)
-          p.id = h.id
-          p.save
-          export.create_count += 1
-        end
-          export.save
-      
-      rescue Exception => ex
-	if export.error_ids.nil?
-		export.error_ids = h.id.to_s
-	else
-		export.error_ids += ", #{h.id}"
-	end
-        export.error_count += 1
-        export.save
-        
-        print "Error #{self.name}(#{h.id}): #{ex.message}\n"
-        h.logger.warn "Error #{self.name}(#{h.id}): #{ex.message}\n"
-        h.logger.warn ex.backtrace.join("\n\t")
-        h.logger.warn "\n"
-      end
-    end
-  
-    export.finished_at = Time.now
-    export.save
-  
-    logger.warn(export.attributes.to_yaml)
-    return export
+    # Tariffs
+    TarifeBloecke.import(do_clean, options)
   end
 end
