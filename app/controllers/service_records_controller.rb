@@ -52,7 +52,9 @@ class ServiceRecordsController < ApplicationController
     query ||= params[:search][:query] if params[:search]
 
     @tariff_items = TariffItem.clever_find(query).paginate(:page => params['page'])
-
+    @patient = Patient.find(params[:patient_id])
+    @session = Session.find(params[:session_id])
+    
     respond_to do |format|
       format.html {
         render :action => 'select_list'
