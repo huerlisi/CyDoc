@@ -1,4 +1,5 @@
 class ServiceRecordsController < ApplicationController
+  in_place_edit_for :session, :date
   in_place_edit_for :service_record, :ref_code
   in_place_edit_for :service_record, :quantity
 
