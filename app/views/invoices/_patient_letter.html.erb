@@ -7,10 +7,10 @@
       <th>Rechnungsdatum:</th><td><%= @invoice.date.strftime('%d.%m.%Y') %></td>
     </tr>
     <tr>
-      <th>Behandlungen von:</th><td><%= @invoice.treatment.date_begin.strftime('%d.%m.%Y') %></td>
+      <th>Behandlungen von:</th><td><%= @invoice.date_begin.strftime('%d.%m.%Y') %></td>
     </tr>
     <tr>
-      <th>Behandlungen bis:</th><td><%= @invoice.treatment.date_end.strftime('%d.%m.%Y') %></td>
+      <th>Behandlungen bis:</th><td><%= @invoice.date_end.strftime('%d.%m.%Y') %></td>
     </tr>
   </table>
 </div>

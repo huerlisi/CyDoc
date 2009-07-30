@@ -48,6 +48,14 @@ class Invoice < ActiveRecord::Base
     law.case_id
   end
 
+  def date_begin
+    service_records.minimum(:date).to_date
+  end
+  
+  def date_end
+    service_records.maximum(:date).to_date
+  end
+  
   # Search
   def self.clever_find(query, args = {})
     return [] if query.nil? or query.empty?

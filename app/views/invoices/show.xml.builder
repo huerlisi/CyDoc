@@ -167,7 +167,7 @@ xml.request :role => "test",
       when TiersPayant: xml.tiers_payant do tiers(xml) end
     end
 
-    xml.detail :date_begin => @invoice.treatment.date_begin.xmlschema, :date_end => @invoice.treatment.date_end.xmlschema, :canton => @invoice.treatment.canton, :service_locality => (@invoice.place_type || "practice") do
+    xml.detail :date_begin => @invoice.date_begin.xmlschema, :date_end => @invoice.date_end.xmlschema, :canton => @invoice.treatment.canton, :service_locality => (@invoice.place_type || "practice") do
       @invoice.treatment.diagnoses.each{|diagnosis|
         xml.diagnosis :type => diagnosis.type_xml, :code => diagnosis.code
       }
@@ -177,9 +177,9 @@ xml.request :role => "test",
       opt_attrs = {}
       opt_attrs[:patient_id] = @invoice.patient.insurance_id unless @invoice.patient.insurance_id.blank?
       case @invoice.law.name.downcase
-        when 'kvg': xml.kvg :reason => @invoice.treatment.reason_xml, :case_date => @invoice.treatment.date_begin.xmlschema, *opt_attrs
-        when 'mvg': xml.kvg :reason => @invoice.treatment.reason_xml, :case_date => @invoice.treatment.date_begin.xmlschema, *opt_attrs
-        when 'uvg': xml.uvg :reason => @invoice.treatment.reason_xml, :case_date => @invoice.treatment.date_begin.xmlschema, *opt_attrs
+        when 'kvg': xml.kvg :reason => @invoice.treatment.reason_xml, :case_date => @invoice.date_begin.xmlschema, *opt_attrs
+        when 'mvg': xml.kvg :reason => @invoice.treatment.reason_xml, :case_date => @invoice.date_begin.xmlschema, *opt_attrs
+        when 'uvg': xml.uvg :reason => @invoice.treatment.reason_xml, :case_date => @invoice.date_begin.xmlschema, *opt_attrs
       end
 
       xml.services do
