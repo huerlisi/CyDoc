@@ -125,4 +125,9 @@ class InvoicesController < ApplicationController
       render :action => 'new'
     end
   end
+
+  def destroy
+    @invoice = Invoice.find(params[:id])
+    @invoice.destroy
+  end
 end
