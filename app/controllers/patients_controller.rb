@@ -44,9 +44,10 @@ class PatientsController < ApplicationController
 
   # GET /posts/new
   def new
-    patient = params[:patient]
-    @patient = Patient.new(patient)
+    @patient = Patient.new(params[:patient])
     @patient.vcard = Vcards::Vcard.new(params[:patient])
+
+    @patient.doctor_patient_nr = Patient.maximum('CAST(doctor_patient_nr AS UNSIGNED INTEGER)').to_i + 1
   end
 
   # POST /posts
