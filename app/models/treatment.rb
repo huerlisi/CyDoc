@@ -34,6 +34,10 @@ class Treatment < ActiveRecord::Base
     end
   end
   
+  def amount
+    sessions.collect{|s| s.service_records}.flatten.sum(&:amount).to_f
+  end
+  
   def reason_xml
     case reason
       when 'Unfall': 'accident'
