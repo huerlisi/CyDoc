@@ -41,6 +41,7 @@ class DrugArticle < ActiveRecord::Base
   def build_tariff_item
     tariff_item = DrugTariffItem.new(
       :amount_mt   => price,
+      :vat_class   => vat_class,
       :obligation  => !insurance_limited,
       :code        => code,
       :remark      => description,
