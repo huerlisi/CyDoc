@@ -55,6 +55,13 @@ class ServiceRecordsController < ApplicationController
     @patient = Patient.find(params[:patient_id])
     @session = Session.find(params[:session_id])
     
+    # Show selection list only if more than one hit
+    if @tariff_items.size == 1
+      params[:tariff_item_id] = @tariff_items.first.id
+      create
+      return
+    end
+      
     respond_to do |format|
       format.html {
         render :action => 'select_list'
