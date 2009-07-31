@@ -2,8 +2,8 @@
   $('search_query').focus()
 </script>
 
-<div class="box">
-  <% remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => select_patient_session_service_records_path(params[:patient_id] || @patient.id, params[:session_id] || @session.id), :html => {:method => :get}, :method => :get do |f| %>
+<div class="box search_form">
+  <% remote_form_for 'search', :before => "Element.show('session_#{@session.id}_service_record_spinner')", :success => "Element.hide('session_#{@session.id}_service_record_spinner')", :url => select_patient_session_service_records_path(@patient.id, @session.id), :html => {:method => :get}, :method => :get do |f| %>
     <%= f.label 'query', 'Leistung' %>
     <%= f.text_field :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
 
@@ -11,9 +11,9 @@
     <%= image_tag("indicator.gif",
                   :align => "absmiddle",
                   :border => 0,
-                  :id => "spinner",
+                  :id => "session_#{@session.id}_service_record_spinner",
                   :style =>"display: none;" ) %>
   <% end %>
 
-  <div id="search_results"></div>
+  <div id="session_<%= @session.id %>_search_results"></div>
 </div>

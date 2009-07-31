@@ -6,6 +6,8 @@ class ServiceRecordsController < ApplicationController
   # GET /service_records/new
   def new
     @service_record = ServiceRecord.new
+    @patient = Patient.find(params[:patient_id])
+    @session = Session.find(params[:session_id])
 
     # Defaults
     @service_record.quantity = 1
@@ -13,7 +15,13 @@ class ServiceRecordsController < ApplicationController
     respond_to do |format|
       format.html { }
       format.js {
-        render :partial => 'form'
+        render :update do |page|
+          page.select('.new_session_service_record').each do |form|
+            form.hide
+          end
+          page.show "new_session_#{@session.id}_service_record"
+          page.replace_html "new_session_#{@session.id}_service_record", :partial => 'form'
+        end
       }
     end
   end
@@ -70,7 +78,7 @@ class ServiceRecordsController < ApplicationController
       }
       format.js {
         render :update do |page|
-          page.replace_html 'search_results', :partial => 'select_list'
+          page.replace_html "session_#{@session.id}_search_results", :partial => 'select_list'
         end
       }
     end
