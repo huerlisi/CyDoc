@@ -9,6 +9,17 @@ class Treatment < ActiveRecord::Base
   
   validates_presence_of :date_begin
   
+  def validate_for_invoice
+    errors.add_to_base("Keine Diagnose eingegeben.") if medical_cases.empty?
+  end
+  
+  def valid_for_invoice?
+    valid?
+    validate_for_invoice
+    
+    errors.empty?
+  end
+
   def date_begin_formatted
     date_begin
   end

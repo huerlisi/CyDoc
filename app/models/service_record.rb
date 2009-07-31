@@ -13,8 +13,20 @@ class ServiceRecord < ActiveRecord::Base
   has_and_belongs_to_many :invoices
   has_and_belongs_to_many :sessions
   
-  validates_presence_of :date
+  # Validation
+  validates_presence_of :date, :code, :tariff_type, :session, :quantity, :unit_tt, :unit_mt, :unit_factor_tt, :unit_factor_mt
 
+  def validate_for_invoice
+    errors.add_to_base("Position '#{code}' verlangt Referenzcode") unless valid_ref_code?
+  end
+
+  def valid_for_invoice?
+    valid?
+    validate_for_invoice
+    
+    errors.empty?
+  end
+  
   def to_s
     "#{sprintf('%03i', tariff_type)} - #{quantity}x #{code} #{!ref_code.nil? ? '(' + ref_code + ') ' : ''} - #{text}"
   end
@@ -24,10 +36,12 @@ class ServiceRecord < ActiveRecord::Base
     text.starts_with?('+')
   end
   
+  def valid_ref_code?
+    not (needs_ref_code? and read_attribute(:ref_code).nil?)
+  end
+  
   def ref_code
-    value = read_attribute(:ref_code)
-    value = "Fehlende Referenz" if value.nil? and needs_ref_code?
-    return value
+    valid_ref_code? ? read_attribute(:ref_code) : "Fehlende Referenz"
   end
   
   # Calculated field
