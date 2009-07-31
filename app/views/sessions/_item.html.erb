@@ -1,4 +1,5 @@
 <% editable = @invoice.nil? %>
+<% current = item == item.treatment.sessions.first %>
 
 <div id="session_<%= item.id %>">
   <div class="contextual">
@@ -11,7 +12,6 @@
   <h4><%= in_place_editor_field :session, :date %>: <%= item.remarks.blank? ? "Konsultation" : item.remarks %></h4>
 
   <div id="new_session_<%= item.id %>_service_record">
-  <% editable &&= item == item.treatment.sessions.first %>
   <%= render :partial => 'service_records/form' if editable %>
   </div>
 
