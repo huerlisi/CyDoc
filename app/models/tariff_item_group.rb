@@ -6,6 +6,19 @@ class TariffItemGroup < TariffItem
     group_s + " (#{service_items.count} pos.):\n" + service_items.map{|item| "      " + item.to_s}.join("\n")
   end
 
+  # Accumulated amounts
+  def amount_mt
+    service_items.map{|s| s.amount_mt}.sum
+  end
+  
+  def amount_tt
+    service_items.map{|s| s.amount_tt}.sum
+  end
+  
+  def amount
+    service_items.map{|s| s.amount}.sum
+  end
+
   def create_service_record
     service_items.collect{|item|
       item.create_service_record
