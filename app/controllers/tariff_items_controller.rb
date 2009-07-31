@@ -21,37 +21,6 @@ class TariffItemsController < ApplicationController
   
   alias :search :index
 
-  def assign
-    tariff_item = TariffItem.find(params[:id])
-    session = Session.find(params[:session_id])
-    patient = Patient.find(params[:patient_id])
-    date = params[:date].blank? ? DateTime.now : Date.parse_europe(params[:date])
-    
-    service_record = tariff_item.create_service_record(patient, @current_doctor, date)
-
-    # Handle TariffItemGroups
-    if service_record.is_a? Array
-      service_record.map{|record| record.save!}
-    else
-      service_record.save
-    end
-    flash[:notice] = 'Erfolgreich erfasst.'
-
-    respond_to do |format|
-      format.html {
-        redirect_to :controller => 'patients', :action => 'show', :id => patient, :tab => 'services'
-        return
-      }
-      format.js {
-        render :update do |page|
-          @patient = patient
-          page.replace_html "session_#{session.id}", :partial => 'sessions/item', :object => session
-#          page.replace_html 'search_results', ''
-        end
-      }
-    end
-  end
-
   def edit
   end
 
