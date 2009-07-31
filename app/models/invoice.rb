@@ -8,21 +8,28 @@ class Invoice < ActiveRecord::Base
 
   has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC, if(ref_code IS NULL, code, ref_code), concat(code,ref_code)'
 
-  validates_presence_of :service_records
+  validates_presence_of :service_records, :message => 'Keine Leistung eingegeben.'
 
   validate :valid_service_records?
   validate :valid_treatment?
+  validate :valid_patient?
   
   def valid_service_records?
     service_records.map{|service_record|
-      errors.add_to_base(service_record.errors.full_messages.join(', ')) unless service_record.valid_for_invoice?
+      errors.add_to_base(service_record.errors.full_messages.join('</li><li>')) unless service_record.valid_for_invoice?
     }
 
     return errors.empty?
   end
   
   def valid_treatment?
-    errors.add_to_base(treatment.errors.full_messages.join(', ')) unless treatment.valid_for_invoice?
+    errors.add_to_base(treatment.errors.full_messages.join('</li><li>')) unless treatment.valid_for_invoice?
+
+    return errors.empty?
+  end
+
+  def valid_patient?
+    errors.add_to_base(patient.errors.full_messages.join('</li><li>')) unless patient.valid_for_invoice?
 
     return errors.empty?
   end

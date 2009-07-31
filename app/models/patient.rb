@@ -15,6 +15,21 @@ class Patient < ActiveRecord::Base
   
   has_many :treatments, :order => 'date_begin DESC'
       
+  validates_presence_of :family_name, :given_name
+
+  def validate_for_invoice
+    for field in [:street_address, :postal_code, :locality]
+      errors.add(field, "für Patient nicht gesetzt") if self.send(field).blank?
+    end
+  end
+  
+  def valid_for_invoice?
+    valid?
+    validate_for_invoice
+    
+    errors.empty?
+  end
+
   def to_s(format = :default)
     ["#{name}#{(' #' + doctor_patient_nr) unless doctor_patient_nr.blank?}", (birth_date.strftime('%d.%m.%Y') if birth_date)].compact.join(', ')
   end
