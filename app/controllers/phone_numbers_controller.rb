@@ -1,4 +1,5 @@
 class PhoneNumbersController < ApplicationController
+  in_place_edit_for :phone_number, :phone_number_type
   in_place_edit_for :phone_number, :number
 
   # GET /phone_numbers/new

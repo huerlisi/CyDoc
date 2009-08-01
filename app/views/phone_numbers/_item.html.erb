@@ -1,6 +1,6 @@
 <% @phone_number = item %>
 <tr id="phone_number_<%= item.id %>">
-  <td><%=h item.phone_number_type %></td>
+  <th><%= in_place_editor_field :phone_number, :phone_number_type %></th>
   <td><%= in_place_editor_field :phone_number, :number %></td>
   <td>
     <%= link_to_remote image_tag('delete.png'), {:url => patient_phone_number_path(@patient, item), :method => :delete} %>

@@ -2,7 +2,7 @@
   <%= error_messages_for :phone_number %>
   <% remote_form_for :phone_number, @phone_number, :url => patient_phone_numbers_url(@patient), :method => :post, :builder => Rubaidh::TabularForm::TabularFormBuilder do |phone_number| %>
     <table>
-      <%= phone_number.select :phone_number_type, ['Privat', 'Geschäft', 'Mobil', 'Fax', 'E-Mail'], :label => 'Typ' %>
+      <%= phone_number.select :phone_number_type, ['Tel. privat', 'Tel. geschäft', 'Handy', 'Fax', 'E-Mail'], :label => 'Typ' %>
       <%= phone_number.text_field :number, :label => 'Nummer', :size => 12 %>
       <%= phone_number.submit "Speichern" %>
     </table>
