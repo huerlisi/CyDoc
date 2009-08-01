@@ -129,5 +129,15 @@ class InvoicesController < ApplicationController
   def destroy
     @invoice = Invoice.find(params[:id])
     @invoice.destroy
+    
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.remove "invoice_#{@invoice.id}"
+        end
+      }
+    end
+
   end
 end

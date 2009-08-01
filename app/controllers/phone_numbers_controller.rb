@@ -44,7 +44,6 @@ class PhoneNumbersController < ApplicationController
 
   def destroy
     @phone_number = PhoneNumber.find(params[:id])
-    
     @phone_number.destroy
     
     respond_to do |format|
