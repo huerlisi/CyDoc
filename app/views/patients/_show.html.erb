@@ -10,6 +10,20 @@
   <%=h @patient.birth_date %> <%=h @patient.sex %><br />
 </div>
 
+<div class="contextual">
+  <%= link_to_remote "Kontakt erfassen", {:url => new_patient_phone_number_url(@patient), :method => :get}, :class => "icon icon-add" %>
+</div>
+<h3>Kontakt</h3>
+<div class="box">
+  <div id="new_phone_number" class="new_phone_number"></div>
+
+  <table id="phone_numbers">
+    <% for phone_number in @patient.phone_numbers -%>
+      <%= render :partial => 'phone_numbers/item', :collection => @patient.phone_numbers %>
+    <% end -%>
+  </table>
+</div>
+
 <h3>Versicherung</h3>
 <div class="box">
   <table>

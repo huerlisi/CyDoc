@@ -5,10 +5,13 @@
   <%= render :partial => 'personal_form' %>
 </table>
 
-<h3>Kontakt</h3>
+<h3>Adresse</h3>
 <table>
   <%= render :partial => '/vcards/form', :locals => {:vcard_name => 'patient', :vcard => @patient} %>
 </table>
+
+<h3>Kontakt</h3>
+<%= render :partial => '/vcards/phone_number_form', :locals => {:vcard_name => 'patient', :vcard => @patient} %>
 
 <h3>Versicherungen</h3>
 <table>
