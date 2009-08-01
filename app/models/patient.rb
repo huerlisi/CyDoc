@@ -10,7 +10,7 @@ class Patient < ActiveRecord::Base
 
   has_vcards
 
-  has_many :phone_numbers, :class_name => 'Vcards::PhoneNumber', :as => :object
+  has_many :phone_numbers, :as => :object
 
   has_many :tiers
   has_many :invoices, :through => :tiers, :order => 'created_at DESC'

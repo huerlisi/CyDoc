@@ -1,7 +1,9 @@
 class PhoneNumbersController < ApplicationController
+  in_place_edit_for :phone_number, :number
+
   # GET /phone_numbers/new
   def new
-    @phone_number = Vcards::PhoneNumber.new
+    @phone_number = PhoneNumber.new
     @patient = Patient.find(params[:patient_id])
 
     respond_to do |format|
@@ -40,7 +42,7 @@ class PhoneNumbersController < ApplicationController
   end
 
   def destroy
-    @phone_number = Vcards::PhoneNumber.find(params[:id])
+    @phone_number = PhoneNumber.find(params[:id])
     
     @phone_number.destroy
     

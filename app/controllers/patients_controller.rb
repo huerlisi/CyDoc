@@ -7,6 +7,7 @@ class PatientsController < ApplicationController
   in_place_edit_for :patient, :birth_date
   in_place_edit_for :patient, :doctor_patient_nr
   in_place_edit_for :patient, :insurance_nr
+  in_place_edit_for :phone_number, :number
 
   in_place_edit_for :session, :date
   # TODO: is duplicated in ServiceRecordsController
