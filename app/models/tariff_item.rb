@@ -1,6 +1,10 @@
 class TariffItem < ActiveRecord::Base
   belongs_to :vat_class
   
+  def self.to_s
+    self.name.gsub('TariffItem', '')
+  end
+  
   def to_s
     [code, remark].compact.select{|item| not item.empty?}.join ' - '
   end

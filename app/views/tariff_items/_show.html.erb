@@ -3,7 +3,7 @@
   <table>
     <tr>
       <th>Tarif:</th>
-      <td><%=h @tariff_item.type %></td>
+      <td><%=h @tariff_item.type.to_s %></td>
     </tr>
     <tr>
       <th>Beschreibung:</th>
@@ -12,6 +12,10 @@
     <tr>
       <th>Code:</th>
       <td><%=h @tariff_item.code %></td>
+    </tr>
+    <tr>
+      <th>Pflichtleistung:</th>
+      <td><%=h @tariff_item.obligation? ? "Ja" : "Nein" %></td>
     </tr>
     <tr>
       <th>MWSt:</th>
