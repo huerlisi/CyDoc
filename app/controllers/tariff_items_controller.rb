@@ -17,4 +17,19 @@ class TariffItemsController < ApplicationController
       }
     end
   end
+
+  # GET /tariff_item/id
+  def show
+    @tariff_item = TariffItem.find(params[:id])
+    
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.replace_html 'tariff_item_view', :partial => 'show'
+          page.replace_html 'search_results', ''
+        end
+      }
+    end
+  end
 end

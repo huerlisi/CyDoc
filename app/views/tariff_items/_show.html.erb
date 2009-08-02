@@ -1,0 +1,21 @@
+<div class="box">
+  <h3>Information</h3>
+  <table>
+    <tr>
+      <th>Tarif:</th>
+      <td><%=h @tariff_item.type %></td>
+    </tr>
+    <tr>
+      <th>Beschreibung:</th>
+      <td><%=h @tariff_item.remark %></td>
+    </tr>
+    <tr>
+      <th>Code:</th>
+      <td><%=h @tariff_item.code %></td>
+    </tr>
+    <tr>
+      <th>MWSt:</th>
+      <td><%=h @tariff_item.vat_class.to_s %></td>
+    </tr>
+  </table>
+</div>
