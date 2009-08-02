@@ -22,4 +22,6 @@
       <td><%=h @tariff_item.vat_class.to_s %></td>
     </tr>
   </table>
+
+  <%= render :partial => 'show_tariff_item_group' if @tariff_item.is_a? TariffItemGroup %>
 </div>
