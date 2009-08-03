@@ -1,10 +1,9 @@
 <tr id="service_item_<%= item.id %>">
-  <td style="text-align:right"><%=h sprintf('%.f', item.quantity) %>x</td>
+  <td><%=h sprintf('%.f', item.quantity) %>x</td>
   <td style="text-align:right"><%=h item.ref_code.nil? ? item.code : "  " + item.ref_code %></td>
   <td><b><%=h item.text %></b></td>
   <td style="text-align:right"><%=h sprintf('%.2f', item.amount_mt) %>&nbsp;AL</td>
   <td style="text-align:right"><%=h sprintf('%.2f', item.amount_tt) %>&nbsp;TL</td>
   <td style="text-align:right"><b><%=h sprintf('%.2f', item.amount) %></b>&nbsp;CHF</td>
-  <td><%=h tariff_item_service_item_path(@tariff_item, item) %></td>
-  <td><%= link_to_remote image_tag('delete.png'), {:url => service_item_url(item.id), :method => :delete} %></td>
+  <td><%= link_to_remote image_tag('delete.png'), {:url => tariff_item_service_item_url(@tariff_item, item.id), :method => :delete} %></td>
 </tr>

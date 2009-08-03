@@ -1,13 +1,5 @@
 <table class="list" id="service_table">
 <%= render :partial => 'service_items/list_header' %>
 <%= render :partial => 'service_items/item', :collection => items %>
-<% unless items.empty? %>
-  <tr>
-    <th style="text-align: left"><%= items.size %>&nbsp;Positionen</th>
-    <th style="text-align: right"><%= sprintf('%.2f', items.collect {|item| item.amount_mt}.sum) %>&nbsp;AL</th>
-    <th style="text-align: right"><%= sprintf('%.2f', items.collect {|item| item.amount_tt}.sum) %>&nbsp;TL</th>
-    <th style="text-align: right"><%= sprintf('%.2f', items.collect {|item| item.amount}.sum) %>&nbsp;CHF</th>
-    <th />
-  </tr>
-<% end %>
+<%= render :partial => 'service_items/list_footer' %>
 </table>
