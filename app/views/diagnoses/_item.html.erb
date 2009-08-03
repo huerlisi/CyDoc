@@ -1,4 +1,4 @@
-<tr style="cursor: pointer" onclick="<%= remote_function(:method => 'post', :url => assign_patient_treatment_medical_case_path(@patient, @treatment, item.id)) %>">
+<tr style="cursor: pointer" onclick="<%= remote_function(:method => 'post', :url => patient_treatment_medical_cases_path(@patient, @treatment, :diagnosis_id => item.id)) %>">
   <td><%= item.type %></td>
   <td><%= item.code %></td>
   <td><%= item.text %></td>

@@ -29,8 +29,13 @@
 </div>
 
 <h3>Diagnosen</h3>
-<div id="medical_cases_list" class="box">
-  <%= render :partial => 'medical_cases/list', :locals => {:items => @invoice.treatment.medical_cases} %>
+<div id="box">
+  <div id="treatment_<%= @treatment.id %>_new_medical_case">
+    <%= render :partial => 'medical_cases/form' %>
+  </div>
+  <table id="treatment_<%= @treatment.id %>_medical_cases" style="width: 100%">
+    <%= render :partial => 'medical_cases/item', :collection => @invoice.treatment.medical_cases %>
+  </table>
 </div>
 
 <h3>Journal</h3>

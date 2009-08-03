@@ -1,3 +1,3 @@
-<table style="width: 100%">
-  <%= render :partial => 'medical_cases/item', :collection => items %>
+<table id="treatment_<%= @treatment.id %>_medical_cases" style="width: 100%">
+  <%= render :partial => 'medical_cases/item', :collection => list %>
 </table>

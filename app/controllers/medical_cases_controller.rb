@@ -9,6 +9,12 @@ class MedicalCasesController < ApplicationController
 
     @diagnoses = Diagnosis.paginate(:page => params['page'], :per_page => 20, :conditions => ['code LIKE :query OR text LIKE :query', {:query => "%#{query}%"}], :order => 'code')
 
+    # Show selection list only if more than one hit
+    if @diagnoses.size == 1
+      params[:diagnosis_id] = @diagnoses.first.id
+      create
+      return
+    end    
     respond_to do |format|
       format.html {
         render :action => 'select_list'
@@ -21,8 +27,8 @@ class MedicalCasesController < ApplicationController
       }
     end
   end
-  
   alias :search :index
+  
   def new
     # TODO: generalize like this: @medical_case = Object.const_get(params[:type]).new
     @medical_case = DiagnosisCase.new
@@ -35,18 +41,17 @@ class MedicalCasesController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.insert_html :top, "treatment_#{@treatment.id}_medical_cases_list", :partial => 'form'
+          page.replace_html "treatment_#{@treatment.id}_new_medical_case", :partial => 'form'
         end
       }
     end
   end
 
-  def assign
+  def create
     @patient = Patient.find(params[:patient_id])
     @treatment = Treatment.find(params[:treatment_id])
 
-    patient = Patient.find(params[:patient_id])
-    diagnosis = Diagnosis.find(params[:id])
+    diagnosis = Diagnosis.find(params[:diagnosis_id])
 
     # TODO: generalize like this: @medical_case = Object.const_get(params[:medical_case][:type]).new(params[:medical_case])
     @medical_case = DiagnosisCase.new(params[:medical_case])
@@ -64,7 +69,8 @@ class MedicalCasesController < ApplicationController
         }
         format.js {
           render :update do |page|
-            page.replace_html "treatment_#{@treatment.id}_medical_cases_list", :partial => 'medical_cases/list', :locals => { :items => @treatment.medical_cases}
+            page.insert_html :top, "treatment_#{@treatment.id}_medical_cases", :partial => 'medical_cases/item', :object => @medical_case
+            page.remove "medical_case_form"
           end
         }
       end

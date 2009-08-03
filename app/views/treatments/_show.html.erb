@@ -28,8 +28,13 @@
   <%= link_to_remote "Neue Diagnose", {:url => new_patient_treatment_medical_case_path(@patient, @treatment), :method => :get}, :class => "icon icon-add" %>
 </div>
 <h3>Diagnosen</h3>
-<div id="treatment_<%= @treatment.id %>_medical_cases_list" class="box">
-  <%= render :partial => 'medical_cases/list', :locals => {:items => @treatment.medical_cases} %>
+<div id="box">
+  <div id="treatment_<%= @treatment.id %>_new_medical_case">
+    <%= render :partial => 'medical_cases/form' %>
+  </div>
+  <table id="treatment_<%= @treatment.id %>_medical_cases" style="width: 100%">
+    <%= render :partial => 'medical_cases/item', :collection => @treatment.medical_cases %>
+  </table>
 </div>
 
 <div class="contextual">
