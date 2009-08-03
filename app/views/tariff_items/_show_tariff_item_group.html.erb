@@ -1,3 +1,2 @@
 <h3>Leistungen</h3>
-<table>
-</table>
+<%= render :partial => 'service_items/list', :locals => {:items => @tariff_item.service_items} %>

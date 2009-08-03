@@ -18,6 +18,14 @@ class ServiceItem < ActiveRecord::Base
     quantity * tariff_item.amount
   end
 
+  def code
+    tariff_item.code
+  end
+  
+  def text
+    tariff_item.remark
+  end
+  
   def create_service_record
     # Create service_record based on associated tariff_item
     service_record = tariff_item.create_service_record
