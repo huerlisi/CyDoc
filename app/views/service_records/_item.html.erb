@@ -1,4 +1,4 @@
-<tr>
+<tr id="service_record_<%= item.id %>">
   <td style="text-align:right"><%=h sprintf('%.f', item.quantity) %>x</td>
   <td style="text-align:right"><%=h item.ref_code.nil? ? item.code : "  " + item.ref_code %></td>
   <td><b><%=h item.text %></b></td>

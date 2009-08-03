@@ -75,19 +75,14 @@ class MedicalCasesController < ApplicationController
 
   # DELETE 
   def destroy
-    medical_case = MedicalCase.find(params[:id])
-    @patient = Patient.find(params[:patient_id])
-    @treatment = Treatment.find(params[:treatment_id])
-    medical_case.destroy
+    @medical_case = MedicalCase.find(params[:id])
+    @medical_case.destroy
     
     respond_to do |format|
-      format.html {
-        redirect_to @patient, :tab => 'medical_history'
-        return
-      }
+      format.html { }
       format.js {
         render :update do |page|
-          page.replace_html "treatment_#{@treatment.id}_medical_cases_list", :partial => 'medical_cases/list', :locals => { :items => @treatment.medical_cases}
+          page.remove "medical_case_#{@medical_case.id}"
         end
       }
     end
