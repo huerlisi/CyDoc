@@ -1,5 +1,6 @@
+<% @service_item = item %>
 <tr id="service_item_<%= item.id %>">
-  <td><%=h sprintf('%.f', item.quantity) %>x</td>
+  <td><%= in_place_editor_field(:service_item, :quantity) %>x</td>
   <td style="text-align:right"><%=h item.ref_code.nil? ? item.code : "  " + item.ref_code %></td>
   <td><b><%=h item.text %></b></td>
   <td style="text-align:right"><%=h sprintf('%.2f', item.amount_mt) %>&nbsp;AL</td>

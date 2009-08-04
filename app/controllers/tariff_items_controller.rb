@@ -1,4 +1,7 @@
 class TariffItemsController < ApplicationController
+  in_place_edit_for :service_item, :ref_code
+  in_place_edit_for :service_item, :quantity
+
   # GET /tariff_items
   def search
     query = params[:query]
