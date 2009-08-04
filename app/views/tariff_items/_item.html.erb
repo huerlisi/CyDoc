@@ -1,6 +1,6 @@
-<tr title="<%=h item.remark %>">
-  <td style="text-align:right"><%= link_to_remote item.code, {:url => tariff_item_url(item), :method => :get} %></td>
-  <td><span style="font-weight: bold"><%=h truncate(item.remark, 100) %></span></td>
+<tr title="<%=h item.remark %>" style="cursor: pointer" onclick="<%= remote_function :url => tariff_item_url(item), :method => :get %>">
+  <td style="text-align:right"><%=h item.code %></td>
+  <td><span style="font-weight: bold"><%=h truncate(item.remark, 80) %></span></td>
   <td style="text-align:right"><%=h sprintf('%.2f', item.amount_mt) %>&nbsp;TP</td>
   <td style="text-align:right"><%=h sprintf('%.2f', item.amount_tt) %>&nbsp;TP</td>
   <td style="text-align:right"><b><%=h sprintf('%.2f', item.amount) %></b>&nbsp;CHF</td>

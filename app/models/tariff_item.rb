@@ -28,8 +28,8 @@ class TariffItem < ActiveRecord::Base
       condition = "remark LIKE :query OR code LIKE :query"
     end
 
-    args.merge!(:conditions => ["(#{condition})", query_params], :order => 'tariff_type, code')
-    find(:all, args)
+    find_args = {:conditions => ["(#{condition})", query_params], :order => 'tariff_type DESC, code'}
+    find(:all, find_args.merge(args))
   end
 
   private
