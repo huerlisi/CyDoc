@@ -110,7 +110,7 @@ class PatientsController < ApplicationController
   end
 
   # POST /patients/1/print_label
-  print_action_for :label, :cups_host => '192.168.100.236', :tray => :label, :media => 'Label'
+  print_action_for :label, :tray => :label, :media => 'Label'
   def label
     @patient = Patient.find(params[:id])
     
@@ -121,7 +121,7 @@ class PatientsController < ApplicationController
   end
 
   # POST /patients/1/print_full_label
-  print_action_for :full_label, :cups_host => '192.168.100.236', :tray => :label, :media => 'Label'
+  print_action_for :full_label, :tray => :label, :media => 'Label'
   def full_label
     @patient = Patient.find(params[:id])
     
