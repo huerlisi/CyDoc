@@ -51,8 +51,12 @@ class ApplicationController < ActionController::Base
 
   # PDF generation
   # ==============
-  def render_to_pdf(options = nil)
-    generator = IO.popen("html2ps.php", "w+")
+  def render_to_pdf(options = {})
+    logger.info("Generate PDF with media '#{options[:media]}'")
+    html2ps_options = "--media #{options[:media]}" unless options[:media].blank?
+    
+    logger.info("html2ps.php #{html2ps_options}")
+    generator = IO.popen("html2ps.php #{html2ps_options}", "w+")
     generator.puts render_to_string(options)
     generator.close_write
 
@@ -62,8 +66,9 @@ class ApplicationController < ActionController::Base
     return data
   end
 
-  def render_pdf
-    send_data(render_to_pdf(:template => "#{controller_name}/#{action_name}.html.erb", :layout => 'simple'))
+  def render_pdf(options = {})
+    options.merge!(:template => "#{controller_name}/#{action_name}.html.erb", :layout => 'simple')
+    send_data(render_to_pdf(options))
   end
 
   private
@@ -143,11 +148,13 @@ module Print
         cups_host = options[:cups_host] || @printers[:cups_host]
         tray = options[:tray].to_sym || :plain
         device = options[:device] || @printers[:trays][tray]
+        media = options[:media] || 'A4'
+
         # You probably need the pdftops filter from xpdf, not poppler on the cups host
         # In my setup it generated an empty page otherwise
         logger.info("lp -h #{cups_host} -d #{device}")
         generator = IO.popen("lp -h #{cups_host} -d #{device}", "w+")
-        generator.puts render_to_pdf(:template => "#{controller_name}/#{method}.html.erb", :layout => 'simple')
+        generator.puts render_to_pdf(:template => "#{controller_name}/#{method}.html.erb", :layout => 'simple', :media => media)
         generator.close_write
 
         # Just read to not create zombie processes... TODO: fix
