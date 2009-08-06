@@ -161,7 +161,16 @@ module Print
         data = generator.read
         generator.close
 
-#        render :text => "<p>Gedruckt.</p>"
+        respond_to do |format|
+          format.html {}
+          format.js {
+            render :update do |page|
+              page.select('.icon-spinner') do |spinner|
+                spinner.toggleClassName('icon-spinner')
+              end
+            end
+          }
+        end
       end
     end
   end

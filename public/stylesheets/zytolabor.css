@@ -42,6 +42,7 @@ vertical-align: middle;
 .icon-delete { background-image: url(../images/delete.png); }
 .icon-print { background-image: url(../images/print.png); }
 .icon-search { background-image: url(../images/search.png); }
+.icon-spinner { background-image: url(../images/indicator.gif); }
 
 /* SubTabs */
 #content .sub-tabs {height: 2.6em; border-bottom: 1px solid #bbbbbb; margin-bottom:1.2em; position:relative;}
