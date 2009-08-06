@@ -1,0 +1,22 @@
+<% vcard = @patient.vcard %>
+
+<style>
+body { margin: 0; padding: 1px; }
+</style>
+
+<div style="font-family: 'Vera Sans',Arial,sans-serif; font-size: 6pt; width: 2.5cm">
+  <div class="full_name" style="font-size: 7pt">
+    <%=h @patient.birth_date %>
+    <%=h "##{@patient.doctor_patient_nr}" unless @patient.doctor_patient_nr.blank? %>
+    <%=h vcard.full_name %><br/>
+  </div>
+  <div style="height: 0.3em"/>
+  <div class="address">
+    <%=h vcard.street_address  %><br/>
+    <%=h vcard.postal_code  %> <%=h vcard.locality %>
+  </div>
+  <div style="height: 0.3em"/>
+  <div>
+     <%=h @patient.insurance.to_s unless @patient.insurance.blank? %> <%=h "Nr. #{@patient.insurance_nr}" unless @patient.insurance_nr.blank? %><br />
+  </div>
+</div>

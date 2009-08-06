@@ -108,4 +108,26 @@ class PatientsController < ApplicationController
     
     @patient = Patient.find(params[:id])
   end
+
+  # POST /patients/1/print_label
+  print_action_for :label, :cups_host => '192.168.100.236', :tray => :label
+  def label
+    @patient = Patient.find(params[:id])
+    
+    respond_to do |format|
+      format.html {}
+      format.pdf { render_pdf }
+    end
+  end
+
+  # POST /patients/1/print_full_label
+  print_action_for :full_label, :cups_host => '192.168.100.236', :tray => :label
+  def full_label
+    @patient = Patient.find(params[:id])
+    
+    respond_to do |format|
+      format.html {}
+      format.pdf { render_pdf }
+    end
+  end
 end

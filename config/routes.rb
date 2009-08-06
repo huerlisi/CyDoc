@@ -28,7 +28,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :doctors
 
-  map.resources :patients do |patient|
+  map.resources :patients, :member => {:print_label => :post, :label => :get, :print_full_label => :post, :full_label => :get} do |patient|
     patient.resources :phone_numbers
     patient.resources :tariff_items, :member => {:assign => :post}
     patient.resources :invoices
