@@ -1,4 +1,7 @@
 <div class="box">
+  <div class="contextual">
+    <%= link_to_remote "Leistung löschen", {:url => tariff_item_url(@tariff_item), :method => :delete}, :class => "icon icon-delete" %>
+  </div>
   <h3>Information</h3>
   <table>
     <tr>

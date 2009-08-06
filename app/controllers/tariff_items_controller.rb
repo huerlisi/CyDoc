@@ -47,4 +47,20 @@ class TariffItemsController < ApplicationController
       }
     end
   end
+
+  # DELETE /tariff_item/1
+  def destroy
+    @tariff_item = TariffItem.find(params[:id])
+
+    @tariff_item.destroy
+    
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.redirect_to tariff_items_url
+        end
+      }
+    end
+  end
 end

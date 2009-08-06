@@ -1,5 +1,5 @@
 class ServiceItemsController < ApplicationController
-  # DELETE /service_item/id
+  # DELETE /service_item/1
   def destroy
     @tariff_item = TariffItem.find(params[:tariff_item_id])
     @service_item = ServiceItem.find(params[:id])
