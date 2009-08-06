@@ -17,4 +17,22 @@ class SessionsController < ApplicationController
       }
     end
   end
+
+  # DELETE 
+  def destroy
+    @session = Session.find(params[:id])
+    @treatment = @session.treatment
+
+    @session.destroy
+    
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.remove "session_#{@session.id}"
+          page.replace_html "treatment_#{@treatment.id}_service_list_total", "Total: #{@treatment.amount.currency_round}"
+        end
+      }
+    end
+  end
 end
