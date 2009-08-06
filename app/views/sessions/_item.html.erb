@@ -31,9 +31,9 @@
         <td style="width: 6em"><%=h service_record.code %></td>
         <td>
         <% if editable %>
-          <%= "(#{in_place_editor_field :service_record, :ref_code, {}, :size => 8}) " unless service_record.ref_code.blank? %>
+          <%= "(#{in_place_editor_field :service_record, :ref_code, {}, :size => 8}) " unless @service_record.ref_code.blank? %>
         <% else %>
-          <%=h "(#{@service_record.ref_code}) " unless service_record.ref_code.blank? %>
+          <%=h "(#{@service_record.ref_code}) " unless @service_record.ref_code.blank? %>
         <% end %>
         <%=h service_record.text %>
         </td>

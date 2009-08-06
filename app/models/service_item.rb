@@ -26,6 +26,19 @@ class ServiceItem < ActiveRecord::Base
     tariff_item.remark
   end
   
+  # TODO: delegate the following to the tariff_item
+  def needs_ref_code?
+    text.starts_with?('+')
+  end
+  
+  def valid_ref_code?
+    not (needs_ref_code? and read_attribute(:ref_code).nil?)
+  end
+  
+  def ref_code
+    valid_ref_code? ? read_attribute(:ref_code) : "Fehlende Referenz"
+  end
+  
   def create_service_record
     # Create service_record based on associated tariff_item
     service_record = tariff_item.create_service_record
