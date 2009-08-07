@@ -9,7 +9,8 @@ class ServiceItemsController < ApplicationController
     
     # Show selection list only if more than one hit
     if @tariff_items.size == 1
-      params[:tariff_item_id] = @tariff_items.first.id
+      params[:tariff_item_id] = @tariff_item.id
+      params[:select_item_id] = @tariff_items.first.id
       create
       return
     end
