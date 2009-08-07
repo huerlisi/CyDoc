@@ -44,4 +44,5 @@
 <div id="session_list" class="box">
   <%= render :partial => 'sessions/list', :object => @treatment.sessions %>
 </div>
+
 <h4 id="treatment_<%= @treatment.id %>_service_list_total">Total CHF <%= @treatment.amount.currency_round %></h4>
