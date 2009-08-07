@@ -1,4 +1,7 @@
 class ServiceItemsController < ApplicationController
+  in_place_edit_for :service_item, :ref_code
+  in_place_edit_for :service_item, :quantity
+
   # GET /service_records/select
   def select
     query = params[:query]
@@ -49,20 +52,24 @@ class ServiceItemsController < ApplicationController
     
     tariff_item = TariffItem.find(params[:select_item_id])
     
-    # TODO: Handle TariffItemGroups
-    @service_item = @tariff_item.service_items.build(params[:service_item])
-    @service_item.tariff_item = tariff_item
-    @service_item.quantity = 1
+    # Handle TariffItemGroups
+    if tariff_item.is_a? TariffItemGroup
+      @tariff_item.service_items << tariff_item.service_items
+    else
+      service_item = @tariff_item.service_items.build(params[:service_item])
+      service_item.tariff_item = tariff_item
+      service_item.quantity = 1
 
-    @service_item.save!
+      service_item.save!
+    end
 
     respond_to do |format|
       format.html { }
       format.js {
         render :update do |page|
-          page.insert_html :after, "service_items_list_header", :partial => 'service_items/item', :object => @service_item
-          page.replace "service_items_list_footer", :partial => 'service_items/list_footer'
-          page.remove "service_item_form"
+          page["service_items_search_query"].activate
+          page.replace_html "tariff_item_search_results", ""
+          page.replace "service_items", :partial => 'service_items/list'
         end
       }
     end
