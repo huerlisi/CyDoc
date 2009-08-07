@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :service_items
   
   map.resources :tariff_items, :collection => {:search => :get} do |tariff_item|
-    tariff_item.resources :service_items
+    tariff_item.resources :service_items, :collection => {:select => :get}
   end
   
   map.resources :medical_cases

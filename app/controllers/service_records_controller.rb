@@ -26,6 +26,7 @@ class ServiceRecordsController < ApplicationController
     end
   end
 
+  # POST /service_records
   def create
     tariff_item = TariffItem.find(params[:tariff_item_id])
     @patient = Patient.find(params[:patient_id])
@@ -72,10 +73,7 @@ class ServiceRecordsController < ApplicationController
     end
       
     respond_to do |format|
-      format.html {
-        render :action => 'select_list'
-        return
-      }
+      format.html { }
       format.js {
         render :update do |page|
           page.replace_html "session_#{@session.id}_search_results", :partial => 'select_list'
@@ -84,7 +82,7 @@ class ServiceRecordsController < ApplicationController
     end
   end
 
-  # DELETE 
+  # DELETE /service_record/1
   def destroy
     service_record = ServiceRecord.find(params[:id])
     @patient = Patient.find(params[:patient_id])

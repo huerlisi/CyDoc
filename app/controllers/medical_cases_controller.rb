@@ -29,6 +29,7 @@ class MedicalCasesController < ApplicationController
   end
   alias :search :index
   
+  # GET /medical_cases/new
   def new
     # TODO: generalize like this: @medical_case = Object.const_get(params[:type]).new
     @medical_case = DiagnosisCase.new
@@ -47,6 +48,7 @@ class MedicalCasesController < ApplicationController
     end
   end
 
+  # POST /medical_cases
   def create
     @patient = Patient.find(params[:patient_id])
     @treatment = Treatment.find(params[:treatment_id])

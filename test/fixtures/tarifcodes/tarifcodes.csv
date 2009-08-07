@@ -1,0 +1,241 @@
+"Tarifcodes Forum Datenaustausch ",,,,,"20090402 / smf"
+"XML: tariff_code","XML:         recordtype           XML 4.0","XML: recordtype XML 5.0","TARIFE
+deutsch","TARIFS
+français","valid from","valid to","mutation"
+"001","record_tarmed","Tarmed","TARMED","TARMED","20020101","99991231","20060413"
+"002","record_uncalassified","Other","Tarmedpauschalen","Forfaits Tarmed","20080101","99991231","20071205"
+"272","record_cantonal","Other","Arzt-Tarif Liechtenstein","Tarif médical Liechtenstein","20020101","99991231","20061103"
+"302","record_cantonal","Other","Spitalleistungs-Katalog (SLK)","Catalogue des prestations hospitalières (CPH)","20020101","99991231","20060413"
+"311","record_physio","Paramed","Physiotherapie-Tarif (physioswiss)","Tarif suisse de physiothérapie (physioswiss)","20020101","99991231","20060413"
+"316","record_lab","Lab","Eidg. Analysenliste (EAL)","Liste fédérale des analyses (LA)","20020101","99991231","20090402"
+"317","record_lab","Lab","Eidg. Analysenliste (EAL) (Neu ab 1.7.2009)","Liste fédérale des analyses (LA) (Neu ab 1.7.2009)","20090701","99991231","20090402"
+"320","record_cantonal","Dental","Zahnarzt-Tarif PP (SSO)","Tarif dentaire suisse PP (SSO)","20020101","99991231","20060413"
+"321","record_cantonal","Dental","Tarif für zahntechnische Arbeiten PP (VZLS)","Tarif pour les travaux de technique dentaire PP (VZLS)","20020101","99991231","20060413"
+"322","record_cantonal","Dental","Zahnarzt-Tarif UV / MV / IV / KV (SSO)","Tarif dentaire suisse AA / AM / AI / Amal (SSO)","20020101","99991231","20060413"
+"323","record_cantonal","Dental","Tarif für zahntechnische Arbeiten UV / MV / IV / KV (VZLS)","Tarif pour les travaux de technique dentaire AA / AM / AI / Amal (VZLS)","20020101","99991231","20060413"
+"324","record_cantonal","Other","Chiropraktoren-Tarif (SCG)","Tarif des chiropraticiens (SCG)","20020101","99991231","20060413"
+"325","record_cantonal","Paramed","Ergotherapie-Tarif (EVS)","Tarif d'ergothérapie (ASE)","20020101","99991231","20060413"
+"326","record_cantonal","Other","Orthopädie-Schuhtechnische Arbeiten UV MV IV (SSOMV)","Travaux en technique Orthopédique de chaussures AA AM AI (ASMCBO)","20020101","99991231","20060413"
+"327","record_cantonal","Other","Orthopädietechnische Arbeiten Tarif UV MV IV (SVOT)","Travaux en orthopedie technique Tarif  AA AM AI (ASTO)","20020101","99991231","20060413"
+"328","record_cantonal","Paramed","Logopädietarif","Tarif de logopédie","20020101","99991231","20060413"
+"329","record_unclassified","Other","Tarif für Hörgeräte (HZV)","Tarif pour appareils acoustiques (HZV)","20020101","99991231","20060413"
+"330","record_unclassified","Paramed","Tarif für ambulante neuropsychologische Leistungen an versicherten Personen gemäss IVG, UVG und MVG in zugelassenen Institutionen (H+)","Tarif pour des prestations neuropsychologiques ambulatoires
+fournies aux assurés selon LAI,  LAA et LAM dans des institutions reconnues (H+)","20041001","99991231","20060413"
+"331","record_unclassified","Other","Tarif für Augenprothesen","Tarif de prothèse occulaire
+","20020101","99991231","20060413"
+"332","record_unclassified","Other","Evaluation der funktionellen Leistungsfähigkeit (EFL)","Evaluation de la capacité fonctionnelle (ECF)","20020101","99991231","20060413"
+"400","record_drug","Drug","Medikamenten-Katalog Pharmacode","Catalogue de médicaments code Pharma","20020101","99991231","20060413"
+"402","record_drug","Drug","Medikamenten-Katalog EAN","Catalogue de médicaments EAN","20040101","99991231","20060413"
+"403","record_drug","Drug","Medikamenten-Katalog swissmedic","Catalogue de médicaments swissmedic","20040101","99991231","20060413"
+"405","record_unclassified","Other","Ergänzungen zu den Medizinal-Tarifen","Adjonctions aux tarifs médicaux","20020101","99991231","20060413"
+"410","record_drug","Drug","Arzneimittelliste mit Tarif (ALT)","Liste des médicaments avec tarif (LMT)","20020101","99991231","20060413"
+"451","record_drug","Drug","Rayon-Codes","Codes rayon","20020101","99991231","20060413"
+"452","record_migel","Migel","MiGeL: Mittel und Gegenstände Liste","LiMA: liste des moyens et appareils","20010101","99991231","20061103"
+"500","record_unclassified","Other","SVK VBL-Tarif in CHF","SVK, tarif APS en CHF","20020101","99991231","20060413"
+"510","record_unclassified","Paramed","Tarif für Ernährungsberatung (SVDE)","Tarif de conseils nutritionnels (ASDD)","20020101","99991231","20060413"
+"511","record_unclassified","Paramed","Tarif für Diabetesberatung (SDG)","Tarif de conseils diabétiques (ASD)","20020101","99991231","20060413"
+"512","record_unclassified","Paramed","Tarif für nichtärztliche Beratungs- und Pflegeleistungen in Spitälern; ambulante onkologische Behandlung (H+)","Tarif pour des prestations non médicales de conseils et de soins en milieu hospitalier: traitement ambulatoire oncologique (H+)","20040101","20041231","20060413"
+"513","record_unclassified","Paramed","Tarif für nichtärztliche Beratungs- und Pflegeleistungen in Spitälern; ambulante Stomaberatung und -behandlung (H+)","Tarif pour des prestations non médicales de conseils et de soins en milieu hospitalier: conseil et traitement ambulatoires en matière de stomie (H+)","20040101","99991231","20060413"
+"514","record_unclassified","Paramed","Tarif für ambulante Leistungen der Ernährungsberatung in Spitälern (H+)","Tarif pour des prestations ambulatoires de conseils en nutrition fournies en établissements hospitaliers (H+)","20020101","99991231","20060413"
+"515","record_unclassified","Paramed","Tarif für ambulante Leistungen der Diabetesberatung in Spitälern (H+)","Tarif pour des prestations ambulatoires de conseils aux diabétiques fournies en établissements hospitaliers (H+)","20020101","99991231","20060413"
+"516","record_unclassified","Paramed","Tarif für Diabetesberatung (SBK)","Tarif pour les conseils diabétiques (ASI)","20041001","99991231","20060413"
+"530","record_unclassified","Other","Schweiz. Spitex-Rahmentarif","Tarife cadre suisse de Spitex","20020101","99991231","20060413"
+"540","record_unclassified","Other","Tarif für die Vermietung von Inhalations- und Atemtheraphiegeräte","Tarif de location d'appareils d'inhalation et de respiration","20020101","99991231","20060413"
+"550","record_unclassified","Other","Schweiz. Hebammentarif","Tarif suisse des sages-femmes","20020101","99991231","20060413"
+"551","record_unclassified","Paramed","Tarif für nichtärztliche Beratungs- und Pflegeleistungen in Spitälern; ambulante Behandlung im Zusammenhang mit Geburt, Geburtsvorbereitung und Wochenbett durch Hebammen, CHF (H+)","Tarif pour des prestations non médicales de conseils et de soins en milieu hospitalier: traitement ambulatoire lié à l’accouchement, à la préparation à l’accouchement et aux soins postnatals par des sages-femmes,  CHF (H+)","20040101","99991231","20060413"
+"552","record_unclassified","Paramed","Tarif für nichtärztliche Beratungs- und Pflegeleistungen in Spitälern; ambulante Behandlung im Zusammenhang mit Geburt, Geburtsvorbereitung und Wochenbett durch Hebammen, TP (H+)","Tarif pour des prestations non médicales de conseils et de soins en milieu hospitalier: traitement ambulatoire lié à l’accouchement, à la préparation à l’accouchement et aux soins postnatals par des sages-femmes,  PT (H+)","20040101","99991231","20060413"
+"553","record_physio","Paramed","Tarif für ambulante physiotherapeutische Leistungen in Spitälern (H+)","Tarif pour des prestations ambulatoires physiothérapeutiques fournies en établissements hospitaliers (H+)","20020101","99991231","200611103"
+"554","record_unclassified","Paramed","Tarif für ambulante ergotherapeutische Leistungen in Spitälern (H+)","Tarif pour des prestations ambulatoires ergothérapeutiques fournies en établissements hospitaliers (H+)","20020101","99991231","20060413"
+"555","record_unclassified","Paramed","Tarif für ambulante logopädische Leistungen in Spitälern (H+)","Tarif pour des prestations ambulatoires logopédiques fournies en établissements hospitaliers (H+)","20020101","99991231","20060413"
+"556","record_unclassified","Paramed","Tarif für ambulante muskuloskelettale Rehabilitation und Neurorehabilitation in Spitälern (H+)","Tarif de la réhabilitation musculoskelettal et neurologique ambulatoires en établissements hospitaliers (H+)","20070101","99991231","20060413"
+"570","record_druggist","Drug","Leistungsorientierte Abgeltung der Apothekerleistungen (LOA)","Rémunération basée sur les prestations (RBP)","20020101","99991231","20060413"
+"580","record_unclassified","Other","Schweiz. Rettungsflugwachttarif (REGA)","Tarif de la Garde Aérienne Suisse de Sauvetage (REGA)","20020101","99991231","20060413"
+"583","record_unclassified","Other","Transporte und Rettungen","Transports et sauvetages","20080401","99991231","20080305"
+"800","record_unclassified","Other","APDRG: cost-weight version 3.2","APDRG: cost-weight version 3.2","20020101","99991231","20060413"
+"804","record_unclassified","Other","APDRG: cost-weight version 4.1","APDRG: cost-weight version 4.1","20040101","99991231","20060413"
+"805","record_unclassified","Other","APDRG: cost-weight version 5.1","APDRG: cost-weight version 5.1","20050101","99991231","200611103"
+"806","record_unclassified","Other","APDRG: cost-weight version 6.0","APDRG: cost-weight version 6.0","20090101","99991231","20081027"
+"910","record_unclassified","Other","Spitaltarif für stationäre Leistungen nach UVG/IVG/MVG","Tarif hospitalier pour prestations stationnaires selon LAA/LAI/LAM","20020101","99991231","20060413"
+"920","record_unclassified","Other","Spitaltarif für stationäre Leistungen nach KVG","Tarif hospitalier pour prestations stationnaires selon LAMal","20020101","99991231","20060413"
+"930","record_unclassified","Other","Spitaltarif für stationäre Leistungen nach VVG","Tarif hospitalier pour prestations stationnaires selon LCA","20020101","99991231","20060413"
+"940","record_unclassified","Other","Spitaltarif für übrige Leistungen","Tarif hospitalier pour autres prestations","20020101","99991231","20060413"
+"951","record_unclassified","Other","Pflegeheim BESA 4","EMS BESA 4","20080101","99991231","20080305"
+"952","record_unclassified","Other","Pflegeheim BESA 12","EMS BESA 12","20080101","99991231","20080305"
+"953","record_unclassified","Other","Pflegeheim PLAISIR 8","EMS PLAISIR 8","20080101","99991231","20080305"
+"954","record_unclassified","Other","Pflegeheim RAI/RUG 12","EMS RAI/RUG 12","20080101","99991231","20080305"
+"955","record_unclassified","Other","Pflegeheim RAI/RUG 44 + 12","EMS RAI/RUG 44 + 12","20080101","99991231","20080305"
+"956","record_unclassified","Other","Pflegeheim ZSB 10","EMS ZSB 10","20080101","99991231","20080305"
+"957","record_unclassified","Other","Pflegeheim CH Index RAI/RUG 12","EMS CH Index RAI/RUG 12","20080101","99991231","20080305"
+"958","record_unclassified","Other","Pflegeheim Tessin 5","EMS Tessin 5","20080101","99991231","20080305"
+"959","record_unclassified","Other","Pflegeheim Fribourg 6","EMS Fribourg 6","20080101","99991231","20080305"
+"999","record_unclassified","Other","Leistungen, die in keinem der aufgeführten Tarife enthalten sind","Prestations ne figurant dans aucun des tarifs énumérés","20020101","99991231","20060413"
+,,,,,,
+,,,,,,
+"000-999",,,"Reserviert für Forum Datenaustausch ","Genehmigungskompetenz Forum Datenaustausch",,
+"AA1-ZZ9","record_unclassified","Other","Frei verfügbar für bilaterale Tarifvereinbarungen","Bewirtschaftung der Einträge durch das Fachorgan (ohne Gewähr)"
+"6xx,7xx,8xx",,,"Bestehende spezifische Tarife (Labor, Spital, etc.)","Bewirtschaftung der Einträge durch das Fachorgan (ohne Gewähr)"
+"000, 901 – 909, 860-879 und 998",,,"Reservierte Nummern durch Forum Datenaustausch ","Reservierte Nummern durch Forum Datenaustausch "
+"Tarifcodes Laborspezifische Tarife (ohne Gewähr)",,,,,"20080305 / smf"
+"XML: tariff_code","XML:         recordtype           XML 4.0","XML: recordtype XML 5.0","TARIFE
+deutsch","TARIFS
+français","valid from","valid to","mutation"
+"601","record_unclassified","other","Laborspezifische Analysen - Labor Dr. Güntert ","Analyses spécifiques de laboratoire - Labor Dr. Güntert ","20020101","99991231","20060413"
+"602","record_unclassified","other","Laborspezifische Analysen - IKMI ","Analyses spécifiques de laboratoire - IKMI ","20020101","20060831","20061103"
+"603","record_unclassified","other","Laborspezifische Analysen - Institut Dr. Risch","Analyses spécifiques de laboratoire - Institut Dr. Risch","20020101","99991231","20060413"
+"604","record_unclassified","other","Laborspezifische Analysen - Labor Bio-Analytica ","Analyses spécifiques de laboratoire - Labor Bio-Analytica ","20020101","99991231","20060413"
+"605","record_unclassified","other","Laborspezifische Analysen - Labor Ilamed AG ","Analyses spécifiques de laboratoire - Labor Ilamed AG ","20020101","99991231","20060413"
+"606","record_unclassified","other","Laborspezifische Analysen - Medics Labor AG ","Analyses spécifiques de laboratoire - Medics Labor AG ","20020101","99991231","20060413"
+"607","record_unclassified","other","Laborspezifische Analysen - Unilabs Mittelland ","Analyses spécifiques de laboratoire - Unilabs Mittelland ","20031101","99991231","20061103"
+"608","record_unclassified","other","Laborspezifische Analysen - LogoLab AG ","Analyses spécifiques de laboratoire - LogoLab AG ","20031101","99991231","20060413"
+"610","record_unclassified","other","Laborspezifische Analysen - Laborgemeinschaft 1 ","Analyses spécifiques de laboratoire - Laborgemeinschaft 1 ","20020101","99991231","20060413"
+"611","record_unclassified","other","Laborspezifische Analysen - Polytest Zug AG","Analyses spécifiques de laboratoire - Polytest Zug SA","20060101","99991231","20060413"
+"612","record_unclassified","other","Laborspezifische Analysen - Felix Platter Spital","Analyses spécifiques de laboratoire - Felix Platter Spital","20051101","99991231","20060413"
+"620","record_unclassified","other","Laborspezifische Analysen - Institut Dr. Viollier","Analyses spécifiques de laboratoire - Institut Dr. Viollier","20020101","99991231","20060413"
+"621","record_unclassified","other","Laborspezifische Analysen - Anamedica SA","Analyses spécifiques de laboratoire - Anamedica SA","20050401","99991231","20060413"
+"622","record_unclassified","other","Laborspezifische Analysen - Mealab AG Analyses","Analyses spécifiques de laboratoire - Mealab AG Analyses","20060101","99991231","20060413"
+"623","record_unclassified","other","Laborspezifische Analysen - Kantonsspital St. Gallen","Analyses spécifiques de laboratoire - Kantonsspital St. Gallen","20020101","99991231","20061103"
+"624","record_unclassified","other","Laborspezifische Analysen - Felix Platter Spital - TP","Analyses spécifiques de laboratoire -  Felix Platter Spital - TP","01-02-12","99991231","20080305"
+"699","record_unclassified","other","Labortarif für nicht speziell zugeteilte Laborsachen","Tarif de laboratoire divers","01-02-12","99991231","20080305"
+,,
+,,
+,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,
+,,,
+,,,
+"Tarifcodes Spitalspezifische Tarife (ohne Gewähr)",,,,,"20060413 / smf"
+"XML: tariff_code","XML:         recordtype           XML 4.0","XML: recordtype XML 5.0","TARIFE
+deutsch","TARIFS
+français","valid from","valid to","mutation"
+"701","record_unclassified","other","Fallpauschalen/Spitaltaxen Inselspital Bern","Forfaits par cas/taxes hospitalières Hôpital de l'Ile Berne","20020101","20091231","20060413"
+"702","record_unclassified","other","Fallpreispauschalen/Spitaltaxen Bürgerspital Solothurn","Forfaits par cas/taxes hospitalières Bürgerspital Solothurn","20020101","20091231","20060413"
+"703","record_unclassified","other","Ambulante Fallpauschalen UV/MV Inselspital Bern","Forfaits par cas en ambulatoire AA/AM Hôpital de l'Ile Berne","20020101","20091231","20060413"
+"710","record_unclassified","other","Cat. hosp. d'un jour vaudois pour maladie","Cat. hosp. d'un jour vaudois pour maladie","20020101","20081231","20060413"
+"711","record_unclassified","other","Cat. hosp. d'un jour vaudois pour accident","Cat. hosp. d'un jour vaudois pour accident","20020101","20081231","20060413"
+"712","record_unclassified","other","Cat. hosp. stationnaire vaudois pour maladie","Cat. hosp. stationnaire vaudois pour maladie","20020101","99991231","20060413"
+"713","record_unclassified","other","Cat. hosp. stationnaire vaudois pour accident","Cat. hosp. stationnaire vaudois pour accident","20020101","99991231","20060413"
+"714","record_unclassified","other","Cat. ambulatoire vaudois pour maladie","Cat. ambulatoire vaudois pour maladie","20020101","20081231","20060413"
+"715","record_unclassified","other","Cat. ambulatoire vaudois pour accident","Cat. ambulatoire vaudois pour accident","20020101","20081231","20060413"
+"716","record_unclassified","other","Cat. hebergement vaudois","Cat. hébergement vaudois","20020101","99991231","20060413"
+"730","record_unclassified","other","Forfaits et taxes de jour HCF","Forfaits et taxes de jour HCF","20020101","20091231","20060413"
+"780","record_unclassified","other","Kantonsspital NW, Allgemein und Halbprivat","Kantonsspital NW, Allgemein und Halbprivat","20020101","99991231","20060413"
+"810","record_unclassified","other","Offizieller Berner OKP-Tarif","Offizieller Berner OKP-Tarif","20040401","99991231","20060413"
+"850","record_unclassified","other","RKB Pauschalen","Forfait RKB","20050401","99991231","20060413"
+"851","record_unclassified","other","Spitaltarif Psychiatrische Dienste des Kantons St. Gallen","Tarif hospitalier - Centres psychiatriques du canton de Saint-Gall","20050701","99991231","20060413"
+,,
+"Tarifcodes Arzt kantonal & spezifische Tarife (ohne Gewähr)",,,,,"20061103 / smf"
+"XML: tariff_code","XML:         recordtype           XML 4.0","XML: recordtype XML 5.0","TARIFE
+deutsch","TARIFS
+français","valid from","valid to","mutation"
+"010","record_cantonal","Other","Kant. Arzt-Tarif Zürich","Tarif médical cantonal Zurich","20020101","20081231","20060413"
+"011","record_cantonal","Other","Kant. Privat-Tarif Zürich","Tarif privé cantonal Zurich","20020101","20041231","20060413"
+"021","record_cantonal","Other","Kant. Arzt-Tarif Bern","Tarif médical cantonal Berne","20020101","20081231","20060413"
+"022","record_unclassified","Other","Ambulante Untersuchungen u. Behandlungen KVBK Inselspital Bern","Examens et traitements ambulatoires FBAM / Hôpital de l'Ile Berne","20020101","20041231","20060413"
+"026","record_unclassified","Other","Spez.stationäre Tarifpositionen Inselspital Bern","Positions tarifaires hospitalières spéciales Hôpital de l'Ile Berne","20020101","20041231","20060413"
+"027","record_unclassified","Other","Spez. stationäre Tarifpositionen Frauenklinik Bern","Positions tarifaires hospitalières spéciales Frauenklinik Berne","20020101","20041231","20060413"
+"030","record_cantonal","Other","Kant. Arzt-Tarif Luzern","Tarif médical cantonal Lucerne","20020101","20081231","20060413"
+"043","record_cantonal","Other","Kant. Arzt-Tarif Uri","Tarif médical cantonal Uri","20020101","20081231","20060413"
+"052","record_cantonal","Other","Kant. Arzt-Tarif Schwyz","Tarif médical cantonal Schwyz","20020101","20081231","20060413"
+"062","record_cantonal","Other","Kant. Arzt-Tarif Nid-/Obwalden","Tarif médical cantonal Nidwald/Obwald","20020101","20081231","20060413"
+"080","record_cantonal","Other","Kant. Arzt-Tarif Glarus","Tarif médical cantonal Glaris","20020101","20081231","20060413"
+"091","record_cantonal","Other","Kant. Arzt-Tarif Zug","Tarif médical cantonal Zoug","20020101","20081231","20060413"
+"101","record_cantonal","Other","Tarif médical cantonal Fribourg","Tarif médical cantonal Fribourg","20020101","20081231","20060413"
+"110","record_cantonal","Other","Kant. Arzt-Tarif Solothurn","Tarif médical cantonal Soleure","20020101","20081231","20060413"
+"121","record_cantonal","Other","Kant. Arzt-Tarif Basel-Stadt","Tarif médical cantonal Bâle-Ville","20020101","20081231","20060413"
+"133","record_cantonal","Other","Kant. Arzt-Tarif Basel-Land","Tarif médical cantonal Bâle-Campagne","20020101","20081231","20060413"
+"134","record_cantonal","Other","Zusatzvereinbarung Kapitel Radioonkologie zum Arzttarif BL, Dr. Beat Amsler, Allschwil","Convention complémentaire chapitre radiooncologie au tarif médical BL, Dr. Beat Amsler, Allschwil","20020101","99991231","20060413"
+"142","record_cantonal","Other","Kant. Arzt-Tarif Schaffhausen","Tarif médical cantonal Schaffhouse","20020101","20081231","20060413"
+"150","record_cantonal","Other","Kant. Arzt-Tarif Appenzell","Tarif médical cantonal Appenzell","20020101","20081231","20060413"
+"174","record_cantonal","Other","Kant. Arzt-Tarif St.Gallen","Tarif médical cantonal St-Gall","20020101","20081231","20060413"
+"185","record_cantonal","Other","Kant. Arzt-Tarif Graubünden","Tarif médical cantonal Grisons","20020101","20081231","20060413"
+"193","record_cantonal","Other","Kant. Arzt-Tarif Aargau","Tarif médical cantonal Argovie","20020101","20081231","20060413"
+"204","record_cantonal","Other","Kant. Arzt-Tarif Thurgau","Tarif médical cantonal Thurgovie","20020101","20081231","20060413"
+"213","record_cantonal","Other","Tariffa medica cantonale Ticino","Tariffa medica cantonale Ticino","20020101","20081231","20060413"
+"220","record_cantonal","Other","Tarif médical cantonal Vaud","Tarif médical cantonal Vaud","20020101","20081231","20060413"
+"230","record_cantonal","Other","Kant. Arzt-Tarif Wallis","Tarif médical cantonal Valais","20020101","20081231","20060413"
+"242","record_cantonal","Other","Tarif médical cantonal Neuchâtel","Tarif médical cantonal Neuchâtel","20020101","20081231","20060413"
+"251","record_cantonal","Other","Tarif médical cantonal Genève","Tarif médical cantonal Genève","20020101","20081231","20060413"
+"263","record_cantonal","Other","Tarif médical cantonal Jura","Tarif médical cantonal Jura","20020101","20081231","20060413"
+"581","record_unclassified","Other","Tarif für Schweizer Krankenwagen","Tarif pour ambulances suisses","20020101","99991231","20060413"
+"582","record_unclassified","Paramed","Tarif für Schweizer Psychologen","Tarif pour psychologues suisses","20020101","99991231","20060413"
+"Tarifcodes für bilaterale Tarife (ohne Gewähr)",,,,"20090402 / smf"
+"XML: tariff_code","Reserviert für:","TARIFE
+deutsch","TARIFS
+français","valid from","valid to","mutation"
+"H40","Helsana","Helsana-Tarif Spital VVG","Helsana-Tarif Spital VVG","20080101","99991231","20080305"
+"H41","Helsana","Helsana-Tarif Pflegheime","Helsana-Tarif Pflegheime","20080101","99991231","20080305"
+"H00-H99","Helsana","prov. Reservierung Helsana","prov. Reservierung Helsana","20080101","99991231","20080305"
+"H0H-H9H","Helsana","prov. Reservierung Helsana","prov. Reservierung Helsana","20080101","99991231","20080305"
+"S00 ","Suva","ParaSuva","ParaSuva","20090101","99991231","20090402"
+"S01","Suva","KIMSA-Tarif","KIMSA-Tarif","20090101","99991231","20081027"
+"S00-S99","Suva","prov. Reservierung Suva","prov. Reservierung Suva","20090101","99991231","20081027"
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,
+,,
+,,
+
