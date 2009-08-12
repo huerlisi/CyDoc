@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  insurance_id: 1
+  patient_id: 1
+  valid_from: 2009-08-12
+  valid_to: 2009-08-12
+  number: MyString
+  policy_type: MyString
+
+two:
+  insurance_id: 1
+  patient_id: 1
+  valid_from: 2009-08-12
+  valid_to: 2009-08-12
+  number: MyString
+  policy_type: MyString
