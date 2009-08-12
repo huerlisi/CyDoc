@@ -18,7 +18,8 @@ h4 {
 .welcome p img { margin-right: 0.5em; float: left; }
 
 /* Forms */
-.fieldWithErrors input { border-color:#dd0000; }
+.fieldWithErrors { display: inline}
+.fieldWithErrors input { border-color:#dd0000}
 form.box {background:#ffffdd; padding:6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
 form { display: block; }
 
