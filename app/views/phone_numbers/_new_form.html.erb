@@ -1,6 +1,6 @@
-<div id="phone_number_form">
+<tr id="phone_number_form">
   <% fields_for 'patient[new_phone_number_attributes][]', @phone_number do |phone_number| %>
-      <%= phone_number.select :phone_number_type, ['Tel. privat', 'Tel. geschäft', 'Handy', 'Fax', 'E-Mail'] %>
-      <%= phone_number.text_field :number, :size => 12, :autocomplete => 'off' %>
+    <td><%= phone_number.select :phone_number_type, ['Tel. privat', 'Tel. geschäft', 'Handy', 'Fax', 'E-Mail'] %></td>
+    <td><%= phone_number.text_field :number, :size => 12, :autocomplete => 'off' %></td>
   <% end %>
-</div>
+</tr>
