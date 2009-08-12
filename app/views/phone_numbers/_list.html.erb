@@ -1,11 +1,11 @@
 <div class="contextual">
-  <%= link_to_remote "Kontakt erfassen", {:url => new_patient_phone_number_url(@patient), :method => :get}, :class => "icon icon-add" %>
+  <%= link_to_remote "Kontakt erfassen", {:url => new_patient_phone_number_url(@patient), :method => :get}, :class => "icon icon-add" unless @patient.new_record?%>
 </div>
 <h3>Kontakt</h3>
 <div class="box">
   <div id="new_phone_number" class="new_phone_number"></div>
 
-  <table id="phone_numbers">
+  <table id="phone_numbers" style="width: 100%'>
     <%= render :partial => 'phone_numbers/item', :collection => @patient.phone_numbers %>
   </table>
 </div>

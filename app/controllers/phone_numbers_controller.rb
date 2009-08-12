@@ -38,7 +38,14 @@ class PhoneNumbersController < ApplicationController
         }
       end
     else
-      render :action => :new
+      respond_to do |format|
+        format.html { }
+        format.js {
+          render :update do |page|
+            page.replace 'phone_number_form', :partial => 'phone_numbers/form', :object => @phone_number
+          end
+        }
+      end
     end
   end
 

@@ -10,14 +10,32 @@ class Patient < ActiveRecord::Base
 
   has_vcards
 
-  has_many :phone_numbers, :as => :object
-
   has_many :tiers
   has_many :invoices, :through => :tiers, :order => 'created_at DESC'
   
   has_many :treatments, :order => 'date_begin DESC'
       
-  validates_presence_of :family_name, :given_name, :on => :update
+  # Phone Numbers
+  has_many :phone_numbers, :as => :object
+  after_update :save_phone_numbers
+  
+  def new_phone_number_attributes=(phone_number_attributes)
+    phone_number_attributes.each do |attributes|
+      phone_numbers.build(attributes) unless attributes[:number].blank?
+    end 
+  end
+  
+  private
+  def save_phone_numbers
+    # Delete
+    phone_numbers.each do |phone_number|
+      phone_number.save(false)
+    end
+  end
+  
+  public
+  # Validation
+  validates_presence_of :family_name, :given_name
 
   def validate_for_invoice
     for field in [:street_address, :postal_code, :locality]

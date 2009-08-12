@@ -64,10 +64,10 @@ class PatientsController < ApplicationController
 
     # TODO: probably doctor specific...
     @patient.sex = 'F'
-
-    # TODO: fix probably using nested form support,
-    #       current hack needed to fix #566
-    @patient.save
+    
+    @patient.phone_numbers.build(:phone_number_type => 'Tel. privat')
+    @patient.phone_numbers.build(:phone_number_type => 'Tel. geschäft')
+    @patient.phone_numbers.build(:phone_number_type => 'Handy')
   end
 
   # POST /posts

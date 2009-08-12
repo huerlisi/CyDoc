@@ -1,8 +1,6 @@
 <div id="phone_number_form">
-  <%= error_messages_for :phone_number %>
-  <% remote_form_for :phone_number, @phone_number, :url => patient_phone_numbers_url(@patient) do |phone_number| %>
+  <% fields_for 'patient[new_phone_number_attributes][]', @phone_number do |phone_number| %>
       <%= phone_number.select :phone_number_type, ['Tel. privat', 'Tel. geschäft', 'Handy', 'Fax', 'E-Mail'] %>
       <%= phone_number.text_field :number, :size => 12, :autocomplete => 'off' %>
-      <%= phone_number.submit "Speichern" %>
   <% end %>
 </div>
