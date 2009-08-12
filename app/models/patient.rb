@@ -17,7 +17,7 @@ class Patient < ActiveRecord::Base
   
   has_many :treatments, :order => 'date_begin DESC'
       
-  validates_presence_of :family_name, :given_name
+  validates_presence_of :family_name, :given_name, :on => :update
 
   def validate_for_invoice
     for field in [:street_address, :postal_code, :locality]
