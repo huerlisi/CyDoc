@@ -2,10 +2,10 @@ class Treatment < ActiveRecord::Base
   has_many :invoices
   belongs_to :patient
   belongs_to :referrer, :class_name => 'Doctor'
-  belongs_to :law
+  belongs_to :law, :dependent => :destroy
 
-  has_many :sessions, :order => 'duration_from DESC'
-  has_many :medical_cases, :order => 'type'
+  has_many :sessions, :order => 'duration_from DESC', :dependent => :destroy
+  has_many :medical_cases, :order => 'type', :dependent => :destroy
   
   validates_presence_of :date_begin
   
