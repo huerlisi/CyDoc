@@ -1,0 +1,5 @@
+<tr>
+  <td style="width: 10em"><%=h item.value_date.strftime('%d.%m.%Y') %></td>
+  <td><%=h item.title %></td>
+  <td style="text-align: right"><%=h sprintf("%0.2f", item.amount.currency_round) %>&nbsp;CHF</td>
+</tr>

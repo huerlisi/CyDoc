@@ -19,7 +19,7 @@
     <th>Gesetz:</th><td><%= @invoice.law.name %></td>
   </tr>
   <tr>
-    <th>Rechnungsdatum:</th><td><%= @invoice.date.strftime('%d.%m.%Y') %></td>
+    <th>Rechnungsdatum:</th><td><%= @invoice.value_date.strftime('%d.%m.%Y') %></td>
     <th>Behandlungsgrund:</th><td><%= @invoice.treatment.reason %></td>
   </tr>
   <tr>
@@ -40,11 +40,7 @@
 
 <h3>Journal</h3>
   <table class="list" style="width: 100%">
-    <tr>
-      <td style="width: 10em"><%= @invoice.date.strftime('%d.%m.%Y') %></td>
-      <td>Rechnung</td>
-      <td style="text-align: right"><%= sprintf("%0.2f", @invoice.rounded_amount) %>&nbsp;CHF</td>
-    </tr>
+    <%= render :partial => 'bookings/item', :collection => @invoice.bookings %>
     <tr>
       <th>Offener Betrag</th>
       <th colspan="2" style="text-align: right"><%= sprintf("%0.2f", @invoice.rounded_amount) %>&nbsp;CHF</th>
