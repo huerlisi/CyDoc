@@ -34,6 +34,8 @@ class Invoice < ActiveRecord::Base
     return errors.empty?
   end
   
+  has_many :bookings, :class_name => 'Accounting::Booking', :as => 'reference'
+
   def to_s(format = :default)
     case format
     when :short
