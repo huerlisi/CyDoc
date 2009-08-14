@@ -1,5 +1,7 @@
 class Invoice < ActiveRecord::Base
   PAYMENT_PERIOD = 30
+  DEBIT_ACCOUNT = Accounting::Account.find_by_number('1100')
+  EARNINGS_ACCOUNT = Accounting::Account.find_by_number('3200')
   
   belongs_to :tiers
   belongs_to :law
@@ -10,6 +12,7 @@ class Invoice < ActiveRecord::Base
 
   has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC, if(ref_code IS NULL, code, ref_code), concat(code,ref_code)'
 
+  # Validation
   validates_presence_of :service_records, :message => 'Keine Leistung eingegeben.'
 
   validate :valid_service_records?
@@ -36,7 +39,17 @@ class Invoice < ActiveRecord::Base
     return errors.empty?
   end
   
-  has_many :bookings, :class_name => 'Accounting::Booking', :as => 'reference'
+  # Accounting
+  has_many :bookings, :class_name => 'Accounting::Booking', :as => 'reference', :dependent => :destroy
+  before_create :build_booking
+  
+  def build_booking
+    bookings.build(:title => "Rechnung ##{id}",
+                   :amount => amount,
+                   :credit_account => EARNINGS_ACCOUNT,
+                   :debit_account => DEBIT_ACCOUNT,
+                   :value_date => value_date)
+  end
 
   def to_s(format = :default)
     case format
