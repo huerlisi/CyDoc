@@ -4,7 +4,7 @@
 <div class="box">
   <% form_for [:patient, :treatment, @invoice], :builder => Rubaidh::TabularForm::TabularFormBuilder do |invoice| %>
     <table>
-      <%= invoice.text_field :date, :label => 'Fälligkeitsdatum', :size => 12 %>
+      <%= invoice.text_field :value_date, :label => 'Rechnungsdatum', :size => 12 %>
       <tr>
         <td><label for="tiers[name]">Vergütungsart:</label></td>
         <td><%= select 'tiers', :name, [['Tiers Garant', TiersGarant], ['Tiers Payant', TiersPayant]] %></td>

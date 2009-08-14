@@ -96,9 +96,9 @@ xml.request :role => "test",
 
   opt_attrs = {}
   opt_attrs[:case_id] = @invoice.case_id unless @invoice.case_id.blank?
-  xml.invoice :invoice_timestamp => @invoice.date.to_time.to_i,
+  xml.invoice :invoice_timestamp => @invoice.value_date.to_time.to_i,
               :invoice_id => @invoice.id,
-              :invoice_date => @invoice.date.xmlschema, # TODO: Drop timezone info
+              :invoice_date => @invoice.value_date.xmlschema, # TODO: Drop timezone info
               :resend => false, # TODO: implement for mahnung etc.
               *opt_attrs do # TODO: no case_id in cydoc, yet
 
@@ -163,7 +163,7 @@ xml.request :role => "test",
 
     # TODO: payment_period not hardcoded
     case @invoice.tiers
-      when TiersGarant: xml.tiers_garant :payment_periode => 'P30D' do tiers(xml) end
+      when TiersGarant: xml.tiers_garant :payment_periode => "P#{Invoice::PAYMENT_PERIOD}D" do tiers(xml) end
       when TiersPayant: xml.tiers_payant do tiers(xml) end
     end
 

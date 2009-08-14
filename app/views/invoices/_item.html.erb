@@ -1,6 +1,7 @@
 <tr id="invoice_<%= item.id %>">
   <td><%= link_to item.patient.full_name, item.patient %></td>
-  <td><%=h item.date %></td>
+  <td><%=h item.value_date %></td>
+  <td><%=h item.due_date %></td>
   <td style="text-align: right"><%= link_to item.id, item %></td>
   <td style="text-align: right"><%=h sprintf("%0.2f", item.rounded_amount) %></td>
   <td><%=h item.state %></td>

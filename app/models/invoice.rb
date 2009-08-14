@@ -1,4 +1,6 @@
 class Invoice < ActiveRecord::Base
+  PAYMENT_PERIOD = 30
+  
   belongs_to :tiers
   belongs_to :law
   belongs_to :treatment
@@ -39,9 +41,9 @@ class Invoice < ActiveRecord::Base
   def to_s(format = :default)
     case format
     when :short
-      "##{id}: #{date.strftime('%d.%m.%Y') if date}"
+      "##{id}: #{value_date.strftime('%d.%m.%Y') if value_date}"
     else
-      "#{patient.name} ##{id}, #{date.strftime('%d.%m.%Y')} à #{sprintf('%0.2f', rounded_amount)} CHF"
+      "#{patient.name} ##{id}, #{value_date.strftime('%d.%m.%Y')} à #{sprintf('%0.2f', rounded_amount)} CHF"
     end
   end
   
@@ -136,13 +138,18 @@ class Invoice < ActiveRecord::Base
 
   # Generalization
   def date
-    created_at.to_date
+    self.value_date
   end
 
   def date=(value)
-    write_attribute(:created_at, value)
+    self.value_date = value
   end
 
+  def value_date=(value)
+    write_attribute(:value_date, value)
+    self.due_date = value_date + PAYMENT_PERIOD
+  end
+  
   def esr9(bank_account)
     esr9_build(rounded_amount, id, bank_account.pc_id, bank_account.esr_id) # TODO: it's biller.esr_id
   end
