@@ -8,6 +8,8 @@ class UseCodeForAccountNumber < ActiveRecord::Migration
       else
         account.code = account.number
       end
+      
+      account.save
     }
   end
 
