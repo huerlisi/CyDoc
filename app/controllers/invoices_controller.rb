@@ -61,9 +61,9 @@ class InvoicesController < ApplicationController
 
     if query.blank?
       # TODO: better sorting
-      @invoices = Invoice.paginate(:page => params['page'], :order => 'id DESC')
+      @invoices = Invoice.paginate(:page => params['page'], :per_page => 20, :order => 'id DESC')
     else
-      @invoices = Invoice.clever_find(query).paginate(:page => params['page'], :order => 'id DESC')
+      @invoices = Invoice.clever_find(query).paginate(:page => params['page'], :per_page => 20, :order => 'id DESC')
     end
     
     respond_to do |format|
