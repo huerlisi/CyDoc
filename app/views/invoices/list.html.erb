@@ -20,5 +20,5 @@
   <%= link_to "Alle drucken", print_all_invoices_path, :method => :post, :class => "icon icon-print" %>
 </div>
 <h2>Rechnungen zum Drucken</h2>
-<% @invoices = Invoice.prepared %>
+<% @invoices = Invoice.prepared.paginate(:page => params['page'], :per_page => 20, :order => 'id DESC') %>
 <%= render :partial => 'list' %>
