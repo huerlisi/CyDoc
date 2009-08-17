@@ -43,7 +43,7 @@
     <%= render :partial => 'bookings/item', :collection => @invoice.bookings %>
     <tr>
       <th>Offener Betrag</th>
-      <th colspan="2" style="text-align: right"><%= sprintf("%0.2f", @invoice.rounded_amount) %>&nbsp;CHF</th>
+      <th colspan="2" style="text-align: right"><%= sprintf("%0.2f", @invoice.due_amount.currency_round) %>&nbsp;CHF</th>
     </tr>
   </table>
 

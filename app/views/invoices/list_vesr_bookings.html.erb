@@ -1,0 +1,27 @@
+<h3>VESR Journal</h3>
+<table class="list" style="width: 100%">
+<tr>
+  <th>Valuta Datum</th>
+  <th>Patient</th>
+  <th>Status</th>
+  <th>Rechnungsbetrag</th>
+  <th>Offener Betrag</th>
+</tr>
+
+<% for (item, invoice_id, message) in @vesr_messages %>
+  <% 
+    if Invoice.exists?(invoice_id)
+      invoice = Invoice.find(invoice_id)
+    else
+      invoice = nil
+    end
+  %>
+  <tr>
+    <td><%=h item.value_date %></td>
+    <td><%= link_to invoice.patient.full_name, invoice if invoice %></td>
+    <td><%= invoice ? link_to(message, invoice) : message %></td>
+    <td style="text-align: right"><%=h sprintf("%0.2f", item.amount) %></td>
+    <td style="text-align: right"><%=h sprintf("%0.2f", invoice.due_amount.currency_round) if invoice %></td>
+  </tr>
+<% end %>
+</table>

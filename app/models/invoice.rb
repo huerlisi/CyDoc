@@ -1,7 +1,8 @@
 class Invoice < ActiveRecord::Base
   PAYMENT_PERIOD = 30
-  DEBIT_ACCOUNT = Accounting::Account.find_by_number('1100')
-  EARNINGS_ACCOUNT = Accounting::Account.find_by_number('3200')
+  DEBIT_ACCOUNT = Accounting::Account.find_by_code('1100')
+  EARNINGS_ACCOUNT = Accounting::Account.find_by_code('3200')
+  VESR_ACCOUNT = Accounting::Account.find_by_code('1000')
   
   belongs_to :tiers
   belongs_to :law
@@ -43,12 +44,50 @@ class Invoice < ActiveRecord::Base
   has_many :bookings, :class_name => 'Accounting::Booking', :as => 'reference', :dependent => :destroy
   before_create :build_booking
   
+  def due_amount
+    bookings.sum(:amount)
+  end
+  
   def build_booking
-    bookings.build(:title => "Rechnung ##{id}",
+    bookings.build(:title => "Rechnung",
                    :amount => amount,
                    :credit_account => EARNINGS_ACCOUNT,
                    :debit_account => DEBIT_ACCOUNT,
                    :value_date => value_date)
+  end
+
+  def build_vesr_booking(record)
+    record.invoice.bookings.build(
+      :amount => 0 - record.amount,
+      :credit_account => DEBIT_ACCOUNT,
+      :debit_account => VESR_ACCOUNT,
+      :value_date => record.value_date,
+      :title => "VESR Zahlung")
+  end
+
+  def self.create_vesr_bookings(records)
+    records.map{|record|
+      if Invoice.exists?(record.invoice_id)
+        invoice = record.invoice
+        invoice.build_vesr_booking(record).save
+        if invoice.due_amount.currency_round == 0.0
+          message = 'Bezahlt'
+        else
+          message = 'Falscher Betrag'
+        end
+      else
+        invoice = nil
+        message = "Rechnung '#{record.invoice_id}' nicht gefunden."
+      end
+      
+      [record, record.invoice_id, message]
+    }
+  end
+
+  def self.book_vesr
+    vesr = Esr.new(File.new(File.join(RAILS_ROOT,'data','vesr','vesr.v11')))
+    
+    self.create_vesr_bookings(vesr.records)
   end
 
   def to_s(format = :default)

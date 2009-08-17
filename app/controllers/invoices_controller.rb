@@ -138,6 +138,17 @@ class InvoicesController < ApplicationController
         end
       }
     end
+  end
 
+  def book_vesr
+    @vesr_messages = Invoice.book_vesr
+    
+    respond_to do |format|
+      format.html {
+        render :action => 'list_vesr_bookings'
+      }
+      format.js { }
+    end
+    
   end
 end
