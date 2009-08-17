@@ -6,7 +6,7 @@ class AddDatesToInvoice < ActiveRecord::Migration
     Invoice.all.each {|i|
       i.value_date = i.created_at.to_date
       i.due_date = i.value_date + Invoice::PAYMENT_PERIOD
-      i.save
+      i.save(false)
     }
   end
 
