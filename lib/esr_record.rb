@@ -36,7 +36,7 @@ class EsrRecord
     self.client_nr    = line[3..11]
     self.reference    = line[12..38]
     self.amount       = line[39..48].to_f / 100
-    self.value_date   = line[87..95]
+    self.value_date   = line[71..76]
   end
 
   def initialize(line = nil)
