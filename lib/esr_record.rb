@@ -16,14 +16,29 @@ class EsrRecord
   attr_accessor :payment_type
   attr_accessor :record_type
   attr_accessor :client_nr, :reference, :amount
-  attr_accessor :order_reference, :value_date
+  attr_accessor :payment_reference
+  attr_accessor :payment_date, :transaction_date, :value_date
+  attr_accessor :microfilm_nr, :reject_code, :reserved, :payment_tax
   
   private
-  def value_date=(value)
+  def parse_date(value)
     year  = value[0..1].to_i + 2000
     month = value[2..3].to_i
     day   = value[4..5].to_i
-    @value_date = Date.new(year, month, day)
+
+    return Date.new(year, month, day)
+  end
+
+  def payment_date=(value)
+    @value_date = parse_date(value)
+  end
+  
+  def transaction_date=(value)
+    @transaction_date = parse_date(value)
+  end
+  
+  def value_date=(value)
+    @value_date = parse_date(value)
   end
   
   def reference=(value)
@@ -32,11 +47,19 @@ class EsrRecord
   
   public
   def parse(line)
-    self.recipe_type  = line[0, 1]
-    self.client_nr    = line[3..11]
-    self.reference    = line[12..38]
-    self.amount       = line[39..48].to_f / 100
-    self.value_date   = line[71..76]
+    self.recipe_type       = line[0, 1]
+    self.client_nr         = line[3..11]
+    self.reference         = line[12..38]
+    # TODO: very bad rounding, use some fixnum/currency type
+    self.amount            = line[39..48].to_f / 100
+    self.payment_reference = line[49..58]
+    self.payment_date      = line[59..64]
+    self.transaction_date  = line[65..70]
+    self.value_date        = line[71..76]
+    self.microfilm_nr      = line[77..85]
+    self.reject_code       = line[86, 1]
+    self.reserved          = line[87,95]
+    self.payment_tax       = line[96..99]
   end
 
   def initialize(line = nil)
