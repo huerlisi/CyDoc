@@ -85,9 +85,21 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.book_vesr
-    vesr = Esr.new(File.new(File.join(RAILS_ROOT,'data','vesr','vesr.v11')))
+    vesr_filename = Dir.new(File.join(RAILS_ROOT, 'data', 'vesr')).select{|entry| !(entry.starts_with?('.') or entry.starts_with?('archive'))}.first
+    return [] if vesr_filename.nil?
     
-    self.create_vesr_bookings(vesr.records)
+    vesr_path = File.join(RAILS_ROOT, 'data', 'vesr', vesr_filename)
+    vesr_file = File.new(vesr_path)
+    vesr = Esr.new(vesr_file)
+    
+    vesr_journal = self.create_vesr_bookings(vesr.records)
+    
+    vesr_file.close
+    
+    archive_filename = File.join(RAILS_ROOT, 'data', 'vesr', 'archive', "vesr-#{DateTime.now.strftime('%Y-%m-%d_%H-%M-%S')}.v11")
+    File.rename(vesr_path, archive_filename)
+
+    return vesr_journal
   end
 
   def to_s(format = :default)
