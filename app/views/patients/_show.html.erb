@@ -12,6 +12,13 @@
   <%=h @patient.birth_date %> <%=h @patient.sex %><br />
 </div>
 
+<% unless @patient.remarks.strip.empty? %>
+<h3>Bemerkungen</h3>
+<div class="box">
+  <%=h @patient.remarks %>
+</div>
+<% end %>
+
 <%= render :partial => 'phone_numbers/list' %>
 
 <h3>Versicherung</h3>
