@@ -10,6 +10,14 @@ class TariffItemGroup < TariffItem
     group_s + " (#{service_items.count} pos.):\n" + service_items.map{|item| "      " + item.to_s}.join("\n")
   end
 
+  def clone
+    new_clone = super
+
+    new_clone.service_items = service_items.map{|s| s.clone}
+
+    return new_clone
+  end
+
   # Accumulated amounts
   def amount_mt
     service_items.map{|s| s.amount_mt}.sum

@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :service_items
   
-  map.resources :tariff_items, :collection => {:search => :get} do |tariff_item|
+  map.resources :tariff_items, :collection => {:search => :get}, :member => {:duplicate => :post} do |tariff_item|
     tariff_item.resources :service_items, :collection => {:select => :get}
   end
   
