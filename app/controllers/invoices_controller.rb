@@ -149,6 +149,5 @@ class InvoicesController < ApplicationController
       }
       format.js { }
     end
-    
   end
 end
