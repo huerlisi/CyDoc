@@ -48,10 +48,16 @@ class EsrRecord < ActiveRecord::Base
     self.reject_code       = line[86, 1]
     self.reserved          = line[87,95]
     self.payment_tax       = line[96..99]
-    
+
+    self
+  end
+
+  # Invoices
+  before_create :assign_invoice
+  
+  private
+  def assign_invoice
     invoice_id = reference[6..-1].to_i
     self.invoice_id = invoice_id if Invoice.exists?(invoice_id)
-    
-    self
   end
 end
