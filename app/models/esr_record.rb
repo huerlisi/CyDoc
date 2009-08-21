@@ -34,9 +34,13 @@ class EsrRecord < ActiveRecord::Base
     "CHF #{amount} for client #{client_nr} on #{value_date}, reference #{reference}"
   end
 
+  def client_id
+    reference[0..5]
+  end
+
   def parse(line)
 #    self.recipe_type       = line[0, 1]
-    self.client_nr         = line[3..11]
+    self.bank_pc_id        = line[3..11]
     self.reference         = line[12..38]
     # TODO: very bad rounding, use some fixnum/currency type
     self.amount            = line[39..48].to_f / 100
@@ -53,11 +57,37 @@ class EsrRecord < ActiveRecord::Base
   end
 
   # Invoices
-  before_create :assign_invoice
+  before_create :assign_invoice, :create_esr_booking
   
   private
   def assign_invoice
     invoice_id = reference[6..-1].to_i
-    self.invoice_id = invoice_id if Invoice.exists?(invoice_id)
+
+    if Invoice.exists?(invoice_id)
+      self.invoice_id = invoice_id
+    else
+      self.remarks += "Rechnung '#{invoice_id}' nicht gefunden."
+    end
+  end
+  
+  def vesr_account
+    Accounting::BankAccount.find_by_esr_id(client_id)
+  end
+
+  def create_esr_booking
+    esr_booking = create_booking(
+      :amount         => 0 - amount,
+      :credit_account => Invoice::DEBIT_ACCOUNT,
+      :debit_account  => vesr_account,
+      :value_date     => value_date,
+      :title          => "VESR Zahlung",
+      :comments       => remarks )
+    
+    if invoice
+      esr_booking.reference = invoice
+      esr_booking.save
+    end
+    
+    return esr_booking
   end
 end
