@@ -1,3 +1,5 @@
+require 'action_controller/test_process.rb'
+
 class EsrBookingsController < ApplicationController
   VESR_DIR = File.join(RAILS_ROOT, 'data', 'vesr')
   def create
@@ -10,6 +12,7 @@ class EsrBookingsController < ApplicationController
     
     vesr_path = File.join(VESR_DIR, vesr_filename)
     @esr_file = EsrFile.new(:uploaded_data => ActionController::TestUploadedFile.new(vesr_path))
+    @esr_file.save
 
     # Move file to archive
     archive_filename = File.join(VESR_DIR, "vesr-#{DateTime.now.strftime('%Y-%m-%d_%H-%M-%S')}.v11")
@@ -17,7 +20,7 @@ class EsrBookingsController < ApplicationController
     
     respond_to do |format|
       format.html {
-        render :action => 'show'
+        redirect_to :action => 'show', :id => @esr_file
       }
       format.js { }
     end
