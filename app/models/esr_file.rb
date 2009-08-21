@@ -1,8 +1,10 @@
 class EsrFile < ActiveRecord::Base
   has_attachment :storage => :file_system
   has_many :esr_records
+  
+  after_save :create_records
 
-  def parse
+  def create_records
     File.new(full_filename).each {|line|
       self.esr_records << EsrRecord.new.parse(line) unless line[0..2] == '999'
     }
@@ -10,7 +12,7 @@ class EsrFile < ActiveRecord::Base
   
   def to_s
     s = ''
-    records.each {|record|
+    esr_records.each {|record|
                    s += record.to_s + "\n"
                  }
     return s
