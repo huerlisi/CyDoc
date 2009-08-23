@@ -3,6 +3,9 @@ class EsrRecord < ActiveRecord::Base
   
   belongs_to :booking, :class_name => 'Accounting::Booking'
   belongs_to :invoice
+  
+  named_scope :valid, :conditions => "remarks = ''"
+  named_scope :invalid, :conditions => "not(remarks = '')"
 
   private
   def parse_date(value)
