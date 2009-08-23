@@ -4,17 +4,23 @@ class EsrFile < ActiveRecord::Base
   
   after_save :create_records
 
+
   def create_records
     File.new(full_filename).each {|line|
       self.esr_records << EsrRecord.new.parse(line) unless line[0..2] == '999'
     }
   end
   
-  def to_s
-    s = ''
-    esr_records.each {|record|
-                   s += record.to_s + "\n"
-                 }
-    return s
+  def to_s(format = :default)
+    case format
+    when :short
+      "#{updated_at.strftime('%d.%m.%Y')}: #{esr_records.count} Buchungen"
+    else
+      s = ''
+      esr_records.each {|record|
+        s += record.to_s + "\n"
+      }
+      s
+    end
   end
 end
