@@ -1,4 +1,4 @@
-<h3>VESR Journal</h3>
+<h3>VESR Journal vom <%= @esr_file.updated_at.strftime('%d.%m.%Y') %></h3>
 <table class="list" style="width: 100%">
 <tr>
   <th>Valuta Datum</th>
@@ -20,3 +20,14 @@
   </tr>
 <% end %>
 </table>
+
+<% content_for :sidebar do %>
+<div class="sub-tabs">
+  <h3>Ältere Buchungsläufe</h3>
+  <ul>
+    <% for esr_file in EsrFile.find :all, :limit => 10, :order => 'updated_at DESC' %>
+      <li><%= link_to esr_file.to_s(:short), esr_booking_path(esr_file) %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
