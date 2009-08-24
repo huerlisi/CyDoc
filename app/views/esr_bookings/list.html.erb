@@ -3,13 +3,11 @@
 </div>
 <h2>VESR Buchungsläufe</h2>
 <div id="vesr_list">
+  <table class="list">
+    <%= render :partial => 'esr_bookings/list_header' %>
+    <%= render :partial => 'esr_bookings/item', :collection => @esr_files %>
+    <%= render :partial => 'esr_bookings/list_footer' %>
+  </table>
 </div>
 
-<% content_for :sidebar do %>
-  <h3>Ältere Buchungsläufe</h3>
-  <ul>
-    <% for esr_file in EsrFile.find :all, :limit => 10, :order => 'updated_at DESC' %>
-      <li><%= link_to esr_file.to_s(:short), esr_booking(esr_file) %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render :partial => 'sidebar' %>
