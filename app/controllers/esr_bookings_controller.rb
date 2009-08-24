@@ -23,11 +23,10 @@ class EsrBookingsController < ApplicationController
     
     vesr_path = File.join(VESR_DIR, vesr_filename)
     @esr_file = EsrFile.new(:uploaded_data => ActionController::TestUploadedFile.new(vesr_path))
-    @esr_file.save
-
-    # Move file to archive
-    archive_filename = File.join(VESR_DIR, "vesr-#{DateTime.now.strftime('%Y-%m-%d_%H-%M-%S')}.v11")
-    File.rename(vesr_path, archive_filename)
+    if @esr_file.save
+      # Delete file if saved as attachment
+      File.delete(vesr_path)
+    end
     
     respond_to do |format|
       format.html {
