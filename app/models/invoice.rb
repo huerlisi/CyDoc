@@ -90,11 +90,7 @@ class Invoice < ActiveRecord::Base
     
     vesr_path = File.join(RAILS_ROOT, 'data', 'vesr', vesr_filename)
     vesr_file = File.new(vesr_path)
-    vesr = Esr.new(vesr_file)
-    
-    vesr_journal = self.create_vesr_bookings(vesr.records)
-    
-    vesr_file.close
+    @esr_file = EsrFile.new(:uploaded_data => ActionController::TestUploadedFile.new('data/vesr/vesr.v11'))
     
     archive_filename = File.join(RAILS_ROOT, 'data', 'vesr', 'archive', "vesr-#{DateTime.now.strftime('%Y-%m-%d_%H-%M-%S')}.v11")
     File.rename(vesr_path, archive_filename)

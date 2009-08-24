@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  client_nr: MyString
+  reference: MyString
+  amount: 1.5
+  payment_reference: MyString
+  payment_date: 2009-08-20
+  transaction_date: 2009-08-20
+  value_date: 2009-08-20
+  rmicrofilm_nr: MyString
+  reject_code: MyString
+  reserved: MyString
+  payment_tax: MyString
+
+two:
+  client_nr: MyString
+  reference: MyString
+  amount: 1.5
+  payment_reference: MyString
+  payment_date: 2009-08-20
+  transaction_date: 2009-08-20
+  value_date: 2009-08-20
+  rmicrofilm_nr: MyString
+  reject_code: MyString
+  reserved: MyString
+  payment_tax: MyString
