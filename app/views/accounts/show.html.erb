@@ -7,6 +7,7 @@
   <tr>
     <th>Datum</th>
     <th>Text</th>
+    <th>Referenz</th>
     <th style="text-align: right">Soll</th>
     <th style="text-align: right">Haben</th>
     <th style="text-align: right">Saldo</th>
@@ -23,6 +24,7 @@
       <%= '<hr style="height: 1px; margin: 0"/>' unless (booking.comments.blank?) %>
       <i><%= in_place_editor_field :booking, :comments %></i>
     </td>
+    <td><%= link_to booking.reference.to_s, booking.reference unless booking.reference.nil? rescue 'Referenz' %></td>
     <td style="text-align: right"><%= (booking.credit_account == @account) ? "<b>#{in_place_editor_field(:booking, :amount)}</b>&nbsp;CHF" : "<i>#{link_to(h(booking.credit_account.code), account_path(booking.credit_account), :title => h(booking.credit_account.title))}</i>" %></td>
     <td style="text-align: right"><%= (booking.debit_account == @account) ? "<b>#{in_place_editor_field(:booking, :amount)}</b>&nbsp;CHF" : "<i>#{link_to(h(booking.debit_account.code), account_path(booking.debit_account), :title => h(booking.debit_account.title))}</i>" %></td>
     <td style="text-align: right"><%= currency_fmt(total_credit - total_debit) %></td>
