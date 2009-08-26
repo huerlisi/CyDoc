@@ -7,6 +7,7 @@
     </td>
     <td style="vertical-align: top; padding-left: 4em">
       <%= navigation_section('Stammdaten', {"Ärzte anzeigen" => :doctors, "Versicherungen anzeigen" => :insurances, "Leistungen anzeigen" => :tariff_items, "Medikamente anzeigen" => :drugs }, '48x48/catalogs.png') %>
+      <%= navigation_section('Buchhaltung', {"Konten anzeigen" => :accounts, "Debitoren anzeigen" => account_path(Invoice::DEBIT_ACCOUNT) }, '48x48/accounts.png') %>
     </td>
    </tr>
   </table>
