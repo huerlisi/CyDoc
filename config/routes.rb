@@ -25,6 +25,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Accounting
   map.resources :accounts
+  map.resources :bookings
   
   # Billing
   map.resources :invoices, :collection => {:print_all => :post}, :member => {:print => :post, :insurance_recipe => :get, :patient_letter => :get}

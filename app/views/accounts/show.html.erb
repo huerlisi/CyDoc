@@ -27,8 +27,7 @@
     <td style="border: 0 none; text-align: right"><%= (booking.debit_account == @account) ? "<b>#{in_place_editor_field(:booking, :amount)}</b>&nbsp;CHF" : "<i>#{link_to(h(booking.debit_account.number), {:controller => 'accounts', :action => :show, :id => booking.debit_account}, :title => h(booking.debit_account.title))}</i>" %></td>
     <td style="border: 0 none; text-align: right"><%= currency_fmt(total_credit - total_debit) %></td>
     <td style="border: 0 none">
-      <%= link_to image_tag('edit_22.png'), { :controller => :bookings, :action => :edit, :id => booking }, :class => 'edit_controls' %>
-      <%= link_to_remote image_tag('remove_22.png'), :update => "booking_#{booking.id}", :url => { :controller => :bookings, :action => 'destroy_inline', :id => booking }, :class => 'edit_controls', :method => :post %>
+      <%= link_to_remote image_tag('delete.png'), {:url => booking_path(booking), :method => :delete} %>
     </td>
   </tr>
   <% end %>
