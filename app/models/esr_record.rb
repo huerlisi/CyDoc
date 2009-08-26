@@ -45,8 +45,7 @@ class EsrRecord < ActiveRecord::Base
 #    self.recipe_type       = line[0, 1]
     self.bank_pc_id        = line[3..11]
     self.reference         = line[12..38]
-    # TODO: very bad rounding, use some fixnum/currency type
-    self.amount            = line[39..48].to_f / 100
+    self.amount            = BigDecimal.new(line[39..48]) / 100
     self.payment_reference = line[49..58]
     self.payment_date      = line[59..64]
     self.transaction_date  = line[65..70]

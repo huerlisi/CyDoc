@@ -61,7 +61,7 @@ module Medindex
       # Prices
         when 'ARTPRI': @price.save!
         when 'VDAT': @price.valid_from = @text.to_date
-        when 'PRICE': @price.price = @text.to_f
+        when 'PRICE': @price.price = @text
         when 'PTYP': @price.price_type = @text
       end
     end
