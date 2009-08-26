@@ -88,7 +88,7 @@ class EsrRecord < ActiveRecord::Base
 
   def create_esr_booking
     esr_booking = create_booking(
-      :amount         => 0 - amount,
+      :amount         => amount,
       :credit_account => Invoice::DEBIT_ACCOUNT,
       :debit_account  => vesr_account,
       :value_date     => value_date,

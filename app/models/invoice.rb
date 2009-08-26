@@ -45,7 +45,7 @@ class Invoice < ActiveRecord::Base
   before_create :build_booking
   
   def due_amount
-    bookings.sum(:amount)
+    bookings.to_a.sum{|b| b.accounted_amount(Invoice::DEBIT_ACCOUNT)}
   end
   
   def build_booking
