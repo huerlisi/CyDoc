@@ -1,0 +1,10 @@
+<div class="contextual">
+  <%= link_to "Neues Konto", accounts_path, :method => :post, :class => "icon icon-new" %>
+</div>
+<h2>Konten</h2>
+
+<table class="list">
+  <%= render :partial => 'accounts/list_header' %>
+  <%= render :partial => 'accounts/item', :collection => @accounts %>
+  <%= render :partial => 'accounts/list_footer' %>
+</table>
