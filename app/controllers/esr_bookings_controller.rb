@@ -17,7 +17,7 @@ class EsrBookingsController < ApplicationController
     # Just pick first file or return
     vesr_filename = Dir.new(VESR_DIR).select{|entry| !(entry.starts_with?('.') or entry.starts_with?('archive'))}.first
     if vesr_filename.nil?
-      render :string => '<h3>Keine VESR Datei gefunden</h3>'
+      render :text => '<h3>Keine neue VESR Datei gefunden</h3>', :layout => 'application'
       return
     end
     
