@@ -50,7 +50,7 @@ class Invoice < ActiveRecord::Base
   
   def build_booking
     bookings.build(:title => "Rechnung",
-                   :amount => amount,
+                   :amount => amount.currency_round,
                    :credit_account => EARNINGS_ACCOUNT,
                    :debit_account => DEBIT_ACCOUNT,
                    :value_date => value_date)
