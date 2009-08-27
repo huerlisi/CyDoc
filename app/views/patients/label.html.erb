@@ -5,4 +5,8 @@ body { margin: 0; padding: 1px; }
 <div style="font-family: 'Vera Sans',Arial,sans-serif; font-size: 7pt; width: 6.5cm">
   <%=h @patient.vcard.honorific_prefix %><br/>
   <%= render :partial => 'vcards/show', :locals => {:vcard => @patient.vcard} %>
+
+  <div id="phone_numbers" style="margin-top: 0.5em; font-style: italic; font-size: 6pt">
+    <%= @patient.phone_numbers.find(:all, :limit => 2).map{|number| "#{number.phone_number_type}: #{number.number}"}.join('<br/>') %>
+  </div>
 </div>
