@@ -42,6 +42,9 @@ class BookingsController < ApplicationController
         @booking.debit_account = Account.find_by_code('1100')
         @booking.credit_account = Account.find_by_code('3200')
         @booking.amount = 0.0 - @booking.amount
+      when "Zusatzleistung":
+        @booking.debit_account = Account.find_by_code('1100')
+        @booking.credit_account = Account.find_by_code('3200')
     end
     
     if @booking.save

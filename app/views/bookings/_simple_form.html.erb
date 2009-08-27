@@ -1,10 +1,10 @@
 <div id="booking_form">
-  <%= error_messages_for :bookings %>
+  <%= error_messages_for :booking %>
   <% remote_form_for :booking, @booking, :url => invoice_bookings_url(@invoice) do |booking| %>
     <%= booking.text_field :value_date, :size => 12 %>
-    <%= booking.select :comments, ['Barzahlung', 'Bankzahlung', 'Skonto/Rabatt'] %>
-    <%= booking.text_field :title, :size => 40 %>
-    <%= booking.text_field :amount, :size => 6 %>
+    <%= booking.select :comments, ['Barzahlung', 'Bankzahlung', 'Skonto/Rabatt', 'Zusatzleistung'] %>
+    Titel: <%= booking.text_field :title, :size => 40 %>
+    Betrag: <%= booking.text_field :amount, :size => 6 %>
     <%= booking.submit "Buchen" %>
   <% end %>
 </div>
