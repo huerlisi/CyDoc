@@ -29,7 +29,7 @@
     <td style="text-align: right"><%= (booking.debit_account == @account) ? "<b>#{in_place_editor_field(:booking, :amount)}</b>&nbsp;CHF" : "<i>#{link_to(h(booking.debit_account.code), account_path(booking.debit_account), :title => h(booking.debit_account.title))}</i>" %></td>
     <td style="text-align: right"><%= currency_fmt(total_credit - total_debit) %></td>
     <td style="border: none">
-      <%= link_to_remote image_tag('delete.png'), {:url => booking_path(booking), :method => :delete} %>
+      <%= link_to_remote image_tag('delete.png'), {:url => booking_path(booking), :method => :delete, :confirm => "Buchung #{booking.to_s} löschen?"} %>
     </td>
   </tr>
   <% end %>

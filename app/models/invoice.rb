@@ -50,7 +50,7 @@ class Invoice < ActiveRecord::Base
   
   def build_booking
     bookings.build(:title => "Rechnung",
-                   :amount => amount,
+                   :amount => amount.currency_round,
                    :credit_account => EARNINGS_ACCOUNT,
                    :debit_account => DEBIT_ACCOUNT,
                    :value_date => value_date)
@@ -176,12 +176,12 @@ class Invoice < ActiveRecord::Base
   # Calculated fields
   def amount_mt(tariff_type = nil, options = {})
     options.merge!(:conditions => {:tariff_type => tariff_type}) if tariff_type
-    BigDecimal.new(service_records.sum('truncate(quantity * amount_mt * unit_factor_mt * unit_mt + 0.005, 2)', options))
+    BigDecimal.new(service_records.sum('truncate(quantity * amount_mt * unit_factor_mt * unit_mt + 0.005, 2)', options) || '0.0')
   end
   
   def amount_tt(tariff_type = nil, options = {})
     options.merge!(:conditions => {:tariff_type => tariff_type}) if tariff_type
-    BigDecimal.new(service_records.sum('truncate(quantity * amount_tt * unit_factor_tt * unit_tt + 0.005, 2)', options))
+    BigDecimal.new(service_records.sum('truncate(quantity * amount_tt * unit_factor_tt * unit_tt + 0.005, 2)', options) || '0.0')
   end
   
   def amount(tariff_type = nil, options = {})

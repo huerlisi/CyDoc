@@ -38,8 +38,14 @@
   </table>
 </div>
 
+
+<div class="contextual">
+  <%= link_to_remote "Manuell buchen", {:url => new_invoice_booking_path(@invoice), :method => :get}, :class => "icon icon-add" %>
+</div>
 <h3>Journal</h3>
-<%= render :partial => 'bookings/list', :object => @invoice.bookings %>
+<div id="booking_list">
+  <%= render :partial => 'bookings/list', :object => @invoice.bookings %>
+</div>
 
 <h3>Leistungen</h3>
 <div id="service_list" class="box">
