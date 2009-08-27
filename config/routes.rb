@@ -43,6 +43,8 @@ ActionController::Routing::Routes.draw do |map|
     patient.resources :tariff_items, :member => {:assign => :post}
     patient.resources :invoices
 
+    patient.resources :insurance_policies
+    
     patient.resources :sessions do |session|
       session.resources :tariff_items
       session.resources :service_records, :collection => {:select => :get}
