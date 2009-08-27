@@ -1,4 +1,74 @@
+include Accounting
+
 class BookingsController < ApplicationController
+  # GET /bookings/new
+  def new
+    if params[:invoice_id]
+      @invoice = Invoice.find(params[:invoice_id])
+      @booking = @invoice.bookings.build
+    else
+      @booking = Booking.new
+    end
+    
+    @booking.value_date = Date.today
+    
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.insert_html :top, "booking_list", :partial => 'simple_form'
+        end
+      }
+    end
+  end
+
+  # PUT /booking
+  def create
+    if params[:invoice_id]
+      @invoice = Invoice.find(params[:invoice_id])
+      @booking = @invoice.bookings.build(params[:booking])
+    else
+      @booking = Booking.new(params[:booking])
+    end
+    
+    case @booking.comments
+      when "Barzahlung":
+        @booking.debit_account = Account.find_by_code('1000')
+        @booking.credit_account = Account.find_by_code('1100')
+      when "Bankzahlung":
+        @booking.debit_account = Account.find_by_code('1020')
+        @booking.credit_account = Account.find_by_code('1100')
+      when "Skonto/Rabatt":
+        @booking.debit_account = Account.find_by_code('1100')
+        @booking.credit_account = Account.find_by_code('3200')
+        @booking.amount = 0.0 - @booking.amount
+    end
+    
+    if @booking.save
+      flash[:notice] = 'Buchung erfasst.'
+
+      respond_to do |format|
+        format.html { }
+        format.js {
+          render :update do |page|
+            page.insert_html :top, 'bookings', :partial => 'bookings/item', :object => @booking
+            page.remove 'booking_form'
+          end
+        }
+      end
+    else
+      respond_to do |format|
+        format.html { }
+        format.js {
+          render :update do |page|
+            page.replace 'booking_form', :partial => 'bookings/simple_form', :object => @booking
+          end
+        }
+      end
+    end
+  end
+
+
   # DELETE /booking/1
   def destroy
     @booking = Booking.find(params[:id])
