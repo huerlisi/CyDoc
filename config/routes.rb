@@ -23,6 +23,11 @@ ActionController::Routing::Routes.draw do |map|
     session.resources :tariff_items
   end
 
+  # Accounting
+  map.resources :accounts
+  map.resources :bookings
+  
+  # Billing
   map.resources :invoices, :collection => {:print_all => :post}, :member => {:print => :post, :insurance_recipe => :get, :patient_letter => :get}
   map.resources :esr_bookings
 

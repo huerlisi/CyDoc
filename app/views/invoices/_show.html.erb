@@ -39,13 +39,7 @@
 </div>
 
 <h3>Journal</h3>
-  <table class="list" style="width: 100%">
-    <%= render :partial => 'bookings/item', :collection => @invoice.bookings %>
-    <tr>
-      <th>Offener Betrag</th>
-      <th colspan="2" style="text-align: right"><%= sprintf("%0.2f", @invoice.due_amount.currency_round) %>&nbsp;CHF</th>
-    </tr>
-  </table>
+<%= render :partial => 'bookings/list', :object => @invoice.bookings %>
 
 <h3>Leistungen</h3>
 <div id="service_list" class="box">

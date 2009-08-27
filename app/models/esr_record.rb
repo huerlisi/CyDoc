@@ -4,9 +4,11 @@ class EsrRecord < ActiveRecord::Base
   belongs_to :booking, :class_name => 'Accounting::Booking'
   belongs_to :invoice
   
-  named_scope :valid, :conditions => "remarks = ''"
-  named_scope :invalid, :conditions => "not(remarks = '')"
-
+  named_scope :valid, :conditions => "state = 'valid'"
+  named_scope :missing, :conditions => "state = 'missing'"
+  named_scope :bad, :conditions => "state = 'bad'"
+  named_scope :invalid, :conditions => "state != 'valid'"
+  
   private
   def parse_date(value)
     year  = value[0..1].to_i + 2000
@@ -67,8 +69,16 @@ class EsrRecord < ActiveRecord::Base
 
     if Invoice.exists?(invoice_id)
       self.invoice_id = invoice_id
+      self.remarks += "Rechnung ##{invoice_id}"
+      if invoice.due_amount.currency_round != self.amount.currency_round
+        self.remarks += ", falscher Betrag"
+        self.state = "bad"
+      else
+        self.state = "valid"
+      end
     else
-      self.remarks += "Rechnung '#{invoice_id}' nicht gefunden."
+      self.remarks += "Rechnung ##{invoice_id} nicht gefunden"
+      self.state = "missing"
     end
   end
   
@@ -78,11 +88,11 @@ class EsrRecord < ActiveRecord::Base
 
   def create_esr_booking
     esr_booking = create_booking(
-      :amount         => 0 - amount,
+      :amount         => amount,
       :credit_account => Invoice::DEBIT_ACCOUNT,
       :debit_account  => vesr_account,
       :value_date     => value_date,
-      :title          => "VESR Zahlung",
+      :title          => "VESR Zahlung #{reference}",
       :comments       => remarks )
     
     if invoice

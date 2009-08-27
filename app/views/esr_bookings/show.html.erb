@@ -4,7 +4,14 @@
 <h2>VESR Protokoll vom <%= @esr_file.updated_at.strftime('%d.%m.%Y') %></h2>
 <%= render :partial => 'list_records', :object => @esr_file.esr_records.valid %>
 
-<h3>Fehlerhafte Buchungen</h3>
-<%= render :partial => 'list_records', :object => @esr_file.esr_records.invalid %>
+<% unless @esr_file.esr_records.missing.empty? %>
+  <h3>Rechnung nicht gefunden</h3>
+  <%= render :partial => 'list_records', :object => @esr_file.esr_records.missing %>
+<% end %>
+
+<% unless @esr_file.esr_records.bad.empty? %>
+  <h3>Falscher Betrag</h3>
+  <%= render :partial => 'list_records', :object => @esr_file.esr_records.bad %>
+<% end %>
 
 <%= render :partial => 'sidebar' %>

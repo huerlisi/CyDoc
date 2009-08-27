@@ -45,7 +45,7 @@ class Invoice < ActiveRecord::Base
   before_create :build_booking
   
   def due_amount
-    bookings.sum(:amount)
+    bookings.to_a.sum{|b| b.accounted_amount(Invoice::DEBIT_ACCOUNT)}
   end
   
   def build_booking
@@ -103,7 +103,7 @@ class Invoice < ActiveRecord::Base
     when :short
       "##{id}: #{value_date.strftime('%d.%m.%Y') if value_date}"
     else
-      "#{patient.name} ##{id}, #{value_date.strftime('%d.%m.%Y')} à #{sprintf('%0.2f', rounded_amount)} CHF"
+      "#{patient.name} ##{id}, Rechnung #{value_date.strftime('%d.%m.%Y')} über #{sprintf('%0.2f', rounded_amount)} CHF"
     end
   end
   
