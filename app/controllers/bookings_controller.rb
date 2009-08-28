@@ -31,7 +31,7 @@ class BookingsController < ApplicationController
       @booking = Booking.new(params[:booking])
     end
     
-    case @booking.comments
+    case @booking.title
       when "Barzahlung":
         @booking.debit_account = Account.find_by_code('1000')
         @booking.credit_account = Account.find_by_code('1100')

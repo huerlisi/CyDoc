@@ -1,5 +1,9 @@
 <tr>
   <td style="width: 10em"><%=h item.value_date.strftime('%d.%m.%Y') %></td>
-  <td><%=h item.title %></td>
+  <td>
+    <%=h item.title %>
+    <%= '<hr style="height: 1px; margin: 0"/>' unless item.comments.blank? %>
+    <%=h item.comments %>
+  </td>
   <td style="text-align: right"><%=h sprintf("%0.2f", item.accounted_amount(Invoice::DEBIT_ACCOUNT).currency_round) %>&nbsp;CHF</td>
 </tr>
