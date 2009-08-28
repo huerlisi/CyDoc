@@ -1,0 +1,5 @@
+<tr id="bookings_footer">
+  <th>Saldo</th>
+  <!-- TODO: to_a is deprecated, but needed to get the Enumeration sum function -->
+  <th colspan="2" style="text-align: right"><%= sprintf("%0.2f", @invoice.due_amount.currency_round) %>&nbsp;CHF</th>
+</tr>

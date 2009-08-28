@@ -54,7 +54,8 @@ class BookingsController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            page.insert_html :top, 'bookings', :partial => 'bookings/item', :object => @booking
+            # TODO: Only works when @invoice is set
+            page.replace 'bookings', :partial => 'bookings/list', :object => @invoice.bookings
             page.remove 'booking_form'
           end
         }
