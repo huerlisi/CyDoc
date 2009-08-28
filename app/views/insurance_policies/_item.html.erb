@@ -1,4 +1,5 @@
 <tr>
-  <th><%=h item.policy_type %></th>
-  <td><%=h item.to_s %></th>
+  <td><%=h item.policy_type %></td>
+  <td><%= link_to item.insurance.to_s, item.insurance %></td>
+  <td><%=h item.number %></td>
 </tr>

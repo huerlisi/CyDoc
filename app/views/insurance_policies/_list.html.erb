@@ -2,10 +2,11 @@
   <%= link_to_remote "Versicherung zuweisen", {:url => new_patient_insurance_policy_url(@patient), :method => :get}, :class => "icon icon-add" unless @patient.new_record?%>
 </div>
 <h3>Versicherungen</h3>
-<div class="box">
+<div>
   <div id="new_insurance_policy" class="new_insurance_policy"></div>
 
-  <table id="insurance_policies" style="width: 100%">
+  <table id="insurance_policies" class="list">
+    <%= render :partial => 'insurance_policies/list_header' %>
     <%= render :partial => 'insurance_policies/item', :collection => @patient.insurance_policies %>
   </table>
 </div>
