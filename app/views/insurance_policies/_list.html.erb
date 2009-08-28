@@ -3,10 +3,13 @@
 </div>
 <h3>Versicherungen</h3>
 <div>
-  <div id="new_insurance_policy" class="new_insurance_policy"></div>
+  <% if @patient.new_record? %>
+    <%= render :partial => 'insurance_policies/new_form' %>
+  <% else %>
+    <div id="new_insurance_policy" class="new_insurance_policy"></div>
+  <% end %>
 
   <table id="insurance_policies" class="list">
-    <%= render :partial => 'insurance_policies/list_header' %>
     <%= render :partial => 'insurance_policies/item', :collection => @patient.insurance_policies %>
   </table>
 </div>

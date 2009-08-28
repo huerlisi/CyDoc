@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  # Authentication
   map.logout '/logout', :controller => 'authentication_sessions', :action => 'destroy'
   map.login '/login', :controller => 'authentication_sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
