@@ -88,6 +88,7 @@ class InvoicesController < ApplicationController
   def new
     @invoice = Invoice.new
     @invoice.date = Date.today
+    @patient = Patient.find(params[:patient_id])
     @treatment = Treatment.find(params[:treatment_id])
     
     respond_to do |format|
