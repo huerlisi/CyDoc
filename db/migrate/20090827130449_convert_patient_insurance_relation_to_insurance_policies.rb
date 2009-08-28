@@ -18,5 +18,18 @@ class ConvertPatientInsuranceRelationToInsurancePolicies < ActiveRecord::Migrati
   end
 
   def self.down
+    add_column :patients, :insurance_id, :integer
+    add_column :patients, :insurance_nr, :string
+  
+    for patient in Patient.all
+      insurance_policy = patient.insurance_policies.first
+      
+      next if insurance_policy.nil?
+      
+      patient.insurance_id = insurance_policy.insurance_id
+      patient.insurance_nr = insurance_policy.number
+      
+      patient.save
+    end
   end
 end
