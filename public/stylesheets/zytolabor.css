@@ -130,17 +130,17 @@ border: 0;
 }
 
 #content .tabs ul li a.selected {
-background-color: #ffffbb;
+background-color: #ffffdd;
 border: 0;
 }
 
 #content .tabs ul li a.selected:hover {
-background-color: #ffffbb;
+background-color: #ffffdd;
 border: 0;
 }
 
 #content .tabs ul li a:hover {
-background-color: #ffffbb;
+background-color: #ffffdd;
 border: 0;
 }
 
