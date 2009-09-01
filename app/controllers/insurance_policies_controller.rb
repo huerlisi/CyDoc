@@ -1,6 +1,21 @@
 class InsurancePoliciesController < ApplicationController
   auto_complete_for :insurance_policy, :number
 
+  # GET /insurance_policies/select
+  def select
+    @patient = Patient.find(params[:patient_id])
+    @insurance_policy = @patient.insurance_policies.build
+    
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.replace_html "new_insurance_policy", :partial => 'form'
+        end
+      }
+    end
+  end
+  
   # GET /insurance_policies/new
   def new
     @patient = Patient.find(params[:patient_id])
@@ -10,7 +25,7 @@ class InsurancePoliciesController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.replace_html "new_insurance_policy", :partial => 'form'
+          page.replace_html "new_insurance_policy", :partial => 'select_form'
         end
       }
     end
