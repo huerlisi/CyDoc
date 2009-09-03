@@ -1,5 +1,6 @@
 <div class="contextual">
   <%= link_to_function "Protokoll drucken", 'window.print()', :class => "icon icon-print" %>
+  <%= link_to "VESR Liste", esr_bookings_path, :class => "icon icon-book" %>
 </div>
 <h2>VESR Protokoll vom <%= @esr_file.updated_at.strftime('%d.%m.%Y') %></h2>
 <%= render :partial => 'list_records', :object => @esr_file.esr_records.valid %>
