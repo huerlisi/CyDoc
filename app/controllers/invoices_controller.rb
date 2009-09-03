@@ -2,6 +2,7 @@ class InvoicesController < ApplicationController
   print_action_for :insurance_recipe, :tray => :plain
   print_action_for :patient_letter, :tray => :invoice
 
+  # POST /invoice/1/print
   def print
     @invoice = Invoice.find(params[:id])
     print_patient_letter
@@ -16,6 +17,7 @@ class InvoicesController < ApplicationController
     end
   end
   
+  # POST /invoices/print_all
   def print_all
     @invoices = Invoice.prepared
     
@@ -33,6 +35,7 @@ class InvoicesController < ApplicationController
     end
   end
 
+  # GET /invoices/1/insurance_recipe
   def insurance_recipe
     @invoice ||= Invoice.find(params[:id])
     @patient = @invoice.patient
@@ -43,6 +46,7 @@ class InvoicesController < ApplicationController
     end
   end
 
+  # GET /invoices/1/patient_letter
   def patient_letter
     @invoice ||= Invoice.find(params[:id])
     @patient = @invoice.patient
@@ -53,7 +57,7 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # CRUD actions
+  # GET /sessions
   def index
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
@@ -79,12 +83,14 @@ class InvoicesController < ApplicationController
     end
   end
 
+  # GET /invoice/1
   def show
     @invoice = Invoice.find(params[:id])
 
     redirect_to :controller => :patients, :action => :show, :id => @invoice.patient.id, :tab => 'invoices', :sub_tab => "invoices_#{@invoice.id}"
   end
 
+  # GET /invoices/new
   def new
     @invoice = Invoice.new
     @invoice.date = Date.today
@@ -102,6 +108,7 @@ class InvoicesController < ApplicationController
     end
   end
 
+  # POST /invoices
   def create
     @invoice = Invoice.new(params[:invoice])
     @patient = Patient.find(params[:patient_id])
@@ -146,6 +153,7 @@ class InvoicesController < ApplicationController
     end
   end
 
+  # DESTROY /invoices/1
   def destroy
     @invoice = Invoice.find(params[:id])
     @invoice.destroy
