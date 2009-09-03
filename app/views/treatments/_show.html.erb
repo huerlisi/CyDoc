@@ -1,7 +1,9 @@
 <div class="contextual">
   <%= link_to_remote "Ändern", {:url => edit_treatment_path(@treatment), :method => :get}, :class => "icon icon-edit" %>
-  <%= link_to "Rechung stellen", new_patient_treatment_invoice_path(@patient, @treatment), :class => "icon icon-add" %>
+  <%= link_to_remote "Rechung stellen", {:url => new_patient_treatment_invoice_path(@patient, @treatment), :method => :get}, :class => "icon icon-add" %>
 </div>
+
+<div id="new_treatment_<%= @treatment.id %>_invoice"></div>
 
 <h3>Behandlung</h3>
 <div class="box" id="treatment-<%= @treatment.id %>">

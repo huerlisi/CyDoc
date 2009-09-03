@@ -43,6 +43,7 @@ class MedicalCasesController < ApplicationController
       format.js {
         render :update do |page|
           page.replace_html "treatment_#{@treatment.id}_new_medical_case", :partial => 'form'
+          page['search_query'].focus
         end
       }
     end

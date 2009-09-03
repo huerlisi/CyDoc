@@ -94,7 +94,10 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html { }
       format.js {
-        render :partial => 'form'
+        render :update do |page|
+          page.replace_html "new_treatment_#{@treatment.id}_invoice", :partial => 'form'
+          page['invoice_value_date'].select
+        end
       }
     end
   end
