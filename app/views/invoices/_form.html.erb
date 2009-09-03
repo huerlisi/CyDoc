@@ -2,7 +2,7 @@
 <%= error_messages_for :invoice %>
 
 <div class="box">
-  <% form_for [:patient, :treatment, @invoice], :builder => Rubaidh::TabularForm::TabularFormBuilder do |invoice| %>
+  <% remote_form_for [:patient, :treatment, @invoice], :builder => Rubaidh::TabularForm::TabularFormBuilder do |invoice| %>
     <table>
       <%= invoice.text_field :value_date, :label => 'Rechnungsdatum', :size => 12 %>
       <tr>
@@ -10,7 +10,8 @@
         <td><%= select 'tiers', :name, [['Tiers Garant', TiersGarant], ['Tiers Payant', TiersPayant]] %></td>
       </tr>
       <%= invoice.text_area :remark, :rows => 2, :label =>  'Bemerkungen' %>
-      <%= invoice.submit "Erstellen" %>
+      <%= invoice.submit "Drucken" %>
+      <%= invoice.submit "Zum Druck freigeben" %>
     </table>
   <% end %>
 </div>

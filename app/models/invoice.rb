@@ -15,6 +15,7 @@ class Invoice < ActiveRecord::Base
 
   # Validation
   validates_presence_of :service_records, :message => 'Keine Leistung eingegeben.'
+  validates_format_of :value_date, :with => /[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}/, :message => 'braucht Format dd.mm.yy (z.B. 3.12.1980)'
 
   validate :valid_service_records?
   validate :valid_treatment?
@@ -206,8 +207,8 @@ class Invoice < ActiveRecord::Base
   end
 
   def value_date=(value)
-    write_attribute(:value_date, value)
-    self.due_date = value_date + PAYMENT_PERIOD
+    write_attribute(:value_date, Date.parse_europe(value))
+    self.due_date = value_date + PAYMENT_PERIOD unless value_date.nil?
   end
   
   def esr9(bank_account)

@@ -124,9 +124,25 @@ class InvoicesController < ApplicationController
     # Saving
     if @invoice.save
       flash[:notice] = 'Erfolgreich erstellt.'
-      redirect_to @invoice
+
+      respond_to do |format|
+        format.html { redirect_to @invoice }
+        format.js {
+          render :update do |page|
+            page.redirect_to @invoice
+          end
+        }
+      end
     else
-      render :action => 'new'
+      respond_to do |format|
+        format.html { }
+        format.js {
+          render :update do |page|
+            page.replace_html "new_treatment_#{@treatment.id}_invoice", :partial => 'form'
+            page['invoice_value_date'].select
+          end
+        }
+      end
     end
   end
 
