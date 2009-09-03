@@ -57,7 +57,7 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # GET /sessions
+  # GET /invoices
   def index
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
