@@ -57,48 +57,6 @@ class Invoice < ActiveRecord::Base
                    :value_date => value_date)
   end
 
-  def build_vesr_booking(record)
-    record.invoice.bookings.build(
-      :amount => 0 - record.amount,
-      :credit_account => DEBIT_ACCOUNT,
-      :debit_account => VESR_ACCOUNT,
-      :value_date => record.value_date,
-      :title => "VESR Zahlung")
-  end
-
-  def self.create_vesr_bookings(records)
-    records.map{|record|
-      if Invoice.exists?(record.invoice_id)
-        invoice = record.invoice
-        invoice.build_vesr_booking(record).save
-        if invoice.due_amount.currency_round == 0.0
-          message = 'Bezahlt'
-        else
-          message = 'Falscher Betrag'
-        end
-      else
-        invoice = nil
-        message = "Rechnung '#{record.invoice_id}' nicht gefunden."
-      end
-      
-      [record, record.invoice_id, message]
-    }
-  end
-
-  def self.book_vesr
-    vesr_filename = Dir.new(File.join(RAILS_ROOT, 'data', 'vesr')).select{|entry| !(entry.starts_with?('.') or entry.starts_with?('archive'))}.first
-    return [] if vesr_filename.nil?
-    
-    vesr_path = File.join(RAILS_ROOT, 'data', 'vesr', vesr_filename)
-    vesr_file = File.new(vesr_path)
-    @esr_file = EsrFile.new(:uploaded_data => ActionController::TestUploadedFile.new('data/vesr/vesr.v11'))
-    
-    archive_filename = File.join(RAILS_ROOT, 'data', 'vesr', 'archive', "vesr-#{DateTime.now.strftime('%Y-%m-%d_%H-%M-%S')}.v11")
-    File.rename(vesr_path, archive_filename)
-
-    return vesr_journal
-  end
-
   def to_s(format = :default)
     case format
     when :short
