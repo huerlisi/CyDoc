@@ -10,8 +10,7 @@
         <td><%= select 'tiers', :name, [['Tiers Garant', TiersGarant], ['Tiers Payant', TiersPayant]] %></td>
       </tr>
       <%= invoice.text_area :remark, :rows => 2, :label =>  'Bemerkungen' %>
-      <%= invoice.submit "Drucken" %>
-      <%= invoice.submit "Zum Druck freigeben" %>
+      <%= invoice.submit "Erstellen" %>
     </table>
   <% end %>
 </div>

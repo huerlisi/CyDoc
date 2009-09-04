@@ -165,13 +165,13 @@ module Print
 
         respond_to do |format|
           format.html {}
-          format.js {
-            render :update do |page|
-              page.select('.icon-spinner') do |spinner|
-                spinner.toggleClassName('icon-spinner')
-              end
-            end
-          }
+#          format.js {
+#            render :update do |page|
+#              page.select('.icon-spinner') do |spinner|
+#                spinner.toggleClassName('icon-spinner')
+#              end
+#            end
+#          }
         end
       end
     end

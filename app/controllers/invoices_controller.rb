@@ -5,15 +5,25 @@ class InvoicesController < ApplicationController
   # POST /invoice/1/print
   def print
     @invoice = Invoice.find(params[:id])
+    @treatment = @invoice.treatment
+    @patient = @treatment.patient
+    
     print_patient_letter
     print_insurance_recipe
     
-    @invoice.state = 'printed'
-    @invoice.save!
+    unless params[:print_copy]
+      @invoice.state = 'printed'
+      @invoice.save!
+    end
     
     respond_to do |format|
       format.html { redirect_to invoices_path }
-      format.js { redirect_to invoices_path }
+      format.js {
+        render :update do |page|
+          page.replace_html "sub-tab-content-invoices-#{@invoice.id}", :partial => 'show'
+          page.replace "invoice_#{@invoice.id}_flash", :partial => 'printed_flash'
+        end
+      }
     end
   end
   
@@ -137,6 +147,7 @@ class InvoicesController < ApplicationController
         format.js {
           render :update do |page|
             page.redirect_to @invoice
+            page.replace "invoice_#{@invoice.id}_flash", :partial => 'printed_flash'
           end
         }
       end
@@ -150,6 +161,30 @@ class InvoicesController < ApplicationController
           end
         }
       end
+    end
+  end
+
+  # POST /invcoice/1/book
+  def book
+    @invoice = Invoice.find(params[:id])
+    @treatment = @invoice.treatment
+    @patient = @treatment.patient
+    
+    booking = @invoice.build_booking
+    
+    if booking.save
+      @invoice.state = 'booked'
+      @invoice.save
+    end
+    
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.replace_html "sub-tab-content-invoices-#{@invoice.id}", :partial => 'show'
+          page.replace "invoice_#{@invoice.id}_flash", :partial => 'booked_flash'
+        end
+      }
     end
   end
 

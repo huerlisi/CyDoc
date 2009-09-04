@@ -43,7 +43,6 @@ class Invoice < ActiveRecord::Base
   
   # Accounting
   has_many :bookings, :class_name => 'Accounting::Booking', :as => 'reference', :dependent => :destroy
-  before_create :build_booking
   
   def due_amount
     bookings.to_a.sum{|b| b.accounted_amount(Invoice::DEBIT_ACCOUNT)}
