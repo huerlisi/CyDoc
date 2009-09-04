@@ -28,9 +28,6 @@ end
 
 <% tabs.each do |tab| -%>
 <% eval "@#{type.singularize} = tab" %>
-<%= content_tag('div', render(:partial => "#{type}/show"),
-                       :id => "sub-tab-content-#{type}-#{tab.id}",
-                       :style => ("#{type}_#{tab.id}" != selected_tab ? 'display:none' : nil),
-                       :class => 'sub-tab-content sub-tab-content-' + type) %>
+<%= render :partial => 'shared/sub_tab_content', :locals => {:type => type, :tab => tab, :selected_tab => selected_tab} %>
 <% end -%>
 </div>

@@ -146,7 +146,8 @@ class InvoicesController < ApplicationController
         format.html { redirect_to @invoice }
         format.js {
           render :update do |page|
-            page.redirect_to @invoice
+            page.insert_html :bottom, 'tab-content-invoices', :partial => 'shared/sub_tab_content', :locals => {:type => 'invoices', :tab => @invoice, :selected_tab => true}
+#            page.call 'showSubTab', "invoices_#{@invoice.id}", "invoices"
             page.replace "invoice_#{@invoice.id}_flash", :partial => 'printed_flash'
           end
         }
