@@ -1,10 +1,10 @@
-<div id="invoice_<%= @invoice.id %>_flash"></div>
+<div id="invoice_<%= @invoice.id %>_flash" class="flash notice" style="display: none"></div>
 
 <div class="contextual">
   <% if @invoice.state == 'prepared' %>
-    <%= link_to_remote "Rechnung drucken", {:url => print_invoice_path(@invoice)}, :class => "icon icon-print" %>
+    <%= link_to_remote "Rechnung drucken", {:url => print_invoice_path(@invoice), :before => "Element.update('invoice_#{@invoice.id}_flash', 'Rechnung wird zum Druck aufbereitet...'); Element.show('invoice_#{@invoice.id}_flash')"}, :class => "icon icon-print" %>
   <% else %>
-    <%= link_to_remote "Kopie drucken", {:url => print_invoice_path(@invoice, :print_copy => true)}, :class => "icon icon-print" %>
+    <%= link_to_remote "Kopie drucken", {:url => print_invoice_path(@invoice, :print_copy => true), :before => "Element.update('invoice_#{@invoice.id}_flash', 'Rechnung wird zum Druck aufbereitet...'); Element.show('invoice_#{@invoice.id}_flash')"}, :class => "icon icon-print" %>
   <% end %>
   <%= link_to_remote "Verbuchen", {:url => book_invoice_path(@invoice)}, :class => "icon icon-book" if @invoice.state == 'printed' %>
   <%= link_to "Rückforderungsbeleg PDF", formatted_insurance_recipe_invoice_path(@invoice, :pdf), :method => :get, :class => "icon icon-pdf" %>

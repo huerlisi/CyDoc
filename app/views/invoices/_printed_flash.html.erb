@@ -4,7 +4,7 @@
   <p>
     Möchten Sie die Rechnung verbuchen?
     <%= button_to_function 'Ja', remote_function(:url => book_invoice_url(@invoice)) %>
-    <%= button_to_function 'Nein', "$('invoice_#{@invoice.id}_flash').hide" %>
+    <%= button_to_function 'Nein', "Element.hide('invoice_#{@invoice.id}_flash')" %>
   </p>
   <% end %>
 </div>

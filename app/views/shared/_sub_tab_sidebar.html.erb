@@ -1,0 +1,12 @@
+<div class="sub-tabs">
+  <% begin %>
+    <%= render :partial => "#{type}/sub_tab_head" %>
+  <% rescue %>
+    <h3><%= type.classify %></h3>
+  <% end %>
+  <ul id="sub-tab-sidebar-<%= type %>">
+  <% tabs.each do |tab| -%>
+    <%= render :partial => 'shared/sub_tab_sidebar_item', :locals => {:type => type, :tab => tab, :selected_tab => selected_tab} %>
+  <% end -%>
+  </ul>
+</div>

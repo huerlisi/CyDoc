@@ -1,0 +1,4 @@
+<li><%= link_to "#{tab.to_s(:short)}", tab,
+                       :id => "sub-tab-#{type}-#{tab.id}",
+                       :class => ("#{type}_#{tab.id}" != selected_tab ? nil : 'selected'),
+                       :onclick => "showSubTab('#{type}-#{tab.id}', '#{type}'); this.blur(); return false;" %></li>
