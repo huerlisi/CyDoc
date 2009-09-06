@@ -16,6 +16,9 @@
   <%= render :partial => 'list' %>
 </div>
 
+<h2>Überfällige Rechnungen</h2>
+<% @invoices = Invoice.overdue.paginate(:page => params['page'], :per_page => 20, :order => 'id DESC') %>
+<%= render :partial => 'list' %>
 
 <h2>Patienten mit offenen Leistungen</h2>
 
