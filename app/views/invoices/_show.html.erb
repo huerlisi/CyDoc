@@ -15,7 +15,7 @@
 <table style="width: 100%">
   <tr>
     <th>Rechnungsnr:</th><td><%= @invoice.id %></td>
-    <th>Status:</th><td><%=h @invoice.state %></td>
+    <th>Status:</th><td id="invoice_<%= @invoice.id%>_state"><%=h @invoice.state %></td>
   </tr>
   <tr>
     <th>Patient:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>

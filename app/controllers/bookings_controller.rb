@@ -54,9 +54,12 @@ class BookingsController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
+            @invoice.reload
             # TODO: Only works when @invoice is set
             page.replace 'bookings', :partial => 'bookings/list', :object => @invoice.bookings
             page.remove 'booking_form'
+            # TODO: some kind of delegation would be nice
+            page.replace_html "invoice_#{@invoice.id}_state", @invoice.state
           end
         }
       end

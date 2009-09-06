@@ -48,6 +48,13 @@ class Invoice < ActiveRecord::Base
     bookings.to_a.sum{|b| b.accounted_amount(Invoice::DEBIT_ACCOUNT)}
   end
   
+  def booking_saved(booking)
+    if state == 'booked' and due_amount <= 0.0
+      self.state = 'paid'
+      self.save
+    end
+  end
+  
   def build_booking
     bookings.build(:title => "Rechnung",
                    :amount => amount.currency_round,
@@ -56,6 +63,9 @@ class Invoice < ActiveRecord::Base
                    :value_date => value_date)
   end
 
+  public
+  
+  # Standard methods
   def to_s(format = :default)
     case format
     when :short
