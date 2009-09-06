@@ -50,7 +50,7 @@
   <%= link_to_remote "Manuell buchen", {:url => new_invoice_booking_path(@invoice), :method => :get}, :class => "icon icon-add" %>
 </div>
 <h3>Journal</h3>
-<div id="booking_list">
+<div id="invoice_<%= @invoice.id %>_booking_list">
   <%= render :partial => 'bookings/list', :object => @invoice.bookings %>
 </div>
 
