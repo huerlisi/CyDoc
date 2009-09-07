@@ -35,6 +35,14 @@
 </table>
 </div>
 
+<div class="contextual">
+  <%= link_to_remote "Manuell buchen", {:url => new_invoice_booking_path(@invoice), :method => :get}, :class => "icon icon-add" %>
+</div>
+<h3>Buchungen</h3>
+<div id="invoice_<%= @invoice.id %>_booking_list">
+  <%= render :partial => 'bookings/list', :object => @invoice.bookings %>
+</div>
+
 <h3>Diagnosen</h3>
 <div id="box">
   <div id="treatment_<%= @treatment.id %>_new_medical_case">
@@ -43,15 +51,6 @@
   <table id="treatment_<%= @treatment.id %>_medical_cases" style="width: 100%">
     <%= render :partial => 'medical_cases/item', :collection => @invoice.treatment.medical_cases %>
   </table>
-</div>
-
-
-<div class="contextual">
-  <%= link_to_remote "Manuell buchen", {:url => new_invoice_booking_path(@invoice), :method => :get}, :class => "icon icon-add" %>
-</div>
-<h3>Buchungen</h3>
-<div id="invoice_<%= @invoice.id %>_booking_list">
-  <%= render :partial => 'bookings/list', :object => @invoice.bookings %>
 </div>
 
 <h3>Leistungen</h3>
