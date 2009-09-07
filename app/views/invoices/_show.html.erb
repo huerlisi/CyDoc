@@ -10,27 +10,28 @@
   <%= link_to "Rückforderungsbeleg PDF", formatted_insurance_recipe_invoice_path(@invoice, :pdf), :method => :get, :class => "icon icon-pdf" %>
 </div>
 
-<h3>Rechnung</h3>
+<h3>Rechnung #<%= @invoice.id %></h3>
 <div class="box">
 <table style="width: 100%">
   <tr>
-    <th>Rechnungsnr:</th><td><%= @invoice.id %></td>
-    <th>Status:</th><td id="invoice_<%= @invoice.id%>_state"><%=h @invoice.state %></td>
-  </tr>
-  <tr>
     <th>Patient:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>
-    <th>Vergütungsart:</th><td><%= @invoice.tiers.name %></td>
-  </tr>
-  <tr>
-    <th>Rechnungsadressat:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>
     <th>Gesetz:</th><td><%= @invoice.law.name %></td>
   </tr>
   <tr>
-    <th>Rechnungsdatum:</th><td><%= @invoice.value_date.strftime('%d.%m.%Y') %></td>
-    <th>Behandlungsgrund:</th><td><%= @invoice.treatment.reason %></td>
+    <th>Rechnungsadressat:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>
+    <th>Vergütungsart:</th><td><%= @invoice.tiers.name %></td>
   </tr>
   <tr>
     <th>Zuweisender Arzt:</th><td><%= @invoice.referrer.to_s %></td>
+    <th>Status:</th><td id="invoice_<%= @invoice.id%>_state"><%=h @invoice.state %></td>
+  </tr>
+  <tr>
+    <th>Behandlungsgrund:</th><td><%= @invoice.treatment.reason %></td>
+    <th>Rechnungsdatum:</th><td><%= @invoice.value_date.strftime('%d.%m.%Y') %></td>
+  </tr>
+  <tr>
+    <th></th><td></td>
+    <th>Fälligkeit:</th><td><%= @invoice.due_date.strftime('%d.%m.%Y') %></td>
   </tr>
 </table>
 </div>
