@@ -45,15 +45,12 @@
 
 <h3>Diagnosen</h3>
 <div id="box">
-  <div id="treatment_<%= @treatment.id %>_new_medical_case">
-    <%= render :partial => 'medical_cases/form' %>
-  </div>
   <table id="treatment_<%= @treatment.id %>_medical_cases" style="width: 100%">
     <%= render :partial => 'medical_cases/item', :collection => @invoice.treatment.medical_cases %>
   </table>
 </div>
 
 <h3>Leistungen</h3>
-<div id="service_list" class="box">
+<div id="service_list">
   <%= render :partial => 'sessions/list', :object => @invoice.treatment.sessions %>
 </div>

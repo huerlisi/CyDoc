@@ -2,16 +2,24 @@
 <% current = item == item.treatment.sessions.first %>
 
 <div id="session_<%= item.id %>">
+  <% if editable %>
   <div class="contextual">
     <%= link_to_remote "Leistung erfassen", {:url => new_patient_session_service_record_url(@patient, item), :method => :get}, :class => "icon icon-add" %>
     <%= link_to_remote "Kons löschen", {:url => patient_session_url(@patient, item), :method => :delete}, :class => "icon icon-delete" %>
   </div>
+  <% end %>
 
   <%
     @session = item
     @patient = item.treatment.patient
    %>
-  <h4><%= in_place_editor_field :session, :date %>: <%= item.remarks.blank? ? "Konsultation" : item.remarks %></h4>
+  <h4>
+    <% if editable %>
+      <%= in_place_editor_field :session, :date %>: <%= item.remarks.blank? ? "Konsultation" : item.remarks %>
+    <% else %>
+      <%= @session.date %>: <%= item.remarks.blank? ? "Konsultation" : item.remarks %>
+    <% end %>
+  </h4>
 
   <div id="new_session_<%= item.id %>_service_record" class="new_session_service_record">
     <%= render :partial => 'service_records/form' if editable and current %>
