@@ -191,7 +191,7 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # DESTROY /invoices/1
+  # DELETE /invoices/1
   def destroy
     @invoice = Invoice.find(params[:id])
     @invoice.destroy
@@ -200,7 +200,13 @@ class InvoicesController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.remove "invoice_#{@invoice.id}"
+          if params[:context] == "list"
+            page.remove "invoice_#{@invoice.id}"
+          else
+            page.remove "sub-tab-invoices-#{@invoice.id}"
+            page.remove "sub-tab-content-invoices-#{@invoice.id}"
+            page.call 'showTab', "personal"
+          end
         end
       }
     end
