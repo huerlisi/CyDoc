@@ -1,8 +1,12 @@
 <div id="invoice_<%= @invoice.id %>_flash" class="flash notice" style="display: none"></div>
 
 <div class="contextual">
-  <% if @invoice.overdue? %>
-    <%= link_to_remote "Mahnung drucken", {:url => print_reminder_letter_invoice_path(@invoice), :before => "showPrintingFlash('invoice_#{@invoice.id}_flash')"}, :class => "icon icon-print" %>
+  <% if @invoice.overdue? or @invoice.state == 'reminded' %>
+    <% if @invoice.state == 'reminded' %>
+      <%= link_to_remote "Mahnungskopie drucken", {:url => print_reminder_letter_invoice_path(@invoice, :print_copy => true), :before => "showPrintingFlash('invoice_#{@invoice.id}_flash')"}, :class => "icon icon-print" %>
+    <% else %>
+      <%= link_to_remote "Mahnung drucken", {:url => print_reminder_letter_invoice_path(@invoice), :before => "showPrintingFlash('invoice_#{@invoice.id}_flash')"}, :class => "icon icon-print" %>
+    <% end %>
   <% end %>
   <% if @invoice.state == 'prepared' %>
     <%= link_to_remote "Rechnung drucken", {:url => print_invoice_path(@invoice), :before => "showPrintingFlash('invoice_#{@invoice.id}_flash')"}, :class => "icon icon-print" %>
