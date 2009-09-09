@@ -1,9 +1,9 @@
 /* General styles */
-table {
+#invoice table {
   border-spacing:	0;
   border-collapse:	collapse;
 }
-h1, h2, h3 {
+#invoice h1, #invoice h2, #invoice h3 {
   border-bottom: 0;
 }
 
@@ -11,7 +11,7 @@ h1, h2, h3 {
   font-size:   9pt;
   position:    absolute;
 }
-h3 {
+#invoice h3 {
   color:         gray;
   font-style:    italic;
   font-weight:   normal;
