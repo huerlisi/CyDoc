@@ -4,7 +4,7 @@
 
 <%= render :partial => 'invoice_parties' %>
 
-<div style="position: absolute; top: 11cm; width: 16.2cm; left: 1.5cm;">
+<div id="invoice-balance">
   <%= render :partial => 'insurance_recipe_balance' %>
 </div>
 
@@ -12,29 +12,7 @@
 @bank_account = @invoice.biller.account
 %>
 
-<div id="paymentfor1" class="block">
-<%= @bank_account.bank.vcard.full_name %><br />
-<%= @bank_account.bank.vcard.postal_code %> <%= @bank_account.bank.vcard.locality %><br />
-<div style="font-size: 80%; margin-top: 0.2cm">Zugunsten von</div>
-  <%= full_address(@bank_account.holder.vcard) %>
-</div>
+<%= render :partial => 'invoice_vesr' %>
 
-<div id="account1" class="line"><%= @bank_account.pc_id %></div>
-<div id="paymentamount1" class="line"><%= sprintf('%.0f', @invoice.amount.floor) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= sprintf('%02i', @invoice.rounded_amount * 100 % 100) %></div>
-<div id="paymentreference1" class="line"><%= @invoice.esr9_reference(@bank_account) %></div>
-<div id="paymentby1" class="block"><%= full_address(@invoice.patient.vcard) %></div>
-
-<div id="paymentfor2" class="block">
-<%= @bank_account.bank.vcard.full_name %><br />
-<%= @bank_account.bank.vcard.postal_code %> <%= @bank_account.bank.vcard.locality %><br />
-<div style="font-size: 80%; margin-top: 0.2cm">Zugunsten von</div>
-  <%= full_address(@bank_account.holder.vcard) %>
-</div>
-
-<div id="account2" class="line"><%= @bank_account.pc_id %></div>
-<div id="paymentamount2" class="line"><%= sprintf('%.0f', @invoice.amount.floor) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= sprintf('%02i', @invoice.rounded_amount * 100 % 100) %></div>
-<div id="paymentby3" class="block"><%= full_address(@bank_account.holder.vcard) %></div>
-<div id="reference" class="line"><%= @invoice.esr9_reference(@bank_account) %></div>
-<div id="vesr"><%= @invoice.esr9(@bank_account) %></div>
 </div>
 <div>
