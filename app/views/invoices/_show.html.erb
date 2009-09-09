@@ -10,7 +10,7 @@
       <%= link_to_remote "Rechnung stornieren", {:url => invoice_path(@invoice), :method => :delete, :confirm => "Rechnung #{@invoice.to_s} stornieren?"}, :class => "icon icon-delete" %>
     <% end %>
   <% end %>
-  <%= link_to_remote "Verbuchen", {:url => book_invoice_path(@invoice)}, :class => "icon icon-book" if @invoice.state == 'printed' %>
+  <%= link_to_remote "Rechnung verbuchen", {:url => book_invoice_path(@invoice)}, :class => "icon icon-book" if @invoice.state == 'printed' %>
   <%= link_to "Rückforderungsbeleg PDF", formatted_insurance_recipe_invoice_path(@invoice, :pdf), :method => :get, :class => "icon icon-pdf" %>
 </div>
 
@@ -41,7 +41,7 @@
 </div>
 
 <div class="contextual">
-  <%= link_to_remote "Manuell buchen", {:url => new_invoice_booking_path(@invoice), :method => :get}, :class => "icon icon-add" %>
+  <%= link_to_remote "Manuell buchen", {:url => new_invoice_booking_path(@invoice), :method => :get}, :class => "icon icon-book" %>
 </div>
 <h3>Buchungen</h3>
 <div id="invoice_<%= @invoice.id %>_booking_list">
