@@ -8,11 +8,21 @@ th {
   font-weight: none;
   text-align:  left;
 }
+h1, h2, h3 {
+  border-bottom: 0;
+}
 
 .block {
   font-size:   9pt;
   position:    absolute;
 }
+.block h3 {
+  font-style:    italic;
+  font-weight:   normal;
+  font-size:     9pt;
+  margin-bottom: 0.2em;
+}
+
 .line {
   font-size:   9pt;
   position:    absolute;
@@ -121,7 +131,7 @@ th {
   left:        1.5cm;
 }
 #referrer {
-  top:         6cm;
+  top:         5cm;
   left:        1.5cm;
 }
 #provider {
@@ -129,7 +139,7 @@ th {
   left:        5.5cm;
 }
 #patient {
-  top:         6cm;
+  top:         5cm;
   left:        5.5cm;
 }
 
@@ -195,15 +205,18 @@ th {
 /* Reminder */
 #reminder-message {
   position: absolute;
-  top:      9cm;
-  width:    16.2cm;
+  top:      8cm;
+  width:    17cm;
   left:     1.5cm;
 }
 
 #reminder-balance {
   position: absolute;
-  top:      16cm;
-  width:    16.2cm;
+  top:      14.5cm;
+  width:    16.5cm;
   left:     1.5cm;
 }
 
+#invoice .booking_list {
+  width: 100%;
+}
