@@ -39,7 +39,20 @@ th {
   width: 1.8cm;
 }
 
-/* Invoices */
+.total {
+  font-weight: bold;
+}
+.amount {
+  font-size:   8pt;
+  text-align:  right;
+}
+.totalamount {
+  font-size:   8pt;
+  font-weight: bold;
+  text-align:  right;
+}
+
+/* Insurance recipe */
 .insurance-recipe {
   font-family: Liberation,Arial,DejaVu Sans;
   font-size:   8pt;
@@ -73,18 +86,6 @@ th {
   top:		26.7cm;
   position:	absolute;
   text-align:	right;
-}
-.total {
-  font-weight: bold;
-}
-.amount {
-  font-size:   8pt;
-  text-align:  right;
-}
-.totalamount {
-  font-size:   8pt;
-  font-weight: bold;
-  text-align:  right;
 }
 
 /* Doctor Invoice */
@@ -125,6 +126,7 @@ th {
   left:        5.5cm;
 }
 
+/* VESR Form */
 #vesr {
   width:       18.2cm;
   font-size:   10pt;
