@@ -26,6 +26,15 @@ class Invoice < ActiveRecord::Base
     self.state = 'canceled'
   end
   
+  def remind
+    bookings.build(:title => "Mahnung",
+                   :amount => 0,
+                   :credit_account => EARNINGS_ACCOUNT,
+                   :debit_account => DEBIT_ACCOUNT,
+                   :value_date => Date.today)
+    self.state = 'reminded'
+  end
+  
   has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC, if(ref_code IS NULL, code, ref_code), concat(code,ref_code)'
 
   # Validation

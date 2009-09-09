@@ -55,8 +55,10 @@ class InvoicesController < ApplicationController
     
     print_reminder
     
-    @invoice.state = 'reminded'
-    @invoice.save!
+    unless params[:print_copy]
+      @invoice.remind
+      @invoice.save!
+    end
     
     respond_to do |format|
       format.html { redirect_to invoices_path }
