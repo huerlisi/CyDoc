@@ -35,7 +35,7 @@
   </tr>
   <tr>
     <th></th><td></td>
-    <th>Fälligkeit:</th><td><%= @invoice.due_date.strftime('%d.%m.%Y') %></td>
+    <th>Fälligkeit:</th><td><%= in_place_editor_field :invoice, :due_date %></td>
   </tr>
 </table>
 </div>

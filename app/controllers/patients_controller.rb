@@ -16,6 +16,8 @@ class PatientsController < ApplicationController
   in_place_edit_for :service_record, :ref_code
   in_place_edit_for :service_record, :quantity
                 
+  in_place_edit_for :invoice, :due_date
+
   # GET /patients
   def index
     query = params[:query]
