@@ -100,6 +100,13 @@ th {
   left:        0cm;
 }
 
+#invoice-balance {
+  position: absolute;
+  top:      11cm;
+  width:    16.2cm;
+  left:     1.5cm;
+}
+
 #billingaddress {
   font-size:   12pt;
   top:         4.2cm;
