@@ -3,6 +3,7 @@ class InvoicesController < ApplicationController
 
   print_action_for :insurance_recipe, :tray => :plain
   print_action_for :patient_letter, :tray => :invoice
+  print_action_for :reminder, :tray => :invoice
 
   # POST /invoice/1/print
   def print
@@ -47,6 +48,28 @@ class InvoicesController < ApplicationController
     end
   end
 
+  # POST /invoice/1/print_reminder
+  def print_reminder
+    @invoice = Invoice.find(params[:id])
+    @treatment = @invoice.treatment
+    @patient = @treatment.patient
+    
+    print_reminder
+    
+    @invoice.state = 'remindeded'
+    @invoice.save!
+    
+    respond_to do |format|
+      format.html { redirect_to invoices_path }
+      format.js {
+        render :update do |page|
+          page.replace_html "sub-tab-content-invoices-#{@invoice.id}", :partial => 'show'
+          page.replace "invoice_#{@invoice.id}_flash", :partial => 'printed_flash'
+        end
+      }
+    end
+  end
+  
   # GET /invoices/1/insurance_recipe
   def insurance_recipe
     @invoice ||= Invoice.find(params[:id])
@@ -60,6 +83,17 @@ class InvoicesController < ApplicationController
 
   # GET /invoices/1/patient_letter
   def patient_letter
+    @invoice ||= Invoice.find(params[:id])
+    @patient = @invoice.patient
+
+    respond_to do |format|
+      format.html {}
+      format.pdf { render_pdf }
+    end
+  end
+
+  # GET /invoices/1/reminder
+  def reminder
     @invoice ||= Invoice.find(params[:id])
     @patient = @invoice.patient
 

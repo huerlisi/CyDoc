@@ -28,7 +28,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :bookings
   
   # Billing
-  map.resources :invoices, :collection => {:print_all => :post}, :member => {:print => :post, :insurance_recipe => :get, :patient_letter => :get, :book => :post} do |invoice|
+  map.resources :invoices, :collection => {:print_all => :post, :print_all_reminders => :post}, :member => {:print => :post, :print_reminder => :post, :insurance_recipe => :get, :patient_letter => :get, :reminder => :get, :book => :post} do |invoice|
     invoice.resources :bookings
   end
   

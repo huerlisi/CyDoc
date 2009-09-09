@@ -13,6 +13,10 @@ class Invoice < ActiveRecord::Base
   named_scope :open, :conditions => "state = 'open'"
   named_scope :overdue, :conditions => ["state = 'booked' AND due_date < ?", Date.today]
 
+  def overdue?
+    state == 'booked' and due_date < Date.today
+  end
+  
   def cancel
     bookings.build(:title => "Storno",
                    :amount => -(amount.currency_round),
@@ -21,7 +25,7 @@ class Invoice < ActiveRecord::Base
                    :value_date => Date.today)
     self.state = 'canceled'
   end
-
+  
   has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC, if(ref_code IS NULL, code, ref_code), concat(code,ref_code)'
 
   # Validation
