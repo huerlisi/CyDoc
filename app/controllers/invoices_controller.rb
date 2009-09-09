@@ -48,17 +48,18 @@ class InvoicesController < ApplicationController
     end
   end
 
+  # POST /invoices/1/print_reminder_letter
   def print_reminder_letter
     @invoice = Invoice.find(params[:id])
     @treatment = @invoice.treatment
     @patient = @treatment.patient
     
-    print_reminder
-    
     unless params[:print_copy]
       @invoice.remind
       @invoice.save!
     end
+    
+    print_reminder
     
     respond_to do |format|
       format.html { redirect_to invoices_path }

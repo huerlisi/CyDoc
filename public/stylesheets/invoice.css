@@ -3,11 +3,6 @@ table {
   border-spacing:	0;
   border-collapse:	collapse;
 }
-th {
-  font-size:   7pt;
-  font-weight: none;
-  text-align:  left;
-}
 h1, h2, h3 {
   border-bottom: 0;
 }
@@ -16,11 +11,20 @@ h1, h2, h3 {
   font-size:   9pt;
   position:    absolute;
 }
-.block h3 {
+h3 {
+  color:         gray;
   font-style:    italic;
   font-weight:   normal;
-  font-size:     9pt;
+  font-size:     8pt;
   margin-bottom: 0.2em;
+}
+.block th {
+  color:         gray;
+  font-style:    italic;
+  font-weight:   normal;
+  font-size:     8pt;
+  text-align:    left;
+  padding-right: 5.4em;
 }
 
 .line {
@@ -126,6 +130,10 @@ h1, h2, h3 {
   top:         0cm;
   left:        1.5cm;
 }
+#info h2 {
+  margin-bottom: 1em;
+}
+
 #biller {
   top:         3cm;
   left:        1.5cm;
@@ -204,19 +212,30 @@ h1, h2, h3 {
 
 /* Reminder */
 #reminder-message {
-  position: absolute;
-  top:      8cm;
-  width:    17cm;
-  left:     1.5cm;
+  font-size: 9pt;
+  position:  absolute;
+  top:       7.2cm;
+  width:     17cm;
+  left:      1.5cm;
 }
 
 #reminder-balance {
   position: absolute;
   top:      14.5cm;
-  width:    16.5cm;
+  width:    17cm;
   left:     1.5cm;
 }
 
 #invoice .booking_list {
-  width: 100%;
+  width:     100%;
+  font-size: 8pt;
+}
+
+#invoice .booking_list th {
+  text-align: left;
+}
+
+#signature {
+  margin-top:   1.5em;
+  margin-left: 10.8cm
 }

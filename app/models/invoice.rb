@@ -28,7 +28,7 @@ class Invoice < ActiveRecord::Base
   
   def remind
     # TODO: support more than one reminder
-    bookings.build(:title => "1.Mahnung (Keine Gebühr)",
+    bookings.build(:title => "1. Mahnung (Keine Gebühr)",
                    :amount => 0,
                    :credit_account => EARNINGS_ACCOUNT,
                    :debit_account => DEBIT_ACCOUNT,
