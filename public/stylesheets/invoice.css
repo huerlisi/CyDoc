@@ -88,7 +88,7 @@ th {
   text-align:	right;
 }
 
-/* Doctor Invoice */
+/* Invoice */
 #invoice {
   font-family: Arial,DejaVu Sans;
   font-size:   8pt;
@@ -191,3 +191,19 @@ th {
   left:        12.6cm;
   width:       10cm;
 }
+
+/* Reminder */
+#reminder-message {
+  position: absolute;
+  top:      9cm;
+  width:    16.2cm;
+  left:     1.5cm;
+}
+
+#reminder-balance {
+  position: absolute;
+  top:      16cm;
+  width:    16.2cm;
+  left:     1.5cm;
+}
+

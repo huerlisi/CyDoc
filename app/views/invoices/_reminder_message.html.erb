@@ -1,0 +1,16 @@
+<div id="reminder-message">
+  <h2>1. Mahnung</h2>
+  <p>Sehr geehrte Patientin</p>
+
+  <p>Bei der Durchsicht meiner Buchhaltung habe ich festgestellt, dass die Zahlung der oben erwähnten Rechnung noch nicht verbucht ist.</p>
+  <p>Falls Sie per E-Banking bezahlt haben, bitte ich Sie nochmals zu überprüfen, ob Sie die korrekte Konto- und Referenznummer angegeben haben.
+  Wenn Sie tatsächlich noch nicht bezahlt haben, möchte ich Sie bitten, den Betrag in den nächsten Tagen zu überweisen.</p>
+  <p>Sollte sich Ihre Zahlung mit der Mahnung kreuzen, betrachten Sie dieses Schreiben als gegenstandslos.</p>
+  <p>Wir möchten Sie darauf aufmerksam machen, dass die nächste Mahnung gebührenpflichtig ist.</p>
+  <p>Bei allfälligen Unstimmigkeiten rufen Sie uns bitte an, oder schreiben Sie eine E-Mail.</p>
+
+  <div id="signature">
+    Mit freundlichen Grüssen<br/>
+    <%= @invoice.biller.to_s %>
+  </div>
+</div>
