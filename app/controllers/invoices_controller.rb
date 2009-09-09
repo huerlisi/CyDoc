@@ -48,15 +48,14 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # POST /invoice/1/print_reminder
-  def print_reminder
+  def print_reminder_letter
     @invoice = Invoice.find(params[:id])
     @treatment = @invoice.treatment
     @patient = @treatment.patient
     
     print_reminder
     
-    @invoice.state = 'remindeded'
+    @invoice.state = 'reminded'
     @invoice.save!
     
     respond_to do |format|
@@ -64,7 +63,7 @@ class InvoicesController < ApplicationController
       format.js {
         render :update do |page|
           page.replace_html "sub-tab-content-invoices-#{@invoice.id}", :partial => 'show'
-          page.replace "invoice_#{@invoice.id}_flash", :partial => 'printed_flash'
+          page.replace "invoice_#{@invoice.id}_flash", :partial => 'reminded_flash'
         end
       }
     end
