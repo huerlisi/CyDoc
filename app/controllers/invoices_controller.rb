@@ -75,12 +75,7 @@ class InvoicesController < ApplicationController
     query ||= params[:search][:query] if params[:search]
     query ||= params[:quick_search][:query] if params[:quick_search]
 
-    if query.blank?
-      # TODO: better sorting
-      @invoices = Invoice.paginate(:page => params['page'], :per_page => 20, :order => 'id DESC')
-    else
-      @invoices = Invoice.clever_find(query).paginate(:page => params['page'], :per_page => 20, :order => 'id DESC')
-    end
+    @invoices = Invoice.clever_find(query).paginate(:page => params['page'], :per_page => 20, :order => 'id DESC')
     
     respond_to do |format|
       format.html {

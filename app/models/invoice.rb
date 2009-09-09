@@ -125,7 +125,7 @@ class Invoice < ActiveRecord::Base
   
   # Search
   def self.clever_find(query, args = {})
-    return [] if query.nil? or query.empty?
+    return [] if query.blank?
 
     query_params = {}
     case query
