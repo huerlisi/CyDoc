@@ -1,3 +1,44 @@
+/* General styles */
+table {
+  border-spacing:	0;
+  border-collapse:	collapse;
+}
+th {
+  font-size:   7pt;
+  font-weight: none;
+  text-align:  left;
+}
+
+.block {
+  font-size:   9pt;
+  position:    absolute;
+}
+.line {
+  font-size:   9pt;
+  position:    absolute;
+}
+
+.head {
+  font-size:   16pt;
+  font-weight: bold;
+}
+.subhead {
+  vertical-align: top;
+  font-size:      7pt;
+  font-weight:   bold;
+}
+.list {
+  font-size:   7pt;
+}
+.bullet {
+  font-size:   8pt;
+  font-weight: none;
+}
+
+.col1 {
+  width: 1.8cm;
+}
+
 /* Invoices */
 .insurance-recipe {
   font-family: Liberation,Arial,DejaVu Sans;
@@ -33,18 +74,6 @@
   position:	absolute;
   text-align:	right;
 }
-.head {
-  font-size:   16pt;
-  font-weight: bold;
-}
-.subhead {
-  vertical-align: top;
-  font-size:      7pt;
-  font-weight:   bold;
-}
-.list {
-  font-size:   7pt;
-}
 .total {
   font-weight: bold;
 }
@@ -56,24 +85,6 @@
   font-size:   8pt;
   font-weight: bold;
   text-align:  right;
-}
-.bullet {
-  font-size:   8pt;
-  font-weight: none;
-}
-
-table {
-  border-spacing:	0;
-  border-collapse:	collapse;
-}
-th {
-  font-size:   7pt;
-  font-weight: none;
-  text-align:  left;
-}
-
-.col1 {
-  width: 1.8cm;
 }
 
 /* Doctor Invoice */
@@ -88,14 +99,6 @@ th {
   left:        0cm;
 }
 
-#vesr {
-  width:       18.2cm;
-  font-size:   10pt;
-  font-family: ocr-b,Helvetica,Arial,sans-serif;
-  position:    absolute;
-  top:         26.9cm;
-  left:        6.7cm;
-}
 #billingaddress {
   font-size:   12pt;
   top:         4.2cm;
@@ -120,6 +123,15 @@ th {
 #patient {
   top:         6cm;
   left:        5.5cm;
+}
+
+#vesr {
+  width:       18.2cm;
+  font-size:   10pt;
+  font-family: ocr-b,Helvetica,Arial,sans-serif;
+  position:    absolute;
+  top:         26.9cm;
+  left:        6.7cm;
 }
 #paymentfor1 {
   top:         19.4cm;
@@ -169,12 +181,4 @@ th {
   top:         21.8cm;
   left:        12.6cm;
   width:       10cm;
-}
-.block {
-  font-size:   9pt;
-  position:    absolute;
-}
-.line {
-  font-size:   9pt;
-  position:    absolute;
 }
