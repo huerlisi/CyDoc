@@ -87,7 +87,13 @@ class EsrRecord < ActiveRecord::Base
   end
 
   def create_esr_booking
-    esr_booking = create_booking(
+    if invoice
+      esr_booking = invoice.bookings.build
+    else
+      esr_booking = Booking.new
+    end
+    
+    esr_booking.update_attributes(
       :amount         => amount,
       :credit_account => Invoice::DEBIT_ACCOUNT,
       :debit_account  => vesr_account,
@@ -95,11 +101,8 @@ class EsrRecord < ActiveRecord::Base
       :title          => "VESR Zahlung #{reference}",
       :comments       => remarks )
     
-    if invoice
-      esr_booking.reference = invoice
-      esr_booking.save
-    end
-    
+    esr_booking.save
+ 
     return esr_booking
   end
 end

@@ -6,8 +6,12 @@
   <td style="text-align: right"><%=h sprintf("%0.2f", item.rounded_amount) %></td>
   <td><%=h item.state %></td>
   <td>
-    <%= link_to "Drucken", print_invoice_path(item), :method => :post %>
-    <%= link_to_remote image_tag('delete.png'), {:url => invoice_path(item), :method => :delete, :confirm => "Rechnung #{item.to_s} löschen?"} %>
+    <%= link_to image_tag('print.png'), print_invoice_path(item), :title => "Drucken", :method => :post %>
+    <% if item.state == 'prepared' %>
+      <%= link_to_remote image_tag('delete.png'), {:url => invoice_path(item, :context => 'list'), :method => :delete, :confirm => "Rechnung #{item.to_s} löschen?"}, :title => 'Löschen' %>
+    <% else %>
+      <%= link_to_remote image_tag('delete.png'), {:url => invoice_path(item, :context => 'list'), :method => :delete, :confirm => "Rechnung #{item.to_s} stornieren?"}, :title => 'Stornieren' %>
+    <% end %>
 <!--
     <%= link_to "KK-Beleg", insurance_recipe_invoice_path(item) %>
     <%= link_to "KK-Beleg PDF", formatted_insurance_recipe_invoice_path(item, :pdf) %>

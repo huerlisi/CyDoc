@@ -1,0 +1,10 @@
+<div id="invoice_<%= @invoice.id %>_flash" class="flash notice">
+  <p>Rechnung an Drucker gesendet...</p>
+  <% unless params[:print_copy] %>
+  <p>
+    Möchten Sie die Rechnung verbuchen?
+    <%= button_to_function 'Ja', remote_function(:url => book_invoice_url(@invoice)) %>
+    <%= button_to_function 'Nein', "Element.hide('invoice_#{@invoice.id}_flash')" %>
+  </p>
+  <% end %>
+</div>

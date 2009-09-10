@@ -1,8 +1,4 @@
-<table class="list" id="bookings">
+<table class="list booking_list" id="invoice_<%= @invoice.id %>_bookings">
   <%= render :partial => 'bookings/item', :collection => list %>
-  <tr>
-    <th>Saldo</th>
-    <!-- TODO: to_a is deprecated, but needed to get the Enumeration sum function -->
-    <th colspan="2" style="text-align: right"><%= sprintf("%0.2f", list.to_a.sum{|b| b.accounted_amount(Invoice::DEBIT_ACCOUNT)}.currency_round) %>&nbsp;CHF</th>
-  </tr>
+  <%= render :partial => 'bookings/list_footer' %>
 </table>

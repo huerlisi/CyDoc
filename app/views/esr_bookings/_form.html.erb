@@ -1,0 +1,8 @@
+<div class="contextual">
+  <%= link_to "VESR Liste", esr_bookings_path, :class => "icon icon-book" %>
+</div>
+<h2>VESR Datei einlesen</h2>
+<% form_for :esr_file, :url => esr_bookings_path, :html => { :multipart => true } do |esr_file| %>
+  Datei: <%= esr_file.file_field :uploaded_data %>
+  <%= esr_file.submit 'Einlesen' %>
+<% end %>

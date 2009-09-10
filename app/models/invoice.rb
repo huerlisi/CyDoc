@@ -8,13 +8,39 @@ class Invoice < ActiveRecord::Base
   belongs_to :law
   belongs_to :treatment
 
+  # State
   named_scope :prepared, :conditions => "state = 'prepared'"
   named_scope :open, :conditions => "state = 'open'"
+  named_scope :overdue, :conditions => ["state = 'booked' AND due_date < ?", Date.today]
 
+  def overdue?
+    state == 'booked' and due_date < Date.today
+  end
+  
+  def cancel
+    bookings.build(:title => "Storno",
+                   :amount => -(amount.currency_round),
+                   :credit_account => EARNINGS_ACCOUNT,
+                   :debit_account => DEBIT_ACCOUNT,
+                   :value_date => Date.today)
+    self.state = 'canceled'
+  end
+  
+  def remind
+    # TODO: support more than one reminder
+    bookings.build(:title => "1. Mahnung (Keine Gebühr)",
+                   :amount => 0,
+                   :credit_account => EARNINGS_ACCOUNT,
+                   :debit_account => DEBIT_ACCOUNT,
+                   :value_date => Date.today)
+    self.state = 'reminded'
+  end
+  
   has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC, if(ref_code IS NULL, code, ref_code), concat(code,ref_code)'
 
   # Validation
   validates_presence_of :service_records, :message => 'Keine Leistung eingegeben.'
+  validates_format_of :value_date, :with => /[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}/, :message => 'braucht Format dd.mm.yy (z.B. 3.12.1980)'
 
   validate :valid_service_records?
   validate :valid_treatment?
@@ -42,10 +68,16 @@ class Invoice < ActiveRecord::Base
   
   # Accounting
   has_many :bookings, :class_name => 'Accounting::Booking', :as => 'reference', :dependent => :destroy
-  before_create :build_booking
   
   def due_amount
     bookings.to_a.sum{|b| b.accounted_amount(Invoice::DEBIT_ACCOUNT)}
+  end
+  
+  def booking_saved(booking)
+    if state == 'booked' and due_amount <= 0.0
+      self.state = 'paid'
+      self.save
+    end
   end
   
   def build_booking
@@ -56,48 +88,9 @@ class Invoice < ActiveRecord::Base
                    :value_date => value_date)
   end
 
-  def build_vesr_booking(record)
-    record.invoice.bookings.build(
-      :amount => 0 - record.amount,
-      :credit_account => DEBIT_ACCOUNT,
-      :debit_account => VESR_ACCOUNT,
-      :value_date => record.value_date,
-      :title => "VESR Zahlung")
-  end
-
-  def self.create_vesr_bookings(records)
-    records.map{|record|
-      if Invoice.exists?(record.invoice_id)
-        invoice = record.invoice
-        invoice.build_vesr_booking(record).save
-        if invoice.due_amount.currency_round == 0.0
-          message = 'Bezahlt'
-        else
-          message = 'Falscher Betrag'
-        end
-      else
-        invoice = nil
-        message = "Rechnung '#{record.invoice_id}' nicht gefunden."
-      end
-      
-      [record, record.invoice_id, message]
-    }
-  end
-
-  def self.book_vesr
-    vesr_filename = Dir.new(File.join(RAILS_ROOT, 'data', 'vesr')).select{|entry| !(entry.starts_with?('.') or entry.starts_with?('archive'))}.first
-    return [] if vesr_filename.nil?
-    
-    vesr_path = File.join(RAILS_ROOT, 'data', 'vesr', vesr_filename)
-    vesr_file = File.new(vesr_path)
-    @esr_file = EsrFile.new(:uploaded_data => ActionController::TestUploadedFile.new('data/vesr/vesr.v11'))
-    
-    archive_filename = File.join(RAILS_ROOT, 'data', 'vesr', 'archive', "vesr-#{DateTime.now.strftime('%Y-%m-%d_%H-%M-%S')}.v11")
-    File.rename(vesr_path, archive_filename)
-
-    return vesr_journal
-  end
-
+  public
+  
+  # Standard methods
   def to_s(format = :default)
     case format
     when :short
@@ -146,7 +139,7 @@ class Invoice < ActiveRecord::Base
   
   # Search
   def self.clever_find(query, args = {})
-    return [] if query.nil? or query.empty?
+    return [] if query.blank?
 
     query_params = {}
     case query
@@ -206,12 +199,12 @@ class Invoice < ActiveRecord::Base
   end
 
   def value_date=(value)
-    write_attribute(:value_date, value)
-    self.due_date = value_date + PAYMENT_PERIOD
+    write_attribute(:value_date, Date.parse_europe(value))
+    self.due_date = value_date + PAYMENT_PERIOD unless value_date.nil?
   end
   
   def esr9(bank_account)
-    esr9_build(rounded_amount, id, bank_account.pc_id, bank_account.esr_id) # TODO: it's biller.esr_id
+    esr9_build(due_amount.currency_round, id, bank_account.pc_id, bank_account.esr_id) # TODO: it's biller.esr_id
   end
 
   def esr9_reference(bank_account)
@@ -245,9 +238,9 @@ class Invoice < ActiveRecord::Base
     sprintf('%02i%06i%1i', pre, main, post)
   end
 
-  def esr9_build(amount, id, biller_id, esr_id)
+  def esr9_build(esr_amount, id, biller_id, esr_id)
     # 01 is type 'Einzahlung in CHF'
-    amount_string = "01#{sprintf('%011.2f', amount).delete('.')}"
+    amount_string = "01#{sprintf('%011.2f', esr_amount).delete('.')}"
 
     id_string = esr_id + sprintf('%020i', id).delete(' ')
 

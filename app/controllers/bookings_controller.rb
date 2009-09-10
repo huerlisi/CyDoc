@@ -16,7 +16,7 @@ class BookingsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.insert_html :top, "booking_list", :partial => 'simple_form'
+          page.insert_html :top, "invoice_#{@invoice.id}_booking_list", :partial => 'simple_form'
         end
       }
     end
@@ -31,7 +31,7 @@ class BookingsController < ApplicationController
       @booking = Booking.new(params[:booking])
     end
     
-    case @booking.comments
+    case @booking.title
       when "Barzahlung":
         @booking.debit_account = Account.find_by_code('1000')
         @booking.credit_account = Account.find_by_code('1100')
@@ -54,8 +54,12 @@ class BookingsController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            page.insert_html :top, 'bookings', :partial => 'bookings/item', :object => @booking
+            @invoice.reload
+            # TODO: Only works when @invoice is set
+            page.replace "invoice_#{@invoice.id}_bookings", :partial => 'bookings/list', :object => @invoice.bookings
             page.remove 'booking_form'
+            # TODO: some kind of delegation would be nice
+            page.replace_html "invoice_#{@invoice.id}_state", @invoice.state
           end
         }
       end

@@ -1,15 +1,20 @@
 test:
-  login: test
-  zsr: 1234567
-  ean_party: 1122334455667
-  account: test_account
+  login:	test
+  code:		t1
+  zsr:		1234567
+  ean_party:	1122334455667
+  remarks:	Test Doctor
 
 single:
-  login: $LABEL
-  zsr: 1234567
-  ean_party: 1122334455667
+  login:	$LABEL
+  code:		s1
+  zsr:		1234567
+  ean_party:	1122334455667
+  remarks:	Single doctor with no colleagues
 
 colleague_one:
-  login: colleague
-  zsr: 7654321
-  ean_party: 9911223344556
+  login:	colleague
+  code:		c1
+  zsr:		7654321
+  ean_party:	9911223344556
+  remarks:	A doctor in a collective

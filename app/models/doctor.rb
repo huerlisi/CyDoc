@@ -2,8 +2,6 @@ class Doctor < ActiveRecord::Base
   has_vcards
   has_accounts
 
-  belongs_to :billing_doctor, :class_name => 'Doctor'
-
   has_many :patients
 
   has_and_belongs_to_many :offices

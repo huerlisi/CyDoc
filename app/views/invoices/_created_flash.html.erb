@@ -1,0 +1,8 @@
+<div id="invoice_<%= @invoice.id %>_flash" class="flash notice">
+  <p>Rechnung erstellt...</p>
+  <p>
+    Möchten Sie die Rechnung drucken?
+    <%= button_to_function 'Ja', remote_function(:url => print_invoice_url(@invoice)) %>
+    <%= button_to_function 'Nein', "Element.hide('invoice_#{@invoice.id}_flash')" %>
+  </p>
+</div>

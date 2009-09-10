@@ -7,30 +7,15 @@ end
 %>
 <div class="sub-tab-container sub-tab-<%= type %>">
   <% content_for :sidebar do %>
-    <div class="sub-tabs">
-      <% begin %>
-        <%= render :partial => "#{type}/sub_tab_head" %>
-      <% rescue %>
-        <h3><%= type.classify %></h3>
-      <% end %>
-      <ul>
-      <% tabs.each do |tab| -%>
-        <li><%= link_to "#{tab.to_s(:short)}", tab,
-                               :id => "sub-tab-#{type}-#{tab.id}",
-                               :class => ("#{type}_#{tab.id}" != selected_tab ? nil : 'selected'),
-                               :onclick => "showSubTab('#{type}-#{tab.id}', '#{type}'); this.blur(); return false;" %></li>
-      <% end -%>
-      </ul>
-    </div>
+    <%= render :partial => 'shared/sub_tab_sidebar', :locals => {:type => type, :tabs => tabs, :selected_tab => selected_tab} %>
   <% end %>
 
 <div id="new-sub-tab-content-<%= type %>"></div>
 
-<% tabs.each do |tab| -%>
-<% eval "@#{type.singularize} = tab" %>
-<%= content_tag('div', render(:partial => "#{type}/show"),
-                       :id => "sub-tab-content-#{type}-#{tab.id}",
-                       :style => ("#{type}_#{tab.id}" != selected_tab ? 'display:none' : nil),
-                       :class => 'sub-tab-content sub-tab-content-' + type) %>
-<% end -%>
+<div id="sub-tab-content-<%= type %>">
+  <% tabs.each do |tab| -%>
+  <% eval "@#{type.singularize} = tab" %>
+  <%= render :partial => 'shared/sub_tab_content', :locals => {:type => type, :tab => tab, :selected_tab => selected_tab} %>
+  <% end -%>
+</div>
 </div>
