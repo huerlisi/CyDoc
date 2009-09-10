@@ -90,7 +90,7 @@ class EsrRecord < ActiveRecord::Base
     if invoice
       esr_booking = invoice.bookings.build
     else
-      esr_booking = Booking.new
+      esr_booking = Accounting::Booking.new
     end
     
     esr_booking.update_attributes(
