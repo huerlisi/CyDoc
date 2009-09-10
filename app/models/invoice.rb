@@ -74,7 +74,7 @@ class Invoice < ActiveRecord::Base
   end
   
   def booking_saved(booking)
-    if state == 'booked' and due_amount <= 0.0
+    if (state == 'booked' or state == 'reminded') and due_amount <= 0.0
       self.state = 'paid'
       self.save
     end
