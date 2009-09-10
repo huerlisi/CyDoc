@@ -72,6 +72,28 @@ class InvoicesController < ApplicationController
     end
   end
   
+  # POST /invoices/print_reminder_for_all
+  def print_reminders_for_all
+    @invoices = Invoice.overdue
+    
+    for @invoice in @invoices
+      @invoice.remind
+      @invoice.save!
+
+      print_reminder
+    end
+
+    respond_to do |format|
+      format.html { redirect_to invoices_path }
+      format.js {
+        render :update do |page|
+          page.remove "overdue_invoice_list"
+          page.replace "invoice_list_flash", :partial => 'all_reminded_flash'
+        end
+       }
+    end
+  end
+
   # GET /invoices/1/insurance_recipe
   def insurance_recipe
     @invoice ||= Invoice.find(params[:id])
