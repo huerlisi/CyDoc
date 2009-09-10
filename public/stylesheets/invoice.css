@@ -135,19 +135,19 @@
 }
 
 #biller {
-  top:         2.5cm;
+  top:         2.2cm;
   left:        1.5cm;
 }
 #referrer {
-  top:         5cm;
+  top:         4.8cm;
   left:        1.5cm;
 }
 #provider {
-  top:         2.5cm;
+  top:         2.1cm;
   left:        5.5cm;
 }
 #patient {
-  top:         5cm;
+  top:         4.8cm;
   left:        5.5cm;
 }
 
@@ -214,7 +214,7 @@
 #reminder-message {
   font-size: 9pt;
   position:  absolute;
-  top:       7.2cm;
+  top:       7.5cm;
   width:     17cm;
   left:      1.5cm;
 }
