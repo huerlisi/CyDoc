@@ -8,7 +8,7 @@
 }
 
 .block {
-  font-size:   9pt;
+  font-size:   8pt;
   position:    absolute;
 }
 #invoice h3 {
@@ -135,7 +135,7 @@
 }
 
 #biller {
-  top:         3cm;
+  top:         2.5cm;
   left:        1.5cm;
 }
 #referrer {
@@ -143,7 +143,7 @@
   left:        1.5cm;
 }
 #provider {
-  top:         3cm;
+  top:         2.5cm;
   left:        5.5cm;
 }
 #patient {
