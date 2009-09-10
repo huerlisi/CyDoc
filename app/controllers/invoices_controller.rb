@@ -272,7 +272,7 @@ class InvoicesController < ApplicationController
     # ... but do cancel it afterwards
     else
       @invoice.cancel
-      @invoice.save!
+      @invoice.save(false)
       
       respond_to do |format|
         format.html { }
