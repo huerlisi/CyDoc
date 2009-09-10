@@ -204,7 +204,7 @@ class Invoice < ActiveRecord::Base
   end
   
   def esr9(bank_account)
-    esr9_build(rounded_amount, id, bank_account.pc_id, bank_account.esr_id) # TODO: it's biller.esr_id
+    esr9_build(due_amount.currency_round, id, bank_account.pc_id, bank_account.esr_id) # TODO: it's biller.esr_id
   end
 
   def esr9_reference(bank_account)
@@ -238,9 +238,9 @@ class Invoice < ActiveRecord::Base
     sprintf('%02i%06i%1i', pre, main, post)
   end
 
-  def esr9_build(amount, id, biller_id, esr_id)
+  def esr9_build(esr_amount, id, biller_id, esr_id)
     # 01 is type 'Einzahlung in CHF'
-    amount_string = "01#{sprintf('%011.2f', amount).delete('.')}"
+    amount_string = "01#{sprintf('%011.2f', esr_amount).delete('.')}"
 
     id_string = esr_id + sprintf('%020i', id).delete(' ')
 
