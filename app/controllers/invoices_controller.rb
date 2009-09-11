@@ -11,13 +11,13 @@ class InvoicesController < ApplicationController
     @treatment = @invoice.treatment
     @patient = @treatment.patient
     
-    print_patient_letter
-    print_insurance_recipe
-    
     unless params[:print_copy]
       @invoice.state = 'printed'
       @invoice.save!
     end
+    
+    print_patient_letter
+    print_insurance_recipe
     
     respond_to do |format|
       format.html { redirect_to invoices_path }

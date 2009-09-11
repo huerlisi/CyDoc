@@ -238,6 +238,7 @@ class Invoice < ActiveRecord::Base
     sprintf('%02i%06i%1i', pre, main, post)
   end
 
+  public
   def esr9_build(esr_amount, id, biller_id, esr_id)
     # 01 is type 'Einzahlung in CHF'
     amount_string = "01#{sprintf('%011.2f', esr_amount).delete('.')}"
