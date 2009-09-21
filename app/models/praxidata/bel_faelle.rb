@@ -1,9 +1,10 @@
 module Praxidata
-  class Praxidata::BelFaelle < Base
+  class BelFaelle < Base
     set_table_name "TbelFaelle"
     set_primary_key "IDFall"
 
-    has_many :bel_sitzungen, :class_name => 'BelSitzungen', :foreign_key => 'inBelegID'
+    has_many :sitzungen, :class_name => 'BelSitzungen', :foreign_key => 'inBelegID'
+
     def self.int_class
       ::Treatment
     end
