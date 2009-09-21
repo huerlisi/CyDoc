@@ -3,8 +3,8 @@ module Praxidata
     set_table_name "TbelSitzungen"
     set_primary_key "IDbelSitzung"
 
-    belongs_to :bel_faelle, :class_name => 'BelFaelle', :foreign_key => 'inBelegID'
-
+    belongs_to :fall, :class_name => 'BelFaelle', :foreign_key => 'inBelegID'
+    has_many :positionen, :class_name => 'BelPositionen', :foreign_key => 'inBelSitzungID'
     def self.int_class
       ::Session
     end
