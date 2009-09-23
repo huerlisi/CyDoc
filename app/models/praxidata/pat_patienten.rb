@@ -1,6 +1,6 @@
 module Praxidata
-  class ArzAerzte < Base
-    set_table_name "TarzAerzte"
+  class PatPatienten < Base
+    set_table_name "TpatPatienten"
     
     belongs_to :stamm, :class_name => 'AdrStamm', :foreign_key => 'inStammID'
   end
