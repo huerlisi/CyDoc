@@ -20,5 +20,6 @@ module Praxidata
 
     has_one :arzt, :class_name => 'ArzAerzte', :foreign_key => 'inStammID'
     has_one :patient, :class_name => 'PatPatienten', :foreign_key => 'inStammID'
+    has_one :patient_nummer, :class_name => 'PatNummer', :foreign_key => 'inPatientID'
   end
 end
