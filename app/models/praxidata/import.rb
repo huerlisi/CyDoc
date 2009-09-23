@@ -16,6 +16,14 @@ module Praxidata
          
          return record
       end
+      
+      def find_or_import(import_record)
+         # Try finding a previously imported record unless there's no primary key
+         record = self.find_by_imported_id(import_record.id) unless import_record.id.nil?
+         record = self.import(import_record) if record.nil?
+         
+         return record
+      end
     end
   end
 end
