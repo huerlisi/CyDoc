@@ -113,7 +113,7 @@ class Date
     return value if value.is_a?(Date)
     return value.to_date if value.is_a?(Time)
     
-    return nil if value.empty?
+    return nil if value.blank?
 
     if value.is_a?(String)
       if value.match /.*-.*-.*/

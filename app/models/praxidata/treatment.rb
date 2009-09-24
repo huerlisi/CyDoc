@@ -1,3 +1,6 @@
+require 'law'
+require 'treatment'
+
 module Praxidata
   module Treatment
     def import(import_record)

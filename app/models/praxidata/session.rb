@@ -1,3 +1,5 @@
+require 'session'
+
 module Praxidata
   module Session
     def import(import_record)
