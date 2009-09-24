@@ -23,6 +23,16 @@ module Praxidata
           :locality         => import_record.adresse.plz.nil? ? nil : import_record.adresse.plz.txOrt
         )
       }
+
+      # Save now as we're looking up this patient in treatment import
+      self.save
+
+      for fall in import_record.faelle
+        self.treatments << ::Treatment.find_or_import(fall)
+      end
+      
+      self.save
+      return self
     end
   end
 end

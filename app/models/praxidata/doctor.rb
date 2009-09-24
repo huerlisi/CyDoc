@@ -18,6 +18,9 @@ module Praxidata
           :locality         => import_record.adresse.plz.txOrt
         )
       }
+
+      self.save
+      return self
     end
   end
 end

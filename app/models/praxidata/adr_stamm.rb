@@ -10,6 +10,8 @@ module Praxidata
     has_one :firma, :class_name => 'AdrFirmen', :foreign_key => 'inStammID'
     has_one :personal, :class_name => 'AdrPersonal', :foreign_key => 'inStammID'
 
+    has_many :faelle, :class_name => 'BelFaelle', :foreign_key => 'inStammID'
+
     def ext_adresse
       case shStammArt
         when 4: return firma
