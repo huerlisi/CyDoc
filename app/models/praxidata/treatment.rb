@@ -6,6 +6,14 @@ module Praxidata
         :date_end   => import_record.dtEnde,
         :patient    => ::Patient.find_or_import(import_record.stamm)
       }
+      
+      for sitzung in import_record.sitzungen
+        self.sessions << ::Session.find_or_import(sitzung)
+      end
+      
+      self.save
+
+      return self
     end
   end
 end
