@@ -1,3 +1,4 @@
+require 'tiers'
 require 'invoice'
 
 module Praxidata
@@ -21,7 +22,7 @@ module Praxidata
         :due_date => (import_record.dtRechnung.nil? ? nil : import_record.dtRechnung + import_record.inZahlungsfrist)
       }
       
-      self.tiers = Tiers.new(
+      self.tiers = TiersGarant.new(
         :patient  => ::Patient.find_or_import(import_record.fall.stamm),
         :biller   => ::Doctor.first,
         :provider => ::Doctor.first        
@@ -34,12 +35,14 @@ module Praxidata
       end
 
       for debitor in import_record.debitoren
-        booking = Accounting::Booking.new(
+        booking = Accounting::Booking.find_by_imported_id_and_title(debitor.id, 'Rechnung')
+        booking ||= Accounting::Booking.new(
           :amount => debitor.snBetrag,
           :title  => 'Rechnung',
           :credit_account => ::Invoice::EARNINGS_ACCOUNT,
           :debit_account  => ::Invoice::DEBIT_ACCOUNT,
-          :value_date => debitor['dtFälligkeit']
+          :value_date => debitor['dtFälligkeit'],
+          :imported_id => debitor.id
         )
         self.bookings << booking
         booking.save
@@ -47,12 +50,14 @@ module Praxidata
       end
 
       for zahlung in import_record.zahlungen
-        booking = Accounting::Booking.new(
+        booking = Accounting::Booking.find_by_imported_id_and_title(zahlung.id, 'Zahlung')
+        booking ||= Accounting::Booking.new(
           :amount => zahlung.snBetrag,
           :title  => 'Zahlung',
           :credit_account => ::Accounting::Account.find_by_code('1100'),
           :debit_account  => ::Accounting::Account.find_by_code('1020'),
-          :value_date => zahlung.dtValutadatum
+          :value_date => zahlung.dtValutadatum,
+          :imported_id => zahlung.id
         )
         self.bookings << booking
         booking.save
