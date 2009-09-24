@@ -1,3 +1,7 @@
+require 'medical_case'
+require 'diagnosis'
+require 'diagnosis_case'
+
 module Praxidata
   module MedicalCase
     def import(import_record)

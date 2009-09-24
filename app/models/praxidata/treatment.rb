@@ -1,5 +1,6 @@
 require 'law'
 require 'treatment'
+require 'medical_case'
 
 module Praxidata
   module Treatment
@@ -15,10 +16,6 @@ module Praxidata
           :case_id   => import_record.txFalllNummerVersicherung
         )
       }
-      
-      for sitzung in import_record.sitzungen
-        self.sessions << ::Session.find_or_import(sitzung)
-      end
       
       for diagnose in import_record.diagnosen
         self.medical_cases << ::DiagnosisCase.find_or_import(diagnose)

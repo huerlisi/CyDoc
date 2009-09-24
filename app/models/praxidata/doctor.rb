@@ -1,3 +1,5 @@
+require 'doctor'
+
 module Praxidata
   module Doctor
     def import(import_record)
