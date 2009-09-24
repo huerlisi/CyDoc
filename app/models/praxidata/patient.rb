@@ -5,7 +5,7 @@ module Praxidata
         :birth_date        => import_record.person.dtGeburtstag,
         :sex               => import_record.person.shSexID,
         # :doctor_id  => lookup,
-        :remarks           => import_record.moBemerkungen,
+        :remarks           => import_record.moBemerkungen || '',
         :dunning_stop      => import_record.patient.tfMahnSperre,
         # :use_billing_address => no billing address support for now,
         :deceased          => !(import_record.person.dtExitus.nil?), # Should be a date, not a boolean

@@ -17,6 +17,10 @@ module Praxidata
         self.sessions << ::Session.find_or_import(sitzung)
       end
       
+      for diagnose in import_record.diagnosen
+        self.medical_cases << ::DiagnosisCase.find_or_import(diagnose)
+      end
+      
       self.save
       return self
     end

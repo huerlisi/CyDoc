@@ -4,6 +4,7 @@ module Praxidata
     set_primary_key "IDFall"
 
     has_many :sitzungen, :class_name => 'BelSitzungen', :foreign_key => 'inBelegID'
+    has_many :diagnosen, :class_name => 'BelDiagnosen', :foreign_key => 'inFallID'
     belongs_to :stamm, :class_name => 'AdrStamm', :foreign_key => 'inStammID'
     belongs_to :abrechnungsmodus, :class_name => 'ModAbrechnungsmodus', :foreign_key => 'inModusID'
   end
