@@ -13,6 +13,32 @@ class Invoice < ActiveRecord::Base
   named_scope :open, :conditions => "state = 'open'"
   named_scope :overdue, :conditions => ["state = 'booked' AND due_date < ?", Date.today]
 
+  def state_adverb
+    case state
+      when 'prepared': "offen"
+      when 'printed': "gedruckt"
+      when 'canceled': "storniert"
+      when 'reactivated': "reaktiviert"
+      when 'reminded': "1x gemahnt"
+      when '2xreminded': "2x gemahnt"
+      when '3xreminded': "3x gemahnt"
+      when 'encashment': "in inkasso"
+    end
+  end
+  
+  def state_noun
+    case state
+      when 'prepared':    "Offene Rechnung"
+      when 'printed':     "Gedruckte Rechnung"
+      when 'canceled':    "Stornierte Rechnung"
+      when 'reactivated': "Reaktivierte Rechnung"
+      when 'reminded':    "1. Mahnung"
+      when '2xreminded':  "2. Mahnung"
+      when '3xreminded':  "3. Mahnung"
+      when 'encashment':  "Inkasso"
+    end
+  end
+  
   def overdue?
     state == 'booked' and due_date < Date.today
   end

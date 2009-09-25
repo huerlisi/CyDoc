@@ -49,7 +49,22 @@ module Praxidata
         )
         self.bookings << booking
         booking.save
-        self.state = 'booked'
+        self.state = 'booked' if state == 'prepared'
+
+        for mahnung in debitor.mahnungen
+          reminder_booking = Accounting::Booking.new(
+            :title          => "#{mahnung.stufe} (Gebühr #{sprintf('%0.2f', mahnung.snSpesen.currency_round)})",
+            :amount         => mahnung.snSpesen.currency_round,
+            :reference      => booking.reference,
+            :value_date     => mahnung.dtMahndatum,
+            :credit_account => booking.credit_account,
+            :debit_account  => booking.debit_account
+          )
+          reminder_booking.save
+        end
+
+        aktive_mahnung = debitor.mahnungen.find(:first, :conditions => ['tfInaktiv = ?', false])
+        self.state = aktive_mahnung.status if aktive_mahnung
       end
 
       for zahlung in import_record.zahlungen
@@ -68,7 +83,7 @@ module Praxidata
 
       self.booking_saved(nil)
 
-      self.save
+      self.save(false)
       return self
     end
   end
