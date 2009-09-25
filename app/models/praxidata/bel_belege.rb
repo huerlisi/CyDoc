@@ -25,7 +25,7 @@ module Praxidata
     def status
       case shStatus
         when 1: 'prepared'
-        when 2: 'cancelled'
+        when 2: 'canceled'
         when 3: 'reactivated'
       end
     end

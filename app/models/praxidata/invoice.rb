@@ -24,16 +24,15 @@ module Praxidata
         :imported_esr_reference => import_record.txESRReferenzNummer
       }
 
-      self.state = imported_record.status if state == 'prepared'
-      
       self.tiers = TiersGarant.new(
         :patient  => ::Patient.find_or_import(import_record.fall.stamm),
         :biller   => ::Doctor.first,
         :provider => ::Doctor.first        
       )
       
+      self.state = imported_record.status if state == 'prepared'
       unless import_record.txStornoGrund.blank?
-        self.state = 'cancelled'
+        self.state = 'canceled'
         self.remark ||= ''
         self.remark += "Storniert: #{import_record.txStornoGrund}"
       end
@@ -65,8 +64,9 @@ module Praxidata
         )
         self.bookings << booking
         booking.save
-        self.booking_saved(booking)
       end
+
+      self.booking_saved(nil)
 
       self.save
       return self
