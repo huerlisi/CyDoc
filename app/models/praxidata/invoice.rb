@@ -30,7 +30,7 @@ module Praxidata
         :provider => ::Doctor.first        
       )
       
-      self.state = imported_record.status if state == 'prepared'
+      self.state = import_record.status if state == 'prepared'
       unless import_record.txStornoGrund.blank?
         self.state = 'canceled'
         self.remark ||= ''
