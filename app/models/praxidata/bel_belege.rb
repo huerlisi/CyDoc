@@ -13,7 +13,7 @@ module Praxidata
     has_many :zahlungen, :class_name => 'FinZahlungen', :foreign_key => 'inBelegID'
 
     # shGesetzID: 1 => Krankheit
-    # shStatus: 1 => bezahlt
+    # shStatus: 1 => aktiv, 2 => storniert, 3 => reaktiviert
     # shVergütungsart: 1 => Tarif Garant
     # shRechnungsart: 3 =>
     # shBelegArt: 3 => Rechnung, 2 => Leistungsblatt
@@ -21,5 +21,13 @@ module Praxidata
     # shErbringungsort: 1 => Praxis
     # tfKorrekturKostenträger: 0, ''
     # inLaufzeit: mostly 0, second most: 30, up to 200...
+    
+    def status
+      case shStatus
+        when 1: 'prepared'
+        when 2: 'cancelled'
+        when 3: 'reactivated'
+      end
+    end
   end
 end

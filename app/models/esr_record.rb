@@ -76,6 +76,15 @@ class EsrRecord < ActiveRecord::Base
       else
         self.state = "valid"
       end
+    elsif imported_invoice = Invoice.find(:first, :conditions => ["imported_esr_reference LIKE concat(?, '%')", reference])
+      self.invoice = imported_invoice
+      self.remarks += "Triamun Rechnung ##{invoice.imported_invoice_id}"
+      if invoice.due_amount.currency_round != self.amount.currency_round
+        self.remarks += ", falscher Betrag"
+        self.state = "bad"
+      else
+        self.state = "valid"
+      end
     else
       self.remarks += "Rechnung ##{invoice_id} nicht gefunden"
       self.state = "missing"

@@ -14,13 +14,17 @@ module Praxidata
       self.service_records = self.treatment.sessions.collect{|s| s.service_records}.flatten
 
       self.attributes = {
-        :remark => import_record.txBemerkung,
-        :law    => self.treatment.law,
-        :place_type => 'praxis',
+        :remark                 => import_record.txBemerkung,
+        :law                    => self.treatment.law,
+        :place_type             => 'praxis',
         # :state => import_record.shStatus,
-        :value_date => import_record.dtRechnung,
-        :due_date => (import_record.dtRechnung.nil? ? nil : import_record.dtRechnung + import_record.inZahlungsfrist)
+        :value_date             => import_record.dtRechnung,
+        :due_date               => (import_record.dtRechnung.nil? ? nil : import_record.dtRechnung + import_record.inZahlungsfrist),
+        :imported_invoice_id    => import_record.inBelegNummer,
+        :imported_esr_reference => import_record.txESRReferenzNummer
       }
+
+      self.state = imported_record.status if state == 'prepared'
       
       self.tiers = TiersGarant.new(
         :patient  => ::Patient.find_or_import(import_record.fall.stamm),
