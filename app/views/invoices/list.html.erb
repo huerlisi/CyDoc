@@ -23,7 +23,7 @@
 </div>
 <div id="overdue_invoice_list">
   <h2>Überfällige Rechnungen</h2>
-  <% @invoices = Invoice.overdue.paginate(:page => params['page'], :per_page => 20, :order => 'id DESC') %>
+  <% @invoices = Invoice.overdue.paginate(:page => params['page'], :per_page => 100, :order => 'state DESC, id DESC') %>
   <%= render :partial => 'list' %>
 </div>
 
