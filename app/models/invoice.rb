@@ -4,6 +4,9 @@ class Invoice < ActiveRecord::Base
   EARNINGS_ACCOUNT = Accounting::Account.find_by_code('3200')
   VESR_ACCOUNT = Accounting::Account.find_by_code('1000')
   
+  REMINDER_FEE = {'reminded' => 0.0, '2xreminded' => 10.0, '3xreminded' => 10.0, 'encashment' => 100.0}
+  REMINDER_PAYMENT_PERIOD = {'reminded' => 20, '2xreminded' => 10, '3xreminded' => 10, 'encashment' => 0}
+  
   belongs_to :tiers
   belongs_to :law
   belongs_to :treatment
@@ -13,6 +16,8 @@ class Invoice < ActiveRecord::Base
   named_scope :open, :conditions => "state = 'open'"
   named_scope :overdue, :conditions => ["state = 'booked' AND due_date < ?", Date.today]
   named_scope :twice_overdue, :conditions => ["state = 'reminded' AND due_date < ?", Date.today]
+  named_scope :three_times_overdue, :conditions => ["state = '2xreminded' AND due_date < ?", Date.today]
+  named_scope :in_encashment, :conditions => ["state = 'encashment'"]
 
   def state_adverb
     case state
@@ -55,14 +60,32 @@ class Invoice < ActiveRecord::Base
     self.state = 'canceled'
   end
   
-  def remind
-    # TODO: support more than one reminder
-    bookings.build(:title => "1. Mahnung (Keine Gebühr)",
-                   :amount => 0,
+  def build_reminder_booking
+    bookings.build(:title => self.state_noun,
+                   :amount => REMINDER_FEE[self.state],
                    :credit_account => EARNINGS_ACCOUNT,
                    :debit_account => DEBIT_ACCOUNT,
                    :value_date => Date.today)
+  end
+  
+  def remind
     self.state = 'reminded'
+    build_reminder_booking
+  end
+  
+  def remind_second_time
+    self.state = '2xreminded'
+    build_reminder_booking
+  end
+  
+  def remind_third_time
+    self.state = '3xreminded'
+    build_reminder_booking
+  end
+  
+  def encash
+    self.state = 'encashment'
+    build_reminder_booking
   end
   
   has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC, if(ref_code IS NULL, code, ref_code), concat(code,ref_code)'
