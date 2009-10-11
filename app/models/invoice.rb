@@ -14,9 +14,7 @@ class Invoice < ActiveRecord::Base
   # State
   named_scope :prepared, :conditions => "state = 'prepared'"
   named_scope :open, :conditions => "state = 'open'"
-  named_scope :overdue, :conditions => ["state = 'booked' AND due_date < ?", Date.today]
-  named_scope :twice_overdue, :conditions => ["state = 'reminded' AND due_date < ?", Date.today]
-  named_scope :three_times_overdue, :conditions => ["state = '2xreminded' AND due_date < ?", Date.today]
+  named_scope :overdue, :conditions => ["(state = 'booked' AND due_date < :today) OR (state = 'reminded' AND reminder_due_date < :today)", {:today => Date.today}]
   named_scope :in_encashment, :conditions => ["state = 'encashment'"]
 
   def state_adverb
@@ -70,16 +68,19 @@ class Invoice < ActiveRecord::Base
   
   def remind
     self.state = 'reminded'
+    self.reminder_due_date = Date.today + REMINDER_PAYMENT_PERIOD[self.state]
     build_reminder_booking
   end
   
   def remind_second_time
     self.state = '2xreminded'
+    self.second_reminder_due_date = Date.today + REMINDER_PAYMENT_PERIOD[self.state]
     build_reminder_booking
   end
   
   def remind_third_time
     self.state = '3xreminded'
+    self.third_reminder_due_date = Date.today + REMINDER_PAYMENT_PERIOD[self.state]
     build_reminder_booking
   end
   
