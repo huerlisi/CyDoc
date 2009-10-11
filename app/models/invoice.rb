@@ -67,6 +67,15 @@ class Invoice < ActiveRecord::Base
   end
   
   def remind
+    case state
+      when 'booked':      remind_first_time
+      when 'reminded':    remind_second_time
+      when '2xreminded':  remind_third_time
+      when '3xreminded':  encash
+    end
+  end
+  
+  def remind_first_time
     self.state = 'reminded'
     self.reminder_due_date = Date.today + REMINDER_PAYMENT_PERIOD[self.state]
     build_reminder_booking
