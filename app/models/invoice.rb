@@ -12,10 +12,12 @@ class Invoice < ActiveRecord::Base
   named_scope :prepared, :conditions => "state = 'prepared'"
   named_scope :open, :conditions => "state = 'open'"
   named_scope :overdue, :conditions => ["state = 'booked' AND due_date < ?", Date.today]
+  named_scope :twice_overdue, :conditions => ["state = 'reminded' AND due_date < ?", Date.today]
 
   def state_adverb
     case state
       when 'prepared': "offen"
+      when 'booked': "verbucht"
       when 'printed': "gedruckt"
       when 'canceled': "storniert"
       when 'reactivated': "reaktiviert"
@@ -29,6 +31,7 @@ class Invoice < ActiveRecord::Base
   def state_noun
     case state
       when 'prepared':    "Offene Rechnung"
+      when 'booked':      "Verbuchte Rechnung"
       when 'printed':     "Gedruckte Rechnung"
       when 'canceled':    "Stornierte Rechnung"
       when 'reactivated': "Reaktivierte Rechnung"
@@ -104,7 +107,7 @@ class Invoice < ActiveRecord::Base
   end
   
   def booking_saved(booking)
-    if (state == 'booked' or state == 'reminded') and due_amount <= 0.0
+    if due_amount <= 0.0
       self.state = 'paid'
       self.save
     end
