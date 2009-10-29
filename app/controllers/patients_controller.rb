@@ -60,7 +60,7 @@ class PatientsController < ApplicationController
   # GET /posts/new
   def new
     @patient = Patient.new(params[:patient])
-    @patient.vcard = Vcards::Vcard.new(params[:patient])
+    @patient.vcard = Vcard.new(params[:patient])
 
     @patient.doctor_patient_nr = Patient.maximum('CAST(doctor_patient_nr AS UNSIGNED INTEGER)').to_i + 1
 
@@ -75,7 +75,7 @@ class PatientsController < ApplicationController
   # POST /posts
   def create
     @patient = Patient.new
-    @patient.vcard = Vcards::Vcard.new
+    @patient.vcard = Vcard.new
 
     if @patient.update_attributes(params[:patient]) and @patient.vcard.save
       flash[:notice] = 'Patient erfasst.'

@@ -8,7 +8,7 @@ class Praxidata::PatientenPersonalien < Praxidata::Base
   
   def self.import_attributes(a)
     {
-      :vcard => Vcards::Vcard.new(
+      :vcard => Vcard.new(
         :locality => a.txOrt,
         :postal_code => a.txPLZ,
         :street_address => a.txAdresse1,
@@ -19,7 +19,7 @@ class Praxidata::PatientenPersonalien < Praxidata::Base
         
       ),
 # I have not yet found out how Triamun handles billing addresses
-#      :billing_vcard => Vcards::Vcard.new(
+#      :billing_vcard => Vcard.new(
 #        :locality => a.tx_fakt_Ort,
 #        :postal_code => a.tx_fakt_PLZ,
 #        :street_address => a.tx_fakt_Strasse,

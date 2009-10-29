@@ -8,7 +8,7 @@ class Praxidata::AdressenBanken < Praxidata::Base
 
   def self.import_attributes(a)
     {
-      :vcard => Vcards::Vcard.new(
+      :vcard => Vcard.new(
 #        :phone_number => a.tx_Telefon,
         :locality => a.tx_Ort,
 #        :fax_number => a.tx_FAX,

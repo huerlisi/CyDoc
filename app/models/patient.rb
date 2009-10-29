@@ -5,7 +5,7 @@ class Patient < ActiveRecord::Base
   has_many :sessions
 
   # FIX: This buggily needs this :select hack
-  named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcard, :conditions => Vcards::Vcard.by_name_conditions(name)}}
+  named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcard, :conditions => Vcard.by_name_conditions(name)}}
   named_scope :by_date, lambda {|date| {:conditions => ['birth_date LIKE ?', Date.parse_europe(date).strftime('%%%y-%m-%d')] }}
 
   has_vcards
