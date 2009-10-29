@@ -1,6 +1,25 @@
-<% fields_for @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
-  <%= patient.date_field :birth_date, :label => 'Geburtstag', :size => 12 %>
-  <%= patient.select :sex, {'Weiblich' => 'F', 'Männlich' => 'M'}, :include_blank => true, :label => 'Geschlecht', :size => 12 %>
-  <%= patient.text_field :doctor_patient_nr, :size => 15, :label => "Patientennr." %>
-  <%= patient.text_area :remarks, :label => "Bemerkungen", :cols => 30, :rows => 3 %>
+<% form_for @patient do |patient| %>
+<% fields_for @patient.vcard do |vcard| %>
+<div class="box" id="patient-personal">
+  <table style="width: 100%">
+    <tr>
+      <th style="width: 10em">Vorname, Name</th><td><%= vcard.text_field :given_name %> <%= vcard.text_field :family_name %></td>
+      <th style="width: 10em">Geburtstag</th><td><%= patient.date_field :birth_date, :size => 12 %></td>
+    </tr>
+    <tr>
+      <th>Strasse</th><td><%= vcard.text_field :street_address %></td>
+      <th>Geschlecht</th><td><%= patient.select :sex, {'Weiblich' => 'F', 'Männlich' => 'M'}, :include_blank => true, :size => 12 %></td>
+    </tr>
+    <tr>
+      <th>PLZ, Ort</th><td><%= vcard.text_field :postal_code, :size => 9 %> <%= vcard.text_field :locality %></td>
+      <th>Patientennr.</th><td><%= patient.text_field :doctor_patient_nr, :size => 15 %></td>
+    </tr>
+    <tr>
+      <th>Bemerkungen</th>
+      <td colspan="3"><%= patient.text_area :remarks, :rows => 3 %></td>
+    </tr>
+  </table>
+  <%= patient.submit "Speichern" %>
+</div>
+<% end %>
 <% end %>

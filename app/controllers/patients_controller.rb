@@ -88,6 +88,15 @@ class PatientsController < ApplicationController
   # GET /patients/1/edit
   def edit
     @patient = Patient.find(params[:id])
+
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.replace "patient-personal", :partial => 'personal_form'
+        end
+      }
+    end
   end
 
   # PUT /patients/1
@@ -95,7 +104,7 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
 
     respond_to do |format|
-      if @patient.update_attributes(params[:patient]) and @patient.vcard.save
+      if @patient.update_attributes(params[:patient]) and @patient.vcard.update_attributes(params[:vcard])
         flash[:notice] = 'Patient wurde geändert.'
         format.html { redirect_to(@patient) }
       else
