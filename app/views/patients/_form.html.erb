@@ -1,14 +1,4 @@
-<h3>Personalien</h3>
-<%= error_messages_for :patient %>
-
-<table>
-  <%= render :partial => 'personal_form' %>
-</table>
-
-<h3>Adresse</h3>
-<table>
-  <%= render :partial => '/vcards/form', :locals => {:vcard_name => 'patient', :vcard => @patient} %>
-</table>
+<%= render :partial => 'personal_form' %>
 
 <%= render :partial => 'phone_numbers/list' %>
 
