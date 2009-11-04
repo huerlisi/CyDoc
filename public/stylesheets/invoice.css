@@ -41,7 +41,7 @@
   font-size:      7pt;
   font-weight:   bold;
 }
-.list {
+#invoice .list, #insurance-recipe .list {
   font-size:   7pt;
 }
 .bullet {
