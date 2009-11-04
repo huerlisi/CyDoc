@@ -1,10 +1,13 @@
-<% form_remote_for @patient do |patient| %>
+<% fields_method = single_page_form ? :fields_for : :form_remote_for %>
+<% send fields_method, @patient do |patient| %>
 <% fields_for @patient.vcard do |vcard| %>
   <div id="patient-personal">
+    <% unless single_page_form %>
     <div class="contextual">
         <%= link_to_remote "Speichern", {:url => patient_path(@patient), :method => :put, :with => "Form.serialize($('edit_patient_#{@patient.id}'))"}, :class => "icon icon-save" %>
         <%= link_to_remote "Abbrechen", {:url => show_tab_patient_path(@patient, :tab => 'personal'), :method => :get}, :class => "icon icon-cancel" %>
     </div>
+    <% end %>
 
     <h3>Personalien</h3>
     <div class="box">
@@ -28,8 +31,10 @@
           <td colspan="3"><%= patient.text_area :remarks, :rows => 3 %></td>
         </tr>
       </table>
+      <% unless single_page_form %>
       <%= patient.submit "Speichern" %>
       <%= button_to_remote "Abbrechen", {:url => show_tab_patient_path(@patient, :tab => 'personal'), :method => :get}, :class => "icon icon-edit" %>
+      <% end %>
     </div>
   </div>
 <% end %>
