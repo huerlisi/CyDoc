@@ -104,24 +104,44 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
 
     respond_to do |format|
-      if @patient.update_attributes(params[:patient]) and @patient.vcard.update_attributes(params[:vcard])
+      if @patient.vcard.update_attributes(params[:vcard]) and @patient.update_attributes(params[:patient])
         flash[:notice] = 'Patient wurde geändert.'
         format.html { redirect_to(@patient) }
+        format.js {
+          render :update do |page|
+            page.replace "patient-personal", :partial => 'personal'
+          end
+        }
       else
         format.html { render :action => "edit" }
+        format.js {
+          render :update do |page|
+            page.replace "patient-personal", :partial => 'personal_form'
+          end
+        }
       end
     end
   end
 
   # GET /patients/1
   def show
-    # TODO: Check if .exists? recognizes the finder conditions
-    unless Patient.exists?(params[:id])
-      render :inline => "<h1>Patient existiert nicht</h1>", :layout => 'application', :status => 404
-      return
-    end
-    
     @patient = Patient.find(params[:id])
+  end
+
+  # GET /patients/1/show_tab
+  def show_tab
+    respond_to do |format|
+      @patient = Patient.find(params[:id])
+      
+      format.js {
+        # For partial updates used in form cancellation events
+        if tab = params[:tab]
+          render :update do |page|
+            page.replace "patient-#{tab}", :partial => tab
+          end
+        end
+      }
+    end
   end
 
   # POST /patients/1/print_label

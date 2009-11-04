@@ -180,4 +180,10 @@ module Print
   end
 end
 
+# Rails 2.2.1 helper
+def button_to_remote(name, options = {}, html_options = {})
+  button_to_function(name, remote_function(options), html_options)
+end
+
+
 ActionController::Base.send :include, Print

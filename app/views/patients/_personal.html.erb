@@ -1,0 +1,30 @@
+<div id="patient-personal">
+  <div class="contextual">
+      <%= link_to_remote "Ändern", {:url => edit_patient_path(@patient), :method => :get}, :class => "icon icon-edit" %>
+      <%= link_to_remote "KG-Etikette", {:url => print_full_label_patient_path(@patient), :method => :post}, :class => "icon icon-print" %>
+      <%= link_to_remote "Adress-Etikette", {:url => print_label_patient_path(@patient), :method => :post}, :class => "icon icon-print"%>
+  </div>
+
+  <h3>Personalien</h3>
+  <div class="box">
+  <% @vcard = @patient.vcard %>
+  <table style="width: 100%">
+    <tr>
+      <th style="width: 10em">Adresse</th><td><%= in_place_editor_field :vcard, :given_name %> <%= in_place_editor_field :vcard, :family_name %></td>
+      <th style="width: 10em">Geburtstag</th><td><%=h @patient.birth_date.strftime('%d.%m.%Y') %></td>
+    </tr>
+    <tr>
+      <th></th><td><%= in_place_editor_field :vcard, :street_address %></td>
+      <th>Geschlecht</th><td><%=h @patient.sex %></td>
+    </tr>
+    <tr>
+      <th></th><td><%= in_place_editor_field :vcard, :postal_code %> <%= in_place_editor_field :vcard, :locality %></td>
+      <th>Patientennr.</th><td><%= in_place_editor_field :patient, :doctor_patient_nr %></td>
+    </tr>
+    <tr>
+      <th>Bemerkungen</th>
+      <td colspan="3"><%= in_place_editor_field :patient, :remarks %></td>
+    </tr>
+  </table>
+  </div>
+</div>

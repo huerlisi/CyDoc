@@ -1,25 +1,36 @@
-<% form_for @patient do |patient| %>
+<% form_remote_for @patient do |patient| %>
 <% fields_for @patient.vcard do |vcard| %>
-<div class="box" id="patient-personal">
-  <table style="width: 100%">
-    <tr>
-      <th style="width: 10em">Vorname, Name</th><td><%= vcard.text_field :given_name %> <%= vcard.text_field :family_name %></td>
-      <th style="width: 10em">Geburtstag</th><td><%= patient.date_field :birth_date, :size => 12 %></td>
-    </tr>
-    <tr>
-      <th>Strasse</th><td><%= vcard.text_field :street_address %></td>
-      <th>Geschlecht</th><td><%= patient.select :sex, {'Weiblich' => 'F', 'Männlich' => 'M'}, :include_blank => true, :size => 12 %></td>
-    </tr>
-    <tr>
-      <th>PLZ, Ort</th><td><%= vcard.text_field :postal_code, :size => 9 %> <%= vcard.text_field :locality %></td>
-      <th>Patientennr.</th><td><%= patient.text_field :doctor_patient_nr, :size => 15 %></td>
-    </tr>
-    <tr>
-      <th>Bemerkungen</th>
-      <td colspan="3"><%= patient.text_area :remarks, :rows => 3 %></td>
-    </tr>
-  </table>
-  <%= patient.submit "Speichern" %>
-</div>
+  <div id="patient-personal">
+    <div class="contextual">
+        <%= link_to_remote "Speichern", {:url => patient_path(@patient), :method => :put, :with => "Form.serialize($('edit_patient_#{@patient.id}'))"}, :class => "icon icon-save" %>
+        <%= link_to_remote "Abbrechen", {:url => show_tab_patient_path(@patient, :tab => 'personal'), :method => :get}, :class => "icon icon-cancel" %>
+    </div>
+
+    <h3>Personalien</h3>
+    <div class="box">
+      <%= error_messages_for :patient %>
+
+      <table style="width: 100%">
+        <tr>
+          <th style="width: 10em">Vorname, Name</th><td><%= vcard.text_field :given_name %> <%= vcard.text_field :family_name %></td>
+          <th style="width: 10em">Geburtstag</th><td><%= patient.date_field :birth_date, :size => 12 %></td>
+        </tr>
+        <tr>
+          <th>Strasse</th><td><%= vcard.text_field :street_address %></td>
+          <th>Geschlecht</th><td><%= patient.select :sex, {'Weiblich' => 'F', 'Männlich' => 'M'}, :include_blank => true, :size => 12 %></td>
+        </tr>
+        <tr>
+          <th>PLZ, Ort</th><td><%= vcard.text_field :postal_code, :size => 9 %> <%= vcard.text_field :locality %></td>
+          <th>Patientennr.</th><td><%= patient.text_field :doctor_patient_nr, :size => 15 %></td>
+        </tr>
+        <tr>
+          <th>Bemerkungen</th>
+          <td colspan="3"><%= patient.text_area :remarks, :rows => 3 %></td>
+        </tr>
+      </table>
+      <%= patient.submit "Speichern" %>
+      <%= button_to_remote "Abbrechen", {:url => show_tab_patient_path(@patient, :tab => 'personal'), :method => :get}, :class => "icon icon-edit" %>
+    </div>
+  </div>
 <% end %>
 <% end %>
