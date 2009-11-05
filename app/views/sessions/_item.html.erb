@@ -26,7 +26,7 @@
   </div>
 
   <table class="session">
-    <% for service_record in item.service_records %>
+    <% for service_record in item.service_records.reverse %>
       <% @service_record = service_record %>
       <tr>
         <td style="width: 2em; text-align: right">
