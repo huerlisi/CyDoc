@@ -40,10 +40,10 @@
     <td class="totalamount"><%=h sprintf('%0.2f', @invoice.amount.currency_round) %></td>
     <td />
     <td class="subhead">Anzahlung</td>
-    <td class="totalamount">0.00</td>
+    <td class="totalamount"><%=h sprintf('%0.2f', @invoice.amount.currency_round - @invoice.due_amount.currency_round) %></td>
     <td />
     <td class="subhead">F&auml;lliger&nbsp;Betrag</td>
-    <td class="totalamount"><%=h sprintf('%0.2f', @invoice.amount.currency_round) %></td>
+    <td class="totalamount"><%=h sprintf('%0.2f', @invoice.due_amount.currency_round) %></td>
   </tr>
   <tr>
     <td colspan="3" class="subhead"><span class="bullet">&#9632;</span>&nbsp;MWSt.Nr.</td>
