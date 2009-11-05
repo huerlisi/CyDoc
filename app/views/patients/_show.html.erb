@@ -1,36 +1,3 @@
-<div class="contextual">
-    <%= link_to "Ändern", edit_patient_path(@patient), :class => "icon icon-edit" %>
-    <%= link_to_remote "KG-Etikette", {:url => print_full_label_patient_path(@patient), :method => :post}, :class => "icon icon-print" %>
-    <%= link_to_remote "Adress-Etikette", {:url => print_label_patient_path(@patient), :method => :post}, :class => "icon icon-print"%>
-</div>
-
-<h3>Adresse</h3>
-<div class="box">
-  <b><%=h @patient.name %></b><br />
-  <%=h @patient.street_address %><br />
-  <%=h @patient.postal_code %> <%=h @patient.locality %><br />
-  <%=h @patient.birth_date %> <%=h @patient.sex %><br />
-</div>
-
-<% unless @patient.remarks.strip.empty? %>
-<h3>Bemerkungen</h3>
-<div class="box">
-  <%=h @patient.remarks %>
-</div>
-<% end %>
-
+<%= render :partial => 'personal' %>
 <%= render :partial => 'phone_numbers/list' %>
-
-<h3>Versicherung</h3>
-<div class="box">
-  <table>
-    <tr>
-      <th>Krankenversicherung</th>
-      <td>
-        <% if !@patient.insurance.nil? %>
-          <%=h @patient.insurance.to_s %> <%=h "##{@patient.insurance_nr}" unless @patient.insurance_nr.blank? %><br />
-        <% end %>
-      </td>
-    </tr>
-  </table>
-</div>
+<%= render :partial => 'insurance_policies/list' %>

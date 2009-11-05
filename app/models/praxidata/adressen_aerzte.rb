@@ -8,7 +8,7 @@ class Praxidata::AdressenAerzte < Praxidata::Base
 
   def self.import_attributes(a)
     {
-      :praxis => Vcards::Vcard.new(
+      :praxis => Vcard.new(
         :locality => a.tx_Prax_Ort,
 #        :fax_number => a.tx_Prax_Fax,
 #        :phone_number => a.tx_Prax_Telefon1,
@@ -17,7 +17,7 @@ class Praxidata::AdressenAerzte < Praxidata::Base
         :family_name => a.tx_Name,
         :given_name => a.tx_Vorname
       ),
-      :private => Vcards::Vcard.new(
+      :private => Vcard.new(
         :locality => a.tx_Priv_Ort,
 #        :fax_number => a.tx_Priv_Fax,
 #        :phone_number => a.tx_Priv_Telefon1,

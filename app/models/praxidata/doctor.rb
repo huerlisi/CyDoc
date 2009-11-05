@@ -8,7 +8,7 @@ module Praxidata
         :active     => !(import_record.tfInaktiv?),
         :speciality => import_record.arzt.txSpezialgebiet,
         :ean_party  => import_record.txEANNummer,
-        :vcard      => Vcards::Vcard.new(
+        :vcard      => Vcard.new(
           :honorific_prefix => [import_record.txAnrede, import_record.person.txTitel].compact.join(' '),
           :family_name      => import_record.txName1,
           :given_name       => import_record.txName2,

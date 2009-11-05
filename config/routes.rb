@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  # Authentication
   map.logout '/logout', :controller => 'authentication_sessions', :action => 'destroy'
   map.login '/login', :controller => 'authentication_sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
@@ -38,11 +39,13 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :doctors
 
-  map.resources :patients, :member => {:print_label => :post, :label => :get, :print_full_label => :post, :full_label => :get} do |patient|
+  map.resources :patients, :member => {:show_tab => :get, :print_label => :post, :label => :get, :print_full_label => :post, :full_label => :get} do |patient|
     patient.resources :phone_numbers
     patient.resources :tariff_items, :member => {:assign => :post}
     patient.resources :invoices
 
+    patient.resources :insurance_policies
+    
     patient.resources :sessions do |session|
       session.resources :tariff_items
       session.resources :service_records, :collection => {:select => :get}

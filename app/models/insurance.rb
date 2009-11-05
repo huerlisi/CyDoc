@@ -5,7 +5,7 @@ class Insurance < ActiveRecord::Base
   named_scope :accident, :conditions => {:role => 'A'}
   
   def to_s
-    [vcard.full_name, vcard.locality].compact.join(', ')
+    "#{[vcard.full_name, vcard.locality].compact.join(', ')} (#{role_code})"
   end
 
   def name

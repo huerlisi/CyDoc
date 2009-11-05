@@ -60,7 +60,7 @@ class PatientsController < ApplicationController
   # GET /posts/new
   def new
     @patient = Patient.new(params[:patient])
-    @patient.vcard = Vcards::Vcard.new(params[:patient])
+    @patient.vcard = Vcard.new(params[:patient])
 
     @patient.doctor_patient_nr = Patient.maximum('CAST(doctor_patient_nr AS UNSIGNED INTEGER)').to_i + 1
 
@@ -75,9 +75,9 @@ class PatientsController < ApplicationController
   # POST /posts
   def create
     @patient = Patient.new
-    @patient.vcard = Vcards::Vcard.new
+    @patient.vcard = Vcard.new
 
-    if @patient.update_attributes(params[:patient]) and @patient.vcard.save
+    if @patient.vcard.update_attributes(params[:vcard]) and @patient.update_attributes(params[:patient])
       flash[:notice] = 'Patient erfasst.'
       redirect_to :action => :show, :id => @patient
     else
@@ -88,6 +88,15 @@ class PatientsController < ApplicationController
   # GET /patients/1/edit
   def edit
     @patient = Patient.find(params[:id])
+
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.replace "patient-personal", :partial => 'personal_form'
+        end
+      }
+    end
   end
 
   # PUT /patients/1
@@ -95,24 +104,44 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
 
     respond_to do |format|
-      if @patient.update_attributes(params[:patient]) and @patient.vcard.save
+      if @patient.vcard.update_attributes(params[:vcard]) and @patient.update_attributes(params[:patient])
         flash[:notice] = 'Patient wurde geändert.'
         format.html { redirect_to(@patient) }
+        format.js {
+          render :update do |page|
+            page.replace "patient-personal", :partial => 'personal'
+          end
+        }
       else
         format.html { render :action => "edit" }
+        format.js {
+          render :update do |page|
+            page.replace "patient-personal", :partial => 'personal_form'
+          end
+        }
       end
     end
   end
 
   # GET /patients/1
   def show
-    # TODO: Check if .exists? recognizes the finder conditions
-    unless Patient.exists?(params[:id])
-      render :inline => "<h1>Patient existiert nicht</h1>", :layout => 'application', :status => 404
-      return
-    end
-    
     @patient = Patient.find(params[:id])
+  end
+
+  # GET /patients/1/show_tab
+  def show_tab
+    respond_to do |format|
+      @patient = Patient.find(params[:id])
+      
+      format.js {
+        # For partial updates used in form cancellation events
+        if tab = params[:tab]
+          render :update do |page|
+            page.replace "patient-#{tab}", :partial => tab
+          end
+        end
+      }
+    end
   end
 
   # POST /patients/1/print_label

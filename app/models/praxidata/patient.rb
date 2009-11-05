@@ -13,7 +13,7 @@ module Praxidata
         :deceased          => !(import_record.person.dtExitus.nil?), # Should be a date, not a boolean
         :doctor_patient_nr => import_record.patient_nummer.inNummer.to_s,
         :active            => !(import_record.tfInaktiv?),
-        :vcard             => Vcards::Vcard.new(
+        :vcard             => Vcard.new(
           :honorific_prefix => [import_record.txAnrede, import_record.person.txTitel].compact.join(' '),
           :family_name      => import_record.txName1,
           :given_name       => import_record.txName2,
