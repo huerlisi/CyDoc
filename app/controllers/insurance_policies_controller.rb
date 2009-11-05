@@ -1,6 +1,4 @@
 class InsurancePoliciesController < ApplicationController
-  auto_complete_for :insurance_policy, :number
-
   # GET /insurance_policies/select
   def select
     @patient = Patient.find(params[:patient_id])

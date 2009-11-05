@@ -4,7 +4,7 @@
 <h3>Versicherungen</h3>
 <div>
   <% if @patient.new_record? %>
-    <%= render :partial => 'insurance_policies/new_form' %>
+    <%= render :partial => 'insurance_policies/form' %>
   <% else %>
     <div id="new_insurance_policy" class="new_insurance_policy"></div>
   <% end %>
