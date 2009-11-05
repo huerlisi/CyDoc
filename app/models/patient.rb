@@ -1,7 +1,6 @@
 class Patient < ActiveRecord::Base
   belongs_to :doctor
 
-  belongs_to :insurance
   has_many :insurance_policies
   has_many :insurances, :through => :insurance_policies
   has_many :sessions

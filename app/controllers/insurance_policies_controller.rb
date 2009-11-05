@@ -25,7 +25,7 @@ class InsurancePoliciesController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.replace_html "new_insurance_policy", :partial => 'select_form'
+          page.replace_html "new_insurance_policy", :partial => 'form'
         end
       }
     end

@@ -10,7 +10,7 @@ class ConvertPatientInsuranceRelationToInsurancePolicies < ActiveRecord::Migrati
       patient.insurance_policies.create(
         :insurance   => patient.insurance,
         :number      => patient.insurance_nr,
-        :policy_type => 'Krankenversicherung'
+        :policy_type => 'KVG'
       )
     end
     

@@ -41,9 +41,11 @@ class TreatmentsController < ApplicationController
     @patient = Patient.find(params[:patient_id])
     @treatment = @patient.treatments.build(params[:treatment])
     
-    # Law, TODO
+    # Law
     @law = Object.const_get(params[:law][:name]).new
-    @law.insured_id = @patient.insurance_nr
+    # TODO: don't just pick first one
+    insurance_policy = @patient.insurance_policies.by_policy_type(@law.name).first
+    @law.insured_id = insurance_policy.number unless insurance_policy.nil?
 
     @law.save
     @treatment.law = @law
