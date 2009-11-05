@@ -1,3 +1,4 @@
+<% single_page_form = false unless defined? single_page_form %>
 <% fields_method = single_page_form ? :fields_for : :form_remote_for %>
 <% send fields_method, @patient do |patient| %>
 <% fields_for @patient.vcard do |vcard| %>
