@@ -28,7 +28,7 @@ local cmd=$1
 }
 
 function check() {
-	for cmd in wget mdb-schema mdb-tables mdb-export sqlite3 ; do
+	for cmd in wget mdb-schema mdb-tables mdb-export sqlite3 unzip; do
 		check_cmd $cmd
 	done
 }
