@@ -1,3 +1,6 @@
+<%= observe_field 'vcard_postal_code', :url => {:action => 'localities_for_postal_code'}, :with => 'postal_code' %>
+<%= observe_field 'vcard_locality', :url => {:action => 'postal_codes_for_locality'}, :with => 'locality' %>
+
 <% single_page_form = false unless defined? single_page_form %>
 <% fields_method = single_page_form ? :fields_for : :form_remote_for %>
 <% send fields_method, @patient do |patient| %>

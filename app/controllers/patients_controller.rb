@@ -18,6 +18,29 @@ class PatientsController < ApplicationController
                 
   in_place_edit_for :invoice, :due_date
 
+  def localities_for_postal_code
+    render :update do |page|
+      localities = PostalCode.find_all_by_zip(params[:postal_code])
+      if localities.count == 1
+        page.replace 'vcard_locality', text_field_tag('vcard_locality', localities[0].locality)
+      else
+        page.replace 'vcard_locality', select('vcard', 'locality', localities.collect {|p| p.locality })
+      end
+    end
+  end
+  
+  def postal_codes_for_locality
+    render :update do |page|
+      postal_codes = PostalCode.find(:all, :conditions => ["locality LIKE CONCAT('%', ?, '%')", params[:locality]])
+      if postal_codes.count == 1
+        page.replace 'vcard_postal_code', text_field_tag('vcard_postal_code', postal_codes[0].zip, :size => 9)
+      else
+        page.replace 'vcard_postal_code', select('vcard', 'postal_code', postal_codes.collect {|p| ["#{p.zip} - #{p.locality}", p.zip] })
+        page['vcard_postal_code'].focus
+      end
+    end
+  end
+  
   # GET /patients
   def index
     query = params[:query]
