@@ -28,3 +28,4 @@ config/initializers/site_keys.rb
 # CyDoc
 # =====
 data/
+db/backup/
