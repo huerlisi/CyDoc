@@ -1,8 +1,5 @@
 <%= render :partial => 'personal_form', :locals => {:single_page_form => true} %>
 
-<div class="contextual">
-  <%= link_to_remote "Kontakt erfassen", {:url => new_patient_phone_number_url(@patient), :method => :get}, :class => "icon icon-add" unless @patient.new_record?%>
-</div>
 <h3>Kontakt</h3>
 <div class="box" id="phone_number_form">
   <table>
@@ -13,9 +10,6 @@
   </table>
 </div>
 
-<div class="contextual">
-  <%= link_to_remote "Versicherung zuweisen", {:url => new_patient_insurance_policy_url(@patient), :method => :get}, :class => "icon icon-add" unless @patient.new_record?%>
-</div>
 <h3>Versicherungen</h3>
 <div class="box" id="insurance_policy_form">
   <table>

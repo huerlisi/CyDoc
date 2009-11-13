@@ -1,0 +1,11 @@
+<% remote_form_for setup_patient(@patient), :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
+<div class="contextual">
+  <%= link_to_function "Speichern", "this.form.submit", :class => "icon icon-save" %>
+  <%= link_to "Abbrechen", patient_path(@patient), :class => "icon icon-cancel" %>
+</div>
+
+<%= render :partial => 'form', :locals => {:patient => patient} %>
+<table>
+  <%= patient.submit 'Speichern' %>
+</table>
+<% end %>

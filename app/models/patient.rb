@@ -2,7 +2,7 @@ class Patient < ActiveRecord::Base
   belongs_to :doctor
 
   has_many :insurance_policies
-  accepts_nested_attributes_for :insurance_policies
+  accepts_nested_attributes_for :insurance_policies, :reject_if => proc { |attrs| attrs['insurance_id'].nil? }
   has_many :insurances, :through => :insurance_policies
   has_many :sessions
 
@@ -19,7 +19,7 @@ class Patient < ActiveRecord::Base
       
   # Phone Numbers
   has_many :phone_numbers, :as => :object
-  accepts_nested_attributes_for :phone_numbers
+  accepts_nested_attributes_for :phone_numbers, :reject_if => proc { |attrs| attrs['number'].blank? }
   after_update :save_phone_numbers
   
   def new_phone_number_attributes=(phone_number_attributes)

@@ -109,10 +109,10 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
 
     respond_to do |format|
-      format.html { }
+      format.html {}
       format.js {
         render :update do |page|
-          page.replace "patient-personal", :partial => 'personal_form'
+          page.replace_html "tab-content-personal", :partial => 'edit'
         end
       }
     end
@@ -128,14 +128,14 @@ class PatientsController < ApplicationController
         format.html { redirect_to(@patient) }
         format.js {
           render :update do |page|
-            page.replace "patient-personal", :partial => 'personal'
+            page.replace_html "tab-content-personal", :partial => 'show'
           end
         }
       else
         format.html { render :action => "edit" }
         format.js {
           render :update do |page|
-            page.replace "patient-personal", :partial => 'personal_form'
+            page.replace_html "tab-content-personal", :partial => 'edit'
           end
         }
       end
