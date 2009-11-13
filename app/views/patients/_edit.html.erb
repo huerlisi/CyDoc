@@ -1,12 +1,13 @@
-<% remote_form_for setup_patient(@patient), :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
-<div class="contextual">
-  <%= link_to_function "Speichern", "this.up('form').submit()", :class => "icon icon-save" %>
-  <%= link_to_remote "Abbrechen", {:url => patient_path(@patient), :method => :get}, :class => "icon icon-cancel" %>
-</div>
+<% remote_form_for setup_patient(@patient) do |patient| %>
+  <div class="contextual">
+    <%= link_to_function "Speichern", "this.up('form').submit()", :class => "icon icon-save" %>
+    <%= link_to_remote "Abbrechen", {:url => patient_path(@patient), :method => :get}, :class => "icon icon-cancel" %>
+  </div>
 
-<%= render :partial => 'form', :locals => {:patient => patient} %>
-<table>
-  <%= patient.submit 'Speichern', :class => "icon icon-save" %>
-  <%= button_to_remote "Abbrechen", {:url => patient_path(@patient), :method => :get}, :class => "icon icon-cancel" %>
-</table>
+  <%= render :partial => 'form', :locals => {:patient => patient} %>
+
+  <p>
+    <%= patient.submit 'Speichern', :class => "icon icon-save" %>
+    <%= button_to_remote "Abbrechen", {:url => patient_path(@patient), :method => :get}, :class => "icon icon-cancel" %>
+  </p>
 <% end %>
