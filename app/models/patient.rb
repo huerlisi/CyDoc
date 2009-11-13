@@ -11,6 +11,7 @@ class Patient < ActiveRecord::Base
   named_scope :by_date, lambda {|date| {:conditions => ['birth_date LIKE ?', Date.parse_europe(date).strftime('%%%y-%m-%d')] }}
 
   has_vcards
+  accepts_nested_attributes_for :vcard
 
   has_many :tiers
   has_many :invoices, :through => :tiers, :order => 'created_at DESC'
