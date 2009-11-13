@@ -2,34 +2,31 @@
 <%= observe_field 'vcard_locality', :url => {:action => 'postal_codes_for_locality'}, :with => 'locality' %>
 
 <h3>Personalien</h3>
-<div class="box">
+<div class="box" id="patient-personal">
 <% fields_for @patient do |patient| %>
   <% patient.fields_for :vcard do |vcard| %>
-    <div id="patient-personal">
-      <%= error_messages_for :patient %>
 
-      <table style="width: 100%">
-        <tr>
-          <th style="width: 10em">Anrede</th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all).collect { |prefix| prefix.name }, :include_blank => true %></td>
-          <th style="width: 10em">Geschlecht</th><td><%= patient.select :sex, {'Weiblich' => 'F', 'Männlich' => 'M'}, :include_blank => true, :size => 12 %></td>
-        </tr>
-        <tr>
-          <th style="width: 10em">Vorname, Name</th><td><%= vcard.text_field :given_name %> <%= vcard.text_field :family_name %></td>
-          <th>Geburtstag</th><td><%= patient.date_field :birth_date, :size => 12 %></td>
-        </tr>
-        <tr>
-          <th>Strasse</th><td><%= vcard.text_field :street_address %></td>
-          <th>Patientennr.</th><td><%= patient.text_field :doctor_patient_nr, :size => 15 %></td>
-        </tr>
-        <tr>
-          <th>PLZ, Ort</th><td><%= vcard.text_field :postal_code, :size => 9 %> <%= vcard.text_field :locality %></td>
-        </tr>
-        <tr>
-          <th>Bemerkungen</th>
-          <td colspan="3"><%= patient.text_area :remarks, :rows => 3 %></td>
-        </tr>
-      </table>
-    </div>
+    <table style="width: 100%">
+      <tr>
+        <th style="width: 10em">Anrede</th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all).collect { |prefix| prefix.name }, :include_blank => true %></td>
+        <th style="width: 10em">Geschlecht</th><td><%= patient.select :sex, {'Weiblich' => 'F', 'Männlich' => 'M'}, :include_blank => true, :size => 12 %></td>
+      </tr>
+      <tr>
+        <th style="width: 10em">Vorname, Name</th><td><%= vcard.text_field :given_name %> <%= vcard.text_field :family_name %></td>
+        <th>Geburtstag</th><td><%= patient.date_field :birth_date, :size => 12 %></td>
+      </tr>
+      <tr>
+        <th>Strasse</th><td><%= vcard.text_field :street_address %></td>
+        <th>Patientennr.</th><td><%= patient.text_field :doctor_patient_nr, :size => 15 %></td>
+      </tr>
+      <tr>
+        <th>PLZ, Ort</th><td><%= vcard.text_field :postal_code, :size => 9 %> <%= vcard.text_field :locality %></td>
+      </tr>
+      <tr>
+        <th>Bemerkungen</th>
+        <td colspan="3"><%= patient.text_area :remarks, :rows => 3 %></td>
+      </tr>
+    </table>
   <% end %>
 <% end %>
 </div>
