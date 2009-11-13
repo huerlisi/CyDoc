@@ -145,6 +145,14 @@ class PatientsController < ApplicationController
   # GET /patients/1
   def show
     @patient = Patient.find(params[:id])
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.replace_html "tab-content-personal", :partial => 'show'
+        end
+      }
+    end
   end
 
   # GET /patients/1/show_tab
