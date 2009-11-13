@@ -89,10 +89,6 @@ class PatientsController < ApplicationController
 
     # TODO: probably doctor specific...
     @patient.sex = 'F'
-    
-    @patient.phone_numbers.build(:phone_number_type => 'Tel. privat')
-    @patient.phone_numbers.build(:phone_number_type => 'Tel. geschäft')
-    @patient.phone_numbers.build(:phone_number_type => 'Handy')
   end
 
   # POST /posts
