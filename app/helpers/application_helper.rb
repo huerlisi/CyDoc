@@ -27,5 +27,20 @@ module ApplicationHelper
     
     return stylesheet
   end
+
+  # Patient Forms
+  def setup_patient(patient)
+    returning(patient) do |p|
+      if p.insurance_policies.empty?
+        p.insurance_policies.build(:policy_type => "KVG")
+        p.insurance_policies.build(:policy_type => "UVG")
+      end
+      if p.phone_numbers.empty?
+        p.phone_numbers.build(:phone_number_type => "Tel. privat")
+        p.phone_numbers.build(:phone_number_type => "Tel. geschäft")
+        p.phone_numbers.build(:phone_number_type => "Handy")
+      end
+    end
+  end
 end
 

@@ -1,12 +1,11 @@
 <div class="contextual">
-    <%= link_to_remote "Speichern", {:url => patient_path(@patient), :method => :put, :with => "Form.serialize($('edit_patient_#{@patient.id}'))"}, :class => "icon icon-save" %>
     <%= link_to "Abbrechen", patients_path, :class => "icon icon-cancel" %>
 </div>
 
 <h2>Patient erfassen</h2>
-<% form_for @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
+<% form_for setup_patient(@patient), :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
 <div class="box">
-  <%= render :partial => 'form' %>
+  <%= render :partial => 'form', :locals => {:patient => patient} %>
   <%= patient.submit 'Speichern' %>
 </div>
 <% end %>

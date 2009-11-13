@@ -1,3 +1,28 @@
 <%= render :partial => 'personal_form', :locals => {:single_page_form => true} %>
-<%= render :partial => 'phone_numbers/list' %>
-<%= render :partial => 'insurance_policies/list' %>
+
+<div class="contextual">
+  <%= link_to_remote "Kontakt erfassen", {:url => new_patient_phone_number_url(@patient), :method => :get}, :class => "icon icon-add" unless @patient.new_record?%>
+</div>
+<h3>Kontakt</h3>
+<div class="box" id="phone_number_form">
+  <table>
+    <% patient.fields_for :phone_numbers do |phone_number| %>
+      <%= phone_number.select :phone_number_type, ['Tel. privat', 'Tel. geschäft', 'Handy', 'Fax', 'E-Mail'], :label => "Art" %>
+      <%= phone_number.text_field :number, :size => 12, :autocomplete => 'off', :label => "Nummer" %>
+    <% end %>
+  </table>
+</div>
+
+<div class="contextual">
+  <%= link_to_remote "Versicherung zuweisen", {:url => new_patient_insurance_policy_url(@patient), :method => :get}, :class => "icon icon-add" unless @patient.new_record?%>
+</div>
+<h3>Versicherungen</h3>
+<div class="box" id="insurance_policy_form">
+  <table>
+    <% patient.fields_for :insurance_policies do |insurance_policy| %>
+      <%= insurance_policy.select :policy_type, {'Krankenversicherung' => 'KVG', 'Unfallversicherung' => 'UVG'}, :label => "Art" %>
+      <%= insurance_policy.select :insurance_id, Insurance.find(:all, :include => :vcard, :order => 'vcards.full_name').collect { |i| [i.to_s, i.id] }, :include_blank => true, :label => "Versicherung" %>
+      <%= insurance_policy.text_field :number, :size => 12, :autocomplete => 'off', :label => "Nummer" %>
+    <% end %>
+  </table>
+</div>
