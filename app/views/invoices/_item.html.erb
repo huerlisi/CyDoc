@@ -7,7 +7,11 @@
   <td style="text-align: right"><%=h sprintf("%0.2f", item.due_amount.currency_round) %></td>
   <td><%=h item.state %></td>
   <td>
-    <%= link_to image_tag('print.png'), print_invoice_path(item), :title => "Drucken", :method => :post %>
+    <% if item.overdue? %>
+      <%= link_to image_tag('print.png'), print_reminder_letter_invoice_path(item), :title => "Drucken", :method => :post %>
+    <% else %>
+      <%= link_to image_tag('print.png'), print_invoice_path(item), :title => "Drucken", :method => :post %>
+    <% end %>
     <% if item.state == 'prepared' %>
       <%= link_to_remote image_tag('delete.png'), {:url => invoice_path(item, :context => 'list'), :method => :delete, :confirm => "Rechnung #{item.to_s} löschen?"}, :title => 'Löschen' %>
     <% else %>

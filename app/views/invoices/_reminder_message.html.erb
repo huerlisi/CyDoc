@@ -21,10 +21,23 @@
   <p>Sehr geehrte Patientin</p>
 
   <p>Trotz erster Mahnung wurde oben erwähnte Rechnung nicht bezahlt.</p>
-  <p>Ich bitte Sie dringenst diese Rechnung zu begleichen, ansonsten bin ich gezwungen eine zusätliche Gebühr von CHF 100.- zu verrechnen und die 
+  <p>Ich bitte Sie dringenst diese Rechnung zu begleichen, ansonsten bin ich gezwungen eine zusätzliche Gebühr von CHF 100.- zu verrechnen und die 
   Rechnung an ein Inkassobüro zu übergeben.</p>
   <p>Sollte sich Ihre Zahlung mit der Mahnung kreuzen, betrachten Sie dieses Schreiben als gegenstandslos.</p>
   <p>Bei allfälligen Unstimmigkeiten rufen Sie uns bitte an, oder schreiben Sie eine E-Mail.</p>
+
+  <div id="signature">
+    Mit freundlichen Grüssen<br/>
+    <%= @invoice.biller.to_s %>
+  </div>
+</div> 
+<% elsif @invoice.state == 'encashment' %>
+ <div id="reminder-message">
+  <h2>Inkasso</h2>
+  <p>Sehr geehrte Damen und Herren</p>
+
+  <p>Trotz Mahnung wurde oben erwähnte Rechnung nicht bezahlt.</p>
+  <p>Ich bitte Sie deshalb die entsprechenden rechtlichen Schritte zum Inkasso einzuleiten.</p>
 
   <div id="signature">
     Mit freundlichen Grüssen<br/>
