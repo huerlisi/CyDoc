@@ -31,6 +31,9 @@ module ApplicationHelper
   # Patient Forms
   def setup_patient(patient)
     returning(patient) do |p|
+      if p.vcard.nil?
+        p.build_vcard
+      end
       if p.insurance_policies.empty?
         p.insurance_policies.build(:policy_type => "KVG")
         p.insurance_policies.build(:policy_type => "UVG")
