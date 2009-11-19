@@ -28,7 +28,7 @@ local cmd=$1
 }
 
 function check() {
-	for cmd in wget unzip; do
+	for cmd in wget unzip recode; do
 		check_cmd $cmd
 	done
 }
