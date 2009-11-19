@@ -1,45 +1,32 @@
-<% single_page_form = false unless defined? single_page_form %>
-<% fields_method = single_page_form ? :fields_for : :form_remote_for %>
-<% send fields_method, @patient do |patient| %>
-<% fields_for @patient.vcard do |vcard| %>
-  <div id="patient-personal">
-    <% unless single_page_form %>
-    <div class="contextual">
-        <%= link_to_remote "Speichern", {:url => patient_path(@patient), :method => :put, :with => "Form.serialize($('edit_patient_#{@patient.id}'))"}, :class => "icon icon-save" %>
-        <%= link_to_remote "Abbrechen", {:url => show_tab_patient_path(@patient, :tab => 'personal'), :method => :get}, :class => "icon icon-cancel" %>
-    </div>
-    <% end %>
+<h3>Personalien</h3>
+<div class="box" id="patient-personal">
+<% fields_for @patient do |patient| %>
+  <% patient.fields_for :vcard do |vcard| %>
 
-    <h3>Personalien</h3>
-    <div class="box">
-      <%= error_messages_for :patient %>
+    <table style="width: 100%">
+      <tr>
+        <th style="width: 10em">Anrede</th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all).collect { |prefix| prefix.name }, :include_blank => true %></td>
+        <th style="width: 10em">Geschlecht</th><td><%= patient.select :sex, {'Weiblich' => 'F', 'Männlich' => 'M'}, :include_blank => true, :size => 12 %></td>
+      </tr>
+      <tr>
+        <th style="width: 10em">Vorname, Name</th><td><%= vcard.text_field :given_name %> <%= vcard.text_field :family_name %></td>
+        <th>Geburtstag</th><td><%= patient.date_field :birth_date, :size => 12 %></td>
+      </tr>
+      <tr>
+        <th>Strasse</th><td><%= vcard.text_field :street_address %></td>
+        <th>Patientennr.</th><td><%= patient.text_field :doctor_patient_nr, :size => 15 %></td>
+      </tr>
+      <tr>
+        <th>PLZ, Ort</th><td><%= vcard.text_field :postal_code, :size => 9 %> <%= vcard.text_field :locality %></td>
+      </tr>
+      <tr>
+        <th>Bemerkungen</th>
+        <td colspan="3"><%= patient.text_area :remarks, :rows => 3 %></td>
+      </tr>
+    </table>
+  <% end %>
+<% end %>
+</div>
 
-      <table style="width: 100%">
-        <tr>
-          <th style="width: 10em">Anrede</th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all).collect { |prefix| prefix.name }, :include_blank => true %></td>
-          <th style="width: 10em">Geschlecht</th><td><%= patient.select :sex, {'Weiblich' => 'F', 'Männlich' => 'M'}, :include_blank => true, :size => 12 %></td>
-        </tr>
-        <tr>
-          <th style="width: 10em">Vorname, Name</th><td><%= vcard.text_field :given_name %> <%= vcard.text_field :family_name %></td>
-          <th>Geburtstag</th><td><%= patient.date_field :birth_date, :size => 12 %></td>
-        </tr>
-        <tr>
-          <th>Strasse</th><td><%= vcard.text_field :street_address %></td>
-          <th>Patientennr.</th><td><%= patient.text_field :doctor_patient_nr, :size => 15 %></td>
-        </tr>
-        <tr>
-          <th>PLZ, Ort</th><td><%= vcard.text_field :postal_code, :size => 9 %> <%= vcard.text_field :locality %></td>
-        </tr>
-        <tr>
-          <th>Bemerkungen</th>
-          <td colspan="3"><%= patient.text_area :remarks, :rows => 3 %></td>
-        </tr>
-      </table>
-      <% unless single_page_form %>
-      <%= patient.submit "Speichern" %>
-      <%= button_to_remote "Abbrechen", {:url => show_tab_patient_path(@patient, :tab => 'personal'), :method => :get}, :class => "icon icon-edit" %>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-<% end %>
+<%= observe_field 'patient_vcard_attributes_postal_code', :url => {:action => 'localities_for_postal_code'}, :with => 'postal_code' %>
+<%= observe_field 'patient_vcard_attributes_locality', :url => {:action => 'postal_codes_for_locality'}, :with => 'locality' %>

@@ -18,6 +18,29 @@ class PatientsController < ApplicationController
                 
   in_place_edit_for :invoice, :due_date
 
+  def localities_for_postal_code
+    render :update do |page|
+      localities = PostalCode.find_all_by_zip(params[:postal_code])
+      if localities.count == 1
+        page.replace 'patient_vcard_attributes_locality', text_field_tag('patient_vcard_attributes_locality', localities[0].locality)
+      else
+        page.replace 'patient_vcard_attributes_locality', select('patient[vcard_attributes]', 'locality', localities.collect {|p| p.locality })
+      end
+    end
+  end
+  
+  def postal_codes_for_locality
+    render :update do |page|
+      postal_codes = PostalCode.find(:all, :conditions => ["locality LIKE CONCAT('%', ?, '%')", params[:locality]])
+      if postal_codes.count == 1
+        page.replace 'patient_vcard_attributes_postal_code', text_field_tag('patient_vcard_attributes_postal_code', postal_codes[0].zip, :size => 9)
+      else
+        page.replace 'patient_vcard_attributes_postal_code', select('patient[vcard_attributes]', 'postal_code', postal_codes.collect {|p| ["#{p.zip} - #{p.locality}", p.zip] })
+        page['patient_vcard_attributes_postal_code'].focus
+      end
+    end
+  end
+  
   # GET /patients
   def index
     query = params[:query]
@@ -66,10 +89,6 @@ class PatientsController < ApplicationController
 
     # TODO: probably doctor specific...
     @patient.sex = 'F'
-    
-    @patient.phone_numbers.build(:phone_number_type => 'Tel. privat')
-    @patient.phone_numbers.build(:phone_number_type => 'Tel. geschäft')
-    @patient.phone_numbers.build(:phone_number_type => 'Handy')
   end
 
   # POST /posts
@@ -90,10 +109,10 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
 
     respond_to do |format|
-      format.html { }
+      format.html {}
       format.js {
         render :update do |page|
-          page.replace "patient-personal", :partial => 'personal_form'
+          page.replace_html "tab-content-personal", :partial => 'edit'
         end
       }
     end
@@ -109,14 +128,14 @@ class PatientsController < ApplicationController
         format.html { redirect_to(@patient) }
         format.js {
           render :update do |page|
-            page.replace "patient-personal", :partial => 'personal'
+            page.replace_html "tab-content-personal", :partial => 'show'
           end
         }
       else
         format.html { render :action => "edit" }
         format.js {
           render :update do |page|
-            page.replace "patient-personal", :partial => 'personal_form'
+            page.replace_html "tab-content-personal", :partial => 'edit'
           end
         }
       end
@@ -126,6 +145,14 @@ class PatientsController < ApplicationController
   # GET /patients/1
   def show
     @patient = Patient.find(params[:id])
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.replace_html "tab-content-personal", :partial => 'show'
+        end
+      }
+    end
   end
 
   # GET /patients/1/show_tab
