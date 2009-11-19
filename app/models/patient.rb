@@ -2,7 +2,7 @@ class Patient < ActiveRecord::Base
   belongs_to :doctor
 
   has_many :insurance_policies
-  accepts_nested_attributes_for :insurance_policies, :reject_if => proc { |attrs| attrs['insurance_id'].nil? }
+  accepts_nested_attributes_for :insurance_policies, :reject_if => proc { |attrs| attrs['insurance_id'].blank? }
   has_many :insurances, :through => :insurance_policies
   has_many :sessions
 
