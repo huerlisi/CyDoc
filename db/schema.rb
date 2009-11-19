@@ -13,13 +13,13 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
-    t.integer  "bank_id",     :limit => 11
+    t.integer  "bank_id"
     t.string   "esr_id"
     t.string   "pc_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type"
-    t.integer  "holder_id",   :limit => 11
+    t.integer  "holder_id"
     t.string   "holder_type"
     t.string   "title"
     t.string   "code"
@@ -33,14 +33,14 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.string  "region",           :limit => 50
     t.string  "postal_code",      :limit => 50
     t.string  "country_name",     :limit => 50
-    t.integer "vcard_id",         :limit => 11
+    t.integer "vcard_id"
     t.string  "address_type"
   end
 
   add_index "addresses", ["vcard_id"], :name => "addresses_vcard_id_index"
 
   create_table "banks", :force => true do |t|
-    t.integer  "vcard_id",   :limit => 11
+    t.integer  "vcard_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -48,13 +48,13 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
   create_table "bookings", :force => true do |t|
     t.string  "title",             :limit => 100
     t.decimal "amount",                            :precision => 8, :scale => 2
-    t.integer "credit_account_id", :limit => 11
-    t.integer "debit_account_id",  :limit => 11
+    t.integer "credit_account_id"
+    t.integer "debit_account_id"
     t.date    "value_date"
     t.string  "comments",          :limit => 1000,                               :default => ""
-    t.integer "reference_id",      :limit => 11
+    t.integer "reference_id"
     t.string  "reference_type"
-    t.integer "imported_id",       :limit => 11
+    t.integer "imported_id"
   end
 
   add_index "bookings", ["credit_account_id"], :name => "index_bookings_on_credit_account_id"
@@ -70,13 +70,13 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
   end
 
   create_table "diagnoses_sessions", :id => false, :force => true do |t|
-    t.integer "diagnosis_id", :limit => 11
-    t.integer "session_id",   :limit => 11
+    t.integer "diagnosis_id"
+    t.integer "session_id"
   end
 
   create_table "diagnoses_treatments", :id => false, :force => true do |t|
-    t.integer "diagnosis_id", :limit => 11
-    t.integer "treatment_id", :limit => 11
+    t.integer "diagnosis_id"
+    t.integer "treatment_id"
   end
 
   create_table "doctors", :force => true do |t|
@@ -89,14 +89,14 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.string   "ean_party",   :limit => 13
     t.string   "zsr",         :limit => 7
     t.text     "remarks"
-    t.integer  "imported_id", :limit => 11
+    t.integer  "imported_id"
   end
 
   add_index "doctors", ["imported_id"], :name => "index_doctors_on_imported_id"
 
   create_table "doctors_offices", :id => false, :force => true do |t|
-    t.integer "office_id", :limit => 11
-    t.integer "doctor_id", :limit => 11
+    t.integer "office_id"
+    t.integer "doctor_id"
   end
 
   create_table "drug_articles", :force => true do |t|
@@ -104,13 +104,13 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.string   "group_code"
     t.string   "assort_key1"
     t.string   "assort_key2"
-    t.integer  "drug_product_id",             :limit => 11
+    t.integer  "drug_product_id"
     t.string   "swissmedic_cat"
     t.string   "swissmedic_no"
     t.boolean  "hospital_only"
     t.boolean  "clinical"
     t.string   "article_type"
-    t.integer  "vat_class_id",                :limit => 11
+    t.integer  "vat_class_id"
     t.boolean  "active"
     t.boolean  "insurance_limited"
     t.float    "insurance_limitation_points"
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.string   "stock_temperature"
     t.boolean  "narcotic"
     t.boolean  "under_bg"
-    t.integer  "expires",                     :limit => 11
+    t.integer  "expires"
     t.float    "quantity"
     t.text     "description",                 :limit => 255
     t.text     "name"
@@ -128,16 +128,16 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.string   "multiply"
     t.string   "alias"
     t.boolean  "higher_co_payment"
-    t.integer  "number_of_pieces",            :limit => 11
+    t.integer  "number_of_pieces"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "drug_prices", :force => true do |t|
     t.date     "valid_from"
-    t.decimal  "price",                         :precision => 8, :scale => 2
+    t.decimal  "price",           :precision => 8, :scale => 2
     t.string   "price_type"
-    t.integer  "drug_article_id", :limit => 11
+    t.integer  "drug_article_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -150,21 +150,21 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.string   "info"
     t.boolean  "original"
     t.string   "generic_group"
-    t.integer  "drug_code1_id",           :limit => 11
-    t.integer  "drug_code2_id",           :limit => 11
-    t.integer  "therap_code1_id",         :limit => 11
-    t.integer  "therap_code2_id",         :limit => 11
-    t.integer  "drug_compendium_id",      :limit => 11
+    t.integer  "drug_code1_id"
+    t.integer  "drug_code2_id"
+    t.integer  "therap_code1_id"
+    t.integer  "therap_code2_id"
+    t.integer  "drug_compendium_id"
     t.string   "application_code"
     t.float    "dose_amount"
     t.string   "dose_units"
     t.string   "dose_application"
-    t.integer  "interaction_relevance",   :limit => 11
+    t.integer  "interaction_relevance"
     t.boolean  "active"
-    t.integer  "partner_id",              :limit => 11
-    t.integer  "drug_monograph_id",       :limit => 11
+    t.integer  "partner_id"
+    t.integer  "drug_monograph_id"
     t.boolean  "galenic"
-    t.integer  "galenic_code_id",         :limit => 11
+    t.integer  "galenic_code_id"
     t.float    "concentration"
     t.string   "concentration_unit"
     t.string   "special_drug_group_code"
@@ -179,7 +179,8 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.datetime "updated_at"
   end
 
-  create_table "drug_substances", :force => true do |t|
+  create_table "drug_substances", :id => false, :force => true do |t|
+    t.string   "id"
     t.string   "name"
     t.string   "description"
     t.datetime "created_at"
@@ -193,18 +194,18 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
   end
 
   create_table "esr_files", :force => true do |t|
-    t.integer  "size",         :limit => 11
+    t.integer  "size"
     t.string   "content_type"
     t.string   "filename"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remarks",                    :default => ""
+    t.string   "remarks",      :default => ""
   end
 
   create_table "esr_records", :force => true do |t|
     t.string   "bank_pc_id"
     t.string   "reference"
-    t.decimal  "amount",                          :precision => 8, :scale => 2
+    t.decimal  "amount",            :precision => 8, :scale => 2
     t.string   "payment_reference"
     t.date     "payment_date"
     t.date     "transaction_date"
@@ -215,21 +216,21 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.string   "payment_tax"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "booking_id",        :limit => 11
-    t.integer  "invoice_id",        :limit => 11
-    t.integer  "esr_file_id",       :limit => 11
-    t.string   "remarks",                                                       :default => ""
-    t.string   "state",                                                                         :null => false
+    t.integer  "esr_file_id"
+    t.integer  "booking_id"
+    t.integer  "invoice_id"
+    t.string   "remarks",                                         :default => ""
+    t.string   "state",                                                           :null => false
   end
 
   create_table "honorific_prefixes", :force => true do |t|
-    t.integer "sex",  :limit => 11
+    t.integer "sex"
     t.string  "name"
   end
 
   create_table "insurance_policies", :force => true do |t|
-    t.integer  "insurance_id", :limit => 11
-    t.integer  "patient_id",   :limit => 11
+    t.integer  "insurance_id"
+    t.integer  "patient_id"
     t.date     "valid_from"
     t.date     "valid_to"
     t.string   "number"
@@ -244,40 +245,40 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.string   "ean_party",       :limit => 13
     t.string   "role"
     t.string   "group_ean_party", :limit => 13
-    t.integer  "imported_id",     :limit => 11
+    t.integer  "imported_id"
   end
 
   add_index "insurances", ["imported_id"], :name => "index_insurances_on_imported_id"
 
   create_table "invoices", :force => true do |t|
     t.text     "remark"
-    t.integer  "tiers_id",                 :limit => 11
-    t.integer  "law_id",                   :limit => 11
-    t.integer  "treatment_id",             :limit => 11
+    t.integer  "tiers_id"
+    t.integer  "law_id"
+    t.integer  "treatment_id"
     t.text     "role_title"
     t.text     "role_type"
-    t.string   "place_type",                             :default => "Praxis"
+    t.string   "place_type",               :default => "Praxis"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "state",                                  :default => "prepared"
+    t.string   "state",                    :default => "prepared"
     t.date     "value_date"
     t.date     "due_date"
-    t.integer  "invoice_replaced_by",      :limit => 11
-    t.integer  "imported_id",              :limit => 11
-    t.integer  "imported_invoice_id",      :limit => 11
+    t.integer  "invoice_replaced_by"
+    t.integer  "imported_id"
+    t.integer  "imported_invoice_id"
     t.string   "imported_esr_reference"
     t.date     "reminder_due_date"
     t.date     "second_reminder_due_date"
     t.date     "third_reminder_due_date"
   end
 
-  add_index "invoices", ["tiers_id"], :name => "index_invoices_on_tiers_id"
   add_index "invoices", ["law_id"], :name => "index_invoices_on_law_id"
+  add_index "invoices", ["tiers_id"], :name => "index_invoices_on_tiers_id"
   add_index "invoices", ["treatment_id"], :name => "index_invoices_on_treatment_id"
 
   create_table "invoices_service_records", :id => false, :force => true do |t|
-    t.integer "invoice_id",        :limit => 11
-    t.integer "service_record_id", :limit => 11
+    t.integer "invoice_id"
+    t.integer "service_record_id"
   end
 
   add_index "invoices_service_records", ["invoice_id"], :name => "index_invoices_service_records_on_invoice_id"
@@ -295,17 +296,17 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
   end
 
   create_table "medical_cases", :force => true do |t|
-    t.integer  "patient_id",    :limit => 11
-    t.integer  "doctor_id",     :limit => 11
+    t.integer  "patient_id"
+    t.integer  "doctor_id"
     t.datetime "duration_from"
     t.datetime "duration_to"
     t.text     "remarks"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type"
-    t.integer  "diagnosis_id",  :limit => 11
-    t.integer  "treatment_id",  :limit => 11
-    t.integer  "imported_id",   :limit => 11
+    t.integer  "diagnosis_id"
+    t.integer  "treatment_id"
+    t.integer  "imported_id"
   end
 
   create_table "offices", :force => true do |t|
@@ -316,33 +317,30 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
 
   create_table "patients", :force => true do |t|
     t.date     "birth_date"
-    t.integer  "sex",                 :limit => 11
-    t.integer  "only_year_of_birth",  :limit => 11
-    t.integer  "doctor_id",           :limit => 11
-    t.text     "remarks",                                              :null => false
+    t.integer  "sex"
+    t.integer  "only_year_of_birth"
+    t.integer  "doctor_id"
+    t.text     "remarks",                                :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "dunning_stop",                      :default => false
-    t.boolean  "use_billing_address",               :default => false
-    t.boolean  "deceased",                          :default => false
+    t.boolean  "dunning_stop",        :default => false
+    t.boolean  "use_billing_address", :default => false
+    t.boolean  "deceased",            :default => false
     t.string   "doctor_patient_nr"
-    t.boolean  "active",                            :default => true,  :null => false
+    t.boolean  "active",              :default => true,  :null => false
     t.string   "name"
-    t.integer  "imported_id",         :limit => 11
+    t.integer  "imported_id"
   end
 
-  add_index "patients", ["updated_at"], :name => "patients_updated_at_index"
   add_index "patients", ["doctor_id"], :name => "patients_doctor_id_index"
+  add_index "patients", ["updated_at"], :name => "patients_updated_at_index"
 
   create_table "phone_numbers", :force => true do |t|
     t.string  "number",            :limit => 50
     t.string  "phone_number_type", :limit => 50
-    t.integer "vcard_id",          :limit => 11
-    t.integer "object_id",         :limit => 11
+    t.integer "object_id"
     t.string  "object_type"
   end
-
-  add_index "phone_numbers", ["vcard_id"], :name => "phone_numbers_vcard_id_index"
 
   create_table "postal_codes", :force => true do |t|
     t.string   "zip_type"
@@ -351,17 +349,17 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.string   "locality"
     t.string   "locality_long"
     t.string   "canton"
-    t.integer  "imported_id",   :limit => 11
+    t.integer  "imported_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "service_items", :force => true do |t|
-    t.integer "tariff_item_id",       :limit => 11
-    t.integer "tariff_item_group_id", :limit => 11
+    t.integer "tariff_item_id"
+    t.integer "tariff_item_group_id"
     t.decimal "quantity",                           :precision => 8, :scale => 2
     t.string  "ref_code",             :limit => 10
-    t.integer "position",             :limit => 11
+    t.integer "position"
   end
 
   create_table "service_records", :force => true do |t|
@@ -371,12 +369,12 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.string   "contract_number",    :limit => 10
     t.string   "code",               :limit => 10,                                                             :null => false
     t.string   "ref_code",           :limit => 10
-    t.integer  "session",            :limit => 11,                                :default => 1
+    t.integer  "session",                                                         :default => 1
     t.decimal  "quantity",                          :precision => 8, :scale => 2, :default => 1.0
     t.datetime "date",                                                                                         :null => false
-    t.integer  "provider_id",        :limit => 11
-    t.integer  "responsible_id",     :limit => 11
-    t.integer  "location_id",        :limit => 11
+    t.integer  "provider_id"
+    t.integer  "responsible_id"
+    t.integer  "location_id"
     t.string   "billing_role",                                                    :default => "both"
     t.string   "medical_role",                                                    :default => "self_employed"
     t.string   "body_location",                                                   :default => "none"
@@ -396,29 +394,29 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.string   "remark",             :limit => 700
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "patient_id",         :limit => 11
+    t.integer  "patient_id"
     t.decimal  "unit_mt",                           :precision => 8, :scale => 2
     t.decimal  "unit_tt",                           :precision => 8, :scale => 2
-    t.integer  "vat_class_id",       :limit => 11
-    t.integer  "imported_id",        :limit => 11
+    t.integer  "vat_class_id"
+    t.integer  "imported_id"
   end
 
   create_table "service_records_sessions", :id => false, :force => true do |t|
-    t.integer "service_record_id", :limit => 11
-    t.integer "session_id",        :limit => 11
+    t.integer "service_record_id"
+    t.integer "session_id"
   end
 
   create_table "sessions", :force => true do |t|
-    t.integer  "patient_id",    :limit => 11
+    t.integer  "patient_id"
     t.datetime "duration_from"
     t.datetime "duration_to"
     t.text     "remarks"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "state",                       :default => "open"
-    t.integer  "invoice_id",    :limit => 11
-    t.integer  "treatment_id",  :limit => 11
-    t.integer  "imported_id",   :limit => 11
+    t.string   "state",         :default => "open"
+    t.integer  "invoice_id"
+    t.integer  "treatment_id"
+    t.integer  "imported_id"
   end
 
   create_table "tariff_codes", :force => true do |t|
@@ -442,17 +440,17 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.boolean  "obligation",                                               :default => true
     t.string   "type"
     t.string   "tariff_type",  :limit => 3
-    t.integer  "vat_class_id", :limit => 11
+    t.integer  "vat_class_id"
   end
 
   create_table "tiers", :force => true do |t|
-    t.integer  "biller_id",            :limit => 11
-    t.integer  "provider_id",          :limit => 11
-    t.integer  "insurance_id",         :limit => 11
-    t.integer  "patient_id",           :limit => 11
-    t.integer  "guarantor_id",         :limit => 11
-    t.integer  "referrer_id",          :limit => 11
-    t.integer  "employer_id",          :limit => 11
+    t.integer  "biller_id"
+    t.integer  "provider_id"
+    t.integer  "insurance_id"
+    t.integer  "patient_id"
+    t.integer  "guarantor_id"
+    t.integer  "referrer_id"
+    t.integer  "employer_id"
     t.string   "type"
     t.string   "payment_periode"
     t.boolean  "invoice_modification"
@@ -461,12 +459,12 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
   end
 
   add_index "tiers", ["biller_id"], :name => "index_tiers_on_biller_id"
-  add_index "tiers", ["provider_id"], :name => "index_tiers_on_provider_id"
+  add_index "tiers", ["employer_id"], :name => "index_tiers_on_employer_id"
+  add_index "tiers", ["guarantor_id"], :name => "index_tiers_on_guarantor_id"
   add_index "tiers", ["insurance_id"], :name => "index_tiers_on_insurance_id"
   add_index "tiers", ["patient_id"], :name => "index_tiers_on_patient_id"
-  add_index "tiers", ["guarantor_id"], :name => "index_tiers_on_guarantor_id"
+  add_index "tiers", ["provider_id"], :name => "index_tiers_on_provider_id"
   add_index "tiers", ["referrer_id"], :name => "index_tiers_on_referrer_id"
-  add_index "tiers", ["employer_id"], :name => "index_tiers_on_employer_id"
 
   create_table "treatments", :force => true do |t|
     t.date     "date_begin"
@@ -475,15 +473,15 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.string   "reason"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "patient_id",  :limit => 11
-    t.integer  "law_id",      :limit => 11
-    t.integer  "referrer_id", :limit => 11
-    t.string   "place_type",                :default => "Praxis"
-    t.integer  "imported_id", :limit => 11
+    t.integer  "patient_id"
+    t.integer  "law_id"
+    t.integer  "referrer_id"
+    t.string   "place_type",  :default => "Praxis"
+    t.integer  "imported_id"
   end
 
-  add_index "treatments", ["patient_id"], :name => "index_treatments_on_patient_id"
   add_index "treatments", ["law_id"], :name => "index_treatments_on_law_id"
+  add_index "treatments", ["patient_id"], :name => "index_treatments_on_patient_id"
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
@@ -499,7 +497,7 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.datetime "activated_at"
     t.string   "state",                                    :default => "passive"
     t.datetime "deleted_at"
-    t.integer  "object_id",                 :limit => 11
+    t.integer  "object_id"
     t.string   "object_type"
   end
 
@@ -523,7 +521,7 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.string  "honorific_suffix", :limit => 50
     t.boolean "active",                         :default => true
     t.string  "type"
-    t.integer "object_id",        :limit => 11
+    t.integer "object_id"
     t.string  "object_type"
   end
 
