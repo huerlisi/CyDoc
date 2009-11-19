@@ -22,9 +22,9 @@ class PatientsController < ApplicationController
     render :update do |page|
       localities = PostalCode.find_all_by_zip(params[:postal_code])
       if localities.count == 1
-        page.replace 'vcard_locality', text_field_tag('vcard_locality', localities[0].locality)
+        page.replace 'patient_vcard_attributes_locality', text_field_tag('patient_vcard_attributes_locality', localities[0].locality)
       else
-        page.replace 'vcard_locality', select('vcard', 'locality', localities.collect {|p| p.locality })
+        page.replace 'patient_vcard_attributes_locality', select('patient[vcard_attributes]', 'locality', localities.collect {|p| p.locality })
       end
     end
   end
@@ -33,10 +33,10 @@ class PatientsController < ApplicationController
     render :update do |page|
       postal_codes = PostalCode.find(:all, :conditions => ["locality LIKE CONCAT('%', ?, '%')", params[:locality]])
       if postal_codes.count == 1
-        page.replace 'vcard_postal_code', text_field_tag('vcard_postal_code', postal_codes[0].zip, :size => 9)
+        page.replace 'patient_vcard_attributes_postal_code', text_field_tag('patient_vcard_attributes_postal_code', postal_codes[0].zip, :size => 9)
       else
-        page.replace 'vcard_postal_code', select('vcard', 'postal_code', postal_codes.collect {|p| ["#{p.zip} - #{p.locality}", p.zip] })
-        page['vcard_postal_code'].focus
+        page.replace 'patient_vcard_attributes_postal_code', select('patient[vcard_attributes]', 'postal_code', postal_codes.collect {|p| ["#{p.zip} - #{p.locality}", p.zip] })
+        page['patient_vcard_attributes_postal_code'].focus
       end
     end
   end

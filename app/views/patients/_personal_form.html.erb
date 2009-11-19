@@ -1,6 +1,3 @@
-<%= observe_field 'vcard_postal_code', :url => {:action => 'localities_for_postal_code'}, :with => 'postal_code' %>
-<%= observe_field 'vcard_locality', :url => {:action => 'postal_codes_for_locality'}, :with => 'locality' %>
-
 <h3>Personalien</h3>
 <div class="box" id="patient-personal">
 <% fields_for @patient do |patient| %>
@@ -30,3 +27,6 @@
   <% end %>
 <% end %>
 </div>
+
+<%= observe_field 'patient_vcard_attributes_postal_code', :url => {:action => 'localities_for_postal_code'}, :with => 'postal_code' %>
+<%= observe_field 'patient_vcard_attributes_locality', :url => {:action => 'postal_codes_for_locality'}, :with => 'locality' %>
