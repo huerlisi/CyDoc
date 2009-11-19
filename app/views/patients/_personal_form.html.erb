@@ -5,7 +5,7 @@
 
     <table style="width: 100%">
       <tr>
-        <th style="width: 10em">Anrede</th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all).collect { |prefix| prefix.name }, :include_blank => true %></td>
+        <th style="width: 10em">Anrede</th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all, :order => 'sex').collect { |prefix| prefix.name } %></td>
         <th style="width: 10em">Geschlecht</th><td><%= patient.select :sex, {'Weiblich' => 'F', 'Männlich' => 'M'}, :include_blank => true, :size => 12 %></td>
       </tr>
       <tr>
@@ -14,7 +14,7 @@
       </tr>
       <tr>
         <th>Strasse</th><td><%= vcard.text_field :street_address %></td>
-        <th>Patientennr.</th><td><%= patient.text_field :doctor_patient_nr, :size => 15 %></td>
+        <th>Patientennr.</th><td><%= patient.text_field :doctor_patient_nr, :size => 15, :readonly => true %></td>
       </tr>
       <tr>
         <th>PLZ, Ort</th><td><%= vcard.text_field :postal_code, :size => 9 %> <%= vcard.text_field :locality %></td>
