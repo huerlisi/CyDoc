@@ -6,9 +6,10 @@ body { margin: 0; padding: 1px; }
 
 <div style="font-family: 'Vera Sans',Arial,sans-serif; font-size: 6pt; width: 6.5cm">
   <div class="full_name" style="font-size: 7pt">
-    <%=h @patient.birth_date %>
     <%=h "##{@patient.doctor_patient_nr}" unless @patient.doctor_patient_nr.blank? %><br/>
-    <%=h vcard.full_name %><br/>
+    <%=h vcard.full_name %>
+    <%=h @patient.birth_date %><br/>
+
   </div>
 
   <div style="height: 0.3em"/>
@@ -27,6 +28,5 @@ body { margin: 0; padding: 1px; }
   <div style="height: 0.3em"/>
 
   <div>
-     <%=h @patient.insurance.to_s unless @patient.insurance.blank? %> <%=h "Nr. #{@patient.insurance_nr}" unless @patient.insurance_nr.blank? %><br />
   </div>
 </div>
