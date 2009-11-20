@@ -10,7 +10,7 @@
   <% @vcard = @patient.vcard %>
   <table style="width: 100%">
     <tr>
-      <th style="width: 10em">Adresse</th><td><%= in_place_editor_field :vcard, :given_name %> <%= in_place_editor_field :vcard, :family_name %></td>
+      <th style="width: 10em">Adresse</th><td><%= in_place_editor_field :vcard, :family_name %> <%= in_place_editor_field :vcard, :given_name %></td>
       <th style="width: 10em">Geburtstag</th><td><%=h @patient.birth_date.blank? ? 'unbekannt' : @patient.birth_date.strftime('%d.%m.%Y') %></td>
     </tr>
     <tr>
