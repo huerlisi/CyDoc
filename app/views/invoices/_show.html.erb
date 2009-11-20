@@ -15,7 +15,7 @@
   <% elsif @invoice.state != 'canceled' %>
       <%= link_to_remote "Rechnung stornieren", {:url => invoice_path(@invoice), :method => :delete, :confirm => "Rechnung #{@invoice.to_s} stornieren?"}, :class => "icon icon-delete" %>
   <% end %>
-  <%= link_to "Rückforderungsbeleg PDF", formatted_insurance_recipe_invoice_path(@invoice, :pdf), :method => :get, :class => "icon icon-pdf" %>
+  <%= link_to "Rückforderungsbeleg PDF", insurance_recipe_invoice_path(@invoice, :format => :pdf), :method => :get, :class => "icon icon-pdf" %>
 </div>
 
 <h3>Rechnung #<%= @invoice.id %></h3>
