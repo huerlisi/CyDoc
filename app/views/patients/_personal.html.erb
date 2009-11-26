@@ -19,7 +19,7 @@
     </tr>
     <tr>
       <th></th><td><%= in_place_editor_field :vcard, :postal_code %> <%= in_place_editor_field :vcard, :locality %></td>
-      <th>Patientennr.</th><td><%= in_place_editor_field :patient, :doctor_patient_nr %></td>
+      <th>Patientennr.</th><td><%=h @patient.doctor_patient_nr %></td>
     </tr>
     <tr>
       <th>Bemerkungen</th>
