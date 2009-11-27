@@ -11,7 +11,7 @@ class InvoicesController < ApplicationController
     @treatment = @invoice.treatment
     @patient = @treatment.patient
     
-    unless params[:print_copy]
+    if @invoice.state == "prepared" and !params[:print_copy]
       @invoice.state = 'printed'
       @invoice.save!
     end
