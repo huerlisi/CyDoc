@@ -108,10 +108,12 @@ class EsrRecord < ActiveRecord::Base
       :debit_account  => vesr_account,
       :value_date     => value_date,
       :title          => "VESR Zahlung #{reference}",
-      :comments       => remarks )
+      :comments       => remarks)
     
     esr_booking.save
  
+    self.booking = esr_booking
+    
     return esr_booking
   end
 end
