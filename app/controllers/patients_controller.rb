@@ -5,7 +5,7 @@ class PatientsController < ApplicationController
   in_place_edit_for :vcard, :postal_code
   in_place_edit_for :vcard, :locality
   in_place_edit_for :patient, :birth_date
-  in_place_edit_for :patient, :doctor_patient_nr
+  in_place_edit_for :patient, :remarks
   in_place_edit_for :patient, :insurance_nr
 
   in_place_edit_for :phone_number, :phone_number_type
@@ -47,12 +47,16 @@ class PatientsController < ApplicationController
     query ||= params[:search][:query] if params[:search]
     query ||= params[:quick_search][:query] if params[:quick_search]
 
-    @patients = Patient.clever_find(query).paginate(:page => params['page'])
+    if params[:all]
+      @patients = Patient.paginate(:page => params['page'])
+    else
+      @patients = Patient.clever_find(query).paginate(:page => params['page'])
+    end
 
     # Show selection list only if more than one hit
     respond_to do |format|
       format.html {
-        if @patients.size == 1
+        if !params[:all] and @patients.size == 1
           redirect_to :action => :show, :id => @patients.first.id
         else
           render :action => 'list'
@@ -61,7 +65,7 @@ class PatientsController < ApplicationController
       }
       format.js {
         render :update do |page|
-          if @patients.size == 1
+          if !params[:all] and @patients.size == 1
             page.redirect_to :action => :show, :id => @patients.first.id
           else
             page.replace_html 'search_results', :partial => 'list'

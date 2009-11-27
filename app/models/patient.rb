@@ -63,7 +63,7 @@ class Patient < ActiveRecord::Base
   end
 
   def birth_date_formatted=(value)
-    write_attribute(:birth_date, Date.parse_europe(value))
+    write_attribute(:birth_date, Date.parse_europe(value, :past))
   end
   
   # Services
