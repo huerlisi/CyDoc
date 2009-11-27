@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091106104925) do
+ActiveRecord::Schema.define(:version => 20091127073015) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -46,15 +46,17 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
   end
 
   create_table "bookings", :force => true do |t|
-    t.string  "title",             :limit => 100
-    t.decimal "amount",                            :precision => 8, :scale => 2
-    t.integer "credit_account_id"
-    t.integer "debit_account_id"
-    t.date    "value_date"
-    t.string  "comments",          :limit => 1000,                               :default => ""
-    t.integer "reference_id"
-    t.string  "reference_type"
-    t.integer "imported_id"
+    t.string   "title",             :limit => 100
+    t.decimal  "amount",                            :precision => 8, :scale => 2
+    t.integer  "credit_account_id"
+    t.integer  "debit_account_id"
+    t.date     "value_date"
+    t.string   "comments",          :limit => 1000,                               :default => ""
+    t.integer  "reference_id"
+    t.string   "reference_type"
+    t.integer  "imported_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "bookings", ["credit_account_id"], :name => "index_bookings_on_credit_account_id"
@@ -121,7 +123,7 @@ ActiveRecord::Schema.define(:version => 20091106104925) do
     t.boolean  "under_bg"
     t.integer  "expires"
     t.float    "quantity"
-    t.text     "description",                 :limit => 255
+    t.text     "description"
     t.text     "name"
     t.string   "quantity_unit"
     t.string   "package_type"
