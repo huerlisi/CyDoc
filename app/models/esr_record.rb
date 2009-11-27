@@ -64,6 +64,19 @@ class EsrRecord < ActiveRecord::Base
   before_create :assign_invoice, :create_esr_booking
   
   private
+  def evaluate_bad
+    if (invoice.due_amount == 0) and (invoice.amount.currency_round == self.amount.currency_round)
+      # paid twice
+      self.remarks += ", doppelt bezahlt"
+    elsif invoice.amount.currency_round == self.amount.currency_round
+      # reminder fee not paied
+      self.remarks += ", Mahnspesen nicht bezahlt"
+    else
+      # bad amount
+      self.remarks += ", falscher Betrag"
+    end
+  end
+  
   def assign_invoice
     invoice_id = reference[6..-1].to_i
 
@@ -71,7 +84,7 @@ class EsrRecord < ActiveRecord::Base
       self.invoice_id = invoice_id
       self.remarks += "Rechnung ##{invoice_id}"
       if invoice.due_amount.currency_round != self.amount.currency_round
-        self.remarks += ", falscher Betrag"
+        evaluate_bad
         self.state = "bad"
       else
         self.state = "valid"
