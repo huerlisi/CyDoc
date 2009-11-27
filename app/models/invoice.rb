@@ -49,6 +49,16 @@ class Invoice < ActiveRecord::Base
     (state == 'booked' and due_date < Date.today) or (state == 'reminded' and reminder_due_date < Date.today) or (state == '2xreminded' and second_reminder_due_date < Date.today)
   end
   
+  def reactivate
+    bookings.build(:title => "Storno",
+                   :amount => -(amount.currency_round),
+                   :credit_account => EARNINGS_ACCOUNT,
+                   :debit_account => DEBIT_ACCOUNT,
+                   :value_date => Date.today)
+    self.state = 'reactivated'
+    # TODO: actually reactivate treatment/session
+  end
+  
   def cancel
     bookings.build(:title => "Storno",
                    :amount => -(amount.currency_round),
