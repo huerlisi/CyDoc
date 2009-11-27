@@ -1,6 +1,6 @@
 class EsrFile < ActiveRecord::Base
   has_attachment :storage => :file_system
-  has_many :esr_records
+  has_many :esr_records, :dependent => :destroy
   
   def to_s(format = :default)
     case format
