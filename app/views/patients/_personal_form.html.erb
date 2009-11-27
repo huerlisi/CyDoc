@@ -11,7 +11,7 @@
       </tr>
       <tr>
         <th style="width: 10em">Name, Vorname</th><td><%= vcard.text_field :family_name, :size => 25 %> <%= vcard.text_field :given_name, :size => 25 %></td>
-        <th>Geburtstag</th><td><%= patient.date_field :birth_date, :size => 12 %></td>
+        <th>Geburtstag</th><td><%= patient.date_field :birth_date, :size => 12, :autocomplete => false %></td>
       </tr>
       <tr>
         <th>Strasse</th><td><%= vcard.text_field :street_address %></td>

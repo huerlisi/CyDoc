@@ -109,7 +109,7 @@ end
 
 class Date
   # Date helpers
-  def self.parse_europe(value)
+  def self.parse_europe(value, base = :future)
     return value if value.is_a?(Date)
     return value.to_date if value.is_a?(Time)
     
@@ -122,7 +122,7 @@ class Date
       day, month, year = value.split('.').map {|s| s.to_i}
       month ||= Date.today.month
       year ||= Date.today.year
-      year = expand_year(year, 2000)
+      year = expand_year(year, base)
 
       return Date.new(year, month, day)
     else
@@ -134,9 +134,21 @@ class Date
     value.is_a?(String) and value.strip.match /^\d{2,4}$/
   end
 
-  def self.expand_year(value, base = 1900)
-    year = value.to_i
-    return year < 100 ? year + base : year
+  def self.expand_year(value, base = :future)
+    value = value.to_i
+    return value unless value < 100
+    
+    century = Date.today.year / 100
+    year = Date.today.year % 100
+    
+    case base
+    when :future:
+      offset = value < year ? 100 : 0
+    when :past:
+      offset = value <= year ? 0 : -100
+    end
+    
+    return 100 * century + value + offset
   end
 end
 
