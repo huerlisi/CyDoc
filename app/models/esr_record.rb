@@ -65,11 +65,16 @@ class EsrRecord < ActiveRecord::Base
   
   private
   def evaluate_bad
-    if (invoice.due_amount == 0) and (invoice.amount.currency_round == self.amount.currency_round)
-      # paid twice
-      self.remarks += ", doppelt bezahlt"
+    if invoice.state == 'paid'
+      # already paid
+      if invoice.amount.currency_round == self.amount.currency_round
+        # paid twice
+        self.remarks += ", doppelt bezahlt"
+      else
+        self.remarks += ", bereits bezahlt"
+      end
     elsif invoice.amount.currency_round == self.amount.currency_round
-      # reminder fee not paied
+      # reminder fee not paid
       self.remarks += ", Mahnspesen nicht bezahlt"
     else
       # bad amount
