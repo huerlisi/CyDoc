@@ -26,7 +26,8 @@ body { margin: 0; padding: 1px; }
   </div>
 
   <div style="height: 0.3em"/>
-
+    <% kvg = @patient.insurance_policies.by_policy_type('KVG').first %>
+    <%=h kvg.to_s if kvg %><br/>
   <div>
   </div>
 </div>
