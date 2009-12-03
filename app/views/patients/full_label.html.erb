@@ -28,6 +28,8 @@ body { margin: 0; padding: 1px; }
   <div style="height: 0.3em"/>
     <% kvg = @patient.insurance_policies.by_policy_type('KVG').first %>
     <%=h kvg.to_s if kvg %><br/>
+    <% uvg = @patient.insurance_policies.by_policy_type('UVG').first %>
+    <%=h uvg.to_s if uvg %><br/>
   <div>
   </div>
 </div>

@@ -9,7 +9,7 @@ class InsurancePolicy < ActiveRecord::Base
   validates_presence_of :insurance
 
   def to_s
-    s = "#{insurance.to_s}"
+    s = "#{policy_type}: #{insurance.to_s}"
     s += " ##{number}" unless number.blank?
 
     return s
