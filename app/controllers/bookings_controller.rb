@@ -1,6 +1,17 @@
 include Accounting
 
 class BookingsController < ApplicationController
+  # GET /bookings
+  def index
+    @bookings = Accounting::Booking.paginate(:page => params['page'], :per_page => 20, :order => 'value_date')
+    
+    respond_to do |format|
+      format.html {
+        render :action => 'list'
+      }
+    end
+  end
+
   # GET /bookings/new
   def new
     if params[:invoice_id]
@@ -16,7 +27,9 @@ class BookingsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.insert_html :top, "invoice_#{@invoice.id}_booking_list", :partial => 'simple_form'
+          if @invoice
+            page.insert_html :top, "invoice_#{@invoice.id}_booking_list", :partial => 'invoice_bookings/simple_form'
+          end
         end
       }
     end
@@ -59,12 +72,14 @@ class BookingsController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            @invoice.reload
-            # TODO: Only works when @invoice is set
-            page.replace "invoice_#{@invoice.id}_bookings", :partial => 'bookings/list', :object => @invoice.bookings
-            page.remove 'booking_form'
-            # TODO: some kind of delegation would be nice
-            page.replace_html "invoice_#{@invoice.id}_state", @invoice.state
+            if @invoice
+              @invoice.reload
+              # TODO: Only works when @invoice is set
+              page.replace "invoice_#{@invoice.id}_bookings", :partial => 'invoice_bookings/list', :object => @invoice.bookings
+              page.remove 'booking_form'
+              # TODO: some kind of delegation would be nice
+              page.replace_html "invoice_#{@invoice.id}_state", @invoice.state
+            end
           end
         }
       end
@@ -73,7 +88,9 @@ class BookingsController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            page.replace 'booking_form', :partial => 'bookings/simple_form', :object => @booking
+            if @invoice
+              page.replace 'booking_form', :partial => 'invoice_bookings/simple_form', :object => @booking
+            end
           end
         }
       end
