@@ -1,9 +1,14 @@
 include Accounting
 
 class BookingsController < ApplicationController
+  in_place_edit_for :booking, :amount
+  in_place_edit_for :booking, :value_date
+  in_place_edit_for :booking, :title
+  in_place_edit_for :booking, :comments
+
   # GET /bookings
   def index
-    @bookings = Accounting::Booking.paginate(:page => params['page'], :per_page => 20, :order => 'value_date')
+    @bookings = Accounting::Booking.paginate(:page => params['page'], :per_page => 20, :order => 'value_date DESC')
     
     respond_to do |format|
       format.html {
@@ -109,7 +114,7 @@ class BookingsController < ApplicationController
       format.js {
         render :update do |page|
           page.remove "booking_#{@booking.id}"
-#          page.replace 'bookings_list_footer', :partial => 'bookings/list_footer'
+          page.replace 'bookings_list_footer', :partial => 'bookings/list_footer'
         end
       }
     end
