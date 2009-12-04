@@ -51,7 +51,7 @@ class Invoice < ActiveRecord::Base
   
   def reactivate
     bookings.build(:title => "Storno",
-                   :amount => -(amount.currency_round),
+                   :amount => amount.currency_round,
                    :credit_account => EARNINGS_ACCOUNT,
                    :debit_account => DEBIT_ACCOUNT,
                    :value_date => Date.today)
@@ -61,7 +61,7 @@ class Invoice < ActiveRecord::Base
   
   def cancel
     bookings.build(:title => "Storno",
-                   :amount => -(amount.currency_round),
+                   :amount => amount.currency_round,
                    :credit_account => EARNINGS_ACCOUNT,
                    :debit_account => DEBIT_ACCOUNT,
                    :value_date => Date.today)
@@ -71,8 +71,8 @@ class Invoice < ActiveRecord::Base
   def build_reminder_booking
     bookings.build(:title => self.state_noun,
                    :amount => REMINDER_FEE[self.state],
-                   :credit_account => EARNINGS_ACCOUNT,
-                   :debit_account => DEBIT_ACCOUNT,
+                   :credit_account => DEBIT_ACCOUNT,
+                   :debit_account => EARNINGS_ACCOUNT,
                    :value_date => Date.today)
   end
   
@@ -151,7 +151,7 @@ class Invoice < ActiveRecord::Base
   end
   
   def booking_saved(booking)
-    if due_amount <= 0.0
+    if (self.state != 'canceled') and (due_amount <= 0.0)
       self.state = 'paid'
       self.save
     end
@@ -160,8 +160,8 @@ class Invoice < ActiveRecord::Base
   def build_booking
     bookings.build(:title => "Rechnung",
                    :amount => amount.currency_round,
-                   :credit_account => EARNINGS_ACCOUNT,
-                   :debit_account => DEBIT_ACCOUNT,
+                   :credit_account => DEBIT_ACCOUNT,
+                   :debit_account => EARNINGS_ACCOUNT,
                    :value_date => value_date)
   end
 

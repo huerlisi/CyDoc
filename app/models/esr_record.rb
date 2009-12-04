@@ -73,6 +73,9 @@ class EsrRecord < ActiveRecord::Base
       else
         self.remarks += ", bereits bezahlt"
       end
+    elsif invoice.state == 'canceled'
+      # canceled invoice
+      self.remarks += ", wurde storniert"
     elsif invoice.amount.currency_round == self.amount.currency_round
       # reminder fee not paid
       self.remarks += ", Mahnspesen nicht bezahlt"
@@ -122,8 +125,8 @@ class EsrRecord < ActiveRecord::Base
     
     esr_booking.update_attributes(
       :amount         => amount,
-      :credit_account => Invoice::DEBIT_ACCOUNT,
-      :debit_account  => vesr_account,
+      :credit_account => vesr_account,
+      :debit_account  => Invoice::DEBIT_ACCOUNT,
       :value_date     => value_date,
       :title          => "VESR Zahlung #{reference}",
       :comments       => remarks)

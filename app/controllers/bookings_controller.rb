@@ -33,24 +33,23 @@ class BookingsController < ApplicationController
     
     case @booking.title
       when "Barzahlung":
-        @booking.debit_account = Account.find_by_code('1000')
-        @booking.credit_account = Account.find_by_code('1100')
+        @booking.credit_account = Account.find_by_code('1000')
+        @booking.debit_account = Account.find_by_code('1100')
       when "Bankzahlung":
-        @booking.debit_account = Account.find_by_code('1020')
-        @booking.credit_account = Account.find_by_code('1100')
-      when "Skonto/Rabatt":
-        @booking.debit_account = Account.find_by_code('1100')
-        @booking.credit_account = Account.find_by_code('3200')
-        @booking.amount = 0.0 - @booking.amount
-      when "Zusatzleistung":
-        @booking.debit_account = Account.find_by_code('1100')
-        @booking.credit_account = Account.find_by_code('3200')
-      when "Debitorenverlust":
-        @booking.debit_account = Account.find_by_code('3900')
-        @booking.credit_account = Account.find_by_code('1100')
-      when "Rückerstattung":
-        @booking.debit_account = Account.find_by_code('1100')
         @booking.credit_account = Account.find_by_code('1020')
+        @booking.debit_account = Account.find_by_code('1100')
+      when "Skonto/Rabatt":
+        @booking.credit_account = Account.find_by_code('3200')
+        @booking.debit_account = Account.find_by_code('1100')
+      when "Zusatzleistung":
+        @booking.credit_account = Account.find_by_code('1100')
+        @booking.debit_account = Account.find_by_code('3200')
+      when "Debitorenverlust":
+        @booking.credit_account = Account.find_by_code('3900') # Debitorenverlust
+        @booking.debit_account = Account.find_by_code('1100') # Debitor
+      when "Rückerstattung":
+        @booking.credit_account = Account.find_by_code('1100') # Debitor
+        @booking.debit_account = Account.find_by_code('1020') # Bank
     end
     
     if @booking.save
