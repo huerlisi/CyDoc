@@ -48,6 +48,9 @@ class BookingsController < ApplicationController
       when "Debitorenverlust":
         @booking.debit_account = Account.find_by_code('3900')
         @booking.credit_account = Account.find_by_code('1100')
+      when "Rückerstattung":
+        @booking.debit_account = Account.find_by_code('1100')
+        @booking.credit_account = Account.find_by_code('1020')
     end
     
     if @booking.save
