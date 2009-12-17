@@ -168,14 +168,10 @@ module Print
 
         # You probably need the pdftops filter from xpdf, not poppler on the cups host
         # In my setup it generated an empty page otherwise
-        logger.info("lp -h #{cups_host} -d #{device}")
-        generator = IO.popen("lp -h #{cups_host} -d #{device}", "w+")
-        generator.puts render_to_pdf(:template => "#{controller_name}/#{method}.html.erb", :layout => 'simple', :media => media)
-        generator.close_write
-
-        # Just read to not create zombie processes... TODO: fix
-        data = generator.read
-        generator.close
+        logger.info("Printing to #{device}")
+        page = render_to_pdf(:template => "#{controller_name}/#{method}.html.erb", :layout => 'simple', :media => media)
+        paper_copy = Cups::PrintJob::Transient.new(page, device)
+        paper_copy.print
 
         respond_to do |format|
           format.html {}
