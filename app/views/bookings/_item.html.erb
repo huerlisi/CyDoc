@@ -1,0 +1,18 @@
+<% @booking = item %>
+<% total_debit += item.amount if item.debit_account == @account %>
+<% total_credit += item.amount if item.credit_account == @account %>
+<tr id="booking_<%= item.id %>">
+  <td><%= in_place_editor_field :booking, :value_date %></td>
+  <td>
+    <%= in_place_editor_field :booking, :title %>
+    <%= '<hr style="height: 1px; margin: 0"/>' unless (item.comments.blank?) %>
+    <i><%= in_place_editor_field :booking, :comments %></i>
+  </td>
+  <td><%= link_to item.reference.to_s, item.reference unless item.reference.nil? rescue 'Referenz' %></td>
+  <td style="text-align: right"><%= "<i>#{link_to(h(item.credit_account.code), account_path(item.credit_account), :title => h(item.credit_account.title))}</i>" %></td>
+  <td style="text-align: right"><%= "<i>#{link_to(h(item.debit_account.code), account_path(item.debit_account), :title => h(item.debit_account.title))}</i>" %></td>
+  <td style="text-align: right"><%= in_place_editor_field(:booking, :amount) %></td>
+  <td style="border: none 0px">
+    <%= link_to_remote image_tag('delete.png'), {:url => booking_path(item), :method => :delete, :confirm => "Buchung #{item.to_s} löschen?"} %>
+  </td>
+</tr>

@@ -4,15 +4,8 @@
 <h2>Konto - <%= @account.title %></h2>
 
 <table class="list booking_list">
-  <tr>
-    <th>Datum</th>
-    <th>Text</th>
-    <th>Referenz</th>
-    <th style="text-align: right">Soll</th>
-    <th style="text-align: right">Haben</th>
-    <th style="text-align: right">Saldo</th>
-    <th />
-  </tr>
+  <%= render :partial => 'bookings/list_header' %>
+
   <% total_debit = 0; total_credit = 0 %>
   <% for booking in @account.bookings %>
   <% @booking = booking %>
