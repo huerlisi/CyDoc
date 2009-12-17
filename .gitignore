@@ -28,3 +28,4 @@ config/initializers/site_keys.rb
 # =====
 data/
 db/backup/
+public/esr_files
