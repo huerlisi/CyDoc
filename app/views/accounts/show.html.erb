@@ -4,7 +4,7 @@
 <h2>Konto - <%= @account.title %></h2>
 
 <table class="list booking_list">
-  <%= render :partial => 'bookings/list_header' %>
+  <%= render :partial => 'accounts/booking_list_header' %>
 
   <% total_debit = 0; total_credit = 0 %>
   <% for booking in @account.bookings %>
