@@ -1,7 +1,7 @@
 include Accounting
 
 class AccountsController < ApplicationController
-  in_place_edit_for :booking, :amount
+  in_place_edit_for :booking, :amount_as_string
   in_place_edit_for :booking, :value_date
   in_place_edit_for :booking, :title
   in_place_edit_for :booking, :comments
