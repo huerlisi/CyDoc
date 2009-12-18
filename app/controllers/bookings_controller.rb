@@ -105,6 +105,7 @@ class BookingsController < ApplicationController
   # DELETE /booking/1
   def destroy
     @booking = Booking.find(params[:id])
+    @account = Accounting::Account.find(params[:account_id])
 
     @booking.destroy
     
@@ -113,7 +114,12 @@ class BookingsController < ApplicationController
       format.js {
         render :update do |page|
           page.remove "booking_#{@booking.id}"
-          page.replace 'bookings_list_footer', :partial => 'bookings/list_footer'
+          if @account
+            page.replace 'bookings_list_footer', :partial => 'accounts/booking_list_turnover'
+            page.replace 'bookings_list_footer', :partial => 'accounts/booking_list_saldo'
+          else
+            page.replace 'bookings_list_footer', :partial => 'bookings/list_footer'
+          end
         end
       }
     end
