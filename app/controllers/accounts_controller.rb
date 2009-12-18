@@ -23,7 +23,7 @@ class AccountsController < ApplicationController
     
     # We're getting hit by will_paginate bug #120 (http://sod.lighthouseapp.com/projects/17958/tickets/120-paginate-association-with-finder_sql-raises-typeerror)
     # This needs the will_paginate version from http://github.com/jwood/will_paginate/tree/master to work.
-    @bookings = @account.bookings.paginate(:page => params['page'], :per_page => 20, :order => 'value_date')
+    @bookings = @account.bookings.paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
     respond_to do |format|
       format.html {
         render :action => 'show'

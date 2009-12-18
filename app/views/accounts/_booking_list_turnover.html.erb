@@ -1,7 +1,7 @@
 <%
 credit_turnover, debit_turnover = @account.turnover(@bookings)
 %>
-<tr style="border-top: double 2px black; background-color: grey">
+<tr id="booking_list_turnover" style="border-top: double 2px black; background-color: grey">
   <td colspan="2">Umsatz</td>
   <td/>
   <td style="text-align: right"><%= currency_fmt(credit_turnover) %></td>

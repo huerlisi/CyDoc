@@ -115,8 +115,9 @@ class BookingsController < ApplicationController
         render :update do |page|
           page.remove "booking_#{@booking.id}"
           if @account
-            page.replace 'bookings_list_footer', :partial => 'accounts/booking_list_turnover'
-            page.replace 'bookings_list_footer', :partial => 'accounts/booking_list_saldo'
+            @bookings = @account.bookings.paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
+            page.replace 'booking_list_turnover', :partial => 'accounts/booking_list_turnover'
+            page.replace 'booking_list_saldo', :partial => 'accounts/booking_list_saldo'
           else
             page.replace 'bookings_list_footer', :partial => 'bookings/list_footer'
           end
