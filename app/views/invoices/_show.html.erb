@@ -50,7 +50,7 @@
 </div>
 <h3>Buchungen</h3>
 <div id="invoice_<%= @invoice.id %>_booking_list">
-  <%= render :partial => 'bookings/list', :object => @invoice.bookings %>
+  <%= render :partial => 'invoice_bookings/list', :object => @invoice.bookings %>
 </div>
 
 <h3>Diagnosen</h3>

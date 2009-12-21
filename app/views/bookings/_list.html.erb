@@ -1,4 +1,5 @@
-<table class="list booking_list" id="invoice_<%= @invoice.id %>_bookings">
-  <%= render :partial => 'bookings/item', :collection => list %>
-  <%= render :partial => 'bookings/list_footer' %>
+<table class="list booking_list" id="bookings">
+  <%= render :partial => 'list_header' %>
+  <%= render :partial => 'item', :collection => @bookings %>
+  <%= render :partial => 'list_footer' %>
 </table>

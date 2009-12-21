@@ -1,6 +1,11 @@
-<tr id="bookings_footer">
-  <th style="width: 10em"><%=h Date.today.strftime('%d.%m.%Y') %></th>
-  <th><%= @invoice.due_amount.currency_round >= 0 ? "Offener Betrag" : "Saldo" %></th>
-  <!-- TODO: to_a is deprecated, but needed to get the Enumeration sum function -->
-  <th style="text-align: right"><%= sprintf("%0.2f", @invoice.due_amount.currency_round) %>&nbsp;CHF</th>
+<tr id="bookings_list_footer" style="border-top: double 2px black; background-color: grey">
+  <td/>
+  <td colspan="2">Umsatz</td>
+  <td/>
+  <td/>
+  <td style="text-align: right"><%= currency_fmt(@bookings.to_a.sum{|b| b.amount}) %></td>
+  <td />
+</tr>
+<tr>
+  <th colspan="7" style="text-align: right"><%= will_paginate @bookings, :params => {:query => params[:query]} %></th>
 </tr>

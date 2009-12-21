@@ -152,50 +152,7 @@ class Date
   end
 end
 
-module Print
-  def self.included(base)
-    base.extend(ClassMethods)
-  end
-
-  module ClassMethods
-    def print_action_for(method, options = {})
-      define_method("print_#{method}") do
-        self.send("#{method}")
-        cups_host = options[:cups_host] || @printers[:cups_host]
-        tray = options[:tray].to_sym || :plain
-        device = options[:device] || @printers[:trays][tray]
-        media = options[:media] || 'A4'
-
-        # You probably need the pdftops filter from xpdf, not poppler on the cups host
-        # In my setup it generated an empty page otherwise
-        logger.info("lp -h #{cups_host} -d #{device}")
-        generator = IO.popen("lp -h #{cups_host} -d #{device}", "w+")
-        generator.puts render_to_pdf(:template => "#{controller_name}/#{method}.html.erb", :layout => 'simple', :media => media)
-        generator.close_write
-
-        # Just read to not create zombie processes... TODO: fix
-        data = generator.read
-        generator.close
-
-        respond_to do |format|
-          format.html {}
-#          format.js {
-#            render :update do |page|
-#              page.select('.icon-spinner') do |spinner|
-#                spinner.toggleClassName('icon-spinner')
-#              end
-#            end
-#          }
-        end
-      end
-    end
-  end
-end
-
 # Rails 2.2.1 helper
 def button_to_remote(name, options = {}, html_options = {})
   button_to_function(name, remote_function(options), html_options)
 end
-
-
-ActionController::Base.send :include, Print

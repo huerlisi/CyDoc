@@ -1,6 +1,22 @@
 include Accounting
 
 class BookingsController < ApplicationController
+  in_place_edit_for :booking, :amount_as_string
+  in_place_edit_for :booking, :value_date
+  in_place_edit_for :booking, :title
+  in_place_edit_for :booking, :comments
+
+  # GET /bookings
+  def index
+    @bookings = Accounting::Booking.paginate(:page => params['page'], :per_page => 20, :order => 'value_date DESC')
+    
+    respond_to do |format|
+      format.html {
+        render :action => 'list'
+      }
+    end
+  end
+
   # GET /bookings/new
   def new
     if params[:invoice_id]
@@ -16,7 +32,9 @@ class BookingsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.insert_html :top, "invoice_#{@invoice.id}_booking_list", :partial => 'simple_form'
+          if @invoice
+            page.insert_html :top, "invoice_#{@invoice.id}_booking_list", :partial => 'invoice_bookings/simple_form'
+          end
         end
       }
     end
@@ -59,12 +77,14 @@ class BookingsController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            @invoice.reload
-            # TODO: Only works when @invoice is set
-            page.replace "invoice_#{@invoice.id}_bookings", :partial => 'bookings/list', :object => @invoice.bookings
-            page.remove 'booking_form'
-            # TODO: some kind of delegation would be nice
-            page.replace_html "invoice_#{@invoice.id}_state", @invoice.state
+            if @invoice
+              @invoice.reload
+              # TODO: Only works when @invoice is set
+              page.replace "invoice_#{@invoice.id}_bookings", :partial => 'invoice_bookings/list', :object => @invoice.bookings
+              page.remove 'booking_form'
+              # TODO: some kind of delegation would be nice
+              page.replace_html "invoice_#{@invoice.id}_state", @invoice.state
+            end
           end
         }
       end
@@ -73,17 +93,61 @@ class BookingsController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            page.replace 'booking_form', :partial => 'bookings/simple_form', :object => @booking
+            if @invoice
+              page.replace 'booking_form', :partial => 'invoice_bookings/simple_form', :object => @booking
+            end
           end
         }
       end
     end
   end
 
+  # GET /bookings/1/edit
+  def edit
+    @booking = Accounting::Booking.find(params[:id])
+    @account = Accounting::Account.find(params[:account_id])
+    
+    respond_to do |format|
+      format.html {}
+      format.js {
+        render :update do |page|
+          page.replace "booking_#{@booking.id}", :partial => 'edit'
+        end
+      }
+    end
+  end
 
+  # PUSH /booking/1
+  def update
+    @booking = Booking.find(params[:id])
+    @account = Accounting::Account.find(params[:account_id])
+    
+    if @booking.update_attributes(params[:booking])
+      respond_to do |format|
+        format.html { }
+        format.js {
+          render :update do |page|
+            @saldo = @account.saldo(@booking)
+            page.replace "booking_#{@booking.id}", :partial => 'accounts/booking_item'
+          end
+        }
+      end
+    else
+      respond_to do |format|
+        format.html { }
+        format.js {
+          render :update do |page|
+            page.replace "booking_#{@booking.id}", :partial => 'edit'
+          end
+        }
+      end
+    end
+  end
+  
   # DELETE /booking/1
   def destroy
     @booking = Booking.find(params[:id])
+    @account = Accounting::Account.find(params[:account_id])
 
     @booking.destroy
     
@@ -92,7 +156,13 @@ class BookingsController < ApplicationController
       format.js {
         render :update do |page|
           page.remove "booking_#{@booking.id}"
-#          page.replace 'bookings_list_footer', :partial => 'bookings/list_footer'
+          if @account
+            @bookings = @account.bookings.paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
+            page.replace 'booking_list_turnover', :partial => 'accounts/booking_list_turnover'
+            page.replace 'booking_list_saldo', :partial => 'accounts/booking_list_saldo'
+          else
+            page.replace 'bookings_list_footer', :partial => 'bookings/list_footer'
+          end
         end
       }
     end

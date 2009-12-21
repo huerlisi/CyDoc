@@ -25,7 +25,9 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   # Accounting
-  map.resources :accounts
+  map.resources :accounts do |account|
+    account.resources :bookings
+  end
   map.resources :bookings
   
   # Billing
