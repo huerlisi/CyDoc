@@ -102,6 +102,48 @@ class BookingsController < ApplicationController
     end
   end
 
+  # GET /bookings/1/edit
+  def edit
+    @booking = Accounting::Booking.find(params[:id])
+    @account = Accounting::Account.find(params[:account_id])
+    
+    respond_to do |format|
+      format.html {}
+      format.js {
+        render :update do |page|
+          page.replace "booking_#{@booking.id}", :partial => 'edit'
+        end
+      }
+    end
+  end
+
+  # PUSH /booking/1
+  def update
+    @booking = Booking.find(params[:id])
+    @account = Accounting::Account.find(params[:account_id])
+    
+    if @booking.update_attributes(params[:booking])
+      respond_to do |format|
+        format.html { }
+        format.js {
+          render :update do |page|
+            @saldo = @account.saldo(@booking)
+            page.replace "booking_#{@booking.id}", :partial => 'accounts/booking_item'
+          end
+        }
+      end
+    else
+      respond_to do |format|
+        format.html { }
+        format.js {
+          render :update do |page|
+            page.replace "booking_#{@booking.id}", :partial => 'edit'
+          end
+        }
+      end
+    end
+  end
+  
   # DELETE /booking/1
   def destroy
     @booking = Booking.find(params[:id])

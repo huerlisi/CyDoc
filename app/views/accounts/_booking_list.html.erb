@@ -1,10 +1,10 @@
 <table class="list booking_list">
   <%= render :partial => 'booking_list_header' %>
 
-  <% @total_credit, @total_debit = @account.turnover(@bookings.first, false) %>
+  <% @saldo = @account.saldo(@bookings.first, false) %>
   <% for @booking in @bookings %>
-    <% @total_debit += @booking.amount if @booking.debit_account == @account %>
-    <% @total_credit += @booking.amount if @booking.credit_account == @account %>
+    <% @saldo += @booking.amount if @booking.debit_account == @account %>
+    <% @saldo -= @booking.amount if @booking.credit_account == @account %>
     <%= render :partial => 'booking_item' %>
   <% end %>
 
