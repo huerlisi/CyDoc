@@ -70,10 +70,6 @@ Rails::Initializer.run do |config|
   # ========
   config.gem 'fastercsv'
   
-  # Printing
-  # ========
-  config.gem 'cups', :version => '>= 0.0.5'
-
   # Testing
   config.gem "cucumber"
 end
