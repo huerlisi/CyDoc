@@ -127,8 +127,8 @@ class BookingsController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            @saldo = @account.saldo(@booking)
-            page.replace "booking_#{@booking.id}", :partial => 'accounts/booking_item'
+            @bookings = @account.bookings.paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
+            page.replace 'booking_list', :partial => 'accounts/booking_list'
           end
         }
       end
@@ -155,12 +155,11 @@ class BookingsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.remove "booking_#{@booking.id}"
           if @account
             @bookings = @account.bookings.paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
-            page.replace 'booking_list_turnover', :partial => 'accounts/booking_list_turnover'
-            page.replace 'booking_list_saldo', :partial => 'accounts/booking_list_saldo'
+            page.replace 'booking_list', :partial => 'accounts/booking_list'
           else
+            page.remove "booking_#{@booking.id}"
             page.replace 'bookings_list_footer', :partial => 'bookings/list_footer'
           end
         end
