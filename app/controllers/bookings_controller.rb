@@ -1,7 +1,7 @@
 include Accounting
 
 class BookingsController < ApplicationController
-  in_place_edit_for :booking, :amount
+  in_place_edit_for :booking, :amount_as_string
   in_place_edit_for :booking, :value_date
   in_place_edit_for :booking, :title
   in_place_edit_for :booking, :comments
@@ -102,10 +102,52 @@ class BookingsController < ApplicationController
     end
   end
 
+  # GET /bookings/1/edit
+  def edit
+    @booking = Accounting::Booking.find(params[:id])
+    @account = Accounting::Account.find(params[:account_id])
+    
+    respond_to do |format|
+      format.html {}
+      format.js {
+        render :update do |page|
+          page.replace "booking_#{@booking.id}", :partial => 'edit'
+        end
+      }
+    end
+  end
 
+  # PUSH /booking/1
+  def update
+    @booking = Booking.find(params[:id])
+    @account = Accounting::Account.find(params[:account_id])
+    
+    if @booking.update_attributes(params[:booking])
+      respond_to do |format|
+        format.html { }
+        format.js {
+          render :update do |page|
+            @bookings = @account.bookings.paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
+            page.replace 'booking_list', :partial => 'accounts/booking_list'
+          end
+        }
+      end
+    else
+      respond_to do |format|
+        format.html { }
+        format.js {
+          render :update do |page|
+            page.replace "booking_#{@booking.id}", :partial => 'edit'
+          end
+        }
+      end
+    end
+  end
+  
   # DELETE /booking/1
   def destroy
     @booking = Booking.find(params[:id])
+    @account = Accounting::Account.find(params[:account_id])
 
     @booking.destroy
     
@@ -113,8 +155,13 @@ class BookingsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.remove "booking_#{@booking.id}"
-          page.replace 'bookings_list_footer', :partial => 'bookings/list_footer'
+          if @account
+            @bookings = @account.bookings.paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
+            page.replace 'booking_list', :partial => 'accounts/booking_list'
+          else
+            page.remove "booking_#{@booking.id}"
+            page.replace 'bookings_list_footer', :partial => 'bookings/list_footer'
+          end
         end
       }
     end

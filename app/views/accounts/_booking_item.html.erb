@@ -1,0 +1,16 @@
+<tr id="booking_<%= @booking.id %>">
+  <td><%=h @booking.value_date %></td>
+  <td>
+    <%=h @booking.title %>
+    <%= '<hr style="height: 1px; margin: 0"/>' unless (@booking.comments.blank?) %>
+    <i><%=h @booking.comments %></i>
+  </td>
+  <td><%= link_to @booking.reference.to_s, @booking.reference unless @booking.reference.nil? rescue 'Referenz' %></td>
+  <td style="text-align: right"><%= (@booking.credit_account == @account) ? h(@booking.amount_as_string) : "<i>#{link_to(h(@booking.credit_account.code), account_path(@booking.credit_account), :title => h(@booking.credit_account.title))}</i>" %></td>
+  <td style="text-align: right"><%= (@booking.debit_account == @account) ? h(@booking.amount_as_string) : "<i>#{link_to(h(@booking.debit_account.code), account_path(@booking.debit_account), :title => h(@booking.debit_account.title))}</i>" %></td>
+  <td style="text-align: right"><%= currency_fmt(@saldo) %></td>
+  <td style="border: none 0px">
+    <%= link_to_remote image_tag('edit.png'), {:url => edit_account_booking_path(@account, @booking, :page => params['page']), :method => :get } %>
+    <%= link_to_remote image_tag('delete.png'), {:url => account_booking_path(@account, @booking, :page => params['page']), :method => :delete, :confirm => "Buchung #{@booking.to_s} löschen?"} %>
+  </td>
+</tr>

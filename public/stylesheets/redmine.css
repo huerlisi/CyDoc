@@ -428,8 +428,6 @@ vertical-align: middle;
 .icon22-authent { background-image: url(../images/22x22/authent.png); }
 .icon22-info { background-image: url(../images/22x22/info.png); }
 .icon22-settings { background-image: url(../images/22x22/settings.png); }
-.icon22-save { background-image: url(../images/22x22/filesave.png); }
-.icon22-cancel { background-image: url(../images/22x22/button_cancel.png); }
 
 img.gravatar { 
 	padding: 2px;

@@ -36,7 +36,7 @@ class EsrRecord < ActiveRecord::Base
 
   public
   def to_s
-    "CHF #{amount} for client #{client_nr} on #{value_date}, reference #{reference}"
+    "CHF #{amount} for client #{client_id} on #{value_date}, reference #{reference}"
   end
 
   def client_id
