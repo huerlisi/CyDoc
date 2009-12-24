@@ -27,8 +27,13 @@ class ServiceRecord < ActiveRecord::Base
     errors.empty?
   end
   
-  def to_s
-    "#{sprintf('%03i', tariff_type)} - #{quantity}x #{code} #{!ref_code.nil? ? '(' + ref_code + ') ' : ''} - #{text}"
+  def to_s(format = :default)
+    case format
+    when :stats
+      "#{date.strftime('%d.%m.%Y')}: #{quantity}x #{code} #{!ref_code.nil? ? '(' + ref_code + ') ' : ''}- #{text}"
+    else
+      "#{sprintf('%03i', tariff_type)} - #{quantity}x #{code} #{!ref_code.nil? ? '(' + ref_code + ') ' : ''}- #{text}"
+    end
   end
   
   # TODO: lookup in tarmed db
