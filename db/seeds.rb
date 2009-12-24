@@ -37,8 +37,8 @@ doctor.accounts << Accounting::BankAccount.create!([
 ])
 
 doctor.accounts << Accounting::Account.create!([
-  {:code => "3900", :title => "Debitorenverlust"},
-  {:code => "3200", :title => "Debitoren"},
   {:code => "1000", :title => "Kasse"},
-  {:code => "1100", :title => "Dienstleistungsertrag"},
+  {:code => "1100", :title => "Debitoren"},
+  {:code => "3200", :title => "Dienstleistungsertrag"},
+  {:code => "3900", :title => "Debitorenverlust"},
 ])
