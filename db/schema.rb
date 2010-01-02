@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091127073015) do
+ActiveRecord::Schema.define(:version => 20091230230943) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
     t.boolean  "under_bg"
     t.integer  "expires"
     t.float    "quantity"
-    t.text     "description"
+    t.text     "description",                 :limit => 255
     t.text     "name"
     t.string   "quantity_unit"
     t.string   "package_type"
@@ -135,6 +135,9 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
     t.datetime "updated_at"
   end
 
+  add_index "drug_articles", ["drug_product_id"], :name => "index_drug_articles_on_drug_product_id"
+  add_index "drug_articles", ["vat_class_id"], :name => "index_drug_articles_on_vat_class_id"
+
   create_table "drug_prices", :force => true do |t|
     t.date     "valid_from"
     t.decimal  "price",           :precision => 8, :scale => 2
@@ -143,6 +146,9 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "drug_prices", ["drug_article_id"], :name => "index_drug_prices_on_drug_article_id"
+  add_index "drug_prices", ["price_type"], :name => "index_drug_prices_on_price_type"
 
   create_table "drug_products", :force => true do |t|
     t.text     "description"
@@ -218,12 +224,16 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
     t.string   "payment_tax"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "esr_file_id"
     t.integer  "booking_id"
     t.integer  "invoice_id"
+    t.integer  "esr_file_id"
     t.string   "remarks",                                         :default => ""
     t.string   "state",                                                           :null => false
   end
+
+  add_index "esr_records", ["booking_id"], :name => "index_esr_records_on_booking_id"
+  add_index "esr_records", ["esr_file_id"], :name => "index_esr_records_on_esr_file_id"
+  add_index "esr_records", ["invoice_id"], :name => "index_esr_records_on_invoice_id"
 
   create_table "honorific_prefixes", :force => true do |t|
     t.integer "sex"
@@ -241,6 +251,10 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
     t.datetime "updated_at"
   end
 
+  add_index "insurance_policies", ["insurance_id"], :name => "index_insurance_policies_on_insurance_id"
+  add_index "insurance_policies", ["patient_id"], :name => "index_insurance_policies_on_patient_id"
+  add_index "insurance_policies", ["policy_type"], :name => "index_insurance_policies_on_policy_type"
+
   create_table "insurances", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -250,7 +264,10 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
     t.integer  "imported_id"
   end
 
+  add_index "insurances", ["ean_party"], :name => "index_insurances_on_ean_party"
+  add_index "insurances", ["group_ean_party"], :name => "index_insurances_on_group_ean_party"
   add_index "insurances", ["imported_id"], :name => "index_insurances_on_imported_id"
+  add_index "insurances", ["role"], :name => "index_insurances_on_role"
 
   create_table "invoices", :force => true do |t|
     t.text     "remark"
@@ -274,7 +291,9 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
     t.date     "third_reminder_due_date"
   end
 
+  add_index "invoices", ["invoice_replaced_by"], :name => "index_invoices_on_invoice_replaced_by"
   add_index "invoices", ["law_id"], :name => "index_invoices_on_law_id"
+  add_index "invoices", ["state"], :name => "index_invoices_on_state"
   add_index "invoices", ["tiers_id"], :name => "index_invoices_on_tiers_id"
   add_index "invoices", ["treatment_id"], :name => "index_invoices_on_treatment_id"
 
@@ -311,10 +330,28 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
     t.integer  "imported_id"
   end
 
+  add_index "medical_cases", ["diagnosis_id"], :name => "index_medical_cases_on_diagnosis_id"
+  add_index "medical_cases", ["doctor_id"], :name => "index_medical_cases_on_doctor_id"
+  add_index "medical_cases", ["patient_id"], :name => "index_medical_cases_on_patient_id"
+  add_index "medical_cases", ["treatment_id"], :name => "index_medical_cases_on_treatment_id"
+  add_index "medical_cases", ["type"], :name => "index_medical_cases_on_type"
+
   create_table "offices", :force => true do |t|
     t.string "name"
     t.string "login"
     t.string "printers"
+  end
+
+  add_index "offices", ["login"], :name => "index_offices_on_login"
+
+  create_table "patient_adresses", :id => false, :force => true do |t|
+    t.string "family_name",      :limit => 50
+    t.string "given_name",       :limit => 50
+    t.string "honorific_prefix", :limit => 50
+    t.string "street_address",   :limit => 50
+    t.string "post_office_box",  :limit => 50
+    t.string "postal_code",      :limit => 50
+    t.string "locality",         :limit => 50
   end
 
   create_table "patients", :force => true do |t|
@@ -335,14 +372,20 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
   end
 
   add_index "patients", ["doctor_id"], :name => "patients_doctor_id_index"
+  add_index "patients", ["doctor_patient_nr"], :name => "index_patients_on_doctor_patient_nr"
   add_index "patients", ["updated_at"], :name => "patients_updated_at_index"
 
   create_table "phone_numbers", :force => true do |t|
     t.string  "number",            :limit => 50
     t.string  "phone_number_type", :limit => 50
+    t.integer "vcard_id"
     t.integer "object_id"
     t.string  "object_type"
   end
+
+  add_index "phone_numbers", ["object_id", "object_type"], :name => "index_phone_numbers_on_object_id_and_object_type"
+  add_index "phone_numbers", ["phone_number_type"], :name => "index_phone_numbers_on_phone_number_type"
+  add_index "phone_numbers", ["vcard_id"], :name => "phone_numbers_vcard_id_index"
 
   create_table "postal_codes", :force => true do |t|
     t.string   "zip_type"
@@ -356,6 +399,9 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
     t.datetime "updated_at"
   end
 
+  add_index "postal_codes", ["zip"], :name => "index_postal_codes_on_zip"
+  add_index "postal_codes", ["zip_type"], :name => "index_postal_codes_on_zip_type"
+
   create_table "service_items", :force => true do |t|
     t.integer "tariff_item_id"
     t.integer "tariff_item_group_id"
@@ -363,6 +409,10 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
     t.string  "ref_code",             :limit => 10
     t.integer "position"
   end
+
+  add_index "service_items", ["ref_code"], :name => "index_service_items_on_ref_code"
+  add_index "service_items", ["tariff_item_group_id"], :name => "index_service_items_on_tariff_item_group_id"
+  add_index "service_items", ["tariff_item_id"], :name => "index_service_items_on_tariff_item_id"
 
   create_table "service_records", :force => true do |t|
     t.string   "treatment",                                                       :default => "ambulatory"
@@ -403,10 +453,18 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
     t.integer  "imported_id"
   end
 
+  add_index "service_records", ["patient_id"], :name => "index_service_records_on_patient_id"
+  add_index "service_records", ["provider_id"], :name => "index_service_records_on_provider_id"
+  add_index "service_records", ["responsible_id"], :name => "index_service_records_on_responsible_id"
+  add_index "service_records", ["vat_class_id"], :name => "index_service_records_on_vat_class_id"
+
   create_table "service_records_sessions", :id => false, :force => true do |t|
     t.integer "service_record_id"
     t.integer "session_id"
   end
+
+  add_index "service_records_sessions", ["service_record_id"], :name => "index_service_records_sessions_on_service_record_id"
+  add_index "service_records_sessions", ["session_id"], :name => "index_service_records_sessions_on_session_id"
 
   create_table "sessions", :force => true do |t|
     t.integer  "patient_id"
@@ -420,6 +478,11 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
     t.integer  "treatment_id"
     t.integer  "imported_id"
   end
+
+  add_index "sessions", ["invoice_id"], :name => "index_sessions_on_invoice_id"
+  add_index "sessions", ["patient_id"], :name => "index_sessions_on_patient_id"
+  add_index "sessions", ["state"], :name => "index_sessions_on_state"
+  add_index "sessions", ["treatment_id"], :name => "index_sessions_on_treatment_id"
 
   create_table "tariff_codes", :force => true do |t|
     t.string   "tariff_code"
@@ -444,6 +507,11 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
     t.string   "tariff_type",  :limit => 3
     t.integer  "vat_class_id"
   end
+
+  add_index "tariff_items", ["code"], :name => "index_tariff_items_on_code"
+  add_index "tariff_items", ["tariff_type"], :name => "index_tariff_items_on_tariff_type"
+  add_index "tariff_items", ["type"], :name => "index_tariff_items_on_type"
+  add_index "tariff_items", ["vat_class_id"], :name => "index_tariff_items_on_vat_class_id"
 
   create_table "tiers", :force => true do |t|
     t.integer  "biller_id"
@@ -484,6 +552,7 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
 
   add_index "treatments", ["law_id"], :name => "index_treatments_on_law_id"
   add_index "treatments", ["patient_id"], :name => "index_treatments_on_patient_id"
+  add_index "treatments", ["referrer_id"], :name => "index_treatments_on_referrer_id"
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
@@ -504,6 +573,7 @@ ActiveRecord::Schema.define(:version => 20091127073015) do
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+  add_index "users", ["state"], :name => "index_users_on_state"
 
   create_table "vat_classes", :force => true do |t|
     t.date     "valid_from"
