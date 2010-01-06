@@ -25,7 +25,7 @@ class Treatment < ActiveRecord::Base
   end
 
   def date_begin_formatted=(value)
-    write_attribute(:date_begin, Date.parse_europe(value))
+    write_attribute(:date_begin, Date.parse_europe(value, :past))
   end
 
   def date_end_formatted
@@ -33,7 +33,7 @@ class Treatment < ActiveRecord::Base
   end
 
   def date_end_formatted=(value)
-    write_attribute(:date_end, Date.parse_europe(value))
+    write_attribute(:date_end, Date.parse_europe(value, :past))
   end
 
   def to_s(format = :default)

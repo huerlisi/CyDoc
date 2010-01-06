@@ -225,7 +225,7 @@ class Invoice < ActiveRecord::Base
       patient_condition = "patients.doctor_patient_nr = :query"
       invoice_condition = "invoices.id = :query OR invoices.imported_invoice_id = :query"
     when /([[:digit:]]{1,2}\.){2}/
-      query_params[:query] = Date.parse_europe(query).strftime('%%%y-%m-%d%')
+      query_params[:query] = Date.parse_europe(query, :past).strftime('%%%y-%m-%d%')
       patient_condition = "patients.birth_date LIKE :query"
       invoice_condition = "invoices.created_at LIKE :query"
     else
