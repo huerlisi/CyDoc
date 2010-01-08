@@ -4,6 +4,14 @@ class BookingsController < ApplicationController
   in_place_edit_for :booking, :title
   in_place_edit_for :booking, :comments
 
+  # Filters
+  before_filter Accounting::ValueDateFilter
+  
+  def for_value_date
+    year = params[:year].to_i || Date.today.year
+    Date.new(year, 1, 1)..Date.new(year, 12, 31)
+  end
+
   # GET /bookings
   def index
     @bookings = Accounting::Booking.paginate(:page => params['page'], :per_page => 20, :order => 'value_date DESC')

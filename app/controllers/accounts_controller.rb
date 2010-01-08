@@ -1,11 +1,17 @@
-include Accounting
-
 class AccountsController < ApplicationController
   in_place_edit_for :booking, :amount_as_string
   in_place_edit_for :booking, :value_date
   in_place_edit_for :booking, :title
   in_place_edit_for :booking, :comments
 
+  # Filters
+  before_filter Accounting::ValueDateFilter
+  
+  def for_value_date
+    year = params[:year].to_i || Date.today.year
+    Date.new(year, 1, 1)..Date.new(year, 12, 31)
+  end
+  
   # GET /accounts
   def index
     @accounts = Accounting::Account.paginate(:page => params['page'], :per_page => 20, :order => 'code')
