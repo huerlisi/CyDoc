@@ -8,8 +8,22 @@ class AccountsController < ApplicationController
   before_filter Accounting::ValueDateFilter
   
   def for_value_date
-    year = params[:year].to_i || Date.today.year
-    Date.new(year, 1, 1)..Date.new(year, 12, 31)
+    if session[:value_date_scope].nil?
+      value_date_scope = Date.today.year
+    end
+
+    session[:value_date_scope]
+  end
+
+  def value_date_scope=(value)
+    year = value.to_i
+    session[:value_date_scope] = Date.new(year, 1, 1)..Date.new(year, 12, 31)
+  end
+  
+  def set_value_date_filter
+    self.value_date_scope = params[:year]
+    
+    redirect_to params[:uri]
   end
   
   # GET /accounts

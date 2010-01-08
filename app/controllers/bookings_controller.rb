@@ -8,8 +8,22 @@ class BookingsController < ApplicationController
   before_filter Accounting::ValueDateFilter
   
   def for_value_date
-    year = params[:year].to_i || Date.today.year
-    Date.new(year, 1, 1)..Date.new(year, 12, 31)
+    if session[:value_date_scope].nil?
+      value_date_scope = Date.today.year
+    end
+
+    session[:value_date_scope]
+  end
+
+  def value_date_scope=(value)
+    year = value.to_i
+    session[:value_date_scope] = Date.new(year, 1, 1)..Date.new(year, 12, 31)
+  end
+  
+  def set_value_date_filter
+    self.value_date_scope = params[:year]
+    
+    redirect_to params[:uri]
   end
 
   # GET /bookings
@@ -153,7 +167,6 @@ class BookingsController < ApplicationController
   # DELETE /booking/1
   def destroy
     @booking = Accounting::Booking.find(params[:id])
-    @account = Accounting::Account.find(params[:account_id])
 
     @booking.destroy
     
@@ -161,11 +174,13 @@ class BookingsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          if @account
+          if params[:account_id]
+            @account = Accounting::Account.find(params[:account_id])
             @bookings = @account.bookings.paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
             page.replace 'booking_list', :partial => 'accounts/booking_list'
           else
             page.remove "booking_#{@booking.id}"
+            @bookings = Accounting::Booking.paginate(:page => params['page'], :per_page => 20, :order => 'value_date DESC')
             page.replace 'bookings_list_footer', :partial => 'bookings/list_footer'
           end
         end
