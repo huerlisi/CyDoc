@@ -90,7 +90,7 @@ class EsrRecord < ActiveRecord::Base
 
     if Invoice.exists?(invoice_id)
       self.invoice_id = invoice_id
-      self.remarks += "Rechnung ##{invoice_id}"
+      self.remarks += "Referenz #{reference}"
       if invoice.due_amount.currency_round != self.amount.currency_round
         evaluate_bad
         self.state = "bad"
@@ -99,7 +99,7 @@ class EsrRecord < ActiveRecord::Base
       end
     elsif imported_invoice = Invoice.find(:first, :conditions => ["imported_esr_reference LIKE concat(?, '%')", reference])
       self.invoice = imported_invoice
-      self.remarks += "Triamun Rechnung ##{invoice.imported_invoice_id}"
+      self.remarks += "Referenz #{reference}"
       if invoice.due_amount.currency_round != self.amount.currency_round
         self.remarks += ", falscher Betrag"
         self.state = "bad"
@@ -128,7 +128,7 @@ class EsrRecord < ActiveRecord::Base
       :credit_account => vesr_account,
       :debit_account  => Invoice::DEBIT_ACCOUNT,
       :value_date     => value_date,
-      :title          => "VESR Zahlung #{reference}",
+      :title          => "VESR Zahlung",
       :comments       => remarks)
     
     esr_booking.save

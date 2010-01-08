@@ -8,7 +8,9 @@ class MoveEsrReferenceFromBookingTitleToBookingComment < ActiveRecord::Migration
       com = booking.comments.gsub(/Rechnung #[0-9, ]*/, '')
       booking.comments = "Referenz #{ref} #{com}"
       
-      bookings.save
+      booking.save
+      
+      booking
     }
     
     puts new_bookings
