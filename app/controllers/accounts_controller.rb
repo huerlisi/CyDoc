@@ -7,7 +7,7 @@ class AccountsController < ApplicationController
   # Filters
   before_filter Accounting::ValueDateFilter
   
-  def for_value_date
+  def value_date_scope
     if session[:value_date_scope].nil?
       value_date_scope = Date.today.year
     end
