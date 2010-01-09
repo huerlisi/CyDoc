@@ -8,5 +8,5 @@
     <%= render :partial => 'accounts/booking_item' %>
   <% end %>
 
-  <%= render :partial => 'accounts/booking_list_footer' %>
+  <%= render :partial => 'accounts/booking_list_footer' unless @bookings.empty? %>
 </table>
