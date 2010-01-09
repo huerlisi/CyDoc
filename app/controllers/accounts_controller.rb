@@ -5,19 +5,19 @@ class AccountsController < ApplicationController
   in_place_edit_for :booking, :comments
 
   # Filters
-  before_filter Accounting::ValueDateFilter
+  around_filter Accounting::Booking
   
   def value_date_scope
-    if session[:value_date_scope].nil?
-      value_date_scope = Date.today.year
-    end
-
     session[:value_date_scope]
   end
 
   def value_date_scope=(value)
-    year = value.to_i
-    session[:value_date_scope] = Date.new(year, 1, 1)..Date.new(year, 12, 31)
+    if value.nil?
+      session[:value_date_scope] = nil
+    else
+      year = value.to_i
+      session[:value_date_scope] = Date.new(year, 1, 1)..Date.new(year, 12, 31)
+    end
   end
   
   def set_value_date_filter
