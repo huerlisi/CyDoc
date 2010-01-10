@@ -3,7 +3,7 @@
   <h3>Filter</h3>
   <ul>
     <li><%= link_to "Alle", set_value_date_filter_accounts_path(:year => nil, :uri => request.request_uri) %></li>
-    <% for year in 2007..2010 %>
+    <% for year in Accounting::Booking.fiscal_years %>
       <li><%= link_to year, set_value_date_filter_accounts_path(:year => year, :uri => request.request_uri) %></li>
     <% end %>
   </ul>
