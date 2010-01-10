@@ -1,0 +1,6 @@
+<% for @account in Accounting::Account.all -%>
+  <h3><%=h @account.title %></h3>
+  <%= render :partial => 'booking_statistics' %>
+<% end -%>
+
+<%= render :partial => 'bookings/sidebar' %>

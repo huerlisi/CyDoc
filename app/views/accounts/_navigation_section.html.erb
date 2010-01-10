@@ -1,4 +1,5 @@
 <%= navigation_section('Buchhaltung', {
       "Konten anzeigen"    => :accounts,
-      "Debitoren anzeigen" => account_path(Invoice::DEBIT_ACCOUNT)
+      "Debitoren anzeigen" => account_path(Invoice::DEBIT_ACCOUNT),
+      "Konto Statistiken"  => {:controller => :bookkeeping, :action => :account_statistics}
     }, '48x48/accounts.png') %>

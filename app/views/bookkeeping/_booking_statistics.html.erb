@@ -1,0 +1,16 @@
+<table class="list">
+  <tr>
+    <th>Titel</th>
+    <th style="text-align: right">Anzahl</th>
+    <th style="text-align: right">Durchschnitt</th>
+    <th style="text-align: right">Summe</th>
+  </tr>
+  <% for record in @account.bookings.statistics -%>
+  <tr>
+    <td><%= record["title"] %></td>
+    <td style="text-align: right"><%= record["count"] %></td>
+    <td style="text-align: right"><%= currency_fmt record["avg"] %></td>
+    <td style="text-align: right"><%= currency_fmt record["sum"] %></td>
+  </tr>
+  <% end -%>  
+</table>
