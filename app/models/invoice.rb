@@ -20,6 +20,14 @@ class Invoice < ActiveRecord::Base
   named_scope :overdue, :conditions => ["(state = 'booked' AND due_date < :today) OR (state = 'reminded' AND reminder_due_date < :today) OR (state = '2xreminded' AND second_reminder_due_date < :today)", {:today => Date.today}]
   named_scope :in_encashment, :conditions => ["state = 'encashment'"]
 
+  def cancelable
+    active and !(state == 'paid')
+  end
+  
+  def active
+    !(state == 'canceled' or state == 'reactivated')
+  end
+  
   def state_adverb
     case state
       when 'prepared': "offen"
@@ -31,6 +39,7 @@ class Invoice < ActiveRecord::Base
       when '2xreminded': "2x gemahnt"
       when '3xreminded': "3x gemahnt"
       when 'encashment': "in inkasso"
+      when 'paid': "bezahlt"
     end
   end
   
@@ -45,6 +54,7 @@ class Invoice < ActiveRecord::Base
       when '2xreminded':  "2. Mahnung"
       when '3xreminded':  "3. Mahnung"
       when 'encashment':  "Inkasso"
+      when 'paid':        "Bezahlte Rechnung"
     end
   end
   
