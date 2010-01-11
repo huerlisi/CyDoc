@@ -1,0 +1,23 @@
+<h2>Jahresabschluss</h2>
+<table class="list">
+  <tr>
+    <th>Total fakturiert</th>
+    <td style="text-align: right"><%= currency_fmt(-Invoice::EARNINGS_ACCOUNT.saldo('2009-01-01'..'2009-12-31')) %></td>
+  </tr>
+  <tr>
+    <th>Total bezahlt</th>
+    <td style="text-align: right"><%= currency_fmt(Accounting::Account.find_by_code('1000').saldo('2009-01-01'..'2009-12-31') + Accounting::Account.find_by_code('1020').saldo('2009-01-01'..'2009-12-31')) %></td>
+  </tr>
+  <tr>
+    <th>Offene Posten</th>
+    <td style="text-align: right"><%= currency_fmt(Invoice::DEBIT_ACCOUNT.saldo('2009-12-31')) %></td>
+  </tr>
+  <tr>
+    <th>Debitorenverlust</th>
+    <td style="text-align: right"><%= currency_fmt(Accounting::Account.find_by_code('3900').saldo('2009-01-01'..'2009-12-31')) %></td>
+  </tr>
+  <tr>
+    <th>Angefangene Arbeiten</th>
+    <td style="text-align: right"><%= currency_fmt(Treatment.open.map{|t| t.amount.currency_round}.sum) %></td>
+  </tr>
+</table>
