@@ -17,6 +17,10 @@ class Invoice < ActiveRecord::Base
   named_scope :overdue, :conditions => ["(state = 'booked' AND due_date < :today) OR (state = 'reminded' AND reminder_due_date < :today) OR (state = '2xreminded' AND second_reminder_due_date < :today)", {:today => Date.today}]
   named_scope :in_encashment, :conditions => ["state = 'encashment'"]
 
+  def cancelable
+    !(state == 'canceled' or state == 'reactivated' or state == 'paid')
+  end
+  
   def state_adverb
     case state
       when 'prepared': "offen"
