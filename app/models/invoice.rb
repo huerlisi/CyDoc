@@ -13,6 +13,7 @@ class Invoice < ActiveRecord::Base
 
   # State
   named_scope :prepared, :conditions => "state = 'prepared'"
+  named_scope :canceled, :conditions => "state = 'canceled'"
   named_scope :open, :conditions => "state = 'open'"
   named_scope :overdue, :conditions => ["(state = 'booked' AND due_date < :today) OR (state = 'reminded' AND reminder_due_date < :today) OR (state = '2xreminded' AND second_reminder_due_date < :today)", {:today => Date.today}]
   named_scope :in_encashment, :conditions => ["state = 'encashment'"]
