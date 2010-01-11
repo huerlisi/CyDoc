@@ -25,7 +25,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   # Accounting
-  map.resources :accounts, :collection => {:set_value_date_filter => :get} do |account|
+  map.resources :accounts, :collection => {:set_value_date_filter => :get, :statistics => :get} do |account|
     account.resources :bookings
   end
   map.resources :bookings
