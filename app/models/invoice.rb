@@ -18,7 +18,11 @@ class Invoice < ActiveRecord::Base
   named_scope :in_encashment, :conditions => ["state = 'encashment'"]
 
   def cancelable
-    !(state == 'canceled' or state == 'reactivated' or state == 'paid')
+    active and !(state == 'paid')
+  end
+  
+  def active
+    !(state == 'canceled' or state == 'reactivated')
   end
   
   def state_adverb
