@@ -41,7 +41,7 @@ class Treatment < ActiveRecord::Base
     when :short
       [reason, date_begin.nil? ? nil : date_begin.strftime('%d.%m.%Y')].join(': ')
     else
-      "#{patient.name} #{reason}: #{date_begin.strftime('%d.%m.%Y')} - #{date_end.strftime('%d.%m.%Y') if date_end}"
+      "#{patient.nil? ? 'Patient unbekannt' : patient.name} #{reason}: #{date_begin.strftime('%d.%m.%Y') if date_begin} - #{date_end.strftime('%d.%m.%Y') if date_end}"
     end
   end
   
