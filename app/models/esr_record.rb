@@ -73,10 +73,11 @@ class EsrRecord < ActiveRecord::Base
       else
         self.remarks += ", bereits bezahlt"
       end
-    elsif invoice.state == 'canceled'
+    elsif !(invoice.active)
       # canceled invoice
-      self.remarks += ", wurde storniert"
+      self.remarks += ", wurde #{invoice.state_adverb}"
     elsif invoice.amount.currency_round == self.amount.currency_round
+      # TODO much to open condition (issue #804)
       # reminder fee not paid
       self.remarks += ", Mahnspesen nicht bezahlt"
     else
