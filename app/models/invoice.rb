@@ -32,6 +32,7 @@ class Invoice < ActiveRecord::Base
       when '2xreminded': "2x gemahnt"
       when '3xreminded': "3x gemahnt"
       when 'encashment': "in inkasso"
+      when 'paid': "bezahlt"
     end
   end
   
@@ -46,6 +47,7 @@ class Invoice < ActiveRecord::Base
       when '2xreminded':  "2. Mahnung"
       when '3xreminded':  "3. Mahnung"
       when 'encashment':  "Inkasso"
+      when 'paid':        "Bezahlte Rechnung"
     end
   end
   
