@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
   in_place_edit_for :booking, :comments
 
   # Filters
-  before_filter Accounting::Booking
+#  before_filter Accounting::Booking
   
   def value_date_scope
     session[:value_date_scope]
