@@ -12,8 +12,7 @@
   <% end %>
   <% if @invoice.bookings.empty? %>
     <%= link_to_remote "Rechnung verbuchen", {:url => book_invoice_path(@invoice)}, :class => "icon icon-book" if (@invoice.state == 'printed' or @invoice.state == 'prepared') %>
-    <%= link_to_remote "Rechnung löschen", {:url => invoice_path(@invoice), :method => :delete, :confirm => "Rechnung #{@invoice.to_s} löschen?"}, :class => "icon icon-delete" %>
-  <% elsif @invoice.state != 'canceled' %>
+  <% elsif @invoice.cancelable %>
       <%= link_to_remote "Rechnung stornieren", {:url => invoice_path(@invoice), :method => :delete, :confirm => "Rechnung #{@invoice.to_s} stornieren?"}, :class => "icon icon-delete" %>
   <% end %>
   <%= link_to "Rückforderungsbeleg PDF", insurance_recipe_invoice_path(@invoice, :format => :pdf), :method => :get, :class => "icon icon-pdf" %>

@@ -251,41 +251,20 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @treatment = @invoice.treatment
     
-    # We destroy the invoice if it's just been prepared...
-    if @invoice.state == "prepared"
-      @invoice.destroy
-      
-      respond_to do |format|
-        format.html { }
-        format.js {
-          render :update do |page|
-            if params[:context] == "list"
-              page.remove "invoice_#{@invoice.id}"
-            else
-              page.remove "sub-tab-invoices-#{@invoice.id}"
-              page.remove "sub-tab-content-invoices-#{@invoice.id}"
-              page.call 'showTab', "personal"
-            end
+    @invoice.cancel
+    @invoice.save(false)
+    
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          if params[:context] == "list"
+            page.replace "invoice_#{@invoice.id}", :partial => 'item', :object => @invoice
+          else
+            page.replace "sub-tab-content-invoices-#{@invoice.id}", :partial => 'show'
           end
-        }
-      end
-    # ... but do cancel it afterwards
-    else
-      @invoice.cancel
-      @invoice.save(false)
-      
-      respond_to do |format|
-        format.html { }
-        format.js {
-          render :update do |page|
-            if params[:context] == "list"
-              page.replace "invoice_#{@invoice.id}", :partial => 'item', :object => @invoice
-            else
-              page.replace "sub-tab-content-invoices-#{@invoice.id}", :partial => 'show'
-            end
-          end
-        }
-      end
+        end
+      }
     end
   end
 end
