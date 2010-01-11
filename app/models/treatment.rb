@@ -9,6 +9,8 @@ class Treatment < ActiveRecord::Base
   
   validates_presence_of :date_begin
   
+  named_scope :open, :include => :invoices, :conditions => "invoices.id IS NULL"
+  
   def validate_for_invoice
     errors.add_to_base("Keine Diagnose eingegeben.") if medical_cases.empty?
   end
