@@ -12,5 +12,11 @@
     <td style="text-align: right"><%= currency_fmt record["avg"] %></td>
     <td style="text-align: right"><%= currency_fmt record["sum"] %></td>
   </tr>
-  <% end -%>  
+  <% end -%>
+  <tr>
+    <th>Total</th>
+    <th style="text-align: right"><%= @account.bookings.count %></th>
+    <th style="text-align: right"><%= currency_fmt @account.bookings.average(:amount) %></th>
+    <th style="text-align: right"><%= currency_fmt @account.bookings.sum(:amount) %></th>
+  </tr>
 </table>
