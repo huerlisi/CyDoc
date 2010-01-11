@@ -16,18 +16,19 @@ class Invoice < ActiveRecord::Base
   named_scope :canceled, :conditions => "state = 'canceled'"
   named_scope :reactivated, :conditions => "state = 'reactivated'"
   named_scope :active, :conditions => "NOT(state IN ('reactivated', 'canceled'))"
-  named_scope :open, :conditions => "state = 'open'"
+  named_scope :open, :conditions => "NOT(state IN ('reactivated', 'canceled', 'paid'))"
   named_scope :overdue, :conditions => ["(state = 'booked' AND due_date < :today) OR (state = 'reminded' AND reminder_due_date < :today) OR (state = '2xreminded' AND second_reminder_due_date < :today)", {:today => Date.today}]
   named_scope :in_encashment, :conditions => ["state = 'encashment'"]
 
-  def cancelable
-    active and !(state == 'paid')
-  end
   
   def active
     !(state == 'canceled' or state == 'reactivated')
   end
   
+  def open
+    active and !(state == 'paid')
+  end
+
   def state_adverb
     case state
       when 'prepared': "offen"
