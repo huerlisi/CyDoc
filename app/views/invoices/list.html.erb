@@ -27,7 +27,9 @@
   <%= render :partial => 'list' %>
 </div>
 
-<h2>Patienten mit offenen Leistungen</h2>
+<h2>Nicht abgeschlossene Fälle</h2>
+<% @treatments = Treatment.open.paginate(:page => params['page'], :per_page => 20) %>
+<%= render :partial => 'treatments/list' %>
 
 <div class="contextual">
   <%= link_to "Alle drucken", print_all_invoices_path, :method => :post, :class => "icon icon-print" %>
