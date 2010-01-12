@@ -21,3 +21,5 @@
     <td style="text-align: right"><%= currency_fmt(Treatment.open.map{|t| t.amount.currency_round}.sum) %></td>
   </tr>
 </table>
+
+<%= render :partial => 'bookings/sidebar' %>
