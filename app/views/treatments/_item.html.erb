@@ -4,7 +4,4 @@
   <td><%=h item.law.name if item.law %></td>
   <td><%=h item.reason %></td>
   <td style="text-align: right"><%=h currency_fmt(item.amount.currency_round) %></td>
-  <td>
-    <%= link_to_remote image_tag('delete.png'), {:url => treatment_path(item, :context => 'list'), :method => :delete, :confirm => "Behandlung #{item.to_s} löschen?"}, :title => 'Löschen' %>
-  </td>
 </tr>
