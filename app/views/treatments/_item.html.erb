@@ -2,6 +2,6 @@
   <td><%= link_to item.patient.full_name, item.patient %></td>
   <td><%=h item.date_begin.strftime('%d.%m.%Y') if item.date_begin%></td>
   <td><%=h item.law.name if item.law %></td>
-  <td><%=h item.reason %></td>
+  <td><%= link_to item.reason, item %></td>
   <td style="text-align: right"><%=h currency_fmt(item.amount.currency_round) %></td>
 </tr>
