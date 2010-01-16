@@ -1,0 +1,3 @@
+[submodule "vendor/plugins/accounting"]
+	path = vendor/plugins/accounting
+	url = project.client.zytolabor.ch:/srv/intern.cyt.ch/code/git/rails-plugins/accounting.git
