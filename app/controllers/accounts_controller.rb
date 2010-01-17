@@ -7,12 +7,6 @@ class AccountsController < ApplicationController
   # Scopes
   has_scope :by_value_date, :type => :range, :session => 'has_scope'
   
-  def set_value_date_filter
-    apply_scopes(Accounting::Booking)
-    
-    redirect_to params[:uri]
-  end
-  
   # GET /accounts
   def index
     @accounts = Accounting::Account.paginate(:page => params['page'], :per_page => 20, :order => 'code')

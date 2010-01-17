@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
   in_place_edit_for :booking, :title
   in_place_edit_for :booking, :comments
 
-  # Filters
+  # Scopes
   has_scope :by_value_date, :type => :range, :session => 'has_scope'
   
   # GET /bookings
