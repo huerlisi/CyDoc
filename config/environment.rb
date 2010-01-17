@@ -72,4 +72,7 @@ Rails::Initializer.run do |config|
   
   # Testing
   config.gem "cucumber"
+  
+  # Scoping
+  config.gem "has_scope"
 end
