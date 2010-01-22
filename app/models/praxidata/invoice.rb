@@ -22,6 +22,7 @@ module Praxidata
         :due_date               => (import_record.dtRechnung.nil? ? nil : import_record.dtRechnung + import_record.inZahlungsfrist),
         :imported_invoice_id    => import_record.inBelegNummer,
         :imported_esr_reference => import_record.txESRReferenzNummer
+        # TODO: set invoice_replaced_by to inNeueBelegID
       }
 
       self.tiers = TiersGarant.new(
@@ -31,6 +32,8 @@ module Praxidata
       )
       
       self.state = import_record.status if state == 'prepared'
+      # TODO: handle reactivated invoices
+      # TODO: create storno booking for canceled and reactivated invoice
       unless import_record.txStornoGrund.blank?
         self.state = 'canceled'
         self.remark ||= ''
@@ -46,9 +49,12 @@ module Praxidata
           :debit_account  => ::Invoice::DEBIT_ACCOUNT,
           :value_date => debitor['dtFälligkeit'],
           :imported_id => debitor.id
+          # TODO: set comments to txBemerkung
         )
         self.bookings << booking
         booking.save
+
+        # TODO: set state to canceled etc. as booking could have set it to paid
         self.state = 'booked' if state == 'prepared'
 
         for mahnung in debitor.mahnungen
