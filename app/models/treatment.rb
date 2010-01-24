@@ -48,7 +48,7 @@ class Treatment < ActiveRecord::Base
   end
   
   def amount
-    sessions.collect{|s| s.service_records}.flatten.sum(&:amount).to_f
+    sessions.to_a.sum(&:amount).to_f
   end
   
   def reason_xml

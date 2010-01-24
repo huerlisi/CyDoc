@@ -20,6 +20,10 @@ class Session < ActiveRecord::Base
     end
   end
   
+  def amount
+    service_records.to_a.sum(&:amount).to_f
+  end
+  
   def date
     duration_from.to_date unless duration_from.nil?
   end
