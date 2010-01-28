@@ -28,7 +28,6 @@
 </div>
 
 <h2>Nicht abgeschlossene Fälle</h2>
-<% @treatments = Treatment.open.paginate(:page => params['page'], :per_page => 20) %>
 <%= render :partial => 'treatments/list' %>
 
 <div class="contextual">
