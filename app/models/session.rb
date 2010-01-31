@@ -6,7 +6,6 @@ class Session < ActiveRecord::Base
   aasm_initial_state :open
   
   aasm_state :open
-  aasm_state :scheduled
   aasm_state :closed
   
   # Associations
