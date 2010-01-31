@@ -1,13 +1,20 @@
 class Session < ActiveRecord::Base
+  # State Machine
+  include AASM
+  aasm_column :state
+  
+  aasm_initial_state :open
+  
+  aasm_state :open
+  aasm_state :scheduled
+  aasm_state :closed
+  
+  # Associations
   belongs_to :patient
   belongs_to :invoice
   belongs_to :treatment
   has_and_belongs_to_many :diagnoses
   has_and_belongs_to_many :service_records
-
-  named_scope :scheduled, :conditions => "state = 'scheduled'"
-  named_scope :open, :conditions => "state = 'open'"
-  named_scope :closed, :conditions => "state = 'closed'"
 
   validates_presence_of :duration_from
   
