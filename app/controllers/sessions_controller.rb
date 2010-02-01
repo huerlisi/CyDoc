@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.replace_html 'session_list', :partial => 'list', :object => @treatment.sessions
+          page.replace_html "treatment_#{@treatment.id}_session_list", :partial => 'list', :object => @treatment.sessions
         end
       }
     end

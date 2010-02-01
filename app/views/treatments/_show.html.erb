@@ -46,7 +46,7 @@
   <%= link_to_remote "Neue Konsultation", {:url => new_patient_treatment_session_path(@patient, @treatment), :method => :get}, :class => "icon icon-add" %>
 </div>
 <h3>Leistungen</h3>
-<div id="session_list" class="box">
+<div id="treatment_<%= @treatment.id %>_session_list" class="box">
   <%= render :partial => 'sessions/list', :object => @treatment.sessions %>
 </div>
 
