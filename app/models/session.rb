@@ -6,7 +6,11 @@ class Session < ActiveRecord::Base
   aasm_initial_state :open
   
   aasm_state :open
-  aasm_state :closed
+  aasm_state :charged
+  
+  aasm_event :charge do
+    transitions :to => :charged, :from => :open
+  end
   
   # Associations
   belongs_to :patient
