@@ -59,7 +59,7 @@ Rails::Initializer.run do |config|
 
   # restful-authentication
   # ======================
-  config.gem "rubyist-aasm", :source => "http://gems.github.com", :lib => "aasm"
+  config.gem "aasm"
   config.active_record.observers = :user_observer
 
   # will_paginate
