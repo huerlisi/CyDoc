@@ -196,6 +196,11 @@ class InvoicesController < ApplicationController
 
     # Saving
     if @invoice.save
+      for session in @treatment.sessions
+        session.invoice = @invoice
+        session.charge!
+      end
+
       flash[:notice] = 'Erfolgreich erstellt.'
 
       respond_to do |format|
