@@ -13,7 +13,6 @@ class Session < ActiveRecord::Base
   end
   
   # Associations
-  belongs_to :patient
   belongs_to :invoice
   belongs_to :treatment
   has_and_belongs_to_many :diagnoses
@@ -28,6 +27,10 @@ class Session < ActiveRecord::Base
     else
       "#{diagnoses.map{|d| d.to_s}.join(', ')} for #{patient.name} #{duration_from.strftime('%d.%m.%Y')} - #{duration_to.strftime('%d.%m.%Y')}, #{service_records.count} pos: #{state}"
     end
+  end
+  
+  def patient
+    treatment.patient
   end
   
   def amount
