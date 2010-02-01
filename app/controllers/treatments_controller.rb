@@ -77,4 +77,22 @@ class TreatmentsController < ApplicationController
       render :action => ''
     end
   end
+
+  def destroy
+    @treatment = Treatment.find(params[:id])
+    @patient = @treatment.patient
+    
+    @treatment.destroy
+    
+    respond_to do |format|
+      format.html {
+        redirect_to @patient
+      }
+      format.js {
+        render :update do |page|
+          page.redirect_to @patient
+        end
+      }
+    end
+  end
 end

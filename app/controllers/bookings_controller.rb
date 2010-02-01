@@ -4,31 +4,12 @@ class BookingsController < ApplicationController
   in_place_edit_for :booking, :title
   in_place_edit_for :booking, :comments
 
-  # Filters
-#  before_filter Accounting::Booking
-  
-  def value_date_scope
-    session[:value_date_scope]
-  end
-
-  def value_date_scope=(value)
-    if value.nil?
-      session[:value_date_scope] = nil
-    else
-      year = value.to_i
-      session[:value_date_scope] = Date.new(year, 1, 1)..Date.new(year, 12, 31)
-    end
-  end
-  
-  def set_value_date_filter
-    self.value_date_scope = params[:year]
-    
-    redirect_to params[:uri]
-  end
+  # Scopes
+  has_scope :by_value_date, :type => :range, :session => 'has_scope'
   
   # GET /bookings
   def index
-    @bookings = Accounting::Booking.paginate(:page => params['page'], :per_page => 20, :order => 'value_date DESC')
+    @bookings = apply_scopes(Accounting::Booking).paginate(:page => params['page'], :per_page => 20, :order => 'value_date DESC')
     
     respond_to do |format|
       format.html {
@@ -99,7 +80,6 @@ class BookingsController < ApplicationController
           render :update do |page|
             if @invoice
               @invoice.reload
-              # TODO: Only works when @invoice is set
               page.replace "invoice_#{@invoice.id}_bookings", :partial => 'invoice_bookings/list', :object => @invoice.bookings
               page.remove 'booking_form'
               # TODO: some kind of delegation would be nice
@@ -170,17 +150,21 @@ class BookingsController < ApplicationController
 
     @booking.destroy
     
+    if params[:account_id]
+      @account = Accounting::Account.find(params[:account_id])
+      @bookings = @account.bookings.paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
+    else
+      @bookings = apply_scopes(Accounting::Booking).paginate(:page => params['page'], :per_page => 20, :order => 'value_date DESC')
+    end
+    
     respond_to do |format|
       format.html { }
       format.js {
         render :update do |page|
           if params[:account_id]
-            @account = Accounting::Account.find(params[:account_id])
-            @bookings = @account.bookings.paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
             page.replace 'booking_list', :partial => 'accounts/booking_list'
           else
             page.remove "booking_#{@booking.id}"
-            @bookings = Accounting::Booking.paginate(:page => params['page'], :per_page => 20, :order => 'value_date DESC')
             page.replace 'bookings_list_footer', :partial => 'bookings/list_footer'
           end
         end

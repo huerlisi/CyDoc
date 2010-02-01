@@ -134,6 +134,7 @@ class InvoicesController < ApplicationController
     query ||= params[:quick_search][:query] if params[:quick_search]
 
     @invoices = Invoice.clever_find(query).paginate(:page => params['page'], :per_page => 20, :order => 'id DESC')
+    @treatments = Treatment.open.paginate(:page => params['page'], :per_page => 20)
     
     respond_to do |format|
       format.html {
@@ -195,6 +196,11 @@ class InvoicesController < ApplicationController
 
     # Saving
     if @invoice.save
+      for session in @treatment.sessions
+        session.invoice = @invoice
+        session.charge!
+      end
+
       flash[:notice] = 'Erfolgreich erstellt.'
 
       respond_to do |format|
