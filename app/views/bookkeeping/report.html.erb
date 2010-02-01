@@ -2,27 +2,27 @@
 <table class="list">
   <tr>
     <th>Total fakturiert</th>
-    <td style="text-align: right"><%= currency_fmt(-Invoice::EARNINGS_ACCOUNT.saldo('2009-01-01'..'2009-12-31')) %></td>
+    <td style="text-align: right"><%= currency_fmt(@total_invoiced) %></td>
   </tr>
   <tr>
     <th>Total bezahlt</th>
-    <td style="text-align: right"><%= currency_fmt(Accounting::Account.find_by_code('1000').saldo('2009-01-01'..'2009-12-31') + Accounting::Account.find_by_code('1020').saldo('2009-01-01'..'2009-12-31')) %></td>
+    <td style="text-align: right"><%= currency_fmt(@total_paid) %></td>
   </tr>
   <tr>
     <th>Offene Posten</th>
-    <td style="text-align: right"><%= currency_fmt(Invoice::DEBIT_ACCOUNT.saldo('2009-12-31')) %></td>
+    <td style="text-align: right"><%= currency_fmt(@open_items) %></td>
   </tr>
   <tr>
     <th>Debitorenverlust</th>
-    <td style="text-align: right"><%= currency_fmt(Accounting::Account.find_by_code('3900').saldo('2009-01-01'..'2009-12-31')) %></td>
+    <td style="text-align: right"><%= currency_fmt(@debtors_write_off) %></td>
   </tr>
   <tr>
     <th>Angefangene Arbeiten</th>
-    <td style="text-align: right"><%= currency_fmt(Session.find(:all, :conditions => "duration_from < '2009-12-31'").select{|s| s.treatment.invoices.empty?}.to_a.sum(&:amount)) %></td>
+    <td style="text-align: right"><%= currency_fmt(@started_work) %></td>
   </tr>
   <tr>
     <th>Medikamenten Lager</th>
-    <td style="text-align: right"><%= currency_fmt(Accounting::Account.find_by_code('1210').saldo('2009-12-31')) %></td>
+    <td style="text-align: right"><%= currency_fmt(@drugs_stock) %></td>
   </tr>
 </table>
 
