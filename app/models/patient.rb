@@ -42,7 +42,7 @@ class Patient < ActiveRecord::Base
   validates_presence_of :family_name, :given_name
 
   def validate_for_invoice
-    for field in [:street_address, :postal_code, :locality, :sex]
+    for field in [:street_address, :postal_code, :locality, :sex, :birth_date]
       errors.add(field, "für Patient nicht gesetzt") if self.send(field).blank?
     end
   end
