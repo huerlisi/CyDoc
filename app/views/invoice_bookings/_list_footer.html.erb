@@ -2,5 +2,5 @@
   <th style="width: 10em"><%=h Date.today.strftime('%d.%m.%Y') %></th>
   <th><%= @invoice.due_amount.currency_round >= 0 ? "Offener Betrag" : "Saldo" %></th>
   <!-- TODO: to_a is deprecated, but needed to get the Enumeration sum function -->
-  <th style="text-align: right"><%= sprintf("%0.2f", @invoice.due_amount.currency_round) %>&nbsp;CHF</th>
+  <th style="text-align: right"><%= sprintf("%0.2f", @invoice.due_amount) %>&nbsp;CHF</th>
 </tr>
