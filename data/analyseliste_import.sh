@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#  Copyright 2009 Simon Hürlimann <simon.huerlimann@cyt.ch>
+#  Copyright 2009-2010 Simon Hürlimann <simon.huerlimann@cyt.ch>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -74,6 +74,6 @@ function main() {
 if [ $# == 0 ] ; then
 	main
 else
-	$1
+	$@
 fi
 
