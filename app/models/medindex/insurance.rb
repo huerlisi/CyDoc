@@ -1,5 +1,5 @@
 module Medindex
-  class Insurance < Base
+  class Insurance < Listener
     # Meta info
     def self.int_class
       Kernel::Insurance

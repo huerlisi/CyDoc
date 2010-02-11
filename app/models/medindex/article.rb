@@ -1,5 +1,5 @@
 module Medindex
-  class Article < Base
+  class Article < Listener
     # Meta info
     def self.int_class
       Kernel::DrugArticle
