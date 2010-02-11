@@ -192,11 +192,15 @@ class InvoicesController < ApplicationController
     # Law
     @invoice.law = @treatment.law
     @invoice.treatment = @treatment
-    @invoice.service_records = @treatment.sessions.collect{|s| s.service_records}.flatten
+    
+    # Sessions
+    sessions = @treatment.sessions.open
+    
+    @invoice.service_records = sessions.collect{|s| s.service_records}.flatten
 
     # Saving
     if @invoice.save
-      for session in @treatment.sessions
+      for session in sessions
         session.invoice = @invoice
         session.charge!
       end
