@@ -1,5 +1,5 @@
 module Medindex
-  class Company < Base
+  class Company < Listener
   end
 end
 
