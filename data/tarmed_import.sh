@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#  Copyright 2009 Simon Hürlimann <simon.huerlimann@cyt.ch>
+#  Copyright 2009-2010 Simon Hürlimann <simon.huerlimann@cyt.ch>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -12,9 +12,13 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-URL='http://www.tarmedsuisse.ch/fileadmin/media/Dateien/Browser_V_1.06/TARMED_Database_V01.06.zip'
+set -e
 
 NAME="tarmed"
+VERSION="1.07"
+
+FILE_NAME="TARMED_Database_V0${VERSION/./_}"
+URL="http://www.tarmedsuisse.ch/fileadmin/media/Dateien/Browser_V_${VERSION}/$FILE_NAME.zip"
 
 function check_cmd() {
 local cmd=$1
@@ -39,7 +43,7 @@ local url="${1:-$URL}"
 local output="${2:-$NAME.zip}"
 	wget --no-verbose "$url" --output-document "$output"
 	unzip "$output"
-	mv TARMED_Database_V01.06.mdb $NAME.mdb
+	mv $FILE_NAME.mdb $NAME.mdb
 }
 
 # Create sqlite3 db
@@ -50,9 +54,9 @@ local output="${2:-$NAME.sqlite3}"
 	./tarmed_convert.sh --sqlite3 "$input" | sqlite3 "$output"
 
 	# Create links
-	ln -fs "../data/$output" ../db/tarmed_development.sqlite3
-	ln -fs "../data/$output" ../db/tarmed_production.sqlite3
-	ln -fs "../data/$output" ../db/tarmed_test.sqlite3
+	ln -fs "../data/$output" ../db/${NAME}_development.sqlite3
+	ln -fs "../data/$output" ../db/${NAME}_production.sqlite3
+	ln -fs "../data/$output" ../db/${NAME}_test.sqlite3
 }
 
 function import() {
@@ -66,6 +70,10 @@ local input="${2:-$NAME.csv}"
 function cleanup() {
 	rm "$NAME.zip"
 	rm "$NAME.mdb"
+	rm "$NAME.sqlite3"
+	rm "../db/${NAME}_development.sqlite3"
+	rm "../db/${NAME}_production.sqlite3"
+	rm "../db/${NAME}_test.sqlite3"
 }
 
 # Main
