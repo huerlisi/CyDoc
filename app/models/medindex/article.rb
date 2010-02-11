@@ -21,17 +21,16 @@ module Medindex
     # Stream handlers
     def tag_start(name, attrs)
       super
+
       case name
         when 'ARTPRI': @price = @int_record.drug_prices.build
       end
     end
 
     def tag_end(name)
+      super
+
       case name
-        when record_name:
-          @int_record.save!
-          puts @int_record
-      
         when 'PHAR':    @int_record.code                        = @text
         when 'GRPCD':   @int_record.group_code                  = @text # TODO: Language support
         when 'CDSO1':   @int_record.assort_key1                 = @text

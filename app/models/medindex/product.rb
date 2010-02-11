@@ -5,21 +5,15 @@ module Medindex
       Kernel::DrugProduct
     end
 
-    # Stream handlers
-    def tag_start(name, attrs)
-      case name
-        when 'PRD':
-          @int_record = int_class.new
-      end
-      @text = ""
+    def record_name
+      'PRD'
     end
-
+    
+    # Stream handlers
     def tag_end(name)
+      super
+      
       case name
-        when 'PRD':
-          @int_record.save!
-          puts @int_record
-          
         when 'PRDNO':    @int_record.id                      = @text.to_i
         when 'DSCRD':    @int_record.description             = @text
         when 'BNAMD':    @int_record.name                    = @text

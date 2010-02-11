@@ -23,11 +23,9 @@ module Medindex
     end
     
     def tag_end(name)
-      case name
-        when record_name:
-          @int_record.save!
-          puts @int_record
+      super
 
+      case name
         when 'EAN':       @int_record.ean_party       = @text
         when 'GROUP_EAN': @int_record.group_ean_party = @text
         when 'ROLE':      @int_record.role            = @text

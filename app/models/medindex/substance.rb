@@ -5,21 +5,15 @@ module Medindex
       Kernel::DrugSubstance
     end
 
-    # Stream handlers
-    def tag_start(name, attrs)
-      case name
-        when 'SB':
-          @int_record = int_class.new
-      end
-      @text = ""
+    def record_name
+      'SB'
     end
 
+    # Stream handlers
     def tag_end(name)
+      super
+      
       case name
-        when 'SB':
-          @int_record.save!
-          puts @int_record
-          
         when 'SUBNO': @int_record.id   = @text.to_i
         when 'NAMD':  @int_record.name = @text
       end
