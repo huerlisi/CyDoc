@@ -1,9 +1,11 @@
 module Medindex
   class Substance < Listener
+    # Meta info
     def int_class
       Kernel::DrugSubstance
     end
 
+    # Stream handlers
     def tag_start(name, attrs)
       case name
         when 'SB':
@@ -18,8 +20,8 @@ module Medindex
           @int_record.save!
           puts @int_record
           
-        when 'SUBNO': @int_record.id = @text.to_i
-        when 'NAMD': @int_record.name = @text
+        when 'SUBNO': @int_record.id   = @text.to_i
+        when 'NAMD':  @int_record.name = @text
       end
     end
   end

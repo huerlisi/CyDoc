@@ -1,5 +1,6 @@
 module Medindex
   class Insurance < Listener
+    # Meta info
     def int_class
       Kernel::Insurance
     end
@@ -8,6 +9,7 @@ module Medindex
       'INS'
     end
     
+    # Stream handlers
     def tag_start(name, attrs)
       super
       
@@ -31,10 +33,10 @@ module Medindex
         when 'ROLE':      @int_record.role            = @text
       # Vcard
 #        when 'ADDR' :  @vcard.save!
-        when 'DESCR1': @int_record.full_name        = @text
-        when 'ZIP':    @int_record.postal_code      = @text
-        when 'CITY':   @int_record.locality         = @text
-        when 'POBOX':  @int_record.extended_address = @text
+        when 'DESCR1':    @int_record.full_name        = @text
+        when 'ZIP':       @int_record.postal_code      = @text
+        when 'CITY':      @int_record.locality         = @text
+        when 'POBOX':     @int_record.extended_address = @text
       end
     end
   end
