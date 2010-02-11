@@ -1,5 +1,5 @@
 module Medindex
-  class Breview < Listener
+  class Breview < Base
   end
 end
 

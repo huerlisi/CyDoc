@@ -1,7 +1,7 @@
 module Medindex
-  class Product < Listener
+  class Product < Base
     # Meta info
-    def int_class
+    def self.int_class
       Kernel::DrugProduct
     end
 

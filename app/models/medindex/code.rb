@@ -1,5 +1,5 @@
 module Medindex
-  class Code < Listener
+  class Code < Base
   end
 end
 

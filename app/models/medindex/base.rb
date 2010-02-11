@@ -1,5 +1,5 @@
 module Medindex
-  class Base
+  class Base < Listener
     include Importer
 
     def self.path
@@ -9,26 +9,14 @@ module Medindex
       end
     end
 
-    def self.load
-      @@data = REXML::Document.new(File.new(path))
-    end
-
     def self.import_all(do_clean = false)
-      Medindex::Insurance.import(do_clean)
-      Medindex::Substance.import(do_clean)
-      Medindex::Product.import(do_clean)
-      Medindex::Article.import(do_clean)
+      import_classes = [Medindex::Insurance, Medindex::Substance, Medindex::Product, Medindex::Article]
+      
+      # Clear all entries if demanded
+      for import_class in import_classes
+        import_class.clean if do_clean
+        REXML::Document.parse_stream(File.new(import_class.path), import_class.new)
+      end
     end
-
-    def self.find(selector, options = {})
-      load
-      @@data.root.elements
-    end
-  end
-end
-
-class REXML::Element
-  def field(selector)
-    elements[selector + '/text()'].to_s
   end
 end

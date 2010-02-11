@@ -8,7 +8,7 @@ module Medindex
     def tag_start(name, attrs)
       case name
         when record_name:
-          @int_record = int_class.new
+          @int_record = self.class.int_class.new
       end
       @text = ""
     end
