@@ -63,7 +63,7 @@ function import() {
 local input="${2:-$NAME.csv}"
 
 	# Import as TariffItems
-	echo "Tarmed::Base.import_all(true)" | ../script/console
+	echo "Tarmed::Base.import_all(false)" | ../script/console
 }
 
 # Cleanup

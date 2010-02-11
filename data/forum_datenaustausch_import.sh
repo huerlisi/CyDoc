@@ -41,9 +41,9 @@ function cleanup() {
 }
 
 function list() {
-	echo "tarif_code" "20090402"
-	echo "response_code" "20081027"
-	echo "status_and_validity" "20060901"
+	echo "tarif_code" "20091214"
+#	echo "response_code" "20081027"
+#	echo "status_and_validity" "20060901"
 }
 
 function import_all() {
