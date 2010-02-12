@@ -5,11 +5,11 @@ module Medindex
       Kernel::DrugSubstance
     end
 
-    def id_element
+    def self.id_element
       'SUBNO'
     end
     
-    def int_id
+    def self.int_id
       'id'
     end
     

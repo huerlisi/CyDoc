@@ -5,11 +5,11 @@ module Medindex
       Kernel::DrugProduct
     end
 
-    def id_element
+    def self.id_element
       'PRDNO'
     end
     
-    def int_id
+    def self.int_id
       'id'
     end
     

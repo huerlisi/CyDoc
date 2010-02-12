@@ -5,11 +5,11 @@ module Medindex
       Kernel::Insurance
     end
     
-    def id_element
+    def self.id_element
       'EAN'
     end
     
-    def int_id
+    def self.int_id
       'ean_party'
     end
     

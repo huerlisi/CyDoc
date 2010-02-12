@@ -5,11 +5,11 @@ module Medindex
       Kernel::DrugArticle
     end
     
-    def id_element
+    def self.id_element
       'PHAR'
     end
     
-    def int_id
+    def self.int_id
       'code'
     end
     

@@ -4,6 +4,11 @@ module Medindex
   class Listener
     include REXML::StreamListener
     
+    # Helpers
+    def self.find(ext_id)
+      int_class.find(:first, :conditions => {int_id => ext_id})
+    end
+    
     # Stream handlers
     def tag_start(name, attrs)
       case name
