@@ -5,6 +5,10 @@ module Medindex
       Kernel::Insurance
     end
     
+    def id_element
+      'EAN'
+    end
+    
     def record_name
       'INS'
     end

@@ -5,6 +5,10 @@ module Medindex
       Kernel::DrugSubstance
     end
 
+    def id_element
+      'SUBNO'
+    end
+    
     def record_name
       'SB'
     end

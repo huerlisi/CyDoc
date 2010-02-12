@@ -5,6 +5,10 @@ module Medindex
       Kernel::DrugArticle
     end
     
+    def id_element
+      'PHAR'
+    end
+    
     def record_name
       'ART'
     end

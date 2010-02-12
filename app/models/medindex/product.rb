@@ -5,6 +5,10 @@ module Medindex
       Kernel::DrugProduct
     end
 
+    def id_element
+      'PRDNO'
+    end
+    
     def record_name
       'PRD'
     end
