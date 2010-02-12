@@ -12,7 +12,7 @@ module Medindex
       end
     end
 
-    private
+    protected
     def self.path(import_class)
       case ENV['RAILS_ENV']
         when 'production': File.join(RAILS_ROOT, 'data', 'Medindex', "DownloadMedindex#{import_class.name.demodulize}_out.xml")
