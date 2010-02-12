@@ -9,6 +9,10 @@ module Medindex
       'PRDNO'
     end
     
+    def int_id
+      'id'
+    end
+    
     def record_name
       'PRD'
     end

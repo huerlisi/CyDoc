@@ -9,6 +9,10 @@ module Medindex
       'PHAR'
     end
     
+    def int_id
+      'code'
+    end
+    
     def record_name
       'ART'
     end

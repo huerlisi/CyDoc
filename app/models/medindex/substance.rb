@@ -9,6 +9,10 @@ module Medindex
       'SUBNO'
     end
     
+    def int_id
+      'id'
+    end
+    
     def record_name
       'SB'
     end

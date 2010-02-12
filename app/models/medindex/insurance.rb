@@ -9,6 +9,10 @@ module Medindex
       'EAN'
     end
     
+    def int_id
+      'ean_party'
+    end
+    
     def record_name
       'INS'
     end
