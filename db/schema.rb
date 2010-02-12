@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100211095124) do
+ActiveRecord::Schema.define(:version => 20100211160221) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -250,6 +250,7 @@ ActiveRecord::Schema.define(:version => 20100211095124) do
     t.string   "error_messages"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "version"
   end
 
   create_table "insurance_policies", :force => true do |t|
