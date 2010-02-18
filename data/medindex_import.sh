@@ -28,7 +28,7 @@ local filter="$3"
 function get() {
 local model="$1"
 local from_date="$2"
-local filter="$3"
+local filter="${3:-A}"
 
 	local user
 	local password
