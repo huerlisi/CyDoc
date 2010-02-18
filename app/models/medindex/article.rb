@@ -50,7 +50,7 @@ module Medindex
         when 'CLINCD':  @int_record.clinical                    = @text == 'Y'
         when 'ARTTYP':  @int_record.article_type                = @text
         when 'VAT':     @int_record.vat_class                   = lookup_vat_class(@text.strip)
-        when 'SALECD':  @int_record.active                      = @text == 'N'
+        when 'SALECD':  @int_record.active                      = @text == 'N' # N = 'no restriction', H = 'out of sale'
         when 'INSLIM':  @int_record.insurance_limited           = @text == 'Y'
         when 'LIMPTS':  @int_record.insurance_limitation_points = @text.to_f
         when 'GRDFR':   @int_record.grand_frere                 = @text == 'Y' # A smaller package may be payed by insurance
@@ -68,6 +68,8 @@ module Medindex
         when 'SYN1D':   @int_record.alias                       = @text # TODO: Language support
         when 'SLOPLUS': @int_record.higher_co_payment           = @text
         when 'NOPCS':   @int_record.number_of_pieces            = @text.to_i
+        when 'OUTSAL':  @int_record.out_of_sale_on              = @text.to_date
+        
       # Prices
         when 'ARTPRI':  @price.save!
         when 'VDAT':    @price.valid_from                       = @text.to_date
