@@ -17,6 +17,10 @@ module Medindex
       'ART'
     end
     
+    def associations
+      [:drug_prices]
+    end
+    
     # Lookup helper
     def lookup_vat_class(code)
       case code
@@ -29,7 +33,7 @@ module Medindex
     # Stream handlers
     def tag_start(name, attrs)
       super
-
+      
       case name
         when 'ARTPRI': @price = @int_record.drug_prices.build
       end
@@ -71,8 +75,8 @@ module Medindex
         when 'OUTSAL':  @int_record.out_of_sale_on              = @text.to_date
         
       # Prices
-        when 'ARTPRI':  @price.save!
-        when 'VDAT':    @price.valid_from                       = @text.to_date
+        when 'ARTPRI':  @price.save!; @price = nil
+        when 'VDAT':    @price.valid_from                       = @text.to_date if @price
         when 'PRICE':   @price.price                            = @text
         when 'PTYP':    @price.price_type                       = @text
       end

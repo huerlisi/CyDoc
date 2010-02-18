@@ -10,6 +10,11 @@ module Medindex
       REXML::Document.parse_stream(source, self.new)
     end
 
+    # Meta info
+    def associations
+      []
+    end
+    
     # Helpers
     def self.find(ext_id)
       if int_id == 'id'
@@ -53,6 +58,10 @@ module Medindex
         int_record.attributes = int_record.attributes.merge(@int_record.attributes.reject{|key, value| key == 'updated_at' or key == 'created_at' or key == 'id'})
         changes = int_record.changes.map{|column, values| "  #{column}: #{values[0]} => #{values[1]}"}.join("\n")
         puts changes
+        
+        for association in self.associations
+          int_record.send(association).send(:<<, @int_record.send(association))
+        end
       else
         puts "Adding:"
         int_record = @int_record
