@@ -5,9 +5,10 @@ module Medindex
     def self.import_all(do_clean = false)
       import_classes = [Medindex::Insurance, Medindex::Substance, Medindex::Product, Medindex::Article]
       
-      # Clear all entries if demanded
       for import_class in import_classes
+        # Clear all entries if demanded
         clean(import_class.int_class) if do_clean
+
         REXML::Document.parse_stream(File.new(path(import_class)), import_class.new)
       end
     end
