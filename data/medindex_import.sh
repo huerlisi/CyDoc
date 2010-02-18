@@ -47,8 +47,18 @@ local filter="$3"
 	fi
 
 	prepare_request $model $from_date $filter
-	wget --debug --header "Content-Type: application/soap+xml" --post-file medindex/request.xml --http-user "$user" --http-password "$password" --output-document "medindex/${model}.xml" "$URL/ws_DownloadMedindex$model.asmx"
+	wget --no-verbose --header "Content-Type: application/soap+xml" --post-file medindex/request.xml --auth-no-challenge --http-user "$user" --http-password "$password" --output-document "medindex/${model}.xml" "$URL/ws_DownloadMedindex$model.asmx"
+}
+
+# Show usage
+function usage() {
+	echo "medindex_import.sh get <model> <from_date> [<filter>]"
 }
 
 # Main
+if [ $# = 0 ] ; then
+	usage
+	exit
+fi
+
 $@
