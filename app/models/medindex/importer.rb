@@ -9,7 +9,7 @@ module Medindex
         # Clear all entries if demanded
         clean(import_class.int_class) if do_clean
 
-        REXML::Document.parse_stream(File.new(path(import_class)), import_class.new)
+        import_class.import(File.new(path(import_class)))
       end
     end
 

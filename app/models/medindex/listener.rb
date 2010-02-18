@@ -6,6 +6,10 @@ module Medindex
     
     attr_accessor :int_record
     
+    def self.import(source)
+      REXML::Document.parse_stream(source, self.new)
+    end
+
     # Helpers
     def self.find(ext_id)
       if int_id == 'id'
