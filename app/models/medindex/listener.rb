@@ -1,3 +1,4 @@
+require 'rexml/document'
 require 'rexml/streamlistener'
 
 module Medindex
