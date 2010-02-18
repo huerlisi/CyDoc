@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100218140132) do
+ActiveRecord::Schema.define(:version => 20100218151602) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(:version => 20100218140132) do
     t.date     "out_of_sale_on"
   end
 
+  add_index "drug_articles", ["code"], :name => "index_drug_articles_on_code"
   add_index "drug_articles", ["drug_product_id"], :name => "index_drug_articles_on_drug_product_id"
   add_index "drug_articles", ["vat_class_id"], :name => "index_drug_articles_on_vat_class_id"
 
@@ -150,6 +151,7 @@ ActiveRecord::Schema.define(:version => 20100218140132) do
 
   add_index "drug_prices", ["drug_article_id"], :name => "index_drug_prices_on_drug_article_id"
   add_index "drug_prices", ["price_type"], :name => "index_drug_prices_on_price_type"
+  add_index "drug_prices", ["valid_from"], :name => "index_drug_prices_on_valid_from"
 
   create_table "drug_products", :force => true do |t|
     t.text     "description"
