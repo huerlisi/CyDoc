@@ -1,5 +1,5 @@
 class DrugProduct < ActiveRecord::Base
-  has_many :drug_articles
+  has_many :drug_articles, :dependent => :destroy
 
   def to_s
     "#{name} - #{description}"
