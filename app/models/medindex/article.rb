@@ -75,7 +75,7 @@ module Medindex
         when 'OUTSAL':  @int_record.out_of_sale_on              = @text.to_date
         
       # Prices
-        when 'ARTPRI':  @price.save!; @price = nil
+        when 'ARTPRI':  @price; @price = nil
         when 'VDAT':    @price.valid_from                       = @text.to_date if @price
         when 'PRICE':   @price.price                            = @text
         when 'PTYP':    @price.price_type                       = @text

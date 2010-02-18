@@ -1,7 +1,7 @@
 class DrugArticle < ActiveRecord::Base
   belongs_to :drug_product
   belongs_to :vat_class
-  has_many :drug_prices
+  has_many :drug_prices, :dependent => :destroy
   
   # General
   def to_s
