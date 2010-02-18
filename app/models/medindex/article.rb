@@ -28,7 +28,14 @@ module Medindex
 
     # Association handlers
     def create_or_update_associations(int_record)
-      int_record.drug_prices << @int_record.drug_prices
+      for price in @int_record.drug_prices
+        if int_record.drug_prices.exists?(:price_type => price.price_type, :valid_from => price.valid_from, :price => price.price)
+          puts "  Existing price: #{price.to_s}" if @@log == :debug
+        else
+          int_record.drug_prices << price
+          puts "  New price: #{price.to_s}"
+        end
+      end
     end
 
     # Stream handlers
