@@ -6,4 +6,8 @@ class DrugPrice < ActiveRecord::Base
 
   named_scope :public, :conditions => ['price_type = ?', 'PPUB']
   named_scope :doctor, :conditions => {:price_type => ['PDOC', 'PEXF', 'PPHA']}
+
+  def to_s
+    "#{price_type} (since #{valid_from}): CHF #{sprintf('%0.2f', price)}"
+  end
 end
