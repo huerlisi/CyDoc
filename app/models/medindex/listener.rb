@@ -9,7 +9,9 @@ module Medindex
     attr_accessor :log
     
     def self.import(source)
-      REXML::Document.parse_stream(source, self.new)
+      int_class.transaction do
+        REXML::Document.parse_stream(source, self.new)
+      end
     end
 
     # Meta info
