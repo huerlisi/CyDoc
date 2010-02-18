@@ -83,4 +83,3 @@ module Medindex
     end
   end
 end
-

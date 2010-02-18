@@ -5,6 +5,7 @@ module Medindex
     include REXML::StreamListener
     
     attr_accessor :int_record
+    attr_accessor :log
     
     def self.import(source)
       REXML::Document.parse_stream(source, self.new)
@@ -46,7 +47,7 @@ module Medindex
         puts "Deleting #{int_record}"
         int_record.destroy
       else
-        puts "Already deleted #{@int_record}"
+        puts "Already deleted #{@int_record}" if @log == :debug
       end
     end
     
@@ -54,19 +55,19 @@ module Medindex
       int_record = find
       
       if int_record
-        puts "Updating #{int_record}:"
         int_record.attributes = int_record.attributes.merge(@int_record.attributes.reject{|key, value| key == 'updated_at' or key == 'created_at' or key == 'id'})
-        changes = int_record.changes.map{|column, values| "  #{column}: #{values[0]} => #{values[1]}"}.join("\n")
-        puts changes
+        unless int_record.changes.empty? or @log == :debug
+          puts "Updating #{int_record}..."
+          changes = int_record.changes.map{|column, values| "  #{column}: #{values[0]} => #{values[1]}"}.join("\n")
+          puts changes
+        end
         
         for association in self.associations
           int_record.send(association).send(:<<, @int_record.send(association))
         end
       else
-        puts "Adding:"
+        puts "Adding #{@int_record}..."
         int_record = @int_record
-        changes = int_record.changes.map{|column, values| "  #{column}: #{values[1]}"}.join("\n")
-        puts changes
       end
       
       return int_record
