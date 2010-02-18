@@ -17,10 +17,6 @@ module Medindex
       'ART'
     end
     
-    def associations
-      [:drug_prices]
-    end
-    
     # Lookup helper
     def lookup_vat_class(code)
       case code
@@ -28,6 +24,11 @@ module Medindex
         when '2': return VatClass.reduced
         when '3': return VatClass.excluded
       end
+    end
+
+    # Association handlers
+    def create_or_update_associations(int_record)
+      int_record.drug_prices << @int_record.drug_prices
     end
 
     # Stream handlers

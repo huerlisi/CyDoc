@@ -14,11 +14,6 @@ module Medindex
       end
     end
 
-    # Meta info
-    def associations
-      []
-    end
-    
     # Helpers
     def self.find(ext_id)
       if int_id == 'id'
@@ -54,12 +49,6 @@ module Medindex
       end
     end
     
-    def create_or_update_associations
-        for association in self.associations
-          int_record.send(association).send(:<<, @int_record.send(association))
-        end
-    end
-    
     def create_or_update
       int_record = find
       
@@ -70,7 +59,8 @@ module Medindex
           changes = int_record.changes.map{|column, values| "  #{column}: #{values[0]} => #{values[1]}"}.join("\n")
           puts changes
         end
-        create_or_update_associations
+        create_or_update_associations(int_record) if self.class.method_defined? :create_or_update_associations
+        
       else
         puts "Adding #{@int_record}..."
         int_record = @int_record
