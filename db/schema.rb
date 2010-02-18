@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100217133812) do
+ActiveRecord::Schema.define(:version => 20100218140132) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -510,16 +510,18 @@ ActiveRecord::Schema.define(:version => 20100217133812) do
   end
 
   create_table "tariff_items", :force => true do |t|
-    t.decimal  "amount_mt",                  :precision => 8, :scale => 2
-    t.decimal  "amount_tt",                  :precision => 8, :scale => 2
+    t.decimal  "amount_mt",                   :precision => 8, :scale => 2
+    t.decimal  "amount_tt",                   :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "code",         :limit => 10
+    t.string   "code",          :limit => 10
     t.text     "remark"
-    t.boolean  "obligation",                                               :default => true
+    t.boolean  "obligation",                                                :default => true
     t.string   "type"
-    t.string   "tariff_type",  :limit => 3
+    t.string   "tariff_type",   :limit => 3
     t.integer  "vat_class_id"
+    t.integer  "imported_id"
+    t.string   "imported_type"
   end
 
   add_index "tariff_items", ["code"], :name => "index_tariff_items_on_code"
