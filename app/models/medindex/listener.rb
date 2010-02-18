@@ -13,6 +13,8 @@ module Medindex
     # Helpers
     def self.find(ext_id)
       if int_id == 'id'
+        return nil unless int_class.exists?(ext_id)
+        
         int_class.find(ext_id)
       else
         int_class.find(:first, :conditions => {int_id => ext_id})
@@ -21,6 +23,26 @@ module Medindex
     
     def find
       self.class.find(@int_record.attributes[self.class.int_id])
+    end
+    
+    def assign
+      if @to_delete
+        delete
+      else
+        @int_record = create_or_update
+        @int_record.save!
+      end
+    end
+    
+    def delete
+      int_record = find
+      
+      if int_record
+        puts "Deleting #{int_record}"
+        int_record.destroy
+      else
+        puts "Already deleted #{@int_record}"
+      end
     end
     
     def create_or_update
@@ -32,7 +54,7 @@ module Medindex
         changes = int_record.changes.map{|column, values| "  #{column}: #{values[0]} => #{values[1]}"}.join("\n")
         puts changes
       else
-        puts "Adding #{int_record}:"
+        puts "Adding:"
         int_record = @int_record
         changes = int_record.changes.map{|column, values| "  #{column}: #{values[1]}"}.join("\n")
         puts changes
@@ -53,8 +75,9 @@ module Medindex
     def tag_end(name)
       case name
         when record_name:
-          @int_record = create_or_update
-          @int_record.save!
+          assign
+        when 'DEL':
+          @to_delete = @text == 'true'
       end
     end
 
