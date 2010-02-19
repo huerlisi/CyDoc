@@ -47,5 +47,29 @@ class DrugArticle < ActiveRecord::Base
       :remark      => description,
       :tariff_type => "400"
     )
+    
+    tariff_item.imported = self
+    
+    return tariff_item
+  end
+
+  def build_or_update_tariff_item
+    tariff_item = DrugTariffItem.find(:first, :conditions => {:tariff_type => "400", :code => code})
+    
+    return build_tariff_item unless tariff_item
+    
+    puts "Updating #{tariff_item}..."
+
+    tariff_item.amount_mt  = price
+    tariff_item.vat_class  = vat_class
+    tariff_item.obligation = !insurance_limited,
+    tariff_item.remark     = description
+    
+    tariff_item.imported   = self
+    
+    changes = tariff_item.changes.map{|column, values| "  #{column}: #{values[0]} => #{values[1]}"}.join("\n")
+    puts changes
+    
+    return tariff_item
   end
 end

@@ -1,5 +1,6 @@
 class TariffItem < ActiveRecord::Base
   belongs_to :vat_class
+  belongs_to :imported, :polymorphic => true
   
   def self.to_s
     self.name.gsub('TariffItem', '')
