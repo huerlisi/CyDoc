@@ -26,12 +26,16 @@ local filter="$3"
 
 # Download XML with SOAP
 function get() {
-local model="$1"
+local model_ident="$1"
 local from_date="$2"
 local filter="${3:-A}"
 
 	local user
 	local password
+
+	local model="$(echo $model_ident | sed 's/^\([a-z]\)/\u\1/')"
+	local output_file="medindex/${model_ident}_$(date +%F).xml"
+	local url="$URL/ws_DownloadMedindex$model.asmx"
 
 	# Guess or ask for credentials
 	if [ -n "$MEDINDEX_USER" ] ; then
@@ -46,8 +50,11 @@ local filter="${3:-A}"
 		read -s -r -p "Password: " password
 	fi
 
+	echo
+	echo "Downloading $model"
+	
 	prepare_request $model $from_date $filter
-	wget --no-verbose --header "Content-Type: application/soap+xml" --post-file medindex/request.xml --auth-no-challenge --http-user "$user" --http-password "$password" --output-document "medindex/${model}.xml" "$URL/ws_DownloadMedindex$model.asmx"
+	wget --no-verbose --header "Content-Type: application/soap+xml" --post-file medindex/request.xml --auth-no-challenge --http-user "$user" --http-password "$password" --output-document "$output_file" "$url"
 }
 
 # Show usage
