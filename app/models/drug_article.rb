@@ -62,7 +62,7 @@ class DrugArticle < ActiveRecord::Base
 
     tariff_item.amount_mt  = price
     tariff_item.vat_class  = vat_class
-    tariff_item.obligation = !insurance_limited,
+    tariff_item.obligation = !insurance_limited
     tariff_item.remark     = description
     
     tariff_item.imported   = self
