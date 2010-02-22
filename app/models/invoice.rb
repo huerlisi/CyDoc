@@ -161,7 +161,7 @@ class Invoice < ActiveRecord::Base
   
   def due_amount(value_date = nil)
     if value_date
-      included_bookings = bookings.find(:all, :conditions => ["value_date <= ?", "2009-12-31"])
+      included_bookings = bookings.find(:all, :conditions => ["value_date <= ?", value_date])
     else
       included_bookings = bookings
     end
