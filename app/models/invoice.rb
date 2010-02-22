@@ -159,8 +159,13 @@ class Invoice < ActiveRecord::Base
   # Accounting
   has_many :bookings, :class_name => 'Accounting::Booking', :as => 'reference', :dependent => :destroy
   
-  def due_amount
-    bookings.to_a.sum{|b| b.accounted_amount(Invoice::DEBIT_ACCOUNT)}
+  def due_amount(value_date = nil)
+    if value_date
+      included_bookings = bookings.find(:all, :conditions => ["value_date <= ?", "2009-12-31"])
+    else
+      included_bookings = bookings
+    end
+    included_bookings.to_a.sum{|b| b.accounted_amount(Invoice::DEBIT_ACCOUNT)}
   end
   
   def booking_saved(booking)
