@@ -1,5 +1,9 @@
-<h2>Offene Posten <%= Date.parse(@value_date_end) %></h2>
+<h2>Offene Posten per <%= Date.parse(@value_date_end) %></h2>
 
-<%= render :partial => 'invoices/list' %>
+<table class="list">
+  <%= render :partial => 'open_invoice_list_header' %>
+  <%= render :partial => 'open_invoice_item', :collection => @invoices %>
+  <%= render :partial => 'invoices/list_footer' %>
+</table>
 
 <%= render :partial => 'bookings/sidebar' %>
