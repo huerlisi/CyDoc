@@ -22,6 +22,6 @@ class BookkeepingController < ApplicationController
   end
 
   def open_invoices
-    @invoices = Invoice.find(:all, :conditions => ["value_date < ?", @value_date_end]).select{|i| i.due_amount(@value_date_end) != 0.0}.paginate(:page => params['page'], :per_page => 20, :order => 'id DESC')
+    @invoices = Invoice.find(:all, :conditions => ["value_date < ?", @value_date_end]).select{|i| i.due_amount(@value_date_end) != 0.0}
   end
 end

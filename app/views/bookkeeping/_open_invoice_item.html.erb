@@ -6,5 +6,4 @@
   <td style="text-align: right"><%= link_to (item.imported_invoice_id.blank? ? item.id : "#{item.id} (Triamun #{item.imported_invoice_id})"), item %></td>
   <td style="text-align: right"><%=h sprintf("%0.2f", item.rounded_amount) %></td>
   <td style="text-align: right"><%=h sprintf("%0.2f", item.due_amount(@value_date_end).currency_round) %></td>
-  </td>
 </tr>
