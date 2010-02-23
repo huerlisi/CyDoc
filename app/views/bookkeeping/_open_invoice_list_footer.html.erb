@@ -3,5 +3,5 @@
   <td/>
   <td/>
   <td/>
-  <td style="text-align: right"><%= currency_fmt(@invoices.collect{|i| i.due_amount("2009-12-31")}.sum) %></td>
+  <td style="text-align: right"><%= currency_fmt(@invoices.collect{|i| i.due_amount(@value_date_end)}.sum) %></td>
 </tr>
