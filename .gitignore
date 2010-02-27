@@ -15,6 +15,7 @@ log/
 tmp/
 db/*.sqlite3
 doc/api
+public/stylesheets/all.css
 
 # Local
 config/database.yml
