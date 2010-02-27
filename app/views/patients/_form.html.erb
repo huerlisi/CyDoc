@@ -20,7 +20,7 @@
     <% patient.fields_for :insurance_policies do |insurance_policy| %>
       <p>
         <%= insurance_policy.select :policy_type, {'Krankenversicherung' => 'KVG', 'Unfallversicherung' => 'UVG'}, :label => "Art" %>
-        <%= insurance_policy.select :insurance_id, Insurance.find(:all, :include => :vcard, :order => 'vcards.full_name').collect { |i| [i.to_s, i.id] }, :include_blank => true, :label => "Versicherung" %>
+        <%= insurance_policy.select :insurance_id, Insurance.find(:all, :include => {:vcard => :address}, :order => 'vcards.full_name').collect { |i| [i.to_s, i.id] }, :include_blank => true, :label => "Versicherung" %>
         <%= insurance_policy.text_field :number, :size => 12, :autocomplete => 'off', :label => "Nummer" %>
       </p>
     <% end %>
