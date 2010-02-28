@@ -4,6 +4,8 @@ class DiagnosisCase < MedicalCase
   before_save :create_or_set_diagnosis
   
   def to_s(format = :default)
+    return "Unbekannte Diagnose" if diagnosis.nil?
+    
     [diagnosis.code, diagnosis.text].compact.join ' - '
   end
 

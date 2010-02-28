@@ -61,7 +61,6 @@ function import_all() {
 # ====
 function main() {
 	import_all
-	cleanup
 }
 
 if [ $# == 0 ] ; then
