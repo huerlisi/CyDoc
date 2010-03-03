@@ -1,4 +1,13 @@
 class Session < ActiveRecord::Base
+  # Associations
+  belongs_to :invoice
+  belongs_to :treatment
+  has_and_belongs_to_many :diagnoses
+  has_and_belongs_to_many :service_records
+
+  # Validations
+  validates_presence_of :duration_from
+  
   # State Machine
   include AASM
   aasm_column :state
@@ -11,14 +20,6 @@ class Session < ActiveRecord::Base
   aasm_event :charge do
     transitions :to => :charged, :from => :open
   end
-  
-  # Associations
-  belongs_to :invoice
-  belongs_to :treatment
-  has_and_belongs_to_many :diagnoses
-  has_and_belongs_to_many :service_records
-
-  validates_presence_of :duration_from
   
   def to_s(format = :default)
     case format
