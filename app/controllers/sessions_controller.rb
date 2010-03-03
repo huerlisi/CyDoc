@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  # DELETE 
+  # DELETE /sessions/1
   def destroy
     @session = Session.find(params[:id])
     @treatment = @session.treatment
