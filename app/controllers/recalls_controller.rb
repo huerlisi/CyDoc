@@ -1,0 +1,2 @@
+class RecallsController < ApplicationController
+end
