@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100218151602) do
+ActiveRecord::Schema.define(:version => 20100303103431) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -417,6 +417,16 @@ ActiveRecord::Schema.define(:version => 20100218151602) do
 
   add_index "postal_codes", ["zip"], :name => "index_postal_codes_on_zip"
   add_index "postal_codes", ["zip_type"], :name => "index_postal_codes_on_zip_type"
+
+  create_table "recalls", :force => true do |t|
+    t.integer  "patient_id"
+    t.date     "due_date"
+    t.text     "remarks"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "recalls", ["patient_id"], :name => "index_recalls_on_patient_id"
 
   create_table "service_items", :force => true do |t|
     t.integer "tariff_item_id"
