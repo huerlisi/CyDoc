@@ -1,7 +1,9 @@
 require 'fastercsv'
 
 module Tarifcodes
-  class Base < Importer
+  class Base
+    include Importer
+    
     def self.path
       case ENV['RAILS_ENV']
         when 'production': File.join(RAILS_ROOT, 'data', 'tarifcodes.csv')
