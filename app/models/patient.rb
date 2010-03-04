@@ -5,6 +5,7 @@ class Patient < ActiveRecord::Base
   accepts_nested_attributes_for :insurance_policies, :reject_if => proc { |attrs| attrs['insurance_id'].blank? }
   has_many :insurances, :through => :insurance_policies
   has_many :sessions
+  has_many :recalls, :dependent => :destroy
 
   # FIX: This buggily needs this :select hack
   named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcard, :conditions => Vcard.by_name_conditions(name)}}
