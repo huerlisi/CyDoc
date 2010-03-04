@@ -1,7 +1,7 @@
 class RecallsController < ApplicationController
   # GET /recalls
   def index
-    @recalls = Recall.paginate(:page => params['page'])
+    @recalls = Recall.paginate(:page => params['page'], :order => 'due_date DESC')
 
     render :action => 'list'
   end
