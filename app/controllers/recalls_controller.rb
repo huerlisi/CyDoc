@@ -24,7 +24,7 @@ class RecallsController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            page.insert_html :top, 'recalls', :partial => 'recalls/item', :object => @recall
+            page.replace_html 'recalls', :partial => 'recalls/item', :collection => @patient.recalls
             page.replace_html 'new_recall'
           end
         }
@@ -66,7 +66,7 @@ class RecallsController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            page.replace "recall_#{@recall.id}", :partial => 'recalls/item', :object => @recall
+            page.replace_html 'recalls', :partial => 'recalls/item', :collection => @patient.recalls
             page.replace_html 'new_recall'
           end
         }
