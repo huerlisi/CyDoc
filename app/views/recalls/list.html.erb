@@ -1,0 +1,7 @@
+<h2>Recalls</h2>
+
+<table id="recalls" class="list">
+  <%= render :partial => 'recalls/list_header' %>
+  <%= render :partial => 'recalls/index_item', :collection => @recalls %>
+  <%= render :partial => 'recalls/list_footer' %>
+</table>

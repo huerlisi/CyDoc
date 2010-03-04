@@ -1,4 +1,11 @@
 class RecallsController < ApplicationController
+  # GET /recalls
+  def index
+    @recalls = Recall.paginate(:page => params['page'])
+
+    render :action => 'list'
+  end
+  
   # GET /patients/1/recalls/new
   def new
     @patient = Patient.find(params[:patient_id])
