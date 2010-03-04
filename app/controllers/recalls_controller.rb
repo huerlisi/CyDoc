@@ -41,6 +41,48 @@ class RecallsController < ApplicationController
     end
   end
 
+  # GET /recall/1/edit
+  def edit
+    @patient = Patient.find(params[:patient_id])
+    @recall = Recall.find(params[:id])
+    
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.replace_html 'new_recall', :partial => 'recalls/form'
+        end
+      }
+    end
+  end
+  
+  # PUT /recall/1
+  def update
+    @patient = Patient.find(params[:patient_id])
+    @recall = Recall.find(params[:id])
+    
+    if @recall.update_attributes(params[:recall])
+      respond_to do |format|
+        format.html { }
+        format.js {
+          render :update do |page|
+            page.replace "recall_#{@recall.id}", :partial => 'recalls/item', :object => @recall
+            page.replace_html 'new_recall'
+          end
+        }
+      end
+    else
+      respond_to do |format|
+        format.html { }
+        format.js {
+          render :update do |page|
+            page.replace_html 'recall_form', :partial => 'recalls/form'
+          end
+        }
+      end
+    end
+  end
+
   # DELETE /recall/1
   def destroy
     @recall = Recall.find(params[:id])

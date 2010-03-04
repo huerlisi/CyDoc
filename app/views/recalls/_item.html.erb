@@ -1,5 +1,8 @@
 <tr id="recall_<%= item.id %>">
   <td><%=h item.due_date %></td>
   <td><%=h item.remarks %></td>
-  <td><%= link_to_remote image_tag('delete.png'), {:url => patient_recall_path(@patient, item), :method => :delete} %></td>
+  <td>
+    <%= link_to_remote image_tag('edit.png'), {:url => edit_patient_recall_path(@patient, item), :method => :get} %>
+    <%= link_to_remote image_tag('delete.png'), {:url => patient_recall_path(@patient, item), :method => :delete} %>
+  </td>
 </tr>
