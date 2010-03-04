@@ -8,8 +8,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :authentication_session
 
-  map.resources :consultations
-
   map.resources :service_items
   
   map.resources :tariff_items, :collection => {:search => :get}, :member => {:duplicate => :post} do |tariff_item|
