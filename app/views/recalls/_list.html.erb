@@ -1,0 +1,12 @@
+<div class="contextual">
+  <%= link_to_remote "Recall erfassen", {:url => new_patient_recall_url(@patient), :method => :get}, :class => "icon icon-add" unless @patient.new_record?%>
+</div>
+<h3>Termine</h3>
+<div class="box">
+  <div id="new_recall" class="new_recall"></div>
+
+  <table id="recalls">
+    <%= render :partial => 'recalls/item', :collection => @patient.recalls %>
+  </table>
+</div>
+
