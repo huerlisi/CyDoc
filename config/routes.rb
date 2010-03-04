@@ -46,6 +46,7 @@ ActionController::Routing::Routes.draw do |map|
 
     patient.resources :insurance_policies
     
+    patient.resources :recalls
     patient.resources :sessions do |session|
       session.resources :tariff_items
       session.resources :service_records, :collection => {:select => :get}
