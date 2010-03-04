@@ -54,6 +54,5 @@ class RecallsController < ApplicationController
         end
       }
     end
-
   end
 end
