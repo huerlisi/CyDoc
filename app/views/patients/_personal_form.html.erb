@@ -6,7 +6,7 @@
 
     <table style="width: 100%">
       <tr>
-        <th style="width: 10em">Anrede</th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all, :order => 'sex DESC').collect { |prefix| prefix.name } %></td>
+        <th style="width: 10em">Anrede</th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name } %></td>
         <th style="width: 10em">Geschlecht</th><td><%= patient.select :sex, {'Weiblich' => 'F', 'Männlich' => 'M'}, :include_blank => true, :size => 12 %></td>
       </tr>
       <tr>

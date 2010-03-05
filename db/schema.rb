@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100303104653) do
+ActiveRecord::Schema.define(:version => 20100305074106) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -241,6 +241,7 @@ ActiveRecord::Schema.define(:version => 20100303104653) do
   create_table "honorific_prefixes", :force => true do |t|
     t.integer "sex"
     t.string  "name"
+    t.integer "position"
   end
 
   create_table "imports", :force => true do |t|
