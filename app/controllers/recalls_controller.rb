@@ -31,7 +31,7 @@ class RecallsController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            page.replace_html 'recalls', :partial => 'recalls/item', :collection => @patient.recalls
+            page.replace_html 'recalls', :partial => 'recalls/patient_item', :collection => @patient.recalls
             page.replace_html 'new_recall'
           end
         }
@@ -73,7 +73,7 @@ class RecallsController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            page.replace_html 'recalls', :partial => 'recalls/item', :collection => @patient.recalls
+            page.replace_html 'recalls', :partial => 'recalls/patient_item', :collection => @patient.recalls
             page.replace_html 'new_recall'
           end
         }
