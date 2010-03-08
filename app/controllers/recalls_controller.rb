@@ -1,7 +1,7 @@
 class RecallsController < ApplicationController
   # GET /recalls
   def index
-    @recalls = Recall.paginate(:page => params['page'], :order => 'due_date DESC')
+    @recalls = Recall.open.paginate(:page => params['page'], :order => 'due_date DESC')
 
     render :action => 'list'
   end
@@ -90,6 +90,22 @@ class RecallsController < ApplicationController
     end
   end
 
+  # POST /recall/1/obey
+  def obey
+    @recall = Recall.find(params[:id])
+    @recall.obey
+    @recall.save
+    
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.remove "recall_#{@recall.id}"
+        end
+      }
+    end
+  end
+  
   # DELETE /recall/1
   def destroy
     @recall = Recall.find(params[:id])

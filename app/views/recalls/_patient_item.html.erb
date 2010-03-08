@@ -4,6 +4,12 @@
   <td><%=h patient_item.remarks %></td>
   <td>
     <%= link_to_remote image_tag('edit.png'), {:url => edit_patient_recall_path(@patient, patient_item), :method => :get} %>
-    <%= link_to_remote image_tag('delete.png'), {:url => patient_recall_path(@patient, patient_item), :method => :delete} %>
+    <% for state in patient_item.aasm_events_for_current_state -%>
+    <%= 
+    case state
+      when :obey:   link_to_remote image_tag('true.png'), :url => obey_patient_recall_path(patient_item.patient, patient_item), :title => "Erledigt"
+      when :cancel: link_to_remote image_tag('delete.png'), :url => patient_recall_path(patient_item.patient, patient_item), :method => :delete
+    end -%>
+    <% end -%>
   </td>
 </tr>

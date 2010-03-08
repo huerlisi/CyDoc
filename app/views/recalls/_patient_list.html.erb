@@ -6,7 +6,7 @@
   <div id="new_recall" class="new_recall"></div>
 
   <table id="recalls">
-    <%= render :partial => 'recalls/patient_item', :collection => @patient.recalls %>
+    <%= render :partial => 'recalls/patient_item', :collection => @patient.recalls.open %>
   </table>
 </div>
 
