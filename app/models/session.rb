@@ -20,6 +20,16 @@ class Session < ActiveRecord::Base
   aasm_event :charge do
     transitions :to => :charged, :from => :open
   end
+  aasm_event :reactivate do
+    transitions :to => :open, :from => :charged, :on_transition => :uncharge
+  end
+  
+  private
+  def uncharge
+    self.invoice = nil
+  end
+  
+  public
   
   def to_s(format = :default)
     case format

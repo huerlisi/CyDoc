@@ -63,6 +63,7 @@ class Invoice < ActiveRecord::Base
   end
   
   def reactivate
+    # TODO: only build booking if booked
     bookings.build(:title => "Storno",
                    :amount => amount.currency_round,
                    :credit_account => EARNINGS_ACCOUNT,
@@ -70,6 +71,12 @@ class Invoice < ActiveRecord::Base
                    :value_date => Date.today)
     self.state = 'reactivated'
     # TODO: actually reactivate treatment/session
+
+    for session in sessions
+      session.reactivate
+    end
+    
+    return self
   end
   
   def cancel
@@ -122,6 +129,7 @@ class Invoice < ActiveRecord::Base
     build_reminder_booking
   end
   
+  has_many :sessions
   has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC, if(ref_code IS NULL, code, ref_code), concat(code,ref_code)'
 
   # Validation
