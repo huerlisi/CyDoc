@@ -57,8 +57,17 @@ local filter="${3:-A}"
 	wget --no-verbose --header "Content-Type: application/soap+xml" --post-file medindex/request.xml --auth-no-challenge --http-user "$user" --http-password "$password" --output-document "$output_file" "$url"
 }
 
+function list() {
+	echo insurance
+	echo wholesaler
+	echo substance
+	echo product
+	echo article
+}
+
 # Show usage
 function usage() {
+	echo "medindex_import.sh list"
 	echo "medindex_import.sh get <model> <from_date> [<filter>]"
 }
 
