@@ -4,6 +4,12 @@ module Analyseliste
   class Base
     include Importer
 
+    def self.import_all(do_clean = false, options = {})
+      LabTariffItem.import(do_clean, options)
+      LabTariffItem.import(false, options.merge({:version => 'old'}))
+    end
+
+    protected
     def self.path(options = {})
       return options[:input] if options[:input]
       
@@ -22,11 +28,6 @@ module Analyseliste
 
       # First sheet is german
       FasterCSV.parse(sheets[0], :headers => true)
-    end
-
-    def self.import_all(do_clean = false, options = {})
-      LabTariffItem.import(do_clean, options)
-      LabTariffItem.import(false, options.merge({:version => 'old'}))
     end
   end
 end
