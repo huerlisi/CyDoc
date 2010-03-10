@@ -24,6 +24,15 @@ local filter="$3"
 	cat medindex/request_template.xml | sed "s/#{model}/$model/g" | sed "s/#{from_date}/$from_date/g" | sed "s/#{filter}/$filter/g" > medindex/request.xml
 }
 
+# List available models
+function list() {
+	echo insurance
+	echo wholesaler
+	echo substance
+	echo product
+	echo article
+}
+
 # Download XML with SOAP
 function get() {
 local model_ident="$1"
@@ -57,12 +66,13 @@ local filter="${3:-A}"
 	wget --no-verbose --header "Content-Type: application/soap+xml" --post-file medindex/request.xml --auth-no-challenge --http-user "$user" --http-password "$password" --output-document "$output_file" "$url"
 }
 
-function list() {
-	echo insurance
-	echo wholesaler
-	echo substance
-	echo product
-	echo article
+function get_all() {
+local from_date="$1"
+local filter="${2:-A}"
+
+	list | while read model ; do
+		get $model $from_date $filter
+	done
 }
 
 # Show usage
