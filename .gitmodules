@@ -7,3 +7,6 @@
 [submodule "vendor/plugins/has_scope"]
 	path = vendor/plugins/has_scope
 	url = git@github.com:huerlisi/has_scope.git
+[submodule "vendor/plugins/prawnto"]
+	path = vendor/plugins/prawnto
+	url = http://github.com/huerlisi/prawnto.git

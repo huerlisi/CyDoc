@@ -10,5 +10,6 @@
       when :cancel: link_to_remote image_tag('delete.png'), :url => patient_recall_path(item.patient, item), :method => :delete
     end -%>
     <% end -%>
+    <%= link_to image_tag('pdf.png'), patient_recall_path(item.patient, item, :format => :pdf) %>
   </td>
 </tr>
