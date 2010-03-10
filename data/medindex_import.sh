@@ -75,10 +75,29 @@ local filter="${2:-A}"
 	done
 }
 
+function import() {
+local model_ident="$1"
+local input="$2"
+
+	local model="$(echo $model_ident | sed 's/^\([a-z]\)/\u\1/')"
+	echo "Medindex::$model.import(File.new('$input'))" | ../script/console
+}
+
+function import_all() {
+local from_date="$1"
+local filter="${2:-A}"
+
+	list | while read model ; do
+		import $model $from_date $filter
+	done
+}
+
 # Show usage
 function usage() {
 	echo "medindex_import.sh list"
 	echo "medindex_import.sh get <model> <from_date> [<filter>]"
+	echo "medindex_import.sh get_all <from_date> [<filter>]"
+	echo "medindex_import.sh import_all <from_date> [<filter>]"
 }
 
 # Main
