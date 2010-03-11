@@ -6,7 +6,7 @@
 	url = project.client.zytolabor.ch:/srv/intern.cyt.ch/code/git/rails-plugins/vcards.git/
 [submodule "vendor/plugins/has_scope"]
 	path = vendor/plugins/has_scope
-	url = git@github.com:huerlisi/has_scope.git
+	url = http://github.com/huerlisi/has_scope.git
 [submodule "vendor/plugins/prawnto"]
 	path = vendor/plugins/prawnto
 	url = http://github.com/huerlisi/prawnto.git
