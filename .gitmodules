@@ -10,3 +10,6 @@
 [submodule "vendor/plugins/prawnto"]
 	path = vendor/plugins/prawnto
 	url = http://github.com/huerlisi/prawnto.git
+[submodule "vendor/plugins/printable"]
+	path = vendor/plugins/printable
+	url = http://github.com/huerlisi/printable.git
