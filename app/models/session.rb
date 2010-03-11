@@ -36,7 +36,9 @@ class Session < ActiveRecord::Base
     when :short
       [date, remarks.blank? ? "Konsultation" : remarks].compact.join(': ')
     else
-      "#{diagnoses.map{|d| d.to_s}.join(', ')} for #{patient.name} #{duration_from.strftime('%d.%m.%Y')} - #{duration_to.strftime('%d.%m.%Y')}, #{service_records.count} pos: #{state}"
+      duration = [duration_from, duration_to].compact.map{|d| d.strftime('%d.%m.%Y')}.join(' - ')
+      title = remarks.blank? ? "Konsultation" : remarks
+      "#{title} (#{state}): #{patient.name} #{duration}, #{service_records.count} positions"
     end
   end
   
