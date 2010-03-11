@@ -120,4 +120,18 @@ class RecallsController < ApplicationController
       }
     end
   end
+
+  # GET /patients/1/recalls/1
+  def show
+    @recall  = Recall.find(params[:id])
+    @patient = @recall.patient
+
+    respond_to do |format|
+      format.pdf {
+        render :layout => false
+      }
+    end
+  end
+
+
 end

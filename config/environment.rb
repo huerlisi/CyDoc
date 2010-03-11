@@ -57,17 +57,14 @@ Rails::Initializer.run do |config|
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
 
-  # restful-authentication
-  # ======================
+  # Authentication
   config.gem "aasm"
   config.active_record.observers = :user_observer
 
-  # will_paginate
-  # =============
+  # Pagination
   config.gem 'will_paginate'
   
   # Importer
-  # ========
   config.gem 'fastercsv'
   
   # Testing
@@ -75,4 +72,7 @@ Rails::Initializer.run do |config|
   
   # Scoping
   config.gem "has_scope"
+
+  # PDF
+  config.gem 'prawn', :version => '>= 0.8.4'
 end
