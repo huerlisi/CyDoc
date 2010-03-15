@@ -149,6 +149,7 @@ class PatientsController < ApplicationController
   # GET /patients/1
   def show
     @patient = Patient.find(params[:id])
+
     respond_to do |format|
       format.html { }
       format.js {

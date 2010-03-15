@@ -1,8 +1,19 @@
 class TreatmentsController < ApplicationController
+  # GET /treatments/1
+  # GET /patients/1/treatments/2
   def show
     @treatment = Treatment.find(params[:id])
     
-    redirect_to :controller => :patients, :action => :show, :id => @treatment.patient_id, :tab => 'treatments', :sub_tab => "treatments_#{@treatment.id}"
+    respond_to do |format|
+      format.html {
+        redirect_to :controller => :patients, :action => :show, :id => @treatment.patient_id, :tab => 'treatments', :sub_tab => "treatments_#{@treatment.id}"
+      }
+      format.js {
+        render :update do |page|
+          page.replace_html "tab-content-treatments", :partial => 'show'
+        end
+      }
+    end
   end
 
   def edit

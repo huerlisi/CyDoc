@@ -150,10 +150,20 @@ class InvoicesController < ApplicationController
   end
 
   # GET /invoice/1
+  # GET /patients/1/invoices/2
   def show
     @invoice = Invoice.find(params[:id])
 
-    redirect_to :controller => :patients, :action => :show, :id => @invoice.patient.id, :tab => 'invoices', :sub_tab => "invoices_#{@invoice.id}"
+    respond_to do |format|
+      format.html {
+        redirect_to :controller => :patients, :action => :show, :id => @invoice.patient.id, :tab => 'invoices', :sub_tab => "invoices_#{@invoice.id}"
+      }
+      format.js {
+        render :update do |page|
+          page.replace_html "tab-content-invoices", :partial => 'show'
+        end
+      }
+    end
   end
 
   # GET /invoices/new
