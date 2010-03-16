@@ -1,0 +1,26 @@
+<% content_for :sidebar do %>
+<div class="sub-tabs">
+  <div class="contextual" style="margin-right: 2em">
+    <%= link_to_remote "Fall eröffnen", {:url => new_patient_treatment_path(@patient), :method => :get}, :class => "icon icon-add" %>
+  </div>
+  <h3 style="margin-right: 1em">Fälle</h3>
+
+  <ul id="sub-tab-sidebar-treatments">
+  <% for treatment in @patient.treatments %>
+    <li id="sub-tab-treatments-<%= treatment.id %>">
+      <%= link_to_remote "#{treatment.to_s(:short)}", {:url => treatment, :method => :get} %>
+    </li>
+  <% end %>
+  </ul>
+
+  <h3 style="margin-right: 1em">Rechnungen</h3>
+
+  <ul id="sub-tab-sidebar-invoices">
+  <% for invoice in @patient.invoices %>
+    <li id="sub-tab-invoices-<%= invoice.id %>">
+      <%= link_to_remote "#{invoice.to_s(:short)}", {:url => invoice, :method => :get} %>
+    </li>
+  <% end %>
+  </ul>
+</div>
+<% end %>
