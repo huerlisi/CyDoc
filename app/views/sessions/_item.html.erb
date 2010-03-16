@@ -4,14 +4,13 @@
 <div id="session_<%= item.id %>">
   <% if editable %>
   <div class="contextual">
-    <%= link_to_remote "Leistung erfassen", {:url => new_patient_session_service_record_url(@patient, item), :method => :get}, :class => "icon icon-add" %>
-    <%= link_to_remote "Kons löschen", {:url => patient_session_url(@patient, item), :method => :delete}, :class => "icon icon-delete" %>
+    <%= link_to_remote "Leistung erfassen", {:url => new_patient_session_service_record_url(item.patient, item), :method => :get}, :class => "icon icon-add" %>
+    <%= link_to_remote "Kons löschen", {:url => patient_session_url(item.patient, item), :method => :delete}, :class => "icon icon-delete" %>
   </div>
   <% end %>
 
   <%
     @session = item
-    @patient = item.treatment.patient
    %>
   <h4>
     <% if editable %>
@@ -46,7 +45,7 @@
         <%=h service_record.text %>
         </td>
         <% if editable %>
-        <td><span><%= link_to_remote image_tag('delete.png'), {:url => patient_session_service_record_path(@patient, item, service_record), :method => :delete} %></span></td>
+        <td><span><%= link_to_remote image_tag('delete.png'), {:url => patient_session_service_record_path(item.patient, item, service_record), :method => :delete} %></span></td>
         <% end %>
       </tr>
     <% end %>
