@@ -24,7 +24,7 @@ class InvoicesController < ApplicationController
       format.js {
         render :update do |page|
           page.replace_html "tab-content-invoices", :partial => 'show'
-          page.replace "invoice_#{@invoice.id}_flash", :partial => 'printed_flash'
+          page.replace "invoice_flash", :partial => 'printed_flash'
         end
       }
     end
@@ -66,7 +66,7 @@ class InvoicesController < ApplicationController
       format.js {
         render :update do |page|
           page.replace_html "tab-content-invoices", :partial => 'show'
-          page.replace "invoice_#{@invoice.id}_flash", :partial => 'reminded_flash'
+          page.replace "invoice_flash", :partial => 'reminded_flash'
         end
       }
     end
@@ -226,7 +226,7 @@ class InvoicesController < ApplicationController
             page.replace_html 'tab-content-invoices', :partial => 'show'
             page.insert_html :top, 'sub-tab-sidebar-invoices', :partial => 'shared/sub_tab_sidebar_item', :locals => {:type => 'invoices', :tab => @invoice, :selected_tab => @invoice}
             page.call 'showTab', "invoices"
-            page.replace "invoice_#{@invoice.id}_flash", :partial => 'created_flash'
+            page.replace "invoice_flash", :partial => 'created_flash'
           end
         }
       end
@@ -261,7 +261,7 @@ class InvoicesController < ApplicationController
       format.js {
         render :update do |page|
           page.replace_html "tab-content-invoices", :partial => 'show'
-          page.replace "invoice_#{@invoice.id}_flash", :partial => 'booked_flash'
+          page.replace "invoice_flash", :partial => 'booked_flash'
         end
       }
     end
@@ -282,7 +282,7 @@ class InvoicesController < ApplicationController
           if params[:context] == "list"
             page.replace "invoice_#{@invoice.id}", :partial => 'item', :object => @invoice
           else
-            page.replace_html "tab-content-invoices", :partial => 'show'
+            page.replace "tab-content-invoices", :partial => 'show'
           end
         end
       }

@@ -1,14 +1,14 @@
-<div id="invoice_<%= @invoice.id %>_flash" class="flash notice" style="display: none"></div>
+<div id="invoice_flash" class="flash notice" style="display: none"></div>
 
 <div class="contextual">
   <% if @invoice.overdue? or @invoice.state == 'reminded' or  @invoice.state == '2xreminded' or  @invoice.state == '3xreminded' or  @invoice.state == 'encashment'%>
-    <%= link_to_remote "Mahnung drucken", {:url => print_reminder_letter_invoice_path(@invoice), :before => "showPrintingFlash('invoice_#{@invoice.id}_flash', 'Mahnung')"}, :class => "icon icon-print" %>
-    <%= link_to_remote "Mahnkopie drucken", {:url => print_reminder_letter_invoice_path(@invoice, :print_copy => true), :before => "showPrintingFlash('invoice_#{@invoice.id}_flash', 'Mahnkopie')"}, :class => "icon icon-print" %>
+    <%= link_to_remote "Mahnung drucken", {:url => print_reminder_letter_invoice_path(@invoice), :before => "showPrintingFlash('invoice_flash', 'Mahnung')"}, :class => "icon icon-print" %>
+    <%= link_to_remote "Mahnkopie drucken", {:url => print_reminder_letter_invoice_path(@invoice, :print_copy => true), :before => "showPrintingFlash('invoice_flash', 'Mahnkopie')"}, :class => "icon icon-print" %>
   <% end %>
   <% if @invoice.state == 'prepared' %>
-    <%= link_to_remote "Rechnung drucken", {:url => print_invoice_path(@invoice), :before => "showPrintingFlash('invoice_#{@invoice.id}_flash', 'Rechnung')"}, :class => "icon icon-print" %>
+    <%= link_to_remote "Rechnung drucken", {:url => print_invoice_path(@invoice), :before => "showPrintingFlash('invoice_flash', 'Rechnung')"}, :class => "icon icon-print" %>
   <% else %>
-    <%= link_to_remote "Rechnungskopie drucken", {:url => print_invoice_path(@invoice, :print_copy => true), :before => "showPrintingFlash('invoice_#{@invoice.id}_flash', 'Rechnungskopie')"}, :class => "icon icon-print" %>
+    <%= link_to_remote "Rechnungskopie drucken", {:url => print_invoice_path(@invoice, :print_copy => true), :before => "showPrintingFlash('invoice_flash', 'Rechnungskopie')"}, :class => "icon icon-print" %>
   <% end %>
   <% if @invoice.bookings.scoped_by_title('Rechnung').empty? %>
     <%= link_to_remote "Rechnung verbuchen", {:url => book_invoice_path(@invoice)}, :class => "icon icon-book" if (@invoice.state == 'printed' or @invoice.state == 'prepared') %>
@@ -31,7 +31,7 @@
   </tr>
   <tr>
     <th>Zuweisender Arzt:</th><td><%= @invoice.referrer.to_s %></td>
-    <th>Status:</th><td id="invoice_<%= @invoice.id%>_state"><%=h @invoice.state %></td>
+    <th>Status:</th><td id="invoice_state"><%=h @invoice.state %></td>
   </tr>
   <tr>
     <th>Behandlungsgrund:</th><td><%= @invoice.treatment.reason %></td>
@@ -48,7 +48,7 @@
   <%= link_to_remote "Manuell buchen", {:url => new_invoice_booking_path(@invoice), :method => :get}, :class => "icon icon-book" %>
 </div>
 <h3>Buchungen</h3>
-<div id="invoice_<%= @invoice.id %>_booking_list">
+<div id="invoice_booking_list">
   <%= render :partial => 'invoice_bookings/list', :object => @invoice.bookings %>
 </div>
 
