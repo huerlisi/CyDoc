@@ -38,11 +38,8 @@ class TreatmentsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.insert_html :after, 'new-sub-tab-content-treatments', :partial => 'edit'
-          page.select('.sub-tab-treatments .sub-tab-content').each do |tab|
-            tab.hide
-          end
-          page.call 'showTab', 'treatments'
+          page.replace_html 'tab-content-treatments', :partial => 'edit'
+          page.call 'showTab', controller_name
         end
       }
     end
