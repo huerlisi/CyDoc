@@ -1,8 +1,20 @@
 class TreatmentsController < ApplicationController
+  # GET /treatments/1
+  # GET /patients/1/treatments/2
   def show
     @treatment = Treatment.find(params[:id])
     
-    redirect_to :controller => :patients, :action => :show, :id => @treatment.patient_id, :tab => 'treatments', :sub_tab => "treatments_#{@treatment.id}"
+    respond_to do |format|
+      format.html {
+        redirect_to :controller => :patients, :action => :show, :id => @treatment.patient_id, :tab => 'treatments', :sub_tab_id => @treatment.id
+      }
+      format.js {
+        render :update do |page|
+          page.replace_html "tab-content-treatments", :partial => 'show'
+          page.call 'showTab', controller_name
+        end
+      }
+    end
   end
 
   def edit
@@ -12,8 +24,7 @@ class TreatmentsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.call 'showSubTab', "treatments-#{@treatment.id}", 'treatments'
-          page.replace "treatment-#{@treatment.id}", :partial => 'form'
+          page.replace "treatment", :partial => 'form'
         end
       }
     end
@@ -27,11 +38,8 @@ class TreatmentsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.insert_html :after, 'new-sub-tab-content-treatments', :partial => 'edit'
-          page.select('.sub-tab-treatments .sub-tab-content').each do |tab|
-            tab.hide
-          end
-          page.call 'showTab', 'treatments'
+          page.replace_html 'tab-content-treatments', :partial => 'edit'
+          page.call 'showTab', controller_name
         end
       }
     end

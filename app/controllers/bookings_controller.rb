@@ -34,7 +34,7 @@ class BookingsController < ApplicationController
       format.js {
         render :update do |page|
           if @invoice
-            page.insert_html :top, "invoice_#{@invoice.id}_booking_list", :partial => 'invoice_bookings/simple_form'
+            page.insert_html :top, "invoice_booking_list", :partial => 'invoice_bookings/simple_form'
           end
         end
       }
@@ -80,10 +80,10 @@ class BookingsController < ApplicationController
           render :update do |page|
             if @invoice
               @invoice.reload
-              page.replace "invoice_#{@invoice.id}_bookings", :partial => 'invoice_bookings/list', :object => @invoice.bookings
+              page.replace "invoice_bookings", :partial => 'invoice_bookings/list', :object => @invoice.bookings
               page.remove 'booking_form'
               # TODO: some kind of delegation would be nice
-              page.replace_html "invoice_#{@invoice.id}_state", @invoice.state
+              page.replace_html "invoice_state", @invoice.state
             end
           end
         }

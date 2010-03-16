@@ -1,6 +1,6 @@
 <div id="medical_case_form" class="box">
   <%= error_messages_for :medical_cases %>
-  <% remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => patient_treatment_medical_cases_path(@patient, @treatment), :method => :get do |f| %>
+  <% remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => patient_treatment_medical_cases_path(@treatment.patient, @treatment), :method => :get do |f| %>
     <%= f.label 'query', 'Suche' %>
     <%= f.text_field :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
 

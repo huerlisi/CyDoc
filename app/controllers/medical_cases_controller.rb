@@ -42,7 +42,7 @@ class MedicalCasesController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.replace_html "treatment_#{@treatment.id}_new_medical_case", :partial => 'form'
+          page.replace_html "treatment_new_medical_case", :partial => 'form'
           page['search_query'].focus
         end
       }
@@ -72,7 +72,7 @@ class MedicalCasesController < ApplicationController
         }
         format.js {
           render :update do |page|
-            page.insert_html :top, "treatment_#{@treatment.id}_medical_cases", :partial => 'medical_cases/item', :object => @medical_case
+            page.insert_html :top, "treatment_medical_cases", :partial => 'medical_cases/item', :object => @medical_case
             page.remove "medical_case_form"
           end
         }

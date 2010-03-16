@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.replace_html "treatment_#{@treatment.id}_session_list", :partial => 'list', :object => @treatment.sessions
+          page.replace_html "treatment_session_list", :partial => 'list', :object => @treatment.sessions
         end
       }
     end
@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
       format.js {
         render :update do |page|
           page.remove "session_#{@session.id}"
-          page.replace_html "treatment_#{@treatment.id}_service_list_total", "Total: #{@treatment.amount.currency_round}"
+          page.replace_html "treatment_service_list_total", "Total: #{@treatment.amount.currency_round}"
         end
       }
     end
