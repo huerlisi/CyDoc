@@ -1,9 +1,10 @@
 <%
-if params[:sub_tab] and params[:sub_tab].starts_with?(type)
-  selected_tab = params[:sub_tab].to_s
+if params[:sub_tab_id] and params[:tab] == type
+  sub_tab = tabs.find(params[:sub_tab_id])
 elsif tabs.first
-  selected_tab = "#{type}_#{tabs.first.id}"
+  sub_tab = tabs.first
 end
+selected_tab = "#{type}_#{sub_tab.id}"
 %>
 <div class="sub-tab-container sub-tab-<%= type %>">
   <% content_for :sidebar do %>
@@ -13,9 +14,7 @@ end
 <div id="new-sub-tab-content-<%= type %>"></div>
 
 <div id="sub-tab-content-<%= type %>">
-  <% tabs.each do |tab| -%>
-  <% eval "@#{type.singularize} = tab" %>
-  <%= render :partial => 'shared/sub_tab_content', :locals => {:type => type, :tab => tab, :selected_tab => selected_tab} %>
-  <% end -%>
+  <% eval "@#{type.singularize} = sub_tab" %>
+  <%= render :partial => 'shared/sub_tab_content', :locals => {:type => type, :tab => sub_tab, :selected_tab => selected_tab} %>
 </div>
 </div>

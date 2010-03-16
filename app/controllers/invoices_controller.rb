@@ -156,7 +156,7 @@ class InvoicesController < ApplicationController
 
     respond_to do |format|
       format.html {
-        redirect_to :controller => :patients, :action => :show, :id => @invoice.patient.id, :tab => 'invoices', :sub_tab => "invoices_#{@invoice.id}"
+        redirect_to :controller => :patients, :action => :show, :id => @invoice.patient.id, :tab => 'invoices', :sub_tab_id => @invoice.id
       }
       format.js {
         render :update do |page|

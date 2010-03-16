@@ -6,7 +6,7 @@ class TreatmentsController < ApplicationController
     
     respond_to do |format|
       format.html {
-        redirect_to :controller => :patients, :action => :show, :id => @treatment.patient_id, :tab => 'treatments', :sub_tab => "treatments_#{@treatment.id}"
+        redirect_to :controller => :patients, :action => :show, :id => @treatment.patient_id, :tab => 'treatments', :sub_tab_id => @treatment.id
       }
       format.js {
         render :update do |page|
