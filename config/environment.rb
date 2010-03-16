@@ -57,6 +57,10 @@ Rails::Initializer.run do |config|
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
 
+  # i18n
+  config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'config', 'locales', 'cydoc', '*.{rb,yml}')]
+  config.i18n.default_locale = 'de-CH'
+  
   # Authentication
   config.gem "aasm"
   config.active_record.observers = :user_observer

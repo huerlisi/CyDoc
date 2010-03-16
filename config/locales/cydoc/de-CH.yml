@@ -1,0 +1,15 @@
+de-CH:
+  activerecord:
+    models:
+      patient:   Patient
+      invoice:   Rechnung
+      treatment: Fall
+      recall:    Recall
+      insurance: Versicherung
+    attributes:
+      invoice:
+        value_date: Rechnungsdatum
+      recall:
+        due_date: Datum
+      patient:
+        given_name: Vorname
