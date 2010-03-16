@@ -161,6 +161,7 @@ class InvoicesController < ApplicationController
       format.js {
         render :update do |page|
           page.replace_html "tab-content-invoices", :partial => 'show'
+          page.call 'showTab', controller_name
         end
       }
     end

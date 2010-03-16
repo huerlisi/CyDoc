@@ -11,6 +11,7 @@ class TreatmentsController < ApplicationController
       format.js {
         render :update do |page|
           page.replace_html "tab-content-treatments", :partial => 'show'
+          page.call 'showTab', controller_name
         end
       }
     end
