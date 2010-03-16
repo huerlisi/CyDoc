@@ -7,10 +7,6 @@ end
 selected_tab = "#{type}_#{sub_tab.id}"
 %>
 <div class="sub-tab-container sub-tab-<%= type %>">
-  <% content_for :sidebar do %>
-    <%= render :partial => 'shared/sub_tab_sidebar', :locals => {:type => type, :tabs => tabs, :selected_tab => selected_tab} %>
-  <% end %>
-
   <div id="sub-tab-content-<%= type %>">
     <% eval "@#{type.singularize} = sub_tab" %>
     <%= render :partial => "#{type}/show" %>
