@@ -1,6 +1,7 @@
 /*
-  From redMine - project management software
-  Copyright (C) 2006-2008  Jean-Philippe Lang
+  Based on code from Redmine <http://www.redmine.org>
+  Copyright (C) 2006-2008 Jean-Philippe Lang
+  Copyright (C) 2009-2010 Simon Hürlimann (ZytoLabor) <simon.huerlimann@cyt.ch>
 */
 
 function showTab(name) {
@@ -14,23 +15,5 @@ function showTab(name) {
         }
         Element.show('tab-content-' + name);
         Element.addClassName('tab-' + name, "selected");
-        return false;
-}
-
-function showSubTab(name, type) {
-    showTab(type);
-
-    var tab_class = '.sub-tab-' + type;
-
-    var f = $$(tab_class + ' .sub-tab-content');
-        for(var i=0; i<f.length; i++){
-                Element.hide(f[i]);
-        }
-    var f = $$(tab_class + ' .sub-tabs a');
-        for(var i=0; i<f.length; i++){
-                Element.removeClassName(f[i], "selected");
-        }
-        Element.show('sub-tab-content-' + name);
-        Element.addClassName('sub-tab-' + name, "selected");
         return false;
 }
