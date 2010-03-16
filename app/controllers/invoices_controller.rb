@@ -23,7 +23,7 @@ class InvoicesController < ApplicationController
       format.html { redirect_to invoices_path }
       format.js {
         render :update do |page|
-          page.replace_html "sub-tab-content-invoices-#{@invoice.id}", :partial => 'show'
+          page.replace_html "tab-content-invoices", :partial => 'show'
           page.replace "invoice_#{@invoice.id}_flash", :partial => 'printed_flash'
         end
       }
@@ -65,7 +65,7 @@ class InvoicesController < ApplicationController
       format.html { redirect_to invoices_path }
       format.js {
         render :update do |page|
-          page.replace_html "sub-tab-content-invoices-#{@invoice.id}", :partial => 'show'
+          page.replace_html "tab-content-invoices", :partial => 'show'
           page.replace "invoice_#{@invoice.id}_flash", :partial => 'reminded_flash'
         end
       }
@@ -178,7 +178,7 @@ class InvoicesController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.replace_html "new_treatment_#{@treatment.id}_invoice", :partial => 'form'
+          page.replace_html "new_treatment_invoice", :partial => 'form'
           page['invoice_value_date'].select
         end
       }
@@ -223,9 +223,9 @@ class InvoicesController < ApplicationController
         format.js {
           render :update do |page|
             page.remove 'invoice_form'
-            page.insert_html :bottom, 'sub-tab-content-invoices', :partial => 'shared/sub_tab_content', :locals => {:type => 'invoices', :tab => @invoice, :selected_tab => @invoice}
+            page.replace_html 'tab-content-invoices', :partial => 'show'
             page.insert_html :top, 'sub-tab-sidebar-invoices', :partial => 'shared/sub_tab_sidebar_item', :locals => {:type => 'invoices', :tab => @invoice, :selected_tab => @invoice}
-            page.call 'showSubTab', "invoices-#{@invoice.id}", "invoices"
+            page.call 'showTab', "invoices"
             page.replace "invoice_#{@invoice.id}_flash", :partial => 'created_flash'
           end
         }
@@ -235,7 +235,7 @@ class InvoicesController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            page.replace_html "new_treatment_#{@treatment.id}_invoice", :partial => 'form'
+            page.replace_html "new_treatment_invoice", :partial => 'form'
             page['invoice_value_date'].select
           end
         }
@@ -260,7 +260,7 @@ class InvoicesController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.replace_html "sub-tab-content-invoices-#{@invoice.id}", :partial => 'show'
+          page.replace_html "tab-content-invoices", :partial => 'show'
           page.replace "invoice_#{@invoice.id}_flash", :partial => 'booked_flash'
         end
       }
@@ -282,7 +282,7 @@ class InvoicesController < ApplicationController
           if params[:context] == "list"
             page.replace "invoice_#{@invoice.id}", :partial => 'item', :object => @invoice
           else
-            page.replace "sub-tab-content-invoices-#{@invoice.id}", :partial => 'show'
+            page.replace_html "tab-content-invoices", :partial => 'show'
           end
         end
       }

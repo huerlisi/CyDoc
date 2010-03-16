@@ -24,8 +24,7 @@ class TreatmentsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.call 'showSubTab', "treatments-#{@treatment.id}", 'treatments'
-          page.replace "treatment-#{@treatment.id}", :partial => 'form'
+          page.replace "treatment", :partial => 'form'
         end
       }
     end
