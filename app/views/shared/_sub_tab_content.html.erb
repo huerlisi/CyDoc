@@ -1,4 +1,1 @@
-<%= content_tag('div', render(:partial => "#{type}/show"),
-                       :id => "sub-tab-content-#{type}-#{tab.id}",
-                       :style => ("#{type}_#{tab.id}" != selected_tab ? 'display:none' : nil),
-                       :class => 'sub-tab-content sub-tab-content-' + type) %>
+<%= render(:partial => "#{type}/show") %>
