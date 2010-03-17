@@ -44,27 +44,11 @@ background-color: #fff;
 }
 
 /* SubTabs */
-#sidebar .sub-tabs {height: 2.6em; margin-bottom:1.2em; position:relative;}
-#sidebar .sub-tabs ul {margin:0; bottom:-2px}
-#sidebar .sub-tabs>ul { bottom:-1px; } /* others */
+#sidebar .sub-tabs ul { margin-bottom: 0.7em; padding-left: 1em;}
+#sidebar .sub-tabs>ul { margin-bottom: 0.1em;} /* others */
 #sidebar .sub-tabs ul li {
 list-style-type:none;
 white-space:nowrap;
-}
-
-#sidebar .sub-tabs ul li a:hover {
-background-color: #ffffdd;
-text-decoration:none;
-}
-
-#sidebar .sub-tabs ul li a.selected {
-background-color: #fff;
-border: 1px solid #bbbbbb;
-border-bottom: 1px solid #fff;
-}
-
-#sidebar .sub-tabs ul li a.selected:hover {
-background-color: #fff;
 }
 
 /* Tabs */
