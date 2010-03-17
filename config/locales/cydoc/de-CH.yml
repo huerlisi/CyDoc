@@ -13,3 +13,14 @@ de-CH:
         due_date: Datum
       patient:
         given_name: Vorname
+
+  invoice:
+    state:
+      prepared:    offen
+      booked:      verbucht
+      canceled:    storniert
+      reactivated: reaktiviert
+      reminded:    1x gemahnt
+      2xreminded:  2x gemahnt
+      encashment:  in Inkasso
+      paid:        bezahlt

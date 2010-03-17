@@ -31,7 +31,7 @@
   </tr>
   <tr>
     <th>Zuweisender Arzt:</th><td><%= @invoice.referrer.to_s %></td>
-    <th>Status:</th><td id="invoice_state"><%=h @invoice.state %></td>
+    <th>Status:</th><td id="invoice_state"><%=t @invoice.state, :scope => 'invoice.state' %></td>
   </tr>
   <tr>
     <th>Behandlungsgrund:</th><td><%= @invoice.treatment.reason %></td>

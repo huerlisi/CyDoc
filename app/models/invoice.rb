@@ -29,18 +29,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def state_adverb
-    case state
-      when 'prepared': "offen"
-      when 'booked': "verbucht"
-      when 'printed': "gedruckt"
-      when 'canceled': "storniert"
-      when 'reactivated': "reaktiviert"
-      when 'reminded': "1x gemahnt"
-      when '2xreminded': "2x gemahnt"
-      when '3xreminded': "3x gemahnt"
-      when 'encashment': "in inkasso"
-      when 'paid': "bezahlt"
-    end
+    I18n.t state, :scope => 'invoice.state'
   end
   
   def state_noun
