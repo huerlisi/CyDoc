@@ -9,16 +9,13 @@
   <% for treatment in @patient.treatments %>
     <li id="sub-tab-treatments-<%= treatment.id %>">
       <%= link_to_remote "#{treatment.to_s(:short)}", {:url => treatment, :method => :get} %>
-    </li>
-  <% end %>
-  </ul>
-
-  <h3 style="margin-right: 1em">Rechnungen</h3>
-
-  <ul id="sub-tab-sidebar-invoices">
-  <% for invoice in @patient.invoices %>
-    <li id="sub-tab-invoices-<%= invoice.id %>">
-      <%= link_to_remote "#{invoice.to_s(:short)}", {:url => invoice, :method => :get} %>
+        <ul id="sub-tab-sidebar-invoices">
+        <% for invoice in treatment.invoices %>
+          <li id="sub-tab-invoices-<%= invoice.id %>">
+            <%= link_to_remote "#{invoice.to_s(:short)}", {:url => invoice, :method => :get} %>
+          </li>
+        <% end %>
+        </ul>
     </li>
   <% end %>
   </ul>
