@@ -13,3 +13,6 @@
 [submodule "vendor/plugins/printable"]
 	path = vendor/plugins/printable
 	url = http://github.com/huerlisi/printable.git
+[submodule "vendor/plugins/attachment_fu"]
+	path = vendor/plugins/attachment_fu
+	url = http://github.com/technoweenie/attachment_fu.git
