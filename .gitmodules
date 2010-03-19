@@ -18,7 +18,7 @@
 	url = http://github.com/huerlisi/loading_indicator.git
 [submodule "vendor/plugins/has_delegates"]
 	path = vendor/plugins/has_delegates
-	url = project.client.zytolabor.ch:/srv/client.zytolabor.ch/code/git/rails-plugins/has_delegates.git
+	url = http://github.com/huerlisi/has_delegates.git
 [submodule "vendor/plugins/in_place_editing"]
 	path = vendor/plugins/in_place_editing
 	url = http://github.com/rails/in_place_editing.git
