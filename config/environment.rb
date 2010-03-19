@@ -65,6 +65,9 @@ Rails::Initializer.run do |config|
   config.gem "aasm"
   config.active_record.observers = :user_observer
 
+  # Forms
+  config.gem 'formtastic'
+
   # Pagination
   config.gem 'will_paginate'
   
