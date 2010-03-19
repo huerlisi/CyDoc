@@ -1,9 +1,6 @@
 [submodule "vendor/plugins/has_accounts"]
 	path = vendor/plugins/has_accounts
 	url = http://github.com/huerlisi/has_accounts.git
-[submodule "vendor/plugins/vcards"]
-	path = vendor/plugins/vcards
-	url = project.client.zytolabor.ch:/srv/client.zytolabor.ch/code/git/rails-plugins/vcards.git/
 [submodule "vendor/plugins/has_scope"]
 	path = vendor/plugins/has_scope
 	url = http://github.com/huerlisi/has_scope.git
