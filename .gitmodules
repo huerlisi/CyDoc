@@ -25,3 +25,6 @@
 [submodule "vendor/plugins/in_place_editing"]
 	path = vendor/plugins/in_place_editing
 	url = http://github.com/rails/in_place_editing.git
+[submodule "vendor/plugins/has_vcards"]
+	path = vendor/plugins/has_vcards
+	url = http://github.com/huerlisi/has_vcards.git
