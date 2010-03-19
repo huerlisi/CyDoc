@@ -80,12 +80,13 @@ form.formtastic fieldset ol li p.inline-errors { color:#cc0000; margin:0.5em 0 0
 form.formtastic fieldset ol li ul.errors { color:#cc0000; margin:0.5em 0 0 25%; list-style:square; }
 form.formtastic fieldset ol li ul.errors li { padding:0; border:none; display:list-item; }
 
-
 /* STRING & NUMERIC OVERRIDES
 --------------------------------------------------------------------------------------------------*/
+/*
 form.formtastic fieldset ol li.string input { width:74%; }
 form.formtastic fieldset ol li.password input { width:74%; }
 form.formtastic fieldset ol li.numeric input { width:74%; }
+*/
 
 
 /* TEXTAREA OVERRIDES
