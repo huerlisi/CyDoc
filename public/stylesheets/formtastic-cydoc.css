@@ -9,11 +9,39 @@ form.formtastic fieldset ol li p.inline-hints { color:#333; }
 
 --------------------------------------------------------------------------------------------------*/
 
+/* BOOLEAN OVERRIDES
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset > ol > li.boolean label { padding-left:15%; }
+
+
+/* SEMANTIC ERRORS
+--------------------------------------------------------------------------------------------------*/
+form.formtastic ul.errors { color:#cc0000; margin:0.5em 0 1.5em 15%; list-style:square; }
+
+/* FIELDSETS & LISTS
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset.buttons { padding-left:15%; }
+
 /* LABELS
 --------------------------------------------------------------------------------------------------*/
 form.formtastic fieldset ol li label { width: 15%; font-weight: bold; }
 form.formtastic fieldset ol li label:after { content: ":"; }
 
+/* NESTED FIELDSETS AND LEGENDS (radio, check boxes and date/time inputs use nested fieldsets)
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset > ol > li fieldset ol { float:left; width:74%; margin:0; padding:0 0 0 15%; }
+
+/* INLINE HINTS
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset > ol > li p.inline-hints { margin:0.5em 0 0 15%; }
+
+
+/* INLINE ERRORS
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset > ol > li p.inline-errors { margin:0.5em 0 0 15%; }
+form.formtastic fieldset > ol > li ul.errors { margin:0.5em 0 0 15%; }
+
 /* INPUT LIs
 --------------------------------------------------------------------------------------------------*/
 form.formtastic fieldset ol li { margin-bottom:0.5em; }
+
