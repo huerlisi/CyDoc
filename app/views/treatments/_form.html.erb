@@ -1,17 +1,17 @@
 <%= error_messages_for :treatment %>
 
 <div class="box">
-  <% form_for [:patient, @treatment], :builder => Rubaidh::TabularForm::TabularFormBuilder do |treatment| %>
-    <table>
-      <%= treatment.text_field :date_begin_formatted, :label => 'Behandlung von', :size => 12 %>
-      <%= treatment.text_field :date_end_formatted, :label => 'Behandlung bis', :size => 12 %>
-      <tr>
-        <td><label for="law[name]">Gesetz:</label></td>
-        <td><%= select 'law', :name, [['KVG', LawKvg], ['UVG', LawUvg], ['IVG', LawIvg], ['MVG', LawMvg], ['VVG', LawVvg], ['ORG', LawOrg]] %></td>
-      </tr>
-      <%= treatment.select :reason, ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'], :label => 'Behandlungsgrund' %>
-      <%= treatment.select :place_type, ['Praxis', 'Spital'], :label => 'Erbringungsort' %>
+  <% semantic_form_for [:patient, @treatment] do |treatment| %>
+    <% treatment.inputs do %>
+      <%= treatment.input :date_begin_formatted, :label => 'Behandlung von', :input_html => {:size => 12} %>
+      <%= treatment.input :date_end_formatted, :label => 'Behandlung bis', :input_html => {:size => 12} %>
+      <li>
+        <label for="law[name]">Gesetz</label>
+        <%= select 'law', :name, [['KVG', LawKvg], ['UVG', LawUvg], ['IVG', LawIvg], ['MVG', LawMvg], ['VVG', LawVvg], ['ORG', LawOrg]] %>
+      </li>
+      <%= treatment.input :reason, :collection => ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'], :label => 'Behandlungsgrund' %>
+      <%= treatment.input :place_type, :collection => ['Praxis', 'Spital'], :label => 'Erbringungsort' %>
       <%= treatment.submit "Speichern" %>
-    </table>
+    <% end %>
   <% end %>
 </div>
