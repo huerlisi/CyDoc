@@ -34,3 +34,6 @@
 [submodule "vendor/plugins/form_builders"]
 	path = vendor/plugins/form_builders
 	url = http://github.com/rubaidh/form_builders.git
+[submodule "vendor/plugins/formtastic"]
+	path = vendor/plugins/formtastic
+	url = http://github.com/justinfrench/formtastic.git
