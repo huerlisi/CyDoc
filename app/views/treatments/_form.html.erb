@@ -1,17 +1,20 @@
-<%= error_messages_for :treatment %>
-
 <div class="box">
-  <% semantic_form_for [:patient, @treatment] do |treatment| %>
-    <% treatment.inputs do %>
-      <%= treatment.input :date_begin_formatted, :label => 'Behandlung von', :input_html => {:size => 12} %>
-      <%= treatment.input :date_end_formatted, :label => 'Behandlung bis', :input_html => {:size => 12} %>
+  <% semantic_form_for [:patient, @treatment] do |form| %>
+    <%= form.semantic_errors :date_begin, :date_end %>
+
+    <% form.inputs do %>
+      <%= form.input :date_begin_formatted, :label => 'Behandlung von', :input_html => {:size => 12} %>
+      <%= form.input :date_end_formatted, :label => 'Behandlung bis', :input_html => {:size => 12} %>
       <li>
         <label for="law[name]">Gesetz</label>
         <%= select 'law', :name, [['KVG', LawKvg], ['UVG', LawUvg], ['IVG', LawIvg], ['MVG', LawMvg], ['VVG', LawVvg], ['ORG', LawOrg]] %>
       </li>
-      <%= treatment.input :reason, :collection => ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'], :label => 'Behandlungsgrund' %>
-      <%= treatment.input :place_type, :collection => ['Praxis', 'Spital'], :label => 'Erbringungsort' %>
-      <%= treatment.submit "Speichern" %>
+      <%= form.input :reason, :collection => ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'], :label => 'Behandlungsgrund' %>
+      <%= form.input :place_type, :collection => ['Praxis', 'Spital'], :label => 'Erbringungsort' %>
+    <% end %>
+
+    <% form.buttons do %>
+      <%= form.submit "Speichern" %>
     <% end %>
   <% end %>
 </div>
