@@ -224,7 +224,7 @@ class InvoicesController < ApplicationController
           render :update do |page|
             page.remove 'invoice_form'
             page.replace_html 'tab-content-invoices', :partial => 'show'
-            page.insert_html :top, 'sub-tab-sidebar-invoices', :partial => 'shared/sub_tab_sidebar_item', :locals => {:type => 'invoices', :tab => @invoice, :selected_tab => @invoice}
+            page.replace_html 'patient-sidebar', :partial => 'patients/sidebar'
             page.call 'showTab', "invoices"
             page.replace "invoice_flash", :partial => 'created_flash'
           end

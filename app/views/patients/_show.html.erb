@@ -3,4 +3,6 @@
 <%= render :partial => 'phone_numbers/list' %>
 <%= render :partial => 'insurance_policies/list' %>
 
-<%= render :partial => 'sidebar' %>
+<% content_for :sidebar do %>
+  <%= render :partial => 'sidebar' %>
+<% end %>

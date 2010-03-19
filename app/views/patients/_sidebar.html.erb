@@ -1,5 +1,4 @@
-<% content_for :sidebar do %>
-<div class="sub-tabs">
+<div id="patient-sidebar" class="sub-tabs">
   <div class="contextual" style="margin-right: 2em">
     <%= link_to_remote "Fall eröffnen", {:url => new_patient_treatment_path(@patient), :method => :get}, :class => "icon icon-add" %>
   </div>
@@ -20,4 +19,3 @@
   <% end %>
   </ul>
 </div>
-<% end %>
