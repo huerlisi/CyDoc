@@ -24,7 +24,7 @@ class TreatmentsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.replace "treatment", :partial => 'form'
+          page.replace_html "treatment", :partial => 'form'
         end
       }
     end
@@ -45,6 +45,7 @@ class TreatmentsController < ApplicationController
     end
   end
 
+  # PUT /patients/1/treatment
   def create
     @patient = Patient.find(params[:patient_id])
     @treatment = @patient.treatments.build(params[:treatment])
@@ -68,21 +69,54 @@ class TreatmentsController < ApplicationController
     # Saving
     if @treatment.save
       flash[:notice] = 'Erfolgreich erstellt.'
-      redirect_to @treatment
+      respond_to do |format|
+        format.html {
+          redirect_to @treatment
+        }
+        format.js {
+          render :update do |page|
+            page.redirect_to @treatment
+          end
+        }
+      end
     else
-      render :action => 'new'
+      respond_to do |format|
+        format.html { }
+        format.js {
+          render :update do |page|
+            page.replace_html 'tab-content-treatments', :partial => 'edit'
+          end
+        }
+      end
     end
   end
 
+  # PUT /treatment/1
   def update
     @treatment = Treatment.find(params[:id])
 
     # Saving
     if @treatment.update_attributes(params[:treatment])
       flash[:notice] = 'Erfolgreich erstellt.'
-      redirect_to @treatment
+      respond_to do |format|
+        format.html { 
+          redirect_to @treatment
+        }
+        format.js {
+          render :update do |page|
+            page.replace_html "tab-content-treatments", :partial => 'show'
+          end
+        }
+      end
     else
-      render :action => ''
+      respond_to do |format|
+        format.html { }
+        format.js {
+          render :update do |page|
+            page.replace_html 'treatment', :partial => 'form'
+          end
+        }
+      end
     end
   end
 
