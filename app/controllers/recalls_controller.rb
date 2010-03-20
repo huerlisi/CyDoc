@@ -64,6 +64,7 @@ class RecallsController < ApplicationController
   end
   
   # PUT /recall/1
+  # PUT /patients/1/recall/2
   def update
     @patient = Patient.find(params[:patient_id])
     @recall = Recall.find(params[:id])
