@@ -13,6 +13,13 @@ de-CH:
         due_date: Datum
       patient:
         given_name: Vorname
+      treatment:
+        date_begin: Behandlung von
+        date_end:   Behandlung bis
+        reason:     Behandlungsgrund
+        place_type: Erbringungsort
+        date_begin_formatted: Behandlung von
+        date_end_formatted:   Behandlung bis
 
   invoice:
     state:
