@@ -38,7 +38,7 @@ class TreatmentsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.replace_html 'tab-content-treatments', :partial => 'edit'
+          page.replace_html 'tab-content-treatments', :partial => 'new'
           page.call 'showTab', controller_name
         end
       }
@@ -84,7 +84,7 @@ class TreatmentsController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            page.replace_html 'tab-content-treatments', :partial => 'edit'
+            page.replace_html "treatment", :partial => 'form'
           end
         }
       end
