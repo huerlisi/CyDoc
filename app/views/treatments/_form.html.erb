@@ -4,9 +4,9 @@
     <%= form.semantic_errors :date_begin, :date_end %>
 
     <% form.inputs do %>
-      <%= form.input :date_begin_formatted, :input_html => {:size => 12} %>
+      <%= form.input :date_begin_formatted, :required => true, :input_html => {:size => 12} %>
       <%= form.input :date_end_formatted, :input_html => {:size => 12} %>
-      <li>
+      <li class="required">
         <label for="law[name]">Gesetz</label>
         <%= select 'law', :name, [['KVG', LawKvg], ['UVG', LawUvg], ['IVG', LawIvg], ['MVG', LawMvg], ['VVG', LawVvg], ['ORG', LawOrg]] %>
       </li>
