@@ -7,7 +7,7 @@ class Treatment < ActiveRecord::Base
   has_many :sessions, :order => 'duration_from DESC', :dependent => :destroy
   has_many :medical_cases, :order => 'type', :dependent => :destroy
   
-  validates_presence_of :date_begin
+  validates_presence_of :date_begin, :reason, :place_type
   
   named_scope :open, :include => :invoices, :conditions => "invoices.id IS NULL", :order => 'date_begin'
 
