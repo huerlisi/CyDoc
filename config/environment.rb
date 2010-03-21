@@ -67,6 +67,7 @@ Rails::Initializer.run do |config|
 
   # Forms
   config.gem 'formtastic'
+  config.gem 'validation_reflection'
 
   # Pagination
   config.gem 'will_paginate'
