@@ -24,8 +24,11 @@ form.formtastic fieldset.buttons { padding-left:15%; }
 
 /* LABELS
 --------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset ol li label { width: 15%; font-weight: bold; }
+form.formtastic fieldset ol li label { width: 15%; }
 form.formtastic fieldset ol li label:after { content: ":"; }
+
+form.formtastic fieldset > ol > li.required { color:#484848; }
+form.formtastic fieldset > ol > li.required label { font-weight: bold; }
 
 /* NESTED FIELDSETS AND LEGENDS (radio, check boxes and date/time inputs use nested fieldsets)
 --------------------------------------------------------------------------------------------------*/
