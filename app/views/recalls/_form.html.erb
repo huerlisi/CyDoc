@@ -1,17 +1,16 @@
 <%= javascript_tag "$('recall_due_date').focus()" %>
 <div id="recall_form">
-  <%= error_messages_for :recall %>
-  <% remote_form_for [@patient, @recall] do |recall| %>
-    <table style="width: 100%">
-      <tr>
-        <th style="width: 10em">Datum</th></td><%= recall.text_field :due_date, :size => 12, :autocomplete => 'off' %></td>
-      </tr>
-      <tr>
-        <th style="width: 10em">Bemerkungen</th>
-        <td><%= recall.text_area :remarks, :rows => 3 %></td>
-      </tr>
-    </table>
-    <%= recall.submit "Speichern", :class => "icon icon-save" %>
-    <%= button_to_function "Abbrechen", "Element.update('new_recall')", :class => "icon icon-cancel" %>
+  <% semantic_remote_form_for [@patient, @recall] do |form| %>
+    <%= form.semantic_errors %>
+
+    <% form.inputs do %>
+      <%= form.input :due_date, :as => :string, :input_html => {:size => 12, :autocomplete => 'off'} %>
+      <%= form.input :remarks, :input_html => {:rows => 3} %>
+    <% end %>
+
+    <% form.buttons do %>
+      <%= form.submit "Speichern", :class => "icon icon-save" %>
+      <%= button_to_function "Abbrechen", "Element.update('new_recall')", :class => "icon icon-cancel" %>
+    <% end %>
  <% end %>
 </div>
