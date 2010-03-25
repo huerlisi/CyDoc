@@ -11,6 +11,7 @@ de-CH:
         value_date: Rechnungsdatum
       recall:
         due_date: Datum
+        remarks:  Bemerkungen
       patient:
         given_name: Vorname
       treatment:
