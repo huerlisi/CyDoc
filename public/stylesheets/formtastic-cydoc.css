@@ -48,3 +48,7 @@ form.formtastic fieldset > ol > li ul.errors { margin:0.5em 0 0 15%; }
 --------------------------------------------------------------------------------------------------*/
 form.formtastic fieldset ol li { margin-bottom:0.5em; }
 
+/* BUTTONS
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset.buttons ol input.icon { background-position: 3px 3px; padding: 3px; padding-left: 20px;}
+
