@@ -1,7 +1,8 @@
-
 class Recall < ActiveRecord::Base
   # Associations
   belongs_to :patient
+  belongs_to :appointment
+  accepts_nested_attributes_for :appointment
 
   # Validations
   validates_presence_of :due_date
@@ -20,5 +21,23 @@ class Recall < ActiveRecord::Base
   end
   aasm_event :obey do
     transitions :to => :obeyed, :from => :open
+  end
+
+  private
+  def assign_appointment(appointment)
+    appointment.patient = self.patient
+    appointment.state = 'proposed'
+  end
+  
+  public
+  
+  # Fix for nested attributes problem
+  # See http://www.pixellatedvisions.com/2009/03/18/rails-2-3-nested-model-forms-and-nil-new-record
+  def initialize(attributes=nil)
+    super
+    
+    unless self.appointment
+      self.build_appointment(:patient => self.patient)
+    end
   end
 end

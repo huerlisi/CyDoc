@@ -21,6 +21,11 @@ de-CH:
         place_type: Erbringungsort
         date_begin_formatted: Behandlung von
         date_end_formatted:   Behandlung bis
+      appointment:
+        date:    Am
+        from:    Von
+        to:      Bis
+        remarks: Bemerkungen
 
   invoice:
     state:

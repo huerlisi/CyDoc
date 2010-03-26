@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100305074106) do
+ActiveRecord::Schema.define(:version => 20100326095315) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -38,6 +38,24 @@ ActiveRecord::Schema.define(:version => 20100305074106) do
   end
 
   add_index "addresses", ["vcard_id"], :name => "addresses_vcard_id_index"
+
+  create_table "appointments", :force => true do |t|
+    t.integer  "patient_id"
+    t.integer  "recall_id"
+    t.integer  "treatment_id"
+    t.text     "remarks"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "date"
+    t.time     "from"
+    t.time     "to"
+  end
+
+  add_index "appointments", ["patient_id"], :name => "index_appointments_on_patient_id"
+  add_index "appointments", ["recall_id"], :name => "index_appointments_on_recall_id"
+  add_index "appointments", ["state"], :name => "index_appointments_on_state"
+  add_index "appointments", ["treatment_id"], :name => "index_appointments_on_treatment_id"
 
   create_table "banks", :force => true do |t|
     t.integer  "vcard_id"
@@ -426,8 +444,10 @@ ActiveRecord::Schema.define(:version => 20100305074106) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "state"
+    t.integer  "appointment_id"
   end
 
+  add_index "recalls", ["appointment_id"], :name => "index_recalls_on_appointment_id"
   add_index "recalls", ["patient_id"], :name => "index_recalls_on_patient_id"
   add_index "recalls", ["state"], :name => "index_recalls_on_state"
 
