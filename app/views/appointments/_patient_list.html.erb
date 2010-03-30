@@ -1,0 +1,12 @@
+<div class="contextual">
+  <%= link_to_remote "Termin erfassen", {:url => new_patient_appointment_url(@patient), :method => :get}, :class => "icon icon-add" unless @patient.new_record?%>
+</div>
+<h3>Termine</h3>
+<div class="box">
+  <div id="new_appointment" class="new_appointment"></div>
+
+  <table id="appointments">
+    <%= render :partial => 'appointments/patient_item', :collection => @patient.appointments.open %>
+  </table>
+</div>
+

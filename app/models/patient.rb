@@ -6,6 +6,7 @@ class Patient < ActiveRecord::Base
   has_many :insurances, :through => :insurance_policies
   has_many :sessions
   has_many :recalls, :order => 'due_date', :dependent => :destroy
+  has_many :appointments, :order => 'date', :dependent => :destroy
 
   # FIX: This buggily needs this :select hack
   named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcard, :conditions => Vcard.by_name_conditions(name)}}

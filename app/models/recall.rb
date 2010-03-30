@@ -5,7 +5,7 @@ class Recall < ActiveRecord::Base
   accepts_nested_attributes_for :appointment
 
   # Validations
-  validates_presence_of :due_date
+  validates_presence_of :due_date, :patient
   validates_format_of :due_date, :with => /[0-9]{1,2}\.[0-9]{1,2}\.20[0-9]{2}/, :message => "Format DD.MM.20YY" # TODO will break in 2100:-(
   
   # State Machine

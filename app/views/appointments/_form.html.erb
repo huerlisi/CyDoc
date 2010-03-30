@@ -1,0 +1,18 @@
+<%= javascript_tag "$('appointment_date').focus()" %>
+<div id="appointment_form">
+  <% semantic_remote_form_for [@patient, @appointment] do |form| %>
+    <%= form.semantic_errors %>
+
+    <% form.inputs do %>
+      <%= form.input :date, :as => :string, :input_html => {:size => 12, :autocomplete => 'off'} %>
+      <%= form.input :from, :as => :string, :input_html => {:size => 12, :autocomplete => 'off'} %>
+      <%= form.input :to, :as => :string, :input_html => {:size => 12, :autocomplete => 'off'} %>
+      <%= form.input :remarks, :input_html => {:rows => 3} %>
+    <% end %>
+
+    <% form.buttons do %>
+      <%= form.submit "Speichern", :class => "icon icon-save" %>
+      <%= button_to_function "Abbrechen", "Element.update('new_recall')", :class => "icon icon-cancel" %>
+    <% end %>
+ <% end %>
+</div>
