@@ -1,7 +1,6 @@
 <tr id="appointment_<%= item.id %>">
   <td><%=h item.date %></td>
-  <td><%=h item.from %></td>
-  <td><%=h item.to %></td>
+  <td><%=h [item.from, item.to].compact.join(' - ') %></td>
   <td><%= link_to item.patient, item.patient %></td>
   <td><%=h item.remarks %></td>
   <td>

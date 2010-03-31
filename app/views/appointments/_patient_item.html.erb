@@ -1,9 +1,7 @@
 <tr id="appointment_<%= patient_item.id %>">
   <th>Termin</th>
   <td><%=h patient_item.date %></td>
-  <td>
-    <%=h patient_item.from %> - <%=h patient_item.to %>
-  </td>
+  <td><%=h [patient_item.from, patient_item.to].compact.join(' - ') %></td>
   <td><%=h patient_item.remarks %></td>
   <td>
     <%= link_to_remote image_tag('edit.png'), {:url => edit_patient_appointment_path(@patient, patient_item), :method => :get} %>
