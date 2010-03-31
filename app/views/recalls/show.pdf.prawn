@@ -10,9 +10,9 @@ pdf.grid([0,1], [1,4]).bounding_box do
 end
 
 pdf.grid([0,7], [1,9]).bounding_box do
-  pdf.text @recall.patient.vcard.full_name
-  pdf.text @recall.patient.vcard.street_address
-  pdf.text @recall.patient.vcard.postal_code + " " + @recall.patient.vcard.locality
+  pdf.text @recall.patient.full_name
+  pdf.text @recall.patient.street_address
+  pdf.text @recall.patient.postal_code + " " + @recall.patient.locality
 end
 
 # Date
