@@ -2,11 +2,13 @@
 pdf.define_grid(:columns => 11, :rows => 16, :gutter => 2)#.show_all('EEEEEE')
 
 # address headers
-pdf.grid([0,1], [1,4]).bounding_box do
-  pdf.text @current_doctor.honorific_prefix
-  pdf.text @current_doctor.full_name
-  pdf.text @current_doctor.street_address
-  pdf.text @current_doctor.postal_code + " " + @current_doctor.locality
+pdf.grid([0,1], [1,6]).bounding_box do
+  pdf.text [@current_doctor.honorific_prefix, @current_doctor.full_name].join(' ')
+  pdf.font "Helvetica", :size => 8 do
+    pdf.text @current_doctor.street_address
+    pdf.text @current_doctor.postal_code + " " + @current_doctor.locality
+    pdf.text contact(@current_doctor.vcard, "\n")
+  end
 end
 
 pdf.grid([0,7], [1,9]).bounding_box do
