@@ -3,8 +3,6 @@ class AppointmentsController < ApplicationController
   def index
     @appointments = Appointment.open.paginate(:page => params['page'], :order => 'date DESC, `from` DESC')
     @recalls = Recall.open.paginate(:page => params['page'], :order => 'due_date DESC')
-
-    render :action => 'list'
   end
   
   # GET /patients/1/appointments/new
