@@ -1,6 +1,8 @@
 <tr id="recall_<%= item.id %>">
   <td><%=h item.due_date %></td>
   <td><%= link_to item.patient, item.patient %></td>
+  <td><%=h item.appointment unless item.appointment.nil? %></td>
+  <td><%=h item.sent_at.to_date if item.sent_at %></td>
   <td><%=h item.remarks %></td>
   <td>
     <% for state in item.aasm_events_for_current_state -%>
