@@ -124,3 +124,7 @@ border: 1px solid #bbbbbb;
 margin-left: 0;
 }
 
+#content h2.tab-heading {
+padding-left: 5.5em;
+background-position: 1.5em 40%;
+}
