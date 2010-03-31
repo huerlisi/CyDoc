@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100326095315) do
+ActiveRecord::Schema.define(:version => 20100331084713) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -445,6 +445,7 @@ ActiveRecord::Schema.define(:version => 20100326095315) do
     t.datetime "updated_at"
     t.string   "state"
     t.integer  "appointment_id"
+    t.datetime "sent_at"
   end
 
   add_index "recalls", ["appointment_id"], :name => "index_recalls_on_appointment_id"
