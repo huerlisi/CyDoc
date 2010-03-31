@@ -26,10 +26,6 @@ class AppointmentsController < ApplicationController
     @patient = Patient.find(params[:patient_id])
     @appointment  = @patient.appointments.build(params[:appointment])
     
-    # Should be handled by model
-    @appointment.appointment.patient = @appointment.patient
-    @appointment.appointment.state = 'proposed'
-    
     if @appointment.save
       respond_to do |format|
         format.html { }
