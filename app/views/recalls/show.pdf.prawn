@@ -34,9 +34,9 @@ pdf.grid([7,1],[7,9]).bounding_box do
 end
 
 pdf.grid([8,1],[8,9]).bounding_box do
-  pdf.text "Als Terminvorschlag haben wir für Sie den"
+  pdf.text "Als Terminvorschlag haben wir für Sie"
   pdf.font "Helvetica", :style => :bold do
-    pdf.text @recall.due_date.to_s
+    pdf.text "#{@recall.appointment.date}, #{@recall.appointment.from}"
   end
   pdf.text "reserviert."
 end
