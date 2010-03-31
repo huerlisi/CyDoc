@@ -38,7 +38,6 @@ class Recall < ActiveRecord::Base
   end
   
   public
-  
   # Fix for nested attributes problem
   # See http://www.pixellatedvisions.com/2009/03/18/rails-2-3-nested-model-forms-and-nil-new-record
   def initialize(attributes=nil)
