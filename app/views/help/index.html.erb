@@ -1,24 +1,26 @@
 <style>
-img.left {
+.help-sidebar {
+  position: fixed;
+}
+
+.help {
+  float: left;
+}
+
+.help h2, .help h3, .help h4 {
+  clear: both;
+  margin-top: 2em;
+}
+
+.help img.left {
   float: left;
   margin-right: 2em;
   margin-bottom: 1em;
   padding: 0.5em;
   border: 1px solid gray;
 }
-h4 {
-  clear: both;
-  margin-top: 2em;
-}
-h3 {
-  clear: both;
-  margin-top: 2em;
-}
-h2 {
-  clear: both;
-  margin-top: 2em;
-}
-img.right {
+
+.help img.right {
   float: right;
   margin-left: 2em;
   margin-bottom: 1em;
@@ -27,62 +29,9 @@ img.right {
 }
 </style>
 
-<div class="sub-tabs">
-  <h3>Inhaltsverzeichniss</h3>
-  <ol>
-    <li>
-      <h4><a href="#first_steps">Erste Schritte</a></h4>
-      <ol>
-        <li><a href="#login_to_Cydoc">Bei CyDoc anmelden</a></li>
-        <li><a href="#search_patient">Patient suchen</a></li>
-        <li><a href="#edit_patient">Patient bearbeiten</a></li>
-        <li><a href="#build_a_new_patient">Neue Patienten anlegen</a></li>
-      </ol>
-    </li>
+<%= render :partial => 'sidebar' %>
 
-    <li>
-      <h4><a href="#accounting">Rechnungswesen</a></h4>
-      <ol>
-        <li><a href="#open_case">Fall eröffnen</a></li>
-        <li><a href="#add_new_service_item">Leistung erfassen</a></li>
-        <li><a href="#erase_service_item">Leistung löschen</a></li>
-        <li><a href="#add_diagnose">Diagnose erfassen</a></li>
-        <li><a href="#create_invoice">Rechnung erstellen</a></li>
-        <li><a href="#copy_of_invoice_print">Rechnungskopie drucken</a></li>
-        <li><a href="#book_payment">Zahlung verbuchen</a></li>
-        <ol>
-          <li><a href="#with_vers_or_besr">mit VESR/BESR</a></li>
-          <li><a href="#book_payment_manually">manuell verbuchen</a></li>
-        </ol>
-      </ol>
-    </li>
-    <li>
-      <h4><a href="#reminder_mechanism">Mahnwesen</a></h4>
-      <ol>
-        <li><a href="#show_actual_reminder">Fällige Mahnungen anzeigen</a></li>
-        <li><a href="#print_reminders">Mahnungen drucken</a></li>
-      </ol>
-    </li>
-    <li>
-      <h4><a href="#basic_claims_data">Stammdaten</a></h4>
-      <ol>
-        <li><a href="#search_insurance">Versicherung suchen</a></li>
-        <li><a href="#search_rate_position">Tarifposition suchen</a></li>
-        <li><a href="#search_drugs">Medikamente suchen</a></li>
-        <li><a href="#search_and_edit_doctors">Ärzte suchen und bearbeiten</a></li>
-      </ol>
-    </li>
-    <li>
-      <h4><a href="#tips_and_tricks">Tips und Tricks</a></h4>
-      <ol>
-        <li><a href="#multiple_window">Mehrere Fenster</a></li>
-        <li><a href="#bookmark">Lesezeichen</a></li>
-      </ol>
-    </li>
-  </ol>
-</div>
-
-<div id="content" style="position:relative">
+<div class="help">
   <div class="contextual">
     <a href="" class="">Benutzerdoku ausdrucken</a>
   </div>
