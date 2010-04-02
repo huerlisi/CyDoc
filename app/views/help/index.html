@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.0//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="Simon Huerlimann &lt;simon.huerlimann@cyt.ch&gt;" />
+    <meta name="keywords" content="Praxis" />
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    
+    <link href="stylesheets/redmine.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/zytolabor.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/navigation.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/cyto.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/result_report.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/invoice.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/accounting.css" media="all" rel="stylesheet" type="text/css" />
+    
+<style>
+img.left {
+  float: left;
+  margin-right: 2em;
+  margin-bottom: 1em;
+  padding: 0.5em;
+  border: 1px solid gray;
+}
+h4 {
+  clear: both;
+  margin-top: 2em;
+}
+h3 {
+  clear: both;
+  margin-top: 2em;
+}
+h2 {
+  clear: both;
+  margin-top: 2em;
+}
+img.right {
+  float: right;
+  margin-left: 2em;
+  margin-bottom: 1em;
+  padding: 0.5em;
+  border: 1px solid gray;
+}
+
+</style>
+
+    <title>CyDoc - Doku</title>
+  </head>
+      <div class="sub-tabs">
+        <h3>Inhaltsverzeichniss</h3>
+        <ol>
+          <li>
+            <h4><a href="#first_steps">Erste Schritte</a></h4>
+            <ol>
+              <li><a href="#login_to_Cydoc">Bei CyDoc anmelden</a></li>
+              <li><a href="#search_patient">Patient suchen</a></li>
+              <li><a href="#edit_patient">Patient bearbeiten</a></li>
+              <li><a href="#build_a_new_patient">Neue Patienten anlegen</a></li>
+            </ol>
+          </li>
+  
+          <li>
+            <h4><a href="#accounting">Rechnungswesen</a></h4>
+            <ol>
+              <li><a href="#open_case">Fall eröffnen</a></li>
+              <li><a href="#add_new_service_item">Leistung erfassen</a></li>
+              <li><a href="#erase_service_item">Leistung löschen</a></li>
+              <li><a href="#add_diagnose">Diagnose erfassen</a></li>
+              <li><a href="#create_invoice">Rechnung erstellen</a></li>
+              <li><a href="#copy_of_invoice_print">Rechnungskopie drucken</a></li>
+              <li><a href="#book_payment">Zahlung verbuchen</a></li>
+              <ol>
+                <li><a href="#with_vers_or_besr">mit VESR/BESR</a></li>
+                <li><a href="#book_payment_manually">manuell verbuchen</a></li>
+              </ol>
+            </ol>
+          </li>
+          <li>
+            <h4><a href="#reminder_mechanism">Mahnwesen</a></h4>
+            <ol>
+              <li><a href="#show_actual_reminder">Fällige Mahnungen anzeigen</a></li>
+              <li><a href="#print_reminders">Mahnungen drucken</a></li>
+            </ol>
+          </li>
+          <li>
+            <h4><a href="#basic_claims_data">Stammdaten</a></h4>
+            <ol>
+              <li><a href="#search_insurance">Versicherung suchen</a></li>
+              <li><a href="#search_rate_position">Tarifposition suchen</a></li>
+              <li><a href="#search_drugs">Medikamente suchen</a></li>
+              <li><a href="#search_and_edit_doctors">Ärzte suchen und bearbeiten</a></li>
+            </ol>
+          </li>
+          <li>
+            <h4><a href="#tips_and_tricks">Tips und Tricks</a></h4>
+            <ol>
+              <li><a href="#multiple_window">Mehrere Fenster</a></li>
+              <li><a href="#bookmark">Lesezeichen</a></li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+
+    <div id="content" style="position:relative">
+      <div class="contextual">
+        <a href="" class="">Benutzerdoku ausdrucken</a>
+      </div>
+      <h2 id="first_steps">Erste Schritte</h2>
+      
+      <h3 id="login_to_Cydoc">Bei CyDoc anmelden</h3>
+      <a href="images/docs/login.png"><img class="left" src="images/docs/small/login.png" /></a>
+      <p>Öffnen Sie die folgende Internet-Adresse mit dem Firefox (empfohlen) oder einem anderen Webbrowser https://cydoc-demo.zytolabor.ch</p>
+      <p>Geben Sie auf der Anmeldeseite Ihren Benutzernamen und Ihr Passwort ein.</p>
+      <p>Bestätigen Sie dann mit „Anmelden“</p>
+      <p>
+        Um unsere Software ein bisschen kennen zu lernen, können Sie mit den folgenden Login-Daten auf unsere Test-Datenbank zugreifen. Dort darf mit allen Daten gespielt werden
+      </p>
+      <p>Login: test</p>
+      <p>Password: Example</p>
+      <h3 id="search_patient">Patient suchen</h3>
+      <p>
+        <a href="images/docs/search_patient.png"><img class="right" src="images/docs/small/search_patient.png" /></a>
+        Rechts oben befindet sich stets ein Suchfeld, um Patienten zu suchen. Geben Sie im Suchfeld einen Teil des Namens (es funktioniert auch mit dem Vornamen) oder das Geburtsdatum der gewünschten PatientIn ein und drücken Sie dann „Enter“ um die PatientIn zu suchen.
+      </p>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <p> 
+        <a href="images/docs/search_patient2.png"><img class="right" src="images/docs/small/search_patient2.png" /></a>
+        Danach erscheint im unteren Bereich die Liste aller gefundenen PatientInnen, welche den Suchbegriff enthalten. (Falls Sie nach „ülle“ suchen, wird auch Frau Meier-Müller gefunden). Um die Details anzuzeigen klicken Sie einfach auf die gewünschte PatientIn.
+      </p>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <p>
+        <a href="images/docs/inplace_edit.png"><img class="right" src="images/docs/small/inplace_edit.png" /></a>
+        Die Personalien werden auf der Hauptseite angezeigt. Um die Personalien zu ändern, klicken Sie bitte auf „Ändern“. Die Daten werden dann editierbar. (Auf der nächsten Seite näher beschrieben)
+      </p>
+      <p>Für kleine Änderungen an Personendaten (z.B. Namen oder Adresse falsch geschrieben), kann das fehlerhafte Feld direkt angeklickt werden.</p>
+      <p>Jetzt kann man das Feld editieren und mit „OK“ speichern.</p>
+      <p>Mit „Cancel“ kann man das Editieren abbrechen.</p>
+      <h3 id="edit_patient">Patient bearbeiten</h3>
+      <p>
+        <a href="images/docs/edit_personality.png"><img class="left" src="images/docs/small/edit_personality.png" /></a>
+        Öffnen Sie eine PatientIn und klicken Sie dann auf „Ändern“. Danach erscheint die Eingabemaske zum korrigieren der Personalien. Klicken Sie nach der Korrektur auf „speichern“ um wieder auf die Patienten-Ansicht zu gelangen.
+      </p>
+      
+      <h3 id="build_a_new_patient">Neue Patienten anlegen</h3>
+      <p>
+        <a href="images/docs/add_patient1.png"><img class="right" src="images/docs/small/add_patient1.png" /></a>
+        Klicken Sie im Hauptmenü auf Patienten und im nun geöffneten Fenster auf „Erfassen“. Eine Maske zur Eingabe der Personalien öffnet sich. Schliessen Sie dann mit „Speichern“ ab.
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <a href="images/docs/add_patient2.png"><img class="right" src="images/docs/small/add_patient2.png" /></a>
+      </p>
+
+      <h2 id="accounting">Rechnungswesen</h2>
+      
+      <h3 id="open_case">Fall eröffnen</h3>
+      <p>
+        <a href="images/docs/add_case.png"><img class="left" src="images/docs/small/add_case.png" /></a>
+        Öffnen Sie eine PatientIn und klicken Sie anschliessend oben rechts auf „Fall eröffnen“. Geben Sie dann die nötigen Informationen wie Anfangsdatum und Behandlungsgrund an und beenden mit „speichern“
+      </p>
+      
+      <h3 id="add_new_service_item">Leistung erfassen</h3>
+      <p>
+        <a href="images/docs/add_service.png"><img class="right" src="images/docs/small/add_service.png" /></a>
+        Öffnen Sie einen Patienten und klicken Sie links auf Fälle. Der aktuelle Fall wird angezeigt und Sie können mit dem Erfassen von Leistungen (Tarmed, Analysenliste, Medikamente) beginnen. Klicken Sie erst auf den Link „Neue Konsultation“. Nun können Leistungen anhand der Tarifnummer oder der Beschreibung gesucht werden. Wenn nur eine Leistung zum Suchbegriff gefunden wird, übernimmt CyDoc diese automatisch. Falls mehrere Leistungen gefunden werden, müssen Sie eine mit der Maus anklicken.
+      </p>
+      
+      <h3 id="erase_service_item">Leistung löschen</h3>
+      <p>
+        <a href="images/docs/erase_service.png"><img class="left" src="images/docs/small/erase_service.png" /></a>
+        Um eine Leistung zu löschen, klicken Sie einfach Rechts neben dem Text auf das rote Kreuz.
+      </p>
+      
+      <h3 id="add_diagnose">Diagnose erfassen</h3>
+      <p>
+        <a href="images/docs/add_diagnose.png"><img class="right" src="images/docs/small/add_diagnose.png" /></a>
+        Im Suchfeld unter „Diagnosen“ können Sie nach Diagnosen suchen. Wenn die Suche eindeutig ist, wird die Diagnose automatisch erfasst, falls es mehrere Treffer gibt, müssen Sie eine Position wählen. Selbstverständlich können Sie nach den Diagnosecodes oder auch nach dem Diagnosetexten suchen. Um weitere Diagnosen eingeben zu können klicken Sie auf „neue Diagnose“.
+      </p>
+      
+      <h3 id="create_invoice">Rechnung erstellen</h3>
+      <p>        
+        <a href="images/docs/create_invoice.png"><img class="left" src="images/docs/small/create_invoice.png" /></a>
+        Um aus den erfassten Leistungen eine Rechnung zu generieren, klicken Sie auf „Rechnung stellen“.
+      </p>
+      <p>
+        Ein neues Formular wird geöffnet, bei dem Sie das Rechnungsdatum, den Garanten und nach Wunsch auch noch Bemerkungen angeben können. Erstellen Sie nun die Rechnung indem Sie auf „Erstellen“ klicken.
+      </p>
+      <p>   
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <a href="images/docs/create_invoice2..png"><img class="left" src="images/docs/small/create_invoice2..png" /></a>
+        Sie werden dann nach und nach über den Status informiert und gefragt, ob die Rechnung gedruckt werden soll und ob die Rechnung verbucht werden soll. Antworten Sie entsprechend jeweils mit „Ja“ oder „Nein“.
+      </p>
+      
+      <h3 id="copy_of_invoice_print">Rechnungskopie drucken</a></h3>
+
+      <p>      
+        <a href="images/docs/print_reminder.png"><img class="right" src="images/docs/small/print_reminder.png" /></a>
+        1.Wählen Sie einen Patienten aus (wenden Sie dazu die Suche an, welche weiter oben genauer beschrieben ist.)</p>
+      <p>2.Im linken Menu auf den Link „Rechnungen“ klicken.</p>
+      <p>3.Im Fenster erscheint die aktuellste Rechnung. Um eine ältere Rechnung auszuwählen, klicken Sie rechts auf die gewünschte Rechnung.</p>
+      <p>4.Um die Rechnungskopie zu drucken, klicken Sie auf „Rechnungskopie drucken“.</p>
+              
+      <h3 id="book_payment">Zahlung verbuchen</h3>
+      
+      <h4 id="with_vers_or_besr">mit VESR/BESR</h4>
+      <p>        
+        <a href="images/docs/vesr1.png"><img class="left" src="images/docs/small/vesr1.png" /></a>
+        Laden Sie die VESR-Datei von Ihrer Bank herunter und merken Sie sich, in welchen Ordner Sie die Datei gespeichert haben.
+      </p> 
+      <br/>
+      <br/>
+      <br/>
+      <p>
+        <a href="images/docs/vesr2.png"><img class="left" src="images/docs/small/vesr2.png" /></a>
+        Gehen Sie dann in CyDoc (Home-Site) auf „VESR-Liste“und klicken Sie auf „VESR Datei einlesen“. Danach klicken Sie bitte auf Durchsuchen, wählen die richtige Datei und  bestätigen mit „Öffnen“. Wenn Sie nun auf Einlesen klicken, wird die Datei hoch geladen und verbucht. Als Bestätigung wird ein Protokol angezeigt, welches Sie bei bedarf ausdrucken können
+      </p>
+
+      <h4 id="book_payment_manually">manuell verbuchen</h4>
+      <p>
+        <a href="images/docs/book_reminder.png"><img class="right" src="images/docs/small/book_reminder.png" /></a>
+        Um manuell eine Zahlung zu verbuchen, öffnen Sie bitte die betreffende Rechnung. Klicken Sie dann unter „Buchungen“ auf „Manuell buchen“. Geben Sie dann das Zahlungsdatum, die Zahlungsart, optional eine Bemerkung und den Betrag an. Dann klicken Sie abschliessend auf „Buchen“.
+      </p>
+
+      <h2 id="reminder_mechanism">Mahnwesen</h2>
+            
+      <h3 id="show_actual_reminder">Fällige Mahnungen anzeigen</h3>
+      <p>
+        <a href="images/docs/print_reminder2.png"><img class="left" src="images/docs/small/print_reminder2.png" /></a>
+        Um die fälligen Mahnungen anzuzeigen, klicken Sie oben auf „Rechnungen“. Unter dem Titel „Überfällige Rechnungen“ sind alle Rechnungen aufgelistet, welche gemahnt werden sollen, oder bereits gemahnt wurden.
+      </p>
+      
+      <h3 id="print_reminders">Mahnungen drucken</h3>
+      <p>                
+        <a href="images/docs/reminder.png"><img class="right" src="images/docs/small/reminder.png" /></a>
+        Öffnen Sie zum Drucken einer Mahnung die betreffende Rechnung und klicken Sie auf „Mahnung drucken“. Die Mahnung wird dann erstellt und direkt ausgedruckt.</p>
+      <p>Wenn man alle Mahnungen auf einmal ausdrucken möchte, geht man auf „Rechnungen“. Rechts oben hat man nun einen Link „Alle Mahnungen drucken“. Diesen wählt man aus.</p>
+      
+      <h2 id="basic_claims_data">Stammdaten</h2>
+      
+      <h3 id="search_insurance">Versicherung suchen</h3>
+      <p>
+        <a href="images/docs/insurance.png"><img class="left" src="images/docs/small/insurance.png" /></a>
+        Um eine Versicherung zu suchen klicken Sie einfach im Menü auf „Versicherungen“ und geben dann den Namen oder einen Teil davon im Suchfeld ein und bestätigen mit „Enter“.
+      </p>
+      
+      <h3 id="search_rate_position">Tarifposition suchen</h3>
+      <p>        
+        <a href="images/docs/search_tarif.png"><img class="right" src="images/docs/small/search_tarif.png" /></a>
+        Um Tarifpositionen zu suchen können Sie im Menü auf „Leistungen“ klicken und dann nach Tarif-Codes oder Beschreibungstext suchen.</p>
+      <p>(Diese Angaben entsprechen genau den Ergebnissen, welche Sie bei der Suche in „Leistungen erfassen“ erhalten.)</p>
+
+      <h3 id="search_drugs">Medikamente suchen</h3>
+      <p>
+        <a href="images/docs/search_drugs.png"><img class="left" src="images/docs/small/search_drugs.png" /></a>
+        Um Medikamente zu suchen, klicken Sie im Menü auf „Medikamente“. Sie können dann nach dem Namen des Präparates suchen. Um die Details eines Medikamentes einzublenden, klicken Sie es einfach mit der Maus an.
+      </p>
+      
+      <h3 id="search_and_edit_doctors">Ärzte suchen und bearbeiten</h3>
+      <p>        
+        <a href="images/docs/search_drugs.png"><img class="right" src="images/docs/small/search_drugs.png" /></a>
+        Um Ärzte zu suchen, klicken Sie im Menü auf  „Ärzte“. Sie können dann nach dem Namen des Arztes suchen.</p> 
+      <p>Mit „Erfassen“ können Sie einen neuen Arzt im System eingeben.</p>
+      <p>
+        Wenn Sie die Daten ändern möchten, klicken Sie auf den gewünschten Arzt. Nun können Sie wieder rechts oben „Ändern“ auswählen oder direkt durch Klick auf das entsprechende Felder überarbeiten.
+      </p>
+      <h2 id="tips_and_tricks">Tips und Tricks</h2>
+      
+      <h3 id="multiple_window">Mehrere Fenster</h3>
+      <p>        
+        <a href="images/docs/open_new_window.png"><img class="left" src="images/docs/small/open_new_window.png" /></a>
+        CyDoc ist so programmiert, dass man beliebig viele Fenster geöffnet haben kann, zum Beispiel eines für die Rechnungen, eines für die Patientenverwaltung und eines für die Medikamenten-Suche. Um einen Menü-Punkt in einem neuen Fenster zu öffnen, klicken Sie mit der rechten Maustaste auf den gewünschten Menü-Punkt und klicken dann auf „Link in neuem Fenster öffnen“. 
+      </p>
+
+      <h3 id="bookmark">Lesezeichen</h3>
+      <p>
+        <a href="images/docs/bookmark1.png"><img class="right" src="images/docs/small/bookmark1.png" /></a>
+        Da CyDoc im „Internet“ läuft, kann man leicht Lesezeichen (Favoriten) anlegen. Zum Beispiel für einen Fall, den man sich für die spätere Bearbeitung merken möchte. Klicken Sie hierfür mit der rechten Maustaste auf den gegebenen Fall und wählen Sie „Lesezeichen für diesen Link hinzufügen“.</p> 
+      <p>
+        <a href="images/docs/bookmark2.png"><img class="right" src="images/docs/small/bookmark2.png" /></a>
+        Es öffnet sich dann ein kleines Fenster, in dem Sie angeben können, ob das Lesezeichen auf der Symbolleiste oder im Lesezeichen-Menü gespeichert werden soll. Des weiteren können Sie einen Namen für dieses Lesezeichen angeben und mit „Fertig“ abschliessen.
+      </p>
+    </div>
+</html>
