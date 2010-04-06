@@ -29,7 +29,7 @@ class Recall < ActiveRecord::Base
     transitions :to => :obeyed, :from => :new
   end
 
-  named_scope :open, :conditions => {:state => ['open, sent']}
+  named_scope :open, :conditions => {:state => ['new', 'sent']}
   
   private
   def assign_appointment(appointment)
