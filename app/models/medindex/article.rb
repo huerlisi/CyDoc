@@ -28,10 +28,15 @@ module Medindex
 
     # Association handlers
     def create_or_update_associations(int_record)
+      log_printed = false
       for price in @int_record.drug_prices
         if int_record.drug_prices.exists?(:price_type => price.price_type, :valid_from => price.valid_from, :price => price.price)
           puts "  Existing price: #{price.to_s}" if @@log == :debug
         else
+          if int_record.changes.empty? and log_printed == false
+            puts "Updating #{int_record}..."
+            log_printed = false
+          end
           int_record.drug_prices << price
           puts "  New price: #{price.to_s}"
         end
