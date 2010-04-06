@@ -38,7 +38,7 @@ function get() {
 local url="${1:-$URL}"
 local output="${2:-$NAME.zip}"
 
-        wget --no-verbose "$url" --output-document "$output"
+        wget --no-check-certificate --no-verbose "$url" --output-document "$output"
         unzip "$output"
         mv plz_l_*.txt $NAME.csv
 }
