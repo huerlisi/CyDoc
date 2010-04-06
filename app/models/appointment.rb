@@ -23,4 +23,9 @@ class Appointment < ActiveRecord::Base
   aasm_event :cancel do
     transitions :to => :canceled
   end
+
+  def to_s
+    "#{date} #{[from, to].compact.join(' - ')}"
+  end
+
 end

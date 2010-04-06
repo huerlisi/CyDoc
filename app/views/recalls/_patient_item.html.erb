@@ -1,6 +1,7 @@
 <tr id="recall_<%= patient_item.id %>">
-  <th>Recall</th>
-  <td><%=h patient_item.due_date %></td>
+  <th><%=h patient_item.due_date %></th>
+  <td>Terminvorschlag: <%=h patient_item.appointment unless patient_item.appointment.nil? %></td>
+  <td><%=h patient_item.sent_at ? "Aufgebot gedruckt: #{patient_item.sent_at.to_date}" : nil %></td>
   <td><%=h patient_item.remarks %></td>
   <td>
     <%= link_to_remote image_tag('edit.png'), {:url => edit_patient_recall_path(@patient, patient_item), :method => :get} %>
