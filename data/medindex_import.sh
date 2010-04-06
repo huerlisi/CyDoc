@@ -77,18 +77,38 @@ local filter="${2:-A}"
 
 function import() {
 local model_ident="$1"
-local input="$2"
+local from_date="$2"
 
 	local model="$(echo $model_ident | sed 's/^\([a-z]\)/\u\1/')"
-	echo "Medindex::$model.import(File.new('$input'))" | ../script/console
+	local input_file="medindex/${model_ident}_$(date +%F).xml"
+
+	echo "Medindex::$model.import(File.new('$input_file'))" | ../script/console
 }
 
 function import_all() {
 local from_date="$1"
+
+	list | while read model ; do
+		import $model $from_date
+	done
+}
+
+# Update
+function update() {
+local model_ident="$1"
+local from_date="$2"
+local filter="${3:-A}"
+
+	get $model_ident $from_date $filter
+	import $model_ident $from_date
+}
+
+function update_all() {
+local from_date="$1"
 local filter="${2:-A}"
 
 	list | while read model ; do
-		import $model $from_date $filter
+		update $model $from_date $filter
 	done
 }
 
@@ -97,7 +117,10 @@ function usage() {
 	echo "medindex_import.sh list"
 	echo "medindex_import.sh get <model> <from_date> [<filter>]"
 	echo "medindex_import.sh get_all <from_date> [<filter>]"
-	echo "medindex_import.sh import_all <from_date> [<filter>]"
+	echo "medindex_import.sh import <model> <from_date>"
+	echo "medindex_import.sh import_all <from_date>"
+	echo "medindex_import.sh update <model> <from_date> [<filter>]"
+	echo "medindex_import.sh update_all <from_date> [<filter>]"
 }
 
 # Main
