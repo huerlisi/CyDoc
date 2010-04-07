@@ -67,7 +67,9 @@ Rails::Initializer.run do |config|
 
   # Forms
   config.gem 'formtastic'
-  config.gem 'validation_reflection'
+
+  # Using vendored plugin as it needs to be included after validates_timeliness
+  # config.gem 'validation_reflection'
 
   # Pagination
   config.gem 'will_paginate'

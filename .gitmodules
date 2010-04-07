@@ -40,3 +40,6 @@
 [submodule "vendor/plugins/validates_timeliness"]
 	path = vendor/plugins/validates_timeliness
 	url = http://github.com/adzap/validates_timeliness.git
+[submodule "vendor/plugins/validation_reflection"]
+	path = vendor/plugins/validation_reflection
+	url = http://github.com/redinger/validation_reflection.git
