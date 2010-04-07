@@ -95,18 +95,27 @@ module ActionView
   module Helpers
     module FormHelper
       def date_field(object_name, method, options = {})
-        text_field object_name, method, options
+        instance_tag = InstanceTag.new(object_name, method, self, options.delete(:object))
+
+        # Let InstanceTag do the object/attribute lookup for us
+        value = instance_tag.value(instance_tag.object)
+
+        # value is empty when re-showing field after error, use params
+        options["value"] = value.is_a?(Date) ? value.to_s(:text_field) : params[object_name][method]
+
+        instance_tag.to_input_field_tag("text", options)
       end
     end
 
     class FormBuilder
       def date_field(method, options = {})
-        @template.date_field(@object_name, method.to_s + "_formatted", objectify_options(options))
+        @template.date_field(@object_name, method, objectify_options(options))
       end
     end
   end
 end
 
+# Monkey patching Date class
 class Date
   # Date helpers
   def self.parse_europe(value, base = :future)
