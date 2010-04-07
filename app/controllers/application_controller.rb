@@ -116,6 +116,14 @@ module ActionView
   end
 end
 
+# Monkay patch formtastic
+class Formtastic::SemanticFormBuilder
+  # Outputs a label and standard Rails text field inside the wrapper.
+  def date_field_input(method, options)
+    basic_input_helper(:date_field, :string, method, options)
+  end
+end
+
 # Monkey patching Date class
 class Date
   # Date helpers
