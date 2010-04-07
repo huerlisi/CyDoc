@@ -13,7 +13,9 @@ de-CH:
         due_date: Datum
         remarks:  Bemerkungen
       patient:
-        given_name: Vorname
+        given_name:  Vorname
+        family_name: Nachname
+        birth_date:  Geburtstag
       treatment:
         date_begin: Behandlung von
         date_end:   Behandlung bis
