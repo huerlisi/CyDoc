@@ -58,7 +58,7 @@ Rails::Initializer.run do |config|
   # config.active_record.default_timezone = :utc
 
   # i18n
-  config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'config', 'locales', 'cydoc', '*.{rb,yml}')]
+  config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'config', 'locales', '*', '*.{rb,yml}')]
   config.i18n.default_locale = 'de-CH'
   
   # Authentication
