@@ -4,7 +4,8 @@ class Appointment < ActiveRecord::Base
   has_one :recall
   
   # Validations
-  validates_presence_of :date, :patient
+  validates_presence_of :patient
+  validates_date :date
   
   # State Machine
   include AASM
