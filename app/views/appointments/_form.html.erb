@@ -4,7 +4,7 @@
     <%= form.semantic_errors %>
 
     <% form.inputs do %>
-      <%= form.input :date, :as => :string, :input_html => {:size => 12, :autocomplete => 'off'} %>
+      <%= form.input :date, :as => :date_field, :input_html => {:size => 12, :autocomplete => 'off'} %>
       <%= form.input :from, :as => :string, :input_html => {:size => 12, :autocomplete => 'off'} %>
       <%= form.input :to, :as => :string, :input_html => {:size => 12, :autocomplete => 'off'} %>
       <%= form.input :remarks, :input_html => {:rows => 3} %>
