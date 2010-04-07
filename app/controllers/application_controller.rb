@@ -101,7 +101,8 @@ module ActionView
         value = instance_tag.value(instance_tag.object)
 
         # value is empty when re-showing field after error, use params
-        options["value"] = value.is_a?(Date) ? value.to_s(:text_field) : params[object_name][method]
+        options["value"] =  value.to_s(:text_field) if value.is_a?(Date)
+        options["value"] ||= params[object_name][method] if params[object_name]
 
         instance_tag.to_input_field_tag("text", options)
       end
