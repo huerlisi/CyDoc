@@ -130,7 +130,7 @@ class Formtastic::SemanticFormBuilder
 
       @object.class.reflect_on_validations_for(attribute_sym).any? do |validation|
         [:validates_presence_of, :validates_date].include?(validation.macro) &&
-        validation.name == attribute_sym &&
+        validation.name == attribute_sym && !(validation.options.present? && (validation.options[:allow_nil] || validation.options[:allow_blank])) &&
         (validation.options.present? ? options_require_validation?(validation.options) : true)
       end
     else
