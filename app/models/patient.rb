@@ -42,7 +42,7 @@ class Patient < ActiveRecord::Base
   public
   # Validation
   validates_presence_of :family_name, :given_name
-  validates_date :birth_date
+  validates_date :birth_date, :allow_blank => true
 
   def validate_for_invoice
     for field in [:street_address, :postal_code, :locality, :sex, :birth_date]
