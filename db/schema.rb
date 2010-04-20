@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100406200401) do
+ActiveRecord::Schema.define(:version => 20100419093746) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -634,6 +634,9 @@ ActiveRecord::Schema.define(:version => 20100406200401) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "vat_classes", ["code"], :name => "index_vat_classes_on_code"
+  add_index "vat_classes", ["valid_from"], :name => "index_vat_classes_on_valid_from"
 
   create_table "vcards", :force => true do |t|
     t.string  "full_name",        :limit => 50
