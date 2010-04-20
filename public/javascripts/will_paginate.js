@@ -5,7 +5,7 @@ document.observe("dom:loaded", function() {
 
   if (container) {
     var img = new Image
-    img.src = '/images/loading.gif'
+    img.src = '../images/loading.gif'
 
     function createSpinner() {
       Element.show('spinner')
