@@ -56,12 +56,14 @@ class ApplicationController < ActionController::Base
     html2ps_options = "--media #{options[:media]}" unless options[:media].blank?
     
     logger.info("html2ps.php #{html2ps_options}")
+    logger.info("Started PDF generation #{Time.now.strftime('%H:%M:%S')}")
     generator = IO.popen("html2ps.php #{html2ps_options}", "w+")
     generator.puts render_to_string(options)
     generator.close_write
 
     data = generator.read
     generator.close
+    logger.info("Finished PDF generation #{Time.now.strftime('%H:%M:%S')}")
     
     return data
   end
@@ -201,9 +203,14 @@ module Print
 
         # You probably need the pdftops filter from xpdf, not poppler on the cups host
         # In my setup it generated an empty page otherwise
+        pdf_string = render_to_pdf(:template => "#{controller_name}/#{method}.html.erb", :layout => 'simple', :media => media)
+
         logger.info("lp -h #{cups_host} -d #{device}")
         generator = IO.popen("lp -h #{cups_host} -d #{device}", "w+")
-        generator.puts render_to_pdf(:template => "#{controller_name}/#{method}.html.erb", :layout => 'simple', :media => media)
+
+        logger.info("Started printing #{Time.now.strftime('%H:%M:%S')}")
+        generator.puts pdf_string
+        logger.info("Finished printing #{Time.now.strftime('%H:%M:%S')}")
         generator.close_write
 
         # Just read to not create zombie processes... TODO: fix
