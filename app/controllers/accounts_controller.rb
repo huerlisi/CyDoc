@@ -30,4 +30,22 @@ class AccountsController < ApplicationController
       format.js { }
     end
   end
+
+  # POST /account/print/1
+  def print
+    @account = Accounting::Account.find(params[:id])
+    @bookings = apply_scopes(Accounting::Booking).by_account(@account).find(:all, :order => 'value_date, id')
+    
+    respond_to do |format|
+      format.html {
+        render :action => 'show'
+      }
+      format.js {
+        render :update do |page|
+          page.replace 'booking_list', :partial => 'booking_list'
+          page.call 'window.print'
+        end
+      }
+    end
+  end
 end
