@@ -4,7 +4,8 @@ class Appointment < ActiveRecord::Base
   has_one :recall
   
   # Validations
-  validates_presence_of :date, :patient
+  validates_presence_of :patient
+  validates_date :date
   
   # State Machine
   include AASM
@@ -21,7 +22,7 @@ class Appointment < ActiveRecord::Base
     transitions :to => :scheduled, :from => :proposed
   end
   aasm_event :cancel do
-    transitions :to => :canceled
+    transitions :to => :canceled, :from => [:proposed, :scheduled]
   end
 
   def to_s

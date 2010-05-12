@@ -15,9 +15,9 @@
 set -e
 
 NAME="tarmed"
-VERSION="1.07"
+VERSION="1.07.01"
 
-FILE_NAME="TARMED_Database_V0${VERSION/./_}"
+FILE_NAME="0${VERSION//./_}_TARMED_Database"
 URL="http://www.tarmedsuisse.ch/fileadmin/media/Dateien/Browser_V_${VERSION}/$FILE_NAME.zip"
 
 function check_cmd() {

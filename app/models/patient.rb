@@ -14,6 +14,7 @@ class Patient < ActiveRecord::Base
 
   has_vcards
   accepts_nested_attributes_for :vcard
+  default_scope :include => {:vcard => :addresses}
 
   has_many :tiers
   has_many :invoices, :through => :tiers, :order => 'created_at DESC'
@@ -42,6 +43,7 @@ class Patient < ActiveRecord::Base
   public
   # Validation
   validates_presence_of :family_name, :given_name
+  validates_date :birth_date, :allow_blank => true
 
   def validate_for_invoice
     for field in [:street_address, :postal_code, :locality, :sex, :birth_date]
