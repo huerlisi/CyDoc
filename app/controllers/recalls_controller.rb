@@ -27,8 +27,8 @@ class RecallsController < ApplicationController
     @recall  = @patient.recalls.build(params[:recall])
     
     # Should be handled by model
-    @recall.appointment.patient = @recall.patient
-    @recall.appointment.state = 'proposed'
+    # @recall.appointment.patient = @recall.patient
+    # @recall.appointment.state = 'proposed'
     
     if @recall.save
       respond_to do |format|

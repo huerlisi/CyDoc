@@ -46,6 +46,7 @@ class Recall < ActiveRecord::Base
   public
   # Fix for nested attributes problem
   # See http://www.pixellatedvisions.com/2009/03/18/rails-2-3-nested-model-forms-and-nil-new-record
+<<END
   def initialize(attributes=nil)
     super
     
@@ -53,4 +54,5 @@ class Recall < ActiveRecord::Base
       self.build_appointment(:patient => self.patient)
     end
   end
+END
 end
