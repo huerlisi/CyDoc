@@ -29,7 +29,9 @@ class Recall < ActiveRecord::Base
     transitions :to => :obeyed, :from => :new
   end
 
+  # Scopes
   named_scope :open, :conditions => {:state => ['new', 'sent']}
+  named_scope :by_due_period, lambda {|from, to| { :conditions => { :due_date => from..to } } }
   
   private
   def assign_appointment(appointment)
