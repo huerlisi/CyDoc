@@ -1,5 +1,6 @@
 <div class="contextual">
   <%= link_to "Kontoliste", accounts_path, :class => "icon icon-index" %>
+  <%= link_to_remote "Kontoauszug drucken", {:url => print_account_path(@account)}, :class => "icon icon-print" %>
 </div>
 <h2>Konto - <%= @account.title %></h2>
 

@@ -254,7 +254,7 @@ class Invoice < ActiveRecord::Base
       invoice_condition = "invoices.remark LIKE :wildcard_value"
     end
 
-    args.merge!(:include => {:tiers => {:patient => [:vcard]}}, :conditions => ["(#{patient_condition}) OR (#{invoice_condition})", query_params], :order => 'vcards.family_name, vcards.given_name')
+    args.merge!(:include => {:tiers => {:patient => {:vcards => :addresses}}}, :conditions => ["(#{patient_condition}) OR (#{invoice_condition})", query_params], :order => 'vcards.family_name, vcards.given_name')
     find(:all, args)
   end
   

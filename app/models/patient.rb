@@ -14,6 +14,7 @@ class Patient < ActiveRecord::Base
 
   has_vcards
   accepts_nested_attributes_for :vcard
+  default_scope :include => {:vcard => :addresses}
 
   has_many :tiers
   has_many :invoices, :through => :tiers, :order => 'created_at DESC'
