@@ -1,10 +1,10 @@
 class AppointmentsController < ApplicationController
   # Filter
-  has_scope :by_due_period, :using => [:from, :to]
+  has_scope :by_period, :using => [:from, :to]
 
   # GET /appointments
   def index
-    @appointments = Appointment.open.paginate(:page => params['page'], :order => 'date, `from`')
+    @appointments = apply_scopes(Appointment).open.paginate(:page => params['page'], :order => 'date, `from`')
     @recalls = apply_scopes(Recall).open.paginate(:page => params['page'], :order => 'due_date')
   end
   

@@ -25,6 +25,9 @@ class Appointment < ActiveRecord::Base
     transitions :to => :canceled, :from => [:proposed, :scheduled]
   end
 
+  # Scopes
+  named_scope :by_period, lambda {|from, to| { :conditions => { :date => from..to } } }
+
   def to_s
     "#{date} #{[from, to].compact.join(' - ')}"
   end

@@ -31,7 +31,7 @@ class Recall < ActiveRecord::Base
 
   # Scopes
   named_scope :open, :conditions => {:state => ['new', 'sent']}
-  named_scope :by_due_period, lambda {|from, to| { :conditions => { :due_date => from..to } } }
+  named_scope :by_period, lambda {|from, to| { :conditions => { :due_date => from..to } } }
   
   private
   def assign_appointment(appointment)
