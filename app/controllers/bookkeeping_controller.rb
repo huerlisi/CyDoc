@@ -1,9 +1,10 @@
 class BookkeepingController < ApplicationController
-  before_filter :set_value_date_range
+  before_filter :set_value_period
   
-  def set_value_date_range
-    if params[:by_value_date]
-      @value_date_begin, @value_date_end = params[:by_value_date].split('..')
+  def set_value_period
+    if by_value_period = params[:by_value_period]
+      @value_date_begin = by_value_period[:from]
+      @value_date_end   = by_value_period[:to]
     else
       @value_date_begin = Date.new(Date.today.year, 1, 1).strftime('%Y-%m-%d')
       @value_date_end   = Date.new(Date.today.year, 12, 31).strftime('%Y-%m-%d')

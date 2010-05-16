@@ -81,7 +81,7 @@ Rails::Initializer.run do |config|
   config.gem "cucumber"
   
   # Scoping
-  # config.gem "has_scope" TODO: we currently need the vendored in version by huerlisi
+  config.gem "has_scope", :version => '>= 0.5'
 
   # PDF
   config.gem 'prawn', :version => '>= 0.8.4'

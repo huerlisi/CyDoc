@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
   in_place_edit_for :booking, :comments
 
   # Scopes
-  has_scope :by_value_date, :type => :range, :session => 'has_scope'
+  has_scope :by_value_period, :using => [:from, :to], :default => proc { |c| c.session[:has_scope] }
   
   # GET /bookings
   def index
