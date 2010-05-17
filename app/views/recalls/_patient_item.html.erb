@@ -4,15 +4,6 @@
   <td><%=h patient_item.sent_at ? "Aufgebot gedruckt: #{patient_item.sent_at.to_date}" : nil %></td>
   <td><%=h patient_item.remarks %></td>
   <td>
-    <%= link_to_remote image_tag('edit.png'), {:url => edit_recall_path(patient_item), :method => :get}, :title => "Recall editieren" %>
-    <% for state in patient_item.aasm_events_for_current_state -%>
-    <%= 
-    case state
-      when :obey:   link_to_remote image_tag('true.png'), {:url => obey_recall_path(patient_item)}, :title => "Termin akzeptiert"
-      when :cancel: link_to_remote image_tag('delete.png'), {:url => recall_path(patient_item), :method => :delete}, :title => "Will keinen Termin"
-      when :prepare: link_to_remote image_tag('send.png'), :url => prepare_recall_path(patient_item), :title => "Aufgebot senden"
-    end -%>
-    <% end -%>
-    <%= link_to image_tag('pdf.png'), recall_path(patient_item, :format => :pdf) %>
+    <%= render :partial => 'recalls/action_links', :locals => {:recall => patient_item} %>
   </td>
 </tr>
