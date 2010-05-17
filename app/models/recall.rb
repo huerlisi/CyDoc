@@ -26,7 +26,7 @@ class Recall < ActiveRecord::Base
     transitions :to => :sent, :from => :new, :on_transition => :sending
   end
   aasm_event :obey do
-    transitions :to => :obeyed, :from => :new
+    transitions :to => :obeyed, :from => :sent
   end
 
   # Scopes
