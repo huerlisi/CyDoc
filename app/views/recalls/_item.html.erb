@@ -5,7 +5,7 @@
   <td><%=h item.sent_at.to_date if item.sent_at %></td>
   <td><%=h item.remarks %></td>
   <td>
-    <%= link_to_remote image_tag('edit.png'), {:url => edit_recall_path(item), :method => :get} %>
+    <%= link_to_remote image_tag('edit.png'), {:url => edit_recall_path(item), :method => :get}, :title => "Recall editieren" %>
     <% for state in item.aasm_events_for_current_state -%>
     <%= 
     case state
@@ -14,6 +14,6 @@
       when :prepare: link_to_remote image_tag('send.png'), :url => prepare_recall_path(item), :title => "Aufgebot senden"
     end -%>
     <% end -%>
-    <%= link_to image_tag('pdf.png'), patient_recall_path(item.patient, item, :format => :pdf) %>
+    <%= link_to image_tag('pdf.png'), recall_path(item, :format => :pdf) %>
   </td>
 </tr>
