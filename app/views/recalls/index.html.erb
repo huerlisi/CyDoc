@@ -1,5 +1,8 @@
 <%=
 tab_container 'recalls', t(:list, :scope => [:recall]), [
-  {:name => 'recalls', :partial => 'recalls/list', :label => 'Recalls'},
+  {:name => 'scheduled_recalls', :partial => 'recalls/scheduled_list', :label => 'Anstehende Recalls'},
+  {:name => 'sent_recalls', :partial => 'recalls/sent_list', :label => 'Versandte Recalls'},
 ]
 %>
+
+<%= render :partial => 'sidebar' %>

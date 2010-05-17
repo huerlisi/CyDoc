@@ -4,7 +4,8 @@ class RecallsController < ApplicationController
 
   # GET /recalls
   def index
-    @recalls = apply_scopes(Recall).open.paginate(:page => params['page'], :order => 'due_date')
+    @scheduled_recalls = apply_scopes(Recall).queued.paginate(:page => params['page'], :order => 'due_date')
+    @sent_recalls = apply_scopes(Recall).sent.paginate(:page => params['page'], :order => 'due_date')
   end
   
   # GET /patients/1/recalls/new
