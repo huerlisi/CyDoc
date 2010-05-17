@@ -54,14 +54,14 @@ class RecallsController < ApplicationController
 
   # GET /recall/1/edit
   def edit
-    @patient = Patient.find(params[:patient_id])
+    @patient = Patient.find(params[:patient_id]) if params[:patient_id]
     @recall = Recall.find(params[:id])
     
     respond_to do |format|
       format.html { }
       format.js {
         render :update do |page|
-          page.replace_html 'new_recall', :partial => 'recalls/form'
+          page.insert_html :after, "recall_#{@recall.id}", :partial => 'recalls/form'
         end
       }
     end
@@ -70,7 +70,7 @@ class RecallsController < ApplicationController
   # PUT /recall/1
   # PUT /patients/1/recall/2
   def update
-    @patient = Patient.find(params[:patient_id])
+    @patient = Patient.find(params[:patient_id]) if params[:patient_id]
     @recall = Recall.find(params[:id])
     
     if @recall.update_attributes(params[:recall])
@@ -78,8 +78,13 @@ class RecallsController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            page.replace_html 'recalls', :partial => 'recalls/patient_item', :collection => @patient.recalls.open
-            page.replace_html 'new_recall'
+            if @patient
+              # reload all recalls when called in patient view to reflect sorting
+              page.replace_html 'recalls', :partial => 'recalls/patient_item', :collection => @patient.recalls.open
+            else
+              page.replace "recall_#{@recall.id}", :partial => 'item', :object => @recall
+              page.remove "recall_form"
+            end
           end
         }
       end

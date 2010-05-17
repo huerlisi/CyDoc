@@ -5,6 +5,7 @@
   <td><%=h item.sent_at.to_date if item.sent_at %></td>
   <td><%=h item.remarks %></td>
   <td>
+    <%= link_to_remote image_tag('edit.png'), {:url => edit_recall_path(item), :method => :get} %>
     <% for state in item.aasm_events_for_current_state -%>
     <%= 
     case state
