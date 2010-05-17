@@ -12,9 +12,10 @@
     <% if @recall.appointment %>
       <% form.inputs 'Terminvorschlag' do %>
         <% form.semantic_fields_for :appointment do |appointment| %>
-          <%= appointment.input :date, :as => :string, :input_html => {:size => 12, :autocomplete => 'off'} %>
-          <%= appointment.input :from, :as => :string, :input_html => {:size => 12, :autocomplete => 'off'} %>
-          <%= appointment.input :to, :as => :string, :input_html => {:size => 12, :autocomplete => 'off'} %>
+          <%= appointment.input :patient_id, :as => :hidden, :value => @recall.patient.id %>
+          <%= appointment.input :date, :as => :date_field, :input_html => {:size => 12, :autocomplete => 'off'} %>
+          <%= appointment.input :from, :as => :time_field, :input_html => {:size => 12, :autocomplete => 'off'} %>
+          <%= appointment.input :to, :as => :time_field, :input_html => {:size => 12, :autocomplete => 'off'} %>
         <% end %>
       <% end %>
     <% end %>
@@ -23,6 +24,6 @@
       <%= form.submit "Speichern", :class => "icon icon-save" %>
       <%= button_to_function "Abbrechen", "Element.remove('recall_form')", :class => "icon icon-cancel" %>
     <% end %>
- <% end %>
+  <% end %>
 </td>
 </tr>
