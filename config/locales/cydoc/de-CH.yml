@@ -39,3 +39,7 @@ de-CH:
       2xreminded:  2x gemahnt
       encashment:  in Inkasso
       paid:        bezahlt
+
+  recall:
+    list: Termine
+    

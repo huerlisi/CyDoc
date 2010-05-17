@@ -1,9 +1,10 @@
 class RecallsController < ApplicationController
+  # Filter
+  has_scope :by_period, :using => [:from, :to]
+
   # GET /recalls
   def index
-    @recalls = Recall.open.paginate(:page => params['page'], :order => 'due_date')
-
-    render :action => 'list'
+    @recalls = apply_scopes(Recall).open.paginate(:page => params['page'], :order => 'due_date')
   end
   
   # GET /patients/1/recalls/new

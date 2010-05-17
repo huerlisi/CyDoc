@@ -34,7 +34,7 @@ class Recall < ActiveRecord::Base
   end
 
   # Scopes
-  named_scope :open, :conditions => {:state => ['new', 'sent']}
+  named_scope :open, :conditions => {:state => ['new', 'prepared', 'sent']}
   named_scope :by_period, lambda {|from, to| { :conditions => { :due_date => from..to } } }
   
   private
