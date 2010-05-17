@@ -39,7 +39,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :doctors
 
-  map.resources :recalls, :member => {:obey => :post}
+  map.resources :recalls, :member => {:obey => :post, :prepare => :post, :send => :post}
   
   map.resources :patients, :member => {:show_tab => :get, :localities_for_postal_code => :post, :postal_codes_for_locality => :post, :print_label => :post, :label => :get, :print_full_label => :post, :full_label => :get} do |patient|
     patient.resources :phone_numbers

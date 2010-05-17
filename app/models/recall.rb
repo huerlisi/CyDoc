@@ -16,14 +16,18 @@ class Recall < ActiveRecord::Base
 
   aasm_state :new
   aasm_state :canceled
+  aasm_state :prepared
   aasm_state :sent
   aasm_state :obeyed
 
   aasm_event :cancel do
     transitions :to => :canceled, :from => [:new, :sent]
   end
+  aasm_event :prepare do
+    transitions :to => :prepared, :from => :new
+  end
   aasm_event :send_notice do
-    transitions :to => :sent, :from => :new, :on_transition => :sending
+    transitions :to => :sent, :from => :prepared, :on_transition => :sending
   end
   aasm_event :obey do
     transitions :to => :obeyed, :from => :sent

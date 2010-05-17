@@ -100,6 +100,25 @@ class RecallsController < ApplicationController
     end
   end
 
+  # POST /recall/1/prepare
+  def prepare
+    @recall = Recall.find(params[:id])
+    @recall.prepare
+    
+    unless @recall.appointment
+      @recall.build_appointment(:patient => @recall.patient)
+    end
+
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.insert_html :after, "recall_#{@recall.id}", :partial => 'recalls/form'
+        end
+      }
+    end
+  end
+
   # POST /recall/1/obey
   def obey
     @recall = Recall.find(params[:id])
