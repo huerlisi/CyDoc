@@ -49,6 +49,13 @@ class Recall < ActiveRecord::Base
   end
   
   public
+  def self.filter_months(limit = 6)
+    months = Recall.find(:all, :select => "date_format(due_date, '%Y-%m-01') AS month, count(*) AS count", :group => "date_format(due_date, '%Y-%m-01')", :order => "due_date", :limit => limit)
+    months.map{|recall|
+      [Date.parse(recall.month), recall.count]
+    }
+  end
+
   # Fix for nested attributes problem
   # See http://www.pixellatedvisions.com/2009/03/18/rails-2-3-nested-model-forms-and-nil-new-record
 <<END
