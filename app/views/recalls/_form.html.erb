@@ -5,7 +5,7 @@
     <%= form.semantic_errors %>
 
     <% form.inputs do %>
-      <%= form.input :due_date, :as => :string, :input_html => {:size => 12, :autocomplete => 'off'} %>
+      <%= form.input :due_date, :as => :date_field, :input_html => {:size => 12, :autocomplete => 'off'} %>
       <%= form.input :remarks, :input_html => {:rows => 3} %>
       <% if @recall.appointment %>
         <% form.semantic_fields_for :appointment do |appointment| %>
