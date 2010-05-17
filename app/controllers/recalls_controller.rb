@@ -93,7 +93,7 @@ class RecallsController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            page.replace_html 'recall_form', :partial => 'recalls/form'
+            page.replace 'recall_form', :partial => 'recalls/form'
           end
         }
       end
