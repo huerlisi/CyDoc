@@ -5,7 +5,7 @@
 <div class="box">
   <div id="new_recall" class="new_recall"></div>
 
-  <table id="recalls">
+  <table id="recalls" style="width: 100%">
     <%= render :partial => 'recalls/patient_item', :collection => @patient.recalls.open + @patient.recalls.sent %>
   </table>
 </div>
