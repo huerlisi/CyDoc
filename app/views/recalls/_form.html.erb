@@ -5,6 +5,7 @@
     <%= form.semantic_errors %>
 
     <% form.inputs 'Recall' do %>
+      <%= form.input :state, :as => :hidden %>
       <%= form.input :due_date, :as => :date_field, :input_html => {:size => 12, :autocomplete => 'off'} %>
       <%= form.input :remarks, :input_html => {:rows => 3} %>
     <% end %>
