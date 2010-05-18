@@ -151,14 +151,21 @@ class RecallsController < ApplicationController
   # POST /recall/1/obey
   def obey
     @recall = Recall.find(params[:id])
+    @patient = @recall.patient
     @recall.obey
     @recall.save
+    
+    @old_recall = @recall
+    @recall = @old_recall.patient.recalls.build
+    @recall.remarks = @old_recall.remarks
+    @recall.due_date = Date.today.in(1.year).to_date
     
     respond_to do |format|
       format.html { }
       format.js {
         render :update do |page|
-          page.remove "recall_#{@recall.id}"
+          page.insert_html :after, "recall_#{@old_recall.id}", :partial => 'form'
+          page.remove "recall_#{@old_recall.id}"
         end
       }
     end
