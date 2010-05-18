@@ -2,6 +2,7 @@
   <td><%=h item.due_date %></td>
   <td><%= link_to item.patient, item.patient %></td>
   <td><%=h item.appointment unless item.appointment.nil? %></td>
+  <td><%= link_to_last_session(item) %></td>
   <td><%=h item.sent_at.to_date if item.sent_at %></td>
   <td><%=h item.remarks %></td>
   <td>
