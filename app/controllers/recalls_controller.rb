@@ -81,6 +81,7 @@ class RecallsController < ApplicationController
         @recall.save
         
         render :update do |page|
+          page.remove "recall_form"
           page.redirect_to :action => 'show', :format => :pdf
         end
         return
@@ -140,6 +141,7 @@ class RecallsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
+          page.remove "recall_form"
           page.redirect_to :action => 'show', :format => :pdf
         end
       }
