@@ -27,7 +27,7 @@ class Recall < ActiveRecord::Base
     transitions :to => :prepared, :from => :scheduled
   end
   aasm_event :send_notice do
-    transitions :to => :sent, :from => :prepared, :on_transition => :sending
+    transitions :to => :sent, :from => [:prepared, :scheduled], :on_transition => :sending
   end
   aasm_event :obey do
     transitions :to => :obeyed, :from => :sent

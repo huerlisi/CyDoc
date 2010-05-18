@@ -76,6 +76,15 @@ class RecallsController < ApplicationController
     @recall = Recall.find(params[:id])
     
     if @recall.update_attributes(params[:recall])
+      if params['send_notice']
+        @recall.send_notice
+        @recall.save
+        
+        render :update do |page|
+          page.redirect_to :action => 'show', :format => :pdf
+        end
+        return
+      end
       respond_to do |format|
         format.html { }
         format.js {
@@ -121,6 +130,22 @@ class RecallsController < ApplicationController
     end
   end
 
+  # POST /recall/1/send
+  def send_notice
+    @recall = Recall.find(params[:id])
+    @recall.send_notice
+    @recall.save
+    
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.redirect_to :action => 'show', :format => :pdf
+        end
+      }
+    end
+  end
+  
   # POST /recall/1/obey
   def obey
     @recall = Recall.find(params[:id])
@@ -163,6 +188,4 @@ class RecallsController < ApplicationController
       }
     end
   end
-
-
 end
