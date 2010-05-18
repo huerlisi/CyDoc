@@ -1,6 +1,7 @@
 <tr id="recall_<%= patient_item.id %>">
   <th><%=h patient_item.due_date %></th>
   <td><%=h "Terminvorschlag: #{patient_item.appointment}" unless patient_item.appointment.nil? %></td>
+  <td>Letzter Termin: <%=link_to_last_session(patient_item) %></td>
   <td><%=h patient_item.sent_at ? "Aufgebot gedruckt: #{patient_item.sent_at.to_date}" : nil %></td>
   <td><%=h patient_item.remarks %></td>
   <td>
