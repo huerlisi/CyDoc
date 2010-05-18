@@ -158,7 +158,9 @@ class RecallsController < ApplicationController
     @old_recall = @recall
     @recall = @old_recall.patient.recalls.build
     @recall.remarks = @old_recall.remarks
-    @recall.due_date = Date.today.in(1.year).to_date
+    last_session = @old_recall.patient.last_session
+    next_due_date = last_session.nil? ? Date.today.in(1.year) : last_session.duration_from.in(1.year)
+    @recall.due_date = next_due_date.to_date
     
     respond_to do |format|
       format.html { }

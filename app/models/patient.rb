@@ -70,6 +70,10 @@ class Patient < ActiveRecord::Base
     write_attribute(:birth_date, Date.parse_europe(value, :past))
   end
   
+  def last_session
+    treatments.map{|t| t.sessions}.flatten.first
+  end
+  
   # Services
   has_many :service_records, :order => 'date DESC', :before_add => :before_add_service_record
 
