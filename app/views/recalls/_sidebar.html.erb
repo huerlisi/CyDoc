@@ -2,9 +2,9 @@
 <div class="sub-tabs">
   <h3>Filter</h3>
   <ul>
-    <li><%= link_to "Alle", url_for(:overwrite_params => {:by_period => nil}) %></li>
+    <li><%= link_to "Alle", url_for(:overwrite_params => {:by_period => nil, :page => nil}) %></li>
     <% for (month, count) in Recall.filter_months -%>
-      <li><%= link_to "#{month.strftime('%b %Y')} (#{count})", url_for(:params => params.merge({:by_period => {:from => month.beginning_of_month.to_s(:db), :to => month.end_of_month.to_s(:db)}})) %></li>
+      <li><%= link_to "#{month.strftime('%b %Y')} (#{count})", url_for(:params => params.merge({:by_period => {:from => month.beginning_of_month.to_s(:db), :to => month.end_of_month.to_s(:db)}, :page => nil})) %></li>
     <% end -%>
   </ul>
 </div>
