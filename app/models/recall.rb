@@ -49,8 +49,8 @@ class Recall < ActiveRecord::Base
   end
   
   public
-  def self.filter_months(limit = 6)
-    months = Recall.find(:all, :select => "date_format(due_date, '%Y-%m-01') AS month, count(*) AS count", :group => "date_format(due_date, '%Y-%m-01')", :order => "due_date", :limit => limit)
+  def self.filter_months(limit = nil)
+    months = Recall.open.find(:all, :select => "date_format(due_date, '%Y-%m-01') AS month, count(*) AS count", :group => "date_format(due_date, '%Y-%m-01')", :order => "due_date", :limit => limit)
     months.map{|recall|
       [Date.parse(recall.month), recall.count]
     }
