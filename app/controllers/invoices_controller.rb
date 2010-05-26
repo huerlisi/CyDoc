@@ -271,10 +271,12 @@ class InvoicesController < ApplicationController
   def destroy
     @invoice = Invoice.find(params[:id])
     @treatment = @invoice.treatment
+    @patient = @invoice.patient
     
     @invoice.cancel
     # Allow saving without validation as validation problem could be a reason to cancel
     @invoice.save(false)
+    @treatment.reload
     
     respond_to do |format|
       format.html { }
@@ -283,7 +285,8 @@ class InvoicesController < ApplicationController
           if params[:context] == "list"
             page.replace "invoice_#{@invoice.id}", :partial => 'item', :object => @invoice
           else
-            page.replace "tab-content-invoices", :partial => 'show'
+            page.replace_html "tab-content-invoices", :partial => 'show'
+            page.replace_html 'patient-sidebar', :partial => 'patients/sidebar'
           end
         end
       }
