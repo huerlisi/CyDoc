@@ -3,7 +3,7 @@ pdf.define_grid(:columns => 11, :rows => 16, :gutter => 2)#.show_all('EEEEEE')
 
 # sender address
 pdf.grid([0,1], [1,6]).bounding_box do
-  pdf.text [@current_doctor.honorific_prefix, @current_doctor.full_name].join(' ')
+  pdf.text [@current_doctor.honorific_prefix, @current_doctor.given_name, @current_doctor.family_name].join(' ')
   pdf.font "Helvetica", :size => 8 do
     pdf.text @current_doctor.street_address
     pdf.text @current_doctor.postal_code + " " + @current_doctor.locality
@@ -19,7 +19,7 @@ end
 # receiver address
 pdf.grid([2,7], [4,9]).bounding_box do
   pdf.text @recall.patient.honorific_prefix
-  pdf.text @recall.patient.full_name
+  pdf.text @recall.patient.given_name + " " + @recall.patient.family_name
   pdf.text @recall.patient.street_address
   pdf.text @recall.patient.postal_code + " " + @recall.patient.locality
 end
