@@ -11,7 +11,7 @@
         <ul id="sub-tab-sidebar-invoices">
         <% for invoice in treatment.invoices %>
           <li id="sub-tab-invoices-<%= invoice.id %>">
-            <%= link_to_remote "#{invoice.to_s(:short)}", {:url => invoice, :method => :get} %>
+            <%= link_to_remote "#{invoice.to_s(:short)}", {:url => invoice, :method => :get}, :class => ['invoice', invoice.state].join(' ') %>
           </li>
         <% end %>
         </ul>

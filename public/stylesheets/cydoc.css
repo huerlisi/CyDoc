@@ -58,6 +58,13 @@ table.session {
   width:        100%;
 }
 
+/* Invoices */
+.invoice.reactivated, .invoice.canceled {
+  text-decoration: line-through;
+  font-style: italic;
+  color: #999999;
+}
+
 /* Cases */
 div.case_info { background:#ffffdd; padding:6px; margin-bottom:6px; border:1px solid #d7d7d7; }
 table.overview-group { margin-bottom:1.8em; border-width:2px}
