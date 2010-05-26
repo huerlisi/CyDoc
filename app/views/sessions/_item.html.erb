@@ -24,7 +24,7 @@
     <%= render :partial => 'service_records/form' if editable and current %>
   </div>
 
-  <table class="session">
+  <table class="session" style="width: 97%">
     <% for service_record in item.service_records.reverse %>
       <% @service_record = service_record %>
       <tr>
@@ -44,6 +44,7 @@
         <% end %>
         <%=h service_record.text %>
         </td>
+        <td style="text-align: right"><b><%= currency_fmt(service_record.amount) %></b></td>
         <% if editable %>
         <td><span><%= link_to_remote image_tag('delete.png'), {:url => patient_session_service_record_path(item.patient, item, service_record), :method => :delete} %></span></td>
         <% end %>
