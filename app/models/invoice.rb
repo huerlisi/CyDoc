@@ -118,7 +118,7 @@ class Invoice < ActiveRecord::Base
     build_reminder_booking
   end
   
-  has_many :sessions
+  has_many :sessions, :autosave => true
   has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC, if(ref_code IS NULL, code, ref_code), concat(code,ref_code)'
 
   # Validation
@@ -166,7 +166,7 @@ class Invoice < ActiveRecord::Base
   end
   
   def booking_saved(booking)
-    if (self.state != 'canceled') and (due_amount <= 0.0)
+    if (self.state != 'canceled') and (self.state != 'reactivated') and (due_amount <= 0.0)
       self.state = 'paid'
       self.save
     end

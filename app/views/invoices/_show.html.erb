@@ -14,6 +14,7 @@
     <%= link_to_remote "Verbuchen", {:url => book_invoice_path(@invoice)}, :class => "icon icon-book" if (@invoice.state == 'printed' or @invoice.state == 'prepared') %>
   <% elsif @invoice.open %>
       <%= link_to_remote "Stornieren", {:url => invoice_path(@invoice), :method => :delete, :confirm => "Rechnung #{@invoice.to_s} stornieren?"}, :class => "icon icon-delete" %>
+      <%= link_to_remote "Reaktivieren", {:url => reactivate_invoice_path(@invoice), :confirm => "Rechnung #{@invoice.to_s} reaktivieren?"}, :class => "icon icon-reactivate" %>
   <% end %>
   <%= link_to "Rückforderungsbeleg PDF", insurance_recipe_invoice_path(@invoice, :format => :pdf), :method => :get, :class => "icon icon-pdf" %>
 </div>
