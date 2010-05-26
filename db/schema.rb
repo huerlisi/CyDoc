@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100517223311) do
+ActiveRecord::Schema.define(:version => 20100526211942) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -340,6 +340,13 @@ ActiveRecord::Schema.define(:version => 20100517223311) do
   add_index "invoices_service_records", ["invoice_id"], :name => "index_invoices_service_records_on_invoice_id"
   add_index "invoices_service_records", ["service_record_id"], :name => "index_invoices_service_records_on_service_record_id"
 
+  create_table "invoices_sessions", :id => false, :force => true do |t|
+    t.integer "invoice_id"
+    t.integer "session_id"
+  end
+
+  add_index "invoices_sessions", ["invoice_id", "session_id"], :name => "index_invoices_sessions_on_invoice_id_and_session_id"
+
   create_table "laws", :force => true do |t|
     t.string   "insured_id"
     t.string   "case_id"
@@ -524,12 +531,10 @@ ActiveRecord::Schema.define(:version => 20100517223311) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "state",         :default => "open"
-    t.integer  "invoice_id"
     t.integer  "treatment_id"
     t.integer  "imported_id"
   end
 
-  add_index "sessions", ["invoice_id"], :name => "index_sessions_on_invoice_id"
   add_index "sessions", ["patient_id"], :name => "index_sessions_on_patient_id"
   add_index "sessions", ["state"], :name => "index_sessions_on_state"
   add_index "sessions", ["treatment_id"], :name => "index_sessions_on_treatment_id"

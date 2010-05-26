@@ -213,7 +213,7 @@ class InvoicesController < ApplicationController
       @tiers.save
       
       for session in sessions
-        session.invoice = @invoice
+        session.invoices << @invoice
         session.charge!
       end
 

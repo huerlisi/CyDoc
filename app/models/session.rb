@@ -1,6 +1,6 @@
 class Session < ActiveRecord::Base
   # Associations
-  belongs_to :invoice
+  has_and_belongs_to_many :invoices
   belongs_to :treatment
   has_and_belongs_to_many :diagnoses
   has_and_belongs_to_many :service_records
@@ -21,15 +21,8 @@ class Session < ActiveRecord::Base
     transitions :to => :charged, :from => :open
   end
   aasm_event :reactivate do
-    transitions :to => :open, :from => :charged, :on_transition => :uncharge
+    transitions :to => :open, :from => :charged
   end
-  
-  private
-  def uncharge
-    self.invoice = nil
-  end
-  
-  public
   
   def to_s(format = :default)
     case format
