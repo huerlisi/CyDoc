@@ -5,7 +5,9 @@
 <div class="box">
   <div id="new_recall" class="new_recall"></div>
 
-  <table id="recalls" style="width: 100%">
+  <div id="recalls" style="display: none"></div>
+
+  <table id="patient_recalls" style="width: 100%">
     <%= render :partial => 'recalls/patient_item', :collection => @patient.recalls.queued + @patient.recalls.sent %>
   </table>
 </div>
