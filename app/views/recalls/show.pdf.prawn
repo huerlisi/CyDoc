@@ -38,7 +38,7 @@ end
 
 # Body
 pdf.grid([7,1],[7,9]).bounding_box do
-  pdf.text "Sie sind bei uns letztes Jahr zur Kontrolle gewesen. Wir erlauben uns, Sie an die nächste Untersuchung zu erinnern."
+  pdf.text "Wie besprochen erlauben wir uns, Sie an die nächste Untersuchung zu erinnern."
 end
 
 pdf.grid([8,1],[8,9]).bounding_box do
@@ -53,7 +53,7 @@ pdf.grid([9,1],[9,9]).bounding_box do
 end
 
 pdf.grid([10,1],[10,9]).bounding_box do
-  pdf.text "Sollte Ihnen der Termin nicht passen, danken wir Ihnen für eine möglichst baldige Meldung. Gerne verabreden wir mit Ihnen dann ein anderes Untersuchungsdatum."
+  pdf.text "Sollte Ihnen der Termin nicht passen, danken wir Ihnen für eine möglichst baldige Meldung. Gerne verabreden wir mit Ihnen dann ein anderes Datum."
 end
 
 # Salutations
