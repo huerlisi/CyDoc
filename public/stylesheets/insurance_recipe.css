@@ -1,0 +1,40 @@
+/* Insurance recipe */
+.insurance-recipe {
+  font-family: Liberation,Arial,DejaVu Sans;
+  font-size:   8pt;
+  margin:      1.2cm;
+  position:    relative;
+  width:       18.2cm;
+  height:      26cm;
+  top:         0cm;
+  left:        0cm;
+}
+.insurance-recipe-footer {
+  position:	absolute;
+  top:		22.7cm;
+  width:	width: 18.2cm;
+}
+
+.insurance-recipe-subtotal {
+  margin-top:	2em;
+  width:	100%;
+}
+
+.service-record-list {
+  margin-top:	0.8em;
+  width:	100%;
+}
+
+.insurance-recipe-vesr {
+  right:	-0.6cm;
+  font-size:	10pt;
+  font-family:	ocr-b,Helvetica,Arial,sans-serif;
+  top:		26.7cm;
+  position:	absolute;
+  text-align:	right;
+}
+
+#insurance-recipe .list {
+  font-size:   7pt;
+}
+
