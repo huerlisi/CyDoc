@@ -4,7 +4,11 @@ class InsurancesController < ApplicationController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    @insurances = Insurance.by_name("%#{query}%").paginate(:page => params['page'])
+    if params[:all]
+      @insurances = Insurance.paginate(:page => params['page'])
+    else
+      @insurances = Insurance.clever_find(query).paginate(:page => params['page'])
+    end
     respond_to do |format|
       format.html {
         render :action => 'list'
