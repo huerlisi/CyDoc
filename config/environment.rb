@@ -85,4 +85,5 @@ Rails::Initializer.run do |config|
 
   # PDF
   config.gem 'prawn', :version => '>= 0.8.4'
+  require 'prawn/measurement_extensions'
 end
