@@ -1,23 +1,33 @@
-# define grid
-pdf.define_grid(:columns => 11, :rows => 16, :gutter => 2)#.show_all('EEEEEE')
-
 # sender address
-pdf.grid([0,1], [1,6]).bounding_box do
+pdf.bounding_box([1.7.cm, 25.5.cm], :width => 7.cm) do
   pdf.text [@current_doctor.honorific_prefix, @current_doctor.given_name, @current_doctor.family_name].join(' ')
   pdf.font "Helvetica", :size => 8 do
     pdf.text @current_doctor.street_address
     pdf.text @current_doctor.postal_code + " " + @current_doctor.locality
-    pdf.text contact(@current_doctor.vcard, "\n")
+
+    contacts = @current_doctor.vcard.contacts
+    labels = contacts.collect{|contact| contact.label}
+    numbers = contacts.collect{|contact| contact.number}
+
+    pdf.bounding_box([0.cm, pdf.cursor - 0.2.cm], :width => 2.cm) do
+      pdf.bounding_box([0.cm, pdf.bounds.top], :width => 0.8.cm) do
+        pdf.text labels.join("\n")
+      end
+
+      pdf.bounding_box([1.cm, pdf.bounds.top], :width => 5.cm) do
+        pdf.text numbers.join("\n")
+      end
+    end
   end
 end
 
 # Date
-pdf.grid([1,7],[1,9]).bounding_box do
+pdf.bounding_box([11.5.cm, 24.cm], :width => 6.cm) do
   pdf.text @current_doctor.locality + ", " + Date.today.to_s
 end
 
 # receiver address
-pdf.grid([2,7], [4,9]).bounding_box do
+pdf.bounding_box([11.5.cm, 21.cm], :width => 6.cm) do
   pdf.text @recall.patient.honorific_prefix
   pdf.text @recall.patient.given_name + " " + @recall.patient.family_name
   pdf.text @recall.patient.street_address
@@ -25,43 +35,39 @@ pdf.grid([2,7], [4,9]).bounding_box do
 end
 
 # Subject
-pdf.grid([5,1],[5,9]).bounding_box do
+pdf.bounding_box([1.7.cm, 17.cm], :width => 16.cm) do
   pdf.font "Helvetica", :style => :bold do
     pdf.text "Vorsorge lohnt sich!"
   end
 end
 
 # Greeting
-pdf.grid([6,1],[6,9]).bounding_box do
+pdf.bounding_box([1.7.cm, 15.5.cm], :width => 16.cm) do
   pdf.text "Sehr geehrte Frau " + @recall.patient.family_name # TODO could be man, too
-end
 
-# Body
-pdf.grid([7,1],[7,9]).bounding_box do
+  pdf.text "\n"
+
   pdf.text "Wie besprochen erlauben wir uns, Sie an die nächste Untersuchung zu erinnern."
-end
+  pdf.text "Wir haben für Sie folgenden Terminvorschlag reserviert:"
 
-pdf.grid([8,1],[8,9]).bounding_box do
-  pdf.text "Wir haben für Sie folgenden Terminvorschlag reserviert."
-end
+  pdf.text "\n"
 
-# appointment proposal
-pdf.grid([9,1],[9,9]).bounding_box do
   pdf.font "Helvetica", :style => :bold do
-    pdf.text "#{@recall.appointment.date}, #{@recall.appointment.from}"
+    pdf.text "#{@recall.appointment.date}, #{@recall.appointment.from} Uhr"
   end
-end
 
-pdf.grid([10,1],[10,9]).bounding_box do
+  pdf.text "\n"
+
   pdf.text "Sollte Ihnen der Termin nicht passen, danken wir Ihnen für eine möglichst baldige Meldung. Gerne verabreden wir mit Ihnen dann ein anderes Datum."
+
 end
 
 # Salutations
-pdf.grid([13,7],[13,9]).bounding_box do
+pdf.bounding_box([11.5.cm, 6.5.cm], :width => 6.cm) do
   pdf.text "Mit freundlichen Grüssen"
-end
 
-pdf.grid([14,7],[14,9]).bounding_box do
+  pdf.text "\n"
+
   pdf.text @current_doctor.honorific_prefix + " " + @current_doctor.family_name
   pdf.text "und Praxisteam"
 end
