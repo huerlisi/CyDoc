@@ -1,6 +1,6 @@
 class MedicalCase < ActiveRecord::Base
   belongs_to :doctor
-  belongs_to :treatment
+  belongs_to :treatment, :touch => true
 
   def to_s(format = :default)
     "#{code}"

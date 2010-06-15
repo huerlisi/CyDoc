@@ -1,3 +1,4 @@
+<% cache item do %>
 <tr id="service_record_<%= item.id %>">
   <td style="text-align:right"><%=h sprintf('%.f', item.quantity) %>x</td>
   <td style="text-align:right"><%=h item.ref_code.nil? ? item.code : "  " + item.ref_code %></td>
@@ -7,3 +8,4 @@
   <td style="text-align:right"><b><%=h sprintf('%.2f', item.amount) %></b>&nbsp;CHF</td>
   <td><%= link_to_remote(image_tag('delete.png'), {:update => 'service_list', :url => tariff_item_path(item), :method => :delete}, :method => :delete, :href => tariff_item_path(item)) %></td>
 </tr>
+<% end %>

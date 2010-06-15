@@ -1,6 +1,6 @@
 class Recall < ActiveRecord::Base
   # Associations
-  belongs_to :patient
+  belongs_to :patient, :touch => true
   belongs_to :appointment
   accepts_nested_attributes_for :appointment
 

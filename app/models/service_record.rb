@@ -11,7 +11,17 @@ class ServiceRecord < ActiveRecord::Base
   belongs_to :patient
 
   has_and_belongs_to_many :invoices
-  has_and_belongs_to_many :sessions
+  has_and_belongs_to_many :sessions, :after_add => :touch_sessions, :after_remove => :touch_sessions
+  after_save(:touch_sessions)
+  
+  def touch_sessions(session = nil)
+    if session
+      session.touch
+    else
+      sessions.reload
+      sessions.map{|session| session.touch}
+    end
+  end
   
   # Validation
   validates_presence_of :date, :code, :tariff_type, :session, :quantity, :unit_tt, :unit_mt, :unit_factor_tt, :unit_factor_mt

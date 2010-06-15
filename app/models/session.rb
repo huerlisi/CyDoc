@@ -1,7 +1,7 @@
 class Session < ActiveRecord::Base
   # Associations
   has_and_belongs_to_many :invoices
-  belongs_to :treatment
+  belongs_to :treatment, :touch => true
   has_and_belongs_to_many :diagnoses
   has_and_belongs_to_many :service_records
 

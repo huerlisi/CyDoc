@@ -4,7 +4,7 @@ class InsurancePolicy < ActiveRecord::Base
   }
 
   belongs_to :insurance
-  belongs_to :patient
+  belongs_to :patient, :touch => true
 
   validates_presence_of :insurance
 
