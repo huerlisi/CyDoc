@@ -35,14 +35,14 @@ pdf.bounding_box([11.5.cm, 21.5.cm], :width => 6.cm) do
 end
 
 # Subject
-pdf.bounding_box([1.7.cm, 17.cm], :width => 16.cm) do
+pdf.bounding_box([1.7.cm, 16.cm], :width => 16.cm) do
   pdf.font "Helvetica", :style => :bold do
     pdf.text "Vorsorge lohnt sich!"
   end
 end
 
 # Greeting
-pdf.bounding_box([1.7.cm, 15.5.cm], :width => 16.cm) do
+pdf.bounding_box([1.7.cm, 14.5.cm], :width => 16.cm) do
   pdf.text "Sehr geehrte Frau " + @recall.patient.family_name # TODO could be man, too
 
   pdf.text "\n"
@@ -63,9 +63,10 @@ pdf.bounding_box([1.7.cm, 15.5.cm], :width => 16.cm) do
 end
 
 # Salutations
-pdf.bounding_box([11.5.cm, 6.5.cm], :width => 6.cm) do
+pdf.bounding_box([11.5.cm, 7.5.cm], :width => 6.cm) do
   pdf.text "Mit freundlichen Grüssen"
 
+  pdf.text "\n"
   pdf.text "\n"
 
   pdf.text @current_doctor.honorific_prefix + " " + @current_doctor.family_name
