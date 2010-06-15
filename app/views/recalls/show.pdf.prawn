@@ -27,7 +27,7 @@ pdf.bounding_box([11.5.cm, 24.cm], :width => 6.cm) do
 end
 
 # receiver address
-pdf.bounding_box([11.5.cm, 21.cm], :width => 6.cm) do
+pdf.bounding_box([11.5.cm, 21.5.cm], :width => 6.cm) do
   pdf.text @recall.patient.honorific_prefix
   pdf.text @recall.patient.given_name + " " + @recall.patient.family_name
   pdf.text @recall.patient.street_address
