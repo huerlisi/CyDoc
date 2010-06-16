@@ -9,4 +9,9 @@ module TariffItemsHelper
       duration_from.strftime("%d.%m.%Y") + " - " + duration_to.strftime("%d.%m.%Y")
     end
   end
+
+  def type_as_string_collection
+    types = %w(TarmedTariffItem LabTariffItem DrugTariffItem MigelTariffItem TariffItemGroup)
+    types.map{|type| [t(type.underscore, :scope => [:activerecord, :models]), type]}
+  end
 end

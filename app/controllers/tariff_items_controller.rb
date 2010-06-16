@@ -70,6 +70,9 @@ class TariffItemsController < ApplicationController
     @tariff_item = TariffItem.find(params[:id])
     
     if @tariff_item.update_attributes(params[:tariff_item])
+      # Hack to cast @tariff_item to correct subclass if type changed
+      @tariff_item = @tariff_item.becomes(@tariff_item.type.constantize)
+      
       respond_to do |format|
         format.html {
           render :action => :show

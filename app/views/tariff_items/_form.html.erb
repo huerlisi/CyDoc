@@ -3,6 +3,7 @@
     <%= form.semantic_errors %>
 
     <% form.inputs do %>
+      <%= form.input :type_as_string, :as => :select, :collection => type_as_string_collection %>
       <%= form.input :code, :input_html => {:size => 8} %>
       <%= form.input :remark, :input_html => {:rows => 3} %>
       <%= form.input :obligation %>

@@ -18,6 +18,14 @@ class TariffItem < ActiveRecord::Base
     self.class.to_s
   end
   
+  def type_as_string
+    read_attribute(:type)
+  end
+  
+  def type_as_string=(value)
+    write_attribute(:type, value)
+  end
+  
   # Search
   # ======
   def self.clever_find(query, args = {})
