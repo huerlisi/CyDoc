@@ -1,5 +1,5 @@
 <tr title="<%=h select_item.remark %>" style="cursor: pointer" onclick="<%= remote_function(:method => 'post', :url => patient_session_service_records_path(@patient, @session, :tariff_item_id => select_item.id)) %>">
   <td style="text-align:right"><%=h select_item.code %></td>
-  <td><span style="font-weight: bold"><%=h truncate(select_item.remark, 100) %></span></td>
+  <td><span style="font-weight: bold"><%=h truncate(select_item.remark, :length => 100, :separator => ' ') %></span></td>
   <td style="text-align:right"><b><%=h sprintf('%.2f', select_item.amount) %></b>&nbsp;CHF</td>
 </tr>
