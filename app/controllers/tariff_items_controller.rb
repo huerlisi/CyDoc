@@ -51,6 +51,50 @@ class TariffItemsController < ApplicationController
     end
   end
 
+  # GET /tariff_item/1/edit
+  def edit
+    @tariff_item = TariffItem.find(params[:id])
+    
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.insert_html :after, "tariff_item_#{@tariff_item.id}", :partial => 'form'
+        end
+      }
+    end
+  end
+  
+  # PUT /tariff_item/1
+  def update
+    @tariff_item = TariffItem.find(params[:id])
+    
+    if @tariff_item.update_attributes(params[:tariff_item])
+      respond_to do |format|
+        format.html {
+          render :action => :show
+        }
+        format.js {
+          render :update do |page|
+            page.replace "tariff_item_#{@tariff_item.id}", :partial => 'item', :object => @tariff_item
+            page.remove "tariff_item_form"
+          end
+        }
+      end
+    else
+      respond_to do |format|
+        format.html {
+          render :action => :edit
+        }
+        format.js {
+          render :update do |page|
+            page.replace 'recall_form', :partial => 'recalls/form'
+          end
+        }
+      end
+    end
+  end
+
   # GET /tariff_item/id
   def show
     @tariff_item = TariffItem.find(params[:id])

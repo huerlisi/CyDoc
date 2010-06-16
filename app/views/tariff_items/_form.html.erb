@@ -1,5 +1,5 @@
 <div id="tariff_item_form">
-  <% semantic_form_for @tariff_item do |form| %>
+  <% semantic_form_for @tariff_item.becomes(TariffItem) do |form| %>
     <%= form.semantic_errors %>
 
     <% form.inputs do %>
