@@ -11,6 +11,7 @@ de-CH:
       lab_tariff_item:    Labor Leistung
       drug_tariff_item:   Medikament
       migel_tariff_item:  MiGel Leistung
+      tariff_item_group:  Blockleistung
     attributes:
       invoice:
         value_date: Rechnungsdatum
