@@ -90,7 +90,7 @@ class PatientsController < ApplicationController
     render :partial => 'list', :layout => false
   end
 
-  # GET /posts/new
+  # GET /patients/new
   def new
     @patient = Patient.new(params[:patient])
     @patient.vcard = Vcard.new(params[:patient])
@@ -101,7 +101,7 @@ class PatientsController < ApplicationController
     @patient.sex = 'F'
   end
 
-  # POST /posts
+  # POST /patients
   def create
     @patient = Patient.new
     @patient.vcard = Vcard.new
