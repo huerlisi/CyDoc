@@ -39,6 +39,18 @@ class TariffItemsController < ApplicationController
     @tariff_item = TariffItem.new(params[:tariff_item])
   end
 
+  # POST /tariff_items
+  def create
+    @tariff_item = TariffItem.new
+    
+    if @tariff_item.update_attributes(params[:tariff_item])
+      flash[:notice] = 'Leistung erfasst.'
+      redirect_to @tariff_item
+    else
+      render :action => :new
+    end
+  end
+
   # GET /tariff_item/id
   def show
     @tariff_item = TariffItem.find(params[:id])

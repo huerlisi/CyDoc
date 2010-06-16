@@ -108,7 +108,7 @@ class PatientsController < ApplicationController
 
     if @patient.vcard.update_attributes(params[:vcard]) and @patient.update_attributes(params[:patient])
       flash[:notice] = 'Patient erfasst.'
-      redirect_to :action => :show, :id => @patient
+      redirect_to @patient
     else
       render :action => :new
     end
