@@ -1,11 +1,12 @@
 de-CH:
   activerecord:
     models:
-      patient:   Patient
-      invoice:   Rechnung
-      treatment: Fall
-      recall:    Recall
-      insurance: Versicherung
+      patient:     Patient
+      invoice:     Rechnung
+      treatment:   Fall
+      recall:      Recall
+      insurance:   Versicherung
+      tariff_item: Leistung
     attributes:
       invoice:
         value_date: Rechnungsdatum
@@ -28,6 +29,10 @@ de-CH:
         from:    Von
         to:      Bis
         remarks: Bemerkungen
+      tariff_item:
+        code: Code
+        remark: Beschreibung
+        obligation: Kassenpflichtig
 
   invoice:
     state:

@@ -34,6 +34,11 @@ class TariffItemsController < ApplicationController
     end
   end
 
+  # GET /tariff_items/new
+  def new
+    @tariff_item = TariffItem.new(params[:tariff_item])
+  end
+
   # GET /tariff_item/id
   def show
     @tariff_item = TariffItem.find(params[:id])
