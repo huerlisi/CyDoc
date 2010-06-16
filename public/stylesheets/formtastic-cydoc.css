@@ -46,6 +46,9 @@ form.formtastic fieldset > ol > li p.inline-hints { margin:0.5em 0 0 15%; }
 form.formtastic fieldset > ol > li p.inline-errors { margin:0.5em 0 0 15%; }
 form.formtastic fieldset > ol > li ul.errors { margin:0.5em 0 0 15%; }
 
+form.formtastic fieldset > ol > li.error input { background-color: #ffeeee; }
+form.formtastic fieldset > ol > li.error textarea { background-color: #ffeeee; }
+
 /* INPUT LIs
 --------------------------------------------------------------------------------------------------*/
 form.formtastic fieldset ol li { margin-bottom:0.5em; }
