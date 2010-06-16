@@ -41,9 +41,9 @@ class TariffItemsController < ApplicationController
 
   # POST /tariff_items
   def create
-    @tariff_item = TariffItem.new
+    @tariff_item = TariffItem.new(params[:tariff_item])
     
-    if @tariff_item.update_attributes(params[:tariff_item])
+    if @tariff_item.save
       flash[:notice] = 'Leistung erfasst.'
       redirect_to @tariff_item
     else
