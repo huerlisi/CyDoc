@@ -7,13 +7,17 @@ class TariffItem < ActiveRecord::Base
   validates_presence_of :code, :remark
   
   def self.to_s
-    self.name.gsub('TariffItem', '')
+    I18n.translate(self.name.underscore, :scope => [:activerecord, :models])
   end
   
   def to_s
     [code, remark].compact.select{|item| not item.empty?}.join ' - '
   end
 
+  def type_to_s
+    self.class.to_s
+  end
+  
   # Search
   # ======
   def self.clever_find(query, args = {})

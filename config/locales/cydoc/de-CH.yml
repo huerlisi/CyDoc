@@ -1,12 +1,16 @@
 de-CH:
   activerecord:
     models:
-      patient:     Patient
-      invoice:     Rechnung
-      treatment:   Fall
-      recall:      Recall
-      insurance:   Versicherung
-      tariff_item: Leistung
+      patient:            Patient
+      invoice:            Rechnung
+      treatment:          Fall
+      recall:             Recall
+      insurance:          Versicherung
+      tariff_item:        Leistung
+      tarmed_tariff_item: Tarmed Leistung
+      lab_tariff_item:    Labor Leistung
+      drug_tariff_item:   Medikament
+      migel_tariff_item:  MiGel Leistung
     attributes:
       invoice:
         value_date: Rechnungsdatum
