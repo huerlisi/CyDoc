@@ -1,5 +1,7 @@
 <div id="tariff_item_form">
   <% semantic_form_for @tariff_item do |form| %>
+    <%= form.semantic_errors %>
+
     <% form.inputs do %>
       <%= form.input :code, :input_html => {:size => 8} %>
       <%= form.input :remark, :input_html => {:rows => 3} %>

@@ -1,6 +1,10 @@
 class TariffItem < ActiveRecord::Base
+  # Associations
   belongs_to :vat_class
   belongs_to :imported, :polymorphic => true
+  
+  # Validations
+  validates_presence_of :code, :remark
   
   def self.to_s
     self.name.gsub('TariffItem', '')
