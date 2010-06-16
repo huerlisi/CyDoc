@@ -35,9 +35,10 @@ de-CH:
         to:      Bis
         remarks: Bemerkungen
       tariff_item:
-        code: Code
-        remark: Beschreibung
-        obligation: Kassenpflichtig
+        type_as_string: Tarif
+        code:           Code
+        remark:         Beschreibung
+        obligation:     Kassenpflichtig
 
   invoice:
     state:
