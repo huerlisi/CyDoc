@@ -6,11 +6,15 @@ class TariffItemsController < ApplicationController
   in_place_edit_for :service_item, :quantity
 
   # GET /tariff_items
-  def search
+  def index
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    @tariff_items = TariffItem.clever_find(query).paginate(:page => params['page'], :per_page => 25)
+    if params[:all]
+      @tariff_items = TariffItem.paginate(:page => params['page'], :per_page => 25)
+    else
+      @tariff_items = TariffItem.clever_find(query).paginate(:page => params['page'], :per_page => 25)
+    end
     
     # Show selection list only if more than one hit
     if @tariff_items.size == 1
@@ -20,10 +24,7 @@ class TariffItemsController < ApplicationController
     end
       
     respond_to do |format|
-      format.html {
-        render :action => 'list'
-        return
-      }
+      format.html { }
       format.js {
         render :update do |page|
           page.replace_html 'search_results', :partial => 'list'
