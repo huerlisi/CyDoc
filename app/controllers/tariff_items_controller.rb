@@ -37,6 +37,16 @@ class TariffItemsController < ApplicationController
   # GET /tariff_items/new
   def new
     @tariff_item = TariffItem.new(params[:tariff_item])
+
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.replace_html 'tariff_item_view', :partial => 'new'
+          page.replace_html 'search_results', ''
+        end
+      }
+    end
   end
 
   # POST /tariff_items
@@ -44,10 +54,31 @@ class TariffItemsController < ApplicationController
     @tariff_item = TariffItem.new(params[:tariff_item])
     
     if @tariff_item.save
+      # Hack to cast @tariff_item to correct subclass if type changed
+      @tariff_item = @tariff_item.becomes(@tariff_item.type.constantize)
+
       flash[:notice] = 'Leistung erfasst.'
-      redirect_to @tariff_item
+      respond_to do |format|
+        format.html {
+          redirect_to @tariff_item
+        }
+        format.js {
+          render :update do |page|
+            page.replace_html 'tariff_item_view', :partial => 'show'
+          end
+        }
+      end
     else
-      render :action => :new
+      respond_to do |format|
+        format.html {
+          render :action => :new
+        }
+        format.js {
+          render :update do |page|
+            page.replace_html 'tariff_item_view', :partial => 'new'
+          end
+        }
+      end
     end
   end
 
@@ -59,7 +90,7 @@ class TariffItemsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.insert_html :after, "tariff_item_#{@tariff_item.id}", :partial => 'form'
+          page.replace_html 'tariff_item_view', :partial => 'edit'
         end
       }
     end
@@ -79,8 +110,7 @@ class TariffItemsController < ApplicationController
         }
         format.js {
           render :update do |page|
-            page.replace "tariff_item_#{@tariff_item.id}", :partial => 'item', :object => @tariff_item
-            page.remove "tariff_item_form"
+            page.replace_html 'tariff_item_view', :partial => 'show'
           end
         }
       end
@@ -91,7 +121,7 @@ class TariffItemsController < ApplicationController
         }
         format.js {
           render :update do |page|
-            page.replace 'recall_form', :partial => 'recalls/form'
+            page.replace_html 'tariff_item_view', :partial => 'edit'
           end
         }
       end
