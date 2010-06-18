@@ -50,7 +50,7 @@ class ServiceRecordsController < ApplicationController
       format.js {
         render :update do |page|
           page.replace_html "session_#{@session.id}", :partial => 'sessions/item', :object => @session
-          page.replace_html "treatment_service_list_total", "Total: #{@session.treatment.amount.currency_round}"
+          page.replace_html "treatment_service_list_total", "Total: #{'%0.2f' % @session.treatment.amount.currency_round}"
         end
       }
     end
