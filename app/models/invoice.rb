@@ -217,7 +217,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def patient
-    tiers.patient
+    treatment.patient
   end
 
   def referrer
