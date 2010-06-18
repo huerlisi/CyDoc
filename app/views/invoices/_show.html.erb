@@ -55,14 +55,5 @@
   <%= render :partial => 'invoice_bookings/list', :object => @invoice.bookings %>
 </div>
 
-<h3>Diagnosen</h3>
-<div id="box">
-  <table id="treatment_<%= @invoice.treatment.id %>_medical_cases" style="width: 100%">
-    <%= render :partial => 'medical_cases/item', :collection => @invoice.treatment.medical_cases %>
-  </table>
-</div>
-
-<h3>Leistungen</h3>
-<div id="service_list">
-  <%= render :partial => 'sessions/list', :object => @invoice.sessions %>
-</div>
+<%= render :partial => 'invoices/medical_case_list' %>
+<%= render :partial => 'invoices/service_record_list' %>

@@ -174,11 +174,20 @@ class InvoicesController < ApplicationController
     @patient = Patient.find(params[:patient_id])
     @treatment = Treatment.find(params[:treatment_id])
     
+    @invoice.treatment = @treatment
+    
+    # Sessions
+    sessions = @treatment.sessions.open
+    @invoice.service_records = sessions.collect{|s| s.service_records}.flatten
+
+    @invoice.valid?
+    
     respond_to do |format|
       format.html { }
       format.js {
         render :update do |page|
-          page.replace_html "new_treatment_invoice", :partial => 'form'
+          page.replace_html 'tab-content-invoices', :partial => 'form'
+          page.call 'showTab', "invoices"
           page['invoice_value_date'].select
         end
       }
@@ -206,20 +215,20 @@ class InvoicesController < ApplicationController
     
     # Sessions
     sessions = @treatment.sessions.open
-    
     @invoice.service_records = sessions.collect{|s| s.service_records}.flatten
 
-    result = Invoice.transaction do
-      @tiers.save
-      
+    # Check if invoice is valid as assigning it to sessions saves it
+    result = @invoice.valid? && Invoice.transaction do
       for session in sessions
         session.invoices << @invoice
-        session.charge!
+        session.charge
+        # Touch session as it won't autosave otherwise
+        session.touch
       end
 
-      @invoice.save
+      @invoice.book
 
-      @invoice.book.save
+      @invoice.save
     end
     
     # Saving
@@ -230,7 +239,6 @@ class InvoicesController < ApplicationController
         format.html { redirect_to @invoice }
         format.js {
           render :update do |page|
-            page.remove 'invoice_form'
             page.replace_html 'tab-content-invoices', :partial => 'show'
             page.replace_html 'patient-sidebar', :partial => 'patients/sidebar'
             page.call 'showTab', "invoices"
@@ -243,7 +251,7 @@ class InvoicesController < ApplicationController
         format.html { }
         format.js {
           render :update do |page|
-            page.replace_html "new_treatment_invoice", :partial => 'form'
+            page.replace_html 'tab-content-invoices', :partial => 'form'
             page['invoice_value_date'].select
           end
         }

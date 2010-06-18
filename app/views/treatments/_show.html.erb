@@ -6,48 +6,33 @@
   <% end -%>
 </div>
 
+<%= render :partial => 'treatments/show_main' %>
+
 <div id="new_treatment_invoice"></div>
 
-<h3>Behandlung</h3>
-<div class="box" id="treatment">
-<table style="width: 100%">
-  <tr>
-    <th>Patient:</th><td><%= full_address(@treatment.patient.vcard, ', ') %></td>
-    <th>Gesetz:</th><td><%= @treatment.law.name if @treatment.law %></td>
-  </tr>
-  <tr>
-    <th>Behandlung von:</th><td><%= @treatment.date_begin.strftime('%d.%m.%Y') if @treatment.date_begin %></td>
-    <th>Erbringungsort:</th><td><%= @treatment.place_type %></td>
-  </tr>
-  <tr>
-    <th>Behandlung bis:</th><td><%= @treatment.date_end.strftime('%d.%m.%Y') if @treatment.date_end %></td>
-    <th>Behandlungsgrund:</th><td><%= @treatment.reason %></td>
-  </tr>
-  <tr>
-    <th>Zuweisender Arzt:</th><td><%= @treatment.referrer.to_s if @treatment.referrer %></td>
-  </tr>
-</table>
-</div>
-
-<div class="contextual">
-  <%= link_to_remote "Neue Diagnose", {:url => new_patient_treatment_medical_case_path(@treatment.patient, @treatment), :method => :get}, :class => "icon icon-add" %>
-</div>
-<h3>Diagnosen</h3>
-<div class="box">
-  <div id="treatment_new_medical_case">
-    <%= render :partial => 'medical_cases/form' %>
+<div id=treatment_medical_cases %>
+  <div class="contextual">
+    <%= link_to_remote "Neue Diagnose", {:url => new_patient_treatment_medical_case_path(@treatment.patient, @treatment), :method => :get}, :class => "icon icon-add" %>
   </div>
-  <table id="treatment_medical_cases" style="width: 100%">
-    <%= render :partial => 'medical_cases/item', :collection => @treatment.medical_cases %>
-  </table>
+  <h3>Diagnosen</h3>
+  <div class="box">
+    <div id="treatment_new_medical_case">
+      <%= render :partial => 'medical_cases/form' %>
+    </div>
+    <table id="treatment_medical_case_list" style="width: 100%">
+      <%= render :partial => 'medical_cases/item', :collection => @treatment.medical_cases %>
+    </table>
+  </div>
 </div>
 
-<div class="contextual">
-  <%= link_to_remote "Neue Konsultation", {:url => new_patient_treatment_session_path(@treatment.patient, @treatment), :method => :get}, :class => "icon icon-add" %>
-</div>
-<h3>Leistungen</h3>
-<div id="treatment_session_list" class="box">
-  <%= render :partial => 'sessions/list', :object => @treatment.sessions %>
-</div>
+<div id="treatment_sessions">
+  <div class="contextual">
+    <%= link_to_remote "Neue Konsultation", {:url => new_patient_treatment_session_path(@treatment.patient, @treatment), :method => :get}, :class => "icon icon-add" %>
+  </div>
+  <h3>Leistungen</h3>
+  <div id="treatment_session_list" class="box">
+    <%= render :partial => 'sessions/list', :object => @treatment.sessions %>
+  </div>
 
-<h4 id="treatment_service_list_total">Total CHF <%= currency_fmt(@treatment.amount) %></h4>
+  <h4 id="treatment_service_list_total">Total CHF <%= currency_fmt(@treatment.amount) %></h4>
+</div>

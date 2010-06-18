@@ -42,7 +42,7 @@
         <% else %>
           <%=h "(#{@service_record.ref_code}) " unless @service_record.ref_code.blank? %>
         <% end %>
-        <%=h service_record.text %>
+          <%=h service_record.text %>
         </td>
         <td style="text-align: right"><b><%= currency_fmt(service_record.amount) %></b></td>
         <% if editable %>

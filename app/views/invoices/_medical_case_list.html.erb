@@ -1,0 +1,6 @@
+<h3>Diagnosen</h3>
+<div id="box">
+  <table id="invoice_medical_cases" style="width: 100%">
+    <%= render :partial => 'medical_cases/item', :collection => @invoice.treatment.medical_cases %>
+  </table>
+</div>

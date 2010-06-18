@@ -1,0 +1,12 @@
+<tr>
+  <td style="width: 6em"><b><%=h service_record.date.to_date %></b></td>
+  <td style="width: 2em; text-align: right">
+    <%=h service_record.quantity %>x
+  </td>
+  <td style="width: 6em"><%=h service_record.code %></td>
+  <td>
+    <%=h "(#{service_record.ref_code}) " unless service_record.ref_code.blank? %>
+    <%=h service_record.text %>
+  </td>
+  <td style="text-align: right"><b><%= currency_fmt(service_record.amount) %></b></td>
+</tr>

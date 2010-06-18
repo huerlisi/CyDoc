@@ -1,3 +1,5 @@
+<%= render :partial => 'treatments/show_main' %>
+
 <div id="invoice_form">
   <h3>Neue Rechnung</h3>
   <%= error_messages_for :invoice %>
@@ -16,3 +18,6 @@
     <% end %>
   </div>
 </div>
+
+<%= render :partial => 'invoices/medical_case_list' %>
+<%= render :partial => 'invoices/service_record_list' %>
