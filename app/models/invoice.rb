@@ -6,9 +6,9 @@ class Invoice < ActiveRecord::Base
   REMINDER_FEE = {'reminded' => 0.0, '2xreminded' => 10.0, '3xreminded' => 10.0, 'encashment' => 100.0}
   REMINDER_PAYMENT_PERIOD = {'reminded' => 20, '2xreminded' => 10, '3xreminded' => 10, 'encashment' => 0}
   
-  belongs_to :tiers
-  belongs_to :law
-  belongs_to :treatment
+  belongs_to :tiers, :autosave => true
+  belongs_to :law, :autosave => true
+  belongs_to :treatment, :autosave => true
 
   # State
   named_scope :prepared, :conditions => "state = 'prepared'"
@@ -79,6 +79,21 @@ class Invoice < ActiveRecord::Base
                    :debit_account => DEBIT_ACCOUNT,
                    :value_date => Date.today)
     self.state = 'canceled'
+  end
+  
+  def build_booking
+    bookings.build(:title => "Rechnung",
+                   :amount => amount.currency_round,
+                   :credit_account => DEBIT_ACCOUNT,
+                   :debit_account => EARNINGS_ACCOUNT,
+                   :value_date => value_date)
+  end
+
+  def book
+    booking = build_booking
+    self.state = 'booked'
+
+    return booking
   end
   
   def build_reminder_booking
@@ -158,7 +173,7 @@ class Invoice < ActiveRecord::Base
   end
   
   # Accounting
-  has_many :bookings, :class_name => 'Accounting::Booking', :as => 'reference', :dependent => :destroy
+  has_many :bookings, :class_name => 'Accounting::Booking', :as => 'reference', :autosave => true, :dependent => :destroy
   
   def due_amount(value_date = nil)
     if value_date
@@ -170,20 +185,12 @@ class Invoice < ActiveRecord::Base
   end
   
   def booking_saved(booking)
-    if (self.state != 'canceled') and (self.state != 'reactivated') and (due_amount <= 0.0)
+    if (self.state != 'canceled') and (self.state != 'reactivated') and (self.due_amount <= 0.0)
       self.state = 'paid'
       self.save
     end
   end
   
-  def build_booking
-    bookings.build(:title => "Rechnung",
-                   :amount => amount.currency_round,
-                   :credit_account => DEBIT_ACCOUNT,
-                   :debit_account => EARNINGS_ACCOUNT,
-                   :value_date => value_date)
-  end
-
   public
   
   # Standard methods

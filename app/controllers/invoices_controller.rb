@@ -192,12 +192,12 @@ class InvoicesController < ApplicationController
     @treatment = Treatment.find(params[:treatment_id])
     
     # Tiers
+    # TODO: check if given tiers name is a subclass of Tiers
     @tiers = Object.const_get(params[:tiers][:name]).new
     @tiers.patient = @patient
     @tiers.biller = Doctor.find(Thread.current["doctor_id"])
     @tiers.provider = Doctor.find(Thread.current["doctor_id"])
 
-    @tiers.save
     @invoice.tiers = @tiers
 
     # Law
@@ -209,13 +209,21 @@ class InvoicesController < ApplicationController
     
     @invoice.service_records = sessions.collect{|s| s.service_records}.flatten
 
-    # Saving
-    if @invoice.save
+    result = Invoice.transaction do
+      @tiers.save
+      
       for session in sessions
         session.invoice = @invoice
         session.charge!
       end
 
+      @invoice.save
+
+      @invoice.book.save
+    end
+    
+    # Saving
+    if result
       flash[:notice] = 'Erfolgreich erstellt.'
 
       respond_to do |format|
