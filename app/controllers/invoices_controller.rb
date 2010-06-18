@@ -259,30 +259,6 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # POST /invcoice/1/book
-  def book
-    @invoice = Invoice.find(params[:id])
-    @treatment = @invoice.treatment
-    @patient = @treatment.patient
-    
-    booking = @invoice.build_booking
-    
-    if booking.save
-      @invoice.state = 'booked'
-      @invoice.save
-    end
-    
-    respond_to do |format|
-      format.html { }
-      format.js {
-        render :update do |page|
-          page.replace_html "tab-content-invoices", :partial => 'show'
-          page.replace "invoice_flash", :partial => 'booked_flash'
-        end
-      }
-    end
-  end
-
   # DELETE /invoices/1
   def destroy
     @invoice = Invoice.find(params[:id])
