@@ -15,6 +15,7 @@ de-CH:
     attributes:
       invoice:
         value_date: Rechnungsdatum
+        remark:     Bemerkungen
       recall:
         due_date: Datum
         remarks:  Bemerkungen
