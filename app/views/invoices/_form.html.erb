@@ -17,6 +17,7 @@
       
       <% form.buttons do %>
         <%= form.submit "Erstellen", :class => "icon icon-save" %>
+        <%= button_to_function "Abbrechen", "showTab('treatments')", :class => "icon icon-cancel" %>
       <% end %>
     <% end %>
   </div>
