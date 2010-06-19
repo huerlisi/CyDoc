@@ -64,7 +64,13 @@ table.session {
   font-style: italic;
   color: #999999;
 }
+.invoice.paid {
+  color: #5daa5d;
+}
 
+.invoice.reminded, .invoice.encashment {
+  color: #c40c0b;
+}
 /* Cases */
 div.case_info { background:#ffffdd; padding:6px; margin-bottom:6px; border:1px solid #d7d7d7; }
 table.overview-group { margin-bottom:1.8em; border-width:2px}
