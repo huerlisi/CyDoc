@@ -1,4 +1,9 @@
 class TreatmentsController < ApplicationController
+  in_place_edit_for :session, :date
+  # TODO: is duplicated in ServiceRecordsController
+  in_place_edit_for :service_record, :ref_code
+  in_place_edit_for :service_record, :quantity
+
   # GET /treatments/1
   # GET /patients/1/treatments/2
   def show
