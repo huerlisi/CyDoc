@@ -1,4 +1,10 @@
 class InvoicesController < ApplicationController
+  # TODO: is duplicated in Patients and Treatment controllers
+
+  in_place_edit_for :session, :date
+  in_place_edit_for :service_record, :ref_code
+  in_place_edit_for :service_record, :quantity
+
   in_place_edit_for :invoice, :due_date
 
   print_action_for :insurance_recipe, :tray => :plain
