@@ -53,11 +53,15 @@ class Invoice < ActiveRecord::Base
   
   def reactivate
     # TODO: only build booking if booked
-    bookings.build(:title => "Storno",
-                   :amount => amount.currency_round,
-                   :credit_account => EARNINGS_ACCOUNT,
-                   :debit_account => DEBIT_ACCOUNT,
-                   :value_date => Date.today)
+    
+    unless state == 'canceled'
+      bookings.build(:title => "Storno",
+                     :amount => amount.currency_round,
+                     :credit_account => EARNINGS_ACCOUNT,
+                     :debit_account => DEBIT_ACCOUNT,
+                     :value_date => Date.today)
+    end
+    
     self.state = 'reactivated'
     # TODO: actually reactivate treatment/session
 
