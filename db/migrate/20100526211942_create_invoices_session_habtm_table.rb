@@ -15,5 +15,14 @@ class CreateInvoicesSessionHabtmTable < ActiveRecord::Migration
   end
 
   def self.down
+    # This is a destructive migration
+
+    add_column :sessions, :invoice_id, :integer
+
+    for session in Session.all
+      session.update_attribute(:invoice_id, session.invoices.first.id) unless session.invoices.empty?
+    end
+
+    drop_table "invoices_sessions"
   end
 end
