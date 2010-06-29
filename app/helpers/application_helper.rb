@@ -1,8 +1,13 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   # i18n
-  def t_attr(attribute, model)
-    t(attribute, :scope => [:activerecord, :attributes, model.name.underscore])
+  def t_attr(attribute, model = nil)
+    if model.is_a? Class
+      model_name = model.name.underscore
+    elsif model.nil?
+      model_name = controller_name.singularize
+    end
+    t(attribute, :scope => [:activerecord, :attributes, model_name])
   end
   
   # Navigation
