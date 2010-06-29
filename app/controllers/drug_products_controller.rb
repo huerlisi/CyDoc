@@ -90,6 +90,49 @@ class DrugProductsController < ApplicationController
     end
   end
 
+  # GET /drug_product/1/edit
+  def edit
+    @drug_product = DrugProduct.find(params[:id])
+    
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.replace_html 'drug_product_view', :partial => 'edit'
+        end
+      }
+    end
+  end
+  
+  # PUT /drug_product/1
+  def update
+    @drug_product = DrugProduct.find(params[:id])
+    
+    if @drug_product.update_attributes(params[:drug_product])
+      respond_to do |format|
+        format.html {
+          render :action => :show
+        }
+        format.js {
+          render :update do |page|
+            page.replace_html 'drug_product_view', :partial => 'show'
+          end
+        }
+      end
+    else
+      respond_to do |format|
+        format.html {
+          render :action => :edit
+        }
+        format.js {
+          render :update do |page|
+            page.replace_html 'drug_product_view', :partial => 'edit'
+          end
+        }
+      end
+    end
+  end
+
   # DELETE /drug_product/1
   def destroy
     @drug_product = DrugProduct.find(params[:id])
