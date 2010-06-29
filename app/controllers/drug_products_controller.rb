@@ -33,6 +33,16 @@ class DrugProductsController < ApplicationController
   # GET /drug_products/1
   def show
     @drug_product = DrugProduct.find(params[:id])
+
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.replace_html 'drug_product_view', :partial => 'show'
+          page.replace_html 'search_results', ''
+        end
+      }
+    end
   end
 
   # GET /drug_products/new

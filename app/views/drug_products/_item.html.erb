@@ -1,4 +1,4 @@
-<tr style="cursor: pointer" onclick="window.location='<%= url_for(item) %>'">
+<tr style="cursor: pointer" onclick="<%= remote_function :url => item, :method => :get %>">
   <td><b/><%=h item.name %></b></td>
   <td><%=h item.description %></td>
 </tr>
