@@ -10,6 +10,15 @@ module ApplicationHelper
     t(attribute, :scope => [:activerecord, :attributes, model_name])
   end
   
+  def t_model(model = nil)
+    if model.is_a? Class
+      model_name = model.name.underscore
+    elsif model.nil?
+      model_name = controller_name.singularize
+    end
+    t(model_name, :scope => [:activerecord, :models])
+  end
+  
   # Navigation
   def navigation_section(section_title, items = {}, image = "#{title}.png")
     items = items.map {|title, item|
