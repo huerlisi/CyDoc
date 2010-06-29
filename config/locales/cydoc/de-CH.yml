@@ -40,6 +40,9 @@ de-CH:
         code:           Code
         remark:         Beschreibung
         obligation:     Kassenpflichtig
+      drug_product:
+        name:        Name
+        description: Beschreibung
 
   invoice:
     state:

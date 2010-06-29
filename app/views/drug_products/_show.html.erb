@@ -2,11 +2,11 @@
   <h3>Information</h3>
   <table>
     <tr>
-      <th>Name:</th>
+      <th><%= t(:name, :scope => [:activerecord, :attributes, :drug_product]) %>:</th>
       <td><%=h @drug_product.name %></td>
     </tr>
     <tr>
-      <th>Beschreibung:</th>
+      <th><%= t(:description, :scope => [:activerecord, :attributes, :drug_product]) %>:</th>
       <td><%=h @drug_product.description %></td>
     </tr>
   </table>
