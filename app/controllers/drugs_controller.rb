@@ -12,11 +12,15 @@ class DrugsController < ApplicationController
       @drugs = DrugProduct.clever_find(query).paginate(:page => params['page'], :order => 'id DESC')
     end
 
+    # Show selection list only if more than one hit
+    if @drugs.size == 1
+      params[:id] = @drugs.first.id
+      show
+      return
+    end
+      
     respond_to do |format|
-      format.html {
-        render :action => 'list'
-        return
-      }
+      format.html { }
       format.js {
         render :update do |page|
           page.replace_html 'search_results', :partial => 'list'
