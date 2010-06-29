@@ -1,4 +1,4 @@
-<tr style="cursor: pointer" onclick="window.location='<%= drug_path(item) %>'">
+<tr style="cursor: pointer" onclick="window.location='<%= url_for(item) %>'">
   <td><b/><%=h item.name %></b></td>
   <td><%=h item.description %></td>
 </tr>

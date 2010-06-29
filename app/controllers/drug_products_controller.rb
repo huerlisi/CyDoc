@@ -24,6 +24,7 @@ class DrugProductsController < ApplicationController
       format.js {
         render :update do |page|
           page.replace_html 'search_results', :partial => 'list'
+          page.replace_html 'drug_product_view', ''
         end
       }
     end
