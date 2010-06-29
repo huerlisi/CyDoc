@@ -66,7 +66,9 @@ ActionController::Routing::Routes.draw do |map|
 
   # Medindex
   # ========
-  map.resources :drug_products, :member => {:create_tariff_item => :put}
+  map.resources :drug_products, :member => {:create_tariff_item => :put} do |drug_product|
+    drug_product.resources :drug_articles
+  end
   
   # The priority is based upon order of creation: first created -> highest priority.
 

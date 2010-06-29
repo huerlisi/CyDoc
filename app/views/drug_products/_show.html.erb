@@ -17,9 +17,10 @@
     </tr>
   </table>
 
+  <div class="contextual">
+    <%= link_to_remote "Packung erfassen", {:url => new_drug_product_drug_article_path(@drug_product), :method => :get}, :class => "icon icon-add" %>
+  </div>
   <h3>Packungen</h3>
-  <table class="list">
-    <%= render :partial => 'article_list_header' %>
-    <%= render :partial => 'article_item', :collection => @drug_product.drug_articles %>
-  </table>
+  <div id="drug_article_view"></div>
+  <%= render :partial => 'drug_articles/list' %>
 </div>

@@ -1,7 +1,11 @@
 class DrugArticle < ActiveRecord::Base
+  # Associations
   belongs_to :drug_product
   belongs_to :vat_class
   has_many :drug_prices, :dependent => :destroy
+  
+  # Validations
+  validates_presence_of :code, :name, :description
   
   # General
   def to_s

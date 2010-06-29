@@ -1,6 +1,4 @@
 class DrugProductsController < ApplicationController
-  # CRUD Actions
-
   # GET /drug_products
   def index
     query = params[:query]

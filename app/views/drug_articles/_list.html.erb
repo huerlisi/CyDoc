@@ -1,0 +1,4 @@
+<table id="drug_article_list" class="list">
+  <%= render :partial => 'drug_articles/list_header' %>
+  <%= render :partial => 'drug_articles/item', :collection => @drug_product.drug_articles %>
+</table>
