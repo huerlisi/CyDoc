@@ -3,17 +3,17 @@
   <table>
     <tr>
       <th>Name:</th>
-      <td><%=h @drug.name %></td>
+      <td><%=h @drug_product.name %></td>
     </tr>
     <tr>
       <th>Beschreibung:</th>
-      <td><%=h @drug.description %></td>
+      <td><%=h @drug_product.description %></td>
     </tr>
   </table>
 
   <h3>Packungen</h3>
   <table class="list">
     <%= render :partial => 'article_list_header' %>
-    <%= render :partial => 'article_item', :collection => @drug.drug_articles %>
+    <%= render :partial => 'article_item', :collection => @drug_product.drug_articles %>
   </table>
 </div>

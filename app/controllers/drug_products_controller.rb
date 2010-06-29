@@ -31,21 +31,51 @@ class DrugProductsController < ApplicationController
 
   # GET /drug_products/1
   def show
-    @drug = DrugProduct.find(params[:id])
+    @drug_product = DrugProduct.find(params[:id])
   end
 
   # GET /drug_products/new
   def new
-    @drug = DrugProduct.new(params[:drug])
+    @drug_product = DrugProduct.new(params[:drug])
 
     respond_to do |format|
       format.html { }
       format.js {
         render :update do |page|
-          page.replace_html 'drug_view', :partial => 'new'
+          page.replace_html 'drug_product_view', :partial => 'new'
           page.replace_html 'search_results', ''
         end
       }
+    end
+  end
+
+  # POST /drug_products
+  def create
+    @drug_product = DrugProduct.new(params[:drug_product])
+    
+    if @drug_product.save
+      flash[:notice] = 'Medikament erfasst.'
+      respond_to do |format|
+        format.html {
+          redirect_to @drug_product
+        }
+        format.js {
+          render :update do |page|
+            page.replace_html 'drug_product_view', :partial => 'show'
+          end
+        }
+      end
+    else
+      respond_to do |format|
+        format.html {
+          render :action => :new
+        }
+        format.js {
+          render :update do |page|
+            page.replace_html 'drug_product_view', :partial => 'new'
+          end
+        }
+      end
     end
   end
 
