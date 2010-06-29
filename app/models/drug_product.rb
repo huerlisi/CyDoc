@@ -1,6 +1,10 @@
 class DrugProduct < ActiveRecord::Base
+  # Associations
   has_many :drug_articles, :dependent => :destroy
 
+  # Validations
+  validates_presence_of :name, :description
+  
   def to_s
     "#{name} - #{description}"
   end
