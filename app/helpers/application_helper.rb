@@ -1,5 +1,10 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  # i18n
+  def t_attr(attribute, model)
+    t(attribute, :scope => [:activerecord, :attributes, model.name.underscore])
+  end
+  
   # Navigation
   def navigation_section(section_title, items = {}, image = "#{title}.png")
     items = items.map {|title, item|
