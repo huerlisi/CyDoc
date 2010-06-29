@@ -90,6 +90,22 @@ class DrugProductsController < ApplicationController
     end
   end
 
+  # DELETE /drug_product/1
+  def destroy
+    @drug_product = DrugProduct.find(params[:id])
+
+    @drug_product.destroy
+    
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.redirect_to drug_products_url
+        end
+      }
+    end
+  end
+  
   def create_tariff_item
     @drug = DrugProduct.find(params[:id])
     
