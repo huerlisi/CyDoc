@@ -143,19 +143,28 @@ class DrugProductsController < ApplicationController
       format.html { }
       format.js {
         render :update do |page|
-          page.redirect_to drug_products_url
+          page.redirect_to drug_products_path
         end
       }
     end
   end
   
+  # PUT /drug_produc/1/create_tariff_item
   def create_tariff_item
-    @drug = DrugProduct.find(params[:id])
+    @drug_product = DrugProduct.find(params[:id])
     
-    for drug_article in @drug.drug_articles
+    for drug_article in @drug_product.drug_articles
       tariff_item = drug_article.build_tariff_item
       tariff_item.save!
     end
-    redirect_to :action => :show
+
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.replace_html 'drug_product_view', :partial => 'show'
+        end
+      }
+    end
   end
 end
