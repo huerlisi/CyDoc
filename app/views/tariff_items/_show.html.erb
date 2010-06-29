@@ -8,19 +8,19 @@
   <h3>Leistung</h3>
   <table>
     <tr>
-      <th>Tarif:</th>
+      <th><%= t(:type_as_string, :scope => [:activerecord, :attributes, :tariff_item]) %>:</th>
       <td><%=h @tariff_item.type_to_s %></td>
     </tr>
     <tr>
-      <th>Code:</th>
+      <th><%= t(:code, :scope => [:activerecord, :attributes, :tariff_item]) %>:</th>
       <td><%= in_place_editor_field :tariff_item, :code %></td>
     </tr>
     <tr>
-      <th>Beschreibung:</th>
+      <th><%= t(:remark, :scope => [:activerecord, :attributes, :tariff_item]) %>:</th>
       <td><%= in_place_editor_field :tariff_item, :remark %></td>
     </tr>
     <tr>
-      <th>Pflichtleistung:</th>
+      <th><%= t(:obligation, :scope => [:activerecord, :attributes, :tariff_item]) %>:</th>
       <td><%=h @tariff_item.obligation? ? "Ja" : "Nein" %></td>
     </tr>
     <tr>
