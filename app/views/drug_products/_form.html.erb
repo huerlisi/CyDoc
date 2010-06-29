@@ -1,0 +1,16 @@
+<div id="drug_form">
+  <% semantic_remote_form_for @drug do |form| %>
+    <%= form.semantic_errors %>
+
+    <% form.inputs do %>
+      <%= form.input :id, :input_html => {:size => 8} %>
+      <%= form.input :name %>
+      <%= form.input :description, :input_html => {:rows => 3} %>
+    <% end %>
+
+    <% form.buttons do %>
+      <%= form.commit_button :button_html => {:class => "icon icon-save"} %>
+      <%= button_to_remote "Abbrechen", {:url => @drug, :method => :get}, :class => "icon icon-cancel" %>
+    <% end %>
+  <% end %>
+</div>

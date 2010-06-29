@@ -1,20 +1,20 @@
-class DrugsController < ApplicationController
+class DrugProductsController < ApplicationController
   # CRUD Actions
 
-  # GET /drugs
+  # GET /drug_products
   def index
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
     if params[:all]
-      @drugs = DrugProduct.paginate(:page => params['page'], :order => 'id DESC')
+      @drug_products = DrugProduct.paginate(:page => params['page'], :order => 'id DESC')
     else
-      @drugs = DrugProduct.clever_find(query).paginate(:page => params['page'], :order => 'id DESC')
+      @drug_products = DrugProduct.clever_find(query).paginate(:page => params['page'], :order => 'id DESC')
     end
 
     # Show selection list only if more than one hit
-    if @drugs.size == 1
-      params[:id] = @drugs.first.id
+    if @drug_products.size == 1
+      params[:id] = @drug_products.first.id
       show
       return
     end
@@ -29,9 +29,24 @@ class DrugsController < ApplicationController
     end
   end
 
-  # GET /drugs/1
+  # GET /drug_products/1
   def show
     @drug = DrugProduct.find(params[:id])
+  end
+
+  # GET /drug_products/new
+  def new
+    @drug = DrugProduct.new(params[:drug])
+
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render :update do |page|
+          page.replace_html 'drug_view', :partial => 'new'
+          page.replace_html 'search_results', ''
+        end
+      }
+    end
   end
 
   def create_tariff_item

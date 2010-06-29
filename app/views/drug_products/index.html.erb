@@ -1,0 +1,9 @@
+<div class="contextual">
+  <%= link_to_remote "Erfassen", {:url => new_drug_product_path, :method => :get}, :class => "icon icon-add" %>
+  <%= link_to_remote "Alle anzeigen", {:url => drug_products_path(:all => true), :method => :get}, :class => "icon icon-index" %>
+</div>
+<%=
+tab_container 'catalogs', "Medikamente", [
+  {:name => 'all', :partial => 'list_tab', :label => 'Alle'},
+]
+%>
