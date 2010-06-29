@@ -151,13 +151,11 @@ class TariffItemsController < ApplicationController
     # TODO: fix to prevent collition on second cloning
     @tariff_item.code += " (Kopie)"
     
-    @tariff_item.save!
-    
     respond_to do |format|
       format.html { }
       format.js {
         render :update do |page|
-          page.replace_html 'tariff_item_view', :partial => 'show'
+          page.replace_html 'tariff_item_view', :partial => 'new'
           page.replace_html 'search_results', ''
         end
       }
