@@ -11,7 +11,7 @@
 
     <% form.buttons do %>
       <%= form.commit_button :button_html => {:class => "icon icon-save"} %>
-      <%= button_to_remote "Abbrechen", {:url => tariff_item_path(@tariff_item), :method => :get}, :class => "icon icon-cancel" %>
+      <%= button_to_remote "Abbrechen", {:url => @tariff_item.becomes(TariffItem), :method => :get}, :class => "icon icon-cancel" %>
     <% end %>
   <% end %>
 </div>
