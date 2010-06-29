@@ -8,19 +8,19 @@
   <h3>Leistung</h3>
   <table>
     <tr>
-      <th><%= t(:type_as_string, :scope => [:activerecord, :attributes, :tariff_item]) %>:</th>
+      <th><%= t_attr(:type_as_string) %>:</th>
       <td><%=h @tariff_item.type_to_s %></td>
     </tr>
     <tr>
-      <th><%= t(:code, :scope => [:activerecord, :attributes, :tariff_item]) %>:</th>
+      <th><%= t_attr(:code) %>:</th>
       <td><%= in_place_editor_field :tariff_item, :code %></td>
     </tr>
     <tr>
-      <th><%= t(:remark, :scope => [:activerecord, :attributes, :tariff_item]) %>:</th>
+      <th><%= t_attr(:remark) %>:</th>
       <td><%= in_place_editor_field :tariff_item, :remark %></td>
     </tr>
     <tr>
-      <th><%= t(:obligation, :scope => [:activerecord, :attributes, :tariff_item]) %>:</th>
+      <th><%= t_attr(:obligation) %>:</th>
       <td><%=h @tariff_item.obligation? ? "Ja" : "Nein" %></td>
     </tr>
     <tr>
