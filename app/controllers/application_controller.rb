@@ -2,6 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 require 'digest/sha2'
+require 'prawn/measurement_extensions'
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
