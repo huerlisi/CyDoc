@@ -1,4 +1,7 @@
 class DrugArticle < ActiveRecord::Base
+  # Constants
+  QUANTITY_UNITS = ["Stück", "ml", "g", "m", "Paar", "kg", "l", "Beutel", "Dosen", "mg", "Platten", "Blätter", "dl", "Becher", "Zäpfchen", "Vaginal Zäpfchen"]
+  
   # Associations
   belongs_to :drug_product
   belongs_to :vat_class
