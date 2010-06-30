@@ -4,24 +4,24 @@ development:
   database: cydoc_development
   adapter: mysql
   host: localhost
-  username: 
-  password: 
+  username: cydoc
+  password: CHANGE ME
   encoding: utf8
 
 production:
   database: cydoc_production
   adapter: mysql
   host: localhost
-  username: 
-  password: 
+  username: cydoc
+  password: CHANGE ME
   encoding: utf8
 
 test:
   database: cydoc_test
   adapter: mysql
   host: localhost
-  username: 
-  password: 
+  username: cydoc
+  password: CHANGE ME
   encoding: utf8
 
 # Tarmed Database
