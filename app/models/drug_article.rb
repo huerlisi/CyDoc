@@ -5,10 +5,10 @@ class DrugArticle < ActiveRecord::Base
   # Associations
   belongs_to :drug_product
   belongs_to :vat_class
-  has_many :drug_prices, :dependent => :destroy
+  has_many :drug_prices, :dependent => :destroy, :autosave => true
   
   # Validations
-  validates_presence_of :code, :name, :description
+  validates_presence_of :code, :name
   validates_presence_of :number_of_pieces, :quantity, :quantity_unit
   validates_presence_of :vat_class
   
@@ -37,15 +37,30 @@ class DrugArticle < ActiveRecord::Base
     end
   end
 
+  def price=(value)
+    drug_price = drug_prices.public.current.first
+    drug_price ||= drug_prices.build(:valid_from => Date.today, :price_type => 'PPUB')
+
+    drug_price.price = value
+  end
+  
+  # Actually returns any wholesale price, not just doctors
   def doctors_price
     begin
       # TODO: there could be more than one price (PPHA + PEXF etc.)
-      return drug_prices.doctor.current.first.price
+      return drug_prices.wholesale.current.first.price
     rescue
       return 0.0
     end
   end
 
+  def doctors_price=(value)
+    drug_price = drug_prices.doctor.current.first
+    drug_price ||= drug_prices.build(:valid_from => Date.today, :price_type => 'PDOC')
+    
+    drug_price.price = value
+  end
+  
   # Tariff Items
   def build_tariff_item
     tariff_item = DrugTariffItem.new(
