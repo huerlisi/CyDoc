@@ -1,7 +1,7 @@
 <tr>
   <td><b/><%=h item.description %></b></td>
   <td><%=h "#{item.number_of_pieces} x #{item.quantity} #{item.quantity_unit}" %></td>
-  <td><%=h item.vat_class.try(:rate) %> %</td>
-  <td>CHF <%=h currency_fmt(item.doctors_price) %></td>
-  <td>CHF <%=h currency_fmt(item.price) %></td>
+  <td style="text-align: right"><%=h item.vat_class.try(:rate) %> %</td>
+  <td style="text-align: right">CHF <%=h currency_fmt(item.doctors_price) %></td>
+  <td style="text-align: right">CHF <%=h currency_fmt(item.price) %></td>
 </tr>

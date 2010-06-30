@@ -54,9 +54,10 @@ de-CH:
         number_of_pieces: Menge
         quantity:         Anzahl
         quantity_unit:    Einheit
+        vat_class:        MwSt
         doctors_price:    Arztpreis
         price:            Publikumspreis
-        vat_class:        MwSt
+        content:          Inhalt
 
   invoice:
     state:
