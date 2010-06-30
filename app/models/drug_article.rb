@@ -14,7 +14,7 @@ class DrugArticle < ActiveRecord::Base
   
   # General
   def to_s
-    "#{code} - #{name}"
+    "#{code} - #{description}"
   end
 
   # Calculations
