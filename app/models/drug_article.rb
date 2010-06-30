@@ -6,6 +6,8 @@ class DrugArticle < ActiveRecord::Base
   
   # Validations
   validates_presence_of :code, :name, :description
+  validates_presence_of :number_of_pieces, :quantity, :quantity_unit
+  validates_presence_of :vat_class
   
   # General
   def to_s

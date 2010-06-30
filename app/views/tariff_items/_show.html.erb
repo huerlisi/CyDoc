@@ -24,7 +24,7 @@
       <td><%=h @tariff_item.obligation? ? "Ja" : "Nein" %></td>
     </tr>
     <tr>
-      <th>MWSt:</th>
+      <th><%= t_attr(:vat_class) %>:</th>
       <td><%=h @tariff_item.vat_class.to_s %></td>
     </tr>
   </table>

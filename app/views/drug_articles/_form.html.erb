@@ -7,6 +7,14 @@
 
       <%= form.input :name, :as => :string %>
       <%= form.input :description, :input_html => {:rows => 3} %>
+      <%= form.input :number_of_pieces, :input_html => {:size => 10} %>
+      <%= form.input :quantity, :input_html => {:size => 10} %>
+      <%= form.input :quantity_unit, :input_html => {:size => 10} %>
+
+      <%= form.input :vat_class %>
+
+      <%= form.input :doctors_price, :required => true, :input_html => {:size => 10} %>
+      <%= form.input :price, :required => true, :input_html => {:size => 10} %>
     <% end %>
 
     <% form.buttons do %>

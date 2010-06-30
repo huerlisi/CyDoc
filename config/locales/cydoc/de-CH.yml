@@ -13,6 +13,7 @@ de-CH:
       migel_tariff_item:  MiGel Leistung
       tariff_item_group:  Blockleistung
       drug_product:       Medikament
+      drug_article:       Medikamentenpackung
 
     attributes:
       invoice:
@@ -42,9 +43,20 @@ de-CH:
         code:           Code
         remark:         Beschreibung
         obligation:     Kassenpflichtig
+        vat_class:      MwSt
       drug_product:
         name:        Name
         description: Beschreibung
+      drug_article:
+        code:             Code
+        name:             Name
+        description:      Beschreibung
+        number_of_pieces: Menge
+        quantity:         Anzahl
+        quantity_unit:    Einheit
+        doctors_price:    Arztpreis
+        price:            Publikumspreis
+        vat_class:        MwSt
 
   invoice:
     state:
