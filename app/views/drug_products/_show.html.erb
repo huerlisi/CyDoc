@@ -2,7 +2,7 @@
   <div class="contextual">
     <%= link_to_remote "Tarif erzeugen", {:url => create_tariff_item_drug_product_path(@drug_product), :method => :put}, :class => "icon icon-add" %>
     <%= link_to_remote "Editieren", {:url => edit_drug_product_path(@drug_product), :method => :get}, :class => "icon icon-edit" %>
-    <%= link_to_remote "Löschen", {:url => @drug_product, :method => :delete}, :class => "icon icon-delete" %>
+    <%= link_to_remote "Löschen", {:url => @drug_product, :method => :delete, :confirm => t_confirm_delete(@drug_product)}, :class => "icon icon-delete" %>
     <%= link_to "Katalog anzeigen", drug_products_path(:all => true), :class => "icon icon-index" %>
   </div>
   <h3>Information</h3>
