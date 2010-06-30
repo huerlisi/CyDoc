@@ -18,7 +18,7 @@ doctor = Doctor.create!(
 )
 
 user = User.create!(
-  :name => "Demo Benützer", :login => "demo", :password => "demo1234", :password_confirmation => "demo1234", :email => "cydoc-demo@zytolabor.ch", :object => doctor
+  :name => "Demo Benützer", :login => "demo", :password => "demo1234", :password_confirmation => "demo1234", :email => "cydoc-demo@cyt.ch", :object => doctor
 )
 user.register!
 user.activate!
