@@ -9,9 +9,11 @@
       <%= form.input :obligation %>
     <% end %>
 
-    <% form.inputs do %>
-      <%= form.input :amount_mt, :input_html => {:size => 8, :style => 'text-align: right'} %>
-      <%= form.input :amount_tt, :input_html => {:size => 8, :style => 'text-align: right'} %>
+    <% unless @tariff_item.is_a? TariffItemGroup %>
+      <% form.inputs do %>
+        <%= form.input :amount_mt, :input_html => {:size => 8, :style => 'text-align: right'} %>
+        <%= form.input :amount_tt, :input_html => {:size => 8, :style => 'text-align: right'} %>
+      <% end %>
     <% end %>
 
     <% form.buttons do %>
