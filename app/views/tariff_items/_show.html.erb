@@ -29,5 +29,9 @@
     </tr>
   </table>
 
-  <%= render :partial => 'show_tariff_item_group' if @tariff_item.is_a? TariffItemGroup %>
+  <% if @tariff_item.is_a? TariffItemGroup %>
+    <%= render 'show_tariff_item_group' %>
+  <% else %>
+    <%= render 'show_price' %>
+  <% end %>
 </div>
