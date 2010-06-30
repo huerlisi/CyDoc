@@ -31,7 +31,7 @@ class DrugArticle < ActiveRecord::Base
   # Prices
   def price
     begin
-      return drug_prices.valid.public.current.first.price
+      return drug_prices.public.current.first.price
     rescue
       return 0.0
     end
@@ -40,7 +40,7 @@ class DrugArticle < ActiveRecord::Base
   def doctors_price
     begin
       # TODO: there could be more than one price (PPHA + PEXF etc.)
-      return drug_prices.valid.doctor.current.first.price
+      return drug_prices.doctor.current.first.price
     rescue
       return 0.0
     end
