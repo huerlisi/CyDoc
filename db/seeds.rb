@@ -11,6 +11,12 @@ HonorificPrefix.create!([
   {:sex => 2, :position => 4, :name => 'Frau Prof.'}
 ])
 
+VatClass.create!([
+  {:code => "excluded", :rate => 0.0, :valid_from => '2001-01-01'},
+  {:code => "reduced", :rate => 2.4, :valid_from => '2001-01-01'},
+  {:code => "full", :rate => 7.6, :valid_from => '2001-01-01'}
+])
+
 # Demo Seeds
 # ==========
 doctor = Doctor.create!(
