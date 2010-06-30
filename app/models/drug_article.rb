@@ -42,6 +42,7 @@ class DrugArticle < ActiveRecord::Base
     drug_price ||= drug_prices.build(:valid_from => Date.today, :price_type => 'PPUB')
 
     drug_price.price = value
+    drug_price.save unless drug_price.new_record?
   end
   
   # Actually returns any wholesale price, not just doctors
@@ -59,6 +60,7 @@ class DrugArticle < ActiveRecord::Base
     drug_price ||= drug_prices.build(:valid_from => Date.today, :price_type => 'PDOC')
     
     drug_price.price = value
+    drug_price.save unless drug_price.new_record?
   end
   
   # Tariff Items
