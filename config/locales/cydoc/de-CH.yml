@@ -72,4 +72,6 @@ de-CH:
 
   recall:
     list: Termine
-    
+
+  messages:
+    confirm_delete: "{{record}} löschen?"

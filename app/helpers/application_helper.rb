@@ -19,6 +19,10 @@ module ApplicationHelper
     t(model_name, :scope => [:activerecord, :models])
   end
   
+  def t_confirm_delete(record)
+    t('messages.confirm_delete', :record => "#{t_model(record.class)} #{record.to_s}")
+  end
+  
   # Navigation
   def navigation_section(section_title, items = {}, image = "#{title}.png")
     items = items.map {|title, item|
