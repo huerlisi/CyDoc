@@ -8,7 +8,7 @@ class DrugArticle < ActiveRecord::Base
   has_many :drug_prices, :dependent => :destroy, :autosave => true
   
   # Validations
-  validates_presence_of :code, :name
+  validates_presence_of :code, :name, :description
   validates_presence_of :number_of_pieces, :quantity, :quantity_unit
   validates_presence_of :vat_class
   
@@ -17,6 +17,12 @@ class DrugArticle < ActiveRecord::Base
     "#{code} - #{name}"
   end
 
+  # Calculations
+  def description=(value)
+    write_attribute(:description, value)
+    write_attribute(:name, value.upcase)
+  end
+  
   # Search
   def self.clever_find(query, *args)
     return [] if query.nil? or query.empty?

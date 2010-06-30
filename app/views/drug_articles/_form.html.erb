@@ -5,8 +5,7 @@
     <% form.inputs do %>
       <%= form.input :code, :input_html => {:size => 10} %>
 
-      <%= form.input :name, :as => :string %>
-      <%= form.input :description, :input_html => {:rows => 3} %>
+      <%= form.input :description, :as => :string, :label => t_attr(:name, DrugArticle) %>
       <%= form.input :number_of_pieces, :input_html => {:size => 10} %>
       <%= form.input :quantity, :input_html => {:size => 10} %>
       <%= form.input :quantity_unit, :as => :select, :collection => DrugArticle::QUANTITY_UNITS %>
