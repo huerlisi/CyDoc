@@ -44,6 +44,9 @@ de-CH:
         remark:         Beschreibung
         obligation:     Kassenpflichtig
         vat_class:      MwSt
+        amount_mt:      TP&nbsp;AL/Preis
+        amount_tt:      TP&nbsp;TL
+        amount:         Betrag
       drug_product:
         name:        Name
         description: Beschreibung
