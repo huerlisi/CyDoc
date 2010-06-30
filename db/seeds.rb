@@ -20,7 +20,7 @@ VatClass.create!([
 # Demo Seeds
 # ==========
 doctor = Doctor.create!(
-  :family_name => "Muster", :given_name => "Melanie", :street_address => "Zentralgasse 99", :postal_code => "6300", :locality => "Zug"
+  :honorific_prefix = 'Frau Dr. med.', :family_name => "Muster", :given_name => "Melanie", :street_address => "Zentralgasse 99", :postal_code => "6300", :locality => "Zug"
 )
 
 user = User.create!(
