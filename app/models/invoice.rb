@@ -174,7 +174,7 @@ class Invoice < ActiveRecord::Base
   end
   
   # Accounting
-  has_many :bookings, :class_name => 'Accounting::Booking', :as => 'reference', :autosave => true, :dependent => :destroy
+  has_many :bookings, :class_name => 'Accounting::Booking', :as => 'reference', :dependent => :destroy
   
   def due_amount(value_date = nil)
     if value_date
@@ -185,10 +185,10 @@ class Invoice < ActiveRecord::Base
     included_bookings.to_a.sum{|b| b.accounted_amount(Invoice::DEBIT_ACCOUNT)}
   end
   
+  # Callback hook
   def booking_saved(booking)
     if (self.state != 'canceled') and (self.state != 'reactivated') and (self.due_amount <= 0.0)
-      self.state = 'paid'
-      self.save
+      update_attribute(:state, 'paid')
     end
   end
   
