@@ -83,7 +83,7 @@ class BookingsController < ApplicationController
               page.replace "invoice_bookings", :partial => 'invoice_bookings/list', :object => @invoice.bookings
               page.remove 'booking_form'
               # TODO: some kind of delegation would be nice
-              page.replace_html "invoice_state", @invoice.state
+              page.replace_html "invoice_state", t(@invoice.state, :scope => 'invoice.state')
             end
           end
         }
