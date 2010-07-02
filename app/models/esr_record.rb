@@ -77,7 +77,7 @@ class EsrRecord < ActiveRecord::Base
       # canceled invoice
       self.remarks += ", wurde #{invoice.state_adverb}"
     elsif invoice.amount.currency_round == self.amount.currency_round
-      # TODO much to open condition (issue #804)
+      # TODO much too open condition (issue #804)
       # reminder fee not paid
       self.remarks += ", Mahnspesen nicht bezahlt"
     else
