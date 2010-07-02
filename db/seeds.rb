@@ -39,7 +39,7 @@ bank = Accounting::Bank.create!(
 )
 
 doctor.accounts << Accounting::BankAccount.create!([
-  {:pc_id => "01-123456-7", :code => "1020", :title => "Bankkonto", :bank => bank, :holder => doctor}
+  {:pc_id => "01-123456-7", :esr_account => "444444", :code => "1020", :title => "Bankkonto", :bank => bank, :holder => doctor}
 ])
 
 doctor.accounts << Accounting::Account.create!([
