@@ -34,6 +34,11 @@ doctor.offices.create!(
   :printers => {:cups_host=>"localhost", :trays=>{:invoice=>"invoice_tray", :label=>"label_tray", :plain=>"plain_tray"}}
 )
 
+Insurance.create!([
+  {:ean_party => '9911000000066', :role => 'H', :full_name => 'SicherSana99', :street_address => "Krankengasse 7", :postal_code => "8001", :locality => "Zürich 1"}
+])
+
+# Accounting
 bank = Accounting::Bank.create!(
   :full_name => "General Bank", :street_address => "Hauptstrasse 1", :postal_code => "8000", :locality => "Zürich"
 )
