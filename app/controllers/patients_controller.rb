@@ -182,6 +182,24 @@ class PatientsController < ApplicationController
     end
   end
 
+  # DELETE /patient/1
+  def destroy
+    @patient = Patient.find(params[:id])
+
+    @patient.destroy
+    
+    respond_to do |format|
+      format.html {
+        redirect_to patients_path
+      }
+      format.js {
+        render :update do |page|
+          page.redirect_to patients_path
+        end
+      }
+    end
+  end
+
   # POST /patients/1/print_label
   print_action_for :label, :tray => :label, :media => 'Label'
   def label

@@ -1,6 +1,7 @@
 <div id="patient-personal">
   <div class="contextual">
       <%= link_to_remote "Ändern", {:url => edit_patient_path(@patient), :method => :get}, :class => "icon icon-edit" %>
+      <%= link_to_remote "Löschen", {:url => patient_path(@patient), :method => :delete, :confirm => t_confirm_delete(@patient)}, :class => "icon icon-delete" %>
       <%= link_to_remote "KG-Etikette", {:url => print_full_label_patient_path(@patient), :method => :post}, :class => "icon icon-print" %>
       <%= link_to_remote "Adress-Etikette", {:url => print_label_patient_path(@patient), :method => :post}, :class => "icon icon-print"%>
   </div>
