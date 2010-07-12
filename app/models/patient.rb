@@ -21,6 +21,11 @@ class Patient < ActiveRecord::Base
   
   has_many :treatments, :order => 'date_begin DESC'
       
+  # Helpers
+  def deletable?
+    treatments.empty?
+  end
+  
   # Phone Numbers
   has_many :phone_numbers, :as => :object
   accepts_nested_attributes_for :phone_numbers, :reject_if => proc { |attrs| attrs['number'].blank? }
