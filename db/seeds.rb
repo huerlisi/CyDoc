@@ -35,7 +35,10 @@ doctor.offices.create!(
 )
 
 Insurance.create!([
-  {:ean_party => '9911000000066', :role => 'H', :full_name => 'SicherSana99', :street_address => "Krankengasse 7", :postal_code => "8001", :locality => "Zürich 1"}
+  {:ean_party => '9911000000066', :role => 'H', :full_name => 'SicherSana99', :street_address => "Krankengasse 7", :postal_code => "8001", :locality => "Zürich 1"},
+  {:ean_party => '9922000000000', :role => 'H', :full_name => 'Group Santo', :street_address => "Heilweg 88", :postal_code => "8001", :locality => "Zürich 1"},
+  {:ean_party => '9922000000001', :group_ean_party => "9922000000000", :role => 'H', :full_name => 'Santo Zürich', :street_address => "Heilweg 88", :postal_code => "8001", :locality => "Zürich 1"},
+  {:ean_party => '9922000000002', :group_ean_party => "9922000000000", :role => 'H', :full_name => 'Santo Lausanne', :street_address => "Rue Hospital", :postal_code => "1000", :locality => "Lausanne"}
 ])
 
 # Accounting
