@@ -122,7 +122,9 @@ class BookingsController < ApplicationController
     @booking = Accounting::Booking.find(params[:id])
     @account = Accounting::Account.find(params[:account_id])
     
+    @booking.reference.touch if @booking.reference
     if @booking.update_attributes(params[:booking])
+      @booking.reference.touch if @booking.reference
       respond_to do |format|
         format.html { }
         format.js {
