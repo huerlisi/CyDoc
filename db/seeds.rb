@@ -20,7 +20,7 @@ VatClass.create!([
 # Demo Seeds
 # ==========
 doctor = Doctor.create!(
-  :honorific_prefix = 'Frau Dr. med.', :family_name => "Muster", :given_name => "Melanie", :street_address => "Zentralgasse 99", :postal_code => "6300", :locality => "Zug"
+  :honorific_prefix => 'Frau Dr. med.', :family_name => "Muster", :given_name => "Melanie", :street_address => "Zentralgasse 99", :postal_code => "6300", :locality => "Zug"
 )
 
 user = User.create!(
@@ -47,7 +47,7 @@ bank = Accounting::Bank.create!(
 )
 
 doctor.accounts << Accounting::BankAccount.create!([
-  {:pc_id => "01-123456-7", :esr_account => "444444", :code => "1020", :title => "Bankkonto", :bank => bank, :holder => doctor}
+  {:pc_id => "01-123456-7", :esr_id => "444444", :code => "1020", :title => "Bankkonto", :bank => bank, :holder => doctor}
 ])
 
 doctor.accounts << Accounting::Account.create!([
