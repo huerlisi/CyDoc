@@ -1,7 +1,9 @@
 <% cache @treatment do %>
 <div class="contextual">
   <%= link_to_remote "Ändern", {:url => edit_treatment_path(@treatment), :method => :get}, :class => "icon icon-edit" %>
-  <%= link_to_remote "Rechung stellen", {:url => new_patient_treatment_invoice_path(@treatment.patient, @treatment), :method => :get}, :class => "icon icon-add" %>
+  <% unless @treatment.sessions.open.empty? %>
+    <%= link_to_remote "Rechung stellen", {:url => new_patient_treatment_invoice_path(@treatment.patient, @treatment), :method => :get}, :class => "icon icon-add" %>
+  <% end %>
   <% if @treatment.invoices.empty? -%>
     <%= link_to_remote "Löschen", {:url => treatment_path(@treatment), :method => :delete, :confirm => "Fall #{@treatment.to_s} löschen?"}, :class => "icon icon-delete" %>
   <% end -%>
