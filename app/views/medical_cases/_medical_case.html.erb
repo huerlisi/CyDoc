@@ -1,4 +1,4 @@
-<% editable = @invoice.nil? %>
+<% editable = @treatment.invoices.empty? %>
 <tr id="medical_case_<%= item.id %>">
   <td><%= item.diagnosis.type %></td>
   <td><%= item.to_s %></td>
