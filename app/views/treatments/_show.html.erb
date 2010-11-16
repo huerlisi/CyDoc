@@ -18,7 +18,9 @@
   <h3>Diagnosen</h3>
   <div class="box">
     <div id="treatment_new_medical_case">
-      <%= render :partial => 'medical_cases/form' %>
+      <% if @treatment.medical_cases.empty? %>
+        <%= render :partial => 'medical_cases/form' %>
+      <% end %>
     </div>
     <table id="treatment_medical_case_list" style="width: 100%">
       <%= render :partial => 'medical_cases/item', :collection => @treatment.medical_cases %>
