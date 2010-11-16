@@ -9,6 +9,8 @@ GEM
       rack (~> 1.1.0)
     activerecord (2.3.10)
       activesupport (= 2.3.10)
+    activerecord-sqlserver-adapter (2.3.13)
+      activerecord (~> 2.2)
     activeresource (2.3.10)
       activesupport (= 2.3.10)
     activesupport (2.3.10)
@@ -57,6 +59,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  activerecord-sqlserver-adapter
   cucumber
   fastercsv
   formtastic (~> 1.1.0)

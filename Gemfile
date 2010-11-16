@@ -30,6 +30,7 @@ gem 'aasm'
 
 # Import
 gem 'fastercsv'
+gem 'activerecord-sqlserver-adapter'
 
 # PDF
 gem 'prawn', '~> 0.8.4'
