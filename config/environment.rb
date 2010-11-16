@@ -62,27 +62,8 @@ Rails::Initializer.run do |config|
   config.i18n.default_locale = 'de-CH'
   
   # Authentication
-  config.gem "aasm"
   config.active_record.observers = :user_observer
-
-  # Forms
-  config.gem 'formtastic'
 
   # Using vendored plugin as it needs to be included after validates_timeliness
   # config.gem 'validation_reflection'
-
-  # Pagination
-  config.gem 'will_paginate'
-  
-  # Importer
-  config.gem 'fastercsv'
-  
-  # Testing
-  config.gem "cucumber"
-  
-  # Scoping
-  config.gem "has_scope", :version => '>= 0.5'
-
-  # PDF
-  config.gem 'prawn', :version => '>= 0.8.4'
 end
