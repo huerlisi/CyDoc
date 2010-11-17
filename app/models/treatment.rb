@@ -1,4 +1,5 @@
 class Treatment < ActiveRecord::Base
+  # Associations
   has_many :invoices
   belongs_to :patient
   belongs_to :referrer, :class_name => 'Doctor'
@@ -7,13 +8,10 @@ class Treatment < ActiveRecord::Base
   has_many :sessions, :order => 'duration_from DESC', :dependent => :destroy
   has_many :medical_cases, :order => 'type', :dependent => :destroy
   
+  # Validation
   validates_presence_of :reason, :place_type
   validates_date :date_begin
   validates_date :date_end, :allow_blank => true
-  
-  # TODO: this doesn't work in many cases: only partially charged, invoice canceled...
-  named_scope :open, :include => :invoices, :conditions => "invoices.id IS NULL", :order => 'date_begin'
-  named_scope :charged, :include => :invoices, :conditions => "invoices.id IS NOT NULL", :order => 'date_begin'
   
   def validate_for_invoice
     errors.add_to_base("Keine Diagnose eingegeben.") if medical_cases.empty?
@@ -26,6 +24,12 @@ class Treatment < ActiveRecord::Base
     errors.empty?
   end
 
+  # State
+  # TODO: this doesn't work in many cases: only partially charged, invoice canceled...
+  named_scope :open, :include => :invoices, :conditions => "invoices.id IS NULL", :order => 'date_begin'
+  named_scope :charged, :include => :invoices, :conditions => "invoices.id IS NOT NULL", :order => 'date_begin'
+  
+  # Helpers
   def date_begin_formatted
     date_begin
   end
@@ -55,6 +59,7 @@ class Treatment < ActiveRecord::Base
     sessions.to_a.sum(&:amount).to_f
   end
   
+  # XML Invoices
   def reason_xml
     case reason
       when 'Unfall': 'accident'
