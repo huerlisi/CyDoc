@@ -35,6 +35,7 @@ class Treatment < ActiveRecord::Base
   
   def chargeable?
     sessions.open.present?
+    # Checking for valid_for_invoice? would be a nice thing, too. But links depending on this would need AJAX updates.
   end
   
   # Helpers
