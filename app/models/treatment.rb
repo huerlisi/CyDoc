@@ -29,6 +29,14 @@ class Treatment < ActiveRecord::Base
   named_scope :open, :include => :invoices, :conditions => "invoices.id IS NULL", :order => 'date_begin'
   named_scope :charged, :include => :invoices, :conditions => "invoices.id IS NOT NULL", :order => 'date_begin'
   
+  def open?
+    invoices.active.empty?
+  end
+  
+  def chargeable?
+    sessions.open.present?
+  end
+  
   # Helpers
   def date_begin_formatted
     date_begin

@@ -159,6 +159,7 @@ class InvoicesController < ApplicationController
   # GET /patients/1/invoices/2
   def show
     @invoice = Invoice.find(params[:id])
+    @treatment = @invoice.treatment
 
     respond_to do |format|
       format.html {
