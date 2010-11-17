@@ -11,9 +11,8 @@ class Treatment < ActiveRecord::Base
   validates_date :date_begin
   validates_date :date_end, :allow_blank => true
   
-  named_scope :open, :include => :invoices, :conditions => "invoices.id IS NULL", :order => 'date_begin'
-
   # TODO: this doesn't work in many cases: only partially charged, invoice canceled...
+  named_scope :open, :include => :invoices, :conditions => "invoices.id IS NULL", :order => 'date_begin'
   named_scope :charged, :include => :invoices, :conditions => "invoices.id IS NOT NULL", :order => 'date_begin'
   
   def validate_for_invoice
