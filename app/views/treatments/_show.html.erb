@@ -1,8 +1,12 @@
 <% cache @treatment do %>
 <div class="contextual">
-  <%= link_to_remote "Ändern", {:url => edit_treatment_path(@treatment), :method => :get}, :class => "icon icon-edit" %>
-  <%= link_to_remote "Rechung stellen", {:url => new_patient_treatment_invoice_path(@treatment.patient, @treatment), :method => :get}, :class => "icon icon-add" %>
-  <% if @treatment.invoices.empty? -%>
+  <% if @treatment.open? -%>
+    <%= link_to_remote "Ändern", {:url => edit_treatment_path(@treatment), :method => :get}, :class => "icon icon-edit" %>
+  <% end -%>
+  <% if @treatment.chargeable? %>
+    <%= link_to_remote "Rechung stellen", {:url => new_patient_treatment_invoice_path(@treatment.patient, @treatment), :method => :get}, :class => "icon icon-add" %>
+  <% end %>
+  <% if @treatment.open? -%>
     <%= link_to_remote "Löschen", {:url => treatment_path(@treatment), :method => :delete, :confirm => "Fall #{@treatment.to_s} löschen?"}, :class => "icon icon-delete" %>
   <% end -%>
 </div>
@@ -13,12 +17,16 @@
 
 <div id=treatment_medical_cases %>
   <div class="contextual">
+  <% if @treatment.open? -%>
     <%= link_to_remote "Neue Diagnose", {:url => new_patient_treatment_medical_case_path(@treatment.patient, @treatment), :method => :get}, :class => "icon icon-add" %>
+  <% end -%>
   </div>
   <h3>Diagnosen</h3>
   <div class="box">
     <div id="treatment_new_medical_case">
-      <%= render :partial => 'medical_cases/form' %>
+      <% if @treatment.medical_cases.empty? %>
+        <%= render :partial => 'medical_cases/form' %>
+      <% end %>
     </div>
     <table id="treatment_medical_case_list" style="width: 100%">
       <%= render :partial => 'medical_cases/item', :collection => @treatment.medical_cases %>
@@ -28,7 +36,9 @@
 
 <div id="treatment_sessions">
   <div class="contextual">
-    <%= link_to_remote "Neue Konsultation", {:url => new_patient_treatment_session_path(@treatment.patient, @treatment), :method => :get}, :class => "icon icon-add" %>
+    <% if @treatment.open? -%>
+      <%= link_to_remote "Neue Konsultation", {:url => new_patient_treatment_session_path(@treatment.patient, @treatment), :method => :get}, :class => "icon icon-add" %>
+    <% end %>
   </div>
   <h3>Leistungen</h3>
   <div id="treatment_session_list" class="box">
