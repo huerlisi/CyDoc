@@ -1,6 +1,6 @@
 class Treatment < ActiveRecord::Base
   # Associations
-  has_many :invoices
+  has_many :invoices, :dependent => :destroy
   belongs_to :patient
   belongs_to :referrer, :class_name => 'Doctor'
   belongs_to :law, :dependent => :destroy
