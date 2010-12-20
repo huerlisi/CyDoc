@@ -10,19 +10,15 @@ class TariffItemsController < ApplicationController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    if params[:all]
-      @tariff_items = TariffItem.paginate(:page => params['page'], :per_page => 25)
-    else
+    if query.present?
       @tariff_items = TariffItem.clever_find(query).paginate(:page => params['page'], :per_page => 25)
+
+      # Show selection list only if more than one hit
+      return if !params[:all] && redirect_if_match(@tariff_items)
+    else
+      @tariff_items = TariffItem.paginate(:page => params['page'], :per_page => 25)
     end
     
-    # Show selection list only if more than one hit
-    if @tariff_items.size == 1
-      params[:id] = @tariff_items.first.id
-      show
-      return
-    end
-      
     respond_to do |format|
       format.html { }
       format.js {

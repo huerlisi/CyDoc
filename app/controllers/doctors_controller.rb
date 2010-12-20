@@ -5,15 +5,18 @@ class DoctorsController < ApplicationController
     query ||= params[:search][:query] if params[:search]
     query ||= params[:quick_search][:query] if params[:quick_search]
 
-    if params[:all]
-      @doctors = Doctor.paginate(:page => params['page'])
-    else
+    if query.present?
       @doctors = Doctor.clever_find(query).paginate(:page => params['page'])
+
+      # Show selection list only if more than one hit
+      return if !params[:all] && redirect_if_match(@doctors)
+    else
+      @doctors = Doctor.paginate(:page => params['page'])
     end
+
     respond_to do |format|
       format.html {
         render :action => 'list'
-        return
       }
       format.js {
         render :update do |page|

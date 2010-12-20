@@ -53,29 +53,22 @@ class PatientsController < ApplicationController
     query ||= params[:search][:query] if params[:search]
     query ||= params[:quick_search][:query] if params[:quick_search]
 
-    if params[:all]
-      @patients = Patient.paginate(:page => params['page'])
-    else
+    if query.present?
       @patients = Patient.clever_find(query).paginate(:page => params['page'])
-    end
 
-    # Show selection list only if more than one hit
+      # Show selection list only if more than one hit
+      return if !params[:all] && redirect_if_match(@patients)
+    else
+      @patients = Patient.paginate(:page => params['page'])
+    end
+    
     respond_to do |format|
       format.html {
-        if !params[:all] and @patients.size == 1
-          redirect_to :action => :show, :id => @patients.first.id
-        else
-          render :action => 'list'
-        end
-        return
+        render :action => 'list'
       }
       format.js {
         render :update do |page|
-          if !params[:all] and @patients.size == 1
-            page.redirect_to :action => :show, :id => @patients.first.id
-          else
-            page.replace_html 'search_results', :partial => 'list'
-          end
+          page.replace_html 'search_results', :partial => 'list'
         end
       }
     end
