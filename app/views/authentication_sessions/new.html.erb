@@ -1,5 +1,7 @@
 <h2>Anmelden</h2>
 
+<%= render 'users/demo' if Rails.env.demo? %>
+
 <% if flash[:error] %><div class="warning"><%= flash[:error] %></div><% end %>
 <div id="login-form">
   <% form_tag authentication_session_path do -%>
