@@ -17,7 +17,7 @@ module Analyseliste
       name = (options[:version] == 'new') ? 'analyseliste.csv' : 'analyseliste_old.csv'
 
       case ENV['RAILS_ENV']
-        when 'production': File.join(RAILS_ROOT, 'data', name)
+        when 'production', 'demo': File.join(RAILS_ROOT, 'data', name)
         when 'development', 'test': File.join(RAILS_ROOT, 'test', 'fixtures', 'analyseliste', name)
       end
     end
