@@ -5,6 +5,28 @@ class TariffItemsController < ApplicationController
   in_place_edit_for :service_item, :ref_code
   in_place_edit_for :service_item, :quantity
 
+  # Show single search match
+  #
+  # Cast match to TariffItem.
+  def redirect_if_match(collection)
+    if collection.size == 1
+      respond_to do |format|
+        format.html {
+          redirect_to collection.first.becomes(TariffItem)
+        }
+        format.js {
+          render :update do |page|
+            page.redirect_to collection.first.becomes(TariffItem)
+          end
+        }
+      end
+      
+      return true
+    else
+      return false
+    end
+  end
+
   # GET /tariff_items
   def index
     query = params[:query]
