@@ -4,11 +4,15 @@ class InsurancesController < ApplicationController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    if params[:all]
-      @insurances = Insurance.paginate(:page => params['page'])
-    else
+    if query.present?
       @insurances = Insurance.clever_find(query).paginate(:page => params['page'])
+    else
+      @insurances = Insurance.paginate(:page => params['page'])
     end
+
+    # Show selection list only if more than one hit
+    return if !params[:all] && redirect_if_match(@insurances)
+    
     respond_to do |format|
       format.html {
         render :action => 'list'

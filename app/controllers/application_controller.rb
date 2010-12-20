@@ -74,6 +74,26 @@ class ApplicationController < ActionController::Base
     send_data(render_to_pdf(options))
   end
 
+  # Show single search match
+  def redirect_if_match(collection)
+    if collection.size == 1
+      respond_to do |format|
+        format.html {
+          redirect_to collection.first
+        }
+        format.js {
+          render :update do |page|
+            page.redirect_to collection.first
+          end
+        }
+      end
+      
+      return true
+    else
+      return false
+    end
+  end
+
   private
   # TODO: Nice hack to add REGEXP support for SQLite, but application controller is bad place...
   def regexp_for_sqlite
