@@ -3,7 +3,7 @@ require "importer"
 module Praxistar
   class Base < ActiveRecord::Base
     include Importer
-    use_db :prefix => "praxis_"
+#    use_db :prefix => "praxis_"
 
     def self.import_all(do_clean, options = {})
       # Adresses

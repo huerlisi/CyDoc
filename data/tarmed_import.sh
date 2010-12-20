@@ -57,6 +57,7 @@ local output="${2:-$NAME.sqlite3}"
 	ln -fs "../data/$output" ../db/${NAME}_development.sqlite3
 	ln -fs "../data/$output" ../db/${NAME}_production.sqlite3
 	ln -fs "../data/$output" ../db/${NAME}_test.sqlite3
+	ln -fs "../data/$output" ../db/${NAME}_demo.sqlite3
 }
 
 function import() {
@@ -74,6 +75,7 @@ function cleanup() {
 	rm "../db/${NAME}_development.sqlite3"
 	rm "../db/${NAME}_production.sqlite3"
 	rm "../db/${NAME}_test.sqlite3"
+	rm "../db/${NAME}_demo.sqlite3"
 }
 
 # Main

@@ -4,7 +4,6 @@ include Praxidata
 
 class Praxidata::Base < ActiveRecord::Base
   include Importer
-  use_db :prefix => "praxidata_"
 
   def self.old_import(mandant_id, selection = :all)
     records = find(selection, :order => "#{primary_key} DESC", :conditions =>  ['Mandant_ID = ?', mandant_id])
