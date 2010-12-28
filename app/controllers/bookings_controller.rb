@@ -75,7 +75,9 @@ class BookingsController < ApplicationController
       flash[:notice] = 'Buchung erfasst.'
 
       respond_to do |format|
-        format.html { }
+        format.html {
+          redirect_to bookings_path
+        }
         format.js {
           render :update do |page|
             if @invoice
@@ -105,7 +107,7 @@ class BookingsController < ApplicationController
   # GET /bookings/1/edit
   def edit
     @booking = Accounting::Booking.find(params[:id])
-    @account = Accounting::Account.find(params[:account_id])
+    @account = Accounting::Account.find(params[:account_id]) if params[:account_id]
     
     respond_to do |format|
       format.html {}
