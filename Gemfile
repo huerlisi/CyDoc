@@ -18,10 +18,13 @@ end
 
 # Standard helpers
 # ================
+gem 'haml'
+
 gem 'formtastic', '~> 1.1.0'
 gem 'will_paginate'
 
 gem 'has_scope', '~> 0.5.0'
+gem 'i18n_rails_helpers', '~> 0.9'
 
 # CyDoc
 # =====

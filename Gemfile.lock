@@ -30,8 +30,12 @@ GEM
     gherkin (2.2.9)
       json (~> 1.4.6)
       term-ansicolor (~> 1.0.5)
+    haml (3.0.24)
     has_scope (0.5.0)
-    i18n (0.4.2)
+    i18n (0.5.0)
+    i18n_rails_helpers (0.9.1)
+      activerecord
+      i18n
     json (1.4.6)
     mysql (2.8.1)
     prawn (0.8.4)
@@ -63,7 +67,9 @@ DEPENDENCIES
   cucumber
   fastercsv
   formtastic (~> 1.1.0)
+  haml
   has_scope (~> 0.5.0)
+  i18n_rails_helpers (~> 0.9)
   mysql
   prawn (~> 0.8.4)
   rails (~> 2.3.8)
