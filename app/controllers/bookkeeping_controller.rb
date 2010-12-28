@@ -13,7 +13,6 @@ class BookkeepingController < ApplicationController
   end
   
   def report
-
     @total_invoiced    = -Invoice::EARNINGS_ACCOUNT.saldo(@value_date_range)
     @total_paid        = Accounting::Account.find_by_code('1000').saldo(@value_date_range) + Accounting::Account.find_by_code('1020').saldo(@value_date_range)
     @open_items        = Invoice::DEBIT_ACCOUNT.saldo(@value_date_end)
