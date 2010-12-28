@@ -1,24 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   # i18n
-  def t_attr(attribute, model = nil)
-    if model.is_a? Class
-      model_name = model.name.underscore
-    elsif model.nil?
-      model_name = controller_name.singularize
-    end
-    t(attribute, :scope => [:activerecord, :attributes, model_name])
-  end
-  
-  def t_model(model = nil)
-    if model.is_a? Class
-      model_name = model.name.underscore
-    elsif model.nil?
-      model_name = controller_name.singularize
-    end
-    t(model_name, :scope => [:activerecord, :models])
-  end
-  
   def t_confirm_delete(record)
     t('messages.confirm_delete', :record => "#{t_model(record.class)} #{record.to_s}")
   end
