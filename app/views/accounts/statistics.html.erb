@@ -1,4 +1,4 @@
-<% for @account in Accounting::Account.all -%>
+<% for @account in Account.all -%>
   <h3><%= link_to @account.title, account_path(@account) %></h3>
   <%= render :partial => 'statistics' %>
 <% end -%>

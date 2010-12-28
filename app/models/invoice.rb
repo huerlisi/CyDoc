@@ -1,7 +1,7 @@
 class Invoice < ActiveRecord::Base
   PAYMENT_PERIOD = 30
-  DEBIT_ACCOUNT = Accounting::Account.find_by_code('1100')
-  EARNINGS_ACCOUNT = Accounting::Account.find_by_code('3200')
+  DEBIT_ACCOUNT = Account.find_by_code('1100')
+  EARNINGS_ACCOUNT = Account.find_by_code('3200')
   
   REMINDER_FEE = {'reminded' => 0.0, '2xreminded' => 10.0, '3xreminded' => 10.0, 'encashment' => 100.0}
   REMINDER_PAYMENT_PERIOD = {'reminded' => 20, '2xreminded' => 10, '3xreminded' => 10, 'encashment' => 0}
@@ -174,7 +174,7 @@ class Invoice < ActiveRecord::Base
   end
   
   # Accounting
-  has_many :bookings, :class_name => 'Accounting::Booking', :as => 'reference', :dependent => :destroy
+  has_many :bookings, :class_name => 'Booking', :as => 'reference', :dependent => :destroy
   
   def due_amount(value_date = nil)
     if value_date

@@ -1,7 +1,7 @@
 class EsrRecord < ActiveRecord::Base
   belongs_to :esr_file
   
-  belongs_to :booking, :class_name => 'Accounting::Booking', :dependent => :destroy
+  belongs_to :booking, :dependent => :destroy
   belongs_to :invoice
   
   named_scope :valid, :conditions => "state = 'valid'"
@@ -114,14 +114,14 @@ class EsrRecord < ActiveRecord::Base
   end
   
   def vesr_account
-    Accounting::BankAccount.find_by_esr_id(client_id)
+    BankAccount.find_by_esr_id(client_id)
   end
 
   def create_esr_booking
     if invoice
       esr_booking = invoice.bookings.build
     else
-      esr_booking = Accounting::Booking.new
+      esr_booking = Booking.new
     end
     
     esr_booking.update_attributes(

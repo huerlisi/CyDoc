@@ -9,7 +9,7 @@ class AccountsController < ApplicationController
   
   # GET /accounts
   def index
-    @accounts = Accounting::Account.paginate(:page => params['page'], :per_page => 20, :order => 'code')
+    @accounts = Account.paginate(:page => params['page'], :per_page => 20, :order => 'code')
     
     respond_to do |format|
       format.html {
@@ -20,9 +20,9 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1
   def show
-    @account = Accounting::Account.find(params[:id])
+    @account = Account.find(params[:id])
     
-    @bookings = apply_scopes(Accounting::Booking).by_account(@account).paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
+    @bookings = apply_scopes(Booking).by_account(@account).paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
     respond_to do |format|
       format.html {
         render :action => 'show'
@@ -33,8 +33,8 @@ class AccountsController < ApplicationController
 
   # POST /account/print/1
   def print
-    @account = Accounting::Account.find(params[:id])
-    @bookings = apply_scopes(Accounting::Booking).by_account(@account).find(:all, :order => 'value_date, id')
+    @account = Account.find(params[:id])
+    @bookings = apply_scopes(Booking).by_account(@account).find(:all, :order => 'value_date, id')
     
     respond_to do |format|
       format.html {

@@ -9,7 +9,7 @@ class BookingsController < ApplicationController
   
   # GET /bookings
   def index
-    @bookings = apply_scopes(Accounting::Booking).paginate(:page => params['page'], :per_page => 20, :order => 'value_date DESC')
+    @bookings = apply_scopes(Booking).paginate(:page => params['page'], :per_page => 20, :order => 'value_date DESC')
     
     respond_to do |format|
       format.html {
@@ -24,7 +24,7 @@ class BookingsController < ApplicationController
       @invoice = Invoice.find(params[:invoice_id])
       @booking = @invoice.bookings.build
     else
-      @booking = Accounting::Booking.new
+      @booking = Booking.new
     end
     
     @booking.value_date = Date.today
@@ -47,28 +47,28 @@ class BookingsController < ApplicationController
       @invoice = Invoice.find(params[:invoice_id])
       @booking = @invoice.bookings.build(params[:booking])
     else
-      @booking = Accounting::Booking.new(params[:booking])
+      @booking = Booking.new(params[:booking])
     end
     
     case @booking.title
       when "Barzahlung":
-        @booking.credit_account = Accounting::Account.find_by_code('1000')
-        @booking.debit_account = Accounting::Account.find_by_code('1100')
+        @booking.credit_account = Account.find_by_code('1000')
+        @booking.debit_account = Account.find_by_code('1100')
       when "Bankzahlung":
-        @booking.credit_account = Accounting::Account.find_by_code('1020')
-        @booking.debit_account = Accounting::Account.find_by_code('1100')
+        @booking.credit_account = Account.find_by_code('1020')
+        @booking.debit_account = Account.find_by_code('1100')
       when "Skonto/Rabatt":
-        @booking.credit_account = Accounting::Account.find_by_code('3200')
-        @booking.debit_account = Accounting::Account.find_by_code('1100')
+        @booking.credit_account = Account.find_by_code('3200')
+        @booking.debit_account = Account.find_by_code('1100')
       when "Zusatzleistung":
-        @booking.credit_account = Accounting::Account.find_by_code('1100')
-        @booking.debit_account = Accounting::Account.find_by_code('3200')
+        @booking.credit_account = Account.find_by_code('1100')
+        @booking.debit_account = Account.find_by_code('3200')
       when "Debitorenverlust":
-        @booking.credit_account = Accounting::Account.find_by_code('3900') # Debitorenverlust
-        @booking.debit_account = Accounting::Account.find_by_code('1100') # Debitor
+        @booking.credit_account = Account.find_by_code('3900') # Debitorenverlust
+        @booking.debit_account = Account.find_by_code('1100') # Debitor
       when "Rückerstattung":
-        @booking.credit_account = Accounting::Account.find_by_code('1100') # Debitor
-        @booking.debit_account = Accounting::Account.find_by_code('1020') # Bank
+        @booking.credit_account = Account.find_by_code('1100') # Debitor
+        @booking.debit_account = Account.find_by_code('1020') # Bank
     end
     
     if @booking.save
@@ -106,8 +106,8 @@ class BookingsController < ApplicationController
 
   # GET /bookings/1/edit
   def edit
-    @booking = Accounting::Booking.find(params[:id])
-    @account = Accounting::Account.find(params[:account_id]) if params[:account_id]
+    @booking = Booking.find(params[:id])
+    @account = Account.find(params[:account_id]) if params[:account_id]
     
     respond_to do |format|
       format.html {}
@@ -121,8 +121,8 @@ class BookingsController < ApplicationController
 
   # PUSH /booking/1
   def update
-    @booking = Accounting::Booking.find(params[:id])
-    @account = Accounting::Account.find(params[:account_id])
+    @booking = Booking.find(params[:id])
+    @account = Account.find(params[:account_id])
     
     @booking.reference.touch if @booking.reference
     if @booking.update_attributes(params[:booking])
@@ -150,15 +150,15 @@ class BookingsController < ApplicationController
   
   # DELETE /booking/1
   def destroy
-    @booking = Accounting::Booking.find(params[:id])
+    @booking = Booking.find(params[:id])
 
     @booking.destroy
     
     if params[:account_id]
-      @account = Accounting::Account.find(params[:account_id])
+      @account = Account.find(params[:account_id])
       @bookings = @account.bookings.paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
     else
-      @bookings = apply_scopes(Accounting::Booking).paginate(:page => params['page'], :per_page => 20, :order => 'value_date DESC')
+      @bookings = apply_scopes(Booking).paginate(:page => params['page'], :per_page => 20, :order => 'value_date DESC')
     end
     
     respond_to do |format|
