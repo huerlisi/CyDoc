@@ -41,8 +41,8 @@ module Praxidata
       end
 
       for debitor in import_record.debitoren
-        booking = Accounting::Booking.find_by_imported_id_and_title(debitor.id, 'Rechnung')
-        booking ||= Accounting::Booking.new(
+        booking = ::Booking.find_by_imported_id_and_title(debitor.id, 'Rechnung')
+        booking ||= ::Booking.new(
           :amount => debitor.snBetrag,
           :title  => 'Rechnung',
           :credit_account => ::Invoice::EARNINGS_ACCOUNT,
@@ -58,7 +58,7 @@ module Praxidata
         self.state = 'booked' if state == 'prepared'
 
         for mahnung in debitor.mahnungen
-          reminder_booking = Accounting::Booking.new(
+          reminder_booking = ::Booking.new(
             :title          => "#{mahnung.stufe} (Gebühr #{sprintf('%0.2f', mahnung.snSpesen.currency_round)})",
             :amount         => mahnung.snSpesen.currency_round,
             :reference      => booking.reference,
@@ -74,12 +74,12 @@ module Praxidata
       end
 
       for zahlung in import_record.zahlungen
-        booking = Accounting::Booking.find_by_imported_id_and_title(zahlung.id, 'Zahlung')
-        booking ||= Accounting::Booking.new(
+        booking = ::Booking.find_by_imported_id_and_title(zahlung.id, 'Zahlung')
+        booking ||= ::Booking.new(
           :amount => zahlung.snBetrag,
           :title  => 'Zahlung',
-          :credit_account => ::Accounting::Account.find_by_code('1100'),
-          :debit_account  => ::Accounting::Account.find_by_code('1020'),
+          :credit_account => ::Account.find_by_code('1100'),
+          :debit_account  => ::Account.find_by_code('1020'),
           :value_date => zahlung.dtValutadatum,
           :imported_id => zahlung.id
         )

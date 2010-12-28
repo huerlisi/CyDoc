@@ -3,7 +3,7 @@ class Praxidata::BankAccount < Praxidata::Base
   set_primary_key "ID_Bank"
 
   def self.hozr_model
-    Accounting::BankAccount
+    ::BankAccount
   end
 
   def self.import_attributes(a)

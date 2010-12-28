@@ -4,7 +4,7 @@ module Praxistar
     set_primary_key "ID_Bank"
 
     def self.int_class
-      Accounting::Bank
+      ::Bank
     end
 
     def self.import_record(a, options)

@@ -9,4 +9,4 @@ module Praxidata
   end
 end
 
-Accounting::Booking.send :include, Praxidata::Import, Praxidata::Booking
+::Booking.send :include, Praxidata::Import, Praxidata::Booking
