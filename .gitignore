@@ -7,14 +7,18 @@ DEADJOE
 
 # Rails
 # =====
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+
 # Vendor
-vendor/
+vendor/cache
+vendor/bundle
 
 # Volatile
-log/
-tmp/
-db/*.sqlite3
 doc/api
+doc/app
 public/stylesheets/all.css
 
 # Local
