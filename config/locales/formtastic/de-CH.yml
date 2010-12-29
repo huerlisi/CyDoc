@@ -2,8 +2,8 @@ de-CH:
   formtastic:
     :yes: 'Ja'
     :no: 'Nein'
-    create: '{{model}} anlegen'
-    update: '{{model}} aktualisieren'
-    save: '{{model}} speichern'
+    create: '%{model} anlegen'
+    update: '%{model} aktualisieren'
+    save: '%{model} speichern'
     submit: 'Abschicken'
     required: 'Erforderlich'
