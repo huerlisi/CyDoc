@@ -5,7 +5,7 @@
       <%= render :partial => 'patients/navigation_section' %>
       <%= render :partial => 'invoices/navigation_section' %>
     </td>
-    <td style="vertical-align: top; padding-left: 4em">
+    <td style="vertical-align: top">
       <%= navigation_section('Stammdaten', {"Ärzte anzeigen" => :doctors, "Versicherungen anzeigen" => :insurances, "Leistungen anzeigen" => :tariff_items, "Medikamente anzeigen" => :drug_products }, '48x48/catalogs.png') %>
       <%= navigation_section('Buchhaltung', {"Konten anzeigen" => :accounts, "Debitoren anzeigen" => account_path(Invoice::DEBIT_ACCOUNT) }, '48x48/accounts.png') %>
     </td>
