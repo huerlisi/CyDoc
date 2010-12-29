@@ -1,0 +1,6 @@
+<div class="contextual">
+  <%= link_to "Alle drucken", print_all_invoices_path, :method => :post, :class => "icon icon-print" %>
+</div>
+<h2>Rechnungen zum Drucken</h2>
+<% @invoices = @prepared %>
+<%= render :partial => 'list' %>
