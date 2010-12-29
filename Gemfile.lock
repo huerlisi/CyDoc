@@ -72,6 +72,6 @@ DEPENDENCIES
   i18n_rails_helpers (~> 0.9)
   mysql
   prawn (~> 0.8.4)
-  rails (~> 2.3.8)
+  rails (~> 2.3.10)
   sqlite3-ruby
   will_paginate
