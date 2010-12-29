@@ -1,7 +1,9 @@
 div.navigation_section {
   margin:          2em;
   margin-bottom:   3.5em;
+  min-height:      10em;
 }
+
 .navigation_section img {
   margin-right:    1em;
   float:           left;
