@@ -9,7 +9,9 @@ div.navigation_section {
 
 .navigation_section ul {
   list-style-type: none;
+  padding-left:    60px;
 }
+
 .navigation_section li {
   text-align:      left;
   font-weight:     bold;
