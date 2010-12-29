@@ -15,6 +15,7 @@
     <td class="tab-frame">
       <div class="box tab-box">
         <% tabs.each do |tab| -%>
+          <%- @tab_name = tab[:name] %>
           <%= content_tag('div', render(:partial => tab[:partial]),
                                  :id => "tab-content-#{tab[:name]}",
                                  :style => (tab[:name] != selected_tab ? 'display:none' : nil),
