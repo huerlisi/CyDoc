@@ -33,4 +33,4 @@ module PostalCodes
   end
 end
 
-PostalCode.send :include, Praxidata::Import, PostalCodes::Import
+PostalCode.send :include, PostalCodes::Import
