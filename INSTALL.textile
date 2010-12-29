@@ -1,0 +1,73 @@
+We currently support installing on Debian 5.0 Lenny and Ubuntu 10.04 Lucid systems.
+
+h2. Install rubygems
+
+To get access to the binaries provided by rails and other gems you need to extend your PATH.
+
+<pre>
+export PATH=/var/lib/gems/1.8/bin:$PATH
+</pre>
+
+h3. On Debian 5.0 Lenny and Ubuntu Intrepid
+
+We need to add lenny-backports support to get a rubygems version supporting rails 2.3.
+
+Create the file _/etc/apt/sources.list.d/lenny-backports.list_ with the following content:
+
+<pre>
+deb http://www.backports.org/debian lenny-backports main contrib
+</pre>
+
+Enable the backports repository and install rubygems:
+
+<pre>
+sudo apt-get update
+sudo apt-get install debian-backports-keyring
+sudo apt-get install -t lenny-backports rubygems
+</pre>
+
+h3. On Ubuntu Lucid
+
+A current rubygems is included in Ubuntu Lucid. Just install:
+
+<pre>
+sudo apt-get install rubygems
+</pre>
+
+h2. Install Ruby'n'Rails
+
+CyDoc is developed and tested using Rails 2.3.10 and Ruby 1.8.
+
+Install packages to support installing rails:
+
+<pre>
+sudo apt-get install irb ruby libruby-extras git-core recode sqlite3 libsqlite3-dev libmysqlclient-dev libxml2-dev libxslt-dev cups-bsd cupsys-client libcupsys2-dev ruby-dev build-essential
+sudo gem install rake bundler
+</pre>
+
+h2. Install CyDoc
+
+Install current CyDoc from git repostory. We'll use this checkout as working directory from now on:
+
+<pre>
+sudo git clone http://github.com/huerlisi/CyDoc.git /srv/cydoc
+cd /srv/cydoc
+sudo mkdir -p vendor tmp log data/vesr
+sudo cp config/database.yml.example config/database.yml
+</pre>
+
+Install dependency gems:
+
+<pre>
+bundle --deployment
+</pre>
+
+Install dependency plugins:
+
+<pre>
+# Install plugin package dependencies
+sudo git submodule update --init
+
+# Run post-installation hooks
+sudo /var/lib/gems/1.8/bin/rake auth:gen:site_key
+</pre>
