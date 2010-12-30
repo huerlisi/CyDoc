@@ -3,6 +3,7 @@
   - f.inputs do
     = f.input :value_date, :as => :date_field, :input_html => {"data-autofocus" => true, :size => 10, :style => 'text-align: right'}
     = f.input :title
+    = f.input :reference_id, :as => :string, :input_html => {:size => 6}
     = f.input :amount, :input_html => {:size => 12, :style => 'text-align: right'}
     = f.input :credit_account, :include_blank => true, :input_html => {:class => 'combobox'}
     = f.input :debit_account, :include_blank => true, :input_html => {:class => 'combobox'}

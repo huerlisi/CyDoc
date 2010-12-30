@@ -61,6 +61,8 @@ de-CH:
         doctors_price:    Arztpreis
         price:            Publikumspreis
         content:          Inhalt
+      booking:
+        reference_id:     Rechnungsnr.
 
   invoice:
     state:

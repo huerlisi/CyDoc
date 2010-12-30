@@ -127,13 +127,17 @@ class BookingsController < ApplicationController
   # PUSH /booking/1
   def update
     @booking = Booking.find(params[:id])
-    @account = Account.find(params[:account_id])
+    @account = Account.find(params[:account_id]) if params[:account_id]
     
     @booking.reference.touch if @booking.reference
     if @booking.update_attributes(params[:booking])
       @booking.reference.touch if @booking.reference
       respond_to do |format|
-        format.html { }
+        # Booking edit
+        format.html { 
+          redirect_to @booking
+        }
+        # Inline edit in account view
         format.js {
           render :update do |page|
             @bookings = @account.bookings.paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
