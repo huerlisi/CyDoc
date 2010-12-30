@@ -1,10 +1,12 @@
 = contextual_links
 
-%h1= @booking
+%h1= t_title
 
-- for column in Booking.content_columns
-  %p
-    %b
-      = column.human_name
-      \:
-    = h @booking.send(column.name)
+- show_for @booking do |b|
+  = b.attribute :value_date
+  = b.attribute :title
+  = b.attribute :amount
+  = b.association :credit_account
+  = b.association :debit_account
+  = b.association :reference
+  = b.attribute :comments, :if_blank => ''

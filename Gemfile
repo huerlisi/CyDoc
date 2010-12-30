@@ -25,6 +25,7 @@ gem 'will_paginate'
 
 gem 'has_scope', '~> 0.5.0'
 gem 'i18n_rails_helpers', '~> 0.9'
+gem 'show_for', '~> 0.1.0'
 
 # CyDoc
 # =====
