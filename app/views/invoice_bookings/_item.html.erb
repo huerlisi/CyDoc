@@ -1,7 +1,7 @@
 <tr>
   <td style="width: 10em"><%=h item.value_date.strftime('%d.%m.%Y') %></td>
   <td>
-    <%=h item.title %>
+    <%= link_to item.title, item %>
     <%= '<hr style="height: 1px; margin: 0"/>' unless item.comments.blank? %>
     <%=h item.comments %>
   </td>
