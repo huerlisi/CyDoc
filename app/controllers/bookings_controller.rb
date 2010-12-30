@@ -18,6 +18,11 @@ class BookingsController < ApplicationController
     end
   end
 
+  # GET /bookings/1
+  def show
+    @booking = Booking.find(params[:id])
+  end
+  
   # GET /bookings/new
   def new
     if params[:invoice_id]

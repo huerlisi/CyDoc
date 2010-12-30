@@ -12,7 +12,8 @@
   <td style="text-align: right"><%= "<i>#{link_to(h(item.credit_account.code), account_path(item.credit_account), :title => h(item.credit_account.title))}</i>" %></td>
   <td style="text-align: right"><%= "<i>#{link_to(h(item.debit_account.code), account_path(item.debit_account), :title => h(item.debit_account.title))}</i>" %></td>
   <td style="text-align: right"><%= in_place_editor_field(:booking, :amount_as_string) %></td>
-  <td style="border: none 0px; width: 44px">
+  <td style="border: none 0px; width: 62px">
+    <%= link_to image_tag('16x16/show.png'), booking_path(@booking) %>
     <%= link_to image_tag('edit.png'), edit_booking_path(@booking) %>
     <%= link_to_remote image_tag('delete.png'), {:url => booking_path(item), :method => :delete, :confirm => "Buchung #{item.to_s} löschen?"} %>
   </td>
