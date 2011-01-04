@@ -16,7 +16,7 @@ production:
   password: CHANGE ME
   encoding: utf8
 
-production:
+demo:
   database: cydoc_demo
   adapter: mysql
   host: localhost
