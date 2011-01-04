@@ -43,15 +43,15 @@ Insurance.create!([
 ])
 
 # Accounting
-bank = Accounting::Bank.create!(
+bank = Bank.create!(
   :full_name => "General Bank", :street_address => "Hauptstrasse 1", :postal_code => "8000", :locality => "Zürich"
 )
 
-doctor.accounts << Accounting::BankAccount.create!([
+doctor.accounts << BankAccount.create!([
   {:pc_id => "01-123456-7", :esr_id => "444444", :code => "1020", :title => "Bankkonto", :bank => bank, :holder => doctor}
 ])
 
-doctor.accounts << Accounting::Account.create!([
+doctor.accounts << Account.create!([
   {:code => "1000", :title => "Kasse"},
   {:code => "1100", :title => "Debitoren"},
   {:code => "1210", :title => "Lager Medikamente"},
