@@ -20,14 +20,14 @@ module Google
         a = p.vcard.build_address
         a.street_address = address.split("\n")[0]
         a.postal_code = address.split("\n")[1].split(' ')[-1]
-        a.locality = address.split("\n")[1].split(' ')[0..-2]
+        a.locality = address.split("\n")[1].split(' ')[0..-2].to_s
       end
       address = r['Home Address']
       unless address.blank?
         a = p.vcard.build_address
         a.street_address = address.split("\n")[0]
         a.postal_code = address.split("\n")[1].split(' ')[-1]
-        a.locality = address.split("\n")[1].split(' ')[0..-2]
+        a.locality = address.split("\n")[1].split(' ')[0..-2].to_s
       end
       p.save
     end
