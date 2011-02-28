@@ -38,3 +38,5 @@ gem 'activerecord-sqlserver-adapter'
 
 # PDF
 gem 'prawn', '~> 0.8.4'
+
+gem 'csv-mapper'
