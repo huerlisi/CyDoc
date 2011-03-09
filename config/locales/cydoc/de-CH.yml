@@ -2,6 +2,7 @@ de-CH:
   activerecord:
     models:
       patient:            Patient
+      doctor:             Arzt
       invoice:            Rechnung
       treatment:          Fall
       recall:             Recall
@@ -26,6 +27,9 @@ de-CH:
         given_name:  Vorname
         family_name: Nachname
         birth_date:  Geburtstag
+      doctor:
+        ean_party:   EAN-Nr.
+        zsr:         ZSR-Nr.
       treatment:
         date_begin: Behandlung von
         date_end:   Behandlung bis
@@ -63,7 +67,11 @@ de-CH:
         content:          Inhalt
       booking:
         reference_id:     Rechnungsnr.
-
+      account:
+        number:           Nummer
+        pc_id:            PC-Nummer
+        esr_id:           ESR-Nummer
+        
   invoice:
     state:
       prepared:    offen

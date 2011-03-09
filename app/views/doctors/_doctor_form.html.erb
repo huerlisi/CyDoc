@@ -1,7 +1,7 @@
 <h3>Arzt Information</h3>
-<% fields_for @doctor, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
-<table>
-  <%= f.text_field :ean_party, :label => "EAN-Nr." %>
-  <%= f.text_field :zsr, :label => "ZSR-Nr." %>
-</table>
+<% semantic_fields_for @doctor do |f| %>
+  <% f.inputs do %>
+    <%= f.input :ean_party %>
+    <%= f.input :zsr %>
+  <% end %>
 <% end %>
