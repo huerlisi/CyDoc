@@ -14,6 +14,10 @@
     <%= javascript_include_tag 'will_paginate' %>
     <%= javascript_include_tag 'tabbing' %>
     <%= javascript_include_tag 'printing' %>
+    <%= javascript_include_tag 'jquery.min' %>
+    <script>
+      jQuery.noConflict();
+    </script>
     <% end %>
     <title>CyDoc - <%= controller.action_name %></title>
   </head>
