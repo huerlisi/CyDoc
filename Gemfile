@@ -32,6 +32,9 @@ gem 'show_for', '~> 0.1.0'
 # Authentication
 gem 'aasm'
 
+# Date/Time handling
+gem 'validates_timeliness', '~> 2.3'
+
 # Import
 gem 'fastercsv'
 gem 'activerecord-sqlserver-adapter'
