@@ -28,9 +28,6 @@
 [submodule "vendor/plugins/restful_authentication"]
 	path = vendor/plugins/restful_authentication
 	url = http://github.com/technoweenie/restful-authentication.git
-[submodule "vendor/plugins/form_builders"]
-	path = vendor/plugins/form_builders
-	url = http://github.com/rubaidh/form_builders.git
 [submodule "vendor/plugins/validation_reflection"]
 	path = vendor/plugins/validation_reflection
 	url = http://github.com/redinger/validation_reflection.git
