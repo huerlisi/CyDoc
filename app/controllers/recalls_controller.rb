@@ -18,6 +18,7 @@ class RecallsController < ApplicationController
       format.js {
         render :update do |page|
           page.replace_html "new_recall", :partial => 'form'
+          page.call(:initBehaviour)
         end
       }
     end
@@ -48,6 +49,7 @@ class RecallsController < ApplicationController
         format.js {
           render :update do |page|
             page.replace 'recall_form', :partial => 'recalls/form', :object => @recall
+            page.call(:initBehaviour)
           end
         }
       end
@@ -64,6 +66,7 @@ class RecallsController < ApplicationController
       format.js {
         render :update do |page|
           page.insert_html :after, "recall_#{@recall.id}", :partial => 'recalls/form'
+          page.call(:initBehaviour)
         end
       }
     end
@@ -106,6 +109,7 @@ class RecallsController < ApplicationController
         format.js {
           render :update do |page|
             page.replace 'recall_form', :partial => 'recalls/form'
+            page.call(:initBehaviour)
           end
         }
       end

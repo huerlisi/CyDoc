@@ -40,6 +40,7 @@ class BookingsController < ApplicationController
         render :update do |page|
           if @invoice
             page.insert_html :top, "invoice_booking_list", :partial => 'invoice_bookings/simple_form'
+            page.call(:initBehaviour)
           end
         end
       }
@@ -119,6 +120,7 @@ class BookingsController < ApplicationController
       format.js {
         render :update do |page|
           page.replace "booking_#{@booking.id}", :partial => 'edit'
+          page.call(:initBehaviour)
         end
       }
     end
@@ -151,6 +153,7 @@ class BookingsController < ApplicationController
         format.js {
           render :update do |page|
             page.replace "booking_#{@booking.id}", :partial => 'edit'
+            page.call(:initBehaviour)
           end
         }
       end

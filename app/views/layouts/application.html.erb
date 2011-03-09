@@ -8,16 +8,18 @@
 
     <link rel="shortcut icon" href="<%= image_path('favicon.ico') %>" />
     
-    <%= stylesheet_link_tag 'formtastic', 'formtastic-cydoc', 'redmine', 'tabbing', 'cydoc', 'navigation', 'cyto', 'result_report', 'invoice', 'accounting', :media => 'all' %>
+    <%= stylesheet_link_tag 'formtastic', 'formtastic-cydoc', 'redmine', 'tabbing', 'cydoc', 'navigation', 'cyto', 'result_report', 'invoice', 'accounting', 'jquery-ui', :media => 'all' %>
     
     <%= javascript_include_tag :defaults %>
     <%= javascript_include_tag 'will_paginate' %>
     <%= javascript_include_tag 'tabbing' %>
     <%= javascript_include_tag 'printing' %>
     <%= javascript_include_tag 'jquery.min' %>
+    <%= javascript_include_tag 'jquery-ui.min' %>
     <script>
       jQuery.noConflict();
     </script>
+    <%= javascript_include_tag 'jquery-application' %>
     <% end %>
     <title>CyDoc - <%= controller.action_name %></title>
   </head>

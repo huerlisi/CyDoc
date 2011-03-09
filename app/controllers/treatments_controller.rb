@@ -30,6 +30,7 @@ class TreatmentsController < ApplicationController
       format.js {
         render :update do |page|
           page.replace_html "treatment", :partial => 'form'
+          page.call(:initBehaviour)
         end
       }
     end
@@ -45,6 +46,7 @@ class TreatmentsController < ApplicationController
         render :update do |page|
           page.replace_html 'tab-content-treatments', :partial => 'new'
           page.call 'showTab', controller_name
+          page.call(:initBehaviour)
         end
       }
     end
@@ -90,6 +92,7 @@ class TreatmentsController < ApplicationController
         format.js {
           render :update do |page|
             page.replace_html "treatment", :partial => 'form'
+            page.call(:initBehaviour)
           end
         }
       end
@@ -119,6 +122,7 @@ class TreatmentsController < ApplicationController
         format.js {
           render :update do |page|
             page.replace_html 'treatment', :partial => 'form'
+            page.call(:initBehaviour)
           end
         }
       end

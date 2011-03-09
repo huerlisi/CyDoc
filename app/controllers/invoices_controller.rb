@@ -196,6 +196,7 @@ class InvoicesController < ApplicationController
         render :update do |page|
           page.replace_html 'tab-content-invoices', :partial => 'form'
           page.call 'showTab', "invoices"
+          page.call(:initBehaviour)
           page['invoice_value_date'].select
         end
       }
@@ -260,6 +261,7 @@ class InvoicesController < ApplicationController
         format.js {
           render :update do |page|
             page.replace_html 'tab-content-invoices', :partial => 'form'
+            page.call(:initBehaviour)
             page['invoice_value_date'].select
           end
         }
