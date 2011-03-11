@@ -35,8 +35,6 @@ de-CH:
         date_end:   Behandlung bis
         reason:     Behandlungsgrund
         place_type: Erbringungsort
-        date_begin_formatted: Behandlung von
-        date_end_formatted:   Behandlung bis
       appointment:
         date:    Am
         from:    Von
