@@ -1,0 +1,86 @@
+en:
+  activerecord:
+    models:
+      patient:            Patient
+      doctor:             Doctor
+      invoice:            Invoice
+      treatment:          Treatment
+      recall:             Recall
+      insurance:          Insurance
+      tariff_item:        Tariff Item
+      tarmed_tariff_item: Tarmed Tariff Item
+      lab_tariff_item:    Lab Analysis Tariff Item
+      drug_tariff_item:   Drug
+      migel_tariff_item:  MiGel Tariff Item
+      tariff_item_group:  Tariff Item Group
+      drug_product:       Drug
+      drug_article:       Drug package
+
+    attributes:
+      invoice:
+        value_date: Date of Invoice
+        remark:     Remarks
+      recall:
+        due_date:   Due Date
+        remarks:    Remakrs
+      patient:
+        given_name:  Given Name
+        family_name: Surename
+        birth_date:  Date of Birth
+      doctor:
+        ean_party:   EAN-Nr.
+        zsr:         ZSR-Nr.
+      treatment:
+        date_begin:  Treatment Begin
+        date_end:    Treatment End
+        reason:      Reason for Treatment
+        place_type:  Place of Treatment
+      appointment:
+        date:        Date
+        from:        From
+        to:          To
+        remarks:     Remarks
+      tariff_item:
+        type_as_string: Type
+        code:           Code
+        remark:         Description
+        obligation:     Obligation
+        vat_class:      VAT
+        amount_mt:      TP&nbsp;AL/Price
+        amount_tt:      TP&nbsp;TL
+        amount:         Amount
+      drug_product:
+        name:           Name
+        description:    Description
+      drug_article:
+        code:             Code
+        name:             Name
+        description:      Description
+        number_of_pieces: Pieces
+        quantity:         Quantity
+        quantity_unit:    Unit
+        vat_class:        VAT
+        doctors_price:    Doctors Price
+        price:            Consumer Price
+        content:          Content
+      booking:
+        reference_id:     Invoice Nr.
+      account:
+        number:           Number
+        pc_id:            PC-Number
+        esr_id:           ESR-Number
+        
+  invoice:
+    state:
+      prepared:    open
+      booked:      booked
+      canceled:    canceled
+      reactivated: reaktivated
+      reminded:    1x reminded
+      2xreminded:  2x reminded
+      encashment:  in encashment
+      paid:        paid
+      printed:     printed
+
+  recall:
+    list: Recalls
