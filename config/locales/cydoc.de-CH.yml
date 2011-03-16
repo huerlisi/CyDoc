@@ -1,5 +1,12 @@
 de-CH:
   cydoc:
+    user_bar:
+      logged_in_as: "Angemeldet als"
+      logout: "Abmelden"
+      login: "Anmelden"
+    search:
+      searching: "Suchen"
+      search: "Suche"
     navigation:
       patients: 'Patienten'
       master_data: Stammdaten

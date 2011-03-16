@@ -1,4 +1,4 @@
 <% form_tag( patients_url, {:method => :get} ) do %>
-  <%= text_field :quick_search, :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
-  <%= submit_tag "Suchen" %>
+  <%= text_field :quick_search, :query, :label => t('cydoc.search.search'), :size => 15, :autocomplete => 'off' %>
+  <%= submit_tag t('cydoc.search.searching') %>
 <% end %>
