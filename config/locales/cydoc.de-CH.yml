@@ -1,4 +1,34 @@
 de-CH:
+  cydoc:
+    navigation:
+      patients: 'Patienten'
+      master_data: Stammdaten
+      doctors: "Ärzte"
+      show_doctors: "Ärzte anzeigen"
+      show_insurances: "Versicherungen anzeigen"
+      show_tariff_items: "Leistungen anzeigen"
+      show_drug_products: "Medikamente anzeigen"
+      create: "Erfassen"
+      search: "Suchen"
+      payments: 'Rechnungen'
+      payment_overview: "Rechnungsübersicht"
+      reminder_list: "Mahnliste"
+      open_cases: "Offene Fälle"
+      accounting: 'Buchhaltung'
+      balance_sheet: "Jahresabschluss"
+      all_bookings: "Alle Buchungen"
+      open_positions: "Offene Posten"
+      show_accounts: "Konten anzeigen"
+      show_debtors: "Debitoren anzeigen"
+      show_insurances: "Versicherungen anzeigen"
+      insurances: "Versicherungen"
+      show_tariff_items: "Leistungen anzeigen"
+      show_drug_products: "Medikamente anzeigen"
+      home: "Home"
+      recalls: "Recalls"
+      service: "Leistungen"
+      drug_products: "Medikamente"
+      help: "Hilfe"
   activerecord:
     models:
       patient:            Patient

@@ -1,4 +1,12 @@
 en:
+  cydoc:
+    navigation_section:
+      patients: 'Patienten'
+      master_data: Stammdaten
+      doctors: "Ärzte anzeigen"
+      insurances: "Versicherungen anzeigen"
+      tariff_items: "Leistungen anzeigen"
+      drug_products: "Medikamente anzeigen"
   activerecord:
     models:
       patient:            Patient

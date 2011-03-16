@@ -1,4 +1,4 @@
-<%= navigation_section('Patienten', {
-      "Erfassen"      => {:controller => 'patients', :action => 'new'},
-      "Suchen"        => :patients,
+<%= navigation_section(:patients, {
+      :create      => {:controller => 'patients', :action => 'new'},
+      :search       => :patients,
     }, 'system-users.png') %>

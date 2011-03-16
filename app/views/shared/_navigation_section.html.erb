@@ -1,9 +1,9 @@
 <div class="navigation_section">
-  <h2><%=h section_title %></h2>
+  <h2><%= t(section_title, :scope => 'cydoc.navigation') %></h2>
   <%= image_tag(image) %>
   <ul>
     <% for item in items %>
-      <li><%= link_to item[:title], item[:url] %></li>
+      <li><%= link_to t(item[:title], :scope => 'cydoc.navigation'), item[:url] %></li>
     <% end %>
   </ul>
 </div>

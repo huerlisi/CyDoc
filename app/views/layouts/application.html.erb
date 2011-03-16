@@ -35,16 +35,16 @@
           <% cache :main_menu do %>
           <div id="main-menu">
             <ul>
-              <li><%= link_to "Home", :controller => "/" %></li>
-              <li><%= link_to "Patienten", :controller => 'patients' %></li>
-              <li><%= link_to "Recalls", :controller => 'recalls' %></li>
-              <li><%= link_to "Rechnungen", :controller => 'invoices' %></li>
-              <li><%= link_to "Versicherungen", :controller => 'insurances' %></li>
-              <li><%= link_to "&Auml;rzte", :controller => 'doctors' %></li>
-              <li><%= link_to "Leistungen", :controller => 'tariff_items' %></li>
-              <li><%= link_to "Medikamente", :controller => 'drug_products' %></li>
-              <li><%= link_to "Buchhaltung", :controller => 'bookkeeping' %></li>
-              <li><%= link_to "Hilfe", :controller => 'help' %></li>
+              <li><%= link_to t('cydoc.navigation.home'), :controller => "/" %></li>
+              <li><%= link_to t('cydoc.navigation.patients'), :controller => 'patients' %></li>
+              <li><%= link_to t('cydoc.navigation.recalls'), :controller => 'recalls' %></li>
+              <li><%= link_to t('cydoc.navigation.payments'), :controller => 'invoices' %></li>
+              <li><%= link_to t('cydoc.navigation.insurances'), :controller => 'insurances' %></li>
+              <li><%= link_to t('cydoc.navigation.doctors'), :controller => 'doctors' %></li>
+              <li><%= link_to t('cydoc.navigation.service'), :controller => 'tariff_items' %></li>
+              <li><%= link_to t('cydoc.navigation.drug_products'), :controller => 'drug_products' %></li>
+              <li><%= link_to t('cydoc.navigation.accounting'), :controller => 'bookkeeping' %></li>
+              <li><%= link_to t('cydoc.navigation.help'), :controller => 'help' %></li>
             </ul>
           </div>
           <% end %>
