@@ -2,7 +2,7 @@
 </div>
 
 <%= tab_container 'patient', @patient.to_s,
-      [{:name => 'personal', :partial => 'patients/show', :label => 'Personalien'},
-       {:name => 'treatments', :partial => 'patients/treatment_tab', :label => 'Fälle'},
-       {:name => 'invoices', :partial => 'patients/invoice_tab', :label => 'Rechnungen'},
+      [{:name => 'personal', :partial => 'patients/show', :label => t('cydoc.tab_container.patient.personal_data')},
+       {:name => 'treatments', :partial => 'patients/treatment_tab', :label => t('cydoc.tab_container.patient.treatment')},
+       {:name => 'invoices', :partial => 'patients/invoice_tab', :label => t('cydoc.tab_container.patient.invoice')},
       ] %>

@@ -1,27 +1,27 @@
 <%= javascript_tag "$('patient_vcard_attributes_given_name').focus()" %>
-<h3>Personalien</h3>
+<h3><%= t('cydoc.title.personal_data') %></h3>
 <div class="box" id="patient-personal">
 <% fields_for @patient do |patient| %>
   <% patient.fields_for :vcard do |vcard| %>
 
     <table style="width: 100%">
       <tr>
-        <th>Anrede</th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name } %></td>
-        <th>Geschlecht</th><td><%= patient.select :sex, {'Weiblich' => 'F', 'Männlich' => 'M'}, :include_blank => true, :size => 12 %></td>
+        <th><%= t_attr(:salutation) %></th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name } %></td>
+        <th><%= t_attr(:gender) %></th><td><%= patient.select :sex, {t_attr(:female) => 'F', t_attr(:male) => 'M'}, :include_blank => true, :size => 12 %></td>
       </tr>
       <tr>
-        <th>Name, Vorname</th><td><%= vcard.text_field :family_name, :style => "width: 45%" %> <%= vcard.text_field :given_name, :style => "width: 45%" %></td>
-        <th>Geburtstag</th><td><%= patient.date_field :birth_date, :size => 12, :autocomplete => false, "date-picker" => true %></td>
+        <th><%= t_attr(:given_name) %>, <%= t_attr(:family_name) %></th><td><%= vcard.text_field :family_name, :style => "width: 45%" %> <%= vcard.text_field :given_name, :style => "width: 45%" %></td>
+        <th><%= t_attr(:birth_date) %></th><td><%= patient.date_field :birth_date, :size => 12, :autocomplete => false, "date-picker" => true %></td>
       </tr>
       <tr>
-        <th>Strasse</th><td><%= vcard.text_field :street_address %></td>
-        <th>Patientennr.</th><td><%= patient.text_field :doctor_patient_nr, :size => 15, :readonly => true %></td>
+        <th><%= t_attr(:street_address) %></th><td><%= vcard.text_field :street_address %></td>
+        <th><%= t_attr(:doctor_patient_nr) %></th><td><%= patient.text_field :doctor_patient_nr, :size => 15, :readonly => true %></td>
       </tr>
       <tr>
-        <th>PLZ, Ort</th><td><%= vcard.text_field :postal_code, :size => 9 %> <%= vcard.text_field :locality %></td>
+        <th><%= t_attr(:postal_code) %>, <%= t_attr(:locality) %></th><td><%= vcard.text_field :postal_code, :size => 9 %> <%= vcard.text_field :locality %></td>
       </tr>
       <tr>
-        <th>Bemerkungen</th>
+        <th><%= t_attr(:remarks) %></th>
         <td colspan="3"><%= patient.text_area :remarks, :rows => 3 %></td>
       </tr>
     </table>

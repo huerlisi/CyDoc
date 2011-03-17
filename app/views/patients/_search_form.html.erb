@@ -1,8 +1,8 @@
 <div class="box">
   <% remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => patients_path, :html => {:method => :get}, :method => :get do |f| %>
-    <%= f.label 'query', 'Suche' %>
-    <%= f.text_field :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
-    <%= image_submit_tag 'find.png', :title => 'Suchen' %>
+    <%= f.label 'query', t('cydoc.search.search') %>
+    <%= f.text_field :query, :label => t('cydoc.search.search'), :size => 15, :autocomplete => 'off' %>
+    <%= image_submit_tag 'find.png', :title => t('cydoc.search.searching') %>
     <%= image_tag("indicator.gif",
                   :align => "absmiddle",
                   :border => 0,

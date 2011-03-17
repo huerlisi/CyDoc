@@ -1,6 +1,6 @@
 <div class="contextual">
-  <%= link_to "Erfassen", new_patient_path, :class => "icon icon-add" %>
-  <%= link_to_remote "Alle anzeigen", {:url => patients_path(:all => true), :method => :get}, :class => "icon icon-index" %>
+  <%= link_to t('cydoc.actions.create'), new_patient_path, :class => "icon icon-add" %>
+  <%= link_to_remote t('cydoc.actions.show_all'), {:url => patients_path(:all => true), :method => :get}, :class => "icon icon-index" %>
 </div>
 <h2>Patienten</h2>
 

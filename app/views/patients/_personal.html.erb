@@ -1,29 +1,29 @@
 <div id="patient-personal">
   <div class="contextual">
-      <%= link_to_remote "Ändern", {:url => edit_patient_path(@patient), :method => :get}, :class => "icon icon-edit" %>
-      <%= link_to_remote "Löschen", {:url => patient_path(@patient), :method => :delete, :confirm => t_confirm_delete(@patient)}, :class => "icon icon-delete" if @patient.deletable? %>
-      <%= link_to_remote "KG-Etikette", {:url => print_full_label_patient_path(@patient), :method => :post}, :class => "icon icon-print" %>
-      <%= link_to_remote "Adress-Etikette", {:url => print_label_patient_path(@patient), :method => :post}, :class => "icon icon-print"%>
+      <%= link_to_remote t('cydoc.actions.update'), {:url => edit_patient_path(@patient), :method => :get}, :class => "icon icon-edit" %>
+      <%= link_to_remote t('cydoc.actions.delete'), {:url => patient_path(@patient), :method => :delete, :confirm => t_confirm_delete(@patient)}, :class => "icon icon-delete" if @patient.deletable? %>
+      <%= link_to_remote t('cydoc.actions.kg_label'), {:url => print_full_label_patient_path(@patient), :method => :post}, :class => "icon icon-print" %>
+      <%= link_to_remote t('cydoc.actions.address_label'), {:url => print_label_patient_path(@patient), :method => :post}, :class => "icon icon-print"%>
   </div>
 
-  <h3>Personalien</h3>
+  <h3><%= t('cydoc.title.personal_data') %></h3>
   <div class="box">
   <% @vcard = @patient.vcard %>
   <table style="width: 100%">
     <tr>
-      <th style="width: 10em">Adresse</th><td><%= in_place_editor_field :vcard, :family_name %> <%= in_place_editor_field :vcard, :given_name %></td>
-      <th style="width: 10em">Geburtstag</th><td><%=h @patient.birth_date.blank? ? 'unbekannt' : @patient.birth_date.strftime('%d.%m.%Y') %></td>
+      <th style="width: 10em"><%= t_attr(:address) %></th><td><%= in_place_editor_field :vcard, :family_name %> <%= in_place_editor_field :vcard, :given_name %></td>
+      <th style="width: 10em"><%= t_attr(:birth_date) %></th><td><%=h @patient.birth_date.blank? ? 'unbekannt' : @patient.birth_date.strftime('%d.%m.%Y') %></td>
     </tr>
     <tr>
       <th></th><td><%= in_place_editor_field :vcard, :street_address %></td>
-      <th>Geschlecht</th><td><%=h @patient.sex %></td>
+      <th><%= t_attr(:gender) %></th><td><%=h @patient.sex %></td>
     </tr>
     <tr>
       <th></th><td><%= in_place_editor_field :vcard, :postal_code %> <%= in_place_editor_field :vcard, :locality %></td>
-      <th>Patientennr.</th><td><%=h @patient.doctor_patient_nr %></td>
+      <th><%= t_attr(:doctor_patient_nr) %></th><td><%=h @patient.doctor_patient_nr %></td>
     </tr>
     <tr>
-      <th>Bemerkungen</th>
+      <th><%= t_attr(:remarks) %></th>
       <td colspan="3"><%= in_place_editor_field :patient, :remarks %></td>
     </tr>
   </table>

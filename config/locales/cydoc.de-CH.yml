@@ -1,5 +1,17 @@
 de-CH:
   cydoc:
+    title:
+      contact: Kontakt
+      insurance: Versicherungen
+      personal_data: Personalien
+      new_patient: Patient erfassen
+      recall: Recall
+      cases: Fälle
+    tab_container:
+      patient:
+        personal_data: 'Personalien'
+        treatment: 'Fälle'
+        invoice: 'Rechnungen'
     user_bar:
       logged_in_as: "Angemeldet als"
       logout: "Abmelden"
@@ -7,6 +19,19 @@ de-CH:
     search:
       searching: "Suchen"
       search: "Suche"
+    actions:
+      save: "Speichern"
+      show_all: "Alle anzeigen"
+      create: "Erfassen"
+      cancel: "Abbrechen"
+      update: "Ändern"
+      delete: "Löschen"
+      kg_label: "KG-Etikette"
+      address_label: "Adress-Etikette"
+      new_recall: "Recall erfassen"
+      new_contact: "Kontakt erfassen"
+      add_insurance: "Versicherung zuweisen"
+      new_case: "Fall eröffnen"
     navigation:
       patients: 'Patienten'
       master_data: Stammdaten
@@ -64,6 +89,32 @@ de-CH:
         given_name:  Vorname
         family_name: Nachname
         birth_date:  Geburtstag
+        name: Name
+        address: Adresse
+        number: PatientenNr.
+        private_phone: 'Tel. privat'
+        business_phone: 'Tel. geschäft'
+        mobile: 'Handy'
+        fax: 'Fax'
+        email: 'E-Mail'
+        phone_number_type: "Art"
+        phone_number: "Nummer"
+        police_type: "Art"
+        health_insurance: 'Krankenversicherung'
+        health_insurance_short_cut: 'KVG'
+        accident_insurance: 'Unfallversicherung'
+        accident_insurance_short_cut: 'UVG'
+        insurance: "Versicherung"
+        insurance_number: "Nummer"
+        salutation: Anrede
+        gender: Geschlecht
+        male: 'Männlich'
+        female: 'Weiblich'
+        street_address: Strasse
+        doctor_patient_nr: Patientennr.
+        postal_code: PLZ
+        locality: Ort
+        remarks: Bemerkungen
       doctor:
         ean_party:   EAN-Nr.
         zsr:         ZSR-Nr.
