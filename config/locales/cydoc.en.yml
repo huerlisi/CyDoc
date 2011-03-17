@@ -36,43 +36,43 @@ en:
       patient:
         accident_insurance: 'Unfallversicherung'
         accident_insurance_short_cut: 'UVG'
-        address: Adresse
+        address: Address
         birth_date:  Date of Birth
-        business_phone: 'Tel. geschäft'
-        doctor_patient_nr: Patientennr.
-        email: 'E-Mail'
+        business_phone: Business phone
+        doctor_patient_nr: Patient-no.
+        email: Email
         family_name: Surename
         fax: 'Fax'
-        female: 'Weiblich'
-        gender: Geschlecht
+        female: 'female'
+        gender: Gender
         given_name:  Given Name
-        health_insurance: 'Krankenversicherung'
+        health_insurance: 'Health insurance'
         health_insurance_short_cut: 'KVG'
-        insurance: "Versicherung"
-        insurance_number: "Nummer"
+        insurance: "Insurance"
+        insurance_number: "Number"
         locality: Ort
-        male: 'Männlich'
-        mobile: 'Handy'
+        male: 'Male'
+        mobile: 'Mobile phone'
         name: Name
-        number: PatientenNr.
-        phone_number: "Nummer"
-        phone_number_type: "Art"
-        police_type: "Art"
-        postal_code: PLZ
-        private_phone: 'Tel. privat'
-        remarks: Bemerkungen
-        salutation: Anrede
-        street_address: Strasse
+        number: Patient-No.
+        phone_number: "Number"
+        phone_number_type: "Type"
+        police_type: "Type"
+        postal_code: Post code
+        private_phone: Private phone
+        remarks: Remarks
+        salutation: Salutation
+        street_address: Street address
       recall:
-        appointment: 'Terminvorschlag'
+        appointment: 'Appointment proposal'
         due_date:   Due Date
-        expire_date: Fälligkeit
-        last_appointment: Letzt. Termin
-        offer: Vorschlag
+        expire_date: Expire date
+        last_appointment: Last appointment
+        offer: Offer
         patient: Patient
-        printed: Gedruckt
-        remark: Bemerkungen
-        remarks:    Remakrs
+        printed: Printed
+        remark: Remark
+        remarks: Remarks
       tariff_item:
         amount:         Amount
         amount_mt:      TP&nbsp;AL/Price
@@ -104,82 +104,82 @@ en:
       treatment:          Treatment
   cydoc:
     actions:
-      add_insurance: "Versicherung zuweisen"
-      address_label: "Adress-Etikette"
-      all: "Alle"
-      cancel: "Abbrechen"
-      create: "Erfassen"
-      delete: "Löschen"
-      edit_recall: "Recall editieren"
-      kg_label: "KG-Etikette"
-      new_case: "Fall eröffnen"
-      new_contact: "Kontakt erfassen"
-      new_recall: "Recall erfassen"
-      save: "Speichern"
-      show_all: "Alle anzeigen"
-      show_letter: "Brief anzeigen"
-      to_pdf: "Als PDF"
-      update: "Ändern"
+      add_insurance: Add Insurance
+      address_label: "Address-Label"
+      all: "All"
+      cancel: "Cancel"
+      create: "Create"
+      delete: "Delete"
+      edit_recall: "Edit recall"
+      kg_label: "KG-Label"
+      new_case: "New case"
+      new_contact: "New contact"
+      new_recall: "New recall"
+      save: "Save"
+      show_all: "Show all"
+      show_letter: "Show letter"
+      to_pdf: "As PDF"
+      update: "Update"
     navigation:
-      accounting: 'Buchhaltung'
-      all_bookings: "Alle Buchungen"
-      balance_sheet: "Jahresabschluss"
-      create: "Erfassen"
-      doctors: "Ärzte"
-      drug_products: "Medikamente"
-      help: "Hilfe"
+      accounting: 'Accounting'
+      all_bookings: "All bookings"
+      balance_sheet: "Balance sheet"
+      create: "Create"
+      doctors: "Doctors"
+      drug_products: "Drugs"
+      help: "Help"
       home: "Home"
-      insurances: "Versicherungen"
-      master_data: Stammdaten
-      open_cases: "Offene Fälle"
-      open_positions: "Offene Posten"
-      patients: 'Patienten'
-      payment_overview: "Rechnungsübersicht"
-      payments: 'Rechnungen'
+      insurances: "Insurances"
+      master_data: Master data
+      open_cases: "Open cases"
+      open_positions: "Open Positions"
+      patients: 'Patients'
+      payment_overview: "Payment overview"
+      payments: 'Payments'
       recalls: "Recalls"
-      reminder_list: "Mahnliste"
-      search: "Suchen"
-      service: "Leistungen"
-      show_accounts: "Konten anzeigen"
-      show_debtors: "Debitoren anzeigen"
-      show_doctors: "Ärzte anzeigen"
-      show_drug_products: "Medikamente anzeigen"
-      show_insurances: "Versicherungen anzeigen"
-      show_tariff_items: "Leistungen anzeigen"
+      reminder_list: "Reminder list"
+      search: "Search"
+      service: "Services"
+      show_accounts: "Show accounts"
+      show_debtors: "Show debtors"
+      show_doctors: "Show doctors"
+      show_drug_products: "Show drugs"
+      show_insurances: "Show insurances"
+      show_tariff_items: "Show services"
     recall:
-      appointed_time: "Terminvorschlag
-      last_appointment: "Letzter Termin
-      offer_printed: "Aufgebot gedruckt
+      appointed_time: "Appointed time"
+      last_appointment: "Last appointment"
+      offer_printed: "Offer printed"
     search:
-      search: "Suche"
-      searching: "Suchen"
+      search: "Search"
+      searching: "Search"
     state:
       recall:
-        accepted: "Termin akzeptiert"
-        refused: "Will keinen Termin"
-        send: "Aufgebot senden"
+        accepted: "Appointment accepted"
+        refused: "No appointment needed"
+        send: "Appointment send"
     tab_container:
       patient:
-        invoice: 'Rechnungen'
-        personal_data: 'Personalien'
-        treatment: 'Fälle'
+        invoice: 'Invoice'
+        personal_data: 'Personal data'
+        treatment: 'Treatments'
       recall:
-        applied_recalls: 'Anstehende Recalls'
-        list: Termine
-        send_recalls: 'Versandte Recalls'
+        applied_recalls: 'Applied recalls'
+        list: Appoinments
+        send_recalls: 'Send recalls'
     title:
-      cases: Fälle
-      contact: Kontakt
+      cases: Cases
+      contact: Contact
       filter: Filter
-      insurance: Versicherungen
-      new_patient: Patient erfassen
-      personal_data: Personalien
+      insurance: Insurance
+      new_patient: Capture patient
+      personal_data: Personal data
       recall: Recall
       recalls: Recalls
     user_bar:
-      logged_in_as: "Angemeldet als"
-      login: "Anmelden"
-      logout: "Abmelden"
+      logged_in_as: "Logged in as"
+      login: "Login"
+      logout: "Logout"
   invoice:
     state:
       2xreminded:  2x reminded

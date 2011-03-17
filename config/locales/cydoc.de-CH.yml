@@ -147,9 +147,9 @@ de-CH:
       show_insurances: "Versicherungen anzeigen"
       show_tariff_items: "Leistungen anzeigen"
     recall:
-      appointed_time: "Terminvorschlag
-      last_appointment: "Letzter Termin
-      offer_printed: "Aufgebot gedruckt
+      appointed_time: "Terminvorschlag"
+      last_appointment: "Letzter Termin"
+      offer_printed: "Aufgebot gedruckt"
     search:
       search: "Suche"
       searching: "Suchen"
