@@ -34,12 +34,12 @@ en:
         remark:     Remarks
         value_date: Date of Invoice
       patient:
-        accident_insurance: 'Unfallversicherung'
+        accident_insurance: 'Accident insurance'
         accident_insurance_short_cut: 'UVG'
         address: Address
         birth_date:  Date of Birth
         business_phone: Business phone
-        doctor_patient_nr: Patient-no.
+        doctor_patient_nr: Patient No.
         email: Email
         family_name: Surename
         fax: 'Fax'
@@ -54,7 +54,7 @@ en:
         male: 'Male'
         mobile: 'Mobile phone'
         name: Name
-        number: Patient-No.
+        number: Patient No.
         phone_number: "Number"
         phone_number_type: "Type"
         police_type: "Type"
@@ -149,7 +149,8 @@ en:
     recall:
       appointed_time: "Appointed time"
       last_appointment: "Last appointment"
-      offer_printed: "Offer printed"
+      offer_printed: "Proposal sent"
+      no_appointment: "No appointment"
     search:
       search: "Search"
       searching: "Search"
