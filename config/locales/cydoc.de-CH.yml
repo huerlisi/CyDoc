@@ -1,174 +1,169 @@
-de-CH:
-  cydoc:
-    title:
-      contact: Kontakt
-      insurance: Versicherungen
-      personal_data: Personalien
-      new_patient: Patient erfassen
-      recall: Recall
-      cases: Fälle
-    tab_container:
-      patient:
-        personal_data: 'Personalien'
-        treatment: 'Fälle'
-        invoice: 'Rechnungen'
-    user_bar:
-      logged_in_as: "Angemeldet als"
-      logout: "Abmelden"
-      login: "Anmelden"
-    search:
-      searching: "Suchen"
-      search: "Suche"
-    actions:
-      save: "Speichern"
-      show_all: "Alle anzeigen"
-      create: "Erfassen"
-      cancel: "Abbrechen"
-      update: "Ändern"
-      delete: "Löschen"
-      kg_label: "KG-Etikette"
-      address_label: "Adress-Etikette"
-      new_recall: "Recall erfassen"
-      new_contact: "Kontakt erfassen"
-      add_insurance: "Versicherung zuweisen"
-      new_case: "Fall eröffnen"
-    navigation:
-      patients: 'Patienten'
-      master_data: Stammdaten
-      doctors: "Ärzte"
-      show_doctors: "Ärzte anzeigen"
-      show_insurances: "Versicherungen anzeigen"
-      show_tariff_items: "Leistungen anzeigen"
-      show_drug_products: "Medikamente anzeigen"
-      create: "Erfassen"
-      search: "Suchen"
-      payments: 'Rechnungen'
-      payment_overview: "Rechnungsübersicht"
-      reminder_list: "Mahnliste"
-      open_cases: "Offene Fälle"
-      accounting: 'Buchhaltung'
-      balance_sheet: "Jahresabschluss"
-      all_bookings: "Alle Buchungen"
-      open_positions: "Offene Posten"
-      show_accounts: "Konten anzeigen"
-      show_debtors: "Debitoren anzeigen"
-      show_insurances: "Versicherungen anzeigen"
-      insurances: "Versicherungen"
-      show_tariff_items: "Leistungen anzeigen"
-      show_drug_products: "Medikamente anzeigen"
-      home: "Home"
-      recalls: "Recalls"
-      service: "Leistungen"
-      drug_products: "Medikamente"
-      help: "Hilfe"
-  activerecord:
-    models:
-      patient:            Patient
-      doctor:             Arzt
-      invoice:            Rechnung
-      treatment:          Fall
-      recall:             Recall
-      insurance:          Versicherung
-      tariff_item:        Leistung
-      tarmed_tariff_item: Tarmed Leistung
-      lab_tariff_item:    Labor Leistung
-      drug_tariff_item:   Medikament
-      migel_tariff_item:  MiGel Leistung
-      tariff_item_group:  Blockleistung
-      drug_product:       Medikament
-      drug_article:       Medikamentenpackung
 
+de-CH: 
+  activerecord:
     attributes:
-      invoice:
-        value_date: Rechnungsdatum
-        remark:     Bemerkungen
-      recall:
-        due_date: Datum
-        remarks:  Bemerkungen
-      patient:
-        given_name:  Vorname
-        family_name: Nachname
-        birth_date:  Geburtstag
-        name: Name
-        address: Adresse
-        number: PatientenNr.
-        private_phone: 'Tel. privat'
-        business_phone: 'Tel. geschäft'
-        mobile: 'Handy'
-        fax: 'Fax'
-        email: 'E-Mail'
-        phone_number_type: "Art"
-        phone_number: "Nummer"
-        police_type: "Art"
-        health_insurance: 'Krankenversicherung'
-        health_insurance_short_cut: 'KVG'
-        accident_insurance: 'Unfallversicherung'
-        accident_insurance_short_cut: 'UVG'
-        insurance: "Versicherung"
-        insurance_number: "Nummer"
-        salutation: Anrede
-        gender: Geschlecht
-        male: 'Männlich'
-        female: 'Weiblich'
-        street_address: Strasse
-        doctor_patient_nr: Patientennr.
-        postal_code: PLZ
-        locality: Ort
-        remarks: Bemerkungen
-      doctor:
-        ean_party:   EAN-Nr.
-        zsr:         ZSR-Nr.
-      treatment:
-        date_begin: Behandlung von
-        date_end:   Behandlung bis
-        reason:     Behandlungsgrund
-        place_type: Erbringungsort
+      account:
+        esr_id:           ESR-Nummer
+        number:           Nummer
+        pc_id:            PC-Nummer
       appointment:
         date:    Am
         from:    Von
-        to:      Bis
         remarks: Bemerkungen
-      tariff_item:
-        type_as_string: Tarif
-        code:           Code
-        remark:         Beschreibung
-        obligation:     Kassenpflichtig
-        vat_class:      MwSt
-        amount_mt:      TP&nbsp;AL/Preis
-        amount_tt:      TP&nbsp;TL
-        amount:         Betrag
-      drug_product:
-        name:        Name
-        description: Beschreibung
+        to:      Bis
+      booking:
+        reference_id:     Rechnungsnr.
+      doctor:
+        ean_party:   EAN-Nr.
+        zsr:         ZSR-Nr.
       drug_article:
         code:             Code
-        name:             Name
+        content:          Inhalt
         description:      Beschreibung
+        doctors_price:    Arztpreis
+        name:             Name
         number_of_pieces: Menge
+        price:            Publikumspreis
         quantity:         Anzahl
         quantity_unit:    Einheit
         vat_class:        MwSt
-        doctors_price:    Arztpreis
-        price:            Publikumspreis
-        content:          Inhalt
-      booking:
-        reference_id:     Rechnungsnr.
-      account:
-        number:           Nummer
-        pc_id:            PC-Nummer
-        esr_id:           ESR-Nummer
-        
+      drug_product:
+        description: Beschreibung
+        name:        Name
+      invoice:
+        remark:     Bemerkungen
+        value_date: Rechnungsdatum
+      patient:
+        accident_insurance: 'Unfallversicherung'
+        accident_insurance_short_cut: 'UVG'
+        address: Adresse
+        birth_date:  Geburtstag
+        business_phone: 'Tel. geschäft'
+        doctor_patient_nr: Patientennr.
+        email: 'E-Mail'
+        family_name: Nachname
+        fax: 'Fax'
+        female: 'Weiblich'
+        gender: Geschlecht
+        given_name:  Vorname
+        health_insurance: 'Krankenversicherung'
+        health_insurance_short_cut: 'KVG'
+        insurance: "Versicherung"
+        insurance_number: "Nummer"
+        locality: Ort
+        male: 'Männlich'
+        mobile: 'Handy'
+        name: Name
+        number: PatientenNr.
+        phone_number: "Nummer"
+        phone_number_type: "Art"
+        police_type: "Art"
+        postal_code: PLZ
+        private_phone: 'Tel. privat'
+        remarks: Bemerkungen
+        salutation: Anrede
+        street_address: Strasse
+      recall:
+        due_date: Datum
+        remarks:  Bemerkungen
+      tariff_item:
+        amount:         Betrag
+        amount_mt:      TP&nbsp;AL/Preis
+        amount_tt:      TP&nbsp;TL
+        code:           Code
+        obligation:     Kassenpflichtig
+        remark:         Beschreibung
+        type_as_string: Tarif
+        vat_class:      MwSt
+      treatment:
+        date_begin: Behandlung von
+        date_end:   Behandlung bis
+        place_type: Erbringungsort
+        reason:     Behandlungsgrund
+    models:
+      doctor:             Arzt
+      drug_article:       Medikamentenpackung
+      drug_product:       Medikament
+      drug_tariff_item:   Medikament
+      insurance:          Versicherung
+      invoice:            Rechnung
+      lab_tariff_item:    Labor Leistung
+      migel_tariff_item:  MiGel Leistung
+      patient:            Patient
+      recall:             Recall
+      tariff_item:        Leistung
+      tariff_item_group:  Blockleistung
+      tarmed_tariff_item: Tarmed Leistung
+      treatment:          Fall
+  cydoc:
+    actions:
+      add_insurance: "Versicherung zuweisen"
+      address_label: "Adress-Etikette"
+      cancel: "Abbrechen"
+      create: "Erfassen"
+      delete: "Löschen"
+      kg_label: "KG-Etikette"
+      new_case: "Fall eröffnen"
+      new_contact: "Kontakt erfassen"
+      new_recall: "Recall erfassen"
+      save: "Speichern"
+      show_all: "Alle anzeigen"
+      update: "Ändern"
+    navigation:
+      accounting: 'Buchhaltung'
+      all_bookings: "Alle Buchungen"
+      balance_sheet: "Jahresabschluss"
+      create: "Erfassen"
+      doctors: "Ärzte"
+      drug_products: "Medikamente"
+      help: "Hilfe"
+      home: "Home"
+      insurances: "Versicherungen"
+      master_data: Stammdaten
+      open_cases: "Offene Fälle"
+      open_positions: "Offene Posten"
+      patients: 'Patienten'
+      payment_overview: "Rechnungsübersicht"
+      payments: 'Rechnungen'
+      recalls: "Recalls"
+      reminder_list: "Mahnliste"
+      search: "Suchen"
+      service: "Leistungen"
+      show_accounts: "Konten anzeigen"
+      show_debtors: "Debitoren anzeigen"
+      show_doctors: "Ärzte anzeigen"
+      show_drug_products: "Medikamente anzeigen"
+      show_insurances: "Versicherungen anzeigen"
+      show_tariff_items: "Leistungen anzeigen"
+    search:
+      search: "Suche"
+      searching: "Suchen"
+    tab_container:
+      patient:
+        invoice: 'Rechnungen'
+        personal_data: 'Personalien'
+        treatment: 'Fälle'
+    title:
+      cases: Fälle
+      contact: Kontakt
+      insurance: Versicherungen
+      new_patient: Patient erfassen
+      personal_data: Personalien
+      recall: Recall
+    user_bar:
+      logged_in_as: "Angemeldet als"
+      login: "Anmelden"
+      logout: "Abmelden"
   invoice:
     state:
-      prepared:    offen
+      2xreminded:  2x gemahnt
       booked:      verbucht
       canceled:    storniert
-      reactivated: reaktiviert
-      reminded:    1x gemahnt
-      2xreminded:  2x gemahnt
       encashment:  in Inkasso
       paid:        bezahlt
+      prepared:    offen
       printed:     gedruckt
-
+      reactivated: reaktiviert
+      reminded:    1x gemahnt
   recall:
     list: Termine
