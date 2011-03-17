@@ -4,14 +4,14 @@
   <% semantic_remote_form_for [@patient, @recall] do |form| %>
     <%= form.semantic_errors %>
 
-    <% form.inputs 'Recall' do %>
+    <% form.inputs t_model do %>
       <%= form.input :state, :as => :hidden %>
       <%= form.input :due_date, :as => :date_field, :input_html => {:size => 12, :autocomplete => 'off'} %>
       <%= form.input :remarks, :input_html => {:rows => 3} %>
     <% end %>
 
     <% if @recall.appointment %>
-      <% form.inputs 'Terminvorschlag' do %>
+      <% form.inputs t_attr(:appointment) do %>
         <% form.semantic_fields_for :appointment do |appointment| %>
           <%= appointment.input :patient_id, :as => :hidden, :value => @recall.patient.id %>
           <%= appointment.input :date, :as => :date_field, :input_html => {:size => 12, :autocomplete => 'off'} %>
@@ -23,11 +23,11 @@
 
     <% form.buttons do %>
       <% if @recall.state == 'prepared' %>
-        <%= form.submit "Brief anzeigen", :name => 'send_notice', :class => "icon icon-save" %>
+        <%= form.submit t('cydoc.actions.show_letter'), :name => 'send_notice', :class => "icon icon-save" %>
       <% else %>
-        <%= form.submit "Speichern", :class => "icon icon-save" %>
+        <%= form.submit t('cydoc.actions.save'), :class => "icon icon-save" %>
       <% end %>
-      <%= button_to_function "Abbrechen", "Element.remove('recall_form')", :class => "icon icon-cancel" %>
+      <%= button_to_function t('cydoc.actions.cancel'), "Element.remove('recall_form')", :class => "icon icon-cancel" %>
     <% end %>
   <% end %>
 </td>

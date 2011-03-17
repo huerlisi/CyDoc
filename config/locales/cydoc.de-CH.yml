@@ -64,7 +64,14 @@ de-CH:
         salutation: Anrede
         street_address: Strasse
       recall:
+        appointment: 'Terminvorschlag'
         due_date: Datum
+        expire_date: Fälligkeit
+        last_appointment: Letzt. Termin
+        offer: Vorschlag
+        patient: Patient
+        printed: Gedruckt
+        remark: Bemerkungen
         remarks:  Bemerkungen
       tariff_item:
         amount:         Betrag
@@ -99,15 +106,19 @@ de-CH:
     actions:
       add_insurance: "Versicherung zuweisen"
       address_label: "Adress-Etikette"
+      all: "Alle"
       cancel: "Abbrechen"
       create: "Erfassen"
       delete: "Löschen"
+      edit_recall: "Recall editieren"
       kg_label: "KG-Etikette"
       new_case: "Fall eröffnen"
       new_contact: "Kontakt erfassen"
       new_recall: "Recall erfassen"
       save: "Speichern"
       show_all: "Alle anzeigen"
+      show_letter: "Brief anzeigen"
+      to_pdf: "Als PDF"
       update: "Ändern"
     navigation:
       accounting: 'Buchhaltung'
@@ -135,21 +146,36 @@ de-CH:
       show_drug_products: "Medikamente anzeigen"
       show_insurances: "Versicherungen anzeigen"
       show_tariff_items: "Leistungen anzeigen"
+    recall:
+      appointed_time: "Terminvorschlag
+      last_appointment: "Letzter Termin
+      offer_printed: "Aufgebot gedruckt
     search:
       search: "Suche"
       searching: "Suchen"
+    state:
+      recall:
+        accepted: "Termin akzeptiert"
+        refused: "Will keinen Termin"
+        send: "Aufgebot senden"
     tab_container:
       patient:
         invoice: 'Rechnungen'
         personal_data: 'Personalien'
         treatment: 'Fälle'
+      recall:
+        applied_recalls: 'Anstehende Recalls'
+        list: Termine
+        send_recalls: 'Versandte Recalls'
     title:
       cases: Fälle
       contact: Kontakt
+      filter: Filter
       insurance: Versicherungen
       new_patient: Patient erfassen
       personal_data: Personalien
       recall: Recall
+      recalls: Recalls
     user_bar:
       logged_in_as: "Angemeldet als"
       login: "Anmelden"
@@ -165,5 +191,3 @@ de-CH:
       printed:     gedruckt
       reactivated: reaktiviert
       reminded:    1x gemahnt
-  recall:
-    list: Termine
