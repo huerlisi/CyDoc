@@ -83,10 +83,14 @@ en:
         type_as_string: Type
         vat_class:      VAT
       treatment:
+        amount: Total CHF
         date_begin:  Treatment Begin
         date_end:    Treatment End
+        law: Gesetz
+        patient: Patient
         place_type:  Place of Treatment
         reason:      Reason for Treatment
+        referrer: Zuweisender Arzt
     models:
       doctor:             Doctor
       drug_article:       Drug package
@@ -110,11 +114,15 @@ en:
       cancel: "Cancel"
       create: "Create"
       delete: "Delete"
+      delete_treatment: "Fall %{treatment} löschen?"
       edit_recall: "Edit recall"
       kg_label: "KG-Label"
       new_case: "New case"
       new_contact: "New contact"
+      new_invoice: "Rechung stellen"
+      new_medical_case: "Neue Diagnose"
       new_recall: "New recall"
+      new_treatment_session: "Neue Konsultation"
       save: "Save"
       show_all: "Show all"
       show_letter: "Show letter"
@@ -149,8 +157,8 @@ en:
     recall:
       appointed_time: "Appointed time"
       last_appointment: "Last appointment"
-      offer_printed: "Proposal sent"
       no_appointment: "No appointment"
+      offer_printed: "Proposal sent"
     search:
       search: "Search"
       searching: "Search"
@@ -173,10 +181,13 @@ en:
       contact: Contact
       filter: Filter
       insurance: Insurance
+      medical_cases: Diagnosen
       new_patient: Capture patient
       personal_data: Personal data
       recall: Recall
       recalls: Recalls
+      treatment: Behandlung
+      treatment_sessions: Leistungen
     user_bar:
       logged_in_as: "Logged in as"
       login: "Login"

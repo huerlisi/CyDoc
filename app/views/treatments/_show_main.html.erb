@@ -1,20 +1,20 @@
-<h3>Behandlung</h3>
+<h3><%= t('cydoc.title.treatment') %></h3>
 <div class="box" id="treatment">
   <table style="width: 100%">
     <tr>
-      <th>Patient:</th><td><%= full_address(@treatment.patient.vcard, ', ') %></td>
-      <th>Gesetz:</th><td><%= @treatment.law.name if @treatment.law %></td>
+      <th><%= t_attr(:patient, Treatment) %></th><td><%= full_address(@treatment.patient.vcard, ', ') %></td>
+      <th><%= t_attr(:law, Treatment) %>:</th><td><%= @treatment.law.name if @treatment.law %></td>
     </tr>
     <tr>
-      <th>Behandlung von:</th><td><%= @treatment.date_begin.strftime('%d.%m.%Y') if @treatment.date_begin %></td>
-      <th>Erbringungsort:</th><td><%= @treatment.place_type %></td>
+      <th><%= t_attr(:date_begin, Treatment) %>:</th><td><%= @treatment.date_begin.strftime('%d.%m.%Y') if @treatment.date_begin %></td>
+      <th><%= t_attr(:place_type, Treatment) %>:</th><td><%= @treatment.place_type %></td>
     </tr>
     <tr>
-      <th>Behandlung bis:</th><td><%= @treatment.date_end.strftime('%d.%m.%Y') if @treatment.date_end %></td>
-      <th>Behandlungsgrund:</th><td><%= @treatment.reason %></td>
+      <th><%= t_attr(:date_end, Treatment) %>:</th><td><%= @treatment.date_end.strftime('%d.%m.%Y') if @treatment.date_end %></td>
+      <th><%= t_attr(:reason, Treatment) %>:</th><td><%= @treatment.reason %></td>
     </tr>
     <tr>
-      <th>Zuweisender Arzt:</th><td><%= @treatment.referrer.to_s if @treatment.referrer %></td>
+      <th><%= t_attr(:referrer, Treatment) %>:</th><td><%= @treatment.referrer.to_s if @treatment.referrer %></td>
     </tr>
   </table>
 </div>

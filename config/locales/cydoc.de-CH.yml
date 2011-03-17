@@ -83,10 +83,14 @@ de-CH:
         type_as_string: Tarif
         vat_class:      MwSt
       treatment:
+        amount: Total CHF
         date_begin: Behandlung von
-        date_end:   Behandlung bis
+        date_end: Behandlung bis
+        law: Gesetz
+        patient: Patient
         place_type: Erbringungsort
-        reason:     Behandlungsgrund
+        reason: Behandlungsgrund
+        referrer: Zuweisender Arzt
     models:
       doctor:             Arzt
       drug_article:       Medikamentenpackung
@@ -110,11 +114,15 @@ de-CH:
       cancel: "Abbrechen"
       create: "Erfassen"
       delete: "Löschen"
+      delete_treatment: "Fall %{treatment} löschen?"
       edit_recall: "Recall editieren"
       kg_label: "KG-Etikette"
       new_case: "Fall eröffnen"
       new_contact: "Kontakt erfassen"
+      new_invoice: "Rechung stellen"
+      new_medical_case: "Neue Diagnose"
       new_recall: "Recall erfassen"
+      new_treatment_session: "Neue Konsultation"
       save: "Speichern"
       show_all: "Alle anzeigen"
       show_letter: "Brief anzeigen"
@@ -149,6 +157,7 @@ de-CH:
     recall:
       appointed_time: "Terminvorschlag"
       last_appointment: "Letzter Termin"
+      no_appointment: "Kein Termin"
       offer_printed: "Aufgebot gedruckt"
     search:
       search: "Suche"
@@ -172,10 +181,13 @@ de-CH:
       contact: Kontakt
       filter: Filter
       insurance: Versicherungen
+      medical_cases: Diagnosen
       new_patient: Patient erfassen
       personal_data: Personalien
       recall: Recall
       recalls: Recalls
+      treatment: Behandlung
+      treatment_sessions: Leistungen
     user_bar:
       logged_in_as: "Angemeldet als"
       login: "Anmelden"
