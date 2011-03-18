@@ -7,15 +7,15 @@ module RoutingFilter
       path.sub! %r(^/([a-zA-Z]{2}|[a-zA-Z]{2}-[a-zA-Z]{2})(?=/|$)) do locale = $1; '' end
 
       yield.tap do |params|
-        params[:locale] = locale || I18n.default_locale
+        params[:locale] = locale || I18n.default_locale.to_s
       end
     end
     
     def around_generate(*args, &block)
-      locale = args.extract_options!.delete(:locale) || I18n.default_locale
+      locale = args.extract_options!.delete(:locale) || I18n.default_locale.to_s
 
       yield.tap do |result|
-        if locale != I18n.default_locale
+        if locale != I18n.default_locale.to_s
           result.sub!(%r(^(http.?://[^/]*)?(.*))){ "#{$1}/#{locale}#{$2}" }
         end
       end
