@@ -42,9 +42,9 @@ class Treatment < ActiveRecord::Base
   def to_s(format = :default)
     case format
     when :short
-      [reason, date_begin.nil? ? nil : date_begin.strftime('%d.%m.%Y')].join(': ')
+      [reason, date_begin.nil? ? nil : I18n.l(date_begin)].join(': ')
     else
-      "#{patient.nil? ? 'Patient unbekannt' : patient.name} #{reason}: #{date_begin.strftime('%d.%m.%Y') if date_begin} - #{date_end.strftime('%d.%m.%Y') if date_end}"
+      "#{patient.nil? ? 'Patient unbekannt' : patient.name} #{reason}: #{I18n.l(date_begin) if date_begin} - #{I18n.l(date_end) if date_end}"
     end
   end
   
