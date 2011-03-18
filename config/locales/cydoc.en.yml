@@ -51,7 +51,7 @@ en:
         insurance: "Insurance"
         insurance_number: "Number"
         locality: Ort
-        male: 'Male'
+        male: 'male'
         mobile: 'Mobile phone'
         name: Name
         number: Patient No.
