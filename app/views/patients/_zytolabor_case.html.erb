@@ -1,7 +1,7 @@
 <% a_case = zytolabor_case.zytolabor_case %>
 <tr style="cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'cases', :action => 'show', :id => a_case) %>'">
   <td>
-    <%=h a_case.examination_date.strftime('%d.%m.%Y') unless a_case.examination_date.nil? %>
+    <%=h l(a_case.examination_date) unless a_case.examination_date.nil? %>
   </td>
   <td class="PAP_<%=h a_case.classification.code unless a_case.classification.nil? %>">
     <b><%= a_case.classification.name unless a_case.classification.nil? %></b>

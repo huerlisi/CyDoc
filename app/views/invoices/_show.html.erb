@@ -37,7 +37,7 @@
   </tr>
   <tr>
     <th>Behandlungsgrund:</th><td><%= @invoice.treatment.reason %></td>
-    <th>Rechnungsdatum:</th><td><%= @invoice.value_date.strftime('%d.%m.%Y') %></td>
+    <th>Rechnungsdatum:</th><td><%=l @invoice.value_date %></td>
   </tr>
   <tr>
     <th></th><td></td>

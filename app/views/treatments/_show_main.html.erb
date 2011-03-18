@@ -6,11 +6,11 @@
       <th><%= t_attr(:law, Treatment) %>:</th><td><%= @treatment.law.name if @treatment.law %></td>
     </tr>
     <tr>
-      <th><%= t_attr(:date_begin, Treatment) %>:</th><td><%= @treatment.date_begin.strftime('%d.%m.%Y') if @treatment.date_begin %></td>
+      <th><%= t_attr(:date_begin, Treatment) %>:</th><td><%= l(@treatment.date_begin) if @treatment.date_begin %></td>
       <th><%= t_attr(:place_type, Treatment) %>:</th><td><%= @treatment.place_type %></td>
     </tr>
     <tr>
-      <th><%= t_attr(:date_end, Treatment) %>:</th><td><%= @treatment.date_end.strftime('%d.%m.%Y') if @treatment.date_end %></td>
+      <th><%= t_attr(:date_end, Treatment) %>:</th><td><%= l(@treatment.date_end) if @treatment.date_end %></td>
       <th><%= t_attr(:reason, Treatment) %>:</th><td><%= @treatment.reason %></td>
     </tr>
     <tr>

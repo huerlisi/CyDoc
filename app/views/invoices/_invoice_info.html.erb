@@ -2,16 +2,16 @@
   <h2>Patientenrechnung Nr. <%= @invoice.id %></h2>
   <table>
     <tr>
-      <th>Rechnungsdatum:</th><td><%= @invoice.date.strftime('%d.%m.%Y') %></td>
+      <th>Rechnungsdatum:</th><td><%=l @invoice.date %></td>
     </tr>
     <tr>
-      <th>Zahlbar bis:</th><td><%= @invoice.due_date.strftime('%d.%m.%Y') %></td>
+      <th>Zahlbar bis:</th><td><%=l @invoice.due_date %></td>
     </tr>
     <tr>
-      <th>Behandlungen von:</th><td><%= @invoice.date_begin.strftime('%d.%m.%Y') %></td>
+      <th>Behandlungen von:</th><td><%=l @invoice.date_begin %></td>
     </tr>
     <tr>
-      <th>Behandlungen bis:</th><td><%= @invoice.date_end.strftime('%d.%m.%Y') %></td>
+      <th>Behandlungen bis:</th><td><%=l @invoice.date_end %></td>
     </tr>
   </table>
 </div>

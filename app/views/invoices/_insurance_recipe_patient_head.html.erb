@@ -35,7 +35,7 @@
   <tr>
     <td></td>
     <td class="list">Geburtsdatum</td>
-    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.patient.birth_date.strftime('%d.%m.%Y') if @invoice.patient.birth_date %></td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @l(invoice.patient.birth_date) if @invoice.patient.birth_date %></td>
     <td colspan="2"><%=h @invoice.patient.vcard.full_name %></td>
   </tr>
   <tr>
@@ -116,7 +116,7 @@
   <tr>
     <td></td>
     <td class="list">Behandlung</td>
-    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.date_begin.strftime('%d.%m.%Y') %>&nbsp;-&nbsp;<%=h @invoice.date_end.strftime('%d.%m.%Y') %></td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=l @invoice.date_begin %>&nbsp;-&nbsp;<%=l @invoice.date_end %></td>
     <td class="list">Rechnungsnr.</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.id %></td>
   </tr>
@@ -125,7 +125,7 @@
     <td class="list">Erbringungsort</td>
     <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.place_type %></td>
     <td class="list">Rechnungs-/Mahndatum</td>
-    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.value_date.strftime('%d.%m.%Y') %></td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=l @invoice.value_date %></td>
   </tr>
   <tr>
     <td class="subhead" style="border-top:thin solid black">Auftraggeber</td>

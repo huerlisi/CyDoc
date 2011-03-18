@@ -1,5 +1,9 @@
 
 de-CH: 
+  date:
+    formats:
+      month: "%B %Y"
+
   activerecord:
     attributes:
       account:

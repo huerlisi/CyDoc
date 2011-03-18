@@ -13,7 +13,7 @@
     </tr>
     <% for file in EsrFile.esr_files %>
     <tr>
-      <td><%=h file.mtime.strftime('%d.%m.%Y') %></td>
+      <td><%=l file.mtime %></td>
       <td><%=h File.basename(file.path) %></td>
       <td><%= link_to "verbuchen", esr_bookings_path(:filename => file.path), :method => :post, :class => "icon icon-book" %></td>
     </tr>
