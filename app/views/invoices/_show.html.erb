@@ -1,4 +1,4 @@
-<% cache @invoice do %>
+<% cache [locale, @invoice.cache_key] do %>
 <div id="invoice_flash" class="flash notice" style="display: none"></div>
 
 <div class="contextual">

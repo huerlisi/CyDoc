@@ -1,4 +1,4 @@
-<% cache @treatment do %>
+<% cache [locale, @treatment.cache_key] do %>
 <div class="contextual">
   <% if @treatment.open? -%>
     <%= link_to_remote t('cydoc.actions.update'), {:url => edit_treatment_path(@treatment), :method => :get}, :class => "icon icon-edit" %>

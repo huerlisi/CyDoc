@@ -32,7 +32,7 @@
             <div><%= render :partial => 'users/user_bar' %></div>
             <div><%= render :partial => '/search/form' %></div>
           </div>
-          <% cache :main_menu do %>
+          <% cache [locale, :main_menu] do %>
           <div id="main-menu">
             <ul>
               <li><%= link_to t('cydoc.navigation.home'), :controller => "/" %></li>
