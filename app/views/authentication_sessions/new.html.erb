@@ -5,18 +5,18 @@
   <% form_tag authentication_session_path do -%>
     <table>
       <tr>
-          <td align="right"><label for="username">Login</label>:</td>
+          <td align="right"><label for="username"><%= t_attr(:login, User) %></label>:</td>
           <td align="left"><p><%= text_field_tag 'login', @login, :size => 40 %></p></td>
       </tr>
       <tr>
-          <td align="right"><label for="password">Passwort</label>:</td>
+          <td align="right"><label for="password"><%= t_attr(:password, User) %></label>:</td>
           <td align="left"><%= password_field_tag 'password', nil, :size => 40 %></td>
       </tr>
       <tr>
           <td align="left">
           </td>
           <td align="right">
-              <input type="submit" name="submit" value="Anmelden" />
+              <input type="submit" name="submit" value="<%= t('devise.sign_in') %>" />
           </td>
       </tr>
     </table>

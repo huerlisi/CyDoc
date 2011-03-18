@@ -91,6 +91,9 @@ en:
         place_type:  Place of Treatment
         reason:      Reason for Treatment
         referrer: Zuweisender Arzt
+      user:
+        login:    Login
+        password: Password
     models:
       doctor:             Doctor
       drug_article:       Drug package
@@ -106,6 +109,7 @@ en:
       tariff_item_group:  Tariff Item Group
       tarmed_tariff_item: Tarmed Tariff Item
       treatment:          Treatment
+      user:               Benutzer
   cydoc:
     actions:
       add_insurance: Add Insurance

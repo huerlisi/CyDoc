@@ -91,6 +91,9 @@ de-CH:
         place_type: Erbringungsort
         reason: Behandlungsgrund
         referrer: Zuweisender Arzt
+      user:
+        login:    Login
+        password: Passwort
     models:
       doctor:             Arzt
       drug_article:       Medikamentenpackung
@@ -106,6 +109,7 @@ de-CH:
       tariff_item_group:  Blockleistung
       tarmed_tariff_item: Tarmed Leistung
       treatment:          Fall
+      user:               Benutzer
   cydoc:
     actions:
       add_insurance: "Versicherung zuweisen"
