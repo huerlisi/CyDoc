@@ -7,7 +7,7 @@ module RoutingFilter
 
     def around_recognize(path, env, &block)
       locale = nil
-      path.sub! %r(^/([a-zA-Z]{2})(?=/|$)) do locale = $1; '' end
+      path.sub! %r(^/([a-zA-Z]{2}|[a-zA-Z]{2}-[a-zA-Z]{2})(?=/|$)) do locale = $1; '' end
 
       yield.tap do |params|
         params[:locale] = locale || LOCALE
