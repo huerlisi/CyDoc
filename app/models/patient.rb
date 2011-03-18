@@ -64,7 +64,7 @@ class Patient < ActiveRecord::Base
   end
 
   def to_s(format = :default)
-    ["#{name}#{(' #' + doctor_patient_nr) unless doctor_patient_nr.blank?}", (birth_date.strftime('%d.%m.%Y') if birth_date)].compact.join(', ')
+    ["#{name}#{(' #' + doctor_patient_nr) unless doctor_patient_nr.blank?}", (I18n.l(birth_date) if birth_date)].compact.join(', ')
   end
 
   def last_session

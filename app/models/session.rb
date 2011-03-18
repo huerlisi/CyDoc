@@ -27,9 +27,9 @@ class Session < ActiveRecord::Base
   def to_s(format = :default)
     case format
     when :short
-      [date, remarks.blank? ? "Konsultation" : remarks].compact.join(': ')
+      [I18n.l(date), remarks.blank? ? "Konsultation" : remarks].compact.join(': ')
     else
-      duration = [duration_from, duration_to].compact.map{|d| d.strftime('%d.%m.%Y')}.join(' - ')
+      duration = [duration_from, duration_to].compact.map{|d| I18n.l(d)}.join(' - ')
       title = remarks.blank? ? "Konsultation" : remarks
       "#{title} (#{state}): #{patient.name} #{duration}, #{service_records.count} positions"
     end
