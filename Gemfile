@@ -43,3 +43,4 @@ gem 'activerecord-sqlserver-adapter'
 gem 'prawn', '~> 0.8.4'
 
 gem 'csv-mapper'
+gem 'routing-filter'

@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.filter 'locale'
   # Authentication
   map.logout '/logout', :controller => 'authentication_sessions', :action => 'destroy'
   map.login '/login', :controller => 'authentication_sessions', :action => 'new'

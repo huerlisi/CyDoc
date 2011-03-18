@@ -9,6 +9,7 @@ RAILS_GEM_VERSION = '~>2.3' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
+require "#{Rails.root}/lib/routing.rb"
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
@@ -65,4 +66,5 @@ Rails::Initializer.run do |config|
 
   # Using vendored plugin as it needs to be included after validates_timeliness
   # config.gem 'validation_reflection'
+  config.gem 'routing-filter'
 end

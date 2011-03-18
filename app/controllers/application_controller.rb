@@ -17,6 +17,21 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation, :old_password
   before_filter :login_required, :authenticate
 
+  # Localization
+  # Code snippet from: https://github.com/svenfuchs/routing-filter/wiki/Localize-filter
+  before_filter :set_locale
+
+  def set_locale
+    locale = params[:locale] || cookies[:locale]
+    I18n.locale = locale.to_s
+    cookies[:locale] = locale unless (cookies[:locale] && cookies[:locale] == locale)
+  end
+
+  def default_url_options(options={})
+    { :locale => I18n.locale }
+  end
+  # Code snippet finished
+
   private
   def authenticate
     return if current_user.nil?
