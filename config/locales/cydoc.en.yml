@@ -37,6 +37,7 @@ en:
         open_amount: "Offener Betrag"
         patient: Patient
         payment_address: Rechnungsadressat
+        reclaim_recipe: Rückforderungsbeleg
         referrer: Zuweisender Arzt
         remark:     Remarks
         state: Status
