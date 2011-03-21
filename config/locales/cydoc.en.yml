@@ -195,7 +195,7 @@ en:
       recall: Recall
       recalls: Recalls
       treatment: Treatment
-      treatment_sessions: Session
+      treatment_sessions: Consultations
     user_bar:
       logged_in_as: "Logged in as"
       login: "Login"
