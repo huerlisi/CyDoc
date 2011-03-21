@@ -1,1 +1,45 @@
-_insurance_recipe_head.html.erb
+<table style="width:100%">
+  <tr>
+    <td class="head" style="width:13.8cm"><%= t_attr(:reclaim_recipe) %></td>
+    <td class="list" style="width:4.7cm">Release&nbsp;<span class="bullet">&#9632;</span>&nbsp;4.0M/de</td>
+    <td class="head">M</td>
+  </tr>
+</table>
+
+<table style="width:18.2cm; border:thin solid black; border-bottom:none">
+  <tr>
+    <td class="subhead col1">Dokument</td>
+    <td class="list" style="width:2.3cm"> </td>
+    <td style="width:2.8cm"><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.id %></td>
+    <td style="width:5.7cm"><%= @invoice.updated_at.strftime('%d.%m.%Y %H:%M:%S') %></td>
+    <td class="subhead" style="width:2cm">Seite&nbsp;<span class="bullet">&#9632;</span>&nbsp;<%=h @page %></td>
+  </tr>
+  <tr>
+    <td class="subhead" rowspan="2" style="width:1.8cm">Rechnungs-<br />steller</td>
+    <td class="list">EAN-Nr.</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.biller.ean_party %></td>
+    <td colspan="2" class="list"><%= full_address(@invoice.biller.vcard, ', ') %></td>
+  </tr>
+  <tr>
+    <td class="list">ZSR-Nr.</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.biller.zsr %></td>
+    <td colspan="3" class="list"><%= contact(@invoice.biller.vcard, ' ') %></td>
+  </tr>
+  <tr>
+    <td class="subhead" rowspan="2">Leistungs-<br />erbringer</td>
+    <td class="list">EAN-Nr.</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.provider.ean_party %></td>
+    <td colspan="2" class="list"><%=h full_address(@invoice.provider.vcard, ', ') %></td>
+  </tr>
+  <tr>
+    <td class="list">ZSR-Nr.</td>
+    <td><span class="bullet">&#9632;</span>&nbsp;<%=h @invoice.provider.zsr %></td>
+    <td colspan="3" class="list"><%= contact(@invoice.provider.vcard, ' ') %></td>
+  </tr>
+</table>
+
+<% if @page == 1 %>
+  <%= render :partial => 'insurance_recipe_patient_head' %>
+<% else %>
+  <%= render :partial => 'insurance_recipe_patient_head_following_page' %>
+<% end %>
