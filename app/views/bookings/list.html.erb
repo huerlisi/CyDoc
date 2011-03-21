@@ -2,7 +2,7 @@
   <%= link_to "Erfassen", new_booking_path, :class => "icon icon-add" %>
   <%= link_to_remote "Alle anzeigen", {:url => bookings_path(:all => true), :method => :get}, :class => "icon icon-index" %>
 </div>
-<h2>Buchungen</h2>
+<h2><%= t('cydoc.title.bookings') %></h2>
 
 <%= render :partial => 'list' %>
 <%= render :partial => 'bookings/sidebar' %>

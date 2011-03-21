@@ -3,14 +3,14 @@
   <% form_for setup_patient(@patient) do |patient| %>
     <div class="contextual">
       <%= link_to_function t('cydoc.actions.save'), "this.up('form'.submit()", :class => "icon icon-save" %>
-      <%= link_to t('cydoc.actions.cancel'), patients_path, :class => "icon icon-cancel" %>
+      <%= link_to t('cydoc.actions.abort'), patients_path, :class => "icon icon-cancel" %>
     </div>
 
     <%= render :partial => 'form', :locals => {:patient => patient} %>
 
   <p>
     <%= patient.submit t('cydoc.actions.save'), :class => "icon icon-save" %>
-    <%= button_to_function t('cydoc.actions.cancel'), "window.location.href = \"#{escape_javascript(patients_path)}\"", :class => "icon icon-cancel" %>
+    <%= button_to_function t('cydoc.actions.abort'), "window.location.href = \"#{escape_javascript(patients_path)}\"", :class => "icon icon-cancel" %>
   </p>
   <% end %>
 </div>

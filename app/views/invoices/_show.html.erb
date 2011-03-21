@@ -3,53 +3,53 @@
 
 <div class="contextual">
   <% if @invoice.overdue? or @invoice.state == 'reminded' or  @invoice.state == '2xreminded' or  @invoice.state == '3xreminded' or  @invoice.state == 'encashment'%>
-    <%= link_to_remote "Mahnung drucken", {:url => print_reminder_letter_invoice_path(@invoice), :before => "showPrintingFlash('invoice_flash', 'Mahnung')"}, :class => "icon icon-print" %>
-    <%= link_to_remote "Mahnkopie drucken", {:url => print_reminder_letter_invoice_path(@invoice, :print_copy => true), :before => "showPrintingFlash('invoice_flash', 'Mahnkopie')"}, :class => "icon icon-print" %>
+    <%= link_to_remote t('cydoc.actions.print_dunning_letter'), {:url => print_reminder_letter_invoice_path(@invoice), :before => "showPrintingFlash('invoice_flash', 'Mahnung')"}, :class => "icon icon-print" %>
+    <%= link_to_remote t('cydoc.actions.print_dunning_letter_copy'), {:url => print_reminder_letter_invoice_path(@invoice, :print_copy => true), :before => "showPrintingFlash('invoice_flash', 'Mahnkopie')"}, :class => "icon icon-print" %>
   <% end %>
   <% if @invoice.state == 'prepared' %>
-    <%= link_to_remote "Drucken", {:url => print_invoice_path(@invoice), :before => "showPrintingFlash('invoice_flash', 'Rechnung')"}, :class => "icon icon-print" %>
+    <%= link_to_remote t('cydoc.actions.print'), {:url => print_invoice_path(@invoice), :before => "showPrintingFlash('invoice_flash', '#{t_model(Invoice)}')"}, :class => "icon icon-print" %>
   <% else %>
-    <%= link_to_remote "Kopie drucken", {:url => print_invoice_path(@invoice, :print_copy => true), :before => "showPrintingFlash('invoice_flash', 'Rechnungskopie')"}, :class => "icon icon-print" %>
+    <%= link_to_remote t('cydoc.actions.print_copy'), {:url => print_invoice_path(@invoice, :print_copy => true), :before => "showPrintingFlash('invoice_flash', 'Rechnungskopie')"}, :class => "icon icon-print" %>
   <% end %>
   <% if @invoice.open %>
-      <%= link_to_remote "Stornieren", {:url => invoice_path(@invoice), :method => :delete, :confirm => "Rechnung #{@invoice.to_s} stornieren?"}, :class => "icon icon-delete" %>
-      <%= link_to_remote "Reaktivieren", {:url => reactivate_invoice_path(@invoice), :confirm => "Rechnung #{@invoice.to_s} reaktivieren?"}, :class => "icon icon-reactivate" %>
+      <%= link_to_remote t('cydoc.actions.cancel'), {:url => invoice_path(@invoice), :method => :delete, :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reverse')}?"}, :class => "icon icon-delete" %>
+      <%= link_to_remote t('cydoc.actions.reactivate'), {:url => reactivate_invoice_path(@invoice), :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?"}, :class => "icon icon-reactivate" %>
   <% elsif @invoice.state == 'canceled' %>
-      <%= link_to_remote "Reaktivieren", {:url => reactivate_invoice_path(@invoice), :confirm => "Rechnung #{@invoice.to_s} reaktivieren?"}, :class => "icon icon-reactivate" %>
+      <%= link_to_remote t('cydoc.actions.reactivate'), {:url => reactivate_invoice_path(@invoice), :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?"}, :class => "icon icon-reactivate" %>
   <% end %>
-  <%= link_to "Rückforderungsbeleg PDF", insurance_recipe_invoice_path(@invoice, :format => :pdf), :method => :get, :class => "icon icon-pdf" %>
+  <%= link_to t('cydoc.actions.print_reclaim_pdf'), insurance_recipe_invoice_path(@invoice, :format => :pdf), :method => :get, :class => "icon icon-pdf" %>
 </div>
 
-<h3>Rechnung #<%= @invoice.id %></h3>
+<h3><%= t_model(Invoice) %> #<%= @invoice.id %></h3>
 <div class="box">
 <table style="width: 100%">
   <tr>
-    <th>Patient:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>
-    <th>Gesetz:</th><td><%= @invoice.law.name %></td>
+    <th><%= t_attr(:patient, Invoice) %>:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>
+    <th><%= t_attr(:law, Invoice) %>:</th><td><%= @invoice.law.name %></td>
   </tr>
   <tr>
-    <th>Rechnungsadressat:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>
-    <th>Vergütungsart:</th><td><%= @invoice.tiers.name %></td>
+    <th><%= t_attr(:payment_address, Invoice) %>:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>
+    <th><%= t_attr(:tiers, Invoice) %>:</th><td><%= @invoice.tiers.name %></td>
   </tr>
   <tr>
-    <th>Zuweisender Arzt:</th><td><%= @invoice.referrer.to_s %></td>
-    <th>Status:</th><td id="invoice_state"><%=t @invoice.state, :scope => 'invoice.state' %></td>
+    <th><%= t_attr(:referrer, Invoice) %>:</th><td><%= @invoice.referrer.to_s %></td>
+    <th><%= t_attr(:state, Invoice) %>:</th><td id="invoice_state"><%=t @invoice.state, :scope => 'invoice.state' %></td>
   </tr>
   <tr>
-    <th>Behandlungsgrund:</th><td><%= @invoice.treatment.reason %></td>
-    <th>Rechnungsdatum:</th><td><%=l @invoice.value_date %></td>
+    <th><%= t_attr(:treatment_reason, Invoice) %>:</th><td><%= @invoice.treatment.reason %></td>
+    <th><%= t_attr(:value_date, Invoice) %>:</th><td><%=l @invoice.value_date %></td>
   </tr>
   <tr>
     <th></th><td></td>
-    <th>Fälligkeit:</th><td><%= in_place_editor_field :invoice, :due_date %></td>
+    <th><%= t_attr(:due_date, Invoice) %>:</th><td><%= in_place_editor_field :invoice, :due_date %></td>
   </tr>
 </table>
 </div>
 
 <div class="contextual">
-  <%= link_to_remote "Manuell buchen", {:url => new_invoice_booking_path(@invoice), :method => :get}, :class => "icon icon-book" %>
+  <%= link_to_remote t('cydoc.actions.book_manual'), {:url => new_invoice_booking_path(@invoice), :method => :get}, :class => "icon icon-book" %>
 </div>
-<h3>Buchungen</h3>
+<h3><%= t('cydoc.title.bookings') %></h3>
 <div id="invoice_booking_list">
   <%= render :partial => 'invoice_bookings/list', :object => @invoice.bookings %>
 </div>

@@ -1,9 +1,5 @@
 
 de-CH: 
-  date:
-    formats:
-      month: "%B %Y"
-
   activerecord:
     attributes:
       account:
@@ -35,7 +31,17 @@ de-CH:
         description: Beschreibung
         name:        Name
       invoice:
+        balance: "Saldo"
+        due_date: Fälligkeit
+        law: Gesetz
+        open_amount: "Offener Betrag"
+        patient: Patient
+        payment_address: Rechnungsadressat
+        referrer: Zuweisender Arzt
         remark:     Bemerkungen
+        state: Status
+        tier: Vergütungsart
+        treatment_reason: Behandlungsgrund
         value_date: Rechnungsdatum
       patient:
         accident_insurance: 'Unfallversicherung'
@@ -116,10 +122,12 @@ de-CH:
       user:               Benutzer
   cydoc:
     actions:
+      abort: "Abbrechen"
       add_insurance: "Versicherung zuweisen"
       address_label: "Adress-Etikette"
       all: "Alle"
-      cancel: "Abbrechen"
+      book_manual: "Manuell buchen"
+      cancel: "Stornieren"
       create: "Erfassen"
       delete: "Löschen"
       delete_treatment: "Fall %{treatment} löschen?"
@@ -131,6 +139,13 @@ de-CH:
       new_medical_case: "Neue Diagnose"
       new_recall: "Recall erfassen"
       new_treatment_session: "Neue Konsultation"
+      print: "Drucken"
+      print_copy: "Kopie drucken"
+      print_dunning_letter: "Mahnung drucken"
+      print_dunning_letter_copy: "Mahnkopie drucken"
+      print_reclaim_pdf: "Rückforderungsbeleg PDF"
+      reactivate: reaktivieren
+      reverse: stornieren
       save: "Speichern"
       show_all: "Alle anzeigen"
       show_letter: "Brief anzeigen"
@@ -185,6 +200,7 @@ de-CH:
         list: Termine
         send_recalls: 'Versandte Recalls'
     title:
+      bookings: Buchungen
       cases: Fälle
       contact: Kontakt
       filter: Filter
@@ -200,6 +216,9 @@ de-CH:
       logged_in_as: "Angemeldet als"
       login: "Anmelden"
       logout: "Abmelden"
+  date:
+    formats:
+      month: "%B %Y"
   invoice:
     state:
       2xreminded:  2x gemahnt

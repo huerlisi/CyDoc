@@ -1,7 +1,7 @@
 <div class="contextual">
   <%= link_to_remote "Leistung hinzufügen", {:url => new_tariff_item_service_item_url(@tariff_item), :method => :get}, :class => "icon icon-add" %>
 </div>
-<h3>Leistungen</h3>
+<h3><%= t('cydoc.title.treatment_sessions') %></h3>
 <div id="service_item_list">
   <div id="new_service_item"></div>
   <%= render :partial => 'service_items/list' %>
