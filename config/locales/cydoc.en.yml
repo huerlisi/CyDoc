@@ -150,7 +150,7 @@ en:
       show_all: "Show all"
       show_letter: "Show letter"
       to_pdf: "As PDF"
-      update: "Update"
+      update: "Edit"
     navigation:
       accounting: 'Accounting'
       all_bookings: "All bookings"
@@ -200,7 +200,7 @@ en:
         list: Appoinments
         send_recalls: 'Send recalls'
     title:
-      bookings: Buchungen
+      bookings: Bookings
       cases: Cases
       contact: Contact
       filter: Filter
