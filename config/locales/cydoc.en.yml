@@ -12,7 +12,7 @@ en:
         remarks:     Remarks
         to:          To
       booking:
-        reference_id:     Invoice Nr.
+        reference_id:     Invoice No.
       doctor:
         ean_party:   EAN-Nr.
         zsr:         ZSR-Nr.
@@ -51,7 +51,7 @@ en:
         business_phone: Business phone
         doctor_patient_nr: Patient No.
         email: Email
-        family_name: Surename
+        family_name: Surname
         fax: 'Fax'
         female: 'female'
         gender: Gender
@@ -60,7 +60,7 @@ en:
         health_insurance_short_cut: 'KVG'
         insurance: "Insurance"
         insurance_number: "Number"
-        locality: Ort
+        locality: City
         male: 'male'
         mobile: 'Mobile phone'
         name: Name
@@ -96,11 +96,11 @@ en:
         amount: Total CHF
         date_begin:  Treatment Begin
         date_end:    Treatment End
-        law: Gesetz
+        law: Law
         patient: Patient
         place_type:  Place of Treatment
         reason:      Reason for Treatment
-        referrer: Zuweisender Arzt
+        referrer:    Referring Doctor
       user:
         login:    Login
         password: Password
@@ -119,26 +119,26 @@ en:
       tariff_item_group:  Tariff Item Group
       tarmed_tariff_item: Tarmed Tariff Item
       treatment:          Treatment
-      user:               Benutzer
+      user:               User
   cydoc:
     actions:
       abort: "Abbrechen"
       add_insurance: Add Insurance
-      address_label: "Address-Label"
+      address_label: "Address Label"
       all: "All"
       book_manual: "Manuell buchen"
       cancel: "Cancel"
       create: "Create"
       delete: "Delete"
-      delete_treatment: "Fall %{treatment} löschen?"
+      delete_treatment: "delete treatment %{treatment} ?"
       edit_recall: "Edit recall"
       kg_label: "KG-Label"
       new_case: "New case"
       new_contact: "New contact"
-      new_invoice: "Rechung stellen"
-      new_medical_case: "Neue Diagnose"
+      new_invoice: "Create invoice"
+      new_medical_case: "add diagnose"
       new_recall: "New recall"
-      new_treatment_session: "Neue Konsultation"
+      new_treatment_session: "Add consultation"
       print: "Drucken"
       print_copy: "Kopie drucken"
       print_dunning_letter: "Mahnung drucken"
@@ -163,7 +163,7 @@ en:
       insurances: "Insurances"
       master_data: Master data
       open_cases: "Open cases"
-      open_positions: "Open Positions"
+      open_positions: "Open positions"
       patients: 'Patients'
       payment_overview: "Payment overview"
       payments: 'Payments'
@@ -205,13 +205,13 @@ en:
       contact: Contact
       filter: Filter
       insurance: Insurance
-      medical_cases: Diagnosen
+      medical_cases: Diagnoses
       new_patient: Capture patient
       personal_data: Personal data
       recall: Recall
       recalls: Recalls
       treatment: Treatment
-      treatment_sessions: Leistungen
+      treatment_sessions: Consultations
     user_bar:
       logged_in_as: "Logged in as"
       login: "Login"
@@ -228,5 +228,5 @@ en:
       paid:        paid
       prepared:    open
       printed:     printed
-      reactivated: reaktivated
+      reactivated: reactivated
       reminded:    1x reminded
