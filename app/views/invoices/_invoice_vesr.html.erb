@@ -6,7 +6,7 @@
 <div id="paymentfor1" class="block">
   <%= bank_account.bank.vcard.full_name %><br />
   <%= bank_account.bank.vcard.postal_code %> <%= bank_account.bank.vcard.locality %><br />
-  <div style="font-size: 80%; margin-top: 0.2cm">Zugunsten von</div>
+  <div style="font-size: 80%; margin-top: 0.2cm"><%= t_attr(:biller) %></div>
   <%= full_address(bank_account.holder.vcard) %>
 </div>
 
@@ -18,7 +18,7 @@
 <div id="paymentfor2" class="block">
   <%= bank_account.bank.vcard.full_name %><br />
   <%= bank_account.bank.vcard.postal_code %> <%= bank_account.bank.vcard.locality %><br />
-  <div style="font-size: 80%; margin-top: 0.2cm">Zugunsten von</div>
+  <div style="font-size: 80%; margin-top: 0.2cm"><%= t_attr(:biller) %></div>
   <%= full_address(bank_account.holder.vcard) %>
 </div>
 

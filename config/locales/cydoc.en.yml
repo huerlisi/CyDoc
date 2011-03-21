@@ -31,19 +31,45 @@ en:
         description:    Description
         name:           Name
       invoice:
+        amount_due: Fälliger Betrag
+        amount_pfl: davon PFL
         balance: "Saldo"
+        biller: Zugunsten von
+        cantonal: Kantonal
+        date: Rechnungsdatum
+        date_begin: Behandlungen von
+        date_end: Behandlungen bis
         due_date: Fälligkeit
+        due_date_till: Zahlbar bis
+        id: Patientenrechnung Nr.
+        laboratory: Labor
         law: Gesetz
+        medi: Medi
+        mi_gel: MiGel
         open_amount: "Offener Betrag"
+        others: Übrige
         patient: Patient
         payment_address: Rechnungsadressat
+        pfl: PFL
+        physio: Physio
+        prepayment: Anzahlung
+        provider: Leistungserbringer
         reclaim_recipe: Rückforderungsbeleg
         referrer: Zuweisender Arzt
         remark:     Remarks
         state: Status
+        tarmed_al: Tarmed AL
+        tarmed_tl: Tarmed TL
         tier: Vergütungsart
+        total: Total
+        total_amount: Gesamtbetrag/CHF
         treatment_reason: Behandlungsgrund
         value_date: Date of Invoice
+        vat: MWSt
+        vat_amount: Betrag
+        vat_code: Code
+        vat_number: MWSt.Nr.
+        vat_rate: Satz
       patient:
         accident_insurance: 'Accident insurance'
         accident_insurance_short_cut: 'UVG'

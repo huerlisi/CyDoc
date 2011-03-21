@@ -1,17 +1,17 @@
 <div id="info" class="block">
-  <h2>Patientenrechnung Nr. <%= @invoice.id %></h2>
+  <h2><%= t_attr(:id) %> <%= @invoice.id %></h2>
   <table>
     <tr>
-      <th>Rechnungsdatum:</th><td><%=l @invoice.date %></td>
+      <th><%= t_attr(:date) %>:</th><td><%=l @invoice.date %></td>
     </tr>
     <tr>
-      <th>Zahlbar bis:</th><td><%=l @invoice.due_date %></td>
+      <th><%= t_attr(:due_date_till) %>:</th><td><%=l @invoice.due_date %></td>
     </tr>
     <tr>
-      <th>Behandlungen von:</th><td><%=l @invoice.date_begin %></td>
+      <th><%= t_attr(:date_begin) %>:</th><td><%=l @invoice.date_begin %></td>
     </tr>
     <tr>
-      <th>Behandlungen bis:</th><td><%=l @invoice.date_end %></td>
+      <th><%= t_attr(:date_end) %>:</th><td><%=l @invoice.date_end %></td>
     </tr>
   </table>
 </div>
