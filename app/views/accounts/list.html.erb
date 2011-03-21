@@ -1,7 +1,7 @@
 <div class="contextual">
-  <%= link_to "VESR Liste", esr_bookings_path, :class => "icon icon-book" %>
+  <%= link_to t('cydoc.actions.esr'), esr_bookings_path, :class => "icon icon-book" %>
 </div>
-<h2>Konten</h2>
+<h2><%= t('cydoc.title.accounts') %></h2>
 
 <table class="list">
   <%= render :partial => 'accounts/list_header' %>

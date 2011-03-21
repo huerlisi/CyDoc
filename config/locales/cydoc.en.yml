@@ -3,16 +3,30 @@ en:
   activerecord:
     attributes:
       account:
+        balance:          Saldo
+        credit:           Haben
+        date:             Datum
+        debit:            Soll
         esr_id:           ESR-Number
+        name:             Name
         number:           Number
         pc_id:            PC-Number
+        reference:        Referenz
+        text:             Text
       appointment:
         date:        Date
         from:        From
         remarks:     Remarks
         to:          To
       booking:
+        amount:           Summe
+        average:          Durchschnitt
+        count:            Anzahl
         reference_id:     Invoice No.
+        till:             bis
+        title:            Titel
+        total:            Total
+        turn_over:        Umsatz
       doctor:
         ean_party:   EAN-Nr.
         zsr:         ZSR-Nr.
@@ -132,6 +146,7 @@ en:
         login:    Login
         password: Password
     models:
+      account:            Konto
       doctor:             Doctor
       drug_article:       Drug package
       drug_product:       Drug
@@ -150,6 +165,7 @@ en:
   cydoc:
     actions:
       abort: "Abbrechen"
+      accounts: "Kontoliste"
       add_insurance: Add Insurance
       address_label: "Address Label"
       all: "All"
@@ -159,7 +175,9 @@ en:
       delete: "Delete"
       delete_treatment: "delete treatment %{treatment} ?"
       edit_recall: "Edit recall"
+      esr: "VESR Liste"
       kg_label: "KG-Label"
+      new_booking: "Neue Buchung"
       new_case: "New case"
       new_contact: "New contact"
       new_invoice: "Create invoice"
@@ -167,6 +185,7 @@ en:
       new_recall: "New recall"
       new_treatment_session: "Add consultation"
       print: "Drucken"
+      print_account: "Kontoauszug drucken"
       print_copy: "Kopie drucken"
       print_dunning_letter: "Mahnung drucken"
       print_dunning_letter_copy: "Mahnkopie drucken"
@@ -232,6 +251,7 @@ en:
         list: Appoinments
         send_recalls: 'Send recalls'
     title:
+      accounts: Konten
       bookings: Bookings
       cases: Cases
       contact: Contact

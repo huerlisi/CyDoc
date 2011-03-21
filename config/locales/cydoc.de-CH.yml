@@ -3,16 +3,30 @@ de-CH:
   activerecord:
     attributes:
       account:
+        balance:          Saldo
+        credit:           Haben
+        date:             Datum
+        debit:            Soll
         esr_id:           ESR-Nummer
+        name:             Name
         number:           Nummer
         pc_id:            PC-Nummer
+        reference:        Referenz
+        text:             Text
       appointment:
         date:    Am
         from:    Von
         remarks: Bemerkungen
         to:      Bis
       booking:
+        amount:           Summe
+        average:          Durchschnitt
+        count:            Anzahl
         reference_id:     Rechnungsnr.
+        till:             bis
+        title:            Titel
+        total:            Total
+        turn_over:        Umsatz
       doctor:
         ean_party:   EAN-Nr.
         zsr:         ZSR-Nr.
@@ -132,6 +146,7 @@ de-CH:
         login:    Login
         password: Passwort
     models:
+      account:            Konto
       doctor:             Arzt
       drug_article:       Medikamentenpackung
       drug_product:       Medikament
@@ -150,6 +165,7 @@ de-CH:
   cydoc:
     actions:
       abort: "Abbrechen"
+      accounts: "Kontoliste"
       add_insurance: "Versicherung zuweisen"
       address_label: "Adress-Etikette"
       all: "Alle"
@@ -159,7 +175,9 @@ de-CH:
       delete: "Löschen"
       delete_treatment: "Fall %{treatment} löschen?"
       edit_recall: "Recall editieren"
+      esr: "VESR Liste"
       kg_label: "KG-Etikette"
+      new_booking: "Neue Buchung"
       new_case: "Fall eröffnen"
       new_contact: "Kontakt erfassen"
       new_invoice: "Rechung stellen"
@@ -167,6 +185,7 @@ de-CH:
       new_recall: "Recall erfassen"
       new_treatment_session: "Neue Konsultation"
       print: "Drucken"
+      print_account: "Kontoauszug drucken"
       print_copy: "Kopie drucken"
       print_dunning_letter: "Mahnung drucken"
       print_dunning_letter_copy: "Mahnkopie drucken"
@@ -232,6 +251,7 @@ de-CH:
         list: Termine
         send_recalls: 'Versandte Recalls'
     title:
+      accounts: Konten
       bookings: Buchungen
       cases: Fälle
       contact: Kontakt
