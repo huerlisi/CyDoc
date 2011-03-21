@@ -3,15 +3,15 @@ en:
   activerecord:
     attributes:
       account:
-        balance:          Saldo
-        credit:           Haben
-        date:             Datum
-        debit:            Soll
+        balance:          Bottom line
+        credit:           Credit
+        date:             Date
+        debit:            Debit
         esr_id:           ESR-Number
         name:             Name
         number:           Number
         pc_id:            PC-Number
-        reference:        Referenz
+        reference:        Reference
         text:             Text
       appointment:
         date:        Date
@@ -19,14 +19,14 @@ en:
         remarks:     Remarks
         to:          To
       booking:
-        amount:           Summe
-        average:          Durchschnitt
-        count:            Anzahl
+        amount:           Total amount
+        average:          Average
+        count:            Quantity
         reference_id:     Invoice No.
-        till:             bis
-        title:            Titel
+        till:             to
+        title:            Title
         total:            Total
-        turn_over:        Umsatz
+        turn_over:        Turnover
       doctor:
         ean_party:   EAN-Nr.
         zsr:         ZSR-Nr.
@@ -45,45 +45,45 @@ en:
         description:    Description
         name:           Name
       invoice:
-        amount_due: Fälliger Betrag
+        amount_due: Due amount
         amount_pfl: davon PFL
-        balance: "Saldo"
-        biller: Zugunsten von
+        balance: "balance"
+        biller: In favour of
         cantonal: Kantonal
-        date: Rechnungsdatum
-        date_begin: Behandlungen von
-        date_end: Behandlungen bis
-        due_date: Fälligkeit
-        due_date_till: Zahlbar bis
-        id: Patientenrechnung Nr.
-        laboratory: Labor
-        law: Gesetz
+        date: date of invoice
+        date_begin: treatment from
+        date_end: treatment to
+        due_date: Due date
+        due_date_till: Due untill
+        id: Patient invoice No.
+        laboratory: Laboratory
+        law: Law
         medi: Medi
         mi_gel: MiGel
-        open_amount: "Offener Betrag"
-        others: Übrige
+        open_amount: "Open amount"
+        others: Ohters
         patient: Patient
-        payment_address: Rechnungsadressat
+        payment_address: invoice address
         pfl: PFL
         physio: Physio
-        prepayment: Anzahlung
-        provider: Leistungserbringer
-        reclaim_recipe: Rückforderungsbeleg
-        referrer: Zuweisender Arzt
+        prepayment: prepayment
+        provider: Provider
+        reclaim_recipe: reclaim recipe
+        referrer: Referring Doctor
         remark:     Remarks
-        state: Status
+        state: State
         tarmed_al: Tarmed AL
         tarmed_tl: Tarmed TL
-        tier: Vergütungsart
+        tier: Tier
         total: Total
-        total_amount: Gesamtbetrag/CHF
-        treatment_reason: Behandlungsgrund
+        total_amount: Total amount/CHF
+        treatment_reason: Reason of treatment
         value_date: Date of Invoice
-        vat: MWSt
-        vat_amount: Betrag
-        vat_code: Code
-        vat_number: MWSt.Nr.
-        vat_rate: Satz
+        vat: VAT
+        vat_amount: VAT amount
+        vat_code: VAT Code
+        vat_number: VAT No.
+        vat_rate: VAT rate
       patient:
         accident_insurance: 'Accident insurance'
         accident_insurance_short_cut: 'UVG'
@@ -146,7 +146,7 @@ en:
         login:    Login
         password: Password
     models:
-      account:            Konto
+      account:            Account
       doctor:             Doctor
       drug_article:       Drug package
       drug_product:       Drug
@@ -164,12 +164,12 @@ en:
       user:               User
   cydoc:
     actions:
-      abort: "Abbrechen"
-      accounts: "Kontoliste"
+      abort: "abort"
+      accounts: "Accounts"
       add_insurance: Add Insurance
       address_label: "Address Label"
       all: "All"
-      book_manual: "Manuell buchen"
+      book_manual: "Manual booking"
       cancel: "Cancel"
       create: "Create"
       delete: "Delete"
@@ -177,21 +177,21 @@ en:
       edit_recall: "Edit recall"
       esr: "VESR Liste"
       kg_label: "KG-Label"
-      new_booking: "Neue Buchung"
+      new_booking: "New booking"
       new_case: "New case"
       new_contact: "New contact"
       new_invoice: "Create invoice"
       new_medical_case: "add diagnose"
       new_recall: "New recall"
       new_treatment_session: "Add consultation"
-      print: "Drucken"
-      print_account: "Kontoauszug drucken"
-      print_copy: "Kopie drucken"
-      print_dunning_letter: "Mahnung drucken"
-      print_dunning_letter_copy: "Mahnkopie drucken"
-      print_reclaim_pdf: "Rückforderungsbeleg PDF"
-      reactivate: reaktivieren
-      reverse: stornieren
+      print: "Print"
+      print_account: "Print account"
+      print_copy: "Print copy"
+      print_dunning_letter: "Print reminder"
+      print_dunning_letter_copy: "Print remider copy"
+      print_reclaim_pdf: "Reclaim as PDF"
+      reactivate: reactivate
+      reverse: reverse
       save: "Save"
       show_all: "Show all"
       show_letter: "Show letter"
@@ -199,8 +199,8 @@ en:
       update: "Edit"
     navigation:
       accounting: 'Accounting'
-      accounts: 'Konten'
-      accounts_statistics: "Konto Statistiken"
+      accounts: 'Accounts'
+      accounts_statistics: "Accounts Statistics"
       all_bookings: "All bookings"
       balance_sheet: "Balance sheet"
       create: "Create"
@@ -212,7 +212,7 @@ en:
       home: "Home"
       insurances: "Insurances"
       master_data: Master data
-      new_esr: "VESR Datei einlesen"
+      new_esr: "new VESR booking"
       open_cases: "Open cases"
       open_positions: "Open positions"
       patients: 'Patients'
@@ -251,7 +251,7 @@ en:
         list: Appoinments
         send_recalls: 'Send recalls'
     title:
-      accounts: Konten
+      accounts: Accounts
       bookings: Bookings
       cases: Cases
       contact: Contact
