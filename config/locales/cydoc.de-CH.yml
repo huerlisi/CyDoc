@@ -180,15 +180,20 @@ de-CH:
       update: "Ändern"
     navigation:
       accounting: 'Buchhaltung'
+      accounts: 'Konten'
+      accounts_statistics: "Konto Statistiken"
       all_bookings: "Alle Buchungen"
       balance_sheet: "Jahresabschluss"
       create: "Erfassen"
       doctors: "Ärzte"
       drug_products: "Medikamente"
+      esr: 'VESR'
+      esr_bookings: "VESR Journal"
       help: "Hilfe"
       home: "Home"
       insurances: "Versicherungen"
       master_data: Stammdaten
+      new_esr: "VESR Datei einlesen"
       open_cases: "Offene Fälle"
       open_positions: "Offene Posten"
       patients: 'Patienten'

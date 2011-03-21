@@ -180,15 +180,20 @@ en:
       update: "Edit"
     navigation:
       accounting: 'Accounting'
+      accounts: 'Konten'
+      accounts_statistics: "Konto Statistiken"
       all_bookings: "All bookings"
       balance_sheet: "Balance sheet"
       create: "Create"
       doctors: "Doctors"
       drug_products: "Drugs"
+      esr: 'VESR'
+      esr_bookings: "VESR Journal"
       help: "Help"
       home: "Home"
       insurances: "Insurances"
       master_data: Master data
+      new_esr: "VESR Datei einlesen"
       open_cases: "Open cases"
       open_positions: "Open positions"
       patients: 'Patients'
