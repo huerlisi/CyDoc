@@ -100,6 +100,12 @@ de-CH:
         law: Gesetz
         patient: Patient
         place_type: Erbringungsort
+        reason:     Behandlungsgrund
+        patient: Patient
+        law: Gesetz
+        date_begin: Behandlung von
+        place_type: Erbringungsort
+        date_end: Behandlung bis
         reason: Behandlungsgrund
         referrer: Zuweisender Arzt
       user:
@@ -183,6 +189,7 @@ de-CH:
       last_appointment: "Letzter Termin"
       no_appointment: "Kein Termin"
       offer_printed: "Aufgebot gedruckt"
+      no_appointment: "Kein Termin"
     search:
       search: "Suche"
       searching: "Suchen"
