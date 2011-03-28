@@ -1,4 +1,3 @@
-
 de-CH: 
   activerecord:
     attributes:
@@ -74,7 +73,7 @@ de-CH:
         state: Status
         tarmed_al: Tarmed AL
         tarmed_tl: Tarmed TL
-        tier: Vergütungsart
+        tiers: Vergütungsart
         total: Total
         total_amount: Gesamtbetrag/CHF
         treatment_reason: Behandlungsgrund

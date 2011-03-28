@@ -1,4 +1,3 @@
-
 en: 
   activerecord:
     attributes:
@@ -74,7 +73,7 @@ en:
         state: State
         tarmed_al: Tarmed AL
         tarmed_tl: Tarmed TL
-        tier: Tier
+        tiers: Tier
         total: Total
         total_amount: Total amount/CHF
         treatment_reason: Reason of treatment
