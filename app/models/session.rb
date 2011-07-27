@@ -3,7 +3,7 @@ class Session < ActiveRecord::Base
   has_and_belongs_to_many :invoices
   belongs_to :treatment, :touch => true
   has_and_belongs_to_many :diagnoses
-  has_and_belongs_to_many :service_records
+  has_and_belongs_to_many :service_records, :autosave => true
 
   # Validations
   validates_presence_of :duration_from
@@ -48,7 +48,14 @@ class Session < ActiveRecord::Base
   end
   
   def date=(value)
-    write_attribute(:duration_from, Date.parse_europe(value))
+    new_date = Date.parse_europe(value)
+
+    write_attribute(:duration_from, new_date)
+
+    # Update service_records
+    service_records.map{|service_record|
+      service_record.date = new_date
+    }
   end
   
   def build_service_record(tariff_item)
