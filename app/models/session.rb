@@ -48,7 +48,14 @@ class Session < ActiveRecord::Base
   end
   
   def date=(value)
-    write_attribute(:duration_from, Date.parse_europe(value))
+    new_date = Date.parse_europe(value)
+
+    write_attribute(:duration_from, new_date)
+
+    # Update service_records
+    service_records.map{|service_record|
+      service_record.date = new_date
+    }
   end
   
   def build_service_record(tariff_item)
