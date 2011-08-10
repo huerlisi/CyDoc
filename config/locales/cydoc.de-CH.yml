@@ -272,12 +272,13 @@ de-CH:
       month: "%B %Y"
   invoice:
     state:
-      2xreminded:  2x gemahnt
-      booked:      verbucht
-      canceled:    storniert
-      encashment:  in Inkasso
-      paid:        bezahlt
       prepared:    offen
+      booked:      verbucht
       printed:     gedruckt
+      canceled:    storniert
       reactivated: reaktiviert
       reminded:    1x gemahnt
+      2xreminded:  2x gemahnt
+      3xreminded:  3x gemahnt
+      encashment:  in Inkasso
+      paid:        bezahlt
