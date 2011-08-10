@@ -189,6 +189,8 @@ class Invoice < ActiveRecord::Base
   def booking_saved(booking)
     if (self.state != 'canceled') and (self.state != 'reactivated') and (self.due_amount <= 0.0)
       update_attribute(:state, 'paid')
+    elsif (self.state == 'paid') and (self.due_amount > 0.0)
+      update_attribute(:state, 'booked')
     end
   end
   
