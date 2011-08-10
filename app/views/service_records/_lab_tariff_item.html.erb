@@ -4,7 +4,7 @@
   <td style="font-size: 80%; font-weight: bold; padding-top: 0.3em; padding-bottom: 0" colspan="15"><%=h record.text %></td>
 </tr>
 <tr>
-  <td>&#9632;&nbsp;<%=l record.date.strftime %></td>
+  <td>&#9632;&nbsp;<%=l record.date.to_date %></td>
   <td><%=h sprintf('%03i', record.tariff_type) %></td>
   <td><%=h record.code %></td>
   <td></td>
