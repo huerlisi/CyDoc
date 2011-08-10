@@ -174,7 +174,7 @@ class BookingsController < ApplicationController
     end
     
     respond_to do |format|
-      format.html { }
+      format.html { redirect_to bookings_path }
       format.js {
         render :update do |page|
           if params[:account_id]
