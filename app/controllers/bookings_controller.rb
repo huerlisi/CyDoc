@@ -80,6 +80,12 @@ class BookingsController < ApplicationController
     if @booking.save
       flash[:notice] = 'Buchung erfasst.'
 
+      # Needs to be done after booking save as it might update state
+      if (@booking.title == "Debitorenverlust") and @invoice and (@invoice.due_amount <= 0.0)
+        @invoice.state = 'written_off'
+        @invoice.save
+      end
+
       respond_to do |format|
         format.html {
           redirect_to bookings_path

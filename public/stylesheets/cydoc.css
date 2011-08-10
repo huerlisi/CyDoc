@@ -68,6 +68,9 @@ table.session {
 .invoice.paid {
   color: #5daa5d;
 }
+.invoice.written_off {
+  color: #F5AE0A;
+}
 
 .invoice.reminded, .invoice.encashment {
   color: #c40c0b;

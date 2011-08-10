@@ -14,7 +14,7 @@
   <% if @invoice.open %>
       <%= link_to_remote t('cydoc.actions.cancel'), {:url => invoice_path(@invoice), :method => :delete, :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reverse')}?"}, :class => "icon icon-delete" %>
       <%= link_to_remote t('cydoc.actions.reactivate'), {:url => reactivate_invoice_path(@invoice), :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?"}, :class => "icon icon-reactivate" %>
-  <% elsif @invoice.state == 'canceled' %>
+  <% elsif @invoice.state == 'canceled' or @invoice.state == 'written_off' %>
       <%= link_to_remote t('cydoc.actions.reactivate'), {:url => reactivate_invoice_path(@invoice), :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?"}, :class => "icon icon-reactivate" %>
   <% end %>
   <%= link_to t('cydoc.actions.print_reclaim_pdf'), insurance_recipe_invoice_path(@invoice, :format => :pdf), :method => :get, :class => "icon icon-pdf" %>
