@@ -14,6 +14,9 @@ class Patient < ActiveRecord::Base
   # FIX: This buggily needs this :select hack
   named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcard, :conditions => Vcard.by_name_conditions(name)}}
   has_vcards
+  # Hack to use 'private' address by default
+  has_one :vcard, :as => 'object', :conditions => {:vcard_type => 'private'}
+
   accepts_nested_attributes_for :vcard
   default_scope :include => {:vcard => :addresses}
 
