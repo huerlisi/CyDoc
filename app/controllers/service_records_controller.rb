@@ -34,12 +34,8 @@ class ServiceRecordsController < ApplicationController
 
     service_record = @session.build_service_record(tariff_item)
     
-    # Handle TariffItemGroups
-    if service_record.is_a? Array
-      service_record.map{|record| record.save!}
-    else
-      service_record.save
-    end
+    @session.save
+
     flash[:notice] = 'Erfolgreich erfasst.'
 
     respond_to do |format|
