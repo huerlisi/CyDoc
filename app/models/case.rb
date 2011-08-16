@@ -8,7 +8,7 @@ class Case < ActiveRecord::Base
     "#{patient.to_s}: PAP Abstrich #{praxistar_eingangsnr}"
   end
 
-  def create_invoice(provider, value_date)
+  def create_treatment(provider)
     # Law
     law = LawKvg.new(:insured_id => patient.insurance_policies.by_policy_type('KVG').first.number)
     
@@ -30,37 +30,13 @@ class Case < ActiveRecord::Base
     )
     
     # TariffItem
-    tariff_item = TariffItem.clever_find(classification.classification_group.title).first
+    tariff_code = "#{classification.name} (#{classification.examination_method.name})"
+    tariff_item = TariffItem.clever_find(tariff_code).first
     
     # Service Records
     session.build_service_record(tariff_item)
-    
-    # Tiers
-    tiers = TiersGarant.new(
-      :patient  => patient,
-      :biller   => provider,
-      :provider => provider,
-      :referrer => doctor
-    )
-    
-    # Invoice
-    invoice = Invoice.create(
-      :value_date      => value_date,
-      :due_date        => value_date.in(30.days),
-      :tiers           => tiers,
-      :law             => law,
-      :treatment       => treatment,
-      :sessions        => [session],
-      :service_records => session.service_records
-    )
 
-    session.invoices << invoice
-    session.charge
-    # Touch session as it won't autosave otherwise
-    session.touch
-    
-    # Book
-    invoice.book
-    invoice.save
+    # Save record
+    treatment.save
   end
 end

@@ -1,3 +1,3 @@
 class Classification < ActiveRecord::Base
-  belongs_to :classification_group
+  belongs_to :examination_method
 end
