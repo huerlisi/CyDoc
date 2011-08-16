@@ -59,7 +59,7 @@ class PatientsController < ApplicationController
       # Show selection list only if more than one hit
       return if !params[:all] && redirect_if_match(@patients)
     else
-      @patients = Patient.paginate(:page => params['page'])
+      @patients = Patient.paginate(:page => params['page'], :order => 'vcards.family_name, vcards.given_name')
     end
     
     respond_to do |format|
