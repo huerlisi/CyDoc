@@ -1,20 +1,23 @@
 class Patient < ActiveRecord::Base
   belongs_to :doctor
 
+  # Insurance
   has_many :insurance_policies
   accepts_nested_attributes_for :insurance_policies, :reject_if => proc { |attrs| attrs['insurance_id'].blank? }
   has_many :insurances, :through => :insurance_policies
+
   has_many :sessions
   has_many :recalls, :order => 'due_date', :dependent => :destroy
   has_many :appointments, :order => 'date', :dependent => :destroy
 
+  # Vcards
   # FIX: This buggily needs this :select hack
   named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcard, :conditions => Vcard.by_name_conditions(name)}}
-  named_scope :by_date, lambda {|date| {:conditions => ['birth_date LIKE ?', Date.parse_europe(date).strftime('%%%y-%m-%d')] }}
-
   has_vcards
   accepts_nested_attributes_for :vcard
   default_scope :include => {:vcard => :addresses}
+
+  named_scope :by_date, lambda {|date| {:conditions => ['birth_date LIKE ?', Date.parse_europe(date).strftime('%%%y-%m-%d')] }}
 
   has_many :tiers
   has_many :invoices, :through => :tiers, :order => 'created_at DESC'
