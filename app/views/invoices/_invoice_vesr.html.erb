@@ -1,5 +1,5 @@
 <%
-  bank_account = @invoice.biller.account
+  bank_account = @invoice.biller.esr_account
   amount = (@invoice.state == 'booked') ? @invoice.due_amount : @invoice.amount.currency_round
 %>
 
