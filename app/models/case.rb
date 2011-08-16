@@ -28,13 +28,15 @@ class Case < ActiveRecord::Base
       :duration_to   => examination_date,
       :treatment     => treatment
     )
-    
-    # TariffItem
-    tariff_code = "#{classification.name} (#{classification.examination_method.name})"
-    tariff_item = TariffItem.clever_find(tariff_code).first
-    
-    # Service Records
-    session.build_service_record(tariff_item)
+
+    if classification
+      # TariffItem
+      tariff_code = "#{classification.name} (#{classification.examination_method.name})"
+      tariff_item = TariffItem.clever_find(tariff_code).first
+      
+      # Service Records
+      session.build_service_record(tariff_item)
+    end
 
     # Save record
     treatment.save
