@@ -8,7 +8,7 @@ class Case < ActiveRecord::Base
     "#{patient.to_s}: PAP Abstrich #{praxistar_eingangsnr}"
   end
 
-  def create_invoice(doctor, value_date)
+  def create_invoice(provider, value_date)
     # Law
     law = LawKvg.new(:insured_id => patient.insurance_policies.by_policy_type('KVG').first.number)
     
@@ -18,7 +18,8 @@ class Case < ActiveRecord::Base
       :date_end   => examination_date,
       :canton     => 'ZH',
       :reason     => 'Krankheit',
-      :law        => law
+      :law        => law,
+      :referrer   => doctor
     )
     
     # Session
@@ -37,8 +38,9 @@ class Case < ActiveRecord::Base
     # Tiers
     tiers = TiersGarant.new(
       :patient  => patient,
-      :biller   => doctor,
-      :provider => doctor
+      :biller   => provider,
+      :provider => provider,
+      :referrer => doctor
     )
     
     # Invoice
