@@ -21,7 +21,7 @@ class Invoice < ActiveRecord::Base
 
   
   def active
-    !(state == 'canceled' or state == 'reactivated')
+    !(state == 'canceled' or state == 'reactivated' or state == 'written_off')
   end
   
   def open
@@ -44,6 +44,7 @@ class Invoice < ActiveRecord::Base
       when '3xreminded':  "3. Mahnung"
       when 'encashment':  "Inkasso"
       when 'paid':        "Bezahlte Rechnung"
+      when 'written_off': "Abgeschriebene Rechnung"
     end
   end
   
@@ -189,6 +190,8 @@ class Invoice < ActiveRecord::Base
   def booking_saved(booking)
     if (self.state != 'canceled') and (self.state != 'reactivated') and (self.due_amount <= 0.0)
       update_attribute(:state, 'paid')
+    elsif !self.overdue? and (self.due_amount > 0.0)
+      update_attribute(:state, 'booked')
     end
   end
   
@@ -198,9 +201,9 @@ class Invoice < ActiveRecord::Base
   def to_s(format = :default)
     case format
     when :short
-      "##{id}: #{value_date.strftime('%d.%m.%Y') if value_date}"
+      "##{id}: #{I18n.l(value_date) if value_date}"
     else
-      "#{patient.name}, Rechnung ##{id} #{value_date.strftime('%d.%m.%Y')} über #{sprintf('%0.2f', rounded_amount)} CHF"
+      "#{patient.name}, Rechnung ##{id} #{I18n.l(value_date)} über #{sprintf('%0.2f', rounded_amount)} CHF"
     end
   end
   

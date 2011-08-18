@@ -1,58 +1,58 @@
 <table style="width: 100%">
   <tr>
-    <td class="subhead" style="width:1.2cm"><span class="bullet">&#9632;</span>&nbsp;PFL</td>
-    <td class="list" style="width:1.3cm">Tarmed&nbsp;AL</td>
+    <td class="subhead" style="width:1.2cm"><span class="bullet">&#9632;</span>&nbsp;<%= t_attr(:pfl) %></td>
+    <td class="list" style="width:1.3cm"><%= t_attr(:tarmed_al) %></td>
     <td class="amount" style="width:1.7cm"><%=h sprintf('%0.2f', @invoice.amount_mt("001").currency_round) %></td>
     <td class="amount" style="width:1.3cm">(<%=h sprintf('%0.2f', @invoice.amount_mt("001") / 0.89 ) %>)</td>
     <td style="width:1cm" />
-    <td class="list" style="width:1.3cm">Physio</td>
+    <td class="list" style="width:1.3cm"><%= t_attr(:physio) %></td>
     <td class="amount" style="width:1.7cm">0.00</td>
     <td style="width:1.2cm" />
-    <td class="list" style="width:1.3cm">MiGel</td>
+    <td class="list" style="width:1.3cm"><%= t_attr(:mi_gel) %></td>
     <td class="amount" style="width:1.5cm"><%=h sprintf('%0.2f', @invoice.amount_tt("452").currency_round) %></td>
     <td style="width:1.3cm" />
-    <td class="list" style="width:1.9cm">&Uuml;brige</td>
+    <td class="list" style="width:1.9cm"><%= t_attr(:others) %></td>
     <td class="amount" style="width:1.7" style="text-align: right">0.00</td>
     <td />
   </tr>
   <tr>
     <td style="width:1.2cm" />
-    <td class="list" style="width:1.3cm">Tarmed&nbsp;TL</td>
+    <td class="list" style="width:1.3cm"><%= t_attr(:tarmed_tl) %></td>
     <td class="amount" style="width:1.7cm"><%=h sprintf('%0.2f', @invoice.amount_tt("001").currency_round) %></td>
     <td class="amount" style="width:1.3cm">(<%=h sprintf('%0.2f', @invoice.amount_tt("001") / 0.89) %>)</td>
     <td style="width:1cm" />
-    <td class="list" style="width:1.3cm">Labor</td>
+    <td class="list" style="width:1.3cm"><%= t_attr(:laboratory) %></td>
     <td class="amount" style="width:1.7cm"><%=h sprintf('%0.2f', (@invoice.amount("316") + @invoice.amount("317")).currency_round) %></td>
     <td style="width:1.2cm" />
-    <td class="list" style="width:1.3cm">Medi</td>
+    <td class="list" style="width:1.3cm"><%= t_attr(:medi) %></td>
     <td class="amount" style="width:1.5cm"><%=h sprintf('%0.2f', @invoice.amount_tt("400").currency_round) %></td>
     <td style="width:1.3cm" />
-    <td class="list" style="width:1.9cm">Kantonal</td>
+    <td class="list" style="width:1.9cm"><%= t_attr(:cantonal) %></td>
     <td class="amount" style="width:1.7" style="text-align: right">0.00</td>
     <td />
   </tr>
   <tr>
-    <td colspan="2" class="subhead" style="width:2.5cm"	><span class="bullet">&#9632;</span>&nbsp;Gesamtbetrag/CHF</td>
+    <td colspan="2" class="subhead" style="width:2.5cm"	><span class="bullet">&#9632;</span>&nbsp;<%= t_attr(:total_amount) %></td>
     <td class="totalamount" style="width:1.7cm"><%=h sprintf('%0.2f', @invoice.amount.currency_round) %></td>
     <td style="width:1.3cm"></td>
     <td />
-    <td class="subhead" style="width:1.3cm">davon&nbsp;PFL</td>
+    <td class="subhead" style="width:1.3cm"><%= t_attr(:amount_pfl) %></td>
     <td class="totalamount"><%=h sprintf('%0.2f', @invoice.amount.currency_round) %></td>
     <td />
-    <td class="subhead">Anzahlung</td>
+    <td class="subhead"><%= t_attr(:prepayment) %></td>
     <td class="totalamount"><%=h sprintf('%0.2f', 0) %></td>
     <td />
-    <td class="subhead">F&auml;lliger&nbsp;Betrag</td>
+    <td class="subhead"><%= t_attr(:amount_due) %></td>
     <td class="totalamount"><%=h sprintf('%0.2f', @invoice.amount.currency_round) %></td>
   </tr>
   <tr>
-    <td colspan="3" class="subhead"><span class="bullet">&#9632;</span>&nbsp;MWSt.Nr.</td>
+    <td colspan="3" class="subhead"><span class="bullet">&#9632;</span>&nbsp;<%= t_attr(:vat_number) %></td>
   </tr>
   <tr>
-    <td class="subhead">Code</td>
-    <td class="subhead">Satz</td>
-    <td class="subhead">Betrag</td>
-    <td class="subhead">MWSt</td>
+    <td class="subhead"><%= t_attr(:vat_code) %></td>
+    <td class="subhead"><%= t_attr(:vat_rate) %></td>
+    <td class="subhead"><%= t_attr(:vat_amount) %></td>
+    <td class="subhead"><%= t_attr(:vat) %></td>
   </tr>
   <tr>
     <td class="text-align: right"><span class="bullet">&#9632;</span>&nbsp;0</td>
@@ -61,7 +61,7 @@
     <td>0.00</td>
   </tr>
   <tr>
-    <td class="total">Total</td>
+    <td class="total"><%= t_attr(:total) %></td>
     <td></td>
     <td class="totalamount" style="text-align: left"><%=h sprintf('%0.2f', @invoice.amount.currency_round) %></td>
     <td class="totalamount" style="text-align: left">0.00</td>

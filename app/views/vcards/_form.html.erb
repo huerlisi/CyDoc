@@ -4,12 +4,14 @@ Event.observe(window, 'load', function() {$('vcard_honorific_prefix').focus()}, 
 //]]>
 </script>
 
-<% fields_for vcard_name, vcard, :builder => Rubaidh::TabularForm::TabularFormBuilder do |address| %>
-  <%= address.select :honorific_prefix, HonorificPrefix.find(:all).collect { |prefix| prefix.name }, :include_blank => true, :label => "Anrede"  %>
-  <%= address.text_field :family_name, :size => 23, :label => "Nachname" %>
-  <%= address.text_field :given_name, :size => 23, :label => "Vorname" %>
-  <%= address.text_field :street_address, :size => 23, :label => "Strasse" %>
-  <%= address.text_field :extended_address, :size => 23, :label => "c/o" %>
-  <%= address.text_field :postal_code, :size => 23, :label => "PLZ" %>
-  <%= address.text_field :locality, :size => 23, :label => "Ort" %>
+<% semantic_fields_for vcard_name, vcard do |address| %>
+  <% address.inputs do %>
+    <%= address.input :honorific_prefix, :collection => HonorificPrefix.find(:all).collect { |prefix| prefix.name }, :include_blank => true %>
+    <%= address.input :family_name, :size => 23 %>
+    <%= address.input :given_name, :size => 23 %>
+    <%= address.input :street_address, :size => 23 %>
+    <%= address.input :extended_address, :size => 23 %>
+    <%= address.input :postal_code, :size => 23 %>
+    <%= address.input :locality, :size => 23 %>
+  <% end %>
 <% end %>

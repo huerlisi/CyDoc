@@ -39,28 +39,12 @@ class Treatment < ActiveRecord::Base
   end
   
   # Helpers
-  def date_begin_formatted
-    date_begin
-  end
-
-  def date_begin_formatted=(value)
-    write_attribute(:date_begin, Date.parse_europe(value, :past))
-  end
-
-  def date_end_formatted
-    date_end
-  end
-
-  def date_end_formatted=(value)
-    write_attribute(:date_end, Date.parse_europe(value, :past))
-  end
-
   def to_s(format = :default)
     case format
     when :short
-      [reason, date_begin.nil? ? nil : date_begin.strftime('%d.%m.%Y')].join(': ')
+      [reason, date_begin.nil? ? nil : I18n.l(date_begin)].join(': ')
     else
-      "#{patient.nil? ? 'Patient unbekannt' : patient.name} #{reason}: #{date_begin.strftime('%d.%m.%Y') if date_begin} - #{date_end.strftime('%d.%m.%Y') if date_end}"
+      "#{patient.nil? ? 'Patient unbekannt' : patient.name} #{reason}: #{I18n.l(date_begin) if date_begin} - #{I18n.l(date_end) if date_end}"
     end
   end
   

@@ -1,5 +1,5 @@
-<%= navigation_section('Konten', {
-      "Konten anzeigen"    => :accounts,
-      "Debitoren anzeigen" => account_path(Invoice::DEBIT_ACCOUNT),
-      "Konto Statistiken"  => statistics_accounts_path
+<%= navigation_section(:accounts, {
+      :show_accounts    => :accounts,
+      :show_debtors => account_path(Invoice::DEBIT_ACCOUNT),
+      :accounts_statistics  => statistics_accounts_path
     }, '48x48/accounts.png') %>

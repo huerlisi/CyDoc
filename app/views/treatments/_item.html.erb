@@ -1,6 +1,6 @@
 <tr id="invoice_<%= item.id %>">
   <td><%= link_to item.patient.full_name, item.patient %></td>
-  <td><%=h item.date_begin.strftime('%d.%m.%Y') if item.date_begin%></td>
+  <td><%=h l(item.date_begin) if item.date_begin%></td>
   <td><%= link_to item.reason, item %></td>
   <td><%=h item.law.name if item.law %></td>
   <td style="text-align: right"><%=h currency_fmt(item.amount.currency_round) %></td>

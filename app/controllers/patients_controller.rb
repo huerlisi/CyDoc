@@ -116,6 +116,7 @@ class PatientsController < ApplicationController
       format.js {
         render :update do |page|
           page.replace_html "tab-content-personal", :partial => 'edit'
+          page.call(:addDatePickerBehaviour)
         end
       }
     end

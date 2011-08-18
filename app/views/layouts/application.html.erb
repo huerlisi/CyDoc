@@ -2,18 +2,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.0//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic10.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <% cache :head do %>
+    <% cache [I18n.locale, :head] do %>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="Simon Huerlimann (CyT) &lt;simon.huerlimann@cyt.ch&gt;" />
 
     <link rel="shortcut icon" href="<%= image_path('favicon.ico') %>" />
     
-    <%= stylesheet_link_tag 'formtastic', 'formtastic-cydoc', 'redmine', 'tabbing', 'cydoc', 'navigation', 'cyto', 'result_report', 'invoice', 'accounting', :media => 'all' %>
+    <%= stylesheet_link_tag 'formtastic', 'formtastic-cydoc', 'redmine', 'tabbing', 'cydoc', 'navigation', 'cyto', 'result_report', 'invoice', 'accounting', 'jquery-ui', :media => 'all' %>
     
     <%= javascript_include_tag :defaults %>
     <%= javascript_include_tag 'will_paginate' %>
     <%= javascript_include_tag 'tabbing' %>
     <%= javascript_include_tag 'printing' %>
+    <%= javascript_include_tag 'jquery.min' %>
+    <%= javascript_include_tag 'jquery-ui.min' %>
+    <script>
+      jQuery.noConflict();
+    </script>
+    <%= javascript_include_tag 'jquery-application' %>
     <% end %>
     <title>CyDoc - <%= controller.action_name %></title>
   </head>
@@ -26,19 +32,19 @@
             <div><%= render :partial => 'users/user_bar' %></div>
             <div><%= render :partial => '/search/form' %></div>
           </div>
-          <% cache :main_menu do %>
+          <% cache [I18n.locale, :main_menu] do %>
           <div id="main-menu">
             <ul>
-              <li><%= link_to "Home", :controller => "/" %></li>
-              <li><%= link_to "Patienten", :controller => 'patients' %></li>
-              <li><%= link_to "Recalls", :controller => 'recalls' %></li>
-              <li><%= link_to "Rechnungen", :controller => 'invoices' %></li>
-              <li><%= link_to "Versicherungen", :controller => 'insurances' %></li>
-              <li><%= link_to "&Auml;rzte", :controller => 'doctors' %></li>
-              <li><%= link_to "Leistungen", :controller => 'tariff_items' %></li>
-              <li><%= link_to "Medikamente", :controller => 'drug_products' %></li>
-              <li><%= link_to "Buchhaltung", :controller => 'bookkeeping' %></li>
-              <li><%= link_to "Hilfe", :controller => 'help' %></li>
+              <li><%= link_to t('cydoc.navigation.home'), :controller => "/" %></li>
+              <li><%= link_to t('cydoc.navigation.patients'), :controller => 'patients' %></li>
+              <li><%= link_to t('cydoc.navigation.recalls'), :controller => 'recalls' %></li>
+              <li><%= link_to t('cydoc.navigation.payments'), :controller => 'invoices' %></li>
+              <li><%= link_to t('cydoc.navigation.insurances'), :controller => 'insurances' %></li>
+              <li><%= link_to t('cydoc.navigation.doctors'), :controller => 'doctors' %></li>
+              <li><%= link_to t('cydoc.navigation.service'), :controller => 'tariff_items' %></li>
+              <li><%= link_to t('cydoc.navigation.drug_products'), :controller => 'drug_products' %></li>
+              <li><%= link_to t('cydoc.navigation.accounting'), :controller => 'bookkeeping' %></li>
+              <li><%= link_to t('cydoc.navigation.help'), :controller => 'help' %></li>
             </ul>
           </div>
           <% end %>

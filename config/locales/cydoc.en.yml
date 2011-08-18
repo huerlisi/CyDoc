@@ -1,0 +1,283 @@
+en: 
+  activerecord:
+    attributes:
+      account:
+        balance:          Bottom line
+        credit:           Credit
+        date:             Date
+        debit:            Debit
+        esr_id:           ESR-Number
+        name:             Name
+        number:           Number
+        pc_id:            PC-Number
+        reference:        Reference
+        text:             Text
+      appointment:
+        date:        Date
+        from:        From
+        remarks:     Remarks
+        to:          To
+      booking:
+        amount:           Total amount
+        average:          Average
+        count:            Quantity
+        reference_id:     Invoice No.
+        till:             to
+        title:            Title
+        total:            Total
+        turn_over:        Turnover
+      doctor:
+        ean_party:   EAN-Nr.
+        zsr:         ZSR-Nr.
+      drug_article:
+        code:             Code
+        content:          Content
+        description:      Description
+        doctors_price:    Doctors Price
+        name:             Name
+        number_of_pieces: Pieces
+        price:            Consumer Price
+        quantity:         Quantity
+        quantity_unit:    Unit
+        vat_class:        VAT
+      drug_product:
+        description:    Description
+        name:           Name
+      invoice:
+        amount_due: Due amount
+        amount_pfl: davon PFL
+        balance: "balance"
+        biller: In favour of
+        cantonal: Kantonal
+        date: date of invoice
+        date_begin: treatment from
+        date_end: treatment to
+        due_date: Due date
+        due_date_till: Due untill
+        id: Patient invoice No.
+        laboratory: Laboratory
+        law: Law
+        medi: Medi
+        mi_gel: MiGel
+        open_amount: "Open amount"
+        others: Ohters
+        patient: Patient
+        payment_address: invoice address
+        pfl: PFL
+        physio: Physio
+        prepayment: prepayment
+        provider: Provider
+        reclaim_recipe: reclaim recipe
+        referrer: Referring Doctor
+        remark:     Remarks
+        state: State
+        tarmed_al: Tarmed AL
+        tarmed_tl: Tarmed TL
+        tiers: Tier
+        total: Total
+        total_amount: Total amount/CHF
+        treatment_reason: Reason of treatment
+        value_date: Date of Invoice
+        vat: VAT
+        vat_amount: VAT amount
+        vat_code: VAT Code
+        vat_number: VAT No.
+        vat_rate: VAT rate
+      patient:
+        accident_insurance: 'Accident insurance'
+        accident_insurance_short_cut: 'UVG'
+        address: Address
+        birth_date:  Date of Birth
+        business_phone: Business phone
+        doctor_patient_nr: Patient No.
+        email: Email
+        family_name: Surname
+        fax: 'Fax'
+        female: 'female'
+        gender: Gender
+        given_name:  Given Name
+        health_insurance: 'Health insurance'
+        health_insurance_short_cut: 'KVG'
+        insurance: "Insurance"
+        insurance_number: "Number"
+        locality: City
+        male: 'male'
+        mobile: 'Mobile phone'
+        name: Name
+        number: Patient No.
+        phone_number: "Number"
+        phone_number_type: "Type"
+        police_type: "Type"
+        postal_code: Post code
+        private_phone: Private phone
+        remarks: Remarks
+        salutation: Salutation
+        street_address: Street address
+      recall:
+        appointment: 'Appointment proposal'
+        due_date:   Due Date
+        expire_date: Expire date
+        last_appointment: Last appointment
+        offer: Offer
+        patient: Patient
+        printed: Printed
+        remark: Remark
+        remarks: Remarks
+      tariff_item:
+        amount:         Amount
+        amount_mt:      TP&nbsp;AL/Price
+        amount_tt:      TP&nbsp;TL
+        code:           Code
+        obligation:     Obligation
+        remark:         Description
+        type_as_string: Type
+        vat_class:      VAT
+      treatment:
+        amount: Total CHF
+        date_begin:  Treatment Begin
+        date_end:    Treatment End
+        law: Law
+        patient: Patient
+        place_type:  Place of Treatment
+        reason:      Reason for Treatment
+        referrer:    Referring Doctor
+      user:
+        login:    Login
+        password: Password
+    models:
+      account:            Account
+      doctor:             Doctor
+      drug_article:       Drug package
+      drug_product:       Drug
+      drug_tariff_item:   Drug
+      insurance:          Insurance
+      invoice:            Invoice
+      lab_tariff_item:    Lab Analysis Tariff Item
+      migel_tariff_item:  MiGel Tariff Item
+      patient:            Patient
+      recall:             Recall
+      tariff_item:        Tariff Item
+      tariff_item_group:  Tariff Item Group
+      tarmed_tariff_item: Tarmed Tariff Item
+      treatment:          Treatment
+      user:               User
+  cydoc:
+    actions:
+      abort: "abort"
+      accounts: "Accounts"
+      add_insurance: Add Insurance
+      address_label: "Address Label"
+      all: "All"
+      book_manual: "Manual booking"
+      cancel: "Cancel"
+      create: "Create"
+      delete: "Delete"
+      delete_treatment: "delete treatment %{treatment} ?"
+      edit_recall: "Edit recall"
+      esr: "VESR Liste"
+      kg_label: "KG-Label"
+      new_booking: "New booking"
+      new_case: "New case"
+      new_contact: "New contact"
+      new_invoice: "Create invoice"
+      new_medical_case: "add diagnose"
+      new_recall: "New recall"
+      new_treatment_session: "Add consultation"
+      print: "Print"
+      print_account: "Print account"
+      print_copy: "Print copy"
+      print_dunning_letter: "Print reminder"
+      print_dunning_letter_copy: "Print remider copy"
+      print_reclaim_pdf: "Reclaim as PDF"
+      reactivate: reactivate
+      reverse: reverse
+      save: "Save"
+      show_all: "Show all"
+      show_letter: "Show letter"
+      to_pdf: "As PDF"
+      update: "Edit"
+    navigation:
+      accounting: 'Accounting'
+      accounts: 'Accounts'
+      accounts_statistics: "Accounts Statistics"
+      all_bookings: "All bookings"
+      balance_sheet: "Balance sheet"
+      create: "Create"
+      doctors: "Doctors"
+      drug_products: "Drugs"
+      esr: 'VESR'
+      esr_bookings: "VESR Journal"
+      help: "Help"
+      home: "Home"
+      insurances: "Insurances"
+      master_data: Master data
+      new_esr: "new VESR booking"
+      open_cases: "Open cases"
+      open_positions: "Open positions"
+      patients: 'Patients'
+      payment_overview: "Payment overview"
+      payments: 'Payments'
+      recalls: "Recalls"
+      reminder_list: "Reminder list"
+      search: "Search"
+      service: "Services"
+      show_accounts: "Show accounts"
+      show_debtors: "Show debtors"
+      show_doctors: "Show doctors"
+      show_drug_products: "Show drugs"
+      show_insurances: "Show insurances"
+      show_tariff_items: "Show services"
+    recall:
+      appointed_time: "Appointed time"
+      last_appointment: "Last appointment"
+      no_appointment: "No appointment"
+      offer_printed: "Proposal sent"
+    search:
+      search: "Search"
+      searching: "Search"
+    state:
+      recall:
+        accepted: "Appointment accepted"
+        refused: "No appointment needed"
+        send: "Appointment send"
+    tab_container:
+      patient:
+        invoice: 'Invoice'
+        personal_data: 'Personal data'
+        treatment: 'Treatments'
+      recall:
+        applied_recalls: 'Applied recalls'
+        list: Appoinments
+        send_recalls: 'Send recalls'
+    title:
+      accounts: Accounts
+      bookings: Bookings
+      cases: Cases
+      contact: Contact
+      filter: Filter
+      insurance: Insurance
+      medical_cases: Diagnoses
+      new_patient: Capture patient
+      personal_data: Personal data
+      recall: Recall
+      recalls: Recalls
+      treatment: Treatment
+      treatment_sessions: Consultations
+    user_bar:
+      logged_in_as: "Logged in as"
+      login: "Login"
+      logout: "Logout"
+  date:
+    formats:
+      month: "%B %Y"
+  invoice:
+    state:
+      2xreminded:  2x reminded
+      booked:      booked
+      canceled:    canceled
+      encashment:  in encashment
+      paid:        paid
+      prepared:    open
+      printed:     printed
+      reactivated: reactivated
+      reminded:    1x reminded

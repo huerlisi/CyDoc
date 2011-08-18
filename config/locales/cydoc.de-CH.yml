@@ -1,0 +1,285 @@
+de-CH: 
+  activerecord:
+    attributes:
+      account:
+        balance:          Saldo
+        credit:           Haben
+        date:             Datum
+        debit:            Soll
+        esr_id:           ESR-Nummer
+        name:             Name
+        number:           Nummer
+        pc_id:            PC-Nummer
+        reference:        Referenz
+        text:             Text
+      appointment:
+        date:    Am
+        from:    Von
+        remarks: Bemerkungen
+        to:      Bis
+      booking:
+        amount:           Summe
+        average:          Durchschnitt
+        count:            Anzahl
+        reference_id:     Rechnungsnr.
+        till:             bis
+        title:            Titel
+        total:            Total
+        turn_over:        Umsatz
+      doctor:
+        ean_party:   EAN-Nr.
+        zsr:         ZSR-Nr.
+      drug_article:
+        code:             Code
+        content:          Inhalt
+        description:      Beschreibung
+        doctors_price:    Arztpreis
+        name:             Name
+        number_of_pieces: Menge
+        price:            Publikumspreis
+        quantity:         Anzahl
+        quantity_unit:    Einheit
+        vat_class:        MwSt
+      drug_product:
+        description: Beschreibung
+        name:        Name
+      invoice:
+        amount_due: Fälliger Betrag
+        amount_pfl: davon PFL
+        balance: "Saldo"
+        biller: Zugunsten von
+        cantonal: Kantonal
+        date: Rechnungsdatum
+        date_begin: Behandlungen von
+        date_end: Behandlungen bis
+        due_date: Fälligkeit
+        due_date_till: Zahlbar bis
+        id: Patientenrechnung Nr.
+        laboratory: Labor
+        law: Gesetz
+        medi: Medi
+        mi_gel: MiGel
+        open_amount: "Offener Betrag"
+        others: Übrige
+        patient: Patient
+        payment_address: Rechnungsadressat
+        pfl: PFL
+        physio: Physio
+        prepayment: Anzahlung
+        provider: Leistungserbringer
+        reclaim_recipe: Rückforderungsbeleg
+        referrer: Zuweisender Arzt
+        remark:     Bemerkungen
+        state: Status
+        tarmed_al: Tarmed AL
+        tarmed_tl: Tarmed TL
+        tiers: Vergütungsart
+        total: Total
+        total_amount: Gesamtbetrag/CHF
+        treatment_reason: Behandlungsgrund
+        value_date: Rechnungsdatum
+        vat: MWSt
+        vat_amount: Betrag
+        vat_code: Code
+        vat_number: MWSt.Nr.
+        vat_rate: Satz
+      patient:
+        accident_insurance: 'Unfallversicherung'
+        accident_insurance_short_cut: 'UVG'
+        address: Adresse
+        birth_date:  Geburtstag
+        business_phone: 'Tel. geschäft'
+        doctor_patient_nr: Patientennr.
+        email: 'E-Mail'
+        family_name: Nachname
+        fax: 'Fax'
+        female: 'Weiblich'
+        gender: Geschlecht
+        given_name:  Vorname
+        health_insurance: 'Krankenversicherung'
+        health_insurance_short_cut: 'KVG'
+        insurance: "Versicherung"
+        insurance_number: "Nummer"
+        locality: Ort
+        male: 'Männlich'
+        mobile: 'Handy'
+        name: Name
+        number: PatientenNr.
+        phone_number: "Nummer"
+        phone_number_type: "Art"
+        police_type: "Art"
+        postal_code: PLZ
+        private_phone: 'Tel. privat'
+        remarks: Bemerkungen
+        salutation: Anrede
+        street_address: Strasse
+      recall:
+        appointment: 'Terminvorschlag'
+        due_date: Datum
+        expire_date: Fälligkeit
+        last_appointment: Letzt. Termin
+        offer: Vorschlag
+        patient: Patient
+        printed: Gedruckt
+        remark: Bemerkungen
+        remarks:  Bemerkungen
+      tariff_item:
+        amount:         Betrag
+        amount_mt:      TP&nbsp;AL/Preis
+        amount_tt:      TP&nbsp;TL
+        code:           Code
+        obligation:     Kassenpflichtig
+        remark:         Beschreibung
+        type_as_string: Tarif
+        vat_class:      MwSt
+      treatment:
+        amount: Total CHF
+        date_begin: Behandlung von
+        date_end: Behandlung bis
+        law: Gesetz
+        patient: Patient
+        place_type: Erbringungsort
+        reason: Behandlungsgrund
+        referrer: Zuweisender Arzt
+      user:
+        login:    Login
+        password: Passwort
+    models:
+      account:            Konto
+      doctor:             Arzt
+      drug_article:       Medikamentenpackung
+      drug_product:       Medikament
+      drug_tariff_item:   Medikament
+      insurance:          Versicherung
+      invoice:            Rechnung
+      lab_tariff_item:    Labor Leistung
+      migel_tariff_item:  MiGel Leistung
+      patient:            Patient
+      recall:             Recall
+      tariff_item:        Leistung
+      tariff_item_group:  Blockleistung
+      tarmed_tariff_item: Tarmed Leistung
+      treatment:          Fall
+      user:               Benutzer
+  cydoc:
+    actions:
+      abort: "Abbrechen"
+      accounts: "Kontoliste"
+      add_insurance: "Versicherung zuweisen"
+      address_label: "Adress-Etikette"
+      all: "Alle"
+      book_manual: "Manuell buchen"
+      cancel: "Stornieren"
+      create: "Erfassen"
+      delete: "Löschen"
+      delete_treatment: "Fall %{treatment} löschen?"
+      edit_recall: "Recall editieren"
+      esr: "VESR Liste"
+      kg_label: "KG-Etikette"
+      new_booking: "Neue Buchung"
+      new_case: "Fall eröffnen"
+      new_contact: "Kontakt erfassen"
+      new_invoice: "Rechung stellen"
+      new_medical_case: "Neue Diagnose"
+      new_recall: "Recall erfassen"
+      new_treatment_session: "Neue Konsultation"
+      print: "Drucken"
+      print_account: "Kontoauszug drucken"
+      print_copy: "Kopie drucken"
+      print_dunning_letter: "Mahnung drucken"
+      print_dunning_letter_copy: "Mahnkopie drucken"
+      print_reclaim_pdf: "Rückforderungsbeleg PDF"
+      reactivate: reaktivieren
+      reverse: stornieren
+      save: "Speichern"
+      show_all: "Alle anzeigen"
+      show_letter: "Brief anzeigen"
+      to_pdf: "Als PDF"
+      update: "Ändern"
+    navigation:
+      accounting: 'Buchhaltung'
+      accounts: 'Konten'
+      accounts_statistics: "Konto Statistiken"
+      all_bookings: "Alle Buchungen"
+      balance_sheet: "Jahresabschluss"
+      create: "Erfassen"
+      doctors: "Ärzte"
+      drug_products: "Medikamente"
+      esr: 'VESR'
+      esr_bookings: "VESR Journal"
+      help: "Hilfe"
+      home: "Home"
+      insurances: "Versicherungen"
+      master_data: Stammdaten
+      new_esr: "VESR Datei einlesen"
+      open_cases: "Offene Fälle"
+      open_positions: "Offene Posten"
+      patients: 'Patienten'
+      payment_overview: "Rechnungsübersicht"
+      payments: 'Rechnungen'
+      recalls: "Recalls"
+      reminder_list: "Mahnliste"
+      search: "Suchen"
+      service: "Leistungen"
+      show_accounts: "Konten anzeigen"
+      show_debtors: "Debitoren anzeigen"
+      show_doctors: "Ärzte anzeigen"
+      show_drug_products: "Medikamente anzeigen"
+      show_insurances: "Versicherungen anzeigen"
+      show_tariff_items: "Leistungen anzeigen"
+    recall:
+      appointed_time: "Terminvorschlag"
+      last_appointment: "Letzter Termin"
+      no_appointment: "Kein Termin"
+      offer_printed: "Aufgebot gedruckt"
+    search:
+      search: "Suche"
+      searching: "Suchen"
+    state:
+      recall:
+        accepted: "Termin akzeptiert"
+        refused: "Will keinen Termin"
+        send: "Aufgebot senden"
+    tab_container:
+      patient:
+        invoice: 'Rechnungen'
+        personal_data: 'Personalien'
+        treatment: 'Fälle'
+      recall:
+        applied_recalls: 'Anstehende Recalls'
+        list: Termine
+        send_recalls: 'Versandte Recalls'
+    title:
+      accounts: Konten
+      bookings: Buchungen
+      cases: Fälle
+      contact: Kontakt
+      filter: Filter
+      insurance: Versicherungen
+      medical_cases: Diagnosen
+      new_patient: Patient erfassen
+      personal_data: Personalien
+      recall: Recall
+      recalls: Recalls
+      treatment: Behandlung
+      treatment_sessions: Leistungen
+    user_bar:
+      logged_in_as: "Angemeldet als"
+      login: "Anmelden"
+      logout: "Abmelden"
+  date:
+    formats:
+      month: "%B %Y"
+  invoice:
+    state:
+      prepared:    offen
+      booked:      verbucht
+      printed:     gedruckt
+      canceled:    storniert
+      reactivated: reaktiviert
+      reminded:    1x gemahnt
+      2xreminded:  2x gemahnt
+      3xreminded:  3x gemahnt
+      encashment:  in Inkasso
+      paid:        bezahlt
+      written_off: abgeschrieben

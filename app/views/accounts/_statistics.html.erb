@@ -1,9 +1,9 @@
 <table class="list">
   <tr>
-    <th style="width: 40%">Titel</th>
-    <th style="text-align: right; width: 20%">Anzahl</th>
-    <th style="text-align: right; width: 20%">Durchschnitt</th>
-    <th style="text-align: right; witdh: 20%">Summe</th>
+    <th style="width: 40%"><%= t_attr(:title, Booking) %></th>
+    <th style="text-align: right; width: 20%"><%= t_attr(:count, Booking) %></th>
+    <th style="text-align: right; width: 20%"><%= t_attr(:average, Booking) %></th>
+    <th style="text-align: right; witdh: 20%"><%= t_attr(:amount, Booking) %></th>
   </tr>
   <% for record in @account.bookings.statistics -%>
   <tr>
@@ -14,7 +14,7 @@
   </tr>
   <% end -%>
   <tr>
-    <th>Total</th>
+    <th><%= t_attr(:total, Booking) %></th>
     <th style="text-align: right"><%= @account.bookings.count %></th>
     <th style="text-align: right"><%= currency_fmt @account.bookings.average(:amount) %></th>
     <th style="text-align: right"><%= currency_fmt @account.bookings.sum(:amount) %></th>

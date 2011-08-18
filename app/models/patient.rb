@@ -64,17 +64,9 @@ class Patient < ActiveRecord::Base
   end
 
   def to_s(format = :default)
-    ["#{name}#{(' #' + doctor_patient_nr) unless doctor_patient_nr.blank?}", (birth_date.strftime('%d.%m.%Y') if birth_date)].compact.join(', ')
+    ["#{name}#{(' #' + doctor_patient_nr) unless doctor_patient_nr.blank?}", (I18n.l(birth_date) if birth_date)].compact.join(', ')
   end
 
-  def birth_date_formatted
-    birth_date
-  end
-
-  def birth_date_formatted=(value)
-    write_attribute(:birth_date, Date.parse_europe(value, :past))
-  end
-  
   def last_session
     treatments.map{|t| t.sessions}.flatten.first
   end

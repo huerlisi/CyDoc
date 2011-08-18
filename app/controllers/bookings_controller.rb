@@ -40,6 +40,7 @@ class BookingsController < ApplicationController
         render :update do |page|
           if @invoice
             page.insert_html :top, "invoice_booking_list", :partial => 'invoice_bookings/simple_form'
+            page.call(:initBehaviour)
           end
         end
       }
@@ -78,6 +79,12 @@ class BookingsController < ApplicationController
     
     if @booking.save
       flash[:notice] = 'Buchung erfasst.'
+
+      # Needs to be done after booking save as it might update state
+      if (@booking.title == "Debitorenverlust") and @invoice and (@invoice.due_amount <= 0.0)
+        @invoice.state = 'written_off'
+        @invoice.save
+      end
 
       respond_to do |format|
         format.html {
@@ -119,6 +126,7 @@ class BookingsController < ApplicationController
       format.js {
         render :update do |page|
           page.replace "booking_#{@booking.id}", :partial => 'edit'
+          page.call(:initBehaviour)
         end
       }
     end
@@ -151,6 +159,7 @@ class BookingsController < ApplicationController
         format.js {
           render :update do |page|
             page.replace "booking_#{@booking.id}", :partial => 'edit'
+            page.call(:initBehaviour)
           end
         }
       end
@@ -171,7 +180,7 @@ class BookingsController < ApplicationController
     end
     
     respond_to do |format|
-      format.html { }
+      format.html { redirect_to bookings_path }
       format.js {
         render :update do |page|
           if params[:account_id]

@@ -5,9 +5,11 @@
 </div>
 
 <h3>Arzt anpassen</h3>
-<% form_for @doctor, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
+<% semantic_form_for @doctor do |f| %>
   <div class="box">
     <%= render :partial => 'form' %>
-    <%= f.submit 'Speichern' %>
+    <% f.buttons do %>
+      <%= f.commit_button %>
+    <% end %>
   </div>
 <% end %>

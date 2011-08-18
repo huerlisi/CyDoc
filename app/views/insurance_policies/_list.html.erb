@@ -1,7 +1,7 @@
 <div class="contextual">
-  <%= link_to_remote "Versicherung zuweisen", {:url => new_patient_insurance_policy_url(@patient), :method => :get}, :class => "icon icon-add" unless @patient.new_record?%>
+  <%= link_to_remote t('cydoc.actions.add_insurance'), {:url => new_patient_insurance_policy_url(@patient), :method => :get}, :class => "icon icon-add" unless @patient.new_record?%>
 </div>
-<h3>Versicherungen</h3>
+<h3><%= t('cydoc.title.insurance') %></h3>
 <div>
   <% if @patient.new_record? %>
     <%= render :partial => 'insurance_policies/form' %>

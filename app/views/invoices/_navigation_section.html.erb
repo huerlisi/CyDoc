@@ -1,5 +1,5 @@
-<%= navigation_section('Rechnungen', {
-      "Rechnungsübersicht" => :invoices,
-      "Mahnliste"          => {:controller => 'invoices', :tab => 'overdue'},
-      "Offene Fälle"       => {:controller => 'invoices', :tab => 'open'}
+<%= navigation_section(:payments, {
+      :payment_overview => :invoices,
+      :reminder_list    => {:controller => 'invoices', :tab => 'overdue'},
+      :open_cases       => {:controller => 'invoices', :tab => 'open'}
     }, '48x48/invoice.png') %>

@@ -2,26 +2,26 @@
 
 <%= render :partial => 'personal_form' %>
 
-<h3>Kontakt</h3>
+<h3><%= t('cydoc.title.contact') %></h3>
 <div class="box" id="phone_number_form">
   <% fields_for @patient do |patient| %>
     <% patient.fields_for :phone_numbers do |phone_number| %>
       <p>
-        <%= phone_number.select :phone_number_type, ['Tel. privat', 'Tel. geschäft', 'Handy', 'Fax', 'E-Mail'], :label => "Art" %>
-        <%= phone_number.text_field :number, :size => 12, :autocomplete => 'off', :label => "Nummer" %>
+        <%= phone_number.select :phone_number_type, [t_attr(:private_phone), t_attr(:business_phone), t_attr(:mobile), t_attr(:fax), t_attr(:email)], :label => t_attr(:phone_number_type) %>
+        <%= phone_number.text_field :number, :size => 12, :autocomplete => 'off', :label => t_attr(:phone_number) %>
       </p>
     <% end %>
   <% end %>
 </div>
 
-<h3>Versicherungen</h3>
+<h3><%= t('cydoc.title.insurance') %></h3>
 <div class="box" id="insurance_policy_form">
   <% fields_for @patient do |patient| %>
     <% patient.fields_for :insurance_policies do |insurance_policy| %>
       <p>
-        <%= insurance_policy.select :policy_type, {'Krankenversicherung' => 'KVG', 'Unfallversicherung' => 'UVG'}, :label => "Art" %>
-        <%= insurance_policy.select :insurance_id, Insurance.find(:all, :include => {:vcard => :address}, :order => 'vcards.full_name').collect { |i| [i.to_s, i.id] }, :include_blank => true, :label => "Versicherung" %>
-        <%= insurance_policy.text_field :number, :size => 12, :autocomplete => 'off', :label => "Nummer" %>
+        <%= insurance_policy.select :policy_type, {t_attr(:health_insurance) => t_attr(:health_insurance_short_cut), t_attr(:accident_insurance) => t_attr(:accident_insurance_short_cut)}, :label => t_attr(:policy_type) %>
+        <%= insurance_policy.select :insurance_id, Insurance.find(:all, :include => {:vcard => :address}, :order => 'vcards.full_name').collect { |i| [i.to_s, i.id] }, :include_blank => true, :label => t_attr(:insurance) %>
+        <%= insurance_policy.text_field :number, :size => 12, :autocomplete => 'off', :label => t_attr(:insurance_number) %>
       </p>
     <% end %>
   <% end %>
