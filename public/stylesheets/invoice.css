@@ -110,8 +110,8 @@
   position:    absolute;
   width:       18.2cm;
   height:      29cm;
-  top:         0cm;
-  left:        0cm;
+  top:         -0.1cm;
+  left:        0.25cm;
 }
 
 #invoice-balance {
