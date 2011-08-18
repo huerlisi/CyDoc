@@ -29,6 +29,11 @@ config/database.yml
 # restful-authentication
 config/initializers/site_keys.rb
 
+# Deployment
+# ==========
+config/deploy_provider.rb
+config/deploy
+
 # CyDoc
 # =====
 data/
