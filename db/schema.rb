@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100526211942) do
+ActiveRecord::Schema.define(:version => 20110818214641) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -245,9 +245,9 @@ ActiveRecord::Schema.define(:version => 20100526211942) do
     t.string   "payment_tax"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "esr_file_id"
     t.integer  "booking_id"
     t.integer  "invoice_id"
-    t.integer  "esr_file_id"
     t.string   "remarks",                                         :default => ""
     t.string   "state",                                                           :null => false
   end
@@ -420,14 +420,12 @@ ActiveRecord::Schema.define(:version => 20100526211942) do
   create_table "phone_numbers", :force => true do |t|
     t.string  "number",            :limit => 50
     t.string  "phone_number_type", :limit => 50
-    t.integer "vcard_id"
     t.integer "object_id"
     t.string  "object_type"
   end
 
   add_index "phone_numbers", ["object_id", "object_type"], :name => "index_phone_numbers_on_object_id_and_object_type"
   add_index "phone_numbers", ["phone_number_type"], :name => "index_phone_numbers_on_phone_number_type"
-  add_index "phone_numbers", ["vcard_id"], :name => "phone_numbers_vcard_id_index"
 
   create_table "postal_codes", :force => true do |t|
     t.string   "zip_type"
