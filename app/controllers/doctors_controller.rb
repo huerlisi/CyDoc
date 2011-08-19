@@ -43,7 +43,7 @@ class DoctorsController < ApplicationController
   def new
     doctor = params[:doctor]
     @doctor = Doctor.new(doctor)
-    @doctor.build_account(params[:accounting_bank_account])
+    @account = @doctor.build_account(params[:accounting_bank_account])
     @doctor.build_vcard(params[:vcard])
   end
 
