@@ -1,5 +1,5 @@
 function addDatePickerBehaviour() {
-  jQuery('input[id$="_date"], input[id*="_date_"]').each(function(){
+  jQuery('input[date-picker ="true"]').each(function(){
     jQuery(this).datepicker({ dateFormat: 'dd.mm.yy' });
   });
 };
