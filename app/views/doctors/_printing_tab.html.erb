@@ -4,7 +4,7 @@
 
 <h3>Drucker</h3>
 
-<% printers = @doctor.office.printers %>
+<% @doctor.office && printers = @doctor.office.printers %>
 <%- if printers %>
   <div class="box">
     Druckserver: <%=h printers[:cups_host] %>
