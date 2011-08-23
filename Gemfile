@@ -27,12 +27,12 @@ end
 # ================
 gem 'haml'
 
-gem 'formtastic', '~> 1.1.0'
-gem 'will_paginate'
+gem 'formtastic'
+gem 'will_paginate', '< 3.0'
 
-gem 'has_scope', '~> 0.5.0'
-gem 'i18n_rails_helpers', '~> 0.9'
-gem 'show_for', '~> 0.1.0'
+gem 'has_scope'
+gem 'i18n_rails_helpers'
+gem 'show_for'
 
 # CyDoc
 # =====
@@ -40,14 +40,14 @@ gem 'show_for', '~> 0.1.0'
 gem 'aasm'
 
 # Date/Time handling
-gem 'validates_timeliness', '~> 2.3'
+gem 'validates_timeliness', '< 3.0'
 
 # Import
 gem 'fastercsv'
 gem 'activerecord-sqlserver-adapter'
 
 # PDF
-gem 'prawn', '~> 0.8.4'
+gem 'prawn'
 
 gem 'csv-mapper'
 gem 'routing-filter'
