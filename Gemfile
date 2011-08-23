@@ -48,6 +48,7 @@ gem 'activerecord-sqlserver-adapter'
 
 # PDF
 gem 'prawn'
+gem 'prawnto'
 
 gem 'csv-mapper'
 gem 'routing-filter'
