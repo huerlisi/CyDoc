@@ -49,7 +49,12 @@ class Invoice < ActiveRecord::Base
   end
   
   def overdue?
-    (state == 'booked' and due_date < Date.today) or (state == 'reminded' and reminder_due_date < Date.today) or (state == '2xreminded' and second_reminder_due_date < Date.today)
+    return true if state == 'booked' and due_date < Date.today
+    return true if state == 'reminded' and (reminder_due_date.nil? or reminder_due_date < Date.today)
+    return true if state == '2xreminded' and (second_reminder_due_date.nil? or second_reminder_due_date < Date.today)
+    return true if state == '3xreminded' and (third_reminder_due_date.nil? or third_reminder_due_date < Date.today)
+
+    return false
   end
   
   def reactivate
