@@ -230,7 +230,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def referrer
-    tiers.provider
+    tiers.referrer
   end
 
   def employer
