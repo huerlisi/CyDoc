@@ -9,6 +9,8 @@ class Case < ActiveRecord::Base
   end
 
   def create_treatment(provider)
+    puts self.praxistar_eingangsnr
+
     # Law
     law = LawKvg.new(:insured_id => patient.insurance_policies.by_policy_type('KVG').first.number)
     
