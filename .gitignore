@@ -24,6 +24,10 @@ public/stylesheets/all.css
 # Local
 config/database.yml
 
+# Passenger
+# =========
+tmp/restart.txt
+
 # Rails Plugins
 # =============
 # restful-authentication
