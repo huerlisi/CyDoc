@@ -4,6 +4,7 @@ class Session < ActiveRecord::Base
   belongs_to :treatment, :touch => true
   has_and_belongs_to_many :diagnoses
   has_and_belongs_to_many :service_records, :autosave => true
+  belongs_to :patient
 
   # Validations
   validates_presence_of :duration_from
