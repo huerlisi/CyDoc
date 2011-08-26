@@ -291,6 +291,10 @@ class Invoice < ActiveRecord::Base
     service_records.by_tariff_type(tariff_type).to_a.sum(&:amount)
   end
 
+  def obligation_amount
+    service_records.obligate.to_a.sum(&:amount)
+  end
+
   def rounded_amount
     if amount.nil?
       return 0
@@ -356,6 +360,6 @@ class Invoice < ActiveRecord::Base
     id_string = esr_id + sprintf('%020i', id).delete(' ')
 
     biller_string = esr9_format_account_id(biller_id)
-    return "#{esr9_add_validation_digit(amount_string)}>#{esr9_add_validation_digit(id_string)}+&nbsp;#{biller_string}>"
+    return "#{esr9_add_validation_digit(amount_string)}>#{esr9_add_validation_digit(id_string)}+ #{biller_string}>"
   end
 end

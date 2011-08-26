@@ -8,6 +8,7 @@ class ServiceRecord < ActiveRecord::Base
       {:conditions => {:tariff_type => tariff_type}}
     end
   }
+  named_scope :obligate, :conditions => {:obligation => true}
 
   belongs_to :vat_class
   named_scope :full_vat, :conditions => {:vat_class_id => VatClass.full}

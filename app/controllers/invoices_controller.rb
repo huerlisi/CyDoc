@@ -7,7 +7,6 @@ class InvoicesController < ApplicationController
 
   in_place_edit_for :invoice, :due_date
 
-  print_action_for :insurance_recipe, :tray => :plain
   print_action_for :patient_letter, :tray => :invoice
   print_action_for :reminder, :tray => :invoice
 
