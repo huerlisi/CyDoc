@@ -3,6 +3,12 @@ class ServiceRecord < ActiveRecord::Base
   belongs_to :biller, :class_name => 'Doctor'
   belongs_to :responsible, :class_name => 'Doctor'
 
+  named_scope :by_tariff_type, lambda {|tariff_type|
+    if tariff_type
+      {:conditions => {:tariff_type => tariff_type}}
+    end
+  }
+
   belongs_to :vat_class
   named_scope :full_vat, :conditions => {:vat_class_id => VatClass.full}
   named_scope :reduced_vat, :conditions => {:vat_class_id => VatClass.reduced}
