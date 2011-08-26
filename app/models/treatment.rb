@@ -49,7 +49,7 @@ class Treatment < ActiveRecord::Base
   end
   
   def amount
-    sessions.to_a.sum(&:amount).to_f
+    sessions.to_a.sum(&:amount)
   end
   
   # XML Invoices
