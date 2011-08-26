@@ -280,17 +280,15 @@ class Invoice < ActiveRecord::Base
   
   # Calculated fields
   def amount_mt(tariff_type = nil, options = {})
-    options.merge!(:conditions => {:tariff_type => tariff_type}) if tariff_type
-    BigDecimal.new(service_records.sum('truncate(quantity * amount_mt * unit_factor_mt * unit_mt + 0.005, 2)', options) || '0.0')
+    service_records.to_a.sum(&:amount_mt).to_f
   end
   
   def amount_tt(tariff_type = nil, options = {})
-    options.merge!(:conditions => {:tariff_type => tariff_type}) if tariff_type
-    BigDecimal.new(service_records.sum('truncate(quantity * amount_tt * unit_factor_tt * unit_tt + 0.005, 2)', options) || '0.0')
+    service_records.to_a.sum(&:amount_tt).to_f
   end
   
   def amount(tariff_type = nil, options = {})
-    amount_mt(tariff_type, options) + amount_tt(tariff_type, options)
+    service_records.to_a.sum(&:amount).to_f
   end
 
   def rounded_amount
