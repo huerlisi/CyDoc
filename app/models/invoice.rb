@@ -280,15 +280,15 @@ class Invoice < ActiveRecord::Base
   
   # Calculated fields
   def amount_mt(tariff_type = nil, options = {})
-    service_records.to_a.sum(&:amount_mt)
+    service_records.by_tariff_type(tariff_type).to_a.sum(&:amount_mt)
   end
   
   def amount_tt(tariff_type = nil, options = {})
-    service_records.to_a.sum(&:amount_tt)
+    service_records.by_tariff_type(tariff_type).to_a.sum(&:amount_tt)
   end
   
   def amount(tariff_type = nil, options = {})
-    service_records.to_a.sum(&:amount)
+    service_records.by_tariff_type(tariff_type).to_a.sum(&:amount)
   end
 
   def rounded_amount
