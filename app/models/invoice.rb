@@ -357,7 +357,7 @@ class Invoice < ActiveRecord::Base
     # 01 is type 'Einzahlung in CHF'
     amount_string = "01#{sprintf('%011.2f', esr_amount).delete('.')}"
 
-    id_string = esr_id + sprintf('%020i', id).delete(' ')
+    id_string = esr_id + sprintf('%013i', patient.id).delete(' ') + sprintf('%07i', id).delete(' ')
 
     biller_string = esr9_format_account_id(biller_id)
     return "#{esr9_add_validation_digit(amount_string)}>#{esr9_add_validation_digit(id_string)}+ #{biller_string}>"
