@@ -47,7 +47,7 @@ de-CH:
         amount_due: Fälliger Betrag
         amount_pfl: davon PFL
         balance: "Saldo"
-        biller: Zugunsten von
+        biller: 'Zugunsten von:'
         cantonal: Kantonal
         date: Rechnungsdatum
         date_begin: Behandlungen von

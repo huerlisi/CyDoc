@@ -7,7 +7,6 @@ class InvoicesController < ApplicationController
 
   in_place_edit_for :invoice, :due_date
 
-  print_action_for :patient_letter, :tray => :invoice
   print_action_for :reminder, :tray => :invoice
 
   # POST /invoice/1/print
@@ -117,7 +116,10 @@ class InvoicesController < ApplicationController
 
     respond_to do |format|
       format.html {}
-      format.pdf { render_pdf }
+      format.pdf {
+        prawnto :prawn => { :page_size => 'A4', :top_margin => 35, :left_margin => 12, :right_margin => 12, :bottom_margin => 23 }
+        render 'patient_letter'
+      }
     end
   end
 
