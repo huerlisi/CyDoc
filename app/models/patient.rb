@@ -67,9 +67,11 @@ class Patient < ActiveRecord::Base
     for field in [:sex, :birth_date]
       errors.add(field, "für Patient nicht gesetzt") if self.send(field).blank?
     end
-    for field in [:street_address, :postal_code, :locality]
+    for field in [:postal_code, :locality]
       errors.add(field, "für Patient nicht gesetzt") if self.billing_vcard.send(field).blank?
     end
+
+    errors.add(:base, "Mindestens eines der Felder 'Strasse', 'Adresszusatz' oder 'Postfach' muss gesetzt sein") unless billing_vcard.street_address.present? or billing_vcard.extended_address.present? or billing_vcard.post_office_box.present?
   end
   
   def valid_for_invoice?
