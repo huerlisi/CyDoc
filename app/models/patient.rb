@@ -16,6 +16,13 @@ class Patient < ActiveRecord::Base
   has_vcards
   # Hack to use 'private' address by default
   has_one :vcard, :as => 'object', :conditions => {:vcard_type => 'private'}
+  def billing_vcard
+    if use_billing_address?
+      return vcards.find(:first, :conditions => {:vcard_type => 'billing'})
+    else
+      return vcard
+    end
+  end
 
   accepts_nested_attributes_for :vcard
   default_scope :include => {:vcard => :addresses}
@@ -57,8 +64,11 @@ class Patient < ActiveRecord::Base
   validates_date :birth_date
 
   def validate_for_invoice
-    for field in [:street_address, :postal_code, :locality, :sex, :birth_date]
+    for field in [:sex, :birth_date]
       errors.add(field, "für Patient nicht gesetzt") if self.send(field).blank?
+    end
+    for field in [:street_address, :postal_code, :locality]
+      errors.add(field, "für Patient nicht gesetzt") if self.billing_vcard.send(field).blank?
     end
   end
   
