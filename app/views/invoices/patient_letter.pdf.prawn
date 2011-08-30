@@ -1,7 +1,116 @@
 # Helpers
+def draw_address(pdf, vcard)
+  pdf.text vcard.full_name
+  pdf.text vcard.extended_address if vcard.extended_address.present?
+  pdf.text vcard.street_address
+  pdf.text vcard.postal_code + " " + vcard.locality
+end
+
+# Fonts
+font_path = '/usr/share/fonts/truetype/ttf-dejavu/'
+pdf.font_families.update(
+  "DejaVuSans" => { :bold        => font_path + "DejaVuSans-Bold.ttf",
+                    :normal      => font_path + "DejaVuSans.ttf"
+  })
+
+# Title
+pdf.bounding_box [1.cm, pdf.bounds.top], :width => pdf.bounds.width do
+  pdf.font "DejaVuSans"
+  pdf.font_size 16
+  pdf.text "Patientenrechnung Nr. #{@invoice.id}", :style => :bold
+  pdf.font_size 6.5
+  pdf.text "Diese Seite ist für Ihre Unterlagen, der beilegende Rückforderungsbeleg für Ihre Krankenkasse."
+
+  # Biller / Provider
+  pdf.bounding_box [0, pdf.bounds.top - 2.4.cm], :width => 7.cm do
+    pdf.font_size 6.5
+    pdf.text "Rechnungssteller/Leistungserbringer:"
+    pdf.font_size 8
+    draw_address(pdf, @invoice.biller.vcard)
+    for contact in @invoice.biller.vcard.contacts
+      pdf.text contact.to_s
+    end
+    pdf.text " "
+    pdf.font_size 6.5
+    pdf.text "Rechnungs-Datum:"
+    pdf.font_size 8
+    pdf.text @invoice.value_date.to_s
+  end
+
+  # Referrer
+  pdf.bounding_box [0, pdf.bounds.top - 8.cm], :width => 7.cm do
+    pdf.font_size 6.5
+    pdf.text "Zuweisender Arzt:"
+    pdf.font_size 8
+    draw_address(pdf, @invoice.referrer.vcard)
+    pdf.text " "
+    pdf.font_size 6.5
+    pdf.text "Behandlung vom:"
+    pdf.font_size 8
+    pdf.text @invoice.treatment.date_begin.to_s
+  end
+
+  # Billing Address
+  pdf.bounding_box [12.cm, pdf.bounds.top - 3.5.cm], :width => 7.cm do
+    pdf.font_size 10
+    pdf.text @invoice.patient.honorific_prefix
+    draw_address(pdf, @invoice.patient.vcard)
+  end
+
+  # Patient
+  pdf.bounding_box [12.cm, pdf.bounds.top - 8.cm], :width => 7.cm do
+    pdf.font_size 6.5
+    pdf.text "Patient:"
+    pdf.font_size 8
+    draw_address(pdf, @invoice.patient.vcard)
+    pdf.text " "
+    pdf.font_size 6.5
+    pdf.text "Geburtsdatum:"
+    pdf.font_size 8
+    pdf.text @invoice.patient.birth_date.to_s
+  end
+
+  # Invoice balance
+  pdf.bounding_box [0, pdf.bounds.top - 13.cm], :width => 7.cm do
+    pdf.font_size 6.5
+    pdf.text "Rechnungsdaten:"
+    pdf.font_size 8
+    content = @invoice.bookings.map{|booking|
+      [
+        booking.value_date,
+        booking.title + (booking.comments.present? ? "\n<font size='6.5'>#{booking.comments}</font>" : ""),
+        sprintf("%0.2f CHF", booking.accounted_amount(Invoice::DEBIT_ACCOUNT))
+      ]
+    }
+    content << [
+      nil,
+      @invoice.due_amount.currency_round >= 0 ? t_attr(:open_amount, Invoice) : t_attr(:balance, Invoice),
+      sprintf("%0.2f CHF", @invoice.due_amount.currency_round)
+    ]
+
+    pdf.table content, :width => 13.cm, :cell_style => {:inline_format => true} do
+      # General
+      cells.borders = []
+      cells.padding = [0.5, 2, 0.5, 2]
+
+      # With
+      column(0).width = 3.cm
+      column(1).width = 8.cm
+      column(2).width = 2.cm
+
+      # Alignment
+      column(2).align = :right
+
+      # Total
+      row(-1).borders    = [:top]
+      row(-1).font_style = :bold
+    end
+  end
+end
 
 
-# Address
+# VESR form
+# =========
 bank_account = @invoice.biller.esr_account
 bank = bank_account.bank
 amount = (@invoice.state == 'booked') ? @invoice.due_amount.currency_round : @invoice.amount.currency_round
