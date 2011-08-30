@@ -362,4 +362,55 @@ class Invoice < ActiveRecord::Base
     biller_string = esr9_format_account_id(biller_id)
     return "#{esr9_add_validation_digit(amount_string)}>#{esr9_add_validation_digit(id_string)}+ #{biller_string}>"
   end
+  
+  # PDF/Print
+  def insurance_recipe_to_pdf
+    #prawn_options = { :page_size => 'A4', :top_margin => 35, :left_margin => 12, :right_margin => 12, :bottom_margin => 23 }
+    prawn_options = {}
+    pdf = InsuranceRecipe.new(prawn_options)
+    
+    return pdf.to_pdf(self)
+  end
+
+  def print_insurance_recipe(printer)
+    # Workaround TransientJob not yet accepting options
+    file = Tempfile.new('')
+    file.puts(insurance_recipe_to_pdf)
+    file.close
+
+    # Try twice
+    begin
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    rescue
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    end
+    paper_copy.print
+  end
+
+  def patient_letter_to_pdf
+    prawn_options = { :page_size => 'A4', :top_margin => 35, :left_margin => 12, :right_margin => 12, :bottom_margin => 23 }
+    pdf = PatientLetter.new(prawn_options)
+    
+    return pdf.to_pdf(self)
+  end
+
+  def print_patient_letter(printer)
+    # Workaround TransientJob not yet accepting options
+    file = Tempfile.new('')
+    file.puts(patient_letter_to_pdf)
+    file.close
+
+    # Try twice
+    begin
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    rescue
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    end
+    paper_copy.print
+  end
+
+  def print(insurance_recipe_printer, patient_letter_printer)
+    print_patient_letter(patient_letter_printer)
+    print_insurance_recipe(insurance_recipe_printer)
+  end
 end

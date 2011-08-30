@@ -52,3 +52,6 @@ gem 'prawnto'
 
 gem 'csv-mapper'
 gem 'routing-filter'
+
+# Printing
+gem 'cups'

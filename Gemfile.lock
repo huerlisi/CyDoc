@@ -39,6 +39,7 @@ GEM
       gherkin (~> 2.4.5)
       json (>= 1.4.6)
       term-ansicolor (>= 1.0.5)
+    cups (0.0.7)
     diff-lcs (1.1.2)
     fastercsv (1.5.4)
     formtastic (1.2.4)
@@ -98,6 +99,7 @@ DEPENDENCIES
   capones_recipes
   csv-mapper
   cucumber
+  cups
   fastercsv
   formtastic
   haml

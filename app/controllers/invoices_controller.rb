@@ -20,8 +20,7 @@ class InvoicesController < ApplicationController
       @invoice.save!
     end
     
-    print_patient_letter
-    print_insurance_recipe
+    @invoice.print(@printers[:trays][:plain], @printers[:trays][:invoice])
     
     respond_to do |format|
       format.html { redirect_to invoices_path }
@@ -106,7 +105,11 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html {}
       format.pdf {
-        render 'insurance_recipe'
+        document = @invoice.insurance_recipe_to_pdf
+        
+        send_data document, :filename => "#{@invoice.id}.pdf", 
+                            :type => "application/pdf",
+                            :disposition => 'inline'
       }
     end
   end
@@ -119,8 +122,11 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html {}
       format.pdf {
-        prawnto :prawn => { :page_size => 'A4', :top_margin => 35, :left_margin => 12, :right_margin => 12, :bottom_margin => 23 }
-        render 'patient_letter'
+        document = @invoice.patient_letter_to_pdf
+        
+        send_data document, :filename => "#{@invoice.id}.pdf", 
+                            :type => "application/pdf",
+                            :disposition => 'inline'
       }
     end
   end
