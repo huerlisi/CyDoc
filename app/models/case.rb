@@ -58,7 +58,9 @@ class Case < ActiveRecord::Base
 
   def self.create_all_treatments
     for a_case in self.to_create_treatment
-      create_treatment(Doctor.find_by_code('zytolabor'))
+      a_case.create_treatment(Doctor.find_by_code('zytolabor'))
     end
+
+    nil
   end
 end
