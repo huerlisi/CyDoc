@@ -218,6 +218,7 @@ class InvoicesController < ApplicationController
     @tiers.patient = @patient
     @tiers.biller = Doctor.find(Thread.current["doctor_id"])
     @tiers.provider = Doctor.find(Thread.current["doctor_id"])
+    @tiers.referrer = @treatment.referrer
 
     @invoice.tiers = @tiers
 
