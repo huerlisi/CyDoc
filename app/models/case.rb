@@ -54,7 +54,7 @@ class Case < ActiveRecord::Base
   end
 
   BILL_DELAY_DAYS = 6.5
-  scope :to_create_treatment, where("session_id IS NULL AND (IFNULL(email_sent_at, result_report_printed_at) < now() - INTERVAL ? HOUR ) AND classification_id IS NOT NULL", BILL_DELAY_DAYS * 24)
+  named_scope :to_create_treatment, :conditions => ["session_id IS NULL AND (IFNULL(email_sent_at, result_report_printed_at) < now() - INTERVAL ? HOUR ) AND classification_id IS NOT NULL", BILL_DELAY_DAYS * 24]
 
   def self.create_all_treatments
     for a_case in self.to_create_treatment
