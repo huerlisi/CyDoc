@@ -46,7 +46,7 @@ content = [
   [nil, "Behandlung", "▪ #{@invoice.date_begin} - #{@invoice.date_end}", " "*4 + "Rechnungsnr.                  <font size='8'>▪ #{@invoice.id}</font>"],
   [nil, "Erbringungsort", "▪ #{@invoice.place_type}", " "*4 + "Rechnungs-/Mahndatum <font size='8'>▪ #{@invoice.value_date}</font>"],
 
-  ["Auftraggeber", "EAN-Nr./ZSR-Nr.", "▪ #{ean_zsr(@invoice.referrer)}", full_address(@invoice.referrer, ', ')],
+  ["Auftraggeber", "EAN-Nr./ZSR-Nr.", "▪ #{ean_zsr(@invoice.referrer) if @invoice.referrer}", @invoice.referrer ? full_address(@invoice.referrer, ', ') : nil],
   ["Diagnose", "▪ " + @invoice.treatment.medical_cases.map {|d| d.diagnosis.type}.uniq.join('; '), "▪ " + @invoice.treatment.medical_cases.map {|d| d.diagnosis.code}.join('; '), nil],
   ["EAN-Liste", "▪ 1/" + @invoice.biller.ean_party, nil, nil],
   ["Bemerkungen", @invoice.remark, nil, nil],
