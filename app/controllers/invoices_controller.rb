@@ -105,7 +105,9 @@ class InvoicesController < ApplicationController
 
     respond_to do |format|
       format.html {}
-      format.pdf { render_pdf }
+      format.pdf {
+        render 'insurance_recipe'
+      }
     end
   end
 
