@@ -304,6 +304,19 @@ ActiveRecord::Schema.define(:version => 20110818214641) do
   add_index "insurances", ["imported_id"], :name => "index_insurances_on_imported_id"
   add_index "insurances", ["role"], :name => "index_insurances_on_role"
 
+  create_table "invoice_batch_jobs", :force => true do |t|
+    t.date     "value_date"
+    t.integer  "count"
+    t.string   "tiers_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invoice_batch_jobs_invoices", :id => false, :force => true do |t|
+    t.integer "invoice_batch_job_id"
+    t.integer "invoice_id"
+  end
+
   create_table "invoices", :force => true do |t|
     t.text     "remark"
     t.integer  "tiers_id"

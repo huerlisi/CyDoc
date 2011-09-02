@@ -33,6 +33,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :invoices, :collection => {:print_all => :post, :print_reminders_for_all => :post}, :member => {:print => :post, :print_reminder_letter => :post, :insurance_recipe => :get, :patient_letter => :get, :reminder => :get, :reactivate => :post} do |invoice|
     invoice.resources :bookings
   end
+  map.resources :invoice_batch_jobs
   
   map.resources :esr_bookings
 

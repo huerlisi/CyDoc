@@ -1,2 +1,7 @@
+<div class="contextual">
+  <%= link_to_remote "Rechnungen drucken", {:url => new_invoice_batch_job_path, :method => :get}, :class => "icon icon-print" %>
+</div>
 <h2>Offene Fälle</h2>
-<%= render :partial => 'treatments/list' %>
+<div id="open_treatments">
+  <%= render :partial => 'treatments/list' %>
+</div>

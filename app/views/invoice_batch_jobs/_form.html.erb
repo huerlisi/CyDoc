@@ -1,0 +1,17 @@
+<div id="invoice_batch_form">
+  <h3>Rechnungslauf</h3>
+  <div class="box">
+    <% semantic_remote_form_for @invoice_batch_job do |form| %>
+      <% form.inputs do %>
+        <%= form.input :value_date, :as => :date_field, :input_html => {:size => 12, :autocomplete => 'off', 'date-picker' => true} %>
+        <%= form.input :count, :input_html => {:size => 12, :autocomplete => 'off'} %>
+        <%= form.input :tiers_name, :as => :hidden %>
+      <% end %>
+      
+      <% form.buttons do %>
+        <%= form.submit "Drucken", :class => "icon icon-print" %>
+        <%= button_to_function "Abbrechen", "$('invoice_batch_form').remove()", :class => "icon icon-cancel" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

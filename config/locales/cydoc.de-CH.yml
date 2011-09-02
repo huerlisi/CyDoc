@@ -83,6 +83,9 @@ de-CH:
         vat_code: Code
         vat_number: MWSt.Nr.
         vat_rate: Satz
+      invoice_batch_job:
+        value_date: Rechnungsdatum
+        count:      Anzahl Rechnungen
       patient:
         accident_insurance: 'Unfallversicherung'
         accident_insurance_short_cut: 'UVG'
