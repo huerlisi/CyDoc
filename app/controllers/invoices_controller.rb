@@ -214,44 +214,12 @@ class InvoicesController < ApplicationController
 
   # POST /invoices
   def create
-    @invoice = Invoice.new(params[:invoice])
-    @patient = Patient.find(params[:patient_id])
     @treatment = Treatment.find(params[:treatment_id])
-    
-    # Tiers
-    # TODO: check if given tiers name is a subclass of Tiers
-    @tiers = Object.const_get(params[:tiers][:name]).new
-    @tiers.patient = @patient
-    @tiers.biller = Doctor.find(Thread.current["doctor_id"])
-    @tiers.provider = Doctor.find(Thread.current["doctor_id"])
-    @tiers.referrer = @treatment.referrer
-
-    @invoice.tiers = @tiers
-
-    # Law
-    @invoice.law = @treatment.law
-    @invoice.treatment = @treatment
-    
-    # Sessions
-    sessions = @treatment.sessions.open
-    @invoice.service_records = sessions.collect{|s| s.service_records}.flatten
-
-    # Check if invoice is valid as assigning it to sessions saves it
-    result = @invoice.valid? && Invoice.transaction do
-      for session in sessions
-        session.invoices << @invoice
-        session.charge
-        # Touch session as it won't autosave otherwise
-        session.touch
-      end
-
-      @invoice.book
-
-      @invoice.save
-    end
+    @patient = @treatment.patient
+    @invoice = Invoice.create_from_treatment(@treatment, params[:invoice][:value_date], params[:tiers][:name], Doctor.find(Thread.current["doctor_id"]), Doctor.find(Thread.current["doctor_id"]))
     
     # Saving
-    if result
+    if @invoice.valid?
       flash[:notice] = 'Erfolgreich erstellt.'
 
       respond_to do |format|

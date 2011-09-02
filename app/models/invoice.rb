@@ -10,6 +10,45 @@ class Invoice < ActiveRecord::Base
   belongs_to :law, :autosave => true
   belongs_to :treatment, :autosave => true
 
+  # Constructor
+  def self.create_from_treatment(treatment, value_date, tiers_name, provider, biller)
+    # Prepare Tiers
+    tiers = Object.const_get(tiers_name).new(
+      :patient  => treatment.patient,
+      :provider => provider,
+      :biller   => biller,
+      :referrer => treatment.referrer
+    )
+
+    # Build Invoice
+    invoice = self.new(
+      :treatment  => treatment,
+      :value_date => value_date,
+      :tiers      => tiers,
+      :law        => treatment.law
+    )
+
+    # Assign service records
+    sessions = treatment.sessions.open
+    invoice.service_records = sessions.collect{|s| s.service_records}.flatten
+
+    invoice.valid? && Invoice.transaction do
+      for session in sessions
+        session.invoices << invoice
+        session.charge
+        # Touch session as it won't autosave otherwise
+        session.touch
+      end
+
+      # Build booking
+      invoice.book
+
+      invoice.save
+    end
+
+    return invoice
+  end
+
   # State
   named_scope :prepared, :conditions => "state = 'prepared'"
   named_scope :canceled, :conditions => "state = 'canceled'"
