@@ -361,12 +361,16 @@ class Invoice < ActiveRecord::Base
   end
 
   def esr9_reference(bank_account)
-    esr9_format(esr9_add_validation_digit(sprintf(bank_account.esr_id + '%020i', id)))
+    esr9_format(esr9_add_validation_digit(esr_number(bank_account.esr_id, patient.id)))
   end
 
   private
 
   # ESR helpers
+  def esr_number(esr_id, patient_id)
+    esr_id + sprintf('%013i', patient_id).delete(' ') + sprintf('%07i', id).delete(' ')
+  end
+
   def esr9_add_validation_digit(value)
     # Defined at http://www.pruefziffernberechnung.de/E/Einzahlungsschein-CH.shtml
     esr9_table = [0, 9, 4, 6, 8, 2, 7, 1, 3, 5]
@@ -396,7 +400,7 @@ class Invoice < ActiveRecord::Base
     # 01 is type 'Einzahlung in CHF'
     amount_string = "01#{sprintf('%011.2f', esr_amount).delete('.')}"
 
-    id_string = esr_id + sprintf('%013i', patient.id).delete(' ') + sprintf('%07i', id).delete(' ')
+    id_string = esr_number(esr_id, patient.id)
 
     biller_string = esr9_format_account_id(biller_id)
     return "#{esr9_add_validation_digit(amount_string)}>#{esr9_add_validation_digit(id_string)}+ #{biller_string}>"

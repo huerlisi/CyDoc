@@ -224,7 +224,7 @@ class PatientLetter < Prawn::Document
     # ESR-Reference
     font_size 10
     font Rails.root.join('data', 'ocrb10.ttf')
-    draw_text invoice.esr9(invoice.biller.esr_account), :at => [6.1.cm, 1.cm]
+    draw_text invoice.esr9(bank_account), :at => [6.1.cm, 1.cm]
 
     render
   end
