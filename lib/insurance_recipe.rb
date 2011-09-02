@@ -28,12 +28,12 @@ class InsuranceRecipe < Prawn::Document
     # Title
     font "DejaVuSans"
     font_size 16
-    draw_text "Rückforderungsbeleg", :style => :bold, :at => [-1, bounds.top + 0.25.cm]
+    draw_text "Rückforderungsbeleg", :style => :bold, :at => [-1, bounds.top]
 
-    draw_text "M", :style => :bold, :at => [bounds.right - 14, bounds.top + 0.25.cm]
+    draw_text "M", :style => :bold, :at => [bounds.right - 14, bounds.top]
 
     font_size 7
-    draw_text "Release ▪ 4.0M/de", :at => [bounds.right - 100, bounds.top + 0.25.cm]
+    draw_text "Release ▪ 4.0M/de", :at => [bounds.right - 100, bounds.top]
 
     # Head
     content = [
@@ -69,6 +69,7 @@ class InsuranceRecipe < Prawn::Document
       ["Bemerkungen", invoice.remark, nil, nil],
     ]
 
+    move_down 0.3.cm
     font_size 8
     table content, :width => bounds.width, :cell_style => { :inline_format => true } do
       # General
@@ -146,6 +147,7 @@ class InsuranceRecipe < Prawn::Document
     table [data], :cell_style => {:overflow => :shrink_to_fit} do
       cells.borders = []
       cells.padding = 0
+      cells.size = 6.5
 
       column(0).width = 2.2.cm
       column(1).width = 0.9.cm
@@ -430,7 +432,7 @@ class InsuranceRecipe < Prawn::Document
 
     font_size 10
     font Rails.root.join('data', 'ocrb10.ttf')
-    draw_text invoice.esr9(invoice.biller.esr_account), :at => [5.6.cm, -0.8.cm]
+    draw_text invoice.esr9(invoice.biller.esr_account), :at => [5.6.cm, 0.cm]
 
     render
   end

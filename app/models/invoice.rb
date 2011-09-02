@@ -365,8 +365,7 @@ class Invoice < ActiveRecord::Base
   
   # PDF/Print
   def insurance_recipe_to_pdf
-    #prawn_options = { :page_size => 'A4', :top_margin => 35, :left_margin => 12, :right_margin => 12, :bottom_margin => 23 }
-    prawn_options = {}
+    prawn_options = { :page_size => 'A4', :top_margin => 1.5.cm, :left_margin => 1.cm, :right_margin => 1.cm, :bottom_margin => 1.8.cm }
     pdf = InsuranceRecipe.new(prawn_options)
     
     return pdf.to_pdf(self)
