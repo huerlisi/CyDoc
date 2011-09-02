@@ -54,7 +54,7 @@ class PatientLetter < Prawn::Document
         font_size 6.5
         text "Zuweisender Arzt:"
         font_size 8
-        draw_address(invoice.referrer.vcard)
+        draw_address(invoice.referrer.vcard) if invoice.referrer
         text " "
         font_size 6.5
         text "Behandlung vom:"
