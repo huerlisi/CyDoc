@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110818214641) do
+ActiveRecord::Schema.define(:version => 20110902104257) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -322,8 +322,6 @@ ActiveRecord::Schema.define(:version => 20110818214641) do
     t.integer  "tiers_id"
     t.integer  "law_id"
     t.integer  "treatment_id"
-    t.text     "role_title"
-    t.text     "role_type"
     t.string   "place_type",               :default => "Praxis"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -398,16 +396,6 @@ ActiveRecord::Schema.define(:version => 20110818214641) do
   end
 
   add_index "offices", ["login"], :name => "index_offices_on_login"
-
-  create_table "patient_adresses", :id => false, :force => true do |t|
-    t.string "family_name",      :limit => 50
-    t.string "given_name",       :limit => 50
-    t.string "honorific_prefix", :limit => 50
-    t.string "street_address",   :limit => 50
-    t.string "post_office_box",  :limit => 50
-    t.string "postal_code",      :limit => 50
-    t.string "locality",         :limit => 50
-  end
 
   create_table "patients", :force => true do |t|
     t.date     "birth_date"
@@ -562,13 +550,13 @@ ActiveRecord::Schema.define(:version => 20110818214641) do
   end
 
   create_table "tariff_items", :force => true do |t|
-    t.decimal  "amount_mt",                   :precision => 8, :scale => 2
-    t.decimal  "amount_tt",                   :precision => 8, :scale => 2
+    t.decimal  "amount_mt",                  :precision => 8, :scale => 2
+    t.decimal  "amount_tt",                  :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "code",          :limit => 10
+    t.string   "code"
     t.text     "remark"
-    t.boolean  "obligation",                                                :default => true
+    t.boolean  "obligation",                                               :default => true
     t.string   "type"
     t.string   "tariff_type",   :limit => 3
     t.integer  "vat_class_id"
@@ -663,9 +651,9 @@ ActiveRecord::Schema.define(:version => 20110818214641) do
     t.string  "honorific_prefix", :limit => 50
     t.string  "honorific_suffix", :limit => 50
     t.boolean "active",                         :default => true
-    t.string  "type"
     t.integer "object_id"
     t.string  "object_type"
+    t.string  "vcard_type"
   end
 
   add_index "vcards", ["object_id", "object_type"], :name => "index_vcards_on_object_id_and_object_type"
