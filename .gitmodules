@@ -19,9 +19,6 @@
 [submodule "vendor/plugins/has_vcards"]
 	path = vendor/plugins/has_vcards
 	url = http://github.com/huerlisi/has_vcards.git
-[submodule "vendor/plugins/use_db"]
-	path = vendor/plugins/use_db
-	url = http://github.com/remi/use_db.git
 [submodule "vendor/plugins/restful_authentication"]
 	path = vendor/plugins/restful_authentication
 	url = http://github.com/technoweenie/restful-authentication.git

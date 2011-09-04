@@ -46,6 +46,9 @@ gem 'validates_timeliness', '< 3.0'
 gem 'fastercsv'
 gem 'activerecord-sqlserver-adapter'
 
+# Multiple Databases
+gem 'use_db'
+
 # PDF
 gem 'prawn'
 gem 'prawnto'
