@@ -53,6 +53,7 @@ GEM
     highline (1.6.2)
     i18n (0.6.0)
     i18n_rails_helpers (0.14.2)
+    in_place_editing (1.1.2)
     json (1.5.3)
     mysql (2.8.1)
     net-scp (1.0.4)
@@ -106,6 +107,7 @@ DEPENDENCIES
   haml
   has_scope
   i18n_rails_helpers
+  in_place_editing
   mysql
   prawn
   prawnto

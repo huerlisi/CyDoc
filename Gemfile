@@ -49,6 +49,9 @@ gem 'activerecord-sqlserver-adapter'
 # Multiple Databases
 gem 'use_db'
 
+# Forms
+gem 'in_place_editing'
+
 # PDF
 gem 'prawn'
 gem 'prawnto'
