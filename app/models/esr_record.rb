@@ -43,6 +43,14 @@ class EsrRecord < ActiveRecord::Base
     reference[0..5]
   end
 
+  def invoice_id
+    reference[19..-1].to_i
+  end
+
+  def patient_id
+    reference[6..18].to_i
+  end
+
   def parse(line)
 #    self.recipe_type       = line[0, 1]
     self.bank_pc_id        = line[3..11]
@@ -87,9 +95,6 @@ class EsrRecord < ActiveRecord::Base
   end
   
   def assign_invoice
-    invoice_id = reference[19..-1].to_i
-    patient_id = reference[6..18].to_i
-
     if Invoice.exists?(invoice_id)
       self.invoice_id = invoice_id
       self.remarks += "Referenz #{reference}"
