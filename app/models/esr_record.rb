@@ -87,7 +87,8 @@ class EsrRecord < ActiveRecord::Base
   end
   
   def assign_invoice
-    invoice_id = reference[6..-1].to_i
+    invoice_id = reference[19..-1].to_i
+    patient_id = reference[6..18].to_i
 
     if Invoice.exists?(invoice_id)
       self.invoice_id = invoice_id
