@@ -2,26 +2,6 @@
   <%= link_to "VESR Datei einlesen", new_esr_booking_path, :class => "icon icon-book" %>
 </div>
 
-<% unless EsrFile.esr_files.empty? %>
-<h2>VESR Dateien zum verbuchen</h2>
-<div id="vesr_file">
-  <table class="list">
-    <tr>
-      <th>Datum</th>
-      <th>Dateiname</th>
-      <th></th>
-    </tr>
-    <% for file in EsrFile.esr_files %>
-    <tr>
-      <td><%=l file.mtime %></td>
-      <td><%=h File.basename(file.path) %></td>
-      <td><%= link_to "verbuchen", esr_bookings_path(:filename => file.path), :method => :post, :class => "icon icon-book" %></td>
-    </tr>
-    <% end %>
-  </table>
-</div>
-<% end %>
-
 <h2>VESR Buchungsläufe</h2>
 <div id="vesr_list">
   <table class="list">

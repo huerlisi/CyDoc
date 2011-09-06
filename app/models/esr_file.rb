@@ -15,12 +15,6 @@ class EsrFile < ActiveRecord::Base
     end
   end
 
-  VESR_DIR = File.join(RAILS_ROOT, 'data', 'vesr')
-
-  def self.esr_files
-    Dir.new(VESR_DIR).select{|entry| !(entry.starts_with?('.') or entry.starts_with?('archive'))}.map{|name| File.new(File.join(VESR_DIR, name))}
-  end
-
   after_save :create_records
 
   private
