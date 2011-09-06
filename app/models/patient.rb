@@ -15,7 +15,7 @@ class Patient < ActiveRecord::Base
   named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcard, :conditions => Vcard.by_name_conditions(name)}}
   has_vcards
   # Hack to use 'private' address by default
-  has_one :vcard, :as => 'object', :conditions => ["vcard_type IS NULL OR vcard_type = 'private'"]
+  has_one :vcard, :as => 'object', :conditions => {:vcard_type => 'private'}
   def billing_vcard
     if use_billing_address?
       return vcards.find(:first, :conditions => {:vcard_type => 'billing'})
