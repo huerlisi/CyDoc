@@ -1,4 +1,14 @@
 class InvoiceBatchJobsController < ApplicationController
+  # GET /invoice_batch_jobs
+  def index
+    @invoice_batch_jobs = InvoiceBatchJob.paginate(:page => params[:page])
+  end
+
+  # GET /invoice_batch_jobs/1
+  def show
+    @invoice_batch_job = InvoiceBatchJob.find(params[:id])
+  end
+
   # GET /invoice_batch_jobs/new
   def new
     @invoice_batch_job = InvoiceBatchJob.new
@@ -19,6 +29,7 @@ class InvoiceBatchJobsController < ApplicationController
     end
   end
 
+  # POST /invoice_batch_jobs
   def create
     @invoice_batch_job = InvoiceBatchJob.new(params[:invoice_batch_job])
     @treatments = Treatment.open.find(:all, :limit => @invoice_batch_job.count)
@@ -28,19 +39,30 @@ class InvoiceBatchJobsController < ApplicationController
     provider   = Doctor.find(Thread.current["doctor_id"])
     biller     = Doctor.find(Thread.current["doctor_id"])
     
+    @invoice_batch_job.failed_jobs = []
     for treatment in @treatments
       # Create invoice
       invoice = Invoice.create_from_treatment(treatment, value_date, tiers_name, provider, biller)
 
-      # Print
-      invoice.print(@printers[:trays][:plain], @printers[:trays][:invoice])
+      if invoice.new_record?
+        # Invoice was invalid in some way
+        @invoice_batch_job.failed_jobs << {:treatment_id => treatment.id, :message => invoice.errors.full_messages}
+      else
+        # Print
+        begin
+          invoice.print(@printers[:trays][:plain], @printers[:trays][:invoice])
+        rescue RuntimeError => e
+          @invoice_batch_job.failed_jobs << {:invoice_id => invoice.id, :message => e.message }
+          next
+        end
 
-      # Record as belonging to this batch
-      @invoice_batch_job.invoices << invoice
+        # Record as belonging to this batch
+        @invoice_batch_job.invoices << invoice
+      end
     end
     
     # Saving
-    if true
+    if @invoice_batch_job.save
       flash[:notice] = 'Erfolgreich erstellt.'
 
       respond_to do |format|
@@ -65,4 +87,23 @@ class InvoiceBatchJobsController < ApplicationController
     end
   end
 
+  # POST /invoice_batch_jobs/1/redo
+  def reprint
+    @invoice_batch_job = InvoiceBatchJob.find(params[:id])
+    
+    @invoice_batch_job.failed_jobs = @invoice_batch_job.failed_jobs.reject{|job| job[:invoice_id]}
+    for invoice in @invoice_batch_job.invoices
+      # Print
+      begin
+        invoice.print(@printers[:trays][:plain], @printers[:trays][:invoice])
+      rescue RuntimeError => e
+        @invoice_batch_job.failed_jobs << {:invoice_id => invoice.id, :message => e.message }
+        next
+      end
+    end
+    
+    @invoice_batch_job.save
+    
+    redirect_to @invoice_batch_job
+  end
 end
