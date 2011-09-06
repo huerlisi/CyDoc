@@ -1,5 +1,6 @@
 <%= navigation_section(:payments, {
       :payment_overview => :invoices,
       :reminder_list    => {:controller => 'invoices', :tab => 'overdue'},
-      :open_cases       => {:controller => 'invoices', :tab => 'open'}
+      :open_cases       => {:controller => 'invoices', :tab => 'open'},
+      :invoice_batch_job => invoice_batch_jobs_path
     }, '48x48/invoice.png') %>

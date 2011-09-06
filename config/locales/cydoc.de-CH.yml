@@ -84,8 +84,12 @@ de-CH:
         vat_number: MWSt.Nr.
         vat_rate: Satz
       invoice_batch_job:
-        value_date: Rechnungsdatum
-        count:      Anzahl Rechnungen
+        created_at:   Vom
+        value_date:   Rechnungsdatum
+        count:        Anzahl Rechnungen
+        total_count:  Total
+        failed_count: Fehlerhaft
+        failed_jobs:  Fehler
       patient:
         accident_insurance: 'Unfallversicherung'
         accident_insurance_short_cut: 'UVG'
@@ -155,6 +159,7 @@ de-CH:
       drug_tariff_item:   Medikament
       insurance:          Versicherung
       invoice:            Rechnung
+      invoice_batch_job:  Rechnungslauf
       lab_tariff_item:    Labor Leistung
       migel_tariff_item:  MiGel Leistung
       patient:            Patient
@@ -218,7 +223,8 @@ de-CH:
       open_cases: "Offene Fälle"
       open_positions: "Offene Posten"
       patients: 'Patienten'
-      payment_overview: "Rechnungsübersicht"
+      payment_overview: "Suchen"
+      invoice_batch_job: "Rechnungsläufe"
       payments: 'Rechnungen'
       recalls: "Recalls"
       reminder_list: "Mahnliste"
