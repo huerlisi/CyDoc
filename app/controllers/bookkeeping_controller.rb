@@ -17,7 +17,7 @@ class BookkeepingController < ApplicationController
     @total_paid        = Account.find_by_code('1000').saldo(@value_date_range) + Account.find_by_code('1020').saldo(@value_date_range)
     @open_items        = Invoice::DEBIT_ACCOUNT.saldo(@value_date_end)
     @debtors_write_off = Account.find_by_code('3900').saldo(@value_date_range)
-    @started_work      = Session.find(:all, :conditions => ["duration_from <= ?", @value_date_end]).select{|s| s.treatment.invoices.find(:all, :conditions => ["value_date <= ?", @value_date_end]).empty?}.to_a.sum(&:amount)
+    @started_work      = Session.find(:all, :include => :invoices, :conditions => ["duration_from <= ? AND invoices.value_date <= ? AND invoices.id IS NULL", @value_date_end, @value_date_end]).to_a.sum(&:amount)
     @drugs_stock       = Account.find_by_code('1210').saldo(@value_date_end)
   end
 
