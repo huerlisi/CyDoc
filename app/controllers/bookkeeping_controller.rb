@@ -22,6 +22,11 @@ class BookkeepingController < ApplicationController
   end
 
   def open_invoices
-    @invoices = Invoice.find(:all, :conditions => ["value_date <= ?", @value_date_end]).select{|i| i.due_amount(@value_date_end) != 0.0}
+    @invoices = Invoice.find(:all,
+      :joins => :bookings,
+      :conditions => ["invoices.value_date <= ? AND bookings.value_date <= ?", @value_date_end, @value_date_end],
+      :group => "reference_id, reference_type",
+      :having => "sum(IF(bookings.debit_account_id = 3, bookings.amount, -bookings.amount)) != 0"
+    ).paginate(:page => params['page'], :per_page => params['per_page'] || 30)
   end
 end

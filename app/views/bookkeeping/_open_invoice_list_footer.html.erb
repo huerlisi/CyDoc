@@ -5,3 +5,6 @@
   <td/>
   <td style="text-align: right"><%= currency_fmt(@invoices.collect{|i| i.due_amount(@value_date_end)}.sum) %></td>
 </tr>
+<tr>
+  <th colspan="6" style="text-align: right"><%= will_paginate @invoices, :params => {:query => params[:query]} %></th>
+</tr>
