@@ -2,9 +2,9 @@
 <div class="sub-tabs">
   <h3><%= t('cydoc.title.filter') %></h3>
   <ul>
-    <li><%= link_to t('cydoc.actions.all'), url_for(:overwrite_params => {:by_value_period => nil}) %></li>
+    <li><%= link_to t('cydoc.actions.all'), url_for(params.merge({:by_value_period => nil, :page => nil})) %></li>
     <% for year in Booking.fiscal_years %>
-      <li><%= link_to year, url_for(:params => params.merge({:by_value_period => {:from => Date.new(year.to_i, 1, 1).to_s(:db), :to => Date.new(year.to_i, 12, 31).to_s(:db)}})) %></li>
+      <li><%= link_to year, url_for(:params => params.merge({:by_value_period => {:from => Date.new(year.to_i, 1, 1).to_s(:db), :to => Date.new(year.to_i, 12, 31).to_s(:db)}, :page => nil})) %></li>
     <% end %>
   </ul>
 </div>
