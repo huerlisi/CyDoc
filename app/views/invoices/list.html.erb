@@ -4,11 +4,13 @@
   <%= link_to "VESR Liste", esr_bookings_path, :class => "icon icon-book" %>
 </div>
 <%=
-tab_container 'invoice', "Rechnungen", [
+tabs = [
   {:name => 'search', :partial => 'search_tab', :label => 'Suche'},
   {:name => 'overdue', :partial => 'overdue_tab', :label => 'Mahnliste'},
-  {:name => 'open', :partial => 'open_tab', :label => 'Offene Fälle'},
-  {:name => 'prepared', :partial => 'prepared_tab', :label => 'Zum Drucken'}
+  {:name => 'open', :partial => 'open_tab', :label => 'Offene Fälle'}
 ]
-%>
 
+tabs << {:name => 'prepared', :partial => 'prepared_tab', :label => 'Zum Drucken'} unless @prepared.empty?
+
+tab_container 'invoice', "Rechnungen", tabs
+ %>
