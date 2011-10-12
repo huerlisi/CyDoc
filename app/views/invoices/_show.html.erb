@@ -3,7 +3,6 @@
 
 <div class="contextual">
   <% if @invoice.overdue? or @invoice.state == 'reminded' or  @invoice.state == '2xreminded' or  @invoice.state == '3xreminded' or  @invoice.state == 'encashment'%>
-    <%= link_to_remote t('cydoc.actions.print_dunning_letter'), {:url => print_reminder_letter_invoice_path(@invoice), :before => "showPrintingFlash('invoice_flash', 'Mahnung')"}, :class => "icon icon-print" %>
     <%= link_to_remote t('cydoc.actions.print_dunning_letter_copy'), {:url => print_reminder_letter_invoice_path(@invoice, :print_copy => true), :before => "showPrintingFlash('invoice_flash', 'Mahnkopie')"}, :class => "icon icon-print" %>
   <% end %>
   <% if @invoice.state == 'prepared' %>
