@@ -193,7 +193,7 @@ de-CH:
       new_treatment_session: "Neue Konsultation"
       print: "Drucken"
       print_account: "Kontoauszug drucken"
-      print_copy: "Kopie drucken"
+      print_copy: "Rechnungskopie drucken"
       print_dunning_letter: "Mahnung drucken"
       print_dunning_letter_copy: "Mahnkopie drucken"
       print_reclaim_pdf: "Rückforderungsbeleg PDF"
