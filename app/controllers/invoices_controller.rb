@@ -83,7 +83,7 @@ class InvoicesController < ApplicationController
       @invoice.remind
       @invoice.save!
 
-      print_reminder
+      @invoice.print_reminder(@printers[:trays][:invoice])
     end
 
     respond_to do |format|
