@@ -461,4 +461,27 @@ class Invoice < ActiveRecord::Base
     print_patient_letter(patient_letter_printer)
     print_insurance_recipe(insurance_recipe_printer)
   end
+
+  # Reminders
+  def reminder_letter_to_pdf
+    prawn_options = { :page_size => 'A4', :top_margin => 35, :left_margin => 12, :right_margin => 12, :bottom_margin => 23 }
+    pdf = ReminderLetter.new(prawn_options)
+
+    return pdf.to_pdf(self)
+  end
+
+  def print_reminder(printer)
+    # Workaround TransientJob not yet accepting options
+    file = Tempfile.new('')
+    file.puts(reminder_letter_to_pdf)
+    file.close
+
+    # Try twice
+    begin
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    rescue
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    end
+    paper_copy.print
+  end
 end

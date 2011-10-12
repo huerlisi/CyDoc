@@ -62,7 +62,7 @@ class InvoicesController < ApplicationController
       @invoice.save!
     end
     
-    print_reminder
+    @invoice.print_reminder(@printers[:trays][:invoice])
     
     respond_to do |format|
       format.html { redirect_to invoices_path }
@@ -106,8 +106,8 @@ class InvoicesController < ApplicationController
       format.html {}
       format.pdf {
         document = @invoice.insurance_recipe_to_pdf
-        
-        send_data document, :filename => "#{@invoice.id}.pdf", 
+
+        send_data document, :filename => "#{@invoice.id}.pdf",
                             :type => "application/pdf",
                             :disposition => 'inline'
       }
@@ -123,8 +123,8 @@ class InvoicesController < ApplicationController
       format.html {}
       format.pdf {
         document = @invoice.patient_letter_to_pdf
-        
-        send_data document, :filename => "#{@invoice.id}.pdf", 
+
+        send_data document, :filename => "#{@invoice.id}.pdf",
                             :type => "application/pdf",
                             :disposition => 'inline'
       }
@@ -138,7 +138,13 @@ class InvoicesController < ApplicationController
 
     respond_to do |format|
       format.html {}
-      format.pdf { render_pdf }
+      format.pdf {
+        document = @invoice.reminder_letter_to_pdf
+        
+        send_data document, :filename => "#{@invoice.id}.pdf", 
+                            :type => "application/pdf",
+                            :disposition => 'inline'
+      }
     end
   end
 
