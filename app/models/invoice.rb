@@ -159,8 +159,7 @@ class Invoice < ActiveRecord::Base
     case state
       when 'booked':      remind_first_time
       when 'reminded':    remind_second_time
-#      when '2xreminded':  remind_third_time
-      when '2xreminded':  encash
+      when '2xreminded':  remind_third_time
       when '3xreminded':  encash
     end
   end
