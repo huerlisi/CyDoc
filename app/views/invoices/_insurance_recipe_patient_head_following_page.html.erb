@@ -1,9 +1,0 @@
-<%
-  @line_counter += 0
-%>
-<table style="width: 100%; border:thin solid black">
-  <tr>
-    <td class="subhead col1">Patient</td>
-    <td class="list"><%=h [@invoice.patient.full_name, l(@invoice.patient.birth_date)].join(', ') %></td>
-  </tr>
-</table>
