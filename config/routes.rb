@@ -29,6 +29,12 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :bookings
   
+  # Addresses
+  map.resources :phone_numbers
+  map.resources :vcards do |vcard|
+    vcard.resources :phone_numbers
+  end
+
   # Billing
   map.resources :invoices, :collection => {:print_all => :post, :print_reminders_for_all => :post}, :member => {:print => :post, :print_reminder_letter => :post, :insurance_recipe => :get, :patient_letter => :get, :reminder => :get, :reactivate => :post} do |invoice|
     invoice.resources :bookings
@@ -39,7 +45,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :insurances
 
-  map.resources :doctors
+  map.resources :doctors do |doctor|
+    doctor.resources :phone_numbers
+  end
 
   map.resources :recalls, :member => {:obey => :post, :prepare => :post, :send_notice => :put}
   

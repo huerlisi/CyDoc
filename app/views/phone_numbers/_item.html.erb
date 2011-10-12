@@ -6,7 +6,7 @@
     <th><%= in_place_editor_field :phone_number, :phone_number_type %></th>
     <td><%= in_place_editor_field :phone_number, :number %></td>
     <td>
-      <%= link_to_remote image_tag('delete.png'), {:url => patient_phone_number_path(@patient, item), :method => :delete} %>
+      <%= link_to_remote image_tag('delete.png'), {:url => phone_number_path(item), :method => :delete} %>
     </td>
   </tr>
 <% end %>

@@ -5,7 +5,7 @@ class PhoneNumbersController < ApplicationController
   # GET /phone_numbers/new
   def new
     @phone_number = PhoneNumber.new
-    @patient = Patient.find(params[:patient_id])
+    @vcard = Vcard.find(params[:vcard_id])
 
     respond_to do |format|
       format.html { }
@@ -19,8 +19,8 @@ class PhoneNumbersController < ApplicationController
 
   # PUT /phone_number
   def create
-    @patient = Patient.find(params[:patient_id])
-    @phone_number = @patient.phone_numbers.build(params[:phone_number])
+    @vcard = Vcard.find(params[:vcard_id])
+    @phone_number = @vcard.phone_numbers.build(params[:phone_number])
     
     if @phone_number.save
       flash[:notice] = 'Kontakt erfasst.'

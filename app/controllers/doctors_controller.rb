@@ -1,4 +1,8 @@
 class DoctorsController < ApplicationController
+  # Phone Numbers
+  in_place_edit_for :phone_number, :phone_number_type
+  in_place_edit_for :phone_number, :number
+
   # GET /patients
   def index
     query = params[:query]

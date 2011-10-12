@@ -1,12 +1,9 @@
-<div class="contextual">
-  <%= link_to_remote t('cydoc.actions.new_contact'), {:url => new_patient_phone_number_url(@patient), :method => :get}, :class => "icon icon-add" unless @patient.new_record?%>
-</div>
 <h3><%= t('cydoc.title.contact') %></h3>
 <div class="box">
   <div id="new_phone_number" class="new_phone_number"></div>
 
   <table id="phone_numbers">
-    <%= render :partial => 'phone_numbers/item', :collection => @patient.phone_numbers %>
+    <%= render :partial => 'phone_numbers/item', :collection => phone_numbers %>
   </table>
 </div>
 
