@@ -243,9 +243,10 @@ class Invoice < ActiveRecord::Base
   
   # Callback hook
   def booking_saved(booking)
+    # Mark as paid unless canceled or reactivated
     if (self.state != 'canceled') and (self.state != 'reactivated') and (self.due_amount <= 0.0)
       update_attribute(:state, 'paid')
-    elsif !self.overdue? and (self.due_amount > 0.0)
+    elsif !self.reminded? and (self.due_amount > 0.0)
       update_attribute(:state, 'booked')
     end
   end
