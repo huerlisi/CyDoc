@@ -193,7 +193,7 @@ class Formtastic::SemanticFormBuilder
         (validation.options.present? ? options_require_validation?(validation.options) : true)
       end
     else
-      @@all_fields_required_by_default
+      false
     end
   end
 end
