@@ -17,6 +17,7 @@ class Invoice < ActiveRecord::Base
   named_scope :active, :conditions => "NOT(state IN ('reactivated', 'canceled'))"
   named_scope :open, :conditions => "NOT(state IN ('reactivated', 'canceled', 'paid'))"
   named_scope :overdue, :conditions => ["(state = 'booked' AND due_date < :today) OR (state = 'reminded' AND reminder_due_date < :today) OR (state = '2xreminded' AND second_reminder_due_date < :today)", {:today => Date.today}]
+  named_scope :reminded, :conditions => "state IN ('reminded', '2xreminded', '3xreminded', 'encashment')"
   named_scope :in_encashment, :conditions => ["state = 'encashment'"]
 
   
@@ -57,6 +58,10 @@ class Invoice < ActiveRecord::Base
     return false
   end
   
+  def reminded?
+    return ['reminded', '2xreminded', '3xreminded', 'encashment'].include?(state)
+  end
+
   def reactivate
     # TODO: only build booking if booked
     
@@ -193,9 +198,10 @@ class Invoice < ActiveRecord::Base
   
   # Callback hook
   def booking_saved(booking)
+    # Mark as paid unless canceled or reactivated
     if (self.state != 'canceled') and (self.state != 'reactivated') and (self.due_amount <= 0.0)
       update_attribute(:state, 'paid')
-    elsif !self.overdue? and (self.due_amount > 0.0)
+    elsif !self.reminded? and (self.due_amount > 0.0)
       update_attribute(:state, 'booked')
     end
   end
