@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110902104257) do
+ActiveRecord::Schema.define(:version => 20111026092116) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -335,6 +335,8 @@ ActiveRecord::Schema.define(:version => 20110902104257) do
     t.date     "reminder_due_date"
     t.date     "second_reminder_due_date"
     t.date     "third_reminder_due_date"
+    t.integer  "patient_vcard_id"
+    t.integer  "billing_vcard_id"
   end
 
   add_index "invoices", ["invoice_replaced_by"], :name => "index_invoices_on_invoice_replaced_by"

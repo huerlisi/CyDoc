@@ -10,6 +10,9 @@ class Invoice < ActiveRecord::Base
   belongs_to :law, :autosave => true
   belongs_to :treatment, :autosave => true
 
+  belongs_to :patient_vcard, :class_name => 'Vcard', :autosave => true
+  belongs_to :billing_vcard, :class_name => 'Vcard', :autosave => true
+
   # Constructor
   def self.create_from_treatment(treatment, value_date, tiers_name, provider, biller)
     # Prepare Tiers
