@@ -38,6 +38,10 @@ class SessionsController < ApplicationController
 
   def show
     @session = Session.find(params[:id])
-    redirect_to @session.treatment
+    treatment = @session.treatment
+
+    invoice = treatment.invoices.last
+
+    redirect_to invoice || treatment
   end
 end
