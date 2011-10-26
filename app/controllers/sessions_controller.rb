@@ -35,4 +35,9 @@ class SessionsController < ApplicationController
       }
     end
   end
+
+  def show
+    @session = Session.find(params[:id])
+    redirect_to @session.treatment
+  end
 end
