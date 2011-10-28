@@ -104,13 +104,6 @@ class Patient < ActiveRecord::Base
     end
   end
 
-#  def name=(value)
-#    if v = vcards.active.first
-#      v.full_name = value
-#      v.save
-#    end
-#  end
-
   def sex
     case read_attribute(:sex)
       when 1: "M"
@@ -134,20 +127,6 @@ class Patient < ActiveRecord::Base
       else nil
     end
   end
-
-  # Authorization
-  # =============
-#  def self.find(*args)
-#    with_scope(:find => {:conditions => {:doctor_id => Thread.current["doctor_ids"]}}) do
-#      super
-#    end
-#  end
-
-#  def self.create(attributes = nil, &block)
-#    with_scope(:create => {:doctor_id => Thread.current["doctor_id"]}) do
-#      super
-#    end
-#  end
 
   # Build an invoice containing all open sessions
   def build_invoice(options)
