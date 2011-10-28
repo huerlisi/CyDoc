@@ -47,22 +47,29 @@ class Case < ActiveRecord::Base
     if treatment.save
       self.session = session
       self.save
+      
+      return nil
     else
       logger.info("[Error] Failed to create treatment for case #{self.praxistar_eingangsnr}:")
       logger.info(treatment.errors.full_messages.join("\n"))
+      
+      return self
     end
 
     treatment
   end
 
-  BILL_DELAY_DAYS = 6.5
-  named_scope :to_create_treatment, :conditions => ["session_id IS NULL AND (IFNULL(email_sent_at, result_report_printed_at) < now() - INTERVAL ? HOUR ) AND classification_id IS NOT NULL", BILL_DELAY_DAYS * 24]
+  named_scope :finished, :conditions => ["screened_at IS NOT NULL AND (needs_review = ? OR review_at IS NOT NULL)", false]
+  named_scope :no_treatment, :conditions => ["session_id IS NULL"]
 
   def self.create_all_treatments
-    for a_case in self.to_create_treatment
-      a_case.create_treatment(Doctor.find_by_code('zytolabor'))
+    failed_cases = []
+
+    cases = self.finished.no_treatment
+    for a_case in cases
+      failed_cases << a_case.create_treatment(Doctor.find_by_code('zytolabor'))
     end
 
-    nil
+    return cases.count, failed_cases.compact!
   end
 end
