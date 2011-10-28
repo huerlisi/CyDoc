@@ -120,6 +120,7 @@ de-CH:
         remarks: Bemerkungen
         salutation: Anrede
         street_address: Strasse
+        dunning_stop: Mahnstopp
       recall:
         appointment: 'Terminvorschlag'
         due_date: Datum

@@ -9,6 +9,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :tiers, :autosave => true
   belongs_to :law, :autosave => true
   belongs_to :treatment, :autosave => true
+  has_one :patient, :through => :treatment
 
   belongs_to :patient_vcard, :class_name => 'Vcard', :autosave => true
   belongs_to :billing_vcard, :class_name => 'Vcard', :autosave => true
@@ -61,7 +62,8 @@ class Invoice < ActiveRecord::Base
   named_scope :overdue, :conditions => ["(state = 'booked' AND due_date < :today) OR (state = 'reminded' AND reminder_due_date < :today) OR (state = '2xreminded' AND second_reminder_due_date < :today)", {:today => Date.today}]
   named_scope :reminded, :conditions => "state IN ('reminded', '2xreminded', '3xreminded', 'encashment')"
   named_scope :in_encashment, :conditions => ["state = 'encashment'"]
-
+  named_scope :dunning_stopped, :include => {:treatment => :patient}, :conditions => {"patients.dunning_stop" => true}
+  named_scope :dunning_active, :include => {:treatment => :patient}, :conditions => {"patients.dunning_stop" => false}
   
   def active
     !(state == 'canceled' or state == 'reactivated' or state == 'written_off')
@@ -280,10 +282,6 @@ class Invoice < ActiveRecord::Base
 
   def insurance
     tiers.insurance
-  end
-
-  def patient
-    treatment.patient
   end
 
   def referrer

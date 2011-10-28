@@ -26,6 +26,10 @@
       <th><%= t_attr(:remarks) %></th>
       <td colspan="3"><%= in_place_editor_field :patient, :remarks %></td>
     </tr>
+    <tr>
+      <th><%= t_attr(:dunning_stop) %></th>
+      <td colspan="3"><%=h @patient.dunning_stop ? "Ja" : "Nein" %></td>
+    </tr>
   </table>
   </div>
 </div>
