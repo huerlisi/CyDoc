@@ -214,7 +214,6 @@ class Invoice < ActiveRecord::Base
   validates_presence_of :treatment
   validate :valid_treatment?
 
-  validates_presence_of :patient
   validate :valid_patient?
   
   def valid_service_records?
@@ -232,7 +231,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def valid_patient?
-    errors.add_to_base(patient.errors.full_messages.join('</li><li>')) unless patient.valid_for_invoice?
+    errors.add_to_base(patient.errors.full_messages.join('</li><li>')) unless treatment.patient.valid_for_invoice?
 
     return errors.empty?
   end
