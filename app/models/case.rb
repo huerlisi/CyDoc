@@ -51,6 +51,8 @@ class Case < ActiveRecord::Base
       logger.info("[Error] Failed to create treatment for case #{self.praxistar_eingangsnr}:")
       logger.info(treatment.errors.full_messages.join("\n"))
     end
+
+    treatment
   end
 
   BILL_DELAY_DAYS = 6.5
