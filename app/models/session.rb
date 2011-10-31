@@ -76,4 +76,7 @@ class Session < ActiveRecord::Base
     service_records << service_record
     return service_record
   end
+
+  # Hozr Integration
+  has_one :case
 end

@@ -62,4 +62,16 @@ class Treatment < ActiveRecord::Base
       when 'Geburtsfehler': 'birthdefect'
     end
   end
+
+  # Hozr Integration
+  has_many :cases, :through => :sessions
+
+  GRACE_PERIOD = 6.5
+  named_scope :ready_to_bill, proc {|grace_period|
+    date = DateTime.now().ago(grace_period.days)
+    {
+      :joins => {:sessions => :case},
+      :conditions => ["screened_at < :date AND (needs_review = :false OR review_at < :date)", {:date => date, :false => false}]
+    }
+  }
 end

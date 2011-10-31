@@ -14,7 +14,7 @@ class InvoiceBatchJobsController < ApplicationController
     @invoice_batch_job = InvoiceBatchJob.new
     
     @invoice_batch_job.tiers_name = "TiersGarant"
-    @invoice_batch_job.count = Treatment.open.count
+    @invoice_batch_job.count = Treatment.open.ready_to_bill(6.5).count
     @invoice_batch_job.value_date = Date.today
     
     respond_to do |format|
@@ -32,7 +32,7 @@ class InvoiceBatchJobsController < ApplicationController
   # POST /invoice_batch_jobs
   def create
     @invoice_batch_job = InvoiceBatchJob.new(params[:invoice_batch_job])
-    @treatments = Treatment.open.find(:all, :limit => @invoice_batch_job.count)
+    @treatments = Treatment.open.ready_to_bill(6.5).find(:all, :limit => @invoice_batch_job.count)
     
     value_date = @invoice_batch_job.value_date
     tiers_name = @invoice_batch_job.tiers_name
@@ -40,7 +40,9 @@ class InvoiceBatchJobsController < ApplicationController
     biller     = Doctor.find(Thread.current["doctor_id"])
     
     @invoice_batch_job.failed_jobs = []
-    for treatment in @treatments
+    for treatment_readonly in @treatments
+      treatment = Treatment.find(treatment_readonly.id)
+
       # Create invoice
       invoice = Invoice.create_from_treatment(treatment, value_date, tiers_name, provider, biller)
 
