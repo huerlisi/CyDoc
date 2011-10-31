@@ -126,13 +126,17 @@ class Invoice < ActiveRecord::Base
     return self
   end
   
-  def cancel
-    bookings.build(:title => "Storno",
+  def cancel(comments = nil)
+    booking = bookings.build(:title => "Storno",
                    :amount => amount.currency_round,
                    :credit_account => EARNINGS_ACCOUNT,
                    :debit_account => DEBIT_ACCOUNT,
                    :value_date => Date.today)
+    booking.comments = comments if comments.present?
+
     self.state = 'canceled'
+
+    return booking
   end
   
   def build_booking
