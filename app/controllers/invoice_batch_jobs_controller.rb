@@ -68,10 +68,10 @@ class InvoiceBatchJobsController < ApplicationController
       flash[:notice] = 'Erfolgreich erstellt.'
 
       respond_to do |format|
-        format.html { redirect_to @invoice }
+        format.html { redirect_to @invoice_batch_job }
         format.js {
           render :update do |page|
-            page.remove 'invoice_batch_form'
+            page.replace "invoice_flash", :partial => 'printed_flash'
           end
         }
       end
