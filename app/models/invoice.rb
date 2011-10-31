@@ -253,6 +253,9 @@ class Invoice < ActiveRecord::Base
     included_bookings.to_a.sum{|b| b.accounted_amount(Invoice::DEBIT_ACCOUNT)}
   end
   
+  # Batch Jobs
+  has_and_belongs_to_many :invoice_batch_jobs
+
   # Callback hook
   def booking_saved(booking)
     # Mark as paid unless canceled or reactivated
