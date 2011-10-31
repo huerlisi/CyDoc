@@ -231,7 +231,11 @@ class Invoice < ActiveRecord::Base
   end
 
   def valid_patient?
-    errors.add_to_base(patient.errors.full_messages.join('</li><li>')) unless treatment.patient.valid_for_invoice?
+    if treatment.patient
+      errors.add_to_base(treatment.patient.errors.full_messages.join('</li><li>')) unless treatment.patient.valid_for_invoice?
+    else
+      errors.add_to_base("Patient fehlt") unless treatment.patient
+    end
 
     return errors.empty?
   end
