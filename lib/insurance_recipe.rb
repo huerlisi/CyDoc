@@ -363,7 +363,7 @@ class InsuranceRecipe < Prawn::Document
       column(1).width = 1.7.cm
       column(2).width = 1.3.cm
       column(3).width = 3.cm
-      column(4).width = 1.0.cm
+      column(4).width = 1.2.cm
       column(5).width = 1.2.cm
       column(6).width = 1.8.cm
       column(7).width = 1.cm
