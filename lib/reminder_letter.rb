@@ -71,6 +71,14 @@ class ReminderLetter < PatientLetter
     text "ZytoLabor"
   end
 
+  def encashment_text(invoice)
+    font_size 12
+    text "Inkasso", :style => :bold
+    text " "
+
+    font_size 7.5
+  end
+
   def to_pdf(invoice)
     set_fonts
  
@@ -109,6 +117,8 @@ class ReminderLetter < PatientLetter
             second_reminder_text(invoice)
           when '3xreminded':
             third_reminder_text(invoice)
+          when 'encashment':
+            encashment_text(invoice)
         end
       end
 
