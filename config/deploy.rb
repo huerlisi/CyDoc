@@ -2,11 +2,11 @@ require 'recipes/rails'
 require 'recipes/restful_authentication'
 require 'recipes/database/sync'
 
-set :application, "cydoc"
-set :repository,  "git@github.com:huerlisi/CyDoc.git"
+# Application
+set :application, 'cydoc'
+set :repository,  'git@github.com:huerlisi/CyDoc.git'
 
 # Staging
-set :stages, %w(demo)
 set :default_stage, "staging"
 
 # Deployment
@@ -23,10 +23,19 @@ set :copy_exclude, [".git", "spec", "test", "stories"]
 
 # Provider
 # ========
-# Try loading a deploy_provider.rb
-begin
-  load File.expand_path('../deploy_provider.rb', __FILE__)
-rescue LoadError
+# Load configuration
+config_path = File.expand_path('~/.capones.yml')
+
+if File.exist?(config_path)
+  # Parse config file
+  config = YAML.load_file(config_path)
+
+  # States
+  deploy_target_path = File.expand_path(config['deploy_target_repository']['path'])
+
+  # Add stages
+  set :stage_dir, File.join(deploy_target_path, application, 'stages')
+  load_paths << ""
 end
 
 # Plugins
