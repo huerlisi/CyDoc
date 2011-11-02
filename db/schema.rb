@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110902104257) do
+ActiveRecord::Schema.define(:version => 20110907200341) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -310,6 +310,7 @@ ActiveRecord::Schema.define(:version => 20110902104257) do
     t.string   "tiers_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "failed_jobs"
   end
 
   create_table "invoice_batch_jobs_invoices", :id => false, :force => true do |t|
@@ -337,11 +338,13 @@ ActiveRecord::Schema.define(:version => 20110902104257) do
     t.date     "third_reminder_due_date"
   end
 
+  add_index "invoices", ["imported_esr_reference"], :name => "index_invoices_on_imported_esr_reference"
   add_index "invoices", ["invoice_replaced_by"], :name => "index_invoices_on_invoice_replaced_by"
   add_index "invoices", ["law_id"], :name => "index_invoices_on_law_id"
   add_index "invoices", ["state"], :name => "index_invoices_on_state"
   add_index "invoices", ["tiers_id"], :name => "index_invoices_on_tiers_id"
   add_index "invoices", ["treatment_id"], :name => "index_invoices_on_treatment_id"
+  add_index "invoices", ["value_date"], :name => "index_invoices_on_value_date"
 
   create_table "invoices_service_records", :id => false, :force => true do |t|
     t.integer "invoice_id"
@@ -478,7 +481,7 @@ ActiveRecord::Schema.define(:version => 20110902104257) do
     t.string   "code",               :limit => 10,                                                             :null => false
     t.string   "ref_code",           :limit => 10
     t.integer  "session",                                                         :default => 1
-    t.decimal  "quantity",                          :precision => 8, :scale => 2, :default => 1.0
+    t.decimal  "quantity",                          :precision => 8, :scale => 2, :default => 1.0,             :null => false
     t.datetime "date",                                                                                         :null => false
     t.integer  "provider_id"
     t.integer  "responsible_id"
@@ -486,11 +489,11 @@ ActiveRecord::Schema.define(:version => 20110902104257) do
     t.string   "billing_role",                                                    :default => "both"
     t.string   "medical_role",                                                    :default => "self_employed"
     t.string   "body_location",                                                   :default => "none"
-    t.decimal  "unit_factor_mt",                    :precision => 3, :scale => 2
+    t.decimal  "unit_factor_mt",                    :precision => 3, :scale => 2,                              :null => false
     t.decimal  "scale_factor_mt",                   :precision => 3, :scale => 2, :default => 1.0
     t.decimal  "external_factor_mt",                :precision => 3, :scale => 2, :default => 1.0
     t.decimal  "amount_mt",                         :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "unit_factor_tt",                    :precision => 3, :scale => 2
+    t.decimal  "unit_factor_tt",                    :precision => 3, :scale => 2,                              :null => false
     t.decimal  "scale_factor_tt",                   :precision => 3, :scale => 2, :default => 1.0
     t.decimal  "external_factor_tt",                :precision => 3, :scale => 2, :default => 1.0
     t.decimal  "amount_tt",                         :precision => 8, :scale => 2, :default => 0.0
@@ -503,8 +506,8 @@ ActiveRecord::Schema.define(:version => 20110902104257) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "patient_id"
-    t.decimal  "unit_mt",                           :precision => 8, :scale => 2
-    t.decimal  "unit_tt",                           :precision => 8, :scale => 2
+    t.decimal  "unit_mt",                           :precision => 8, :scale => 2,                              :null => false
+    t.decimal  "unit_tt",                           :precision => 8, :scale => 2,                              :null => false
     t.integer  "vat_class_id"
     t.integer  "imported_id"
   end

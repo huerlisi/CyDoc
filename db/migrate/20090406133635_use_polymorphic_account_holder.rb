@@ -3,7 +3,7 @@ class UsePolymorphicAccountHolder < ActiveRecord::Migration
     add_column :accounts, :holder_id, :integer
     add_column :accounts, :holder_type, :string
     
-    for bank_account in Accounting::BankAccount.all
+    BankAccount.all.each do |bank_account|
       next if bank_account.holder_vcard_id.nil?
       
       vcard = Vcards::Vcard.find(bank_account.holder_vcard_id)
