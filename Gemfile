@@ -13,6 +13,9 @@ gem 'mysql'
 # Development
 # ===========
 group :development do
+  # RDoc
+  gem 'rdoc'
+
   # Deployment
   gem 'capones_recipes'
 end
