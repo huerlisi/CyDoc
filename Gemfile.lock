@@ -26,8 +26,8 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
-    capistrano_colors (0.5.4)
-    capones_recipes (0.12.1)
+    capistrano_colors (0.5.5)
+    capones_recipes (1.3.0)
       cap-recipes
       capistrano
       capistrano-ext
