@@ -1,7 +1,7 @@
 class Insurance < ActiveRecord::Base
   # String
   def to_s
-    "#{[vcard.full_name, vcard.locality].compact.join(', ')} (#{role_code})"
+    "#{[vcard.full_name, vcard.locality].compact.join(', ')} (#{role(:code)})"
   end
 
   # Vcard
@@ -16,19 +16,17 @@ class Insurance < ActiveRecord::Base
   named_scope :health_care, :conditions => {:role => 'H'}
   named_scope :accident, :conditions => {:role => 'A'}
 
-  def role_code
-    case read_attribute(:role)
-      when 'H': "KVG"
-      when 'A': "UVG"
-    end
-  end
-
-  def role
-    # TODO: should support multiple formats.
+  def role(format = :db)
     # TODO: should probably use Law model.
-    case read_attribute(:role)
-      when 'H': "Krankenversicherung (KVG)"
-      when 'A': "Unfallversicherung (UVG)"
+    raw = read_attribute(:role)
+
+    case format
+      when :text
+        I18n::translate(raw, :scope => 'activerecord.attributes.insurance.role_enum')
+      when :code
+        I18n::translate(raw, :scope => 'activerecord.attributes.insurance.role_enum_code')
+      else
+        raw
     end
   end
 

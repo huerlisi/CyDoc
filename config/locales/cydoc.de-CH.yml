@@ -58,6 +58,9 @@ de-CH:
         role_enum:
           H:              Krankenversicherung (KVG)
           A:              Unfallversicherung (UVG)
+        role_enum_code:
+          H:              KVG
+          A:              UVG
       invoice:
         amount_due: Fälliger Betrag
         amount_pfl: davon PFL
