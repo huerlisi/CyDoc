@@ -1,6 +1,5 @@
-require 'recipes/rails'
-require 'recipes/restful_authentication'
-require 'recipes/database/sync'
+require 'capones_recipes/cookbook/rails'
+require 'capones_recipes/tasks/restful_authentication'
 
 # Application
 set :application, 'cydoc'
