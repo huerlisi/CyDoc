@@ -1,18 +1,20 @@
 class Insurance < ActiveRecord::Base
-  has_vcards
-  
-  named_scope :health_care, :conditions => {:role => 'H'}
-  named_scope :accident, :conditions => {:role => 'A'}
-  
+  # String
   def to_s
     "#{[vcard.full_name, vcard.locality].compact.join(', ')} (#{role_code})"
   end
+
+  # Vcard
+  has_vcards
 
   def name
     vcard.full_name
   end
 
-  # Overrides
+  # Role
+  named_scope :health_care, :conditions => {:role => 'H'}
+  named_scope :accident, :conditions => {:role => 'A'}
+
   def role_code
     case read_attribute(:role)
       when 'H': "KVG"
