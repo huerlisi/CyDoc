@@ -53,7 +53,7 @@ function import() {
 local input="${2:-$NAME.csv}"
 
 	# Import
-	echo "PostalCodes::Import; PostalCode.import_all; nil" | ../script/console
+	echo "PostalCodes::Import; PostalCode.import_all; nil" | bundle exec ../script/console
 }
 
 function cleanup() {
