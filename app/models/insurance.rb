@@ -6,6 +6,7 @@ class Insurance < ActiveRecord::Base
 
   # Vcard
   has_vcards
+  accepts_nested_attributes_for :vcard
 
   def name
     vcard.full_name

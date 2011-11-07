@@ -1,6 +1,14 @@
 de-CH: 
   activerecord:
     attributes:
+      vcard:
+        full_name:           Name
+        street_address:      Strasse
+        extended_address:    Adresszusatz
+        post_office_box:     Postfach
+        postal_code:         PLZ
+        locality:            Ort
+
       account:
         balance:          Saldo
         credit:           Haben
@@ -43,6 +51,13 @@ de-CH:
       drug_product:
         description: Beschreibung
         name:        Name
+      insurance:
+        ean_party:        EAN-Nummer
+        group_ean_party:  EAN-Gruppe
+        role:             Rolle
+        role_enum:
+          H:              Krankenversicherung (KVG)
+          A:              Unfallversicherung (UVG)
       invoice:
         amount_due: Fälliger Betrag
         amount_pfl: davon PFL
@@ -283,3 +298,8 @@ de-CH:
       encashment:  in Inkasso
       paid:        bezahlt
       written_off: abgeschrieben
+
+  # CRUD
+  crud:
+    action:
+      search: Suchen

@@ -1,0 +1,15 @@
+= form.semantic_errors
+
+- form.inputs 'Kontakt' do
+  - form.fields_for :vcard do |vcard|
+    = vcard.input :full_name
+    = vcard.input :extended_address
+    = vcard.input :street_address
+    = vcard.input :post_office_box
+    = vcard.input :postal_code
+    = vcard.input :locality
+
+- form.inputs 'Information' do
+  = form.input :ean_party
+  = form.input :group_ean_party
+  = form.input :role, :collection => insurance_role_collection
