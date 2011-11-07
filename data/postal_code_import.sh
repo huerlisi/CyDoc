@@ -12,7 +12,7 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-URL='https://match.postmail.ch/download?id=10000&tid=10'
+URL='https://match.post.ch/download?file=10000&tid=10&rol=0'
 
 NAME="postal_code"
 
