@@ -1,9 +1,6 @@
 class Employee < ActiveRecord::Base
   has_vcards
   
-  named_scope :health_care, :conditions => {:role => 'H'}
-  named_scope :accident, :conditions => {:role => 'A'}
-
   # Authentication
   has_one :user, :as => :object
 

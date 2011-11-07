@@ -1,3 +1,8 @@
+<div class="contextual">
+  <%= icon_link_to :search, insurances_path %>
+  <%= contextual_link_to :edit %>
+</div>
+
 <h2><%=h @insurance.name %></h2>
 <div class="box">
   <%= render :partial => 'show' %>

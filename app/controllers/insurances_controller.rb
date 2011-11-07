@@ -30,4 +30,42 @@ class InsurancesController < ApplicationController
   def show
     @insurance = Insurance.find(params[:id])
   end
+
+  # GET /insurances/new
+  def new
+    @insurance = Insurance.new(params[:insurance])
+    @insurance.vcard = Vcard.new(params[:insurance])
+  end
+
+  # POST /insurances
+  def create
+    @insurance = Insurance.new
+    @insurance.vcard = Vcard.new
+
+    if @insurance.update_attributes(params[:insurance])
+      flash[:notice] = 'Versicherung erfasst.'
+      redirect_to @insurance
+    else
+      render :action => :new
+    end
+  end
+
+  # GET /insurances/1/edit
+  def edit
+    @insurance = Insurance.find(params[:id])
+  end
+
+  # PUT /insurances/1
+  def update
+    @insurance = Insurance.find(params[:id])
+
+    respond_to do |format|
+      if @insurance.update_attributes(params[:insurance])
+        flash[:notice] = 'Versicherung wurde geändert.'
+        format.html { redirect_to(@insurance) }
+      else
+        format.html { render :action => "edit" }
+      end
+    end
+  end
 end

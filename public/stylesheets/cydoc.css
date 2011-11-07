@@ -43,6 +43,7 @@ vertical-align: middle;
 
 .icon-show { background-image: url(../images/16x16/show.png); }
 .icon-add { background-image: url(../images/add.png); }
+.icon-new { background-image: url(../images/add.png); }
 .icon-delete { background-image: url(../images/delete.png); }
 .icon-reactivate { background-image: url(../images/reactivate.png); }
 .icon-print { background-image: url(../images/print.png); }
