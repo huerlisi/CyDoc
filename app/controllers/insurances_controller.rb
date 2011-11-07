@@ -68,4 +68,11 @@ class InsurancesController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @insurance = Insurance.find(params[:id])
+
+    @insurance.destroy
+    redirect_to insurances_path
+  end
 end
