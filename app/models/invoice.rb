@@ -243,7 +243,7 @@ class Invoice < ActiveRecord::Base
   end
   
   # Accounting
-  has_many :bookings, :class_name => 'Booking', :as => 'reference', :dependent => :destroy
+  has_many :bookings, :class_name => 'Booking', :as => 'reference', :order => 'value_date', :dependent => :destroy
   
   def due_amount(value_date = nil)
     if value_date
