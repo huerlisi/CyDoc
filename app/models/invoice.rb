@@ -168,10 +168,10 @@ class Invoice < ActiveRecord::Base
   
   def remind
     case state
-      when 'booked':      remind_first_time
-      when 'reminded':    remind_second_time
-      when '2xreminded':  remind_third_time
-      when '3xreminded':  encash
+      when 'booked', 'printed': remind_first_time
+      when 'reminded':          remind_second_time
+      when '2xreminded':        remind_third_time
+      when '3xreminded':        encash
     end
   end
   
