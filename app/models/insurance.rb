@@ -32,10 +32,13 @@ class Insurance < ActiveRecord::Base
 
   # Group
   def members
+    return [] if ean_party.blank?
+
     Insurance.find(:all, :conditions => {:group_ean_party => ean_party})
   end
   
   def group
+    return nil if group_ean_party.blank?
     Insurance.find(:first, :conditions => {:ean_party => group_ean_party})
   end
 
