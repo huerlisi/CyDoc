@@ -27,7 +27,7 @@ module PostalCodes
         records = FasterCSV.parse(File.new(File.join(RAILS_ROOT, 'data', 'postal_code.csv')), {:col_sep => "\t", :headers => false})
         PostalCode.transaction do
           for record in records
-            PostalCode.new.import(record)
+            puts PostalCode.new.import(record)
           end
         end
       end
