@@ -36,9 +36,7 @@
 
 <div id="treatment_sessions">
   <div class="contextual">
-    <% if @treatment.open? -%>
-      <%= link_to_remote t('cydoc.actions.new_treatment_session'), {:url => new_patient_treatment_session_path(@treatment.patient, @treatment), :method => :get}, :class => "icon icon-add" %>
-    <% end %>
+    <%= link_to_remote t('cydoc.actions.new_treatment_session'), {:url => new_patient_treatment_session_path(@treatment.patient, @treatment), :method => :get}, :class => "icon icon-add" %>
   </div>
   <h3><%= t('cydoc.title.treatment_sessions') %></h3>
   <div id="treatment_session_list" class="box">
