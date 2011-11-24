@@ -30,7 +30,7 @@ module ApplicationHelper
 
   # Patient Forms
   def setup_patient(patient)
-    returning(patient) do |p|
+    patient.tap do |p|
       if p.vcard.nil?
         v = p.build_vcard
       end
