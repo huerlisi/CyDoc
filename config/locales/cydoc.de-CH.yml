@@ -182,6 +182,7 @@ de-CH:
       lab_tariff_item:    Labor Leistung
       migel_tariff_item:  MiGel Leistung
       patient:            Patient
+      physio_tariff_item: Physiotherapie Leistung
       recall:             Recall
       tariff_item:        Leistung
       tariff_item_group:  Blockleistung
