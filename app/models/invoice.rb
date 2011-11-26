@@ -365,6 +365,18 @@ class Invoice < ActiveRecord::Base
     end
   end
 
+  def tax_points_mt(tariff_type = nil, options = {})
+    service_records.by_tariff_type(tariff_type).to_a.sum(&:tax_points_mt)
+  end
+
+  def tax_points_tt(tariff_type = nil, options = {})
+    service_records.by_tariff_type(tariff_type).to_a.sum(&:tax_points_tt)
+  end
+
+  def tax_points(tariff_type = nil, options = {})
+    service_records.by_tariff_type(tariff_type).to_a.sum(&:tax_points)
+  end
+
   # Generalization
   def date
     self.value_date

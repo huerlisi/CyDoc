@@ -71,6 +71,18 @@ class ServiceRecord < ActiveRecord::Base
     self.quantity * ((self.amount_mt * self.unit_factor_mt * self.unit_mt).round(2) + (self.amount_tt * self.unit_factor_tt * self.unit_tt).round(2))
   end
 
+  def tax_points_mt
+    self.quantity * self.amount_mt
+  end
+
+  def tax_points_tt
+    self.quantity * self.amount_tt
+  end
+
+  def tax_points
+    tax_points_mt + tax_points_tt
+  end
+
   def text
     remark
   end

@@ -8,7 +8,7 @@ module InvoicesHelper
     if amount.currency_round == 0.0
       return nil
     else
-      tax_points = amount / 0.89
+      tax_points = invoice.tax_points_mt(tariff_type)
       return "(" + sprintf("%0.2f", tax_points) + ")"
     end
   end
@@ -18,7 +18,7 @@ module InvoicesHelper
     if amount.currency_round == 0.0
       return nil
     else
-      tax_points = amount / 0.89
+      tax_points = invoice.tax_points_tt(tariff_type)
       return "(" + sprintf("%0.2f", tax_points) + ")"
     end
   end
@@ -28,7 +28,7 @@ module InvoicesHelper
     if amount.currency_round == 0.0
       return nil
     else
-      tax_points = amount / 0.89
+      tax_points = invoice.tax_points(tariff_type)
       return "(" + sprintf("%0.2f", tax_points) + ")"
     end
   end
