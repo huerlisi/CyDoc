@@ -10,6 +10,7 @@
       </li>
       <%= form.input :reason, :collection => ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'] %>
       <%= form.input :place_type, :collection => ['Praxis', 'Spital'] %>
+      <%= form.input :referrer %>
     <% end %>
 
     <% form.buttons do %>
