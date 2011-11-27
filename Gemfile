@@ -32,7 +32,7 @@ gem 'haml'
 
 gem 'formtastic'
 gem 'will_paginate', '< 3.0'
-gem 'inherited_resources'
+gem 'inherited_resources', '< 1.1'
 gem 'has_scope'
 gem 'i18n_rails_helpers'
 gem 'show_for'
@@ -54,6 +54,9 @@ gem 'use_db'
 
 # Forms
 gem 'in_place_editing'
+
+# CRUD helpers
+gem 'inherited_resources_views'
 
 # PDF
 gem 'prawn'
