@@ -32,7 +32,7 @@ gem 'haml'
 
 gem 'formtastic'
 gem 'will_paginate', '< 3.0'
-
+gem 'inherited_resources'
 gem 'has_scope'
 gem 'i18n_rails_helpers'
 gem 'show_for'
