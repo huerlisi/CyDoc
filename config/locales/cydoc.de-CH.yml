@@ -1,4 +1,4 @@
-de-CH: 
+de-CH:
   activerecord:
     attributes:
       vcard:
@@ -25,6 +25,9 @@ de-CH:
         from:    Von
         remarks: Bemerkungen
         to:      Bis
+      attachment:
+        file:             Dateiname
+        title:            Titel
       booking:
         amount:           Summe
         average:          Durchschnitt
@@ -172,6 +175,7 @@ de-CH:
         password: Passwort
     models:
       account:            Konto
+      attachment:         Anhang
       doctor:             Arzt
       drug_article:       Medikamentenpackung
       drug_product:       Medikament
