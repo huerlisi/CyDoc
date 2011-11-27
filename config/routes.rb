@@ -2,49 +2,22 @@ ActionController::Routing::Routes.draw do |map|
   # Root
   map.root :controller => "welcome"
 
+  # I18n
   map.filter 'locale'
+
   # Authentication
   map.logout '/logout', :controller => 'authentication_sessions', :action => 'destroy'
   map.login '/login', :controller => 'authentication_sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.resources :users
-
   map.resource :authentication_session
 
-  map.resources :service_items
-  
-  map.resources :tariff_items, :collection => {:search => :get}, :member => {:duplicate => :post} do |tariff_item|
-    tariff_item.resources :service_items, :collection => {:select => :get}
-  end
-  
-  map.resources :medical_cases
-  map.resources :diagnosis_cases
-  map.resources :diagnoses
-  map.resources :treatments
-  map.resources :sessions do |session|
-    session.resources :tariff_items
-  end
-
-  # Accounting
-  map.resources :accounts, :collection => {:set_value_date_filter => :get, :statistics => :get}, :member => {:print => :post} do |account|
-    account.resources :bookings
-  end
-  map.resources :bookings
-  
-  # Addresses
-  map.resources :phone_numbers
+  # People
   map.resources :vcards do |vcard|
     vcard.resources :phone_numbers
   end
-
-  # Billing
-  map.resources :invoices, :collection => {:print_all => :post, :print_reminders_for_all => :post}, :member => {:print => :post, :print_reminder_letter => :post, :insurance_recipe => :get, :patient_letter => :get, :reminder => :get, :reactivate => :post} do |invoice|
-    invoice.resources :bookings
-  end
-  map.resources :invoice_batch_jobs, :member => {:reprint => :post}
-  
-  map.resources :esr_bookings
+  map.resources :phone_numbers
 
   map.resources :insurances
 
@@ -52,8 +25,6 @@ ActionController::Routing::Routes.draw do |map|
     doctor.resources :phone_numbers
   end
 
-  map.resources :recalls, :member => {:obey => :post, :prepare => :post, :send_notice => :put}
-  
   map.resources :patients, :member => {:show_tab => :get, :localities_for_postal_code => :post, :postal_codes_for_locality => :post, :print_label => :post, :label => :get, :print_full_label => :post, :full_label => :get} do |patient|
     patient.resources :phone_numbers
     patient.resources :tariff_items, :member => {:assign => :post}
@@ -77,13 +48,42 @@ ActionController::Routing::Routes.draw do |map|
     end
   end
 
-  # Medindex
-  # ========
+  # Recalls
+  map.resources :recalls, :member => {:obey => :post, :prepare => :post, :send_notice => :put}
+
+  # Treatments
+  map.resources :medical_cases
+  map.resources :diagnosis_cases
+  map.resources :diagnoses
+  map.resources :treatments
+  map.resources :sessions do |session|
+    session.resources :tariff_items
+  end
+
+  # Tariff
+  map.resources :service_items
+
+  map.resources :tariff_items, :collection => {:search => :get}, :member => {:duplicate => :post} do |tariff_item|
+    tariff_item.resources :service_items, :collection => {:select => :get}
+  end
+
   map.resources :drug_products, :member => {:create_tariff_item => :put} do |drug_product|
     drug_product.resources :drug_articles, :shallow => true
   end
-  
-  # See how all your routes lay out with "rake routes"
+
+  # Accounting
+  map.resources :accounts, :collection => {:set_value_date_filter => :get, :statistics => :get}, :member => {:print => :post} do |account|
+    account.resources :bookings
+  end
+  map.resources :bookings
+
+  # Billing
+  map.resources :invoices, :collection => {:print_all => :post, :print_reminders_for_all => :post}, :member => {:print => :post, :print_reminder_letter => :post, :insurance_recipe => :get, :patient_letter => :get, :reminder => :get, :reactivate => :post} do |invoice|
+    invoice.resources :bookings
+  end
+  map.resources :invoice_batch_jobs, :member => {:reprint => :post}
+
+  map.resources :esr_bookings
 
   # Install the default routes as the lowest priority.
   map.connect ':controller/:action/:id'
