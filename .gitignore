@@ -32,6 +32,8 @@ tmp/restart.txt
 # =============
 # restful-authentication
 config/initializers/site_keys.rb
+# carrier-wave
+system
 
 # Deployment
 # ==========

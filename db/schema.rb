@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111103102530) do
+ActiveRecord::Schema.define(:version => 20111127205411) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -56,6 +56,19 @@ ActiveRecord::Schema.define(:version => 20111103102530) do
   add_index "appointments", ["recall_id"], :name => "index_appointments_on_recall_id"
   add_index "appointments", ["state"], :name => "index_appointments_on_state"
   add_index "appointments", ["treatment_id"], :name => "index_appointments_on_treatment_id"
+
+  create_table "attachments", :force => true do |t|
+    t.string   "title"
+    t.string   "file"
+    t.integer  "object_id"
+    t.string   "object_type"
+    t.string   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attachments", ["code"], :name => "index_attachments_on_code"
+  add_index "attachments", ["object_id", "object_type"], :name => "index_attachments_on_object_id_and_object_type"
 
   create_table "banks", :force => true do |t|
     t.integer  "vcard_id"

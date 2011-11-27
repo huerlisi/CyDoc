@@ -58,6 +58,9 @@ gem 'in_place_editing'
 # CRUD helpers
 gem 'inherited_resources_views'
 
+# Uploads
+gem 'carrierwave'
+
 # PDF
 gem 'prawn'
 gem 'prawnto'
