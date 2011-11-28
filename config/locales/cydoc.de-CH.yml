@@ -38,8 +38,9 @@ de-CH:
         total:            Total
         turn_over:        Umsatz
       doctor:
-        ean_party:   EAN-Nr.
-        zsr:         ZSR-Nr.
+        ean_party:         EAN-Nr.
+        zsr:               ZSR-Nr.
+        print_payment_for: '"Zugunsten von" auf Einzahlungschein drucken'
       drug_article:
         code:             Code
         content:          Inhalt

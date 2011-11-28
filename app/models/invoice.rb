@@ -11,6 +11,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :law, :autosave => true
   belongs_to :treatment, :autosave => true
   has_one :patient, :through => :treatment
+  alias customer patient
 
   belongs_to :patient_vcard, :class_name => 'Vcard', :autosave => true
   belongs_to :billing_vcard, :class_name => 'Vcard', :autosave => true

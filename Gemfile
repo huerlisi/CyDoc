@@ -68,5 +68,8 @@ gem 'prawnto'
 gem 'csv-mapper'
 gem 'routing-filter'
 
+# ESR support
+gem 'vesr'
+
 # Printing
 gem 'cups'

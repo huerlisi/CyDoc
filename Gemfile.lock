@@ -100,6 +100,7 @@ GEM
     ttfunk (1.0.3)
     use_db (0.2.0)
     validates_timeliness (2.3.2)
+    vesr (0.6.0)
     will_paginate (2.3.16)
 
 PLATFORMS
@@ -131,4 +132,5 @@ DEPENDENCIES
   sqlite3-ruby
   use_db
   validates_timeliness (< 3.0)
+  vesr
   will_paginate (< 3.0)

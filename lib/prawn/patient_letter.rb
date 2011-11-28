@@ -2,6 +2,7 @@ module Prawn
   class PatientLetter < Prawn::LetterDocument
     include InvoicesHelper
     include I18nRailsHelpers
+    include EsrRecipe
 
     # Helpers
     def h(s)
@@ -113,113 +114,6 @@ module Prawn
       end
     end
 
-    def vesr(invoice)
-      bank_account = invoice.biller.esr_account
-      bank = bank_account.bank
-      amount = (invoice.state == 'booked') ? invoice.due_amount.currency_round : invoice.amount.currency_round
-
-      font_size 8
-      bounding_box [0.2.cm, 8.8.cm], :width => 5.cm do
-        text bank.vcard.full_name
-        text bank.vcard.postal_code + " " + bank.vcard.locality
-
-        text " "
-        text I18n::translate(:biller, :scope => "activerecord.attributes.invoice")
-        text " "
-
-        vcard = bank_account.holder.vcard
-        text vcard.full_name
-        text vcard.extended_address if vcard.extended_address.present?
-        text vcard.street_address
-        text vcard.postal_code + " " + vcard.locality
-
-        move_down 0.7.cm
-        indent 2.3.cm do
-          font_size 9 do
-            text bank_account.pc_id
-          end
-        end
-      end
-        
-      bounding_box [0, 4.5.cm], :width => 3.5.cm do
-        font_size 9 do
-          text sprintf('%.0f', amount.floor), :align => :right
-        end
-      end
-
-      bounding_box [4.7.cm, 4.5.cm], :width => 1.cm do
-        font_size 9 do
-          text sprintf('%.0f', amount * 100 % 100)
-        end
-      end
-
-      bounding_box [0.2.cm, 3.2.cm], :width => 5.cm do
-        text invoice.esr9_reference(bank_account)
-
-        text " "
-
-        vcard = invoice.patient.vcard
-        text vcard.full_name
-        text vcard.extended_address if vcard.extended_address.present?
-        text vcard.street_address
-        text vcard.postal_code + " " + vcard.locality
-      end
-
-      bounding_box [6.cm, 8.8.cm], :width => 5.cm do
-        text bank.vcard.full_name
-        text bank.vcard.postal_code + " " + bank.vcard.locality
-
-        text " "
-        text I18n::translate(:biller, :scope => "activerecord.attributes.invoice")
-        text " "
-
-        vcard = bank_account.holder.vcard
-        text vcard.full_name
-        text vcard.extended_address if vcard.extended_address.present?
-        text vcard.street_address
-        text vcard.postal_code + " " + vcard.locality
-
-        move_down 0.7.cm
-        indent 2.6.cm do
-          font_size 9 do
-            text bank_account.pc_id
-          end
-        end
-      end
-
-      bounding_box [6.cm, 4.5.cm], :width => 3.5.cm do
-        font_size 9 do
-          text sprintf('%.0f', amount.floor), :align => :right
-        end
-      end
-
-      bounding_box [10.8.cm, 4.5.cm], :width => 1.cm do
-        font_size 9 do
-          text sprintf('%.0f', amount * 100 % 100)
-        end
-      end
-
-      font_size 10 do
-        draw_text invoice.esr9_reference(bank_account), :at => [12.3.cm, 5.9.cm]
-      end
-
-      bounding_box [12.1.cm, 4.5.cm], :width => 7.5.cm do
-        vcard = invoice.patient.vcard
-        text vcard.honorific_prefix
-        text vcard.full_name
-        text vcard.extended_address if vcard.extended_address.present?
-        text vcard.street_address
-        text vcard.postal_code + " " + vcard.locality
-      end
-
-      # ESR-Reference
-      font_size 10
-      font Rails.root.join('data', 'ocrb10.ttf')
-      draw_text invoice.esr9(bank_account), :at => [6.1.cm, 1.cm]
-
-      render
-    end
-
     def to_pdf(invoice)
       bounding_box [1.cm, bounds.top], :width => bounds.width do
         title(invoice)
@@ -248,7 +142,9 @@ module Prawn
       end
 
       # VESR form
-      vesr(invoice)
+      draw_esr(invoice, invoice.biller.esr_account, invoice.biller, invoice.biller.use_vesr)
+
+      render
     end
   end
 end

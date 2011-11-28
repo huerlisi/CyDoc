@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111127205411) do
+ActiveRecord::Schema.define(:version => 20111128150803) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -117,12 +117,14 @@ ActiveRecord::Schema.define(:version => 20111127205411) do
     t.string   "speciality"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",                    :default => true
+    t.boolean  "active",                          :default => true
     t.string   "login"
-    t.string   "ean_party",   :limit => 13
-    t.string   "zsr",         :limit => 7
+    t.string   "ean_party",         :limit => 13
+    t.string   "zsr",               :limit => 7
     t.text     "remarks"
     t.integer  "imported_id"
+    t.boolean  "use_vesr"
+    t.boolean  "print_payment_for"
   end
 
   add_index "doctors", ["imported_id"], :name => "index_doctors_on_imported_id"
