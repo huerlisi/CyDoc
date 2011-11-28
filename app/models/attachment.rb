@@ -12,7 +12,11 @@ class Attachment < ActiveRecord::Base
   end
   
   def self.codes
-    [['Brief-Template', 'Prawn::LetterDocument']]
+    [
+      ['Brief Vorlage', 'Prawn::LetterDocument'],
+      ['Rechnungsvorlage', 'Prawn::PatientLetter'],
+      ['Mahnungsvorlage', 'Prawn::ReminderLetter']
+    ]
   end
   
   before_save :create_title

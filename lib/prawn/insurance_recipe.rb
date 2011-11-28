@@ -1,8 +1,7 @@
 require 'prawn/measurement_extensions'
 
 module Prawn
-  class InsuranceRecipe < Prawn::Document
-    include ApplicationHelper
+  class InsuranceRecipe < Prawn::LetterDocument
     include InvoicesHelper
     include VcardHelper::InstanceMethods
     include I18nRailsHelpers
@@ -18,21 +17,18 @@ module Prawn
       text vcard.postal_code + " " + vcard.locality
     end
 
-    def set_fonts
+    def initialize_fonts
       # Fonts
       font_path = '/usr/share/fonts/truetype/ttf-dejavu/'
       font_families.update(
         "DejaVuSans" => { :bold        => font_path + "DejaVuSans-Bold.ttf",
-                          :normal      => font_path + "DejaVuSans.ttf"
-        })
+                          :normal      => font_path + "DejaVuSans.ttf" }
+      )
 
-      font "DejaVuSans"
+      font 'DejaVuSans'
     end
 
     def to_pdf(invoice)
-      # Fonts
-      set_fonts
-
       # Title
       font_size 16
       draw_text "Rückforderungsbeleg", :style => :bold, :at => [-1, bounds.top]

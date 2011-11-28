@@ -1,8 +1,7 @@
 require 'prawn/measurement_extensions'
 
 module Prawn
-  class PatientLetter < Prawn::Document
-    include ApplicationHelper
+  class PatientLetter < Prawn::LetterDocument
     include InvoicesHelper
     include I18nRailsHelpers
 
@@ -11,13 +10,15 @@ module Prawn
       return s
     end
 
-    def set_fonts
+    def initialize_fonts
       # Fonts
       font_path = '/usr/share/fonts/truetype/ttf-dejavu/'
       font_families.update(
         "DejaVuSans" => { :bold        => font_path + "DejaVuSans-Bold.ttf",
-                          :normal      => font_path + "DejaVuSans.ttf"
-        })
+                          :normal      => font_path + "DejaVuSans.ttf" }
+      )
+
+      font 'DejaVuSans'
     end
 
     # Content Blocks
@@ -230,9 +231,6 @@ module Prawn
     end
 
     def to_pdf(invoice)
-      # Fonts
-      set_fonts
-
       bounding_box [1.cm, bounds.top], :width => bounds.width do
         title(invoice)
 
