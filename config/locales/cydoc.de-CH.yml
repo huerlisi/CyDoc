@@ -28,6 +28,11 @@ de-CH:
       attachment:
         file:             Dateiname
         title:            Titel
+        code:           Verwenden als
+        code_enum:
+          'Prawn::LetterDocument': Briefvorlage
+          'Prawn::PatientLetter':  Rechnungsvorlage
+          'Prawn::ReminderLetter': Mahnvorlage
       booking:
         amount:           Summe
         average:          Durchschnitt

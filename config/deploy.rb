@@ -1,5 +1,6 @@
 require 'capones_recipes/cookbook/rails'
 require 'capones_recipes/tasks/restful_authentication'
+require 'capones_recipes/tasks/carrier_wave'
 
 # Application
 set :application, 'cydoc'
@@ -11,6 +12,10 @@ set :default_stage, "staging"
 # Deployment
 set :server, :passenger
 set :user, "deployer"                               # The server's user for deploys
+
+# Sync directories
+set :sync_directories, ['uploads']
+set :sync_backups, 3
 
 # Configuration
 set :scm, :git

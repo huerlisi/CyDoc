@@ -1,3 +1,3 @@
 CarrierWave.configure do |config|
-  config.root = Rails.root.join('system', 'uploads')
+  config.root = Rails.root.join('uploads')
 end
