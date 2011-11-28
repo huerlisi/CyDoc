@@ -2,10 +2,14 @@
   <%= link_to "Ändern", edit_doctor_path(@doctor), :class => "icon icon-edit" %>
 </div>
 
-<h3>Konto</h3>
+<h3>Rechnungswesen</h3>
 
 <div class="box">
   <table>
+    <tr>
+      <th><%= t_attr :print_payment_for %>:</th>
+      <td><%=h t(@doctor.print_payment_for, :scope => :boolean) %></td>
+    </tr>
     <% if @doctor.account %>
       <tr>
         <th>Kontonummer:</th>

@@ -1,0 +1,14 @@
+<h3>VESR</h3>
+<% semantic_fields_for @doctor do |f| %>
+  <% f.inputs do %>
+    <%# f.input :use_vesr %>
+    <%= f.input :print_payment_for %>
+  <% end %>
+<% end %>
+<% semantic_fields_for @account do |f| %>
+  <% f.inputs do %>
+    <%= f.input :number %>
+    <%= f.input :pc_id %>
+    <%= f.input :esr_id %>
+  <% end %>
+<% end %>

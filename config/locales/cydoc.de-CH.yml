@@ -322,3 +322,7 @@ de-CH:
   crud:
     action:
       search: Suchen
+
+  boolean:
+    true:  Ja
+    false: Nein
