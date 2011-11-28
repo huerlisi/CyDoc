@@ -1,5 +1,3 @@
-require 'prawn/measurement_extensions'
-
 module Prawn
   class PatientLetter < Prawn::LetterDocument
     include InvoicesHelper
