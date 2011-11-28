@@ -466,8 +466,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def patient_letter_to_pdf
-    prawn_options = { :page_size => 'A4', :top_margin => 35, :left_margin => 12, :right_margin => 12, :bottom_margin => 23 }
-    pdf = Prawn::PatientLetter.new(prawn_options)
+    pdf = Prawn::PatientLetter.new
     
     return pdf.to_pdf(self)
   end

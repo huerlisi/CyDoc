@@ -12,11 +12,14 @@ module Prawn
       font_size 9.5
     end
 
+    def default_options
+      {:page_size => 'A4'}
+    end
+
     def initialize(opts = {})
-      opts.reverse_merge!(:page_size => 'A4',  
-                          :top_margin => 60, 
-                          :left_margin => 50, 
-                          :right_margin => 55)
+      # Default options
+      opts.reverse_merge!(default_options)
+
       # Set the template
       letter_template = Attachment.find_by_code(self.class.name)
       opts.reverse_merge!(:template => letter_template.file.current_path) if letter_template
