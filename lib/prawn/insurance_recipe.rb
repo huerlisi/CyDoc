@@ -10,13 +10,6 @@ module Prawn
       return s
     end
 
-    def draw_address(vcard)
-      text vcard.full_name
-      text vcard.extended_address if vcard.extended_address.present?
-      text vcard.street_address
-      text vcard.postal_code + " " + vcard.locality
-    end
-
     def initialize_fonts
       # Fonts
       font_path = '/usr/share/fonts/truetype/ttf-dejavu/'

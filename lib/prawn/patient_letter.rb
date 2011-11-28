@@ -21,14 +21,6 @@ module Prawn
       font 'DejaVuSans'
     end
 
-    # Content Blocks
-    def draw_address(vcard)
-      text vcard.full_name
-      text vcard.extended_address if vcard.extended_address.present?
-      text vcard.street_address
-      text vcard.postal_code + " " + vcard.locality
-    end
-
     # Title
     def title(invoice)
       font_size 16
@@ -69,7 +61,7 @@ module Prawn
     # Billing Address
     def billing_address(invoice)
       font_size 10
-      text invoice.patient.billing_vcard.honorific_prefix
+      text invoice.patient.billing_vcard.honorific_prefix if invoice.patient.billing_vcard.honorific_prefix
       draw_address(invoice.patient.billing_vcard)
     end
 
