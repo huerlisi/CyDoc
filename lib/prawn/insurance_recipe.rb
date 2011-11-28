@@ -18,7 +18,7 @@ module Prawn
       text vcard.postal_code + " " + vcard.locality
     end
 
-    def to_pdf(invoice)
+    def set_fonts
       # Fonts
       font_path = '/usr/share/fonts/truetype/ttf-dejavu/'
       font_families.update(
@@ -26,8 +26,14 @@ module Prawn
                           :normal      => font_path + "DejaVuSans.ttf"
         })
 
-      # Title
       font "DejaVuSans"
+    end
+
+    def to_pdf(invoice)
+      # Fonts
+      set_fonts
+
+      # Title
       font_size 16
       draw_text "Rückforderungsbeleg", :style => :bold, :at => [-1, bounds.top]
 

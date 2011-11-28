@@ -4,7 +4,6 @@ module Prawn
   class ReminderLetter < PatientLetter
     # Title
     def title(invoice)
-      font "DejaVuSans"
       font_size 16
       text "Patientenrechnung Nr. #{invoice.id}", :style => :bold
     end
@@ -81,6 +80,7 @@ module Prawn
     end
 
     def to_pdf(invoice)
+      # Fonts
       set_fonts
    
       bounding_box [1.cm, bounds.top], :width => bounds.width do
