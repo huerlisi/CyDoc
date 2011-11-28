@@ -4,7 +4,6 @@ module Prawn
   class PatientLetter < Prawn::Document
     include ApplicationHelper
     include InvoicesHelper
-    include VcardHelper::InstanceMethods
     include I18nRailsHelpers
 
     # Helpers
