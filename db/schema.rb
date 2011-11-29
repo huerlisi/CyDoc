@@ -325,6 +325,7 @@ ActiveRecord::Schema.define(:version => 20111128150803) do
     t.string   "tiers_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "failed_jobs"
   end
 
   create_table "invoice_batch_jobs_invoices", :id => false, :force => true do |t|
@@ -354,11 +355,13 @@ ActiveRecord::Schema.define(:version => 20111128150803) do
     t.integer  "billing_vcard_id"
   end
 
+  add_index "invoices", ["imported_esr_reference"], :name => "index_invoices_on_imported_esr_reference"
   add_index "invoices", ["invoice_replaced_by"], :name => "index_invoices_on_invoice_replaced_by"
   add_index "invoices", ["law_id"], :name => "index_invoices_on_law_id"
   add_index "invoices", ["state"], :name => "index_invoices_on_state"
   add_index "invoices", ["tiers_id"], :name => "index_invoices_on_tiers_id"
   add_index "invoices", ["treatment_id"], :name => "index_invoices_on_treatment_id"
+  add_index "invoices", ["value_date"], :name => "index_invoices_on_value_date"
 
   create_table "invoices_service_records", :id => false, :force => true do |t|
     t.integer "invoice_id"
@@ -433,6 +436,7 @@ ActiveRecord::Schema.define(:version => 20111128150803) do
 
   add_index "patients", ["doctor_id"], :name => "patients_doctor_id_index"
   add_index "patients", ["doctor_patient_nr"], :name => "index_patients_on_doctor_patient_nr"
+  add_index "patients", ["dunning_stop"], :name => "index_patients_on_dunning_stop"
   add_index "patients", ["updated_at"], :name => "patients_updated_at_index"
 
   create_table "phone_numbers", :force => true do |t|
