@@ -1,7 +1,7 @@
 class InvoiceBatchJobsController < ApplicationController
   # GET /invoice_batch_jobs
   def index
-    @invoice_batch_jobs = InvoiceBatchJob.paginate(:page => params[:page])
+    @invoice_batch_jobs = InvoiceBatchJob.paginate(:page => params[:page], :order => 'created_at DESC')
   end
 
   # GET /invoice_batch_jobs/1
