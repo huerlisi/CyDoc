@@ -9,4 +9,7 @@
     <th><%= t_attr :failed_jobs %></th>
   </tr>
   <%= render @invoice_batch_jobs %>
+  <tr>
+    <th colspan="5" style="text-align: right"><%= will_paginate @invoice_batch_jobs, :params => {:query => params[:query]} %></th>
+  </tr>
 </table>
