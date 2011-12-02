@@ -1,8 +1,6 @@
 <% cache [I18n.locale, @treatment.cache_key] do %>
 <div class="contextual">
-  <% if @treatment.open? -%>
-    <%= link_to_remote t('cydoc.actions.update'), {:url => edit_treatment_path(@treatment), :method => :get}, :class => "icon icon-edit" %>
-  <% end -%>
+  <%= link_to_remote t('cydoc.actions.update'), {:url => edit_treatment_path(@treatment), :method => :get}, :class => "icon icon-edit" %>
   <% if @treatment.chargeable? %>
     <%= link_to_remote t('cydoc.actions.new_invoice'), {:url => new_patient_treatment_invoice_path(@treatment.patient, @treatment), :method => :get}, :class => "icon icon-add" %>
   <% end %>
