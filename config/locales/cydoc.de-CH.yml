@@ -194,6 +194,7 @@ de-CH:
       patient:            Patient
       physio_tariff_item: Physiotherapie Leistung
       recall:             Recall
+      session:            Konsultation
       tariff_item:        Leistung
       tariff_item_group:  Blockleistung
       tarmed_tariff_item: Tarmed Leistung

@@ -5,7 +5,7 @@
   <% if editable %>
   <div class="contextual">
     <%= link_to_remote "Leistung erfassen", {:url => new_patient_session_service_record_url(item.patient, item), :method => :get}, :class => "icon icon-add" %>
-    <%= link_to_remote "Kons löschen", {:url => patient_session_url(item.patient, item), :method => :delete}, :class => "icon icon-delete" %>
+    <%= link_to_remote "Kons löschen", {:url => patient_session_url(item.patient, item), :method => :delete, :confirm => t_confirm_delete(item)}, :class => "icon icon-delete" %>
   </div>
   <% end %>
 
