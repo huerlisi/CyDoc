@@ -1,51 +1,62 @@
+# Database configuration
+# ======================
+# This file can be use as a template for the database.yml file.
+#
+# The only tested database is MySQL, currently. But you may give
+# your prefered database a try and report any issues.
+#
+# Copy this file to config/database.yml and adapt for your setup.
+#
+# 1. create the database and grant access
+# 3. set username and password and possibly host settings in
+#    the environment config.
+
+# Common settings
+# ===============
+# SQLite3
+sqlite: &sqlite
+  adapter: sqlite3
+  pool:    5
+  timeout: 5000
+
+# MySQL
+mysql: &mysql
+  adapter:  mysql2
+  encoding: utf8
+  pool:     5
+  timeout:  5000
+  host:     localhost
+
 # Main Database
 # =============
 development:
+  <<: *mysql
   database: cydoc_development
-  adapter: mysql
-  host: localhost
   username: cydoc
-  password: CHANGE ME
-  encoding: utf8
+  password:
 
 production:
+  <<: *mysql
   database: cydoc_production
-  adapter: mysql
-  host: localhost
   username: cydoc
-  password: CHANGE ME
-  encoding: utf8
-
-demo:
-  database: cydoc_demo
-  adapter: mysql
-  host: localhost
-  username: cydoc
-  password: CHANGE ME
-  encoding: utf8
+  password:
 
 test:
+  <<: *mysql
   database: cydoc_test
-  adapter: mysql
-  host: localhost
   username: cydoc
-  password: CHANGE ME
-  encoding: utf8
+  password:
 
 # Tarmed Database
 # ===============
 tarmed_development:
-  adapter: sqlite3
+  <<: *sqlite
   database: db/tarmed_development.sqlite3
 
 tarmed_test:
-  adapter: sqlite3
+  <<: *sqlite
   database: db/tarmed_test.sqlite3
 
-tarmed_demo:
-  adapter: sqlite3
-  database: db/tarmed_demo.sqlite3
-
 tarmed_production:
-  adapter: sqlite3
+  <<: *sqlite
   database: db/tarmed_production.sqlite3
