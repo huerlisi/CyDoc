@@ -66,10 +66,13 @@ class TariffItem < ActiveRecord::Base
     ServiceRecord
   end
 
-  def create_service_record
+  def create_service_record(session)
     # Type information
     service_record = service_record_class.new
     service_record.tariff_type = tariff_type
+
+    # Remember session as it may influence tax points
+    @session = session
 
     # Tariff data
     service_record.code = code

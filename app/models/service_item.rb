@@ -39,9 +39,9 @@ class ServiceItem < ActiveRecord::Base
     valid_ref_code? ? read_attribute(:ref_code) : "Fehlende Referenz"
   end
   
-  def create_service_record
+  def create_service_record(session)
     # Create service_record based on associated tariff_item
-    service_record = tariff_item.create_service_record
+    service_record = tariff_item.create_service_record(session)
 
     # Fill in instance attributes
     service_record.ref_code = ref_code if ref_code

@@ -1,10 +1,24 @@
 class PhysioTariffItem < TariffItem
+  def reason
+    @session.treatment.reason
+  end
+
   def unit_mt
-    1.03
+    case reason
+      when "Unfall":
+        1.0
+      else
+        1.03
+    end
   end
 
   def unit_tt
-    1.03
+    case reason
+      when "Unfall":
+        1.0
+      else
+        1.03
+    end
   end
 
   def self.tariff_type

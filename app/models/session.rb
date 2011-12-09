@@ -61,7 +61,7 @@ class Session < ActiveRecord::Base
   
   def build_service_record(tariff_item)
     # Type information
-    service_record = tariff_item.create_service_record
+    service_record = tariff_item.create_service_record(self)
 
     if service_record.is_a? Array
       service_record.map{|s|
