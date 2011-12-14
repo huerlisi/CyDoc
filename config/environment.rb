@@ -56,7 +56,8 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector
 
   # Make Active Record use UTC-base instead of local time
-  config.active_record.default_timezone = 'Bern'
+  config.time_zone = 'Bern'
+  config.active_record.default_timezone = :local
 
   # i18n
   config.i18n.default_locale = 'de-CH'
