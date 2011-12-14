@@ -62,7 +62,7 @@ GEM
     inherited_resources_views (0.4.1)
       inherited_resources (>= 1.0)
     json (1.6.1)
-    mysql (2.8.1)
+    mysql2 (0.2.18)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -122,7 +122,7 @@ DEPENDENCIES
   in_place_editing
   inherited_resources (< 1.1)
   inherited_resources_views
-  mysql
+  mysql2 (~> 0.2.18)
   prawn
   prawnto
   rails (~> 2.3.10)

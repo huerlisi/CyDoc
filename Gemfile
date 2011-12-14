@@ -8,7 +8,7 @@ gem 'rails', '~> 2.3.10'
 
 # Database
 gem 'sqlite3-ruby', :require => 'sqlite3'
-gem 'mysql'
+gem 'mysql2', '~> 0.2.18'
 
 # Development
 # ===========
