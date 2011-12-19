@@ -1,6 +1,6 @@
 class FreeTariffItem < TariffItem
   def self.tariff_type
-    'free'
+    999
   end
   
   def unit_mt
