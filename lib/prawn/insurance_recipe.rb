@@ -59,7 +59,7 @@ module Prawn
 
         ["Auftraggeber", "EAN-Nr./ZSR-Nr.", "▪ #{ean_zsr(invoice.referrer) if invoice.referrer}", invoice.referrer ? full_address(invoice.referrer, ', ') : nil],
         ["Diagnose", "▪ " + invoice.treatment.medical_cases.map {|d| d.diagnosis.type}.uniq.join('; '), "▪ " + invoice.treatment.medical_cases.map {|d| d.diagnosis.code}.join('; '), nil],
-        ["EAN-Liste", "▪ 1/" + invoice.biller.ean_party, nil, nil],
+        ["EAN-Liste", invoice.biller.ean_party.present? ("▪ 1/" + invoice.biller.ean_party) : nil, nil, nil],
         ["Bemerkungen", invoice.remark, nil, nil],
       ]
 
