@@ -25,3 +25,23 @@ set :use_sudo, false
 set :deploy_via, :remote_cache
 set :git_enable_submodules, 1
 set :copy_exclude, [".git", "spec", "test", "stories"]
+
+# Dependencies
+depend :remote, :gem, 'bundler', '> 0'
+
+# Headers for gem compilation
+depend :remote, :deb, "build-essential", ''
+depend :remote, :deb, "ruby-dev", ''
+depend :remote, :deb, "libcups2-dev", ''
+depend :remote, :deb, "libsqlite3-dev", ''
+depend :remote, :deb, "libmysqlclient-dev", ''
+depend :remote, :deb, "libxml2-dev", ''
+depend :remote, :deb, "libxslt1-dev", ''
+
+# Import scripts
+depend :remote, :deb, "build-essential", ''
+depend :remote, :deb, "mdbtools", ''
+depend :remote, :deb, "wget", ''
+depend :remote, :deb, "sqlite3", ''
+depend :remote, :deb, "unzip", ''
+depend :remote, :deb, "recode", ''
