@@ -35,11 +35,6 @@ config/initializers/site_keys.rb
 # carrier-wave
 uploads/
 
-# Deployment
-# ==========
-config/deploy_provider.rb
-config/deploy
-
 # CyDoc
 # =====
 data/

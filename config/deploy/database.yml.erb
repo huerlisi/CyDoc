@@ -1,0 +1,42 @@
+# Database configuration
+# ======================
+# This file can be use as a template for the database.yml file.
+#
+# The only tested database is MySQL, currently. But you may give
+# your prefered database a try and report any issues.
+#
+# Copy this file to config/database.yml and adapt for your setup.
+#
+# 1. create the database and grant access
+# 3. set username and password and possibly host settings in
+#    the environment config.
+
+# Common settings
+# ===============
+# SQLite3
+sqlite: &sqlite
+  adapter: sqlite3
+  pool:    5
+  timeout: 5000
+
+# MySQL
+mysql: &mysql
+  adapter:  mysql2
+  encoding: utf8
+  pool:     5
+  timeout:  5000
+  host:     <%= db_host %>
+
+# Main Database
+# =============
+<%= rails_env %>:
+  <<: *mysql
+  database: <%= db_database %>
+  username: <%= db_username %>
+  password: <%= db_password %>
+
+# Tarmed Database
+# ===============
+tarmed_<%= rails_env %>:
+  <<: *sqlite
+  database: db/tarmed_<%= rails_env %>.sqlite3
