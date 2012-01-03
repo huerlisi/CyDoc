@@ -350,8 +350,16 @@ class Invoice < ActiveRecord::Base
     service_records.by_tariff_type(tariff_type).to_a.sum(&:amount_tt)
   end
   
+  # Returns rounded total amount
+  #
+  # The total is rounded according to currency rounding rules.
+  #
+  # tariff_type::
+  #   Only use service_records with these types. Can be an array
   def amount(tariff_type = nil, options = {})
-    service_records.by_tariff_type(tariff_type).to_a.sum(&:amount)
+    value = service_records.by_tariff_type(tariff_type).to_a.sum(&:amount)
+
+    value.currency_round
   end
 
   def obligation_amount
