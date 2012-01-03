@@ -275,7 +275,7 @@ class Invoice < ActiveRecord::Base
     when :short
       "##{id}: #{I18n.l(value_date) if value_date}"
     else
-      "#{patient.name}, Rechnung ##{id} #{I18n.l(value_date)} über #{sprintf('%0.2f', rounded_amount)} CHF"
+      "#{patient.name}, Rechnung ##{id} #{I18n.l(value_date)} über #{sprintf('%0.2f', amount.currency_round)} CHF"
     end
   end
   
@@ -356,14 +356,6 @@ class Invoice < ActiveRecord::Base
 
   def obligation_amount
     service_records.obligate.to_a.sum(&:amount)
-  end
-
-  def rounded_amount
-    if amount.nil?
-      return 0
-    else
-      return amount.currency_round
-    end
   end
 
   def tax_points_mt(tariff_type = nil, options = {})
