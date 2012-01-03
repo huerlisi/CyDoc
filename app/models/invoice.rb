@@ -114,7 +114,7 @@ class Invoice < ActiveRecord::Base
     
     unless state == 'canceled'
       bookings.build(:title => "Storno",
-                     :amount => amount.currency_round,
+                     :amount => amount,
                      :credit_account => EARNINGS_ACCOUNT,
                      :debit_account => DEBIT_ACCOUNT,
                      :value_date => Date.today)
@@ -132,7 +132,7 @@ class Invoice < ActiveRecord::Base
   
   def cancel(comments = nil)
     booking = bookings.build(:title => "Storno",
-                   :amount => amount.currency_round,
+                   :amount => amount,
                    :credit_account => EARNINGS_ACCOUNT,
                    :debit_account => DEBIT_ACCOUNT,
                    :value_date => Date.today)
@@ -145,7 +145,7 @@ class Invoice < ActiveRecord::Base
   
   def build_booking
     bookings.build(:title => "Rechnung",
-                   :amount => amount.currency_round,
+                   :amount => amount,
                    :credit_account => DEBIT_ACCOUNT,
                    :debit_account => EARNINGS_ACCOUNT,
                    :value_date => value_date)
@@ -275,7 +275,7 @@ class Invoice < ActiveRecord::Base
     when :short
       "##{id}: #{I18n.l(value_date) if value_date}"
     else
-      "#{patient.name}, Rechnung ##{id} #{I18n.l(value_date)} über #{sprintf('%0.2f', amount.currency_round)} CHF"
+      "#{patient.name}, Rechnung ##{id} #{I18n.l(value_date)} über #{sprintf('%0.2f', amount)} CHF"
     end
   end
   

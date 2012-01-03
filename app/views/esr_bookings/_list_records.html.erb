@@ -13,7 +13,7 @@
     <td><%=h esr_record.value_date %></td>
     <td><%= link_to esr_record.invoice.patient.to_s, esr_record.invoice if esr_record.invoice %></td>
     <td><%= esr_record.invoice ? link_to(esr_record.remarks, esr_record.invoice) : esr_record.remarks %></td>
-    <td style="text-align: right"><%=h sprintf("%0.2f", esr_record.invoice.amount.currency_round) if esr_record.invoice %></td>
+    <td style="text-align: right"><%=h sprintf("%0.2f", esr_record.invoice.amount) if esr_record.invoice %></td>
     <td style="text-align: right"><%=h sprintf("%0.2f", esr_record.amount.currency_round) %></td>
     <td style="text-align: right"><%=h sprintf("%0.2f", esr_record.invoice.due_amount.currency_round) if esr_record.invoice %></td>
   </tr>
