@@ -114,7 +114,7 @@ class Invoice < ActiveRecord::Base
     
     unless state == 'canceled'
       bookings.build(:title => "Storno",
-                     :amount => amount.currency_round,
+                     :amount => amount,
                      :credit_account => EARNINGS_ACCOUNT,
                      :debit_account => DEBIT_ACCOUNT,
                      :value_date => Date.today)
@@ -132,7 +132,7 @@ class Invoice < ActiveRecord::Base
   
   def cancel(comments = nil)
     booking = bookings.build(:title => "Storno",
-                   :amount => amount.currency_round,
+                   :amount => amount,
                    :credit_account => EARNINGS_ACCOUNT,
                    :debit_account => DEBIT_ACCOUNT,
                    :value_date => Date.today)
@@ -145,7 +145,7 @@ class Invoice < ActiveRecord::Base
   
   def build_booking
     bookings.build(:title => "Rechnung",
-                   :amount => amount.currency_round,
+                   :amount => amount,
                    :credit_account => DEBIT_ACCOUNT,
                    :debit_account => EARNINGS_ACCOUNT,
                    :value_date => value_date)
@@ -275,7 +275,7 @@ class Invoice < ActiveRecord::Base
     when :short
       "##{id}: #{I18n.l(value_date) if value_date}"
     else
-      "#{patient.name}, Rechnung ##{id} #{I18n.l(value_date)} über #{sprintf('%0.2f', rounded_amount)} CHF"
+      "#{patient.name}, Rechnung ##{id} #{I18n.l(value_date)} über #{sprintf('%0.2f', amount)} CHF"
     end
   end
   
@@ -350,20 +350,20 @@ class Invoice < ActiveRecord::Base
     service_records.by_tariff_type(tariff_type).to_a.sum(&:amount_tt)
   end
   
+  # Returns rounded total amount
+  #
+  # The total is rounded according to currency rounding rules.
+  #
+  # tariff_type::
+  #   Only use service_records with these types. Can be an array
   def amount(tariff_type = nil, options = {})
-    service_records.by_tariff_type(tariff_type).to_a.sum(&:amount)
+    value = service_records.by_tariff_type(tariff_type).to_a.sum(&:amount)
+
+    value.currency_round
   end
 
   def obligation_amount
     service_records.obligate.to_a.sum(&:amount)
-  end
-
-  def rounded_amount
-    if amount.nil?
-      return 0
-    else
-      return amount.currency_round
-    end
   end
 
   def tax_points_mt(tariff_type = nil, options = {})
