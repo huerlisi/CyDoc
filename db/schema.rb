@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111128150803) do
+ActiveRecord::Schema.define(:version => 20120104134202) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -625,11 +625,13 @@ ActiveRecord::Schema.define(:version => 20111128150803) do
     t.integer  "referrer_id"
     t.string   "place_type",  :default => "Praxis"
     t.integer  "imported_id"
+    t.string   "state",       :default => "open"
   end
 
   add_index "treatments", ["law_id"], :name => "index_treatments_on_law_id"
   add_index "treatments", ["patient_id"], :name => "index_treatments_on_patient_id"
   add_index "treatments", ["referrer_id"], :name => "index_treatments_on_referrer_id"
+  add_index "treatments", ["state"], :name => "index_treatments_on_state"
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40

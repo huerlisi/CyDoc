@@ -25,12 +25,11 @@ class Treatment < ActiveRecord::Base
   end
 
   # State
-  # TODO: this doesn't work in many cases: only partially charged, invoice canceled...
-  named_scope :open, :include => :invoices, :conditions => "invoices.id IS NULL", :order => 'date_begin'
-  named_scope :charged, :include => :invoices, :conditions => "invoices.id IS NOT NULL", :order => 'date_begin'
+  named_scope :open, :conditions => "treatments.state = 'open'", :order => 'date_begin'
+  named_scope :charged, :conditions => "treatments.state = 'charged'", :order => 'date_begin'
   
   def open?
-    invoices.active.empty?
+    state == 'open'
   end
   
   def chargeable?
@@ -38,6 +37,18 @@ class Treatment < ActiveRecord::Base
     # Checking for valid_for_invoice? would be a nice thing, too. But links depending on this would need AJAX updates.
   end
   
+  # Callback hook for invoice
+  def update_state
+    # Set default state to 'open'
+    new_state = 'open'
+    # Set state to 'charged' if ANY associated invoice is active
+    new_state = 'charged' if invoices.active.present?
+
+    update_attribute(:state, new_state)
+
+    new_state
+  end
+
   # Helpers
   def to_s(format = :default)
     case format

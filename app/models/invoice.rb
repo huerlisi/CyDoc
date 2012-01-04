@@ -16,6 +16,14 @@ class Invoice < ActiveRecord::Base
   belongs_to :patient_vcard, :class_name => 'Vcard', :autosave => true
   belongs_to :billing_vcard, :class_name => 'Vcard', :autosave => true
 
+  # Treatment hook
+  after_save :notify_treatment
+  after_destroy :notify_treatment
+
+  def notify_treatment
+    treatment.update_state
+  end
+
   # Constructor
   def self.create_from_treatment(treatment, value_date, tiers_name, provider, biller)
     # Prepare Tiers
