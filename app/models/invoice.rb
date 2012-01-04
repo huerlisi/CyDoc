@@ -55,24 +55,40 @@ class Invoice < ActiveRecord::Base
     return invoice
   end
 
+  # Dunning
+  named_scope :dunning_stopped, :include => {:treatment => :patient}, :conditions => {"patients.dunning_stop" => true}
+  named_scope :dunning_active, :include => {:treatment => :patient}, :conditions => {"patients.dunning_stop" => false}
+
   # State
+  # =====
   named_scope :prepared, :conditions => "invoices.state = 'prepared'"
   named_scope :canceled, :conditions => "invoices.state = 'canceled'"
   named_scope :reactivated, :conditions => "invoices.state = 'reactivated'"
-  named_scope :active, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled'))"
-  named_scope :open, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled', 'paid'))"
-  named_scope :overdue, :conditions => ["(invoices.state IN ('booked', 'printed') AND due_date < :today) OR (invoices.state = 'reminded' AND reminder_due_date < :today) OR (invoices.state = '2xreminded' AND second_reminder_due_date < :today) OR (invoices.state = '3xreminded' AND third_reminder_due_date < :today)", {:today => Date.today.ago(30.days)}]
-  named_scope :reminded, :conditions => "invoices.state IN ('reminded', '2xreminded', '3xreminded', 'encashment')"
   named_scope :in_encashment, :conditions => ["invoices.state = 'encashment'"]
-  named_scope :dunning_stopped, :include => {:treatment => :patient}, :conditions => {"patients.dunning_stop" => true}
-  named_scope :dunning_active, :include => {:treatment => :patient}, :conditions => {"patients.dunning_stop" => false}
-  
+
+  named_scope :active, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled'))"
   def active
     !(state == 'canceled' or state == 'reactivated' or state == 'written_off')
   end
   
+  named_scope :open, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled', 'paid'))"
   def open
     active and !(state == 'paid')
+  end
+
+  named_scope :overdue, :conditions => ["(invoices.state IN ('booked', 'printed') AND due_date < :today) OR (invoices.state = 'reminded' AND reminder_due_date < :today) OR (invoices.state = '2xreminded' AND second_reminder_due_date < :today) OR (invoices.state = '3xreminded' AND third_reminder_due_date < :today)", {:today => Date.today.ago(30.days)}]
+  def overdue?
+    return true if (state == 'booked' or state == 'printed') and due_date < Date.today
+    return true if state == 'reminded' and (reminder_due_date.nil? or reminder_due_date < Date.today)
+    return true if state == '2xreminded' and (second_reminder_due_date.nil? or second_reminder_due_date < Date.today)
+    return true if state == '3xreminded' and (third_reminder_due_date.nil? or third_reminder_due_date < Date.today)
+
+    return false
+  end
+
+  named_scope :reminded, :conditions => "invoices.state IN ('reminded', '2xreminded', '3xreminded', 'encashment')"
+  def reminded?
+    return ['reminded', '2xreminded', '3xreminded', 'encashment'].include?(state)
   end
 
   def state_adverb
@@ -96,19 +112,7 @@ class Invoice < ActiveRecord::Base
     end
   end
   
-  def overdue?
-    return true if (state == 'booked' or state == 'printed') and due_date < Date.today
-    return true if state == 'reminded' and (reminder_due_date.nil? or reminder_due_date < Date.today)
-    return true if state == '2xreminded' and (second_reminder_due_date.nil? or second_reminder_due_date < Date.today)
-    return true if state == '3xreminded' and (third_reminder_due_date.nil? or third_reminder_due_date < Date.today)
-
-    return false
-  end
-  
-  def reminded?
-    return ['reminded', '2xreminded', '3xreminded', 'encashment'].include?(state)
-  end
-
+  # Actions
   def reactivate
     # TODO: only build booking if booked
     
