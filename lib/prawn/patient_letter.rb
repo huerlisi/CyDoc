@@ -147,7 +147,7 @@ module Prawn
       end
 
       # VESR form
-      draw_esr(invoice, invoice.biller.esr_account, invoice.biller, invoice.biller.use_vesr)
+      draw_esr(invoice, invoice.biller.esr_account, invoice.biller, invoice.biller.print_payment_for?)
 
       render
     end
