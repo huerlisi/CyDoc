@@ -90,28 +90,31 @@ module Prawn
       content = invoice.bookings.map{|booking|
         [
           booking.value_date,
-          booking.title + (booking.comments.present? ? "\n<font size='6.5'>#{booking.comments}</font>" : ""),
+          booking.title,
+          booking.comments.present? ? "<font size='6.5'>#{booking.comments}</font>" : "",
           sprintf("%0.2f CHF", booking.accounted_amount(Invoice::DEBIT_ACCOUNT))
         ]
       }
       content << [
         nil,
         invoice.due_amount.currency_round >= 0 ? I18n::translate(:open_amount, Invoice, :scope => "activerecord.attributes.invoice") : I18n::translate(:balance, Invoice, :scope => "activerecord.attributes.invoice"),
+        nil,
         sprintf("%0.2f CHF", invoice.due_amount.currency_round)
       ]
 
-      table content, :width => 13.cm, :cell_style => {:inline_format => true} do
+      table content, :width => 17.cm, :cell_style => {:inline_format => true} do
         # General
         cells.borders = []
         cells.padding = [0.5, 2, 0.5, 2]
 
         # With
-        column(0).width = 3.cm
-        column(1).width = 8.cm
-        column(2).width = 2.cm
+        column(0).width = 2.5.cm
+        column(1).width = 3.5.cm
+        column(2).width = 9.cm
+        column(3).width = 2.cm
 
         # Alignment
-        column(2).align = :right
+        column(3).align = :right
 
         # Total
         row(-1).borders    = [:top]
