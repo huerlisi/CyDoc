@@ -78,9 +78,6 @@ module Prawn
     end
 
     def to_pdf(invoice)
-      # Fonts
-      set_fonts
-   
       bounding_box [1.cm, bounds.top], :width => bounds.width do
         title(invoice)
 
@@ -128,7 +125,9 @@ module Prawn
       end
 
       # VESR form
-      vesr(invoice)
+      draw_esr(invoice, invoice.biller.esr_account, invoice.biller, invoice.biller.print_payment_for?)
+
+      render
     end
   end
 end
