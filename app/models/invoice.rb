@@ -56,14 +56,14 @@ class Invoice < ActiveRecord::Base
   end
 
   # State
-  named_scope :prepared, :conditions => "state = 'prepared'"
-  named_scope :canceled, :conditions => "state = 'canceled'"
-  named_scope :reactivated, :conditions => "state = 'reactivated'"
-  named_scope :active, :conditions => "NOT(state IN ('reactivated', 'canceled'))"
-  named_scope :open, :conditions => "NOT(state IN ('reactivated', 'canceled', 'paid'))"
-  named_scope :overdue, :conditions => ["(state IN ('booked', 'printed') AND due_date < :today) OR (state = 'reminded' AND reminder_due_date < :today) OR (state = '2xreminded' AND second_reminder_due_date < :today) OR (state = '3xreminded' AND third_reminder_due_date < :today)", {:today => Date.today.ago(30.days)}]
-  named_scope :reminded, :conditions => "state IN ('reminded', '2xreminded', '3xreminded', 'encashment')"
-  named_scope :in_encashment, :conditions => ["state = 'encashment'"]
+  named_scope :prepared, :conditions => "invoices.state = 'prepared'"
+  named_scope :canceled, :conditions => "invoices.state = 'canceled'"
+  named_scope :reactivated, :conditions => "invoices.state = 'reactivated'"
+  named_scope :active, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled'))"
+  named_scope :open, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled', 'paid'))"
+  named_scope :overdue, :conditions => ["(invoices.state IN ('booked', 'printed') AND due_date < :today) OR (invoices.state = 'reminded' AND reminder_due_date < :today) OR (invoices.state = '2xreminded' AND second_reminder_due_date < :today) OR (invoices.state = '3xreminded' AND third_reminder_due_date < :today)", {:today => Date.today.ago(30.days)}]
+  named_scope :reminded, :conditions => "invoices.state IN ('reminded', '2xreminded', '3xreminded', 'encashment')"
+  named_scope :in_encashment, :conditions => ["invoices.state = 'encashment'"]
   named_scope :dunning_stopped, :include => {:treatment => :patient}, :conditions => {"patients.dunning_stop" => true}
   named_scope :dunning_active, :include => {:treatment => :patient}, :conditions => {"patients.dunning_stop" => false}
   
