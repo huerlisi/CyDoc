@@ -66,16 +66,17 @@ class Invoice < ActiveRecord::Base
   named_scope :reactivated, :conditions => "invoices.state = 'reactivated'"
   named_scope :in_encashment, :conditions => ["invoices.state = 'encashment'"]
 
-  named_scope :active, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled'))"
+  named_scope :active, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled', 'written_off'))"
   def active
     !(state == 'canceled' or state == 'reactivated' or state == 'written_off')
   end
   
-  named_scope :open, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled', 'paid'))"
+  named_scope :open, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled', 'written_off', 'paid'))"
   def open
-    active and !(state == 'paid')
+    !(state == 'canceled' or state == 'reactivated' or state == 'written_off' or state == 'paid')
   end
 
+  # TODO: unify greeze period of 30 days and make configurable
   named_scope :overdue, :conditions => ["(invoices.state IN ('booked', 'printed') AND due_date < :today) OR (invoices.state = 'reminded' AND reminder_due_date < :today) OR (invoices.state = '2xreminded' AND second_reminder_due_date < :today) OR (invoices.state = '3xreminded' AND third_reminder_due_date < :today)", {:today => Date.today.ago(30.days)}]
   def overdue?
     return true if (state == 'booked' or state == 'printed') and due_date < Date.today
