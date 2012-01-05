@@ -39,10 +39,18 @@ class Treatment < ActiveRecord::Base
   
   # Callback hook for invoice
   def update_state
-    # Set default state to 'open'
-    new_state = 'open'
-    # Set state to 'charged' if ANY associated invoice is active
-    new_state = 'charged' if invoices.active.present?
+    if sessions.empty?
+      # Set state to 'new' if no sessions are associated
+      new_state = 'new'
+    else
+      if chargeable?
+        # Set state to 'open' if any session is open
+        new_state = 'open'
+      else
+        # Set state to 'charged' as no session is ready to bill
+        new_state = 'charged'
+      end
+    end
 
     update_attribute(:state, new_state)
 
