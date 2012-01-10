@@ -130,6 +130,7 @@ class Invoice < ActiveRecord::Base
     
     unless state == 'canceled'
       bookings.build(:title => "Storno",
+                     :comments => "Reaktiviert",
                      :amount => amount,
                      :credit_account => EARNINGS_ACCOUNT,
                      :debit_account => DEBIT_ACCOUNT,
