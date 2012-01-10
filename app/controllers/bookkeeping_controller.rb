@@ -19,6 +19,7 @@ class BookkeepingController < ApplicationController
     @debtors_write_off = Account.find_by_code('3900').saldo(@value_date_range)
     @started_work      = Session.find(:all, :include => :invoices, :conditions => ["duration_from <= ? AND invoices.value_date <= ? AND invoices.id IS NULL", @value_date_end, @value_date_end]).to_a.sum(&:amount)
     @drugs_stock       = Account.find_by_code('1210').saldo(@value_date_end)
+    @special_earnings  = -Account.find_by_code('8000').saldo(@value_date_end)
   end
 
   def open_invoices

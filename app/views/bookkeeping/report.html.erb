@@ -24,6 +24,10 @@
     <th>Medikamenten Lager</th>
     <td style="text-align: right"><%= currency_fmt(@drugs_stock) %></td>
   </tr>
+  <tr>
+    <th>Ausserordentlicher Ertrag</th>
+    <td style="text-align: right"><%= currency_fmt(@special_earnings) %></td>
+  </tr>
 </table>
 
 <%= render :partial => 'bookings/sidebar' %>
