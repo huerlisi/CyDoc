@@ -51,4 +51,5 @@ doctor.accounts << Account.create!([
   {:code => "3200", :title => "Dienstleistungsertrag"},
   {:code => "3900", :title => "Debitorenverlust"},
   {:code => "4000", :title => "Aufwand Medikamente"},
+  {:code => "8000", :title => "Ausserordentlicher Ertrag"}
 ])
