@@ -22,6 +22,7 @@ class BookkeepingController < ApplicationController
   end
 
   def open_invoices
+    # TODO: hardcoded account id for debit account
     @invoices = Invoice.find(:all,
       :joins => :bookings,
       :conditions => ["invoices.value_date <= ? AND bookings.value_date <= ?", @value_date_end, @value_date_end],
