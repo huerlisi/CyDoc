@@ -75,3 +75,6 @@ gem 'vesr'
 
 # Printing
 gem 'cups'
+
+# CSV Export
+gem 'csv-mapper'
