@@ -36,6 +36,8 @@ class Case < ActiveRecord::Base
       tariff_code = "#{classification.name} (#{classification.examination_method.name})"
       tariff_item = TariffItem.clever_find(tariff_code).first
       
+      raise "Tarif für code '#{classification.name} (#{classification.examination_method.name})' nicht gefunden" unless tariff_item
+
       # Service Records
       session.build_service_record(tariff_item)
     end
