@@ -40,7 +40,13 @@ class InvoiceBatchJobsController < ApplicationController
     biller     = Doctor.find(Thread.current["doctor_id"])
     
     @invoice_batch_job.failed_jobs = []
-    for treatment_readonly in @treatments
+    @treatments.each_with_index do |treatment_readonly, index|
+
+      # Sleep for 4min every 50 treatments
+      if index > 0 and index.modulo(50) == 0
+        sleep 4 * 60
+      end
+
       treatment = Treatment.find(treatment_readonly.id)
 
       # Create invoice
