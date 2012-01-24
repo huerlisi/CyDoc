@@ -10,7 +10,7 @@
         <th><%= t_attr(:gender) %></th><td><%= patient.select :sex, {t_attr(:female) => 'F', t_attr(:male) => 'M'}, :include_blank => true, :size => 12 %></td>
       </tr>
       <tr>
-        <th><%= t_attr(:given_name) %>, <%= t_attr(:family_name) %></th><td><%= vcard.text_field :family_name, :style => "width: 45%" %> <%= vcard.text_field :given_name, :style => "width: 45%" %></td>
+        <th><%= t_attr(:family_name) %>, <%= t_attr(:given_name) %></th><td><%= vcard.text_field :family_name, :style => "width: 45%" %> <%= vcard.text_field :given_name, :style => "width: 45%" %></td>
         <th><%= t_attr(:birth_date) %></th><td><%= patient.date_field :birth_date, :size => 12, :autocomplete => false %></td>
       </tr>
       <tr>
