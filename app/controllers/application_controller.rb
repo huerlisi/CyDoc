@@ -26,10 +26,6 @@ class ApplicationController < ActionController::Base
     I18n.locale = locale.to_s
     cookies[:locale] = locale unless (cookies[:locale] && cookies[:locale] == locale)
   end
-
-  def default_url_options(options={})
-    { :locale => I18n.locale }
-  end
   # Code snippet finished
 
   private
