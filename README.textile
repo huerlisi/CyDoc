@@ -1,0 +1,66 @@
+h1. CyDoc
+
+CyDoc is a webbased Doctors Office Application. It allows you to track your patients medical history and handles all your billing needs.
+
+h2. Features
+
+* Patient relationship management
+** Register new patients
+** Update patients information
+** Show medical history
+** Recall management
+* Medical histroy tracking
+** Free Text diary
+* Tariff Support
+** Tarmed Swiss
+** Drug tariff
+** Laboratory tariff
+** Custom and pre-defined Tariff groups
+* Invoicing
+** Partial invoice support
+** Paper invoices
+** Multiple reminder states
+** Payment booking by ESR
+* Bookkeeping
+** Double entry accounting
+
+h2. Usage
+
+CyDoc is available as Software as a Service. This means that all the maintenance task to run CyDoc are outsourced. You only need web access using a modern web-browser. All traffic is encrypted and your valuable data is backed up routinely.
+
+We try stick with the slogan 'Keep it simple, stupid'. The interface follows modern industrial design rules. All pages try to give you just enough information to do the task while being simple. Dynamic elements such as inline editing are used sparsely, but are there where appreciated.
+
+h2. Feedback
+
+CyDoc is not the average Medical Desktop Application. It is built using the same technologies and principles as well known internet services like Facebook, tel.search.ch or GMX. This allows very fast development and roll-out times. Every feedback, both positive and negative is very much appreciated. 
+
+h2. Documentation
+
+* "Installation":https://github.com/huerlisi/CyDoc/blob/master/INSTALL.textile
+
+h2. Contributing
+
+Code is available at "github":http://github.com/huerlisi/CyDoc.
+
+Issue tracking is done using "Redmine":http://redmine.cyt.ch/projects/CyDoc/issues.
+
+h2. License
+
+Copyright 2007-2012 Simon Hürlimann <simon.huerlimann@cyt.ch>
+Copyright 2010-2012 Ramon Egloff <ramon.egloff@cyt.ch>
+Copyright 2010-2012 Roman Simecek <roman.simecek@cyt.ch>
+Copyright 2007-2012 CyT <info@cyt.ch>
+Copyright 2007-2012 ZytoLabor <info@zyto-labor.com>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
