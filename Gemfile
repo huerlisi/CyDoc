@@ -66,6 +66,8 @@ gem 'prawn'
 gem 'prawnto'
 
 gem 'csv-mapper'
+
+# Locale setting
 gem 'routing-filter'
 
 # ESR support
