@@ -11,7 +11,10 @@ class Invoice < ActiveRecord::Base
   belongs_to :law, :autosave => true
   belongs_to :treatment, :autosave => true
   has_one :patient, :through => :treatment
+
+  # HasAccount compatibility
   alias customer patient
+  alias balance due_amount
 
   belongs_to :patient_vcard, :class_name => 'Vcard', :autosave => true
   belongs_to :billing_vcard, :class_name => 'Vcard', :autosave => true
@@ -257,7 +260,6 @@ class Invoice < ActiveRecord::Base
   
   # Accounting
   has_many :bookings, :class_name => 'Booking', :as => 'reference', :order => 'value_date', :dependent => :destroy
-  
   def due_amount(value_date = nil)
     if value_date
       included_bookings = bookings.find(:all, :conditions => ["value_date <= ?", value_date])
