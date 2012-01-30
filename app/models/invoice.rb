@@ -12,10 +12,6 @@ class Invoice < ActiveRecord::Base
   belongs_to :treatment, :autosave => true
   has_one :patient, :through => :treatment
 
-  # HasAccount compatibility
-  alias customer patient
-  alias balance due_amount
-
   belongs_to :patient_vcard, :class_name => 'Vcard', :autosave => true
   belongs_to :billing_vcard, :class_name => 'Vcard', :autosave => true
 
@@ -270,6 +266,10 @@ class Invoice < ActiveRecord::Base
     included_bookings.to_a.sum{|b| b.accounted_amount(Invoice::DEBIT_ACCOUNT)}
   end
   
+  # HasAccount compatibility
+  alias customer patient
+  alias balance due_amount
+
   # Batch Jobs
   has_and_belongs_to_many :invoice_batch_jobs
 
