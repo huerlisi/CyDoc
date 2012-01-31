@@ -31,24 +31,6 @@ class InvoicesController < ApplicationController
     end
   end
   
-  # POST /invoices/print_all
-  def print_all
-    @invoices = Invoice.prepared
-    
-    for @invoice in @invoices
-      print_patient_letter
-      print_insurance_recipe
-      
-      @invoice.state = 'printed'
-      @invoice.save!
-    end
-
-    respond_to do |format|
-      format.html { redirect_to invoices_path }
-      format.js { redirect_to invoices_path }
-    end
-  end
-
   # POST /invoices/1/print_reminder_letter
   def print_reminder_letter
     @invoice = Invoice.find(params[:id])
