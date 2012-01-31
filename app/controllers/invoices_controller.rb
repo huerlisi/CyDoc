@@ -286,7 +286,6 @@ class InvoicesController < ApplicationController
     @invoice.reactivate
     # Allow saving without validation as validation problem could be a reason to reactivate
     @invoice.save(false)
-    
     @treatment.reload
 
     respond_to do |format|
