@@ -4,7 +4,7 @@ class InvoiceBatchJobsController < ApplicationController
   # Inherited Resources
   protected
     def collection
-      instance_eval("@#{controller_name.pluralize} ||= end_of_association_chain.paginate(:page => params[:page], :per_page => params[:per_page])")
+      instance_eval("@#{controller_name.pluralize} ||= end_of_association_chain.paginate(:page => params[:page], :per_page => params[:per_page], :order => 'created_at DESC')")
     end
 
   public
