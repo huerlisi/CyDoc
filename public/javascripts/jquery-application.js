@@ -1,11 +1,9 @@
-function addDatePickerBehaviour() {
-  jQuery('input[date-picker ="true"]').each(function(){
-    jQuery(this).datepicker({ dateFormat: 'dd.mm.yy' });
-  });
-};
-
 function initBehaviour() {
+  // from cyt.js
+  addAutofocusBehaviour();
   addDatePickerBehaviour();
+  addSortableBehaviour();
+  addLinkifyContainersBehaviour();
 };
 
 jQuery(document).ready(function($) {
