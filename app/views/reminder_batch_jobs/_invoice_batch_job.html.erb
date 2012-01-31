@@ -1,7 +1,0 @@
-<tr style="cursor: pointer" onclick="window.location='<%= invoice_batch_job_path(invoice_batch_job) %>'">
-  <td style="text-align: right"><%= invoice_batch_job.created_at.to_date %></td>
-  <td style="text-align: right"><%= invoice_batch_job.value_date %></td>
-  <td style="text-align: right"><%= invoice_batch_job.count %></td>
-  <td style="text-align: right"><%= invoice_batch_job.failed_job_count %></td>
-  <td><%= failed_jobs(invoice_batch_job) %></td>
-</tr>

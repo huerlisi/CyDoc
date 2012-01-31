@@ -265,6 +265,7 @@ de-CH:
       patients: 'Patienten'
       payment_overview: "Suchen"
       invoice_batch_job: "Rechnungsläufe"
+      reminder_batch_job: "Mahnläufe"
       create_treatments: "Fälle importieren"
       payments: 'Rechnungen'
       recalls: "Recalls"
