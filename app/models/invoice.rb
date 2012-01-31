@@ -125,12 +125,22 @@ class Invoice < ActiveRecord::Base
     # TODO: only build booking if booked
     
     unless state == 'canceled'
+      # Cancel original amount
       bookings.build(:title => "Storno",
                      :comments => "Reaktiviert",
                      :amount => amount,
                      :credit_account => EARNINGS_ACCOUNT,
                      :debit_account => DEBIT_ACCOUNT,
                      :value_date => Date.today)
+      # Cancel reset if needed
+      if due_amount > 0
+        bookings.build(:title => "Debitorenverlust",
+                       :comments => "Reaktiviert",
+                       :amount => due_amount,
+                       :credit_account => EARNINGS_ACCOUNT,
+                       :debit_account => DEBIT_ACCOUNT,
+                       :value_date => Date.today)
+      end
     end
     
     self.state = 'reactivated'
@@ -144,12 +154,23 @@ class Invoice < ActiveRecord::Base
   end
   
   def cancel(comments = nil)
+    # Cancel original amount
     booking = bookings.build(:title => "Storno",
                    :amount => amount,
                    :credit_account => EARNINGS_ACCOUNT,
                    :debit_account => DEBIT_ACCOUNT,
                    :value_date => Date.today)
     booking.comments = comments if comments.present?
+
+    # Cancel reset if needed
+    if due_amount > 0
+      bookings.build(:title => "Debitorenverlust",
+                     :comments => "Storniert",
+                     :amount => due_amount,
+                     :credit_account => EARNINGS_ACCOUNT,
+                     :debit_account => DEBIT_ACCOUNT,
+                     :value_date => Date.today)
+    end
 
     self.state = 'canceled'
 
