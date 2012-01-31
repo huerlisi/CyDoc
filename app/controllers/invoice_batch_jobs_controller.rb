@@ -39,36 +39,9 @@ class InvoiceBatchJobsController < ApplicationController
     provider   = Doctor.find(Thread.current["doctor_id"])
     biller     = Doctor.find(Thread.current["doctor_id"])
     
-    @invoice_batch_job.failed_jobs = []
-    @treatments.each_with_index do |treatment_readonly, index|
+    @invoice_batch_job.create_invoices(@treatments, value_date, tiers_name, provider, biller)
+    @invoice_batch_job.print(@printers)
 
-      # Sleep for 4min every 50 treatments
-      if index > 0 and index.modulo(50) == 0
-        sleep 4 * 60
-      end
-
-      treatment = Treatment.find(treatment_readonly.id)
-
-      # Create invoice
-      invoice = Invoice.create_from_treatment(treatment, value_date, tiers_name, provider, biller)
-
-      if invoice.new_record?
-        # Invoice was invalid in some way
-        @invoice_batch_job.failed_jobs << {:treatment_id => treatment.id, :message => invoice.errors.full_messages}
-      else
-        # Print
-        begin
-          invoice.print(@printers[:trays][:plain], @printers[:trays][:invoice])
-        rescue RuntimeError => e
-          @invoice_batch_job.failed_jobs << {:invoice_id => invoice.id, :message => e.message }
-          next
-        end
-
-        # Record as belonging to this batch
-        @invoice_batch_job.invoices << invoice
-      end
-    end
-    
     # Saving
     if @invoice_batch_job.save
       flash[:notice] = 'Erfolgreich erstellt.'
