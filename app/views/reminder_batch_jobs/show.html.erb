@@ -1,0 +1,12 @@
+<div class="contextual">
+  <%= link_to "Liste", reminder_batch_jobs_path, :class => "icon icon-index" %>
+  <%= link_to "Erneut drucken", reprint_reminder_batch_job_path, :method => :post, :class => "icon icon-print" %>
+</div>
+<h2><%= t_title %></h2>
+
+<h3><%= t_attr :failed_jobs %></h3>
+<%= failed_jobs(@reminder_batch_job) %>
+
+<h3>Rechnungen</h3>
+<%- @invoices = @reminder_batch_job.invoices.paginate(:page => params[:page], :per_page => 50) %>
+<%= render 'invoices/list' %>

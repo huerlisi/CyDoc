@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120130223548) do
+ActiveRecord::Schema.define(:version => 20120131123927) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -326,6 +326,7 @@ ActiveRecord::Schema.define(:version => 20120130223548) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "failed_jobs"
+    t.string   "type"
   end
 
   create_table "invoice_batch_jobs_invoices", :id => false, :force => true do |t|

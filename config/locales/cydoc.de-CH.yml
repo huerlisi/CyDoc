@@ -117,6 +117,13 @@ de-CH:
         total_count:  Total
         failed_count: Fehlerhaft
         failed_jobs:  Fehler
+      reminder_batch_job:
+        created_at:   Vom
+        value_date:   Rechnungsdatum
+        count:        Anzahl Rechnungen
+        total_count:  Total
+        failed_count: Fehlerhaft
+        failed_jobs:  Fehler
       patient:
         accident_insurance: 'Unfallversicherung'
         accident_insurance_short_cut: 'UVG'
@@ -189,6 +196,7 @@ de-CH:
       insurance:          Versicherung
       invoice:            Rechnung
       invoice_batch_job:  Rechnungslauf
+      reminder_batch_job: Mahnlauf
       lab_tariff_item:    Labor Leistung
       migel_tariff_item:  MiGel Leistung
       free_tariff_item:   Leistung

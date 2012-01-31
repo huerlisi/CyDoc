@@ -24,6 +24,7 @@ ActionController::Routing::Routes.draw do |map|
     invoice.resources :bookings
   end
   map.resources :invoice_batch_jobs, :member => {:reprint => :post}
+  map.resources :reminder_batch_jobs, :member => {:reprint => :post}
   
   map.resources :esr_bookings
 
