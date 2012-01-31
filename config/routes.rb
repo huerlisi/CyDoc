@@ -84,7 +84,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :accounts, :collection => {:set_value_date_filter => :get, :statistics => :get}, :member => {:print => :post} do |account|
     account.resources :bookings
   end
-  map.resources :bookings
+  map.resources :bookings, :collection => {:list_csv => :get}
 
   # Billing
   map.resources :invoices, :collection => {:print_all => :post, :print_reminders_for_all => :post}, :member => {:print => :post, :print_reminder_letter => :post, :insurance_recipe => :get, :patient_letter => :get, :reminder => :get, :reactivate => :post} do |invoice|

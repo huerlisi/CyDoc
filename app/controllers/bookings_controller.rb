@@ -18,6 +18,14 @@ class BookingsController < ApplicationController
     end
   end
 
+  def list_csv
+    @bookings = apply_scopes(Booking).find(:all,
+      :order => 'value_date DESC',
+      :include => {:debit_account => [], :credit_account => [], :reference => {:patient => {:vcard => :address}}}
+    )
+    send_csv @bookings, :only => [:value_date, :title, :comments, "reference.to_s", "credit_account.code", "debit_account.code", :amount_as_string]
+  end
+
   # GET /bookings/1
   def show
     @booking = Booking.find(params[:id])
