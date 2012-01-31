@@ -23,7 +23,6 @@ class InvoiceBatchJobsController < ApplicationController
         render :update do |page|
           page.insert_html :before, 'open_treatments', :partial => 'form'
           page.call(:initBehaviour)
-          page['invoice_batch_job_value_date'].select
         end
       }
     end
@@ -61,7 +60,6 @@ class InvoiceBatchJobsController < ApplicationController
           render :update do |page|
             page.replace_html 'tab-content-invoices', :partial => 'form'
             page.call(:initBehaviour)
-            page['invoice_value_date'].select
           end
         }
       end
