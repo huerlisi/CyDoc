@@ -1,22 +1,22 @@
 class InvoiceBatchJobsController < ApplicationController
-  # GET /invoice_batch_jobs
-  def index
-    @invoice_batch_jobs = InvoiceBatchJob.paginate(:page => params[:page], :order => 'created_at DESC')
-  end
+  inherit_resources
 
-  # GET /invoice_batch_jobs/1
-  def show
-    @invoice_batch_job = InvoiceBatchJob.find(params[:id])
-  end
+  # Inherited Resources
+  protected
+    def collection
+      instance_eval("@#{controller_name.pluralize} ||= end_of_association_chain.paginate(:page => params[:page], :per_page => params[:per_page])")
+    end
+
+  public
 
   # GET /invoice_batch_jobs/new
   def new
     @invoice_batch_job = InvoiceBatchJob.new
-    
+
     @invoice_batch_job.tiers_name = "TiersGarant"
     @invoice_batch_job.count = Treatment.open.ready_to_bill(Treatment::GRACE_PERIOD).count
     @invoice_batch_job.value_date = Date.today
-    
+
     respond_to do |format|
       format.html { }
       format.js {
