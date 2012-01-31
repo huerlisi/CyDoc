@@ -16,7 +16,13 @@ class InvoiceBatchJob < ActiveRecord::Base
     self.failed_jobs = []
   end
 
+  def clean_failed_invoice_jobs
+    self.failed_jobs = self.failed_jobs.reject{|job| job[:invoice_id]}
+  end
+
   def print(printers)
+    clean_failed_invoice_jobs
+
     invoices.each_with_index do |invoice, index|
       # Sleep for 4min every 50 treatments
       if index > 0 and index.modulo(50) == 0

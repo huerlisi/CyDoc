@@ -72,16 +72,7 @@ class InvoiceBatchJobsController < ApplicationController
   def reprint
     @invoice_batch_job = InvoiceBatchJob.find(params[:id])
     
-    @invoice_batch_job.failed_jobs = @invoice_batch_job.failed_jobs.reject{|job| job[:invoice_id]}
-    for invoice in @invoice_batch_job.invoices
-      # Print
-      begin
-        invoice.print(@printers[:trays][:plain], @printers[:trays][:invoice])
-      rescue RuntimeError => e
-        @invoice_batch_job.failed_jobs << {:invoice_id => invoice.id, :message => e.message }
-        next
-      end
-    end
+    @invoice_batch_job.print(@printers)
     
     @invoice_batch_job.save
     
