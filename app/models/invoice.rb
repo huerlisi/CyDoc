@@ -308,8 +308,8 @@ class Invoice < ActiveRecord::Base
 
   # Callback hook
   def booking_saved(booking)
-    # Don't touch state if canceled of reactivated
-    return if self.state == 'canceled' or self.state == 'reactivated'
+    # Don't touch state if canceled, reactivated or written_off
+    return if self.state == 'canceled' or self.state == 'reactivated' or self.state == 'written_off'
 
     # Mark as paid unless canceled or reactivated
     if self.due_amount <= 0.0
