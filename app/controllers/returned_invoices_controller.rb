@@ -12,7 +12,12 @@ class ReturnedInvoicesController < ApplicationController
   end
 
   def create
-    create! { new_returned_invoice_path }
+    create! do |success, failure|
+      success.html {
+        @returned_invoice.patient.update_attribute(:dunning_stop, true)
+        redirect_to new_returned_invoice_path
+      }
+    end
   end
 
   def update
