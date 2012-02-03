@@ -34,10 +34,11 @@ class ReturnedInvoice < ActiveRecord::Base
     invoice.patient
   end
 
-  def doctor
-    # Guard
-    return unless invoice
-
-    invoice.treatment.referrer
+  # Doctor
+  belongs_to :doctor
+  before_save :set_doctor
+private
+  def set_doctor
+    self.doctor = invoice.treatment.referrer
   end
 end
