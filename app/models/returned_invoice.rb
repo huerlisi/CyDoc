@@ -1,4 +1,7 @@
 class ReturnedInvoice < ActiveRecord::Base
+  # Sorting
+  default_scope :order => "doctor_id, state"
+
   # String
   def to_s
     "%s: %s" % [state, invoice]

@@ -349,6 +349,7 @@ de-CH:
       resolve:            Abschliessen
       reactivate:         Reaktivieren
       write_off:          Abschreiben
+      edit_ready:         Neue vorbereiten
 
   boolean:
     true:  Ja

@@ -39,7 +39,22 @@ class ReturnedInvoicesController < ApplicationController
     else
     end
 
-    redirect_to returned_invoices_path
+    if queue = params[:queue]
+      redirect_to :action => "edit_#{queue}"
+    else
+      redirect_to returned_invoices_path
+    end
+  end
+
+  def edit_ready
+    @returned_invoice = ReturnedInvoice.ready.first
+    if @returned_invoice.nil?
+      redirect_to returned_invoices_path and return
+    end
+
+    @queue = 'ready'
+
+    render 'edit'
   end
 
   def resolve
@@ -57,7 +72,7 @@ class ReturnedInvoicesController < ApplicationController
   end
 
   def queue_all_requests
-    returned_invoices = ReturnedInvoice.by_doctor(params[:doctor_id])
+    returned_invoices = ReturnedInvoice.by_doctor_id(params[:doctor_id])
 
     returned_invoices.ready.each do |returned_invoice|
       returned_invoice.queue_request!
