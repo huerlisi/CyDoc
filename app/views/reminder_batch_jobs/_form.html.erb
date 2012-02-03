@@ -3,7 +3,7 @@
   <div class="box">
     <% semantic_remote_form_for @reminder_batch_job, :before => "showPrintingFlash('invoice_flash', 'Rechnungslauf'); $('reminder_batch_form').remove()" do |form| %>
       <% form.inputs do %>
-        <%= form.input :count, :input_html => {:size => 12, :autocomplete => 'off'} %>
+        <%= form.input :count, :input_html => {:size => 12, :autocomplete => 'off', 'data-autofocus' => true} %>
       <% end %>
       
       <% form.buttons do %>
