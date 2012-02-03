@@ -150,6 +150,21 @@ class Invoice < ActiveRecord::Base
     return self
   end
   
+  def write_off(comments = nil)
+    if due_amount > 0
+      bookings.build(:title => "Debitorenverlust",
+                     :comments => comments || "Abgeschrieben",
+                     :amount => due_amount,
+                     :credit_account => EARNINGS_ACCOUNT,
+                     :debit_account => DEBIT_ACCOUNT,
+                     :value_date => Date.today)
+    end
+
+    self.state = 'written_off'
+
+    return self
+  end
+
   def cancel(comments = nil)
     # Cancel original amount
     booking = bookings.build(:title => "Storno",
