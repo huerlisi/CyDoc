@@ -6,26 +6,26 @@
 
     <table style="width: 100%">
       <tr>
-        <th><%= t_attr(:salutation) %></th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name } %></td>
-        <th><%= t_attr(:gender) %></th><td><%= patient.select :sex, {t_attr(:female) => 'F', t_attr(:male) => 'M'}, :include_blank => true, :size => 12 %></td>
+        <th><%= t_attr(:salutation, Patient) %></th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name } %></td>
+        <th><%= t_attr(:gender, Patient) %></th><td><%= patient.select :sex, {t_attr(:female, Patient) => 'F', t_attr(:male, Patient) => 'M'}, :include_blank => true, :size => 12 %></td>
       </tr>
       <tr>
-        <th><%= t_attr(:family_name) %>, <%= t_attr(:given_name) %></th><td><%= vcard.text_field :family_name, :style => "width: 45%" %> <%= vcard.text_field :given_name, :style => "width: 45%" %></td>
-        <th><%= t_attr(:birth_date) %></th><td><%= patient.date_field :birth_date, :size => 12, :autocomplete => false %></td>
+        <th><%= t_attr(:family_name, Patient) %>, <%= t_attr(:given_name, Patient) %></th><td><%= vcard.text_field :family_name, :style => "width: 45%" %> <%= vcard.text_field :given_name, :style => "width: 45%" %></td>
+        <th><%= t_attr(:birth_date, Patient) %></th><td><%= patient.date_field :birth_date, :size => 12, :autocomplete => false %></td>
       </tr>
       <tr>
-        <th><%= t_attr(:street_address) %></th><td><%= vcard.text_field :street_address %></td>
-        <th><%= t_attr(:doctor_patient_nr) %></th><td><%= patient.text_field :doctor_patient_nr, :size => 15, :readonly => true %></td>
+        <th><%= t_attr(:street_address, Patient) %></th><td><%= vcard.text_field :street_address %></td>
+        <th><%= t_attr(:doctor_patient_nr, Patient) %></th><td><%= patient.text_field :doctor_patient_nr, :size => 15, :readonly => true %></td>
       </tr>
       <tr>
-        <th><%= t_attr(:postal_code) %>, <%= t_attr(:locality) %></th><td><%= vcard.text_field :postal_code, :size => 9 %> <%= vcard.text_field :locality %></td>
+        <th><%= t_attr(:postal_code, Patient) %>, <%= t_attr(:locality, Patient) %></th><td><%= vcard.text_field :postal_code, :size => 9 %> <%= vcard.text_field :locality %></td>
       </tr>
       <tr>
-        <th><%= t_attr(:remarks) %></th>
+        <th><%= t_attr(:remarks, Patient) %></th>
         <td colspan="3"><%= patient.text_area :remarks, :rows => 3 %></td>
       </tr>
       <tr>
-        <th><%= t_attr(:dunning_stop) %></th>
+        <th><%= t_attr(:dunning_stop, Patient) %></th>
         <td colspan="3"><%= patient.check_box :dunning_stop %></td>
       </tr>
     </table>
