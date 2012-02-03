@@ -1,0 +1,9 @@
+= contextual_links
+
+%h2= t_title
+
+.box
+  - if @returned_invoice.patient.blank?
+    = render 'form'
+  - else
+    = render 'patient_form'
