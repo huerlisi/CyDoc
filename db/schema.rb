@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131123927) do
+ActiveRecord::Schema.define(:version => 20120131143214) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -479,6 +479,14 @@ ActiveRecord::Schema.define(:version => 20120131123927) do
   add_index "recalls", ["appointment_id"], :name => "index_recalls_on_appointment_id"
   add_index "recalls", ["patient_id"], :name => "index_recalls_on_patient_id"
   add_index "recalls", ["state"], :name => "index_recalls_on_state"
+
+  create_table "returned_invoices", :force => true do |t|
+    t.string   "state",      :default => "new"
+    t.integer  "invoice_id"
+    t.text     "remarks"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "service_items", :force => true do |t|
     t.integer "tariff_item_id"

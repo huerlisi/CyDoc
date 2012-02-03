@@ -42,6 +42,7 @@
               <li><%= link_to t('cydoc.navigation.doctors'), :controller => 'doctors' %></li>
               <li><%= link_to t('cydoc.navigation.service'), :controller => 'tariff_items' %></li>
               <li><%= link_to t('cydoc.navigation.payments'), :controller => 'invoices' %></li>
+              <li><%= link_to t_model(ReturnedInvoice), returned_invoices_path %></li>
               <li><%= link_to t('cydoc.navigation.accounting'), :controller => 'bookkeeping' %></li>
               <li><%= link_to t('cydoc.navigation.help'), :controller => 'help' %></li>
             </ul>

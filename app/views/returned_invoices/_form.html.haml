@@ -1,0 +1,11 @@
+- semantic_form_for resource do |f|
+  = f.semantic_errors
+
+  - f.inputs do
+    = f.semantic_errors :invoice
+    = f.input :invoice_id, :input_html => {'data-autofocus' => true}
+    = f.input :state
+    = f.input :remarks, :input_html => {:rows => 4, :cols => 40}
+
+  - f.buttons do
+    = f.commit_button

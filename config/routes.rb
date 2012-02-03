@@ -92,6 +92,8 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :invoice_batch_jobs, :member => {:reprint => :post}
 
+  map.resources :returned_invoices
+
   map.resources :esr_bookings
 
   # Attachments
