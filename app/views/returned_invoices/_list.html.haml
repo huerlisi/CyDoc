@@ -14,7 +14,7 @@
     %tbody
       - invoices.each do |r|
         %tr
-          %td= link_to r.state, r, 'data-href-container' => 'tr'
+          %td= link_to r.state, [:edit, r], 'data-href-container' => 'tr'
           %td= r.invoice_id
           %td= r.patient
           %td.action-links
