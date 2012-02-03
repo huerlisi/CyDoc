@@ -14,9 +14,9 @@
     %tbody
       - invoices.each do |r|
         %tr
-          %td= r.state
-          %td= link_to r.invoice_id, r.invoice
-          %td= link_to r.patient, r.patient
+          %td= link_to r.state, r, 'data-href-container' => 'tr'
+          %td= r.invoice_id
+          %td= r.patient
           %td.action-links
             - r.aasm_events_for_current_state.each do |event|
               = list_link_for(event, r, :method => :post)
