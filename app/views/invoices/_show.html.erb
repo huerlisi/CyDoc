@@ -53,6 +53,6 @@
   <%= render :partial => 'invoice_bookings/list', :object => @invoice.bookings %>
 </div>
 
-<%= render :partial => 'invoices/medical_case_list' %>
-<%= render :partial => 'invoices/service_record_list' %>
+<%= render 'invoices/medical_case_list' %>
+<%= render 'invoices/service_record_list' %>
 <% end %>
