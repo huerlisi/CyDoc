@@ -26,4 +26,18 @@ class ReturnedInvoice < ActiveRecord::Base
   belongs_to :invoice
   validates_presence_of :invoice_id
   validates_presence_of :invoice, :message => 'Rechnung nicht gefunden'
+
+  def patient
+    # Guard
+    return unless invoice
+
+    invoice.patient
+  end
+
+  def doctor
+    # Guard
+    return unless invoice
+
+    invoice.treatment.referrer
+  end
 end
