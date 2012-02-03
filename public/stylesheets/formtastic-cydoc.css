@@ -22,7 +22,7 @@ form.formtastic ul.errors { color:#cc0000; margin:0.5em 0 1.5em 15%; list-style:
 --------------------------------------------------------------------------------------------------*/
 #recall_form form.formtastic fieldset { border: 2px groove #d7d7d7; padding: 0.2em;}
 #recall_form form.formtastic fieldset.buttons { border: 0; }
-#recall_form form.formtastic fieldset.buttons { padding-left:15%; }
+form.formtastic fieldset.buttons { padding-left:15%; }
 
 /* LABELS
 --------------------------------------------------------------------------------------------------*/
