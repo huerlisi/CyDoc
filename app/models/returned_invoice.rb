@@ -1,4 +1,9 @@
 class ReturnedInvoice < ActiveRecord::Base
+  # String
+  def to_s
+    "%s: %s" % [state, invoice]
+  end
+
   # State Machine
   include AASM
   aasm_column :state
