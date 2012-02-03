@@ -14,4 +14,6 @@
     = f.input :remarks, :input_html => {:rows => 4, :cols => 40}
 
   - f.buttons do
-    = f.commit_button
+    %button{:name => 'commit', :value => 'queue_request'}= t_action('queue_request')
+    %button{:name => 'commit', :value => 'reactivate'}= t_action('reactivate')
+    %button{:name => 'commit', :value => 'write_off'}= t_action('write_off')

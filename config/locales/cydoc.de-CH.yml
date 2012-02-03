@@ -347,6 +347,8 @@ de-CH:
       queue_request:      Anfragen
       queue_all_requests: Alle anfragen
       resolve:            Abschliessen
+      reactivate:         Reaktivieren
+      write_off:          Abschreiben
 
   boolean:
     true:  Ja

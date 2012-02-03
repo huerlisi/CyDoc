@@ -15,6 +15,24 @@ class ReturnedInvoicesController < ApplicationController
     create! { new_returned_invoice_path }
   end
 
+  def update
+    @returned_invoice = ReturnedInvoice.find(params[:id])
+
+    case params[:commit]
+    when 'queue_request'
+      @returned_invoice.queue_request!
+    when 'reactivate'
+      @returned_invoice.invoice.reactivate.save
+      @returned_invoice.resolve!
+    when 'write_off'
+      @returned_invoice.invoice.write_off.save
+      @returned_invoice.resolve!
+    else
+    end
+
+    redirect_to returned_invoices_path
+  end
+
   def resolve
     @returned_invoice = ReturnedInvoice.find(params[:id])
     @returned_invoice.resolve!
