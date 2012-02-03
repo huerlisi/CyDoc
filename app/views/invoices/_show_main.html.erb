@@ -1,0 +1,25 @@
+<h3><%= t_model(Invoice) %> #<%= @invoice.id %></h3>
+<div class="box">
+  <table style="width: 100%">
+    <tr>
+      <th><%= t_attr(:patient, Invoice) %>:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>
+      <th><%= t_attr(:law, Invoice) %>:</th><td><%= @invoice.law.name %></td>
+    </tr>
+    <tr>
+      <th><%= t_attr(:payment_address, Invoice) %>:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>
+      <th><%= t_attr(:tiers, Invoice) %>:</th><td><%= @invoice.tiers.name %></td>
+    </tr>
+    <tr>
+      <th><%= t_attr(:referrer, Invoice) %>:</th><td><%= @invoice.referrer.to_s %></td>
+      <th><%= t_attr(:state, Invoice) %>:</th><td id="invoice_state"><%=t @invoice.state, :scope => 'invoice.state' %></td>
+    </tr>
+    <tr>
+      <th><%= t_attr(:treatment_reason, Invoice) %>:</th><td><%= @invoice.treatment.reason %></td>
+      <th><%= t_attr(:value_date, Invoice) %>:</th><td><%=l @invoice.value_date %></td>
+    </tr>
+    <tr>
+      <th></th><td></td>
+      <th><%= t_attr(:due_date, Invoice) %>:</th><td><%= in_place_editor_field :invoice, :due_date %></td>
+    </tr>
+  </table>
+</div>
