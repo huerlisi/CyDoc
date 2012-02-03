@@ -343,7 +343,10 @@ de-CH:
   # CRUD
   crud:
     action:
-      search: Suchen
+      search:             Suchen
+      queue_request:      Anfragen
+      queue_all_requests: Alle anfragen
+      resolve:            Abschliessen
 
   boolean:
     true:  Ja

@@ -9,18 +9,20 @@ class ReturnedInvoice < ActiveRecord::Base
   aasm_column :state
   validates_presence_of :state
 
-  aasm_initial_state :new
-  aasm_state :new
+  aasm_initial_state :ready
+  aasm_state :ready
   aasm_state :request_pending
   aasm_state :resolved
 
-  aasm_event :request do
-    transitions :from => :new, :to => :request_pending
+  aasm_event :queue_request do
+    transitions :from => :ready, :to => :request_pending
   end
 
   aasm_event :resolve do
-    transitions :from => [:new, :request_pending], :to => :resolved
+    transitions :from => [:ready, :request_pending], :to => :resolved
   end
+
+  named_scope :open, :conditions => {:state => ['ready', 'request_pending']}
 
   # Invoice
   belongs_to :invoice
@@ -36,6 +38,7 @@ class ReturnedInvoice < ActiveRecord::Base
 
   # Doctor
   belongs_to :doctor
+  named_scope :by_doctor, lambda {|doctor| {:conditions => {:doctor_id => doctor.id}}}
   before_save :set_doctor
 private
   def set_doctor

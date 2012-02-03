@@ -4,7 +4,7 @@
   - f.inputs do
     = f.semantic_errors :invoice
     = f.input :invoice_id, :input_html => {'data-autofocus' => true}
-    = f.input :state
+    = f.input :state, :collection => resource_class.aasm_states_for_select
     = f.input :remarks, :input_html => {:rows => 4, :cols => 40}
 
   - f.buttons do
