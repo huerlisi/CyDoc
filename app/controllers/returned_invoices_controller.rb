@@ -1,14 +1,18 @@
 class ReturnedInvoicesController < ApplicationController
-  inherit_resources
   # Inherited Resources
+  inherit_resources
+
   protected
     def collection
       instance_eval("@#{controller_name.pluralize} ||= end_of_association_chain.paginate(:page => params[:page], :per_page => params[:per_page], :order => 'created_at DESC')")
     end
 
+  # Scopes
+  has_scope :by_doctor_id
+
   public
   def index
-    @returned_invoices = ReturnedInvoice.open.paginate(:page => params[:page], :per_page => params[:per_page], :order => 'created_at DESC')
+    @returned_invoices = apply_scopes(ReturnedInvoice).open.paginate(:page => params[:page], :per_page => params[:per_page], :order => 'created_at DESC')
   end
 
   def create
@@ -53,9 +57,7 @@ class ReturnedInvoicesController < ApplicationController
   end
 
   def queue_all_requests
-    @doctor = Doctor.find(params[:doctor_id])
-
-    returned_invoices = ReturnedInvoice.by_doctor(@doctor)
+    returned_invoices = ReturnedInvoice.by_doctor(params[:doctor_id])
 
     returned_invoices.ready.each do |returned_invoice|
       returned_invoice.queue_request!

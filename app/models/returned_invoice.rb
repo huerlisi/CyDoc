@@ -38,7 +38,7 @@ class ReturnedInvoice < ActiveRecord::Base
 
   # Doctor
   belongs_to :doctor
-  named_scope :by_doctor, lambda {|doctor| {:conditions => {:doctor_id => doctor.id}}}
+  named_scope :by_doctor_id, lambda {|doctor_id| {:conditions => {:doctor_id => doctor_id}}}
   before_save :set_doctor
 private
   def set_doctor
