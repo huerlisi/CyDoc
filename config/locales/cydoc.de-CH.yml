@@ -133,11 +133,8 @@ de-CH:
         accident_insurance_short_cut: 'UVG'
         address: Adresse
         birth_date:  Geburtstag
-        business_phone: 'Tel. geschäft'
         doctor_patient_nr: Patientennr.
-        email: 'E-Mail'
         family_name: Nachname
-        fax: 'Fax'
         female: 'Weiblich'
         gender: Geschlecht
         given_name:  Vorname
@@ -147,18 +144,22 @@ de-CH:
         insurance_number: "Nummer"
         locality: Ort
         male: 'Männlich'
-        mobile: 'Handy'
         name: Name
         number: PatientenNr.
-        phone_number: "Nummer"
-        phone_number_type: "Art"
         police_type: "Art"
         postal_code: PLZ
-        private_phone: 'Tel. privat'
         remarks: Bemerkungen
         salutation: Anrede
         street_address: Strasse
         dunning_stop: Mahnstopp
+      phone_number:
+        phone_number: "Nummer"
+        phone_number_type: "Art"
+        business_phone: 'Tel. geschäft'
+        email: 'E-Mail'
+        fax: 'Fax'
+        mobile: 'Handy'
+        private_phone: 'Tel. privat'
       recall:
         appointment: 'Terminvorschlag'
         due_date: Datum

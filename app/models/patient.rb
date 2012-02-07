@@ -43,7 +43,13 @@ class Patient < ActiveRecord::Base
   end
   
   # Phone Numbers
-  has_many :phone_numbers, :as => :object
+  has_many :phone_numbers, :as => :object do
+    def build_defaults
+      ['Tel. geschäft', 'Tel. privat', 'Handy', 'E-Mail'].map{ |phone_number_type|
+        build(:phone_number_type => phone_number_type) unless exists?(:phone_number_type => phone_number_type)
+      }
+    end
+  end
   accepts_nested_attributes_for :phone_numbers, :reject_if => proc { |attrs| attrs['number'].blank? }
   after_update :save_phone_numbers
   

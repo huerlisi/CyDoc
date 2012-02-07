@@ -38,11 +38,6 @@ module ApplicationHelper
         p.insurance_policies.build(:policy_type => "KVG")
         p.insurance_policies.build(:policy_type => "UVG")
       end
-      if p.phone_numbers.empty?
-        p.phone_numbers.build(:phone_number_type => "Tel. privat")
-        p.phone_numbers.build(:phone_number_type => "Tel. geschäft")
-        p.phone_numbers.build(:phone_number_type => "Handy")
-      end
     end
   end
 
