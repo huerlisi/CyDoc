@@ -351,6 +351,10 @@ de-CH:
       write_off:          Abschreiben
       edit_ready:         Neue vorbereiten
 
+  returned_invoices:
+    edit_ready:
+      title:              Neue vorbereiten
+
   boolean:
     true:  Ja
     false: Nein
