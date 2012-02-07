@@ -88,7 +88,7 @@ class Treatment < ActiveRecord::Base
   if Rails.env.demo?
     GRACE_PERIOD = 0
   else
-    GRACE_PERIOD = 6.5
+    GRACE_PERIOD = 2
   end
   named_scope :ready_to_bill, proc {|grace_period|
     date = DateTime.now().ago(grace_period.days)
