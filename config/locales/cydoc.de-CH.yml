@@ -152,6 +152,7 @@ de-CH:
         salutation: Anrede
         street_address: Strasse
         dunning_stop: Mahnstopp
+        use_billing_address: Rechnungsadresse aktiv
       phone_number:
         phone_number: "Nummer"
         phone_number_type: "Art"
@@ -316,6 +317,7 @@ de-CH:
       medical_cases: Diagnosen
       new_patient: Patient erfassen
       personal_data: Personalien
+      billing_data: Rechnungsdaten
       recall: Recall
       recalls: Recalls
       treatment: Behandlung

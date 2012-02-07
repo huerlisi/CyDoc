@@ -1,0 +1,22 @@
+<h3><%= t('cydoc.title.billing_data') %></h3>
+<div class="box" id="patient-billing">
+<% fields_for @patient do |patient| %>
+  <% patient.fields_for :billing_vcard do |vcard| %>
+
+    <table style="width: 100%">
+      <tr>
+        <th><%= t_attr(:use_billing_address, Patient) %></th><td><%= patient.check_box :use_billing_address %></td>
+        <th><%= t_attr(:dunning_stop, Patient) %></th><td><%= patient.check_box :dunning_stop %></td>
+      </tr>
+      <tr>
+        <th><%= t_attr(:family_name, Patient) %>, <%= t_attr(:given_name, Patient) %></th><td><%= vcard.text_field :family_name, :style => "width: 45%" %> <%= vcard.text_field :given_name, :style => "width: 45%" %></td>
+        <th><%= t_attr(:salutation, Patient) %></th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name } %></td>
+      </tr>
+      <tr>
+        <th><%= t_attr(:street_address, Patient) %></th><td><%= vcard.text_field :street_address %></td>
+        <th><%= t_attr(:postal_code, Patient) %>, <%= t_attr(:locality, Patient) %></th><td><%= vcard.text_field :postal_code, :size => 9 %> <%= vcard.text_field :locality %></td>
+      </tr>
+    </table>
+  <% end %>
+<% end %>
+</div>

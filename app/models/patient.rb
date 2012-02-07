@@ -16,7 +16,9 @@ class Patient < ActiveRecord::Base
   has_vcards
   # Hack to use 'private' address by default
   has_one :vcard, :as => 'object', :conditions => {:vcard_type => 'private'}
-  has_one :billing_vcard, :as => 'object', :conditions => {:vcard_type => 'billing'}
+  accepts_nested_attributes_for :vcard
+  has_one :billing_vcard, :class_name => 'Vcard', :as => 'object', :conditions => {:vcard_type => 'billing'}
+  accepts_nested_attributes_for :billing_vcard
 
   def invoice_vcard
     if use_billing_address?
@@ -26,7 +28,6 @@ class Patient < ActiveRecord::Base
     end
   end
 
-  accepts_nested_attributes_for :vcard
   default_scope :include => {:vcard => :addresses}
 
   named_scope :by_date, lambda {|date| {:conditions => ['birth_date LIKE ?', Date.parse_europe(date).strftime('%%%y-%m-%d')] }}

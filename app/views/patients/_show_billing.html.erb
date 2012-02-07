@@ -1,0 +1,15 @@
+<h3><%= t('cydoc.title.billing_data') %></h3>
+<div class="box">
+  <table style="width: 100%">
+    <tr>
+      <th style="width: 15%"><%= t_attr(:use_billing_address) %></th>
+      <td style="width: 43%"><%=h @patient.use_billing_address ? "Ja" : "Nein" %></td>
+      <th style="width: 10%"><%= t_attr(:dunning_stop) %></th>
+      <td style="width: 30%"><%=h @patient.dunning_stop ? "Ja" : "Nein" %></td>
+    </tr>
+    <tr>
+      <th><%= t_attr(:address) %></th>
+      <td><%= full_address(@patient.billing_vcard, ', ') %></td>
+    </tr>
+  </table>
+</div>

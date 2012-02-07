@@ -24,10 +24,6 @@
         <th><%= t_attr(:remarks, Patient) %></th>
         <td colspan="3"><%= patient.text_area :remarks, :rows => 3 %></td>
       </tr>
-      <tr>
-        <th><%= t_attr(:dunning_stop, Patient) %></th>
-        <td colspan="3"><%= patient.check_box :dunning_stop %></td>
-      </tr>
     </table>
   <% end %>
 <% end %>
