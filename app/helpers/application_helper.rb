@@ -49,5 +49,16 @@ module ApplicationHelper
   def icon_delete_link_to(model, path)
     link_to t_action(:delete), path, :remote => true, :method => :delete, :confirm => t_confirm_delete(model), :class => 'icon-delete-text', :title => t_action(:delete)
   end
+
+  # Hozr
+  def link_to_hozr(title, path, options = {})
+    if Rails.env.development?
+      hostname = "hozr-dev"
+    else
+      hostname = "hozr"
+    end
+
+    link_to title, "https://#{hostname}/" + path, options.merge(:target => hostname)
+  end
 end
 

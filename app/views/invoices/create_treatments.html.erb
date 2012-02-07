@@ -10,7 +10,7 @@
 
 <ul>
   <%- for failed_case in (@failed_cases || [])%>
-    <li><%= link_to failed_case.to_s, "https://hozr/cases/#{failed_case.id}" %></li>
+    <li><%= link_to_hozr failed_case.to_s, "cases/#{failed_case.id}" %></li>
   <%- end %>
 </ul>
 <%- end %>
