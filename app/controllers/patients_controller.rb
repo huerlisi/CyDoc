@@ -94,7 +94,7 @@ class PatientsController < ApplicationController
     @patient = Patient.new
     @patient.vcard = Vcard.new
 
-    if @patient.vcard.update_attributes(params[:vcard]) and @patient.update_attributes(params[:patient])
+    if @patient.update_attributes(params[:patient])
       flash[:notice] = 'Patient erfasst.'
       redirect_to @patient
     else
@@ -122,7 +122,7 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
 
     respond_to do |format|
-      if @patient.vcard.update_attributes(params[:vcard]) and @patient.update_attributes(params[:patient])
+      if @patient.update_attributes(params[:patient])
         flash[:notice] = 'Patient wurde geändert.'
         format.html { redirect_to(@patient) }
         format.js {
