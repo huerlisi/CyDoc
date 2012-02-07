@@ -2,17 +2,12 @@ class ReturnedInvoicesController < ApplicationController
   # Inherited Resources
   inherit_resources
 
-  protected
-    def collection
-      instance_eval("@#{controller_name.pluralize} ||= end_of_association_chain.paginate(:page => params[:page], :per_page => params[:per_page], :order => 'created_at DESC')")
-    end
-
   # Scopes
   has_scope :by_doctor_id
 
   public
   def index
-    @returned_invoices = apply_scopes(ReturnedInvoice).open.paginate(:page => params[:page], :per_page => params[:per_page], :order => 'created_at DESC')
+    @returned_invoices = apply_scopes(ReturnedInvoice).open
   end
 
   def create

@@ -4,6 +4,5 @@
 
 %h2= t_title
 
-- paginated_section collection do
-  - if collection.any?
-    = render "list"
+- if collection.any?
+  = render "list"
