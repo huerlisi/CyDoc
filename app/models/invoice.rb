@@ -40,7 +40,7 @@ class Invoice < ActiveRecord::Base
       :tiers         => tiers,
       :law           => treatment.law,
       :patient_vcard => treatment.patient.vcard,
-      :billing_vcard => treatment.patient.billing_vcard
+      :billing_vcard => treatment.patient.invoice_vcard
     )
 
     # Assign service records

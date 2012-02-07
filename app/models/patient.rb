@@ -16,10 +16,11 @@ class Patient < ActiveRecord::Base
   has_vcards
   # Hack to use 'private' address by default
   has_one :vcard, :as => 'object', :conditions => {:vcard_type => 'private'}
+  has_one :billing_vcard, :as => 'object', :conditions => {:vcard_type => 'billing'}
 
-  def billing_vcard
+  def invoice_vcard
     if use_billing_address?
-      return vcards.find(:first, :conditions => {:vcard_type => 'billing'})
+      return billing_vcard
     else
       return vcard
     end
@@ -81,7 +82,7 @@ class Patient < ActiveRecord::Base
       errors.add(field, "für Patient nicht gesetzt") if self.billing_vcard.send(field).blank?
     end
 
-    unless billing_vcard.street_address.present? or billing_vcard.extended_address.present? or billing_vcard.post_office_box.present?
+    unless invoice_vcard.street_address.present? or invoice_vcard.extended_address.present? or invoice_vcard.post_office_box.present?
       errors.add(:base, "Mindestens eines der Felder 'Strasse', 'Adresszusatz' oder 'Postfach' muss gesetzt sein")
     end
   end
