@@ -38,10 +38,10 @@ class ReturnedInvoicesController < ApplicationController
       @returned_invoice.queue_request!
     when 'reactivate'
       @returned_invoice.invoice.reactivate.save
-      @returned_invoice.resolve!
+      @returned_invoice.reactivate!
     when 'write_off'
       @returned_invoice.invoice.write_off.save
-      @returned_invoice.resolve!
+      @returned_invoice.write_off!
     else
     end
 
@@ -64,9 +64,18 @@ class ReturnedInvoicesController < ApplicationController
     render 'edit'
   end
 
-  def resolve
+  def reactivate
     @returned_invoice = ReturnedInvoice.find(params[:id])
-    @returned_invoice.resolve!
+    @returned_invoice.invoice.reactivate.save
+    @returned_invoice.reactivate!
+
+    redirect_to returned_invoices_path
+  end
+
+  def write_off
+    @returned_invoice = ReturnedInvoice.find(params[:id])
+    @returned_invoice.invoice.write_off.save
+    @returned_invoice.write_off!
 
     redirect_to returned_invoices_path
   end

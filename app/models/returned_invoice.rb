@@ -21,7 +21,11 @@ class ReturnedInvoice < ActiveRecord::Base
     transitions :from => :ready, :to => :request_pending
   end
 
-  aasm_event :resolve do
+  aasm_event :reactivate do
+    transitions :from => [:ready, :request_pending], :to => :resolved
+  end
+
+  aasm_event :write_off do
     transitions :from => [:ready, :request_pending], :to => :resolved
   end
 
