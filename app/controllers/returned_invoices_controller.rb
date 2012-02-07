@@ -19,6 +19,7 @@ class ReturnedInvoicesController < ApplicationController
     create! do |success, failure|
       success.html {
         @returned_invoice.patient.update_attribute(:dunning_stop, true)
+        flash[:notice] = @returned_invoice.to_s
         redirect_to new_returned_invoice_path
       }
     end
