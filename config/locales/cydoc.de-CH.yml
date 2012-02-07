@@ -89,7 +89,7 @@ de-CH:
         open_amount: "Offener Betrag"
         others: Übrige
         patient: Patient
-        payment_address: Rechnungsadressat
+        billing_address: Rechnungsadressat
         pfl: PFL
         physio: Physio
         prepayment: Anzahlung

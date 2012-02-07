@@ -35,10 +35,12 @@ class Invoice < ActiveRecord::Base
 
     # Build Invoice
     invoice = self.new(
-      :treatment  => treatment,
-      :value_date => value_date,
-      :tiers      => tiers,
-      :law        => treatment.law
+      :treatment     => treatment,
+      :value_date    => value_date,
+      :tiers         => tiers,
+      :law           => treatment.law,
+      :patient_vcard => treatment.patient.vcard,
+      :billing_vcard => treatment.patient.billing_vcard
     )
 
     # Assign service records

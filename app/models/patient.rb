@@ -16,6 +16,7 @@ class Patient < ActiveRecord::Base
   has_vcards
   # Hack to use 'private' address by default
   has_one :vcard, :as => 'object', :conditions => {:vcard_type => 'private'}
+
   def billing_vcard
     if use_billing_address?
       return vcards.find(:first, :conditions => {:vcard_type => 'billing'})

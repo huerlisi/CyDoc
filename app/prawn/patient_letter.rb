@@ -65,8 +65,8 @@ module Prawn
     # Billing Address
     def billing_address(invoice)
       font_size 10
-      text invoice.patient.billing_vcard.honorific_prefix if invoice.patient.billing_vcard.honorific_prefix
-      draw_address(invoice.patient.billing_vcard)
+      text invoice.billing_vcard.honorific_prefix if invoice.billing_vcard.honorific_prefix
+      draw_address(invoice.billing_vcard)
     end
 
     # Patient
@@ -74,7 +74,7 @@ module Prawn
       font_size 6.5
       text "Patient:"
       font_size 8
-      draw_address(invoice.patient.vcard)
+      draw_address(invoice.patient_vcard)
       text " "
       font_size 6.5
       text "Geburtsdatum:"
