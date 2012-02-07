@@ -51,14 +51,20 @@ module ApplicationHelper
   end
 
   # Hozr
-  def link_to_hozr(title, path, options = {})
+  def hozr_env
     if Rails.env.development?
       hostname = "hozr-dev"
     else
       hostname = "hozr"
     end
+  end
 
-    link_to title, "https://#{hostname}/" + path, options.merge(:target => hostname)
+  def hozr_url_for(path)
+    "https://#{hozr_env}/" + path
+  end
+
+  def link_to_hozr(title, path, options = {})
+    link_to title, hozr_url_for(path), options.merge(:target => hozr_env)
   end
 end
 
