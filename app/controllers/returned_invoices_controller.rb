@@ -45,7 +45,8 @@ class ReturnedInvoicesController < ApplicationController
     else
     end
 
-    if queue = params[:queue]
+    queue = params[:queue]
+    if queue.present?
       redirect_to :action => "edit_#{queue}"
     else
       redirect_to returned_invoices_path
