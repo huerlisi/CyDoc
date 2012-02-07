@@ -28,6 +28,11 @@ class ReturnedInvoicesController < ApplicationController
   def update
     @returned_invoice = ReturnedInvoice.find(params[:id])
 
+    @patient = @returned_invoice.patient
+    unless @patient.update_attributes(params[:patient])
+      render 'patient_form' and return
+    end
+
     case params[:commit]
     when 'queue_request'
       @returned_invoice.queue_request!
