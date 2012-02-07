@@ -1,0 +1,11 @@
+<h3><%= t('cydoc.title.contact') %></h3>
+<div class="box" id="phone_number_form">
+  <% fields_for @patient do |patient| %>
+    <% patient.fields_for :phone_numbers do |phone_number| %>
+      <p>
+        <%= phone_number.select :phone_number_type, [t_attr(:private_phone), t_attr(:business_phone), t_attr(:mobile), t_attr(:fax), t_attr(:email)], :label => t_attr(:phone_number_type) %>
+        <%= phone_number.text_field :number, :size => 12, :autocomplete => 'off', :label => t_attr(:phone_number) %>
+      </p>
+    <% end %>
+  <% end %>
+</div>
