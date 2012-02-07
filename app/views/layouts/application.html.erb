@@ -54,7 +54,13 @@
         <%= yield :sidebar %>
       </div>
       <div id="content">
-          <%= yield %>
+        <%- if flash[:notice] %>
+          <div class="flash notice">
+            <%= flash[:notice] %>
+          </div>
+        <%- end %>
+
+        <%= yield %>
       </div>
     </div>
   </body>
