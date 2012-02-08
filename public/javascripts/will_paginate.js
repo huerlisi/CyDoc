@@ -3,13 +3,13 @@ document.observe("dom:loaded", function() {
   // ones originating from pagination links
   var container = $(document.body)
 
-  if (container) {
-    var img = new Image
-    img.src = '/images/loading.gif'
+  // if (container) {
+  //   var img = new Image
+  //   img.src = '/images/loading.gif'
 
-    function createSpinner() {
-      Element.show('spinner')
-    }
+  //   function createSpinner() {
+  //     Element.show('spinner')
+  //   }
 
     container.observe('click', function(e) {
       var el = e.element()
