@@ -7,6 +7,10 @@ class InvoicesController < ApplicationController
 
   in_place_edit_for :invoice, :due_date
 
+  def create_treatments
+    @case_count, @failed_cases = Case.create_all_treatments
+  end
+
   # POST /invoice/1/print
   def print
     @invoice = Invoice.find(params[:id])
