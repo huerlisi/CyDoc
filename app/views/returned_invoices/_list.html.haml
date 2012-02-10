@@ -12,11 +12,4 @@
         %th.action-links{:style => "width: 15%"}
         
     %tbody
-      - invoices.each do |r|
-        %tr
-          %td= link_to r.state, [:edit, r], 'data-href-container' => 'tr'
-          %td= r.invoice_id
-          %td= r.patient
-          %td.action-links
-            - r.aasm_events_for_current_state.each do |event|
-              = list_link_for(event, r, :method => :post)
+      = render invoices
