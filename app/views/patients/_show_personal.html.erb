@@ -11,15 +11,24 @@
   <% @vcard = @patient.vcard %>
   <table style="width: 100%">
     <tr>
-      <th style="width: 15%"><%= t_attr(:address) %></th><td><%= in_place_editor_field :vcard, :family_name %> <%= in_place_editor_field :vcard, :given_name %></td>
+      <th rowspan="3" style="width: 15%; vertical-align: top"><%= t_attr(:address) %></th>
+      <td rowspan="3">
+        <%= in_place_editor_field :vcard, :family_name %> <%= in_place_editor_field :vcard, :given_name %><br />
+        <%- if @vcard.extended_address.present? %>
+          <%= in_place_editor_field :vcard, :extended_address %><br />
+        <%- end %>
+        <%= in_place_editor_field :vcard, :street_address %><br />
+        <%- if @vcard.post_office_box.present? %>
+          <%= in_place_editor_field :vcard, :post_office_box %><br />
+        <%- end %>
+        <%= in_place_editor_field :vcard, :postal_code %> <%= in_place_editor_field :vcard, :locality %>
+     </td>
       <th style="width: 15%"><%= t_attr(:birth_date) %></th><td><%=h @patient.birth_date.blank? ? 'unbekannt' : l(@patient.birth_date) %></td>
     </tr>
     <tr>
-      <th></th><td><%= in_place_editor_field :vcard, :street_address %></td>
       <th><%= t_attr(:gender) %></th><td><%=h @patient.sex %></td>
     </tr>
     <tr>
-      <th></th><td><%= in_place_editor_field :vcard, :postal_code %> <%= in_place_editor_field :vcard, :locality %></td>
       <th><%= t_attr(:doctor_patient_nr) %></th><td><%=h @patient.doctor_patient_nr %></td>
     </tr>
     <tr>

@@ -13,6 +13,10 @@
         <th><%= t_attr(:salutation, Patient) %></th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name } %></td>
       </tr>
       <tr>
+        <th><%= t_attr(:extended_address, Vcard) %></th><td><%= vcard.text_field :extended_address %></td>
+        <th><%= t_attr(:post_office_box, Vcard) %></th><td><%= vcard.text_field :post_office_box %></td>
+      </tr>
+      <tr>
         <th><%= t_attr(:street_address, Patient) %></th><td><%= vcard.text_field :street_address %></td>
         <th><%= t_attr(:postal_code, Patient) %>, <%= t_attr(:locality, Patient) %></th><td><%= vcard.text_field :postal_code, :size => 9 %> <%= vcard.text_field :locality %></td>
       </tr>

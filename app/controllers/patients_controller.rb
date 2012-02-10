@@ -1,7 +1,9 @@
 class PatientsController < ApplicationController
   in_place_edit_for :vcard, :family_name
   in_place_edit_for :vcard, :given_name
+  in_place_edit_for :vcard, :extended_address
   in_place_edit_for :vcard, :street_address
+  in_place_edit_for :vcard, :post_office_box
   in_place_edit_for :vcard, :postal_code
   in_place_edit_for :vcard, :locality
   in_place_edit_for :patient, :birth_date
