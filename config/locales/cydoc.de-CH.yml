@@ -362,3 +362,6 @@ de-CH:
   boolean:
     true:  Ja
     false: Nein
+
+  letters:
+    greetings:        Freundliche Grüsse

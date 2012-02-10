@@ -54,4 +54,13 @@ class Doctor < ActiveRecord::Base
 
     find(:all, :include => [:vcard], :conditions => ["#{vcard_condition}", query_params], :order => 'full_name, family_name, given_name')
   end
+
+  # Returned invoices
+  has_many :returned_invoices
+
+  # PDF/Print
+  include ActsAsDocument
+  def self.document_type_to_class(document_type = nil)
+    Prawn::ReturnedInvoiceRequestDocument
+  end
 end

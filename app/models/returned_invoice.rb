@@ -47,6 +47,7 @@ class ReturnedInvoice < ActiveRecord::Base
   belongs_to :doctor
   named_scope :by_doctor_id, lambda {|doctor_id| {:conditions => {:doctor_id => doctor_id}}}
   before_save :set_doctor
+
 private
   def set_doctor
     self.doctor = invoice.treatment.referrer

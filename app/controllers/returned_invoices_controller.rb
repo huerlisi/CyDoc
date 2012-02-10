@@ -91,4 +91,20 @@ class ReturnedInvoicesController < ApplicationController
 
     redirect_to returned_invoices_path
   end
+
+  # PDF
+  def letter
+    doctor = Doctor.find(params[:doctor_id])
+
+    respond_to do |format|
+      format.html {}
+      format.pdf {
+        document = doctor.document_to_pdf(nil, :sender => @current_doctor)
+
+        send_data document, :filename => "#{doctor.id}.pdf",
+                            :type => "application/pdf",
+                            :disposition => 'inline'
+      }
+    end
+  end
 end
