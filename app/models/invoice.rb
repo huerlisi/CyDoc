@@ -498,9 +498,7 @@ class Invoice < ActiveRecord::Base
   
   # PDF/Print
   def insurance_recipe_to_pdf
-    pdf = Prawn::InsuranceRecipe.new
-    
-    return pdf.to_pdf(self)
+    Prawn::InsuranceRecipe.new.to_pdf(self)
   end
 
   def print_insurance_recipe(printer)
@@ -519,9 +517,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def patient_letter_to_pdf
-    pdf = Prawn::PatientLetter.new
-    
-    return pdf.to_pdf(self)
+    Prawn::PatientLetter.new.to_pdf(self)
   end
 
   def print_patient_letter(printer)
@@ -546,9 +542,7 @@ class Invoice < ActiveRecord::Base
 
   # Reminders
   def reminder_letter_to_pdf
-    pdf = Prawn::ReminderLetter.new
-
-    return pdf.to_pdf(self)
+    Prawn::ReminderLetter.new.to_pdf(self)
   end
 
   def print_reminder(printer)
