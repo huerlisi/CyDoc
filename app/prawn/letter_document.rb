@@ -68,10 +68,7 @@ module Prawn
     
     # Draws the full address of a vcard
     def draw_address(vcard)
-      lines = [vcard.full_name, vcard.extended_address, vcard.street_address, vcard.post_office_box, "#{vcard.postal_code} #{vcard.locality}"]
-      lines = lines.map {|line| line.strip unless (line.nil? or line.strip.empty?)}.compact
-
-      lines.each do |line|
+      vcard.full_address_lines.each do |line|
         text line
       end
     end
