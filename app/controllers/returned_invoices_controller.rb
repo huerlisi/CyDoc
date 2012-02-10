@@ -93,13 +93,13 @@ class ReturnedInvoicesController < ApplicationController
   end
 
   # PDF
-  def letter
+  def request_document
     doctor = Doctor.find(params[:doctor_id])
 
     respond_to do |format|
       format.html {}
       format.pdf {
-        document = doctor.document_to_pdf(nil, :sender => @current_doctor)
+        document = doctor.document_to_pdf(:returned_invoice_request, :sender => @current_doctor)
 
         send_data document, :filename => "#{doctor.id}.pdf",
                             :type => "application/pdf",

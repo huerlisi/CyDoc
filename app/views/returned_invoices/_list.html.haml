@@ -1,6 +1,7 @@
 - collection.group_by(&:doctor).each do |doctor, invoices|
   .contextual
     = icon_link_to(:queue_all_requests, queue_all_requests_returned_invoices_path(:doctor_id => doctor.id), :method => :post)
+    = icon_link_to(:request_document, request_document_returned_invoices_path(:doctor_id => doctor.id, :format => :pdf), :method => :get)
   %h3= link_to doctor, url_for(:by_doctor_id => doctor.id)
 
   %table.list{:class => "#{collection.first.class.to_s.downcase.pluralize} collection"}

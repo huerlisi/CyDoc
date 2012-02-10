@@ -93,8 +93,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :invoice_batch_jobs, :member => {:reprint => :post}
 
   map.resources :returned_invoices,
-    :collection => {:queue_all_requests => :post, :edit_ready => :get},
-    :member => {:reactivate => :post, :write_off => :post, :queue_request => :post, :letter => :get}
+    :collection => {:queue_all_requests => :post, :edit_ready => :get, :request_document => :get},
+    :member => {:reactivate => :post, :write_off => :post, :queue_request => :post}
 
   map.resources :esr_bookings
 
