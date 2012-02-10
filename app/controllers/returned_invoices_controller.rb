@@ -4,10 +4,13 @@ class ReturnedInvoicesController < ApplicationController
 
   # Scopes
   has_scope :by_doctor_id
+  has_scope :by_state
 
   public
   def index
-    @returned_invoices = apply_scopes(ReturnedInvoice).open
+    params[:by_state] = 'ready' if params[:by_state].empty?
+
+    @returned_invoices = apply_scopes(ReturnedInvoice)
   end
 
   def create

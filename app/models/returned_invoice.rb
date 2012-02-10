@@ -29,7 +29,7 @@ class ReturnedInvoice < ActiveRecord::Base
     transitions :from => [:ready, :request_pending], :to => :resolved
   end
 
-  named_scope :open, :conditions => {:state => ['ready', 'request_pending']}
+  named_scope :by_state, lambda {|value| {:conditions => {:state => value} } }
 
   # Invoice
   belongs_to :invoice

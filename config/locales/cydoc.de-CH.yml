@@ -354,8 +354,13 @@ de-CH:
       write_off:          Abschreiben
       edit_ready:         Neue vorbereiten
       show_order_form:    Auftragsformular anzeigen
-      request_document:   Adressanfrage
+      print_request_document: Adressanfrage
       next:               Speichern & weiter
+      pdf:                PDF
+      resolved:           Abgeschlossen
+      request_pending:    Pendent
+      ready:              Neu
+      
 
   returned_invoices:
     edit_ready:
