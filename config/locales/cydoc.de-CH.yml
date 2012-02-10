@@ -355,6 +355,7 @@ de-CH:
       edit_ready:         Neue vorbereiten
       show_order_form:    Auftragsformular anzeigen
       request_document:   Adressanfrage
+      next:               Speichern & weiter
 
   returned_invoices:
     edit_ready:

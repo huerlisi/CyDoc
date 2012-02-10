@@ -20,5 +20,6 @@
     = f.input :remarks, :input_html => {:rows => 4, :cols => 40}
 
   - f.buttons do
+    %button{:name => 'commit', :value => 'next'}= t_action(:next)
     - for event in resource.aasm_events_for_current_state
       %button{:name => 'commit', :value => event}= t_action(event)
