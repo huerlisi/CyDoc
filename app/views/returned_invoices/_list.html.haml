@@ -7,7 +7,7 @@
     %thead
       %tr
         %th{:style => "width: 15%"}= t_attr(:state)
-        %th{:style => "width: 15%"}= t_attr(:invoice_id)
+        %th{:style => "width: 15%"}= t_model(Invoice)
         %th= t_model(Patient)
         %th.action-links{:style => "width: 15%"}
         
