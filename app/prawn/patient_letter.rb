@@ -1,7 +1,6 @@
 module Prawn
   class PatientLetter < Prawn::LetterDocument
     include InvoicesHelper
-    include I18nRailsHelpers
     include EsrRecipe
 
     # Helpers

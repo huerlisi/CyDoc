@@ -2,7 +2,6 @@ module Prawn
   class InsuranceRecipe < Prawn::LetterDocument
     include InvoicesHelper
     include VcardHelper::InstanceMethods
-    include I18nRailsHelpers
 
     def h(s)
       return s
