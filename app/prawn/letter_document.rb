@@ -6,7 +6,12 @@ module Prawn
     include ApplicationHelper
     include ActionView::Helpers::TranslationHelper
     include I18nRailsHelpers
+    include VcardHelper::InstanceMethods
     include Prawn::Measurements
+
+    def h(s)
+      return s
+    end
 
     def initialize_fonts
       font 'Helvetica'

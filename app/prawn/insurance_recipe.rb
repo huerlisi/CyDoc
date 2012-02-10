@@ -1,11 +1,6 @@
 module Prawn
   class InsuranceRecipe < Prawn::LetterDocument
     include InvoicesHelper
-    include VcardHelper::InstanceMethods
-
-    def h(s)
-      return s
-    end
 
     def default_options
       parent_options = super

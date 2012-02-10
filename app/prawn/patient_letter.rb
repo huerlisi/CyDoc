@@ -4,10 +4,6 @@ module Prawn
     include EsrRecipe
 
     # Helpers
-    def h(s)
-      return s
-    end
-
     def default_options
       parent_options = super
       parent_options.merge(:top_margin => 35, :left_margin => 12, :right_margin => 12, :bottom_margin => 23)
