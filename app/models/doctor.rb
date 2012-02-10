@@ -57,6 +57,9 @@ class Doctor < ActiveRecord::Base
 
   # Returned invoices
   has_many :returned_invoices
+  def request_all_returned_invoices
+    returned_invoices.ready.map {|returned_invoice| returned_invoice.queue_request!}
+  end
 
   # PDF/Print
   include ActsAsDocument

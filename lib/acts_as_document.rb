@@ -3,10 +3,10 @@ module ActsAsDocument
     self.class.document_type_to_class(document_type).new.to_pdf(self, params)
   end
 
-  def print_document(document_type, printer)
+  def print_document(document_type, printer, params = {})
     # Workaround TransientJob not yet accepting options
     file = Tempfile.new('')
-    file.puts(document_to_pdf(document_type))
+    file.puts(document_to_pdf(document_type, params))
     file.close
 
     # Try twice

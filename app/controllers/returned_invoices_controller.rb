@@ -86,11 +86,8 @@ class ReturnedInvoicesController < ApplicationController
   end
 
   def queue_all_requests
-    returned_invoices = ReturnedInvoice.by_doctor_id(params[:doctor_id])
-
-    returned_invoices.ready.each do |returned_invoice|
-      returned_invoice.queue_request!
-    end
+    doctor = Doctor.find(params[:doctor_id])
+    doctor.request_all_returned_invoices
 
     redirect_to returned_invoices_path
   end
@@ -109,5 +106,14 @@ class ReturnedInvoicesController < ApplicationController
                             :disposition => 'inline'
       }
     end
+  end
+
+  def print_request_document
+    doctor = Doctor.find(params[:doctor_id])
+
+    doctor.print_document(:returned_invoice_request, @printers[:trays][:plain], :sender => @current_doctor)
+    doctor.request_all_returned_invoices
+
+    redirect_to returned_invoices_path
   end
 end
