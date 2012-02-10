@@ -498,7 +498,7 @@ class Invoice < ActiveRecord::Base
   
   # PDF/Print
   include ActsAsDocument
-  def document_type_to_class(document_type)
+  def self.document_type_to_class(document_type)
     case document_type
     when :insurance_recipe
       Prawn::InsuranceRecipe

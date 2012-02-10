@@ -18,7 +18,7 @@ module Prawn
       font 'DejaVuSans'
     end
 
-    def to_pdf(invoice)
+    def to_pdf(invoice, params = {})
       # Title
       font_size 16
       draw_text "Rückforderungsbeleg", :style => :bold, :at => [-1, bounds.top]

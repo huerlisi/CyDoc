@@ -77,7 +77,7 @@ module Prawn
       font_size 7.5
     end
 
-    def to_pdf(invoice)
+    def to_pdf(invoice, params = {})
       bounding_box [1.cm, bounds.top], :width => bounds.width do
         title(invoice)
 
