@@ -1,5 +1,7 @@
 class PhysioTariffItem < TariffItem
   def reason
+    return nil unless @session
+
     @session.treatment.reason
   end
 
