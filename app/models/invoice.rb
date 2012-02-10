@@ -497,42 +497,40 @@ class Invoice < ActiveRecord::Base
   end
   
   # PDF/Print
-  def insurance_recipe_to_pdf
-    Prawn::InsuranceRecipe.new.to_pdf(self)
+  def document_to_pdf(document_type)
+    document_class = case document_type
+    when :insurance_recipe
+      Prawn::InsuranceRecipe
+    when :patient_letter
+      Prawn::PatientLetter
+    when :reminder_letter
+      Prawn::ReminderLetter
+    end
+
+    document_class.new.to_pdf(self)
+  end
+
+  def print_document(document_type, printer)
+    # Workaround TransientJob not yet accepting options
+    file = Tempfile.new('')
+    file.puts(document_to_pdf(document_type))
+    file.close
+
+    # Try twice
+    begin
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    rescue
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    end
+    paper_copy.print
   end
 
   def print_insurance_recipe(printer)
-    # Workaround TransientJob not yet accepting options
-    file = Tempfile.new('')
-    file.puts(insurance_recipe_to_pdf)
-    file.close
-
-    # Try twice
-    begin
-      paper_copy = Cups::PrintJob.new(file.path, printer)
-    rescue
-      paper_copy = Cups::PrintJob.new(file.path, printer)
-    end
-    paper_copy.print
-  end
-
-  def patient_letter_to_pdf
-    Prawn::PatientLetter.new.to_pdf(self)
+    print_document(:insurance_recipe, printer)
   end
 
   def print_patient_letter(printer)
-    # Workaround TransientJob not yet accepting options
-    file = Tempfile.new('')
-    file.puts(patient_letter_to_pdf)
-    file.close
-
-    # Try twice
-    begin
-      paper_copy = Cups::PrintJob.new(file.path, printer)
-    rescue
-      paper_copy = Cups::PrintJob.new(file.path, printer)
-    end
-    paper_copy.print
+    print_document(:insurance_recipe, printer)
   end
 
   def print(insurance_recipe_printer, patient_letter_printer)
@@ -541,22 +539,7 @@ class Invoice < ActiveRecord::Base
   end
 
   # Reminders
-  def reminder_letter_to_pdf
-    Prawn::ReminderLetter.new.to_pdf(self)
-  end
-
   def print_reminder(printer)
-    # Workaround TransientJob not yet accepting options
-    file = Tempfile.new('')
-    file.puts(reminder_letter_to_pdf)
-    file.close
-
-    # Try twice
-    begin
-      paper_copy = Cups::PrintJob.new(file.path, printer)
-    rescue
-      paper_copy = Cups::PrintJob.new(file.path, printer)
-    end
-    paper_copy.print
+    print_document(:reminder_letter, printer)
   end
 end

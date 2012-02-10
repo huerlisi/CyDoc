@@ -67,7 +67,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html {}
       format.pdf {
-        document = @invoice.insurance_recipe_to_pdf
+        document = @invoice.document_to_pdf(:insurance_recipe)
 
         send_data document, :filename => "#{@invoice.id}.pdf",
                             :type => "application/pdf",
@@ -84,7 +84,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html {}
       format.pdf {
-        document = @invoice.patient_letter_to_pdf
+        document = @invoice.document_to_pdf(:patient_letter)
 
         send_data document, :filename => "#{@invoice.id}.pdf",
                             :type => "application/pdf",
@@ -101,7 +101,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html {}
       format.pdf {
-        document = @invoice.reminder_letter_to_pdf
+        document = @invoice.document_to_pdf(:reminder_letter)
         
         send_data document, :filename => "#{@invoice.id}.pdf", 
                             :type => "application/pdf",
