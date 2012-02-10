@@ -44,7 +44,7 @@ module Prawn
       float do
         canvas do
           bounding_box [12.cm, bounds.top - 6.cm], :width => 10.cm do
-            full_address(receiver.vcard)
+            draw_address(receiver.vcard)
           end
         end
       end
