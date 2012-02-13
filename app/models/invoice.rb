@@ -514,7 +514,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def print_patient_letter(printer)
-    print_document(:insurance_recipe, printer)
+    print_document(:patient_letter, printer)
   end
 
   def print(insurance_recipe_printer, patient_letter_printer)
