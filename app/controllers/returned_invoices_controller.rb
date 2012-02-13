@@ -8,7 +8,7 @@ class ReturnedInvoicesController < ApplicationController
 
   public
   def index
-    params[:by_state] = 'ready' if params[:by_state].empty?
+    params[:by_state] = 'ready' if params[:by_state].blank?
 
     @returned_invoices = apply_scopes(ReturnedInvoice)
   end
