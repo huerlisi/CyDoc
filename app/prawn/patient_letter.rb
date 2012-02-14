@@ -34,9 +34,13 @@ module Prawn
       text "Rechnungssteller/Leistungserbringer:"
       font_size 8
       draw_address(invoice.biller.vcard)
-      for contact in invoice.biller.vcard.contacts
-        text contact.to_s
+
+      font_size 6.5 do
+        for contact in invoice.biller.vcard.contacts
+          text contact.to_s
+        end
       end
+
       text " "
       font_size 6.5
       text "Rechnungs-Datum:"
