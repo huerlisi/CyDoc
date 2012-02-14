@@ -133,7 +133,7 @@ class EsrRecord < ActiveRecord::Base
     esr_booking.update_attributes(
       :amount         => amount,
       :credit_account => vesr_account,
-      :debit_account  => Invoice::DEBIT_ACCOUNT,
+      :debit_account  => Account.find_by_code(invoice.balance_account), # TODO: fails if invoice not set
       :value_date     => value_date,
       :title          => "VESR Zahlung",
       :comments       => remarks)

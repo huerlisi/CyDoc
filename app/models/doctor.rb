@@ -1,4 +1,7 @@
 class Doctor < ActiveRecord::Base
+  # Settings
+  has_settings
+
   has_vcards
 
   # Accounts

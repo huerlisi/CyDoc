@@ -1,7 +1,5 @@
 class Invoice < ActiveRecord::Base
   PAYMENT_PERIOD = 30
-  DEBIT_ACCOUNT = Account.find_by_code('1100')
-  EARNINGS_ACCOUNT = Account.find_by_code('3200')
 
   REMINDER_FEE = {'reminded' => 0.0, '2xreminded' => 10.0, '3xreminded' => 10.0, 'encashment' => 0.0}
   REMINDER_PAYMENT_PERIOD = {'reminded' => 20, '2xreminded' => 10, '3xreminded' => 10, 'encashment' => 0}
@@ -14,6 +12,11 @@ class Invoice < ActiveRecord::Base
 
   belongs_to :patient_vcard, :class_name => 'Vcard', :autosave => true
   belongs_to :billing_vcard, :class_name => 'Vcard', :autosave => true
+
+  # Settings
+  def settings
+    biller.present? ? biller.settings : Settings
+  end
 
   # Treatment hook
   after_save :notify_treatment
@@ -129,16 +132,16 @@ class Invoice < ActiveRecord::Base
       bookings.build(:title => "Storno",
                      :comments => "Reaktiviert",
                      :amount => amount,
-                     :credit_account => EARNINGS_ACCOUNT,
-                     :debit_account => DEBIT_ACCOUNT,
+                     :credit_account => profit_account,
+                     :debit_account => balance_account,
                      :value_date => Date.today)
       # write off rest if needed
       if due_amount > 0
         bookings.build(:title => "Debitorenverlust",
                        :comments => "Reaktiviert",
                        :amount => due_amount,
-                       :credit_account => EARNINGS_ACCOUNT,
-                       :debit_account => DEBIT_ACCOUNT,
+                       :credit_account => profit_account,
+                       :debit_account => balance_account,
                        :value_date => Date.today)
       end
     end
@@ -157,8 +160,8 @@ class Invoice < ActiveRecord::Base
       bookings.build(:title => "Debitorenverlust",
                      :comments => comments || "Abgeschrieben",
                      :amount => due_amount,
-                     :credit_account => EARNINGS_ACCOUNT,
-                     :debit_account => DEBIT_ACCOUNT,
+                     :credit_account => profit_account,
+                     :debit_account => balance_account,
                      :value_date => Date.today)
     end
 
@@ -171,8 +174,8 @@ class Invoice < ActiveRecord::Base
     # Cancel original amount
     booking = bookings.build(:title => "Storno",
                    :amount => amount,
-                   :credit_account => EARNINGS_ACCOUNT,
-                   :debit_account => DEBIT_ACCOUNT,
+                   :credit_account => profit_account,
+                   :debit_account => balance_account,
                    :value_date => Date.today)
     booking.comments = comments if comments.present?
 
@@ -181,8 +184,8 @@ class Invoice < ActiveRecord::Base
       bookings.build(:title => "Debitorenverlust",
                      :comments => "Storniert",
                      :amount => due_amount,
-                     :credit_account => EARNINGS_ACCOUNT,
-                     :debit_account => DEBIT_ACCOUNT,
+                     :credit_account => profit_account,
+                     :debit_account => balance_account,
                      :value_date => Date.today)
     end
 
@@ -194,8 +197,8 @@ class Invoice < ActiveRecord::Base
   def build_booking
     bookings.build(:title => "Rechnung",
                    :amount => amount,
-                   :credit_account => DEBIT_ACCOUNT,
-                   :debit_account => EARNINGS_ACCOUNT,
+                   :credit_account => balance_account,
+                   :debit_account => profit_account,
                    :value_date => value_date)
   end
 
@@ -209,8 +212,8 @@ class Invoice < ActiveRecord::Base
   def build_reminder_booking
     bookings.build(:title => self.state_noun,
                    :amount => REMINDER_FEE[self.state],
-                   :credit_account => DEBIT_ACCOUNT,
-                   :debit_account => EARNINGS_ACCOUNT,
+                   :credit_account => balance_account,
+                   :debit_account => profit_account,
                    :value_date => Date.today)
   end
   
@@ -291,6 +294,14 @@ class Invoice < ActiveRecord::Base
   end
   
   # Accounting
+  def profit_account
+    Account.find_by_code(settings['invoices.profit_account_code'])
+  end
+
+  def balance_account
+    Account.find_by_code(settings['invoices.balance_account_code'])
+  end
+
   has_many :bookings, :class_name => 'Booking', :as => 'reference', :order => 'value_date', :dependent => :destroy
   def due_amount(value_date = nil)
     if value_date
@@ -298,7 +309,7 @@ class Invoice < ActiveRecord::Base
     else
       included_bookings = bookings
     end
-    included_bookings.to_a.sum{|b| b.accounted_amount(Invoice::DEBIT_ACCOUNT)}
+    included_bookings.to_a.sum{|b| b.accounted_amount(balance_account)}
   end
   
   # HasAccount compatibility

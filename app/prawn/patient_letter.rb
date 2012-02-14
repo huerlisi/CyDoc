@@ -87,7 +87,7 @@ module Prawn
           booking.value_date,
           booking.title,
           booking.comments.present? ? "<font size='6.5'>#{booking.comments}</font>" : "",
-          sprintf("%0.2f CHF", booking.accounted_amount(Invoice::DEBIT_ACCOUNT))
+          sprintf("%0.2f CHF", booking.accounted_amount(invoice.balance_account))
         ]
       }
       content << [
