@@ -110,7 +110,6 @@ module Prawn
       # Patient address
       font_size 10
       bounding_box [12.cm, bounds.top - 3.5.cm], :width => 7.cm do
-        text invoice.billing_vcard.honorific_prefix
         draw_address(invoice.billing_vcard)
       end
 
