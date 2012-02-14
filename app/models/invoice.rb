@@ -97,7 +97,7 @@ class Invoice < ActiveRecord::Base
 
   named_scope :reminded, :conditions => "invoices.state IN ('reminded', '2xreminded', '3xreminded', 'encashment')"
   def reminded?
-    return ['reminded', '2xreminded', '3xreminded', 'encashment'].include?(state)
+    reminder_level > 0
   end
 
   def reminder_level
@@ -110,6 +110,8 @@ class Invoice < ActiveRecord::Base
         3
       when 'encashment'
         4
+      else
+        0
     end
   end
 
