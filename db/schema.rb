@@ -481,12 +481,15 @@ ActiveRecord::Schema.define(:version => 20120213204741) do
   add_index "recalls", ["state"], :name => "index_recalls_on_state"
 
   create_table "returned_invoices", :force => true do |t|
-    t.string   "state",      :default => "new"
+    t.string   "state",      :default => "ready"
     t.integer  "invoice_id"
     t.text     "remarks"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "doctor_id"
   end
+
+  add_index "returned_invoices", ["doctor_id"], :name => "index_returned_invoices_on_doctor_id"
 
   create_table "service_items", :force => true do |t|
     t.integer "tariff_item_id"
