@@ -93,8 +93,8 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # GET /invoices/1/reminder
-  def reminder
+  # GET /invoices/1/reminder_letter
+  def reminder_letter
     @invoice ||= Invoice.find(params[:id])
     @patient = @invoice.patient
 
