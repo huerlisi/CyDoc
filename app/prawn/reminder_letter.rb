@@ -65,6 +65,18 @@ module Prawn
       font_size 7.5
     end
 
+    def invoice_dates(invoice)
+      font_size 6.5
+      text "Mahndatum:"
+      font_size 8
+      text invoice.latest_reminder_value_date.to_s
+      move_down 3
+      font_size 6.5
+      text "Zahlbar bis:"
+      font_size 8
+      text invoice.due_date.to_s
+    end
+
     def closing(sender)
       text "Bei allfälligen Unstimmigkeiten rufen Sie uns bitte an oder schreiben Sie eine E-Mail an #{sender.vcard.contacts.email.first}."
       common_closing(sender)
@@ -77,11 +89,6 @@ module Prawn
         # Head info
         bounding_box [0, bounds.top - 2.4.cm], :width => 7.cm do
           biller(invoice)
-
-          font_size 6.5
-          text "Mahndatum:"
-          font_size 8
-          text invoice.latest_reminder_value_date.to_s
         end
 
         bounding_box [0, bounds.top - 7.cm], :width => 7.cm do

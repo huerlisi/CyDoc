@@ -29,6 +29,17 @@ module Prawn
     end
 
     # Biller / Provider
+    def invoice_dates(invoice)
+      font_size 6.5
+      text "Rechnungs-Datum:"
+      font_size 8
+      text invoice.value_date.to_s
+      font_size 6.5
+      text "Zahlbar bis:"
+      font_size 8
+      text invoice.due_date.to_s
+    end
+
     def biller(invoice)
       font_size 6.5
       text "Rechnungssteller/Leistungserbringer:"
@@ -42,10 +53,7 @@ module Prawn
       end
 
       text " "
-      font_size 6.5
-      text "Rechnungs-Datum:"
-      font_size 8
-      text invoice.value_date.to_s
+      invoice_dates(invoice)
     end
 
     # Referrer
