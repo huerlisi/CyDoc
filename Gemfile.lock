@@ -62,6 +62,8 @@ GEM
     inherited_resources_views (0.4.1)
       inherited_resources (>= 1.0)
     json (1.6.5)
+    ledermann-rails-settings (1.0.1)
+      activerecord (>= 2.3)
     mysql2 (0.2.18)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -124,6 +126,7 @@ DEPENDENCIES
   in_place_editing
   inherited_resources (< 1.1)
   inherited_resources_views
+  ledermann-rails-settings
   mysql2 (~> 0.2.18)
   prawn
   prawnto
