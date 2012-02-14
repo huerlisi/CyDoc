@@ -78,14 +78,13 @@ module Prawn
         bounding_box [0, bounds.top - 2.4.cm], :width => 7.cm do
           biller(invoice)
 
-          text " "
           font_size 6.5
           text "Mahndatum:"
           font_size 8
           text invoice.latest_reminder_value_date.to_s
         end
 
-        bounding_box [0, bounds.top - 6.cm], :width => 7.cm do
+        bounding_box [0, bounds.top - 7.cm], :width => 7.cm do
           referrer(invoice)
         end
 
