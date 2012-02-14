@@ -11,7 +11,7 @@ Settings.defaults = {
   'invoices.reminders.3.fee'            => 10.0,
   'invoices.reminders.3.payment_period' => 10.days,
   'invoices.reminders.3.grace_period'   => 30.days,
-  'invoices.reminders.encashment.fee'            => 0.0,
-  'invoices.reminders.encashment.payment_period' => 0.days,
-  'invoices.reminders.encashment.grace_period'   => 30.days
+  'invoices.reminders.4.fee'            => 0.0,
+  'invoices.reminders.4.payment_period' => 0.days,
+  'invoices.reminders.4.grace_period'   => 30.days
 }

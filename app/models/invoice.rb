@@ -104,6 +104,31 @@ class Invoice < ActiveRecord::Base
     return ['reminded', '2xreminded', '3xreminded', 'encashment'].include?(state)
   end
 
+  def reminder_level
+    case state
+      when 'reminded'
+        1
+      when '2xreminded'
+        2
+      when '3xreminded'
+        3
+      when 'encashment'
+        4
+    end
+  end
+
+  def reminder_fee
+    settings["invoices.reminders.#{reminder_level}.fee"]
+  end
+
+  def reminder_grace_period
+    settings["invoices.reminders.#{reminder_level}.grace_period"]
+  end
+
+  def reminder_payment_period
+    settings["invoices.reminders.#{reminder_level}.payment_period"]
+  end
+
   def state_adverb
     I18n.t state, :scope => 'invoice.state'
   end
@@ -211,7 +236,7 @@ class Invoice < ActiveRecord::Base
   
   def build_reminder_booking
     bookings.build(:title => self.state_noun,
-                   :amount => REMINDER_FEE[self.state],
+                   :amount => reminder_fee,
                    :credit_account => balance_account,
                    :debit_account => profit_account,
                    :value_date => Date.today)
@@ -228,7 +253,7 @@ class Invoice < ActiveRecord::Base
   
   def remind_first_time
     self.state = 'reminded'
-    self.reminder_due_date = Date.today + REMINDER_PAYMENT_PERIOD[self.state]
+    self.reminder_due_date = Date.today + reminder_payment_period
     build_reminder_booking
   end
   
@@ -239,13 +264,13 @@ class Invoice < ActiveRecord::Base
 
   def remind_second_time
     self.state = '2xreminded'
-    self.second_reminder_due_date = Date.today + REMINDER_PAYMENT_PERIOD[self.state]
+    self.second_reminder_due_date = Date.today + reminder_payment_period
     build_reminder_booking
   end
   
   def remind_third_time
     self.state = '3xreminded'
-    self.third_reminder_due_date = Date.today + REMINDER_PAYMENT_PERIOD[self.state]
+    self.third_reminder_due_date = Date.today + reminder_payment_period
     build_reminder_booking
   end
   
