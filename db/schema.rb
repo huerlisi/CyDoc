@@ -433,6 +433,7 @@ ActiveRecord::Schema.define(:version => 20120221091102) do
     t.boolean  "active",              :default => true,  :null => false
     t.string   "name"
     t.integer  "imported_id"
+    t.string   "covercard_code"
   end
 
   add_index "patients", ["doctor_id"], :name => "patients_doctor_id_index"
