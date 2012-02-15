@@ -20,7 +20,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :phone_numbers
 
   # Billing
-  map.resources :invoices, :collection => {:print_all => :post, :create_treatments => :get}, :member => {:print => :post, :print_reminder_letter => :post, :insurance_recipe => :get, :patient_letter => :get, :reminder => :get, :reactivate => :post} do |invoice|
+  map.resources :invoices, :collection => {:print_all => :post, :create_treatments => :get}, :member => {:print => :post, :print_reminder_letter => :post, :insurance_recipe => :get, :patient_letter => :get, :reminder_letter => :get, :reactivate => :post} do |invoice|
     invoice.resources :bookings
   end
   map.resources :invoice_batch_jobs, :member => {:reprint => :post}
@@ -92,7 +92,9 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :invoice_batch_jobs, :member => {:reprint => :post}
 
-  map.resources :returned_invoices, :collection => {:queue_all_requests => :post, :edit_ready => :get}, :member => {:resolve => :post, :queue_request => :post}
+  map.resources :returned_invoices,
+    :collection => {:print_request_document => :post, :edit_ready => :get, :request_document => :get},
+    :member => {:reactivate => :post, :write_off => :post, :queue_request => :post}
 
   map.resources :esr_bookings
 

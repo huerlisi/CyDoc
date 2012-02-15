@@ -38,11 +38,6 @@ module ApplicationHelper
         p.insurance_policies.build(:policy_type => "KVG")
         p.insurance_policies.build(:policy_type => "UVG")
       end
-      if p.phone_numbers.empty?
-        p.phone_numbers.build(:phone_number_type => "Tel. privat")
-        p.phone_numbers.build(:phone_number_type => "Tel. geschäft")
-        p.phone_numbers.build(:phone_number_type => "Handy")
-      end
     end
   end
 
@@ -53,6 +48,23 @@ module ApplicationHelper
 
   def icon_delete_link_to(model, path)
     link_to t_action(:delete), path, :remote => true, :method => :delete, :confirm => t_confirm_delete(model), :class => 'icon-delete-text', :title => t_action(:delete)
+  end
+
+  # Hozr
+  def hozr_env
+    if Rails.env.development?
+      hostname = "hozr-dev"
+    else
+      hostname = "hozr"
+    end
+  end
+
+  def hozr_url_for(path)
+    "https://#{hozr_env}/" + path
+  end
+
+  def link_to_hozr(title, path, options = {})
+    link_to title, hozr_url_for(path), options.merge(:target => hozr_env)
   end
 end
 

@@ -1,22 +1,16 @@
 - collection.group_by(&:doctor).each do |doctor, invoices|
   .contextual
-    = icon_link_to(:queue_all_requests, queue_all_requests_returned_invoices_path(:doctor_id => doctor.id), :method => :post)
+    = icon_link_to(:print_request_document, print_request_document_returned_invoices_path(:doctor_id => doctor.id), :method => :post)
+    = icon_link_to(:pdf, request_document_returned_invoices_path(:doctor_id => doctor.id, :format => :pdf), :method => :get)
   %h3= link_to doctor, url_for(:by_doctor_id => doctor.id)
 
   %table.list{:class => "#{collection.first.class.to_s.downcase.pluralize} collection"}
     %thead
       %tr
         %th{:style => "width: 15%"}= t_attr(:state)
-        %th{:style => "width: 15%"}= t_attr(:invoice_id)
+        %th{:style => "width: 15%"}= t_model(Invoice)
         %th= t_model(Patient)
         %th.action-links{:style => "width: 15%"}
         
     %tbody
-      - invoices.each do |r|
-        %tr
-          %td= link_to r.state, [:edit, r], 'data-href-container' => 'tr'
-          %td= r.invoice_id
-          %td= r.patient
-          %td.action-links
-            - r.aasm_events_for_current_state.each do |event|
-              = list_link_for(event, r, :method => :post)
+      = render invoices

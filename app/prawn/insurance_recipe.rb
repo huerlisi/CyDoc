@@ -1,11 +1,10 @@
 module Prawn
   class InsuranceRecipe < Prawn::LetterDocument
     include InvoicesHelper
-    include VcardHelper::InstanceMethods
-    include I18nRailsHelpers
 
-    def h(s)
-      return s
+    def default_options
+      parent_options = super
+      parent_options.merge(:top_margin => 1.5.cm, :left_margin => 1.cm, :right_margin => 1.cm, :bottom_margin => 1.8.cm)
     end
 
     def initialize_fonts
@@ -19,7 +18,7 @@ module Prawn
       font 'DejaVuSans'
     end
 
-    def to_pdf(invoice)
+    def to_pdf(invoice, params = {})
       # Title
       font_size 16
       draw_text "Rückforderungsbeleg", :style => :bold, :at => [-1, bounds.top]
@@ -37,11 +36,11 @@ module Prawn
         ["Leistungs-", "EAN-Nr.", "▪ #{invoice.provider.ean_party}", full_address(invoice.provider.vcard, ', ')],
         ["erbringer", "ZSR-Nr./NIF-Nr.", "▪ #{invoice.provider.zsr}", contact(invoice.provider.vcard, ', ')],
 
-        ["Patient", "Name", "▪ #{invoice.patient.vcard.family_name}", " "*30 + "EAN-Nr. <font size='8'>▪</font>"],
-        [nil, "Vorname", "▪ #{invoice.patient.vcard.given_name}", nil],
-        [nil, "Strasse", "▪ #{invoice.patient.vcard.street_address}", nil],
-        [nil, "PLZ", "▪ #{invoice.patient.vcard.postal_code}", nil],
-        [nil, "Ort", "▪ #{invoice.patient.vcard.locality}", nil],
+        ["Patient", "Name", "▪ #{invoice.patient_vcard.family_name}", " "*30 + "EAN-Nr. <font size='8'>▪</font>"],
+        [nil, "Vorname", "▪ #{invoice.patient_vcard.given_name}", nil],
+        [nil, "Strasse", "▪ #{invoice.patient_vcard.street_address}", nil],
+        [nil, "PLZ", "▪ #{invoice.patient_vcard.postal_code}", nil],
+        [nil, "Ort", "▪ #{invoice.patient_vcard.locality}", nil],
         [nil, "Geburtsdatum", "▪ #{invoice.patient.birth_date}", nil],
         [nil, "Geschlecht", "▪ #{invoice.patient.sex}", nil],
         [nil, "Unfalldatum", "▪", nil],
@@ -111,8 +110,7 @@ module Prawn
       # Patient address
       font_size 10
       bounding_box [12.cm, bounds.top - 3.5.cm], :width => 7.cm do
-        text invoice.patient.billing_vcard.honorific_prefix
-        draw_address(invoice.patient.billing_vcard)
+        draw_address(invoice.billing_vcard)
       end
 
       # Service records

@@ -1,7 +1,7 @@
 <div id="phone_number_form">
   <%= error_messages_for :phone_number %>
   <% remote_form_for :phone_number, @phone_number, :url => vcard_phone_numbers_url(@vcard) do |phone_number| %>
-      <%= phone_number.select :phone_number_type, ['Tel. privat', 'Tel. geschäft', 'Handy', 'Fax', 'E-Mail'] %>
+        <%= phone_number.select :phone_number_type, [t_attr(:private_phone, PhoneNumber), t_attr(:business_phone, PhoneNumber), t_attr(:mobile, PhoneNumber), t_attr(:fax, PhoneNumber), t_attr(:email, PhoneNumber)], :label => t_attr(:phone_number_type, PhoneNumber) %>
       <%= phone_number.text_field :number, :size => 12, :autocomplete => 'off' %>
       <%= phone_number.submit "Speichern" %>
   <% end %>

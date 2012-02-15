@@ -7,6 +7,10 @@ class InvoicesController < ApplicationController
 
   in_place_edit_for :invoice, :due_date
 
+  def create_treatments
+    @case_count, @failed_cases = Case.create_all_treatments
+  end
+
   # POST /invoice/1/print
   def print
     @invoice = Invoice.find(params[:id])
@@ -63,7 +67,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html {}
       format.pdf {
-        document = @invoice.insurance_recipe_to_pdf
+        document = @invoice.document_to_pdf(:insurance_recipe)
 
         send_data document, :filename => "#{@invoice.id}.pdf",
                             :type => "application/pdf",
@@ -80,7 +84,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html {}
       format.pdf {
-        document = @invoice.patient_letter_to_pdf
+        document = @invoice.document_to_pdf(:patient_letter)
 
         send_data document, :filename => "#{@invoice.id}.pdf",
                             :type => "application/pdf",
@@ -89,15 +93,15 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # GET /invoices/1/reminder
-  def reminder
+  # GET /invoices/1/reminder_letter
+  def reminder_letter
     @invoice ||= Invoice.find(params[:id])
     @patient = @invoice.patient
 
     respond_to do |format|
       format.html {}
       format.pdf {
-        document = @invoice.reminder_letter_to_pdf
+        document = @invoice.document_to_pdf(:reminder_letter)
         
         send_data document, :filename => "#{@invoice.id}.pdf", 
                             :type => "application/pdf",

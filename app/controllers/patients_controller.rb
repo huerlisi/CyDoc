@@ -1,7 +1,9 @@
 class PatientsController < ApplicationController
   in_place_edit_for :vcard, :family_name
   in_place_edit_for :vcard, :given_name
+  in_place_edit_for :vcard, :extended_address
   in_place_edit_for :vcard, :street_address
+  in_place_edit_for :vcard, :post_office_box
   in_place_edit_for :vcard, :postal_code
   in_place_edit_for :vcard, :locality
   in_place_edit_for :patient, :birth_date
@@ -94,7 +96,7 @@ class PatientsController < ApplicationController
     @patient = Patient.new
     @patient.vcard = Vcard.new
 
-    if @patient.vcard.update_attributes(params[:vcard]) and @patient.update_attributes(params[:patient])
+    if @patient.update_attributes(params[:patient])
       flash[:notice] = 'Patient erfasst.'
       redirect_to @patient
     else
@@ -122,7 +124,7 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
 
     respond_to do |format|
-      if @patient.vcard.update_attributes(params[:vcard]) and @patient.update_attributes(params[:patient])
+      if @patient.update_attributes(params[:patient])
         flash[:notice] = 'Patient wurde geändert.'
         format.html { redirect_to(@patient) }
         format.js {

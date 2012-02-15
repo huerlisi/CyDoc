@@ -9,7 +9,7 @@ class InsurancePolicy < ActiveRecord::Base
   belongs_to :patient
 
   # Validations
-  validates_presence_of :insurance
+#  validates_presence_of :insurance
 
   def to_s
     s = "#{policy_type}: #{insurance.to_s}"

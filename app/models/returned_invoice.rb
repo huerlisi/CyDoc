@@ -21,11 +21,15 @@ class ReturnedInvoice < ActiveRecord::Base
     transitions :from => :ready, :to => :request_pending
   end
 
-  aasm_event :resolve do
+  aasm_event :reactivate do
     transitions :from => [:ready, :request_pending], :to => :resolved
   end
 
-  named_scope :open, :conditions => {:state => ['ready', 'request_pending']}
+  aasm_event :write_off do
+    transitions :from => [:ready, :request_pending], :to => :resolved
+  end
+
+  named_scope :by_state, lambda {|value| {:conditions => {:state => value} } }
 
   # Invoice
   belongs_to :invoice
@@ -43,6 +47,7 @@ class ReturnedInvoice < ActiveRecord::Base
   belongs_to :doctor
   named_scope :by_doctor_id, lambda {|doctor_id| {:conditions => {:doctor_id => doctor_id}}}
   before_save :set_doctor
+
 private
   def set_doctor
     self.doctor = invoice.treatment.referrer

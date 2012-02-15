@@ -5,7 +5,11 @@
   = render 'invoices/show_main'
 
   - @patient = resource.patient
+
   = render 'patients/personal_form'
+  = render 'patients/billing_form'
+  = render 'patients/contacts_form'
+
   - content_for :sidebar do
     = render 'patients/sidebar'
 
@@ -16,6 +20,6 @@
     = f.input :remarks, :input_html => {:rows => 4, :cols => 40}
 
   - f.buttons do
-    %button{:name => 'commit', :value => 'queue_request'}= t_action('queue_request')
-    %button{:name => 'commit', :value => 'reactivate'}= t_action('reactivate')
-    %button{:name => 'commit', :value => 'write_off'}= t_action('write_off')
+    %button{:name => 'commit', :value => 'next'}= t_action(:next)
+    - for event in resource.aasm_events_for_current_state
+      %button{:name => 'commit', :value => event}= t_action(event)

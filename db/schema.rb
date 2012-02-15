@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120203104911) do
+ActiveRecord::Schema.define(:version => 20120214110112) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -481,12 +481,15 @@ ActiveRecord::Schema.define(:version => 20120203104911) do
   add_index "recalls", ["state"], :name => "index_recalls_on_state"
 
   create_table "returned_invoices", :force => true do |t|
-    t.string   "state",      :default => "new"
+    t.string   "state",      :default => "ready"
     t.integer  "invoice_id"
     t.text     "remarks"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "doctor_id"
   end
+
+  add_index "returned_invoices", ["doctor_id"], :name => "index_returned_invoices_on_doctor_id"
 
   create_table "service_items", :force => true do |t|
     t.integer "tariff_item_id"
@@ -567,6 +570,17 @@ ActiveRecord::Schema.define(:version => 20120203104911) do
   add_index "sessions", ["patient_id"], :name => "index_sessions_on_patient_id"
   add_index "sessions", ["state"], :name => "index_sessions_on_state"
   add_index "sessions", ["treatment_id"], :name => "index_sessions_on_treatment_id"
+
+  create_table "settings", :force => true do |t|
+    t.string   "var",                       :null => false
+    t.text     "value"
+    t.integer  "target_id"
+    t.string   "target_type", :limit => 30
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "settings", ["target_type", "target_id", "var"], :name => "index_settings_on_target_type_and_target_id_and_var", :unique => true
 
   create_table "tariff_codes", :force => true do |t|
     t.string   "tariff_code"
