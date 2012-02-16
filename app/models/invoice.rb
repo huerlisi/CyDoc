@@ -480,18 +480,61 @@ class Invoice < ActiveRecord::Base
     write_attribute(:value_date, Date.parse_europe(value))
     self.due_date = value_date + PAYMENT_PERIOD unless value_date.nil?
   end
+  
+  def esr9(bank_account)
+    esr9_build(due_amount.currency_round, id, bank_account.pc_id, bank_account.esr_id) # TODO: it's biller.esr_id
+  end
 
+  def esr9_reference(bank_account)
+    esr9_format(esr9_add_validation_digit(esr_number(bank_account.esr_id, patient.id)))
+  end
+
+  private
+
+  # ESR helpers
+  def esr_number(esr_id, patient_id)
+    esr_id + sprintf('%013i', patient_id).delete(' ') + sprintf('%07i', id).delete(' ')
+  end
+
+  def esr9_add_validation_digit(value)
+    # Defined at http://www.pruefziffernberechnung.de/E/Einzahlungsschein-CH.shtml
+    esr9_table = [0, 9, 4, 6, 8, 2, 7, 1, 3, 5]
+    
+    digit = 0
+    value.split('').map{|c| digit = esr9_table[(digit + c.to_i) % 10]}
+    
+    digit = (10 - digit) % 10
+    return "#{value}#{digit}"
+  end
+
+  def esr9_format(reference_code)
+    # Drop all leading zeroes
+    reference_code.gsub!(/^0*/, '')
+
+    # Group by 5 digit blocks, beginning at the right side
+    reference_code.reverse.gsub(/(.....)/, '\1 ').reverse
+  end
+
+  def esr9_format_account_id(account_id)
+    (pre, main, post) = account_id.split('-')
+    sprintf('%02i%06i%1i', pre, main, post)
+  end
+
+  public
+  def esr9_build(esr_amount, id, biller_id, esr_id)
+    # 01 is type 'Einzahlung in CHF'
+    amount_string = "01#{sprintf('%011.2f', esr_amount).delete('.')}"
+
+    id_string = esr_number(esr_id, patient.id)
+
+    biller_string = esr9_format_account_id(biller_id)
+    return "#{esr9_add_validation_digit(amount_string)}>#{esr9_add_validation_digit(id_string)}+ #{biller_string}>"
+  end
+  
   # PDF/Print
   include ActsAsDocument
   def self.document_type_to_class(document_type)
-    case document_type
-    when :insurance_recipe
-      Prawn::InsuranceRecipe
-    when :patient_letter
-      Prawn::PatientLetter
-    when :reminder_letter
-      Prawn::ReminderLetter
-    end
+    "Prawn::#{document_type.to_s.camelcase}".constantize
   end
 
   def print_insurance_recipe(printer)
