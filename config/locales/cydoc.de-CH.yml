@@ -252,6 +252,7 @@ de-CH:
       show_letter: "Brief anzeigen"
       to_pdf: "Als PDF"
       update: "Ändern"
+      covercard_update: "Covercard-Abgleich"
     navigation:
       accounting: 'Buchhaltung'
       accounts: 'Konten'
