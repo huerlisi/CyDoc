@@ -534,14 +534,7 @@ class Invoice < ActiveRecord::Base
   # PDF/Print
   include ActsAsDocument
   def self.document_type_to_class(document_type)
-    case document_type
-    when :insurance_recipe
-      Prawn::InsuranceRecipe
-    when :patient_letter
-      Prawn::PatientLetter
-    when :reminder_letter
-      Prawn::ReminderLetter
-    end
+    "Prawn::#{document_type.to_s.camelcase}".constantize
   end
 
   def print_insurance_recipe(printer)
