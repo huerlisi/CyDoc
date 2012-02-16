@@ -20,13 +20,7 @@ module Prawn
 
     def to_pdf(invoice, params = {})
       # Title
-      font_size 16
-      draw_text "Rückforderungsbeleg", :style => :bold, :at => [-1, bounds.top]
-
-      draw_text "M", :style => :bold, :at => [bounds.right - 14, bounds.top]
-
-      font_size 7
-      draw_text "Release ▪ 4.0M/de", :at => [bounds.right - 100, bounds.top]
+      title
 
       # Head
       content = [
@@ -63,7 +57,6 @@ module Prawn
       ]
 
       move_down 0.3.cm
-      font_size 8
       table content, :width => bounds.width, :cell_style => { :inline_format => true } do
         # General
         cells.border_width = 0
@@ -427,6 +420,17 @@ module Prawn
       draw_text invoice.esr9(invoice.biller.esr_account), :at => [5.6.cm, 0.cm]
 
       render
+    end
+
+    def title
+      font_size 16
+      draw_text "Rückforderungsbeleg", :style => :bold, :at => [-1, bounds.top]
+
+      draw_text "M", :style => :bold, :at => [bounds.right - 14, bounds.top]
+
+      font_size 7
+      draw_text "Release ▪ 4.0M/de", :at => [bounds.right - 100, bounds.top]
+      font_size 8
     end
   end
 end
