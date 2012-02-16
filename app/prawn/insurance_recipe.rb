@@ -19,8 +19,10 @@ module Prawn
     end
 
     def to_pdf(invoice, params = {})
-      # Title
-      title
+      # Title, repeated on all pages.
+      repeat :all do
+        title
+      end
 
       # Head
       content = [
