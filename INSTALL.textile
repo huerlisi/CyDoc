@@ -45,6 +45,26 @@ sudo apt-get install irb ruby libruby-extras git-core recode sqlite3 libsqlite3-
 sudo gem install rake bundler
 </pre>
 
+h2. Install fonts for PDF generator
+
+The font DejaVuSans and DejaVuSans-Bold is used by the PDF generator.
+
+h3. Debian systems
+
+<pre>
+sudo apt-get install ttf-dejavu
+</pre>
+
+h3. Other *nix systems
+
+Create the folder and place the files there.
+The names of these font files should be "DejaVuSans.ttf" and "DejaVuSans-Bold.ttf".
+
+<pre>
+sudo mkdir -p /usr/share/fonts/truetype/ttf-dejavu/
+</pre>
+
+
 h2. Install CyDoc
 
 Install current CyDoc from git repostory. We'll use this checkout as working directory from now on:
