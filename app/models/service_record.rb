@@ -33,13 +33,15 @@ class ServiceRecord < ActiveRecord::Base
   # Validation
   validates_presence_of :date, :code, :tariff_type, :session, :quantity, :unit_tt, :unit_mt, :unit_factor_tt, :unit_factor_mt
 
-  def validate_for_invoice
-    errors.add_to_base("Position '#{code}' verlangt Referenzcode") unless valid_ref_code?
+  def validate_for_invoice(invoice)
+    if invoice.settings['validation.tarmed']
+      errors.add_to_base("Position '#{code}' verlangt Referenzcode") unless valid_ref_code?
+    end
   end
 
-  def valid_for_invoice?
+  def valid_for_invoice?(invoice)
     valid?
-    validate_for_invoice
+    validate_for_invoice(invoice)
     
     errors.empty?
   end

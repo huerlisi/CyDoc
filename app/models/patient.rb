@@ -79,7 +79,7 @@ class Patient < ActiveRecord::Base
   validates_presence_of :family_name, :given_name
   validates_date :birth_date
 
-  def validate_for_invoice
+  def validate_for_invoice(invoice)
     for field in [:sex, :birth_date]
       errors.add(field, "für Patient nicht gesetzt") if self.send(field).blank?
     end
@@ -92,10 +92,10 @@ class Patient < ActiveRecord::Base
     end
   end
   
-  def valid_for_invoice?
+  def valid_for_invoice?(invoice)
     valid?
-    validate_for_invoice
-    
+    validate_for_invoice(invoice)
+
     errors.empty?
   end
 
