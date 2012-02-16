@@ -61,7 +61,7 @@ class ServiceRecord < ActiveRecord::Base
   end
   
   def valid_ref_code?
-    not (needs_ref_code? and read_attribute(:ref_code).nil?)
+    not (needs_ref_code? and read_attribute(:ref_code).blank?)
   end
   
   def ref_code
