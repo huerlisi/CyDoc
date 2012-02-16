@@ -16,4 +16,5 @@ Settings.defaults = {
   'invoices.reminders.4.grace_period'   => 30.days,
   'validation.medical_case_present'     => true,
   'validation.tarmed'                   => true,
+  'cases.invoice_grace_period'          => 2.days
 }
