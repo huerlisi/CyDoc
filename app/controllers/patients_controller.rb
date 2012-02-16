@@ -43,6 +43,14 @@ class PatientsController < ApplicationController
       page.call 'focus', 'patient_vcard_attributes_postal_code'
     end
   end
+
+  def covercard_update
+    @patient = Patient.find(params[:id])
+
+    @patient.update_attribute(:covercard_code, params[:covercard_code]) if params[:covercard_code]
+
+    render @patient.to_json
+  end
   
   # GET /patients
   def index
