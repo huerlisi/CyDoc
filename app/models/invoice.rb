@@ -371,9 +371,7 @@ class Invoice < ActiveRecord::Base
   end
   
   # Convenience methods
-  def biller
-    tiers.biller
-  end
+  delegate :biller, :to => :tiers, :allow_nil => true
 
   def provider
     tiers.provider
