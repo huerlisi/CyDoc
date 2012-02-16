@@ -214,6 +214,8 @@ module Prawn
         move_down 3
       end
 
+      start_new_page if invoice.service_records.count > 10
+
       # Tarmed footer
       content = [
         [
