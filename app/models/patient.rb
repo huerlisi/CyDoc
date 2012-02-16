@@ -84,7 +84,7 @@ class Patient < ActiveRecord::Base
       errors.add(field, "für Patient nicht gesetzt") if self.send(field).blank?
     end
     for field in [:postal_code, :locality]
-      errors.add(field, "für Patient nicht gesetzt") if self.invoice_vcard.send(field).blank?
+      errors.add(field, "für Rechnungsadressat nicht gesetzt") if self.invoice_vcard.send(field).blank?
     end
 
     unless invoice_vcard.street_address.present? or invoice_vcard.extended_address.present? or invoice_vcard.post_office_box.present?
