@@ -186,6 +186,9 @@ class Patient < ActiveRecord::Base
     query.strip!
     query_params = {}
     case get_query_type(query)
+    when "covercard"
+      query_params[:covercard_code] = query
+      patient_condition = "patients.covercard_code = :covercard_code"
     when "number"
       query_params[:query] = query
       patient_condition = "patients.doctor_patient_nr = :query"
@@ -208,7 +211,9 @@ class Patient < ActiveRecord::Base
 
   private
   def self.get_query_type(value)
-    if value.match(/^[[:digit:]]*$/)
+    if value.match(/^\d{19}\^\d{4}$/)
+      return "covercard"
+    elsif value.match(/^[[:digit:]]*$/)
       return "number"
     elsif value.match(/([[:digit:]]{1,2}\.){2}/)
       return "date"
