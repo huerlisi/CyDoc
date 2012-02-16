@@ -153,6 +153,7 @@ de-CH:
         street_address: Strasse
         dunning_stop: Mahnstopp
         use_billing_address: Rechnungsadresse aktiv
+        covercard_code: Covercard-ID
       phone_number:
         phone_number: "Nummer"
         phone_number_type: "Art"
@@ -324,6 +325,7 @@ de-CH:
       treatment: Behandlung
       treatment_sessions: Leistungen
       unknown_assigning_doctor: Zuweisender Arzt unbekannt.
+      covercard: Covercard
     user_bar:
       logged_in_as: "Angemeldet als"
       login: "Anmelden"
