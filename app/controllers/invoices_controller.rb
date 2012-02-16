@@ -116,10 +116,10 @@ class InvoicesController < ApplicationController
     query ||= params[:search][:query] if params[:search]
     query ||= params[:quick_search][:query] if params[:quick_search]
 
-    @invoices = Invoice.clever_find(query).paginate(:page => params['page'], :per_page => 30, :order => 'id DESC')
-    @overdue = Invoice.overdue.dunning_active.paginate(:page => params['page'], :per_page => 30)
-    @prepared = Invoice.prepared.paginate(:page => params['page'], :per_page => 30, :order => 'id DESC')
-    @treatments = Treatment.open.paginate(:page => params['page'], :per_page => 30, :include => {:patient => {:vcards => :addresses, :vcard => :addresses}, :law => [], :sessions => []})
+    @invoices = Invoice.clever_find(query).paginate(:page => params['page_search'], :per_page => 30, :order => 'id DESC')
+    @overdue = Invoice.overdue.dunning_active.paginate(:page => params['page_overdue'], :per_page => 30)
+    @prepared = Invoice.prepared.paginate(:page => params['page_prepared'], :per_page => 30, :order => 'id DESC')
+    @treatments = Treatment.open.paginate(:page => params['page_open'], :per_page => 30, :include => {:patient => {:vcards => :addresses, :vcard => :addresses}, :law => [], :sessions => []})
     
     respond_to do |format|
       format.html {
