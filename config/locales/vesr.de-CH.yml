@@ -38,4 +38,4 @@ de-CH:
   # CRUD
   crud:
     action:
-      
+      show_all:           Alle anzeigen
