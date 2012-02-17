@@ -30,6 +30,7 @@ class ReturnedInvoice < ActiveRecord::Base
   end
 
   named_scope :by_state, lambda {|value| {:conditions => {:state => value} } }
+  named_scope :active, :conditions => {:state => ["ready", "request_pending"]}
 
   # Invoice
   belongs_to :invoice
@@ -38,7 +39,7 @@ class ReturnedInvoice < ActiveRecord::Base
 
   def validate_on_create
     # Check if an open returned_invoice record with same invoice exists
-    if ReturnedInvoice.count(:conditions => {:invoice_id => self.invoice_id, :state => ["ready", "request_pending"]}) > 0
+    if ReturnedInvoice.active.count(:conditions => {:invoice_id => self.invoice_id}) > 0
       errors.add_to_base("Rechnung bereits erfasst.")
     end
   end
