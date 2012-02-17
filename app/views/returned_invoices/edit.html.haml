@@ -1,6 +1,7 @@
 .contextual
   = contextual_links_for
-  = icon_link_to :show_order_form, hozr_url_for("cases/order_form/#{@returned_invoice.invoice.treatment.cases.first.id}"), :target => hozr_env
+  - if @returned_invoice.treatment.cases.first
+    = icon_link_to :show_order_form, hozr_url_for("cases/order_form/#{@returned_invoice.invoice.treatment.cases.first.id}"), :target => hozr_env
 
 %h2= t_title
 
