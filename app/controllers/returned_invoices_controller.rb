@@ -59,17 +59,6 @@ class ReturnedInvoicesController < ApplicationController
     end
   end
 
-  def edit_ready
-    @returned_invoice = ReturnedInvoice.ready.first
-    if @returned_invoice.nil?
-      redirect_to returned_invoices_path and return
-    end
-
-    @queue = 'ready'
-
-    render 'edit'
-  end
-
   def reactivate
     @returned_invoice = ReturnedInvoice.find(params[:id])
     @returned_invoice.invoice.reactivate.save
