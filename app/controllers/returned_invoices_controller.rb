@@ -27,7 +27,7 @@ class ReturnedInvoicesController < ApplicationController
     @returned_invoice = ReturnedInvoice.find(params[:id])
 
     @patient = @returned_invoice.patient
-    unless @patient.update_attributes(params[:patient])
+    unless @patient.update_attributes(params[:patient]) and @returned_invoice.update_attributes(params[:returned_invoice])
       render 'edit' and return
     end
 
