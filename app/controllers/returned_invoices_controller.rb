@@ -36,9 +36,11 @@ class ReturnedInvoicesController < ApplicationController
       @returned_invoice.queue_request!
     when 'reactivate'
       @returned_invoice.invoice.reactivate.save
+      @returned_invoice.patient.update_attribute(:dunning_stop, false)
       @returned_invoice.reactivate!
     when 'write_off'
       @returned_invoice.invoice.write_off.save
+      @returned_invoice.patient.update_attribute(:dunning_stop, false)
       @returned_invoice.write_off!
     else
     end
