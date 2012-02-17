@@ -52,6 +52,7 @@ vertical-align: middle;
 
 .icon-pdf { background-image: url(../images/pdf.png); }
 .icon-spinner { background-image: url(../images/indicator.gif); }
+.icon-print_request_document { background-image: url(../images/16x16/print_request_document.png); }
 
 /* Sessions */
 table.session {
