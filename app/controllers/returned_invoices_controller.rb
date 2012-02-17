@@ -31,6 +31,9 @@ class ReturnedInvoicesController < ApplicationController
       render 'edit' and return
     end
 
+    # All records in same state
+    returned_invoices = ReturnedInvoice.by_state(@returned_invoice.state)
+
     case params[:commit]
     when 'queue_request'
       @returned_invoice.queue_request!
@@ -45,9 +48,12 @@ class ReturnedInvoicesController < ApplicationController
     else
     end
 
-    queue = params[:queue]
-    if queue.present?
-      redirect_to :action => "edit_#{queue}"
+    next_record = returned_invoices.find(:first, :conditions => ["doctor_id = ? AND state = ? AND id > ?", @returned_invoice.doctor_id, @returned_invoice.state, @returned_invoice.id])
+    next_record ||= returned_invoices.find(:first, :conditions => ["doctor_id = ? AND state > ?", @returned_invoice.doctor_id, @returned_invoice.state])
+    next_record ||= returned_invoices.find(:first, :conditions => ["doctor_id > ?", @returned_invoice.doctor_id])
+
+    if next_record
+      redirect_to :action => "edit", :id => next_record.id
     else
       redirect_to returned_invoices_path
     end
