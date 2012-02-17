@@ -96,6 +96,7 @@ ActionController::Routing::Routes.draw do |map|
     :collection => {:print_request_document => :post, :request_document => :get},
     :member => {:reactivate => :post, :write_off => :post, :queue_request => :post}
 
+  map.resources :esr_files
   map.resources :esr_bookings
 
   # Attachments

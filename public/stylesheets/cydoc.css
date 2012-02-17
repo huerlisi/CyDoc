@@ -12,6 +12,15 @@ h4 {
   margin-top: 0;
 }
 
+/* Misc */
+.right {
+  text-align: right
+}
+
+.currency {
+  text-align: right
+}
+
 /* Welcome */
 .welcome { margin: 2em; margin-bottom: 3.5em; }
 .welcome p { width: 100%; font-size: 13pt; font-variant:italic }

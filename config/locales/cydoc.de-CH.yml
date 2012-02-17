@@ -261,7 +261,7 @@ de-CH:
       doctors: "Ärzte"
       drug_products: "Medikamente"
       esr: 'VESR'
-      esr_bookings: "VESR Journal"
+      esr_files: "VESR Journal"
       help: "Hilfe"
       home: "Home"
       insurances: "Versicherungen"
