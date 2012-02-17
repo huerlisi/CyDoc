@@ -36,7 +36,7 @@ class ReturnedInvoice < ActiveRecord::Base
   validates_presence_of :invoice_id
   validates_presence_of :invoice, :message => 'Rechnung nicht gefunden'
 
-  def validate
+  def validate_on_create
     # Check if an open returned_invoice record with same invoice exists
     if ReturnedInvoice.count(:conditions => {:invoice_id => self.invoice_id, :state => ["ready", "request_pending"]}) > 0
       errors.add_to_base("Rechnung bereits erfasst.")
