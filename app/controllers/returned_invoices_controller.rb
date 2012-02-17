@@ -28,7 +28,7 @@ class ReturnedInvoicesController < ApplicationController
 
     @patient = @returned_invoice.patient
     unless @patient.update_attributes(params[:patient])
-      render 'patient_form' and return
+      render 'edit' and return
     end
 
     case params[:commit]
