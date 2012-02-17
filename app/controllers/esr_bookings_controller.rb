@@ -26,19 +26,9 @@ class EsrBookingsController < ApplicationController
 
   # POST /esr_bookings
   def create
-    # if :filename param is set, file exists
-    if params[:filename]
-      vesr_path = params[:filename]
-      
-      @esr_file = EsrFile.new(:uploaded_data => ActionController::TestUploadedFile.new(vesr_path))
-    else
-      @esr_file = EsrFile.new(params[:esr_file])
-    end
+    @esr_file = EsrFile.new(params[:esr_file])
 
-    if @esr_file.save
-      # Delete file if saved as attachment
-      File.delete(vesr_path) if vesr_path
-    end
+    @esr_file.save
     
     respond_to do |format|
       format.html {
