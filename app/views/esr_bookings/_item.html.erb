@@ -1,6 +1,0 @@
-<tr id="esr_file_<%= item.id %>">
-  <td><%= link_to l(item.updated_at), esr_booking_path(item) %></td>
-  <td style="text-align: right"><%=h item.esr_records.valid.count %></td>
-  <td style="text-align: right"><%=h item.esr_records.invalid.count %></td>
-  <td style="text-align: right"><%=h sprintf("%0.2f", item.esr_records.sum(:amount) || 0.0) %></td>
-</tr>

@@ -1,0 +1,41 @@
+# German locale
+de-CH:
+  activerecord:
+    models:
+      esr_file:   ESR-Datei
+      esr_record: ESR-Eintrag
+    attributes:
+      esr_file:
+        remarks:    Bemerkungen
+        file:       Dateiname
+        updated_at: Verbucht am
+        bookings:   Buchungen
+        bad_bookings: Fehlerhafte Buchungen
+        total_amount: Total (inkl. fehlerhaft)
+        uploaded_data: Datei
+      esr_record:
+        bank_pc_id:       Teilnehmer-Nr.
+        reference:        Referenz
+        amount:           Betrag
+        transaction_date: Transaktionsdatum
+        payment_amount:   Zahlbetrag
+        payment_date:     Zahldatum
+        saldo:            Saldo
+        value_date:       Valuta Datum
+        invoice:          Rechnung
+        customer:         Kunde
+        booking:          Buchung
+        state:            Status
+        remarks:          Bemerkungen
+
+  # Titles
+  esr_files:
+    new:
+      title:              VESR Datei einlesen
+    index:
+      index:              VESR Liste
+
+  # CRUD
+  crud:
+    action:
+      

@@ -1,0 +1,13 @@
+.contextual
+  = link_to_function "Protokoll drucken", 'window.print()', :class => "icon icon-print"
+  = link_to "VESR Liste", esr_files_path, :class => "icon icon-book"
+%h2
+  VESR Protokoll vom #{l(@esr_file.updated_at.to_date)}
+= render :partial => 'list_records', :object => @esr_file.esr_records.valid
+- unless @esr_file.esr_records.bad.empty?
+  %h3 Falscher Betrag
+  = render :partial => 'list_records', :object => @esr_file.esr_records.bad
+- unless @esr_file.esr_records.missing.empty?
+  %h3 Rechnung nicht gefunden
+  = render :partial => 'list_records', :object => @esr_file.esr_records.missing
+= render :partial => 'sidebar'
