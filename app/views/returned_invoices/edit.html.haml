@@ -6,6 +6,8 @@
 
 %h2= t_title
 
+#tab-content-invoices
+#tab-content-treatments
 .box
   - if @returned_invoice.patient.blank?
     = render 'form'
