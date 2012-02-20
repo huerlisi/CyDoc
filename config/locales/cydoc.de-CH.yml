@@ -365,6 +365,8 @@ de-CH:
   returned_invoices:
     edit_ready:
       title:              Neue vorbereiten
+    index:
+      title:              Inkasso
 
   boolean:
     true:  Ja
