@@ -16,7 +16,7 @@ de-CH:
       esr_record:
         bank_pc_id:       Teilnehmer-Nr.
         reference:        Referenz
-        amount:           Betrag
+        amount:           Rechnungsbetrag
         transaction_date: Transaktionsdatum
         payment_amount:   Zahlbetrag
         payment_date:     Zahldatum
