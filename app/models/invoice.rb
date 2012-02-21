@@ -2,6 +2,7 @@ class Invoice < ActiveRecord::Base
   PAYMENT_PERIOD = 30
   DEBIT_ACCOUNT = Account.find_by_code('1100')
   EARNINGS_ACCOUNT = Account.find_by_code('3200')
+  EXTRA_EARNINGS_ACCOUNT = Account.find_by_code('8000')
 
   REMINDER_FEE = {'reminded' => 0.0, '2xreminded' => 10.0, '3xreminded' => 10.0, 'encashment' => 0.0}
   REMINDER_PAYMENT_PERIOD = {'reminded' => 20, '2xreminded' => 10, '3xreminded' => 10, 'encashment' => 0}
@@ -123,11 +124,11 @@ class Invoice < ActiveRecord::Base
   end
   
   # Actions
-  def reactivate
+  def reactivate(comments = nil)
     unless state == 'canceled'
       # Cancel original amount
       bookings.build(:title => "Storno",
-                     :comments => "Reaktiviert",
+                     :comments => comments || "Reaktiviert",
                      :amount => amount,
                      :credit_account => EARNINGS_ACCOUNT,
                      :debit_account => DEBIT_ACCOUNT,
@@ -135,7 +136,7 @@ class Invoice < ActiveRecord::Base
       # write off rest if needed
       if due_amount > 0
         bookings.build(:title => "Debitorenverlust",
-                       :comments => "Reaktiviert",
+                       :comments => comments || "Reaktiviert",
                        :amount => due_amount,
                        :credit_account => EARNINGS_ACCOUNT,
                        :debit_account => DEBIT_ACCOUNT,
@@ -159,6 +160,21 @@ class Invoice < ActiveRecord::Base
                      :amount => due_amount,
                      :credit_account => EARNINGS_ACCOUNT,
                      :debit_account => DEBIT_ACCOUNT,
+                     :value_date => Date.today)
+    end
+
+    self.state = 'written_off'
+
+    return self
+  end
+
+  def book_extra_earning(comments = nil)
+    if due_amount < 0
+      bookings.build(:title => "Ausserordentlicher Ertrag",
+                     :comments => comments || "Zuviel bezahlt",
+                     :amount => -due_amount,
+                     :debit_account  => EXTRA_EARNINGS_ACCOUNT,
+                     :credit_account => DEBIT_ACCOUNT,
                      :value_date => Date.today)
     end
 

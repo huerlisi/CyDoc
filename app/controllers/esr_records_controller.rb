@@ -13,4 +13,12 @@ class EsrRecordsController < ApplicationController
 
     redirect_to @esr_record.esr_file
   end
+
+  def book_extra_earning
+    @esr_record = EsrRecord.find(params[:id])
+    @esr_record.invoice.book_extra_earning("Korrektur nach VESR Zahlung").save
+    @esr_record.book_extra_earning!
+
+    redirect_to @esr_record.esr_file
+  end
 end
