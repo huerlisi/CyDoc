@@ -5,5 +5,6 @@ class SetNewEsrRecordStates < ActiveRecord::Migration
       e.update_state
       e.save
     }
+    EsrRecord.update_all("state = 'paid'", "state = 'valid'")
   end
 end
