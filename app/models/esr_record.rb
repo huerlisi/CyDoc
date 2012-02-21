@@ -25,7 +25,7 @@ class EsrRecord < ActiveRecord::Base
   end
 
   aasm_event :book_extra_earning do
-    transitions :from => [:overpaid, :missing], :to => :resolved, :guard => :overpaid?
+    transitions :from => [:overpaid, :missing], :to => :resolved
   end
 
   named_scope :invalid, :conditions => {:state => ['overpaid', 'underpaid', 'resolved']}
@@ -186,5 +186,15 @@ class EsrRecord < ActiveRecord::Base
     self.booking = esr_booking
     
     return esr_booking
+  end
+
+public
+  def create_extra_earning_booking(comments = nil)
+    Booking.create(:title => "Ausserordentlicher Ertrag",
+                   :comments => comments || "Zahlung kann keiner Rechnung zugewiesen werden",
+                   :amount => self.amount,
+                   :debit_account  => Invoice::EXTRA_EARNINGS_ACCOUNT,
+                   :credit_account => Invoice::DEBIT_ACCOUNT,
+                   :value_date => Date.today)
   end
 end
