@@ -178,8 +178,6 @@ class Invoice < ActiveRecord::Base
                      :value_date => Date.today)
     end
 
-    self.state = 'written_off'
-
     return self
   end
 
