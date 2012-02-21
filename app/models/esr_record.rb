@@ -129,6 +129,13 @@ class EsrRecord < ActiveRecord::Base
     end
   end
 
+  def self.update_invalid_states
+    self.invalid.find_each do |e|
+      e.update_state
+      e.save
+    end
+  end
+
   # Invoices
   before_create :assign_invoice, :create_esr_booking
   

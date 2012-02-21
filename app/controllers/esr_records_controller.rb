@@ -3,6 +3,10 @@ class EsrRecordsController < ApplicationController
   inherit_resources
   respond_to :html, :js
 
+  before_filter :only => [:index] do
+    EsrRecord.update_invalid_states
+  end
+
   # Scopes
   def index
     @esr_records = EsrRecord.unsolved.paginate :page => params[:page]
