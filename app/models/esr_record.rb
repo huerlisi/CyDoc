@@ -95,6 +95,8 @@ class EsrRecord < ActiveRecord::Base
   end
   
   def assign_invoice
+    # Prepare remarks to not be null
+    self.remarks ||= ''
     if Invoice.exists?(invoice_id)
       self.invoice_id = invoice_id
       self.remarks += "Referenz #{reference}"
