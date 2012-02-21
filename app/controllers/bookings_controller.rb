@@ -81,7 +81,11 @@ class BookingsController < ApplicationController
         @booking.credit_account = Account.find_by_code('3900') # Debitorenverlust
         @booking.debit_account = Account.find_by_code('1100') # Debitor
       when "Rückerstattung":
-        @booking.credit_account = Account.find_by_code('1100') # Debitor
+        if extra_earning_booking = @invoice.bookings.find_by_debit_account_id(Invoice::EXTRA_EARNINGS_ACCOUNT.id)
+          @booking.credit_account = Account.find_by_code('8000') # Ausserordentlicher Ertrag
+        else
+          @booking.credit_account = Account.find_by_code('1100') # Debitor
+        end
         @booking.debit_account = Account.find_by_code('1020') # Bank
     end
     
