@@ -352,6 +352,7 @@ de-CH:
       resolve:            Abschliessen
       reactivate:         Reaktivieren
       write_off:          Abschreiben
+      book_extra_earning: Ausserordentlicher Gewinn verbuchen
       edit_ready:         Neue vorbereiten
       show_order_form:    Auftragsformular
       print_request_document: Adressanfrage

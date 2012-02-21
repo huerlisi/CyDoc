@@ -4,11 +4,32 @@ class EsrRecord < ActiveRecord::Base
   belongs_to :booking, :dependent => :destroy
   belongs_to :invoice
   
-  named_scope :valid, :conditions => "state = 'valid'"
-  named_scope :missing, :conditions => "state = 'missing'"
-  named_scope :bad, :conditions => "state = 'bad'"
-  named_scope :invalid, :conditions => "state != 'valid'"
-  
+  # State Machine
+  include AASM
+  aasm_column :state
+  validates_presence_of :state
+
+  aasm_initial_state :ready
+  aasm_state :paid
+  aasm_state :missing
+  aasm_state :overpaid
+  aasm_state :underpaid
+  aasm_state :resolved
+
+  aasm_event :write_off do
+    transitions :from => :underpaid, :to => :resolved
+  end
+
+  aasm_event :book_extra_earning do
+    transitions :from => [:overpaid, :missing], :to => :resolved, :guard => :overpaid?
+  end
+
+  aasm_event :assign_invoice do
+    transitions :from => :missing, :to => :resolved
+  end
+
+  named_scope :bad, :conditions => {:state => ['overpaid', 'underpaid', 'resolved']}
+
   private
   def parse_date(value)
     year  = value[0..1].to_i + 2000
