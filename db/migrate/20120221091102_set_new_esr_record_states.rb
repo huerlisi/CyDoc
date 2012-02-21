@@ -6,5 +6,7 @@ class SetNewEsrRecordStates < ActiveRecord::Migration
       e.save
     }
     EsrRecord.update_all("state = 'paid'", "state = 'valid'")
+
+    EsrRecord.missing.all.each{|er| er.remarks = ""; er.send(:assign_invoice); er.save}
   end
 end

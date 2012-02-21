@@ -136,20 +136,20 @@ class EsrRecord < ActiveRecord::Base
     # Prepare remarks to not be null
     self.remarks ||= ''
 
+    self.remarks += "Referenz #{reference}"
+
     if Invoice.exists?(invoice_id)
       self.invoice_id = invoice_id
-      self.remarks += "Referenz #{reference}"
       update_remarks
       update_state
 
     elsif imported_invoice = Invoice.find(:first, :conditions => ["imported_esr_reference LIKE concat(?, '%')", reference])
       self.invoice = imported_invoice
-      self.remarks += "Referenz #{reference}"
       update_remarks
       update_state
 
     else
-      self.remarks += "Rechnung ##{invoice_id} nicht gefunden"
+      self.remarks += ", Rechnung ##{invoice_id} nicht gefunden"
       self.state = "missing"
     end
   end
