@@ -20,12 +20,12 @@ class EsrRecord < ActiveRecord::Base
     transitions :from => :underpaid, :to => :resolved
   end
 
-  aasm_event :book_extra_earning do
-    transitions :from => [:overpaid, :missing], :to => :resolved, :guard => :overpaid?
+  aasm_event :resolve do
+    transitions :from => :underpaid, :to => :resolved
   end
 
-  aasm_event :assign_invoice do
-    transitions :from => :missing, :to => :resolved
+  aasm_event :book_extra_earning do
+    transitions :from => [:overpaid, :missing], :to => :resolved, :guard => :overpaid?
   end
 
   named_scope :invalid, :conditions => {:state => ['overpaid', 'underpaid']}

@@ -26,4 +26,13 @@ class EsrRecordsController < ApplicationController
       format.html {redirect_to @esr_record.esr_file}
     end
   end
+
+  def resolve
+    @esr_record = EsrRecord.find(params[:id])
+    @esr_record.resolve!
+
+    respond_to do |format|
+      format.html {redirect_to @esr_record.esr_file}
+    end
+  end
 end
