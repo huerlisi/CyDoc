@@ -267,6 +267,7 @@ de-CH:
       insurances: "Versicherungen"
       master_data: Stammdaten
       new_esr: "VESR Datei einlesen"
+      unresolved_records: "Falsche VESR Buchungen"
       open_cases: "Offene Fälle"
       open_positions: "Offene Posten"
       patients: 'Patienten'
