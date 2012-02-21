@@ -9,7 +9,7 @@ class EsrRecordsController < ApplicationController
 
   # Scopes
   def index
-    @esr_records = EsrRecord.unsolved.paginate :page => params[:page]
+    @esr_records = EsrRecord.unsolved.paginate :page => params[:page], :order => 'state, value_date'
   end
 
   # State events
