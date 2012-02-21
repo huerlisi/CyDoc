@@ -8,4 +8,4 @@
     %th.currency= t_attr :saldo, EsrRecord
     %th.action-links
 
-  = render esr_records
+  = render @esr_records || esr_records

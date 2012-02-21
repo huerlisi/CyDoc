@@ -4,7 +4,9 @@ class EsrRecordsController < ApplicationController
   respond_to :html, :js
 
   # Scopes
-  has_scope :by_state
+  def index
+    @esr_records = EsrRecord.invalid.paginate :page => params[:page]
+  end
 
   # State events
   def write_off
