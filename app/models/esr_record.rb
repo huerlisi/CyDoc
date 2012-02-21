@@ -110,7 +110,7 @@ class EsrRecord < ActiveRecord::Base
       self.invoice = imported_invoice
       self.remarks += "Referenz #{reference}"
       if invoice.due_amount.currency_round != self.amount.currency_round
-        self.remarks += ", falscher Betrag"
+        evaluate_bad
         self.state = "bad"
       else
         self.state = "valid"
