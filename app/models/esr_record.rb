@@ -83,7 +83,7 @@ class EsrRecord < ActiveRecord::Base
       end
     elsif !(invoice.active)
       # canceled invoice
-      self.remarks += ", wurde #{invoice.state_adverb}"
+      self.remarks += ", wurde bereits #{invoice.state_adverb}"
     elsif invoice.amount == self.amount.currency_round
       # TODO much too open condition (issue #804)
       # reminder fee not paid
