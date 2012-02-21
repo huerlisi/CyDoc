@@ -9,3 +9,7 @@ tr.esr_record.underpaid {
 tr.esr_record.resolved {
   background-color: #DFF0D8;
 }
+
+tr.esr_record.missing {
+  background-color: #D9EDF7;
+}
