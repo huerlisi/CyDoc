@@ -28,8 +28,9 @@ class EsrRecord < ActiveRecord::Base
     transitions :from => [:overpaid, :missing], :to => :resolved, :guard => :overpaid?
   end
 
-  named_scope :invalid, :conditions => {:state => ['overpaid', 'underpaid']}
-  named_scope :valid, :conditions => {:state => ['paid', 'resolved']}
+  named_scope :invalid, :conditions => {:state => ['overpaid', 'underpaid', 'resolved']}
+  named_scope :unsolved, :conditions => {:state => ['overpaid', 'underpaid', 'missing']}
+  named_scope :valid, :conditions => {:state => 'paid'}
 
   private
   def parse_date(value)

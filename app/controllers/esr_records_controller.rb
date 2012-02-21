@@ -5,7 +5,7 @@ class EsrRecordsController < ApplicationController
 
   # Scopes
   def index
-    @esr_records = EsrRecord.invalid.paginate :page => params[:page]
+    @esr_records = EsrRecord.unsolved.paginate :page => params[:page]
   end
 
   # State events
