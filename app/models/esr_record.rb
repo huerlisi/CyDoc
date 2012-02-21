@@ -68,11 +68,7 @@ class EsrRecord < ActiveRecord::Base
     self
   end
 
-  # Invoices
-  before_create :assign_invoice, :create_esr_booking
-  
-  private
-  def evaluate_bad
+  def update_remarks
     if invoice.state == 'paid'
       # already paid
       if invoice.amount == self.amount.currency_round
@@ -93,28 +89,43 @@ class EsrRecord < ActiveRecord::Base
       self.remarks += ", falscher Betrag"
     end
   end
+
+  def update_state
+    if self.invoice.nil?
+      self.state = 'missing'
+      return
+    end
+
+    balance = self.invoice.balance.currency_round
+    if balance == 0
+      self.state = 'paid'
+    elsif balance > 0
+      self.state = 'underpaid'
+    elsif balance < 0
+      self.state = 'overpaid'
+    end
+  end
+
+  # Invoices
+  before_create :assign_invoice, :create_esr_booking
   
+  private
   def assign_invoice
     # Prepare remarks to not be null
     self.remarks ||= ''
+
     if Invoice.exists?(invoice_id)
       self.invoice_id = invoice_id
       self.remarks += "Referenz #{reference}"
-      if invoice.due_amount.currency_round != self.amount.currency_round
-        evaluate_bad
-        self.state = "bad"
-      else
-        self.state = "valid"
-      end
+      update_remarks
+      update_state
+
     elsif imported_invoice = Invoice.find(:first, :conditions => ["imported_esr_reference LIKE concat(?, '%')", reference])
       self.invoice = imported_invoice
       self.remarks += "Referenz #{reference}"
-      if invoice.due_amount.currency_round != self.amount.currency_round
-        evaluate_bad
-        self.state = "bad"
-      else
-        self.state = "valid"
-      end
+      update_remarks
+      update_state
+
     else
       self.remarks += "Rechnung ##{invoice_id} nicht gefunden"
       self.state = "missing"
