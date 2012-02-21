@@ -26,8 +26,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :invoice_batch_jobs, :member => {:reprint => :post}
   map.resources :reminder_batch_jobs, :member => {:reprint => :post}
   
-  map.resources :esr_bookings
-
   map.resources :insurances
 
   map.resources :doctors do |doctor|
@@ -97,7 +95,6 @@ ActionController::Routing::Routes.draw do |map|
     :member => {:reactivate => :post, :write_off => :post, :queue_request => :post}
 
   map.resources :esr_files
-  map.resources :esr_bookings
 
   # Attachments
   map.resources :attachments, :member => {:download => :get}
