@@ -10,6 +10,7 @@ class EsrRecord < ActiveRecord::Base
   validates_presence_of :state
 
   aasm_initial_state :ready
+  aasm_state :ready
   aasm_state :paid
   aasm_state :missing
   aasm_state :overpaid
