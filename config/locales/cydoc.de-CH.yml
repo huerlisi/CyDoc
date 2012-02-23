@@ -267,6 +267,7 @@ de-CH:
       insurances: "Versicherungen"
       master_data: Stammdaten
       new_esr: "VESR Datei einlesen"
+      unresolved_records: "Falsche VESR Buchungen"
       open_cases: "Offene Fälle"
       open_positions: "Offene Posten"
       patients: 'Patienten'
@@ -352,6 +353,8 @@ de-CH:
       resolve:            Abschliessen
       reactivate:         Reaktivieren
       write_off:          Abschreiben
+      book_extra_earning: Ausserordentlicher Gewinn verbuchen
+      resolve:            Als erledigt markieren
       edit_ready:         Neue vorbereiten
       show_order_form:    Auftragsformular
       print_request_document: Adressanfrage

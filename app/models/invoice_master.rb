@@ -1,29 +1,14 @@
 class Invoice < ActiveRecord::Base
   PAYMENT_PERIOD = 30
-
+  DEBIT_ACCOUNT = Account.find_by_code('1100')
+  EARNINGS_ACCOUNT = Account.find_by_code('3200')
+  
+  REMINDER_FEE = {'reminded' => 0.0, '2xreminded' => 10.0, '3xreminded' => 10.0, 'encashment' => 100.0}
+  REMINDER_PAYMENT_PERIOD = {'reminded' => 20, '2xreminded' => 10, '3xreminded' => 10, 'encashment' => 0}
+  
   belongs_to :tiers, :autosave => true
   belongs_to :law, :autosave => true
   belongs_to :treatment, :autosave => true
-  has_one :patient, :through => :treatment
-
-  belongs_to :patient_vcard, :class_name => 'Vcard', :autosave => true
-  belongs_to :billing_vcard, :class_name => 'Vcard', :autosave => true
-
-  # Settings
-  def settings
-    doctor = biller
-    doctor ||= Doctor.find(Thread.current["doctor_id"]) if Doctor.exists?(Thread.current["doctor_id"])
-
-    doctor.present? ? doctor.settings : Settings
-  end
-
-  # Treatment hook
-  after_save :notify_treatment
-  after_destroy :notify_treatment
-
-  def notify_treatment
-    treatment.update_state
-  end
 
   # Constructor
   def self.create_from_treatment(treatment, value_date, tiers_name, provider, biller)
@@ -37,12 +22,10 @@ class Invoice < ActiveRecord::Base
 
     # Build Invoice
     invoice = self.new(
-      :treatment     => treatment,
-      :value_date    => value_date,
-      :tiers         => tiers,
-      :law           => treatment.law,
-      :patient_vcard => treatment.patient.vcard,
-      :billing_vcard => treatment.patient.invoice_vcard
+      :treatment  => treatment,
+      :value_date => value_date,
+      :tiers      => tiers,
+      :law        => treatment.law
     )
 
     # Assign service records
@@ -66,68 +49,23 @@ class Invoice < ActiveRecord::Base
     return invoice
   end
 
-  # Dunning
-  named_scope :dunning_stopped, :include => {:treatment => :patient}, :conditions => {"patients.dunning_stop" => true}
-  named_scope :dunning_active, :include => {:treatment => :patient}, :conditions => {"patients.dunning_stop" => false}
-
   # State
-  # =====
-  named_scope :prepared, :conditions => "invoices.state = 'prepared'"
-  named_scope :canceled, :conditions => "invoices.state = 'canceled'"
-  named_scope :reactivated, :conditions => "invoices.state = 'reactivated'"
-  named_scope :in_encashment, :conditions => ["invoices.state = 'encashment'"]
+  named_scope :prepared, :conditions => "state = 'prepared'"
+  named_scope :canceled, :conditions => "state = 'canceled'"
+  named_scope :reactivated, :conditions => "state = 'reactivated'"
+  named_scope :active, :conditions => "NOT(state IN ('reactivated', 'canceled'))"
+  named_scope :open, :conditions => "NOT(state IN ('reactivated', 'canceled', 'paid'))"
+  named_scope :overdue, :conditions => ["(state = 'booked' AND due_date < :today) OR (state = 'reminded' AND reminder_due_date < :today) OR (state = '2xreminded' AND second_reminder_due_date < :today)", {:today => Date.today}]
+  named_scope :reminded, :conditions => "state IN ('reminded', '2xreminded', '3xreminded', 'encashment')"
+  named_scope :in_encashment, :conditions => ["state = 'encashment'"]
 
-  named_scope :active, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled', 'written_off'))"
+  
   def active
     !(state == 'canceled' or state == 'reactivated' or state == 'written_off')
   end
   
-  named_scope :open, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled', 'written_off', 'paid'))"
   def open
-    !(state == 'canceled' or state == 'reactivated' or state == 'written_off' or state == 'paid')
-  end
-
-  # TODO: unify greeze period of 30 days and make configurable
-  named_scope :overdue, :conditions => ["(invoices.state IN ('booked', 'printed') AND due_date < :grace_date) OR (invoices.state = 'reminded' AND reminder_due_date < :today) OR (invoices.state = '2xreminded' AND second_reminder_due_date < :today) OR (invoices.state = '3xreminded' AND third_reminder_due_date < :today)", {:today => Date.today, :grace_date => Date.today.ago(30.days)}]
-  def overdue?
-    return true if (state == 'booked' or state == 'printed') and due_date < Date.today
-    return true if state == 'reminded' and (reminder_due_date.nil? or reminder_due_date < Date.today)
-    return true if state == '2xreminded' and (second_reminder_due_date.nil? or second_reminder_due_date < Date.today)
-    return true if state == '3xreminded' and (third_reminder_due_date.nil? or third_reminder_due_date < Date.today)
-
-    return false
-  end
-
-  named_scope :reminded, :conditions => "invoices.state IN ('reminded', '2xreminded', '3xreminded', 'encashment')"
-  def reminded?
-    reminder_level > 0
-  end
-
-  def reminder_level
-    case state
-      when 'reminded'
-        1
-      when '2xreminded'
-        2
-      when '3xreminded'
-        3
-      when 'encashment'
-        4
-      else
-        0
-    end
-  end
-
-  def reminder_fee
-    settings["invoices.reminders.#{reminder_level}.fee"]
-  end
-
-  def reminder_grace_period
-    settings["invoices.reminders.#{reminder_level}.grace_period"]
-  end
-
-  def reminder_payment_period
-    settings["invoices.reminders.#{reminder_level}.payment_period"]
+    active and !(state == 'paid')
   end
 
   def state_adverb
@@ -151,28 +89,32 @@ class Invoice < ActiveRecord::Base
     end
   end
   
-  # Actions
-  def reactivate(comments = nil)
+  def overdue?
+    return true if state == 'booked' and due_date < Date.today
+    return true if state == 'reminded' and (reminder_due_date.nil? or reminder_due_date < Date.today)
+    return true if state == '2xreminded' and (second_reminder_due_date.nil? or second_reminder_due_date < Date.today)
+    return true if state == '3xreminded' and (third_reminder_due_date.nil? or third_reminder_due_date < Date.today)
+
+    return false
+  end
+  
+  def reminded?
+    return ['reminded', '2xreminded', '3xreminded', 'encashment'].include?(state)
+  end
+
+  def reactivate
+    # TODO: only build booking if booked
+    
     unless state == 'canceled'
-      # Cancel original amount
       bookings.build(:title => "Storno",
-                     :comments => comments || "Reaktiviert",
-                     :amount => amount,
-                     :credit_account => profit_account,
-                     :debit_account => balance_account,
+                     :amount => amount.currency_round,
+                     :credit_account => EARNINGS_ACCOUNT,
+                     :debit_account => DEBIT_ACCOUNT,
                      :value_date => Date.today)
-      # write off rest if needed
-      if due_amount > 0
-        bookings.build(:title => "Debitorenverlust",
-                       :comments => comments || "Reaktiviert",
-                       :amount => due_amount,
-                       :credit_account => profit_account,
-                       :debit_account => balance_account,
-                       :value_date => Date.today)
-      end
     end
     
     self.state = 'reactivated'
+    # TODO: actually reactivate treatment/session
 
     for session in sessions
       session.reactivate
@@ -181,63 +123,20 @@ class Invoice < ActiveRecord::Base
     return self
   end
   
-  def write_off(comments = nil)
-    if due_amount > 0
-      bookings.build(:title => "Debitorenverlust",
-                     :comments => comments || "Abgeschrieben",
-                     :amount => due_amount,
-                     :credit_account => profit_account,
-                     :debit_account => balance_account,
-                     :value_date => Date.today)
-    end
-
-    self.state = 'written_off'
-
-    return self
-  end
-
-  def book_extra_earning(comments = nil)
-    if due_amount < 0
-      bookings.build(:title => "Ausserordentlicher Ertrag",
-                     :comments => comments || "Zuviel bezahlt",
-                     :amount => -due_amount,
-                     :debit_account  => Account.find_by_code(settings['invoices.extra_earnings_account_code']),
-                     :credit_account => balance_account,
-                     :value_date => Date.today)
-    end
-
-    return self
-  end
-
-  def cancel(comments = nil)
-    # Cancel original amount
-    booking = bookings.build(:title => "Storno",
-                   :amount => amount,
-                   :credit_account => profit_account,
-                   :debit_account => balance_account,
+  def cancel
+    bookings.build(:title => "Storno",
+                   :amount => amount.currency_round,
+                   :credit_account => EARNINGS_ACCOUNT,
+                   :debit_account => DEBIT_ACCOUNT,
                    :value_date => Date.today)
-    booking.comments = comments if comments.present?
-
-    # Cancel reset if needed
-    if due_amount > 0
-      bookings.build(:title => "Debitorenverlust",
-                     :comments => "Storniert",
-                     :amount => due_amount,
-                     :credit_account => profit_account,
-                     :debit_account => balance_account,
-                     :value_date => Date.today)
-    end
-
     self.state = 'canceled'
-
-    return booking
   end
   
   def build_booking
     bookings.build(:title => "Rechnung",
-                   :amount => amount,
-                   :credit_account => balance_account,
-                   :debit_account => profit_account,
+                   :amount => amount.currency_round,
+                   :credit_account => DEBIT_ACCOUNT,
+                   :debit_account => EARNINGS_ACCOUNT,
                    :value_date => value_date)
   end
 
@@ -250,24 +149,25 @@ class Invoice < ActiveRecord::Base
   
   def build_reminder_booking
     bookings.build(:title => self.state_noun,
-                   :amount => reminder_fee,
-                   :credit_account => balance_account,
-                   :debit_account => profit_account,
+                   :amount => REMINDER_FEE[self.state],
+                   :credit_account => DEBIT_ACCOUNT,
+                   :debit_account => EARNINGS_ACCOUNT,
                    :value_date => Date.today)
   end
   
   def remind
     case state
-      when 'booked', 'printed': remind_first_time
-      when 'reminded':          remind_second_time
-      when '2xreminded':        remind_third_time
-      when '3xreminded':        encash
+      when 'booked':      remind_first_time
+      when 'reminded':    remind_second_time
+#      when '2xreminded':  remind_third_time
+      when '2xreminded':  encash
+      when '3xreminded':  encash
     end
   end
   
   def remind_first_time
     self.state = 'reminded'
-    self.reminder_due_date = Date.today + reminder_payment_period
+    self.reminder_due_date = Date.today + REMINDER_PAYMENT_PERIOD[self.state]
     build_reminder_booking
   end
   
@@ -278,13 +178,13 @@ class Invoice < ActiveRecord::Base
 
   def remind_second_time
     self.state = '2xreminded'
-    self.second_reminder_due_date = Date.today + reminder_payment_period
+    self.second_reminder_due_date = Date.today + REMINDER_PAYMENT_PERIOD[self.state]
     build_reminder_booking
   end
   
   def remind_third_time
     self.state = '3xreminded'
-    self.third_reminder_due_date = Date.today + reminder_payment_period
+    self.third_reminder_due_date = Date.today + REMINDER_PAYMENT_PERIOD[self.state]
     build_reminder_booking
   end
   
@@ -298,7 +198,7 @@ class Invoice < ActiveRecord::Base
 
   # Validation
   validates_presence_of :value_date
-#  validates_format_of :value_date, :with => /[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}/, :message => 'braucht Format dd.mm.yy (z.B. 3.12.1980)'
+  validates_format_of :value_date, :with => /[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}/, :message => 'braucht Format dd.mm.yy (z.B. 3.12.1980)'
 
   validates_presence_of :service_records, :message => 'Keine Leistung eingegeben.'
   validate :valid_service_records?
@@ -306,65 +206,45 @@ class Invoice < ActiveRecord::Base
   validates_presence_of :treatment
   validate :valid_treatment?
 
+  validates_presence_of :patient
   validate :valid_patient?
   
   def valid_service_records?
     service_records.map{|service_record|
-      errors.add_to_base(service_record.errors.full_messages.join('</li><li>')) unless service_record.valid_for_invoice?(self)
+      errors.add_to_base(service_record.errors.full_messages.join('</li><li>')) unless service_record.valid_for_invoice?
     }
 
     return errors.empty?
   end
   
   def valid_treatment?
-    errors.add_to_base(treatment.errors.full_messages.join('</li><li>')) unless treatment.valid_for_invoice?(self)
+    errors.add_to_base(treatment.errors.full_messages.join('</li><li>')) unless treatment.valid_for_invoice?
 
     return errors.empty?
   end
 
   def valid_patient?
-    if treatment.patient
-      errors.add_to_base(treatment.patient.errors.full_messages.join('</li><li>')) unless treatment.patient.valid_for_invoice?(self)
-    else
-      errors.add_to_base("Patient fehlt") unless treatment.patient
-    end
+    errors.add_to_base(patient.errors.full_messages.join('</li><li>')) unless patient.valid_for_invoice?
 
     return errors.empty?
   end
   
   # Accounting
-  def profit_account
-    Account.find_by_code(settings['invoices.profit_account_code'])
-  end
-
-  def balance_account
-    Account.find_by_code(settings['invoices.balance_account_code'])
-  end
-
-  has_many :bookings, :class_name => 'Booking', :as => 'reference', :order => 'value_date', :dependent => :destroy
+  has_many :bookings, :class_name => 'Booking', :as => 'reference', :dependent => :destroy
+  
   def due_amount(value_date = nil)
     if value_date
       included_bookings = bookings.find(:all, :conditions => ["value_date <= ?", value_date])
     else
       included_bookings = bookings
     end
-    included_bookings.to_a.sum{|b| b.accounted_amount(balance_account)}
+    included_bookings.to_a.sum{|b| b.accounted_amount(Invoice::DEBIT_ACCOUNT)}
   end
   
-  # HasAccount compatibility
-  alias customer patient
-  alias balance due_amount
-
-  # Batch Jobs
-  has_and_belongs_to_many :invoice_batch_jobs
-
   # Callback hook
   def booking_saved(booking)
-    # Don't touch state if canceled, reactivated or written_off
-    return if self.state == 'canceled' or self.state == 'reactivated' or self.state == 'written_off'
-
     # Mark as paid unless canceled or reactivated
-    if self.due_amount <= 0.0
+    if (self.state != 'canceled') and (self.state != 'reactivated') and (self.due_amount <= 0.0)
       update_attribute(:state, 'paid')
     elsif !self.reminded? and (self.due_amount > 0.0)
       update_attribute(:state, 'booked')
@@ -379,12 +259,14 @@ class Invoice < ActiveRecord::Base
     when :short
       "##{id}: #{I18n.l(value_date) if value_date}"
     else
-      "#{patient.name}, Rechnung ##{id} #{I18n.l(value_date)} über #{sprintf('%0.2f', amount)} CHF"
+      "#{patient.name}, Rechnung ##{id} #{I18n.l(value_date)} über #{sprintf('%0.2f', amount.currency_round)} CHF"
     end
   end
   
   # Convenience methods
-  delegate :biller, :to => :tiers, :allow_nil => true
+  def biller
+    tiers.biller
+  end
 
   def provider
     tiers.provider
@@ -392,6 +274,10 @@ class Invoice < ActiveRecord::Base
 
   def insurance
     tiers.insurance
+  end
+
+  def patient
+    treatment.patient
   end
 
   def referrer
@@ -452,32 +338,20 @@ class Invoice < ActiveRecord::Base
     service_records.by_tariff_type(tariff_type).to_a.sum(&:amount_tt)
   end
   
-  # Returns rounded total amount
-  #
-  # The total is rounded according to currency rounding rules.
-  #
-  # tariff_type::
-  #   Only use service_records with these types. Can be an array
   def amount(tariff_type = nil, options = {})
-    value = service_records.by_tariff_type(tariff_type).to_a.sum(&:amount)
-
-    value.currency_round
+    service_records.by_tariff_type(tariff_type).to_a.sum(&:amount)
   end
 
   def obligation_amount
     service_records.obligate.to_a.sum(&:amount)
   end
 
-  def tax_points_mt(tariff_type = nil, options = {})
-    service_records.by_tariff_type(tariff_type).to_a.sum(&:tax_points_mt)
-  end
-
-  def tax_points_tt(tariff_type = nil, options = {})
-    service_records.by_tariff_type(tariff_type).to_a.sum(&:tax_points_tt)
-  end
-
-  def tax_points(tariff_type = nil, options = {})
-    service_records.by_tariff_type(tariff_type).to_a.sum(&:tax_points)
+  def amount.currency_round
+    if amount.nil?
+      return 0
+    else
+      return amount.currency_round
+    end
   end
 
   # Generalization
@@ -545,17 +419,48 @@ class Invoice < ActiveRecord::Base
   end
   
   # PDF/Print
-  include ActsAsDocument
-  def self.document_type_to_class(document_type)
-    "Prawn::#{document_type.to_s.camelcase}".constantize
+  def insurance_recipe_to_pdf
+    prawn_options = { :page_size => 'A4', :top_margin => 1.5.cm, :left_margin => 1.cm, :right_margin => 1.cm, :bottom_margin => 1.8.cm }
+    pdf = InsuranceRecipe.new(prawn_options)
+    
+    return pdf.to_pdf(self)
   end
 
   def print_insurance_recipe(printer)
-    print_document(:insurance_recipe, printer)
+    # Workaround TransientJob not yet accepting options
+    file = Tempfile.new('')
+    file.puts(insurance_recipe_to_pdf)
+    file.close
+
+    # Try twice
+    begin
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    rescue
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    end
+    paper_copy.print
+  end
+
+  def patient_letter_to_pdf
+    prawn_options = { :page_size => 'A4', :top_margin => 35, :left_margin => 12, :right_margin => 12, :bottom_margin => 23 }
+    pdf = PatientLetter.new(prawn_options)
+    
+    return pdf.to_pdf(self)
   end
 
   def print_patient_letter(printer)
-    print_document(:patient_letter, printer)
+    # Workaround TransientJob not yet accepting options
+    file = Tempfile.new('')
+    file.puts(patient_letter_to_pdf)
+    file.close
+
+    # Try twice
+    begin
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    rescue
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    end
+    paper_copy.print
   end
 
   def print(insurance_recipe_printer, patient_letter_printer)
@@ -564,7 +469,25 @@ class Invoice < ActiveRecord::Base
   end
 
   # Reminders
+  def reminder_letter_to_pdf
+    prawn_options = { :page_size => 'A4', :top_margin => 35, :left_margin => 12, :right_margin => 12, :bottom_margin => 23 }
+    pdf = ReminderLetter.new(prawn_options)
+
+    return pdf.to_pdf(self)
+  end
+
   def print_reminder(printer)
-    print_document(:reminder_letter, printer)
+    # Workaround TransientJob not yet accepting options
+    file = Tempfile.new('')
+    file.puts(reminder_letter_to_pdf)
+    file.close
+
+    # Try twice
+    begin
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    rescue
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    end
+    paper_copy.print
   end
 end

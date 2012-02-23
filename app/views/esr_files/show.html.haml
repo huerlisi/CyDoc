@@ -5,16 +5,16 @@
 
 %h2 VESR Protokoll vom #{l(@esr_file.updated_at.to_date)}
 
-- unless @esr_file.esr_records.bad.empty?
+- unless @esr_file.esr_records.invalid.empty?
   %h3 Falscher Betrag
-  = render :partial => 'list_records', :object => @esr_file.esr_records.bad
+  = render 'esr_records/list', :esr_records => @esr_file.esr_records.invalid
 
 - unless @esr_file.esr_records.missing.empty?
   %h3 Rechnung nicht gefunden
-  = render :partial => 'list_records', :object => @esr_file.esr_records.missing
+  = render 'esr_records/list', :esr_records => @esr_file.esr_records.missing
 
 - if params['show_valid'].present?
   %h3 Korrekte Zahlungen
-  = render :partial => 'list_records', :object => @esr_file.esr_records.valid
+  = render 'esr_records/list', :esr_records => @esr_file.esr_records.valid
 
 = render :partial => 'sidebar'
