@@ -1,0 +1,6 @@
+- content_for :sidebar do
+  .sub-tabs
+  %h3= t('cydoc.title.filter')
+  %ul
+    - for state in ReturnedInvoice.aasm_states
+      %li= link_to t_action(state.name), url_for(:params => params.merge(:by_state => state.name))

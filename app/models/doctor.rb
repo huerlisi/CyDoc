@@ -1,4 +1,7 @@
 class Doctor < ActiveRecord::Base
+  # Settings
+  has_settings
+
   has_vcards
 
   # Accounts
@@ -53,5 +56,17 @@ class Doctor < ActiveRecord::Base
     vcard_condition = "(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)"
 
     find(:all, :include => [:vcard], :conditions => ["#{vcard_condition}", query_params], :order => 'full_name, family_name, given_name')
+  end
+
+  # Returned invoices
+  has_many :returned_invoices
+  def request_all_returned_invoices
+    returned_invoices.ready.map {|returned_invoice| returned_invoice.queue_request!}
+  end
+
+  # PDF/Print
+  include ActsAsDocument
+  def self.document_type_to_class(document_type = nil)
+    Prawn::ReturnedInvoiceRequestDocument
   end
 end

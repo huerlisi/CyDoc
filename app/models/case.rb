@@ -59,15 +59,23 @@ class Case < ActiveRecord::Base
     treatment
   end
 
-  named_scope :finished, :conditions => ["screened_at IS NOT NULL AND (needs_review = ? OR review_at IS NOT NULL)", false]
   named_scope :no_treatment, :conditions => ["session_id IS NULL"]
+  named_scope :finished, :conditions => ["screened_at IS NOT NULL AND (needs_review = ? OR review_at IS NOT NULL)", false]
+  named_scope :finished_at, proc {|date|
+    {
+      :conditions => ["screened_at < :date AND (needs_review = :false OR review_at < :date)", {:date => date, :false => false}]
+    }
+  }
 
   def self.create_all_treatments
+    doctor = Doctor.find_by_code(Thread.current["doctor_id"])
+    date = DateTime.now.ago(doctor.settings['cases.invoice_grace_period'])
+
     failed_cases = []
 
-    cases = self.finished.no_treatment
+    cases = self.finished_at(date).no_treatment
     for a_case in cases
-      failed_cases << a_case.create_treatment(Doctor.find_by_code('zytolabor'))
+      failed_cases << a_case.create_treatment(doctor)
     end
 
     return cases.count, failed_cases.compact!

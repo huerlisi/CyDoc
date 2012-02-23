@@ -1,0 +1,8 @@
+%tr[returned_invoice]
+  %td= link_to returned_invoice.state, [:edit, returned_invoice], 'data-href-container' => 'tr'
+  %td= returned_invoice.invoice.to_s(:short)
+  %td= returned_invoice.patient
+  %td.action-links
+    - returned_invoice.aasm_events_for_current_state.each do |event|
+      = link_to image_tag("16x16/#{event}.png"), [event, returned_invoice], :method => :post, :title => t_action(event)
+    = link_to image_tag('delete.png'), returned_invoice, :method => :delete, :title => t_action(:delete)

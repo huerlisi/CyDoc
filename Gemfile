@@ -70,6 +70,9 @@ gem 'csv-mapper'
 # Locale setting
 gem 'routing-filter'
 
+# Settings
+gem 'ledermann-rails-settings', :require => 'rails-settings'
+
 # ESR support
 gem 'vesr'
 

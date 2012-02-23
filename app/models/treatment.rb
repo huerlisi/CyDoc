@@ -13,13 +13,15 @@ class Treatment < ActiveRecord::Base
   validates_date :date_begin
   validates_date :date_end, :allow_blank => true
   
-  def validate_for_invoice
-    #errors.add_to_base("Keine Diagnose eingegeben.") if medical_cases.empty?
+  def validate_for_invoice(invoice)
+    if invoice.settings['validation.medical_case_present']
+      errors.add_to_base("Keine Diagnose eingegeben.") if medical_cases.empty?
+    end
   end
   
-  def valid_for_invoice?
+  def valid_for_invoice?(invoice)
     valid?
-    validate_for_invoice
+    validate_for_invoice(invoice)
     
     errors.empty?
   end
@@ -85,11 +87,6 @@ class Treatment < ActiveRecord::Base
   # Hozr Integration
   has_many :cases, :through => :sessions
 
-  if Rails.env.demo?
-    GRACE_PERIOD = 0
-  else
-    GRACE_PERIOD = 6.5
-  end
   named_scope :ready_to_bill, proc {|grace_period|
     date = DateTime.now().ago(grace_period.days)
     {

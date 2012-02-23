@@ -20,14 +20,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :phone_numbers
 
   # Billing
-  map.resources :invoices, :collection => {:print_all => :post, :create_treatments => :get}, :member => {:print => :post, :print_reminder_letter => :post, :insurance_recipe => :get, :patient_letter => :get, :reminder => :get, :reactivate => :post} do |invoice|
+  map.resources :invoices, :collection => {:print_all => :post}, :member => {:print => :post, :print_reminder_letter => :post, :insurance_recipe => :get, :patient_letter => :get, :reminder_letter => :get, :reactivate => :post} do |invoice|
     invoice.resources :bookings
   end
   map.resources :invoice_batch_jobs, :member => {:reprint => :post}
   map.resources :reminder_batch_jobs, :member => {:reprint => :post}
   
-  map.resources :esr_bookings
-
   map.resources :insurances
 
   map.resources :doctors do |doctor|
@@ -64,7 +62,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :medical_cases
   map.resources :diagnosis_cases
   map.resources :diagnoses
-  map.resources :treatments
+  map.resources :treatments, :collection => {:create_all => :get}
   map.resources :sessions do |session|
     session.resources :tariff_items
   end
@@ -92,9 +90,13 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :invoice_batch_jobs, :member => {:reprint => :post}
 
-  map.resources :returned_invoices, :collection => {:queue_all_requests => :post, :edit_ready => :get}, :member => {:resolve => :post, :queue_request => :post}
+  map.resources :returned_invoices,
+    :collection => {:print_request_document => :post, :request_document => :get},
+    :member => {:reactivate => :post, :write_off => :post, :queue_request => :post}
 
-  map.resources :esr_bookings
+  map.resources :esr_files
+  map.resources :esr_records,
+    :member => {:write_off => :post, :book_extra_earning => :post, :resolve => :post}
 
   # Attachments
   map.resources :attachments, :member => {:download => :get}

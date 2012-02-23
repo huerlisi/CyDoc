@@ -1,6 +1,6 @@
 class ReturnedInvoice < ActiveRecord::Base
   # Sorting
-  default_scope :order => "doctor_id, state"
+  default_scope :order => "doctor_id, state, id"
 
   # String
   def to_s
@@ -21,16 +21,28 @@ class ReturnedInvoice < ActiveRecord::Base
     transitions :from => :ready, :to => :request_pending
   end
 
-  aasm_event :resolve do
+  aasm_event :reactivate do
     transitions :from => [:ready, :request_pending], :to => :resolved
   end
 
-  named_scope :open, :conditions => {:state => ['ready', 'request_pending']}
+  aasm_event :write_off do
+    transitions :from => [:ready, :request_pending], :to => :resolved
+  end
+
+  named_scope :by_state, lambda {|value| {:conditions => {:state => value} } }
+  named_scope :active, :conditions => {:state => ["ready", "request_pending"]}
 
   # Invoice
   belongs_to :invoice
   validates_presence_of :invoice_id
   validates_presence_of :invoice, :message => 'Rechnung nicht gefunden'
+
+  def validate_on_create
+    # Check if an open returned_invoice record with same invoice exists
+    if ReturnedInvoice.active.count(:conditions => {:invoice_id => self.invoice_id}) > 0
+      errors.add_to_base("Rechnung bereits erfasst.")
+    end
+  end
 
   def patient
     # Guard
@@ -43,6 +55,7 @@ class ReturnedInvoice < ActiveRecord::Base
   belongs_to :doctor
   named_scope :by_doctor_id, lambda {|doctor_id| {:conditions => {:doctor_id => doctor_id}}}
   before_save :set_doctor
+
 private
   def set_doctor
     self.doctor = invoice.treatment.referrer

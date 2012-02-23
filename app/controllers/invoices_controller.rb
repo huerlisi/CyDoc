@@ -63,7 +63,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html {}
       format.pdf {
-        document = @invoice.insurance_recipe_to_pdf
+        document = @invoice.document_to_pdf(:insurance_recipe)
 
         send_data document, :filename => "#{@invoice.id}.pdf",
                             :type => "application/pdf",
@@ -80,7 +80,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html {}
       format.pdf {
-        document = @invoice.patient_letter_to_pdf
+        document = @invoice.document_to_pdf(:patient_letter)
 
         send_data document, :filename => "#{@invoice.id}.pdf",
                             :type => "application/pdf",
@@ -89,15 +89,15 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # GET /invoices/1/reminder
-  def reminder
+  # GET /invoices/1/reminder_letter
+  def reminder_letter
     @invoice ||= Invoice.find(params[:id])
     @patient = @invoice.patient
 
     respond_to do |format|
       format.html {}
       format.pdf {
-        document = @invoice.reminder_letter_to_pdf
+        document = @invoice.document_to_pdf(:reminder_letter)
         
         send_data document, :filename => "#{@invoice.id}.pdf", 
                             :type => "application/pdf",
@@ -112,10 +112,10 @@ class InvoicesController < ApplicationController
     query ||= params[:search][:query] if params[:search]
     query ||= params[:quick_search][:query] if params[:quick_search]
 
-    @invoices = Invoice.clever_find(query).paginate(:page => params['page'], :per_page => 30, :order => 'id DESC')
-    @overdue = Invoice.overdue.dunning_active.paginate(:page => params['page'], :per_page => 30)
-    @prepared = Invoice.prepared.paginate(:page => params['page'], :per_page => 30, :order => 'id DESC')
-    @treatments = Treatment.open.paginate(:page => params['page'], :per_page => 30, :include => {:patient => {:vcards => :addresses, :vcard => :addresses}, :law => [], :sessions => []})
+    @invoices = Invoice.clever_find(query).paginate(:page => params['page_search'], :per_page => 30, :order => 'id DESC')
+    @overdue = Invoice.overdue.dunning_active.paginate(:page => params['page_overdue'], :per_page => 30)
+    @prepared = Invoice.prepared.paginate(:page => params['page_prepared'], :per_page => 30, :order => 'id DESC')
+    @treatments = Treatment.open.paginate(:page => params['page_open'], :per_page => 30, :include => {:patient => {:vcards => :addresses, :vcard => :addresses}, :law => [], :sessions => []})
     
     respond_to do |format|
       format.html {

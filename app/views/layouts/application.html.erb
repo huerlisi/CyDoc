@@ -8,10 +8,9 @@
 
     <link rel="shortcut icon" href="<%= image_path('favicon.ico') %>" />
     
-    <%= stylesheet_link_tag 'formtastic', 'formtastic-cydoc', 'redmine', 'tabbing', 'cydoc', 'navigation', 'cyto', 'result_report', 'invoice', 'accounting', 'jquery-ui', :media => 'all' %>
+    <%= stylesheet_link_tag 'formtastic', 'formtastic-cydoc', 'redmine', 'tabbing', 'cydoc', 'navigation', 'cyto', 'result_report', 'invoice', 'accounting', 'jquery-ui', 'vesr', :media => 'all' %>
     
     <%= javascript_include_tag :defaults %>
-    <%= javascript_include_tag 'will_paginate' %>
     <%= javascript_include_tag 'tabbing' %>
     <%= javascript_include_tag 'printing' %>
     <%= javascript_include_tag 'jquery.min' %>
@@ -42,7 +41,7 @@
               <li><%= link_to t('cydoc.navigation.doctors'), :controller => 'doctors' %></li>
               <li><%= link_to t('cydoc.navigation.service'), :controller => 'tariff_items' %></li>
               <li><%= link_to t('cydoc.navigation.payments'), :controller => 'invoices' %></li>
-              <li><%= link_to t_model(ReturnedInvoice), returned_invoices_path %></li>
+              <li><%= link_to t_title(:index, ReturnedInvoice), returned_invoices_path %></li>
               <li><%= link_to t('cydoc.navigation.accounting'), :controller => 'bookkeeping' %></li>
               <li><%= link_to t('cydoc.navigation.help'), :controller => 'help' %></li>
             </ul>
@@ -54,7 +53,13 @@
         <%= yield :sidebar %>
       </div>
       <div id="content">
-          <%= yield %>
+        <%- if flash[:notice] %>
+          <div class="flash notice">
+            <%= flash[:notice] %>
+          </div>
+        <%- end %>
+
+        <%= yield %>
       </div>
     </div>
   </body>

@@ -16,15 +16,22 @@ class Patient < ActiveRecord::Base
   has_vcards
   # Hack to use 'private' address by default
   has_one :vcard, :as => 'object', :conditions => {:vcard_type => 'private'}
-  def billing_vcard
+  accepts_nested_attributes_for :vcard
+  has_one :billing_vcard, :class_name => 'Vcard', :as => 'object', :conditions => {:vcard_type => 'billing'}
+  accepts_nested_attributes_for :billing_vcard
+  def billing_vcard_with_autobuild
+    billing_vcard_without_autobuild || build_billing_vcard
+  end
+  alias_method_chain :billing_vcard, :autobuild
+
+  def invoice_vcard
     if use_billing_address?
-      return vcards.find(:first, :conditions => {:vcard_type => 'billing'})
+      return billing_vcard
     else
       return vcard
     end
   end
 
-  accepts_nested_attributes_for :vcard
   default_scope :include => {:vcard => :addresses}
 
   named_scope :by_date, lambda {|date| {:conditions => ['birth_date LIKE ?', Date.parse_europe(date).strftime('%%%y-%m-%d')] }}
@@ -43,7 +50,13 @@ class Patient < ActiveRecord::Base
   end
   
   # Phone Numbers
-  has_many :phone_numbers, :as => :object
+  has_many :phone_numbers, :as => :object do
+    def build_defaults
+      ['Tel. geschäft', 'Tel. privat', 'Handy', 'E-Mail'].map{ |phone_number_type|
+        build(:phone_number_type => phone_number_type) unless exists?(:phone_number_type => phone_number_type)
+      }
+    end
+  end
   accepts_nested_attributes_for :phone_numbers, :reject_if => proc { |attrs| attrs['number'].blank? }
   after_update :save_phone_numbers
   
@@ -66,21 +79,23 @@ class Patient < ActiveRecord::Base
   validates_presence_of :family_name, :given_name
   validates_date :birth_date
 
-  def validate_for_invoice
+  def validate_for_invoice(invoice)
     for field in [:sex, :birth_date]
       errors.add(field, "für Patient nicht gesetzt") if self.send(field).blank?
     end
     for field in [:postal_code, :locality]
-      errors.add(field, "für Patient nicht gesetzt") if self.billing_vcard.send(field).blank?
+      errors.add(field, "für Rechnungsadressat nicht gesetzt") if self.invoice_vcard.send(field).blank?
     end
 
-    errors.add(:base, "Mindestens eines der Felder 'Strasse', 'Adresszusatz' oder 'Postfach' muss gesetzt sein") unless billing_vcard.street_address.present? or billing_vcard.extended_address.present? or billing_vcard.post_office_box.present?
+    unless invoice_vcard.street_address.present? or invoice_vcard.extended_address.present? or invoice_vcard.post_office_box.present?
+      errors.add(:base, "Mindestens eines der Felder 'Strasse', 'Adresszusatz' oder 'Postfach' muss gesetzt sein")
+    end
   end
   
-  def valid_for_invoice?
+  def valid_for_invoice?(invoice)
     valid?
-    validate_for_invoice
-    
+    validate_for_invoice(invoice)
+
     errors.empty?
   end
 

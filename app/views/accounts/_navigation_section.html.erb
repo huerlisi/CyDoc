@@ -1,5 +1,5 @@
 <%= navigation_section(:accounts, {
       :show_accounts    => :accounts,
-      :show_debtors => account_path(Invoice::DEBIT_ACCOUNT),
+      :show_debtors => account_path(Account.find_by_code(@current_doctor.settings['invoices.balance_account_code'])),
       :accounts_statistics  => statistics_accounts_path
     }, '48x48/accounts.png') %>

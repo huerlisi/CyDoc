@@ -1,14 +1,9 @@
 module Prawn
   class PatientLetter < Prawn::LetterDocument
     include InvoicesHelper
-    include I18nRailsHelpers
     include EsrRecipe
 
     # Helpers
-    def h(s)
-      return s
-    end
-
     def default_options
       parent_options = super
       parent_options.merge(:top_margin => 35, :left_margin => 12, :right_margin => 12, :bottom_margin => 23)
@@ -34,19 +29,31 @@ module Prawn
     end
 
     # Biller / Provider
+    def invoice_dates(invoice)
+      font_size 6.5
+      text "Rechnungs-Datum:"
+      font_size 8
+      text invoice.value_date.to_s
+      font_size 6.5
+      text "Zahlbar bis:"
+      font_size 8
+      text invoice.due_date.to_s
+    end
+
     def biller(invoice)
       font_size 6.5
       text "Rechnungssteller/Leistungserbringer:"
       font_size 8
       draw_address(invoice.biller.vcard)
-      for contact in invoice.biller.vcard.contacts
-        text contact.to_s
+
+      font_size 6.5 do
+        for contact in invoice.biller.vcard.contacts
+          text contact.to_s
+        end
       end
+
       text " "
-      font_size 6.5
-      text "Rechnungs-Datum:"
-      font_size 8
-      text invoice.value_date.to_s
+      invoice_dates(invoice)
     end
 
     # Referrer
@@ -65,8 +72,8 @@ module Prawn
     # Billing Address
     def billing_address(invoice)
       font_size 10
-      text invoice.patient.billing_vcard.honorific_prefix if invoice.patient.billing_vcard.honorific_prefix
-      draw_address(invoice.patient.billing_vcard)
+      text invoice.billing_vcard.honorific_prefix if invoice.billing_vcard.honorific_prefix
+      draw_address(invoice.billing_vcard)
     end
 
     # Patient
@@ -74,7 +81,7 @@ module Prawn
       font_size 6.5
       text "Patient:"
       font_size 8
-      draw_address(invoice.patient.vcard)
+      draw_address(invoice.patient_vcard)
       text " "
       font_size 6.5
       text "Geburtsdatum:"
@@ -92,7 +99,7 @@ module Prawn
           booking.value_date,
           booking.title,
           booking.comments.present? ? "<font size='6.5'>#{booking.comments}</font>" : "",
-          sprintf("%0.2f CHF", booking.accounted_amount(Invoice::DEBIT_ACCOUNT))
+          sprintf("%0.2f CHF", booking.accounted_amount(invoice.balance_account))
         ]
       }
       content << [
@@ -122,7 +129,7 @@ module Prawn
       end
     end
 
-    def to_pdf(invoice)
+    def to_pdf(invoice, params = {})
       bounding_box [1.cm, bounds.top], :width => bounds.width do
         title(invoice)
 

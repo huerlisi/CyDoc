@@ -2,11 +2,11 @@
 <div class="box">
   <table style="width: 100%">
     <tr>
-      <th><%= t_attr(:patient, Invoice) %>:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>
+      <th><%= t_attr(:patient, Invoice) %>:</th><td><%= full_address(@invoice.patient_vcard, ', ') %></td>
       <th><%= t_attr(:law, Invoice) %>:</th><td><%= @invoice.law.name %></td>
     </tr>
     <tr>
-      <th><%= t_attr(:payment_address, Invoice) %>:</th><td><%= full_address(@invoice.patient.vcard, ', ') %></td>
+      <th><%= t_attr(:billing_address, Invoice) %>:</th><td><%= full_address(@invoice.billing_vcard, ', ') %></td>
       <th><%= t_attr(:tiers, Invoice) %>:</th><td><%= @invoice.tiers.name %></td>
     </tr>
     <tr>

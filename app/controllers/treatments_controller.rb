@@ -146,4 +146,9 @@ class TreatmentsController < ApplicationController
       }
     end
   end
+
+  # Hozr Integration
+  def create_all
+    @case_count, @failed_cases = Case.create_all_treatments
+  end
 end

@@ -21,10 +21,6 @@ module Prawn
       text "- Sollte sich Ihre Zahlung mit der Mahnung kreuzen, betrachten Sie dieses Schreiben als gegenstandslos."
       text "- Wir möchten Sie darauf aufmerksam machen, dass die nächste Mahnung gebührenpflichtig ist."
       text " "
-      text "Bei allfälligen Unstimmigkeiten rufen Sie uns bitte an oder schreiben Sie eine E-Mail an admin@zyto-labor.com."
-      text " "
-      text "Mit freundlichen Grüssen"
-      text "ZytoLabor"
     end
 
     def second_reminder_text(invoice)
@@ -42,10 +38,6 @@ module Prawn
       text "- Sollte sich Ihre Zahlung mit der Mahnung kreuzen, betrachten Sie dieses Schreiben als gegenstandslos."
       text "- Für die Bezahlung benützen Sie unbedingt den beiligenden Einzahlungschein."
       text " "
-      text "Bei allfälligen Unstimmigkeiten rufen Sie uns bitte an oder schreiben Sie eine E-Mail an admin@zyto-labor.com."
-      text " "
-      text "Mit freundlichen Grüssen"
-      text "ZytoLabor"
     end
 
     def third_reminder_text(invoice)
@@ -63,10 +55,6 @@ module Prawn
       text "- Durch eine Betreibung werden für Sie Zusatzkosten bis zu CHF 300.- entstehen."
       text "- Für die Bezahlung benützen Sie unbedingt den beiligenden Einzahlungschein."
       text " "
-      text "Bei allfälligen Unstimmigkeiten rufen Sie uns bitte an oder schreiben Sie eine E-Mail an admin@zyto-labor.com."
-      text " "
-      text "Mit freundlichen Grüssen"
-      text "ZytoLabor"
     end
 
     def encashment_text(invoice)
@@ -77,22 +65,33 @@ module Prawn
       font_size 7.5
     end
 
-    def to_pdf(invoice)
+    def invoice_dates(invoice)
+      font_size 6.5
+      text "Mahndatum:"
+      font_size 8
+      text invoice.latest_reminder_value_date.to_s
+      move_down 3
+      font_size 6.5
+      text "Zahlbar bis:"
+      font_size 8
+      text invoice.due_date.to_s
+    end
+
+    def closing(sender)
+      text "Bei allfälligen Unstimmigkeiten rufen Sie uns bitte an oder schreiben Sie eine E-Mail an #{sender.vcard.contacts.email.first}."
+      common_closing(sender)
+    end
+
+    def to_pdf(invoice, params = {})
       bounding_box [1.cm, bounds.top], :width => bounds.width do
         title(invoice)
 
         # Head info
         bounding_box [0, bounds.top - 2.4.cm], :width => 7.cm do
           biller(invoice)
-
-          text " "
-          font_size 6.5
-          text "Mahndatum:"
-          font_size 8
-          text invoice.latest_reminder_value_date.to_s
         end
 
-        bounding_box [0, bounds.top - 6.cm], :width => 7.cm do
+        bounding_box [0, bounds.top - 7.cm], :width => 7.cm do
           referrer(invoice)
         end
 
@@ -116,6 +115,8 @@ module Prawn
             when 'encashment':
               encashment_text(invoice)
           end
+
+          closing(invoice.biller)
         end
 
         # Invoice balance
