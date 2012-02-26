@@ -130,8 +130,8 @@ class EsrRecord < ActiveRecord::Base
     end
   end
 
-  def self.update_invalid_states
-    self.invalid.find_each do |e|
+  def self.update_unsolved_states
+    self.unsolved.find_each do |e|
       e.update_state
       e.save
     end

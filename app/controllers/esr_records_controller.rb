@@ -4,7 +4,7 @@ class EsrRecordsController < ApplicationController
   respond_to :html, :js
 
   before_filter :only => [:index] do
-    EsrRecord.update_invalid_states
+    EsrRecord.update_unsolved_states
   end
 
   # Scopes
