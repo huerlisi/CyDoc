@@ -1,8 +1,8 @@
-<div id="invoice_flash" class="flash notice">
+<div id="notice_flash" class="flash notice">
   <p>Rechnung wurde verbucht...</p>
   <p>
     Möchten Sie die Rechnung drucken?
-    <%= button_to_function 'Ja', remote_function(:url => print_invoice_url(@invoice), :before => "showPrintingFlash('invoice_flash', 'Rechnung')") %>
-    <%= button_to_function 'Nein', "Element.hide('invoice_flash')" %>
+    <%= button_to_function 'Ja', remote_function(:url => print_invoice_url(@invoice), :before => "showPrintingFlash('notice_flash', 'Rechnung')") %>
+    <%= button_to_function 'Nein', "Element.hide('notice_flash')" %>
   </p>
 </div>

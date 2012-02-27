@@ -49,7 +49,7 @@ class InvoiceBatchJobsController < ApplicationController
         format.html { redirect_to @invoice_batch_job }
         format.js {
           render :update do |page|
-            page.replace "invoice_flash", :partial => 'printed_flash'
+            page.replace "notice_flash", :partial => 'printed_flash'
           end
         }
       end
