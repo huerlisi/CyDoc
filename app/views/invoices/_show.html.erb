@@ -3,26 +3,26 @@
 
 <div class="contextual">
   <% if @invoice.overdue? or @invoice.reminded? %>
-    <%= link_to_remote t('cydoc.actions.print_dunning_letter_copy'), {:url => print_reminder_letter_invoice_path(@invoice, :print_copy => true), :before => "showPrintingFlash('invoice_flash', 'Mahnkopie')"}, :class => "icon icon-print" %>
+    <%= link_to t('cydoc.actions.print_dunning_letter_copy'), print_reminder_letter_invoice_path(@invoice, :print_copy => true), :onclick => "showPrintingFlash('invoice_flash', 'Mahnkopie')", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-print" %>
   <% end %>
   <% if @invoice.state == 'prepared' %>
-    <%= link_to_remote t('cydoc.actions.print'), {:url => print_invoice_path(@invoice), :before => "showPrintingFlash('invoice_flash', '#{t_model(Invoice)}')"}, :class => "icon icon-print" %>
+    <%= link_to t('cydoc.actions.print'), print_invoice_path(@invoice), :onclick => "showPrintingFlash('invoice_flash', '#{t_model(Invoice)}')", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-print" %>
   <% else %>
-    <%= link_to_remote t('cydoc.actions.print_copy'), {:url => print_invoice_path(@invoice, :print_copy => true), :before => "showPrintingFlash('invoice_flash', 'Rechnungskopie')"}, :class => "icon icon-print" %>
+    <%= link_to t('cydoc.actions.print_copy'), print_invoice_path(@invoice, :print_copy => true), :onclick => "showPrintingFlash('invoice_flash', 'Rechnungskopie')", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-print" %>
   <% end %>
   <% if @invoice.open %>
-      <%= link_to_remote t('cydoc.actions.cancel'), {:url => invoice_path(@invoice), :method => :delete, :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reverse')}?"}, :class => "icon icon-delete" %>
-      <%= link_to_remote t('cydoc.actions.reactivate'), {:url => reactivate_invoice_path(@invoice), :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?"}, :class => "icon icon-reactivate" %>
+      <%= link_to t('cydoc.actions.cancel'), invoice_path(@invoice), 'data-method' => :delete, :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reverse')}?", 'data-remote' => true, :class => "icon icon-delete" %>
+      <%= link_to t('cydoc.actions.reactivate'), reactivate_invoice_path(@invoice), 'data-confirm' => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-reactivate" %>
   <% elsif @invoice.state == 'canceled' or @invoice.state == 'written_off' %>
-      <%= link_to_remote t('cydoc.actions.reactivate'), {:url => reactivate_invoice_path(@invoice), :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?"}, :class => "icon icon-reactivate" %>
+      <%= link_to t('cydoc.actions.reactivate'), reactivate_invoice_path(@invoice), 'data-confirm' => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-reactivate" %>
   <% end %>
-  <%= link_to t('cydoc.actions.print_reclaim_pdf'), insurance_recipe_invoice_path(@invoice, :format => :pdf), :method => :get, :class => "icon icon-pdf" %>
+  <%= link_to t('cydoc.actions.print_reclaim_pdf'), insurance_recipe_invoice_path(@invoice, :format => :pdf), :class => "icon icon-pdf" %>
 </div>
 
 <%= render 'invoices/show_main' %>
 
 <div class="contextual">
-  <%= link_to_remote t('cydoc.actions.book_manual'), {:url => new_invoice_booking_path(@invoice), :method => :get}, :class => "icon icon-book" %>
+  <%= link_to t('cydoc.actions.book_manual'), new_invoice_booking_path(@invoice), 'data-remote' => true, :class => "icon icon-book" %>
 </div>
 <h3><%= t('cydoc.title.bookings') %></h3>
 <div id="invoice_booking_list">
