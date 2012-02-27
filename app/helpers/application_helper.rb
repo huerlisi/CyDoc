@@ -50,6 +50,16 @@ module ApplicationHelper
     link_to t_action(:delete), path, :remote => true, :method => :delete, :confirm => t_confirm_delete(model), :class => 'icon-delete-text', :title => t_action(:delete)
   end
 
+  # Rails UJS
+  def csrf_meta_tag
+    if protect_against_forgery?
+      out = %(<meta name="csrf-param" content="%s"/>\n)
+      out << %(<meta name="csrf-token" content="%s"/>)
+      out % [ Rack::Utils.escape_html(request_forgery_protection_token),
+              Rack::Utils.escape_html(form_authenticity_token) ]
+    end
+  end
+
   # Hozr
   def hozr_env
     if Rails.env.development?
@@ -67,4 +77,3 @@ module ApplicationHelper
     link_to title, hozr_url_for(path), options.merge(:target => hozr_env)
   end
 end
-
