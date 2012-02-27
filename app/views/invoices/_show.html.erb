@@ -1,13 +1,12 @@
 <% cache [I18n.locale, @invoice.cache_key] do %>
-<div id="invoice_flash" class="flash notice" style="display: none"></div>
-
 <div class="contextual">
-    <%= link_to t('cydoc.actions.print_dunning_letter_copy'), print_reminder_letter_invoice_path(@invoice, :print_copy => true), :onclick => "showPrintingFlash('invoice_flash', 'Mahnkopie')", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-print" %>
+  <% if @invoice.overdue? or @invoice.reminded? %>
+    <%= link_to t('cydoc.actions.print_dunning_letter_copy'), print_reminder_letter_invoice_path(@invoice, :print_copy => true), :onclick => "showPrintingFlash('notice_flash', 'Mahnkopie')", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-print" %>
   <% end %>
   <% if @invoice.state == 'prepared' %>
-    <%= link_to t('cydoc.actions.print'), print_invoice_path(@invoice), :onclick => "showPrintingFlash('invoice_flash', '#{t_model(Invoice)}')", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-print" %>
+    <%= link_to t('cydoc.actions.print'), print_invoice_path(@invoice), :onclick => "showPrintingFlash('notice_flash', '#{t_model(Invoice)}')", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-print" %>
   <% else %>
-    <%= link_to t('cydoc.actions.print_copy'), print_invoice_path(@invoice, :print_copy => true), :onclick => "showPrintingFlash('invoice_flash', 'Rechnungskopie')", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-print" %>
+    <%= link_to t('cydoc.actions.print_copy'), print_invoice_path(@invoice, :print_copy => true), :onclick => "showPrintingFlash('notice_flash', 'Rechnungskopie')", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-print" %>
   <% end %>
   <% if @invoice.open %>
       <%= link_to t('cydoc.actions.cancel'), invoice_path(@invoice), 'data-method' => :delete, :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reverse')}?", 'data-remote' => true, :class => "icon icon-delete" %>
