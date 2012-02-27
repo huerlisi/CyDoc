@@ -532,8 +532,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def print(insurance_recipe_printer, patient_letter_printer)
-    print_patient_letter(patient_letter_printer)
-    print_insurance_recipe(insurance_recipe_printer)
+    print_patient_letter(patient_letter_printer) && print_insurance_recipe(insurance_recipe_printer)
   end
 
   # Reminders

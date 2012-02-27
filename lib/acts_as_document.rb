@@ -3,7 +3,13 @@ module ActsAsDocument
     self.class.document_type_to_class(document_type).new.to_pdf(self, params)
   end
 
+  def printing_error
+    @printing_error || ""
+  end
+
   def print_document(document_type, printer, params = {})
+    @printing_error = nil
+
     # Workaround TransientJob not yet accepting options
     file = Tempfile.new('')
     file.puts(document_to_pdf(document_type, params))
@@ -13,9 +19,18 @@ module ActsAsDocument
     begin
       paper_copy = Cups::PrintJob.new(file.path, printer)
     rescue
-      paper_copy = Cups::PrintJob.new(file.path, printer)
+      paper_copy = nil
     end
-    paper_copy.print
+
+    begin
+      paper_copy ||= Cups::PrintJob.new(file.path, printer)
+      paper_copy.print
+    rescue RuntimeError => e
+      @printing_error = e.message
+      return false
+    end
+
+    return true
   end
 
   module ClassMethods

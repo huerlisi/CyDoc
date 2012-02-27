@@ -57,11 +57,12 @@
         <%= yield :sidebar %>
       </div>
       <div id="content">
-        <%- if flash[:notice] %>
-          <div class="flash notice">
-            <%= flash[:notice] %>
-          </div>
-        <%- end %>
+        <div id="notice_flash" class="flash notice" <%= "style='display: none'" if flash[:notice].blank? %>>
+          <%= flash[:notice] %>
+        </div>
+        <div id="error_flash" class="flash error" <%= "style='display: none'" if flash[:error].blank? %>>
+          <%= flash[:error] %>
+        </div>
 
         <%= yield %>
       </div>
