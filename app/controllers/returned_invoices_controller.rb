@@ -62,6 +62,7 @@ class ReturnedInvoicesController < ApplicationController
   def reactivate
     @returned_invoice = ReturnedInvoice.find(params[:id])
     @returned_invoice.invoice.reactivate.save
+    @returned_invoice.patient.update_attribute(:dunning_stop, false)
     @returned_invoice.reactivate!
 
     redirect_to returned_invoices_path
@@ -70,6 +71,7 @@ class ReturnedInvoicesController < ApplicationController
   def write_off
     @returned_invoice = ReturnedInvoice.find(params[:id])
     @returned_invoice.invoice.write_off.save
+    @returned_invoice.patient.update_attribute(:dunning_stop, false)
     @returned_invoice.write_off!
 
     redirect_to returned_invoices_path
