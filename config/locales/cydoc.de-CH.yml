@@ -323,6 +323,7 @@ de-CH:
       recalls: Recalls
       treatment: Behandlung
       treatment_sessions: Leistungen
+      unknown_assigning_doctor: Zuweisender Arzt unbekannt.
     user_bar:
       logged_in_as: "Angemeldet als"
       login: "Anmelden"
