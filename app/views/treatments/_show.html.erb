@@ -1,11 +1,11 @@
 <% cache [I18n.locale, @treatment.cache_key] do %>
 <div class="contextual">
-  <%= link_to t('cydoc.actions.update'), edit_treatment_path(@treatment), 'date-remote' => true, :class => "icon icon-edit" %>
+  <%= link_to t('cydoc.actions.update'), edit_treatment_path(@treatment), 'data-remote' => true, :class => "icon icon-edit" %>
   <% if @treatment.chargeable? %>
-    <%= link_to t('cydoc.actions.new_invoice'), new_patient_treatment_invoice_path(@treatment.patient, @treatment), 'date-remote' => true, :class => "icon icon-add" %>
+    <%= link_to t('cydoc.actions.new_invoice'), new_patient_treatment_invoice_path(@treatment.patient, @treatment), 'data-remote' => true, :class => "icon icon-add" %>
   <% end %>
   <% if @treatment.open? -%>
-    <%= link_to t('cydoc.actions.delete'), treatment_path(@treatment), 'data-method' => :delete, 'date-remote' => true, 'data-confirm' => t('cydoc.actions.delete_treatment', :treatment => @treatment.to_s), :class => "icon icon-delete" %>
+    <%= link_to t('cydoc.actions.delete'), treatment_path(@treatment), 'data-method' => :delete, 'data-remote' => true, 'data-confirm' => t('cydoc.actions.delete_treatment', :treatment => @treatment.to_s), :class => "icon icon-delete" %>
   <% end -%>
 </div>
 
@@ -16,7 +16,7 @@
 <div id="treatment_medical_cases">
   <div class="contextual">
   <% if @treatment.open? -%>
-    <%= link_to t('cydoc.actions.new_medical_case'), new_patient_treatment_medical_case_path(@treatment.patient, @treatment), 'date-remote' => true, :class => "icon icon-add" %>
+    <%= link_to t('cydoc.actions.new_medical_case'), new_patient_treatment_medical_case_path(@treatment.patient, @treatment), 'data-remote' => true, :class => "icon icon-add" %>
   <% end -%>
   </div>
   <h3><%= t('cydoc.title.medical_cases') %></h3>
@@ -34,7 +34,7 @@
 
 <div id="treatment_sessions">
   <div class="contextual">
-    <%= link_to t('cydoc.actions.new_treatment_session'), new_patient_treatment_session_path(@treatment.patient, @treatment), 'date-remote' => true, :class => "icon icon-add" %>
+    <%= link_to t('cydoc.actions.new_treatment_session'), new_patient_treatment_session_path(@treatment.patient, @treatment), 'data-remote' => true, :class => "icon icon-add" %>
   </div>
   <h3><%= t('cydoc.title.treatment_sessions') %></h3>
   <div id="treatment_session_list" class="box">
