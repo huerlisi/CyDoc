@@ -143,6 +143,12 @@ class Patient < ActiveRecord::Base
     end
   end
 
+  before_save :clean_covercard_code
+
+  def clean_covercard_code
+    self[:covercard_code] = Patient.clean_covercard_code(self.covercard_code)
+  end
+
   # Build an invoice containing all open sessions
   def build_invoice(options)
     invoice = invoices.new(options)
@@ -187,7 +193,7 @@ class Patient < ActiveRecord::Base
     query_params = {}
     case get_query_type(query)
     when "covercard"
-      query_params[:covercard_code] = query
+      query_params[:covercard_code] = clean_covercard_code(query)
       patient_condition = "patients.covercard_code = :covercard_code"
     when "number"
       query_params[:query] = query
@@ -211,7 +217,7 @@ class Patient < ActiveRecord::Base
 
   private
   def self.get_query_type(value)
-    if value.match(/^\d{19}\^\d{4}$/)
+    if value.match(/^\d{19}/)
       return "covercard"
     elsif value.match(/^[[:digit:]]*$/)
       return "number"
@@ -220,6 +226,10 @@ class Patient < ActiveRecord::Base
     else
       return "text"
     end
+  end
+
+  def self.clean_covercard_code(value)
+    value[0..18]
   end
 
   # Tarmed
