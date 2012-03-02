@@ -44,12 +44,13 @@ class PatientsController < ApplicationController
     end
   end
 
-  def covercard_update
+  # Covercard actions
+  
+  # Checks if the patient has new covercard infomations.
+  # Returns a flash message when new infomations available.
+  def covercard_check_update
+    # TODO: Implement an AJAX Request when a patient is loaded to do this action and of course this action.
     @patient = Patient.find(params[:id])
-
-    @patient.update_attribute(:covercard_code, params[:covercard_code]) if params[:covercard_code]
-
-    render @patient.to_json
   end
   
   # GET /patients
