@@ -1,0 +1,15 @@
+tr.esr_record.overpaid {
+  background-color: #FCF8E3;
+}
+
+tr.esr_record.underpaid {
+  background-color: #F2DEDE;
+}
+
+tr.esr_record.resolved {
+  background-color: #DFF0D8;
+}
+
+tr.esr_record.missing {
+  background-color: #D9EDF7;
+}

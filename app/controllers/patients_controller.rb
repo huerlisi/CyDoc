@@ -88,7 +88,8 @@ class PatientsController < ApplicationController
     @patient.doctor_patient_nr = Patient.maximum('CAST(doctor_patient_nr AS UNSIGNED INTEGER)').to_i + 1
 
     # TODO: probably doctor specific...
-    @patient.sex = 'F'
+    @patient.sex = 'M'
+    @patient.vcard.honorific_prefix = 'Herr'
   end
 
   # POST /patients

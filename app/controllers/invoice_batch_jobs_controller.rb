@@ -14,7 +14,7 @@ class InvoiceBatchJobsController < ApplicationController
     @invoice_batch_job = InvoiceBatchJob.new
 
     @invoice_batch_job.tiers_name = "TiersGarant"
-    @invoice_batch_job.count = Treatment.open.ready_to_bill(Treatment::GRACE_PERIOD).count
+    @invoice_batch_job.count = Treatment.open.count
     @invoice_batch_job.value_date = Date.today
 
     respond_to do |format|
@@ -31,7 +31,7 @@ class InvoiceBatchJobsController < ApplicationController
   # POST /invoice_batch_jobs
   def create
     @invoice_batch_job = InvoiceBatchJob.new(params[:invoice_batch_job])
-    @treatments = Treatment.open.ready_to_bill(Treatment::GRACE_PERIOD).find(:all, :limit => @invoice_batch_job.count)
+    @treatments = Treatment.open.find(:all, :limit => @invoice_batch_job.count)
     
     value_date = @invoice_batch_job.value_date
     tiers_name = @invoice_batch_job.tiers_name
@@ -49,7 +49,7 @@ class InvoiceBatchJobsController < ApplicationController
         format.html { redirect_to @invoice_batch_job }
         format.js {
           render :update do |page|
-            page.replace "invoice_flash", :partial => 'printed_flash'
+            page.replace "notice_flash", :partial => 'printed_flash'
           end
         }
       end

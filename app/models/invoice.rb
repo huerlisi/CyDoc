@@ -88,7 +88,7 @@ class Invoice < ActiveRecord::Base
   end
 
   # TODO: unify greeze period of 30 days and make configurable
-  named_scope :overdue, :conditions => ["(invoices.state IN ('booked', 'printed') AND due_date < :today) OR (invoices.state = 'reminded' AND reminder_due_date < :today) OR (invoices.state = '2xreminded' AND second_reminder_due_date < :today) OR (invoices.state = '3xreminded' AND third_reminder_due_date < :today)", {:today => Date.today.ago(30.days)}]
+  named_scope :overdue, :conditions => ["(invoices.state IN ('booked', 'printed') AND due_date < :grace_date) OR (invoices.state = 'reminded' AND reminder_due_date < :today) OR (invoices.state = '2xreminded' AND second_reminder_due_date < :today) OR (invoices.state = '3xreminded' AND third_reminder_due_date < :today)", {:today => Date.today, :grace_date => Date.today.ago(30.days)}]
   def overdue?
     return true if (state == 'booked' or state == 'printed') and due_date < Date.today
     return true if state == 'reminded' and (reminder_due_date.nil? or reminder_due_date < Date.today)
@@ -152,11 +152,11 @@ class Invoice < ActiveRecord::Base
   end
   
   # Actions
-  def reactivate
+  def reactivate(comments = nil)
     unless state == 'canceled'
       # Cancel original amount
       bookings.build(:title => "Storno",
-                     :comments => "Reaktiviert",
+                     :comments => comments || "Reaktiviert",
                      :amount => amount,
                      :credit_account => profit_account,
                      :debit_account => balance_account,
@@ -164,7 +164,7 @@ class Invoice < ActiveRecord::Base
       # write off rest if needed
       if due_amount > 0
         bookings.build(:title => "Debitorenverlust",
-                       :comments => "Reaktiviert",
+                       :comments => comments || "Reaktiviert",
                        :amount => due_amount,
                        :credit_account => profit_account,
                        :debit_account => balance_account,
@@ -192,6 +192,19 @@ class Invoice < ActiveRecord::Base
     end
 
     self.state = 'written_off'
+
+    return self
+  end
+
+  def book_extra_earning(comments = nil)
+    if due_amount < 0
+      bookings.build(:title => "Ausserordentlicher Ertrag",
+                     :comments => comments || "Zuviel bezahlt",
+                     :amount => -due_amount,
+                     :debit_account  => Account.find_by_code(settings['invoices.extra_earnings_account_code']),
+                     :credit_account => balance_account,
+                     :value_date => Date.today)
+    end
 
     return self
   end
@@ -546,8 +559,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def print(insurance_recipe_printer, patient_letter_printer)
-    print_patient_letter(patient_letter_printer)
-    print_insurance_recipe(insurance_recipe_printer)
+    print_patient_letter(patient_letter_printer) && print_insurance_recipe(insurance_recipe_printer)
   end
 
   # Reminders

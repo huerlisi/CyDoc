@@ -261,12 +261,13 @@ de-CH:
       doctors: "Ärzte"
       drug_products: "Medikamente"
       esr: 'VESR'
-      esr_bookings: "VESR Journal"
+      esr_files: "VESR Journal"
       help: "Hilfe"
       home: "Home"
       insurances: "Versicherungen"
       master_data: Stammdaten
       new_esr: "VESR Datei einlesen"
+      unresolved_records: "Falsche VESR Buchungen"
       open_cases: "Offene Fälle"
       open_positions: "Offene Posten"
       patients: 'Patienten'
@@ -322,6 +323,7 @@ de-CH:
       recalls: Recalls
       treatment: Behandlung
       treatment_sessions: Leistungen
+      unknown_assigning_doctor: Zuweisender Arzt unbekannt.
     user_bar:
       logged_in_as: "Angemeldet als"
       login: "Anmelden"
@@ -352,8 +354,10 @@ de-CH:
       resolve:            Abschliessen
       reactivate:         Reaktivieren
       write_off:          Abschreiben
+      book_extra_earning: Ausserordentlicher Gewinn verbuchen
+      resolve:            Als erledigt markieren
       edit_ready:         Neue vorbereiten
-      show_order_form:    Auftragsformular anzeigen
+      show_order_form:    Auftragsformular
       print_request_document: Adressanfrage
       next:               Speichern & weiter
       pdf:                PDF
@@ -365,6 +369,8 @@ de-CH:
   returned_invoices:
     edit_ready:
       title:              Neue vorbereiten
+    index:
+      title:              Inkasso
 
   boolean:
     true:  Ja

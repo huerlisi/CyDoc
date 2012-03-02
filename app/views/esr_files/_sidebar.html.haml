@@ -1,0 +1,6 @@
+- content_for :sidebar do
+  .sub-tabs
+    %h3 Ältere Buchungsläufe
+    %ul
+      - for esr_file in EsrFile.find :all, :limit => 10, :order => 'updated_at DESC'
+        %li= link_to esr_file.to_s(:short), esr_file

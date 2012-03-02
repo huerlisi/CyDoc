@@ -1,5 +1,5 @@
 - semantic_form_for resource do |f|
-  = hidden_field_tag :queue, @queue
+  = error_messages_for :patient
 
   - @invoice = resource.invoice
   = render 'invoices/show_main'

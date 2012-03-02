@@ -12,6 +12,15 @@ h4 {
   margin-top: 0;
 }
 
+/* Misc */
+.right {
+  text-align: right
+}
+
+.currency {
+  text-align: right
+}
+
 /* Welcome */
 .welcome { margin: 2em; margin-bottom: 3.5em; }
 .welcome p { width: 100%; font-size: 13pt; font-variant:italic }
@@ -52,6 +61,8 @@ vertical-align: middle;
 
 .icon-pdf { background-image: url(../images/pdf.png); }
 .icon-spinner { background-image: url(../images/indicator.gif); }
+.icon-print_request_document { background-image: url(../images/16x16/print_request_document.png); }
+.icon-show_all { background-image: url(../images/16x16/show_all.png); }
 
 /* Sessions */
 table.session {

@@ -27,44 +27,42 @@ class ReturnedInvoicesController < ApplicationController
     @returned_invoice = ReturnedInvoice.find(params[:id])
 
     @patient = @returned_invoice.patient
-    unless @patient.update_attributes(params[:patient])
-      render 'patient_form' and return
+    unless @patient.update_attributes(params[:patient]) and @returned_invoice.update_attributes(params[:returned_invoice])
+      render 'edit' and return
     end
+
+    # All records in same state
+    returned_invoices = ReturnedInvoice.by_state(@returned_invoice.state)
 
     case params[:commit]
     when 'queue_request'
       @returned_invoice.queue_request!
     when 'reactivate'
       @returned_invoice.invoice.reactivate.save
+      @returned_invoice.patient.update_attribute(:dunning_stop, false)
       @returned_invoice.reactivate!
     when 'write_off'
       @returned_invoice.invoice.write_off.save
+      @returned_invoice.patient.update_attribute(:dunning_stop, false)
       @returned_invoice.write_off!
     else
     end
 
-    queue = params[:queue]
-    if queue.present?
-      redirect_to :action => "edit_#{queue}"
+    next_record = returned_invoices.find(:first, :conditions => ["doctor_id = ? AND state = ? AND id > ?", @returned_invoice.doctor_id, @returned_invoice.state, @returned_invoice.id])
+    next_record ||= returned_invoices.find(:first, :conditions => ["doctor_id = ? AND state > ?", @returned_invoice.doctor_id, @returned_invoice.state])
+    next_record ||= returned_invoices.find(:first, :conditions => ["doctor_id > ?", @returned_invoice.doctor_id])
+
+    if next_record
+      redirect_to :action => "edit", :id => next_record.id
     else
       redirect_to returned_invoices_path
     end
   end
 
-  def edit_ready
-    @returned_invoice = ReturnedInvoice.ready.first
-    if @returned_invoice.nil?
-      redirect_to returned_invoices_path and return
-    end
-
-    @queue = 'ready'
-
-    render 'edit'
-  end
-
   def reactivate
     @returned_invoice = ReturnedInvoice.find(params[:id])
     @returned_invoice.invoice.reactivate.save
+    @returned_invoice.patient.update_attribute(:dunning_stop, false)
     @returned_invoice.reactivate!
 
     redirect_to returned_invoices_path
@@ -73,6 +71,7 @@ class ReturnedInvoicesController < ApplicationController
   def write_off
     @returned_invoice = ReturnedInvoice.find(params[:id])
     @returned_invoice.invoice.write_off.save
+    @returned_invoice.patient.update_attribute(:dunning_stop, false)
     @returned_invoice.write_off!
 
     redirect_to returned_invoices_path

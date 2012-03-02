@@ -1,6 +1,6 @@
 class ReturnedInvoice < ActiveRecord::Base
   # Sorting
-  default_scope :order => "doctor_id, state"
+  default_scope :order => "doctor_id, state, id"
 
   # String
   def to_s
@@ -30,11 +30,19 @@ class ReturnedInvoice < ActiveRecord::Base
   end
 
   named_scope :by_state, lambda {|value| {:conditions => {:state => value} } }
+  named_scope :active, :conditions => {:state => ["ready", "request_pending"]}
 
   # Invoice
   belongs_to :invoice
   validates_presence_of :invoice_id
   validates_presence_of :invoice, :message => 'Rechnung nicht gefunden'
+
+  def validate_on_create
+    # Check if an open returned_invoice record with same invoice exists
+    if ReturnedInvoice.active.count(:conditions => {:invoice_id => self.invoice_id}) > 0
+      errors.add_to_base("Rechnung bereits erfasst.")
+    end
+  end
 
   def patient
     # Guard

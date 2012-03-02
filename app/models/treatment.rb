@@ -87,11 +87,6 @@ class Treatment < ActiveRecord::Base
   # Hozr Integration
   has_many :cases, :through => :sessions
 
-  if Rails.env.demo?
-    GRACE_PERIOD = 0
-  else
-    GRACE_PERIOD = 2
-  end
   named_scope :ready_to_bill, proc {|grace_period|
     date = DateTime.now().ago(grace_period.days)
     {

@@ -7,10 +7,6 @@ class InvoicesController < ApplicationController
 
   in_place_edit_for :invoice, :due_date
 
-  def create_treatments
-    @case_count, @failed_cases = Case.create_all_treatments
-  end
-
   # POST /invoice/1/print
   def print
     @invoice = Invoice.find(params[:id])
@@ -22,16 +18,27 @@ class InvoicesController < ApplicationController
       @invoice.save!
     end
     
-    @invoice.print(@printers[:trays][:plain], @printers[:trays][:invoice])
-    
-    respond_to do |format|
-      format.html { redirect_to invoices_path }
-      format.js {
-        render :update do |page|
-          page.replace_html "tab-content-invoices", :partial => 'show'
-          page.replace "invoice_flash", :partial => 'printed_flash'
-        end
-      }
+    if @invoice.print(@printers[:trays][:plain], @printers[:trays][:invoice])
+      respond_to do |format|
+        format.html { redirect_to invoices_path }
+        format.js {
+          render :update do |page|
+            page.replace_html "tab-content-invoices", :partial => 'show'
+            page.replace "notice_flash", :partial => 'printed_flash'
+          end
+        }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @invoice }
+        format.js {
+          render :update do |page|
+            page.replace_html "error_flash", :text => @invoice.printing_error
+            page.show "error_flash"
+            page.hide "notice_flash"
+          end
+        }
+      end
     end
   end
   
@@ -46,16 +53,27 @@ class InvoicesController < ApplicationController
       @invoice.save!
     end
     
-    @invoice.print_reminder(@printers[:trays][:invoice])
-    
-    respond_to do |format|
-      format.html { redirect_to invoices_path }
-      format.js {
-        render :update do |page|
-          page.replace_html "tab-content-invoices", :partial => 'show'
-          page.replace "invoice_flash", :partial => 'reminded_flash'
-        end
-      }
+    if @invoice.print_reminder(@printers[:trays][:invoice])
+      respond_to do |format|
+        format.html { redirect_to invoices_path }
+        format.js {
+          render :update do |page|
+            page.replace_html "tab-content-invoices", :partial => 'show'
+            page.replace "notice_flash", :partial => 'reminded_flash'
+          end
+        }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @invoice }
+        format.js {
+          render :update do |page|
+            page.replace_html "error_flash", :text => @invoice.printing_error
+            page.show "error_flash"
+            page.hide "notice_flash"
+          end
+        }
+      end
     end
   end
   
@@ -197,7 +215,7 @@ class InvoicesController < ApplicationController
             page.replace_html 'tab-content-invoices', :partial => 'show'
             page.replace_html 'patient-sidebar', :partial => 'patients/sidebar'
             page.call 'showTab', "invoices"
-            page.replace "invoice_flash", :partial => 'created_flash'
+            page.replace "notice_flash", :partial => 'created_flash'
           end
         }
       end
