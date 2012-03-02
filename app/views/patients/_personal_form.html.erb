@@ -25,6 +25,10 @@
         <th><%= t_attr(:postal_code, Patient) %>, <%= t_attr(:locality, Patient) %></th><td><%= vcard.text_field :postal_code, :size => 9 %> <%= vcard.text_field :locality %></td>
       </tr>
       <tr>
+        <th><%= t_attr(:covercard_code, Patient) %></th>
+        <td><%= patient.text_field :covercard_code %></td>
+      </tr>
+      <tr>
         <th><%= t_attr(:remarks, Patient) %></th>
         <td colspan="3"><%= patient.text_area :remarks, :rows => 3 %></td>
       </tr>

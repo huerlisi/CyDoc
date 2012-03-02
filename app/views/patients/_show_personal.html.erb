@@ -33,6 +33,10 @@
       <th><%= t_attr(:doctor_patient_nr) %></th><td><%=h @patient.doctor_patient_nr %></td>
     </tr>
     <tr>
+      <th><%= t_attr(:covercard_code) %></th>
+      <td><%=h @patient.covercard_code %></td>
+    </tr>
+    <tr>
       <th><%= t_attr(:remarks) %></th>
       <td colspan="3"><%= in_place_editor_field :patient, :remarks %></td>
     </tr>
