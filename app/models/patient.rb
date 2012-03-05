@@ -191,9 +191,10 @@ class Patient < ActiveRecord::Base
 
     query.strip!
     query_params = {}
-    case get_query_type(query)
+    query_type = get_query_type(query)
+    case query_type
     when "covercard"
-      query_params[:covercard_code] = clean_covercard_code(query)
+      query_params[:covercard_code] = Covercard::Patient.clean_code(query)
       patient_condition = "patients.covercard_code = :covercard_code"
     when "number"
       query_params[:query] = query
