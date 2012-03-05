@@ -1,4 +1,4 @@
-<div id="covercard_patient" class="box">
+<div id="covercard_patient">
   <h2><%= t('cydoc.covercard_search.result') %></h2>
   <div class="left-box">
     <% [:name, :birth_date, :sex].each do |attr| %>
@@ -20,7 +20,7 @@
           <% end %>
           <%= address.street_address %>
           <br/>
-          <%= address.postal_code %> <%= address.region %>
+          <%= address.postal_code %> <%= address.locality %>
         </div>
       </p>
     <% end %>
