@@ -20,6 +20,8 @@ class PatientsController < ApplicationController
                 
   in_place_edit_for :invoice, :due_date
 
+  respond_to :js, :only => :covercard_search
+
   def localities_for_postal_code
     render :update do |page|
       localities = PostalCode.find_all_by_zip(params[:postal_code])
@@ -51,6 +53,10 @@ class PatientsController < ApplicationController
   def covercard_check_update
     # TODO: Implement an AJAX Request when a patient is loaded to do this action and of course this action.
     @patient = Patient.find(params[:id])
+  end
+
+  def covercard_search
+    @patient = Covercard::Patient.find(params[:code])
   end
   
   # GET /patients

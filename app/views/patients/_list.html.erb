@@ -1,7 +1,14 @@
 <div id="search_result">
+  <%= flash[:notice] %>
   <table class="list">
     <%= render :partial => 'list_header' %>
-    <%= render :partial => 'item', :collection => @patients %>
-    <%= render :partial => 'list_footer' %>
+    <% if @patients %>
+      <%= render :partial => 'item', :collection => @patients %>
+      <%= render :partial => 'list_footer' %>
+    <% end %>
+
+    <% if @suggest_covercard_search %>
+      <td><tr><%= link_to t('cydoc.actions.covercard_search'), covercard_search_path(@suggest_covercard_search), 'data-remote' => true %></tr></td>
+    <% end %>
   </table>
 </div>

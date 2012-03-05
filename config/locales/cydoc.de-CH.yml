@@ -253,6 +253,7 @@ de-CH:
       to_pdf: "Als PDF"
       update: "Ändern"
       covercard_update: "Covercard-Abgleich"
+      covercard_search: "HIN-Abfrage starten"
     navigation:
       accounting: 'Buchhaltung'
       accounts: 'Konten'

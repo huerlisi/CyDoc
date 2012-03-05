@@ -32,6 +32,8 @@ ActionController::Routing::Routes.draw do |map|
     doctor.resources :phone_numbers
   end
 
+  map.covercard_search '/patients/covercard_search/:code', :controller => :patients, :action => :covercard_search
+
   map.resources :patients, :member => {:show_tab => :get, 
                                        :localities_for_postal_code => :post, 
                                        :postal_codes_for_locality => :post, 
