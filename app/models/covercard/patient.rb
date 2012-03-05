@@ -22,5 +22,14 @@ module Covercard
         instance_variable_set("@#{k}", v) unless v.nil?
       end
     end
+
+    # Proxy accessors
+    def name
+      if vcard.nil?
+        ""
+      else
+        vcard.full_name || ""
+      end
+    end
   end
 end
