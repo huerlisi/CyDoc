@@ -228,10 +228,6 @@ class Patient < ActiveRecord::Base
     end
   end
 
-  def self.clean_covercard_code(value)
-    value[0..18]
-  end
-
   # Tarmed
   # ======
   # Association callbacks
