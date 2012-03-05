@@ -32,7 +32,14 @@ ActionController::Routing::Routes.draw do |map|
     doctor.resources :phone_numbers
   end
 
-  map.resources :patients, :member => {:show_tab => :get, :localities_for_postal_code => :post, :postal_codes_for_locality => :post, :print_label => :post, :label => :get, :print_full_label => :post, :full_label => :get, :covercard_update => :post} do |patient|
+  map.resources :patients, :member => {:show_tab => :get, 
+                                       :localities_for_postal_code => :post, 
+                                       :postal_codes_for_locality => :post, 
+                                       :print_label => :post, 
+                                       :label => :get, 
+                                       :print_full_label => :post, 
+                                       :full_label => :get, 
+                                       :covercard_update => :post} do |patient|
     patient.resources :phone_numbers
     patient.resources :tariff_items, :member => {:assign => :post}
     patient.resources :invoices
