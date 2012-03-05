@@ -56,7 +56,13 @@ class PatientsController < ApplicationController
   end
 
   def covercard_search
-    @patient = Covercard::Patient.find(params[:code])
+    @covercard_patient = Covercard::Patient.find(params[:code])
+
+    if @covercard_patient
+      @exact_patients = Patient.by_date(@covercard_patient.birth_date).by_name(@covercard_patient.name)  
+      @date_patients = Patient.by_date(@covercard_patient.birth_date) 
+      @name_patients = Patient.by_name(@covercard_patient.name) 
+    end
   end
   
   # GET /patients

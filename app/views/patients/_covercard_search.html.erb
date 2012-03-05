@@ -1,0 +1,19 @@
+<% if @covercard_patient %>
+  <div id="covercard_result">
+    <%= render :partial => 'covercard_patients/item' %>
+  </div>
+  <% [:exact_patients, :date_patients, :name_patients].each do |patients| %>
+    <% collection = instance_variable_get("@#{patients}") %>
+    <% unless collection.empty? %>
+      <h2><%= t(patients, :scope => 'cydoc.covercard_search') %></h2>
+      <div id="<%= patients %>_result">
+        <table class="list">
+          <%= render :partial => 'list_header' %>
+          <%= render :partial => 'item', :collection => collection %>
+        </table>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <h2><%= t('cydoc.covercard_search.no_result') %></h2>
+<% end %>

@@ -105,3 +105,9 @@ ul.case-history li { margin: 0; padding-left: 1em; background-color: white; }
 @media print {
   div.case_info { background:white; border:0 }
 }
+
+/* Covercard search */
+.left-box, .right-box { width: 50%; float: left; }
+#covercard_patient { width: 98%; float: left; }
+#covercard_patient label { font-weight: bold; width: 135px; float: left;}
+#covercard_patient .address { float: left; }

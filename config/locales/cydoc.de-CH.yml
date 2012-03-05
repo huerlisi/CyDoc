@@ -132,6 +132,8 @@ de-CH:
         accident_insurance: 'Unfallversicherung'
         accident_insurance_short_cut: 'UVG'
         address: Adresse
+        vcard: Adresse
+        billing_vcard: Rechnungsadresse
         birth_date:  Geburtstag
         doctor_patient_nr: Patientennr.
         family_name: Nachname
@@ -254,6 +256,12 @@ de-CH:
       update: "Ändern"
       covercard_update: "Covercard-Abgleich"
       covercard_search: "HIN-Abfrage starten"
+    covercard_search:
+      date_patients: "Treffer mit dem Geburtstag"
+      exact_patients: "Volltreffer"
+      name_patients: "Treffer mit dem Namen"
+      no_result: "Kein Suchergebnis"
+      result: "Covercard-Treffer"
     navigation:
       accounting: 'Buchhaltung'
       accounts: 'Konten'
