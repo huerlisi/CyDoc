@@ -60,8 +60,9 @@ class PatientsController < ApplicationController
     query ||= params[:quick_search][:query] if params[:quick_search]
 
     if query.present?
-      @patients = Patient.clever_find(query).paginate(:page => params['page'])
+      @patients, query_type, covercard_code = Patient.clever_find(query, :page => params[:page])
 
+      @suggest_covercard_search = covercard_code if query_type.eql?('covercard')
       # Show selection list only if more than one hit
       return if !params[:all] && redirect_if_match(@patients)
     else

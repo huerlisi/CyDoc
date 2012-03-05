@@ -192,6 +192,8 @@ class Patient < ActiveRecord::Base
     query.strip!
     query_params = {}
     query_type = get_query_type(query)
+    page = args.delete(:page)
+
     case query_type
     when "covercard"
       query_params[:covercard_code] = Covercard::Patient.clean_code(query)
@@ -213,7 +215,9 @@ class Patient < ActiveRecord::Base
     end
 
     args.merge!(:include => [:vcard ], :conditions => ["(#{patient_condition})", query_params], :order => 'vcards.family_name, vcards.given_name')
-    find(:all, args)
+    patients = find(:all, args)
+
+    [patients.paginate(:page => page), query_type, (patients.empty? ? query_params[:covercard_code] : nil)]
   end
 
   private
