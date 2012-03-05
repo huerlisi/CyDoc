@@ -1,7 +1,9 @@
 <% if @covercard_patient %>
-  <div id="covercard_result">
+  <div id="covercard_result" class="box">
     <%= render :partial => 'covercard_patients/item' %>
+    <%= render :partial => 'covercard_patients/create_link' %>
   </div>
+  <br/>
   <% [:exact_patients, :date_patients, :name_patients].each do |patients| %>
     <% collection = instance_variable_get("@#{patients}") %>
     <% unless collection.empty? %>

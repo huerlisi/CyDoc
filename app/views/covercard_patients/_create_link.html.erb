@@ -1,1 +1,18 @@
-<%= link_to 'create', '/' %>
+<% form_for setup_patient(Patient.new), :url => new_patient_path, :method => :get do |f| %>
+  <div style="display:block;">
+    <% [:birth_date, :sex, :covercard_code].each do |attr| %>
+      <%= f.text_field attr, :value => @covercard_patient.send(attr) %>
+    <% end %>
+    <% [:vcard, :billing_vcard].each do |v| %>
+      <% vcard = @covercard_patient.send(v) %>
+      <% f.fields_for v do |vcard_field| %>
+        <% [:honorific_prefix, :given_name, :family_name, :extended_address, :street_address, :postal_code, :locality].each do |attr| %>
+          <% value = vcard.send(attr) %>
+          <%= vcard_field.text_field attr, :value => value if value %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <%= f.submit t_action(:patient_from_covercard), :class => "icon icon-save" %>
+<% end %>
+

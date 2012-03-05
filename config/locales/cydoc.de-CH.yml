@@ -375,6 +375,7 @@ de-CH:
       resolved:           Abgeschlossen
       request_pending:    Pendent
       ready:              Neu
+      patient_from_covercard: "Als Patient erfassen"
       
 
   returned_invoices:

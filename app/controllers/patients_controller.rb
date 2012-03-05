@@ -105,7 +105,7 @@ class PatientsController < ApplicationController
   # GET /patients/new
   def new
     @patient = Patient.new(params[:patient])
-    @patient.vcard = Vcard.new(params[:patient])
+    @patient.vcard = Vcard.new(params[:patient]) unless params[:patient].present?
 
     @patient.doctor_patient_nr = Patient.maximum('CAST(doctor_patient_nr AS UNSIGNED INTEGER)').to_i + 1
 
