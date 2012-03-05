@@ -1,6 +1,5 @@
 module Covercard
   class Patient
-    
     def self.find(value)
       return nil unless value && value.length == 19
       
