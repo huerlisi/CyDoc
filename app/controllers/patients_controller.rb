@@ -55,6 +55,12 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
   end
 
+  def covercard_update
+    @patient = Patient.find(params[:id])
+    @covercard_patient = Covercard::Patient.find(params[:covercard_code])
+    @patient, @updated_attributes = @covercard_patient.update(@patient)
+  end
+
   def covercard_search
     @covercard_patient = Covercard::Patient.find(params[:code])
 

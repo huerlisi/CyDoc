@@ -33,6 +33,41 @@ module Covercard
       end
     end
 
+    def to_param
+      covercard_code
+    end
+
+    def update(patient)
+      updated_attributes = {}
+
+      [:birth_date, :sex, :only_year_of_birth, :covercard_code].each do |attr|
+        value = patient.send(attr)
+        new_value = self.send(attr)
+
+        unless value.eql?(new_value)
+          patient.send("#{attr}=", new_value)
+          updated_attributes[attr] = value  
+        end
+      end
+
+      [:vcard, :billing_vcard].each do |v|
+        vcard = patient.send(v)
+        new_vcard = self.send(v)
+
+        [:family_name, :given_name, :street_address, :postal_code, :locality, :honorific_prefix].each do |attr|
+          value = vcard.send(attr)
+          new_value = new_vcard.send(attr)
+
+          unless value.eql?(new_value)
+            vcard.send("#{attr}=", new_value)
+            updated_attributes["#{v}_attributes_#{attr}"] = value
+          end
+        end
+      end
+
+      [patient, updated_attributes]
+    end
+
     # Proxy accessors
     def name
       if vcard.nil?

@@ -33,6 +33,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.covercard_search '/patients/covercard_search/:code', :controller => :patients, :action => :covercard_search
+  map.covercard_update '/patients/:id/covercard_update/:covercard_code', :controller => :patients, :action => :covercard_update
 
   map.resources :patients, :member => {:show_tab => :get, 
                                        :localities_for_postal_code => :post, 

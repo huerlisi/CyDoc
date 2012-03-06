@@ -1,6 +1,6 @@
 <% if @covercard_patient %>
   <div id="covercard_result" class="box">
-    <%= render :partial => 'covercard_patients/item' %>
+    <%= render :partial => 'covercard_patients/show' %>
     <%= render :partial => 'covercard_patients/create_link' %>
   </div>
   <br/>
@@ -10,8 +10,8 @@
       <h2><%= t(patients, :scope => 'cydoc.covercard_search') %></h2>
       <div id="<%= patients %>_result">
         <table class="list">
-          <%= render :partial => 'list_header' %>
-          <%= render :partial => 'item', :collection => collection %>
+          <%= render :partial => 'covercard_patients/list_header' %>
+          <%= render :partial => 'covercard_patients/item', :collection => collection %>
         </table>
       </div>
     <% end %>

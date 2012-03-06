@@ -1,28 +1,7 @@
-<div id="covercard_patient">
-  <h2><%= t('cydoc.covercard_search.result') %></h2>
-  <div class="left-box">
-    <% [:name, :birth_date, :sex].each do |attr| %>
-      <p>
-        <label><%= t_attr(attr, Patient) %></label>
-        <%= @covercard_patient.send(attr) %>
-      </p>
-    <% end %>
-  </div>
-  <div class="right-box">
-    <% [:vcard, :billing_vcard].each do |vcard| %>
-      <% address = @covercard_patient.send(vcard) %>
-      <p>
-        <label><%= t_attr(vcard, Patient) %></label>
-        <div class="address">
-          <% if address.extended_address %>
-            <%= address.extended_address %>
-            <br/>
-          <% end %>
-          <%= address.street_address %>
-          <br/>
-          <%= address.postal_code %> <%= address.locality %>
-        </div>
-      </p>
-    <% end %>
-  </div>
-</div>
+<tr style="cursor: pointer" onclick="window.location='<%= patient_path(item) %>'">
+  <td><b><%=h item.full_name %></b></td>
+  <td><%= address(item.vcard, ', ') %></td>
+  <td style="text-align: right"><%=h item.doctor_patient_nr %></td>
+  <td style="text-align: right"><%=h item.birth_date %></td>
+  <td><%= link_to t_action(:trim_patient), covercard_update_path(item, @covercard_patient.to_param) %></td>
+</tr>
