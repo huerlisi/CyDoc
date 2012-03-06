@@ -8,8 +8,8 @@ module Covercard
                         :street_address => 'Evergreen Terrace 742',
                         :postal_code => '9373',
                         :locality => 'Springfield',
-                        :honorific_prefix => honorific_prefix('m'))
-      Patient.new(:vcard => vcard, :billing_vcard => vcard, :birth_date => Date.new(1986, 3, 25), :sex => 'm', :covercard_code => value)
+                        :honorific_prefix => honorific_prefix('M'))
+      Patient.new(:vcard => vcard, :billing_vcard => vcard, :birth_date => Date.new(1986, 3, 25), :sex => 'M', :covercard_code => value)
     end
 
     def self.clean_code(value)
@@ -18,9 +18,9 @@ module Covercard
 
     def self.honorific_prefix(value)
       case value
-      when 'm'
+      when 'M'
         'Herr'
-      when 'f'
+      when 'F'
         'Frau'
       end
     end
