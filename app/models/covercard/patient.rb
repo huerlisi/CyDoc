@@ -25,7 +25,7 @@ module Covercard
       end
     end
 
-    attr_accessor :vcard, :birth_date, :sex, :only_year_of_birth, :billing_vcard, :vcard, :covercard_code
+    attr_accessor :vcard, :birth_date, :sex, :only_year_of_birth, :billing_vcard, :covercard_code
 
     def initialize(args)
       args.each do |k,v|
