@@ -19,6 +19,7 @@ class EsrRecordsController < ApplicationController
     @esr_record.write_off!
 
     respond_to do |format|
+      format.js {}
       format.html {redirect_to @esr_record.esr_file}
     end
   end
@@ -33,6 +34,7 @@ class EsrRecordsController < ApplicationController
 
     @esr_record.book_extra_earning!
     respond_to do |format|
+      format.js {}
       format.html {redirect_to @esr_record.esr_file}
     end
   end
@@ -42,6 +44,7 @@ class EsrRecordsController < ApplicationController
     @esr_record.resolve!
 
     respond_to do |format|
+      format.js {}
       format.html {redirect_to @esr_record.esr_file}
     end
   end
