@@ -9,7 +9,7 @@ module Covercard
                         :postal_code => '9373',
                         :locality => 'Springfield',
                         :honorific_prefix => honorific_prefix('m'))
-      Patient.new(:vcard => vcard, :billing_vcard => vcard, :birth_date => Date.today, :sex => 'm', :covercard_code => value)
+      Patient.new(:vcard => vcard, :billing_vcard => vcard, :birth_date => Date.new(1986, 3, 25), :sex => 'm', :covercard_code => value)
     end
 
     def self.clean_code(value)
