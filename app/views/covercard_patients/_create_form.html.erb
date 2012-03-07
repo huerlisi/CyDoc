@@ -27,6 +27,18 @@
         </div>
       <% end %>
     </div>
+    <div class="left-box">
+      <div class="address-box">
+        <label><%= t_attr(:insurance_policy, Patient) %></label>
+        <input type="text" value="<%= @covercard_patient.insurance_policy.to_s %>" readonly="readonly"/>
+      </div>
+    </div>
+    <div class="left-box">
+      <div class="address-box">
+        <label><%= t_attr(:insurance, Patient) %></label>
+        <input type="text" value="<%= @covercard_patient.insurance %>" readonly="readonly"/>
+      </div>
+    </div>
   </div>
   <%= f.submit t_action(:patient_from_covercard), :class => "icon icon-save" %>
 <% end %>
