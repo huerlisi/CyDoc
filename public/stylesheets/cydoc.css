@@ -111,10 +111,12 @@ ul.case-history li { margin: 0; padding-left: 1em; background-color: white; }
 #covercard_patient { width: 100%; float: left; } 
 #covercard_result { width: 98%; float: left; }
 #covercard_patient label { font-weight: bold; width: 135px; float: left;}
-#covercard_patient .address { float: left; margin: 0; }
+#covercard_patient .address { float: left; margin: 0; width: 50%; }
 #create-patient-from-covercard { float: right; }
 #covercard_result form { display: inline; }
 #covercard_patient .address-box, .left-box p { float: left; width: 100%; margin: 0; margin-bottom: 1em; }
 .value-before { color: red; }
 .attribute-updated { color: red; border: 1px solid red; }
 .reset-updated-attribute { vertical-align: bottom; }
+#covercard_result input[type=text] { border: none; background-color: #FFD; }
+#covercard_result .address input[type=text] { width: 100%; }
