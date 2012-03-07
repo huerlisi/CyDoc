@@ -1,5 +1,27 @@
 module Covercard
-  class Patient
+  class Patient < ActiveRecord::Base
+    # Tableless active record
+    class_inheritable_accessor :columns
+    self.columns = []
+   
+    def self.column(name, sql_type = nil, default = nil, null = true)
+      columns << ActiveRecord::ConnectionAdapters::Column.new(name.to_s, default, sql_type.to_s, null)
+    end
+   
+    column :vcard, :string
+    column :billing_vcard, :string
+    column :birth_date, :date
+    column :sex, :string
+    column :covercard_code, :string
+    column :insurance_policy, :string
+    column :insurance, :string
+    column :only_year_of_birth, :integer
+
+    serialize :insurance, Insurance
+    serialize :insurance_policy, InsurancePolicy
+    serialize :vcard, Vcard
+    serialize :billing_vcard, Vcard
+
     def self.find(value)
       return nil unless value && value.length == 19
       
@@ -22,14 +44,6 @@ module Covercard
         'Herr'
       when 'F'
         'Frau'
-      end
-    end
-
-    attr_accessor :vcard, :birth_date, :sex, :only_year_of_birth, :billing_vcard, :covercard_code
-
-    def initialize(args)
-      args.each do |k,v|
-        instance_variable_set("@#{k}", v) unless v.nil?
       end
     end
 
