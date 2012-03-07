@@ -1,6 +1,6 @@
 <% if @covercard_patient %>
   <div id="covercard_result" class="box">
-    <%= render :partial => 'covercard_patients/create_link' %>
+    <%= render :partial => 'covercard_patients/create_form' %>
   </div>
   <br/>
   <% [:exact_patients, :date_patients, :name_patients].each do |patients| %>
