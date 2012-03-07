@@ -5,7 +5,7 @@
       <% [:covercard_code, :birth_date, :sex].each do |attr| %>
         <p>
           <label><%= t_attr(attr, Patient) %></label>
-          <%= f.text_field attr, :value => @covercard_patient.send(attr) %>
+          <%= f.text_field attr, :value => @covercard_patient.send(attr), :readonly => true %>
         </p>
       <% end %>
     </div>
@@ -19,7 +19,7 @@
               <% [:honorific_prefix, :given_name, :family_name, :extended_address, :street_address, :postal_code, :locality].each do |attr| %>
                 <% value = vcard.send(attr) %>
                 <% if value %>
-                  <%= vcard_field.text_field attr, :value => value  %>
+                  <%= vcard_field.text_field attr, :value => value, :readonly => true  %>
                 <% end %>
               <% end %>
             <% end %>
