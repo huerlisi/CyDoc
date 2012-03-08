@@ -36,7 +36,13 @@ module Covercard
       insurance_policy = InsurancePolicy.new(:number => '00033079540',
                                              :policy_type => 'KVG')
 
-      Patient.new(:vcard => vcard, :billing_vcard => vcard, :birth_date => Date.new(1986, 3, 25), :sex => 'M', :covercard_code => value, :insurance_policy => insurance_policy, :insurance => 'CSS Versicherung')
+      Patient.new(:vcard => vcard,
+                  :billing_vcard => vcard,
+                  :birth_date => Date.new(1986, 3, 25),
+                  :sex => 'M',
+                  :covercard_code => value,
+                  :insurance_policy => insurance_policy,
+                  :insurance => 'CSS Versicherung')
     end
 
     def self.insurance_policy(insurance_policy_attributes, insurance_name)
