@@ -83,6 +83,7 @@ module Covercard
     def update(patient)
       updated_attributes = {}
 
+      # Common attributes
       [:birth_date, :sex, :only_year_of_birth, :covercard_code].each do |attr|
         value = patient.send(attr)
         new_value = self.send(attr)
@@ -93,6 +94,7 @@ module Covercard
         end
       end
 
+      # Addresses
       [:vcard, :billing_vcard].each do |v|
         vcard = patient.send(v)
         new_vcard = self.send(v)
