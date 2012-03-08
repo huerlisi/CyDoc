@@ -69,4 +69,29 @@ class Doctor < ActiveRecord::Base
   def self.document_type_to_class(document_type = nil)
     Prawn::ReturnedInvoiceRequestDocument
   end
+
+  # Phone Numbers
+  has_many :phone_numbers, :as => :object do
+    def build_defaults
+      ['Tel. geschäft', 'Tel. privat', 'Handy', 'E-Mail'].map{ |phone_number_type|
+        build(:phone_number_type => phone_number_type) unless exists?(:phone_number_type => phone_number_type)
+      }
+    end
+  end
+  accepts_nested_attributes_for :phone_numbers, :reject_if => proc { |attrs| attrs['number'].blank? }
+  after_update :save_phone_numbers
+
+  def new_phone_number_attributes=(phone_number_attributes)
+    phone_number_attributes.each do |attributes|
+      phone_numbers.build(attributes) unless attributes[:number].blank?
+    end
+  end
+
+  private
+  def save_phone_numbers
+    # Delete
+    phone_numbers.each do |phone_number|
+      phone_number.save(false)
+    end
+  end
 end
