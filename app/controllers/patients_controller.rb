@@ -110,14 +110,20 @@ class PatientsController < ApplicationController
 
   # GET /patients/new
   def new
-    @patient = Patient.new(params[:patient])
-    @patient.vcard = Vcard.new(params[:patient]) unless params[:patient].present?
+    if params[:patient][:from_covercard].present?
+      params[:patient].delete(:from_covercard)
+      insurance_policy = Covercard::Patient.insurance_policy(params[:patient].delete(:insurance_policy), params[:patient].delete(:insurance))
+      @patient = Patient.new(params[:patient])
+      @patient.insurance_policies << insurance_policy
+    else
+      @patient = Patient.new(params[:patient])
+      @patient.vcard = Vcard.new(params[:patient])
+      # TODO: probably doctor specific...
+      @patient.sex = 'M'
+      @patient.vcard.honorific_prefix = 'Herr'
+    end
 
     @patient.doctor_patient_nr = Patient.maximum('CAST(doctor_patient_nr AS UNSIGNED INTEGER)').to_i + 1
-
-    # TODO: probably doctor specific...
-    @patient.sex = 'M'
-    @patient.vcard.honorific_prefix = 'Herr'
   end
 
   # POST /patients
