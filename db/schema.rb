@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221091102) do
+ActiveRecord::Schema.define(:version => 20120308102222) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -312,6 +312,7 @@ ActiveRecord::Schema.define(:version => 20120221091102) do
     t.string   "role"
     t.string   "group_ean_party", :limit => 13
     t.integer  "imported_id"
+    t.integer  "bsv_code"
   end
 
   add_index "insurances", ["ean_party"], :name => "index_insurances_on_ean_party"
