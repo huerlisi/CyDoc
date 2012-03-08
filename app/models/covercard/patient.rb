@@ -56,6 +56,14 @@ module Covercard
       insurance_policy
     end
 
+    def self.find_insurance(attributes)
+      insurance = Insurance.find_by_bsv_code(attributes['bsv_code'])
+      insurance ||= Insurance.find_by_ean_party(attributes['ean_party'])
+      insurance ||= Insurance.clever_find(attributes['name'])
+
+      insurance
+    end
+
     def self.clean_code(value)
       value[0..18]
     end
