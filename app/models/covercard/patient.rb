@@ -70,10 +70,6 @@ module Covercard
       end
     end
 
-    def to_param
-      covercard_code
-    end
-
     def update(patient)
       updated_attributes = {}
       updated_insurance_policies = {}

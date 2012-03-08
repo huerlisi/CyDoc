@@ -3,5 +3,5 @@
   <td><%= address(item.vcard, ', ') %></td>
   <td style="text-align: right"><%=h item.doctor_patient_nr %></td>
   <td style="text-align: right"><%=h item.birth_date %></td>
-  <td><%= link_to t_action(:trim_patient), covercard_update_path(item, @covercard_patient.to_param) %></td>
+  <td><%= link_to t_action(:trim_patient), covercard_update_path(item, @covercard_patient.covercard_code) %></td>
 </tr>
