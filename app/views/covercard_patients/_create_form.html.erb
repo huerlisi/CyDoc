@@ -40,6 +40,9 @@
       </div>
     </div>
   </div>
+  <%= hidden_field :patient, :insurance_policy, :value => @covercard_patient.insurance_policy.to_json %>
+  <%= hidden_field :patient, :insurance, :value => @covercard_patient.insurance %>
+  <%= hidden_field :patient, :from_covercard, :value => true %>
   <%= f.submit t_action(:patient_from_covercard), :class => "icon icon-save" %>
 <% end %>
 

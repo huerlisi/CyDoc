@@ -1,3 +1,5 @@
+require 'json'
+
 module Covercard
   class Patient < ActiveRecord::Base
     # Tableless active record
@@ -35,6 +37,15 @@ module Covercard
                                                :policy_type => 'KVG')
 
       Patient.new(:vcard => vcard, :billing_vcard => vcard, :birth_date => Date.new(1986, 3, 25), :sex => 'M', :covercard_code => value, :insurance_policy => insurance_policy, :insurance => 'CSS Versicherung')
+    end
+
+    def self.insurance_policy(insurance_policy_attributes, insurance_name)
+      insurance_policy_attributes = JSON.parse(insurance_policy_attributes)
+      insurance_policy = InsurancePolicy.new(insurance_policy_attributes)
+      insurance = Insurance.clever_find(insurance_name).first
+      insurance_policy.insurance_id = insurance.id if insurance
+
+      insurance_policy
     end
 
     def self.clean_code(value)
