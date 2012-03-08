@@ -42,7 +42,9 @@ module Covercard
                   :sex => 'M',
                   :covercard_code => value,
                   :insurance_policy => insurance_policy,
-                  :insurance => 'CSS Versicherung')
+                  :insurance => {:name => 'CSS Versicherung',
+                                 :bsv_code => 8,
+                                 :ean_party => 7601003001082})
     end
 
     def self.insurance_policy(insurance_policy_attributes, insurance_name)
