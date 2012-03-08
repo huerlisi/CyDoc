@@ -47,11 +47,10 @@ module Covercard
                                  :ean_party => 7601003001082})
     end
 
-    def self.insurance_policy(insurance_policy_attributes, insurance_name)
-      insurance_policy_attributes = JSON.parse(insurance_policy_attributes)
-      insurance_policy = InsurancePolicy.new(insurance_policy_attributes)
-      insurance = Insurance.clever_find(insurance_name).first
-      insurance_policy.insurance_id = insurance.id if insurance
+    def self.insurance_policy(insurance_policy_attributes, insurance_attributes)
+      insurance_policy = InsurancePolicy.new(JSON.parse(insurance_policy_attributes))
+      insurance = find_insurance(JSON.parse(insurance_attributes))
+      insurance_policy.insurance = insurance if insurance
 
       insurance_policy
     end
