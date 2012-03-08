@@ -30,18 +30,19 @@
     <div class="left-box">
       <div class="address-box">
         <label><%= t_attr(:insurance_policy, Patient) %></label>
-        <input type="text" value="<%= @covercard_patient.insurance_policy.to_s %>" readonly="readonly"/>
+        <%= @covercard_patient.insurance_policy.to_s %>  
       </div>
-    </div>
-    <div class="left-box">
       <div class="address-box">
         <label><%= t_attr(:insurance, Patient) %></label>
-        <input type="text" value="<%= @covercard_patient.insurance[:name] %>" readonly="readonly"/>
+        <%= @covercard_patient.insurance_policy.insurance.to_s %>
       </div>
     </div>
   </div>
-  <%= hidden_field :patient, :insurance_policy, :value => @covercard_patient.insurance_policy.to_json %>
-  <%= hidden_field :patient, :insurance, :value => @covercard_patient.insurance.to_json %>
+  <% f.fields_for :insurance_policies do |p| %>
+    <% [:number, :policy_type, :insurance_id].each do |attr| %>
+      <%= p.hidden_field attr, :value => @covercard_patient.insurance_policy.send(attr) %>
+    <% end %>
+  <% end %>
   <%= hidden_field :patient, :from_covercard, :value => true %>
   <%= f.submit t_action(:patient_from_covercard), :class => "icon icon-save" %>
 <% end %>

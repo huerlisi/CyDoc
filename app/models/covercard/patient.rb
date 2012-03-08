@@ -33,32 +33,26 @@ module Covercard
                         :locality => 'Springfield',
                         :honorific_prefix => honorific_prefix('M'))
 
+      insurance = find_insurance({:name => 'CSS Versicherung',
+                                  :bsv_code => 8,
+                                  :ean_party => 7601003001082})
+
       insurance_policy = InsurancePolicy.new(:number => '00033079540',
-                                             :policy_type => 'KVG')
+                                             :policy_type => 'KVG',
+                                             :insurance => insurance)
 
       Patient.new(:vcard => vcard,
                   :billing_vcard => vcard,
                   :birth_date => Date.new(1986, 3, 25),
                   :sex => 'M',
                   :covercard_code => value,
-                  :insurance_policy => insurance_policy,
-                  :insurance => {:name => 'CSS Versicherung',
-                                 :bsv_code => 8,
-                                 :ean_party => 7601003001082})
-    end
-
-    def self.insurance_policy(insurance_policy_attributes, insurance_attributes)
-      insurance_policy = InsurancePolicy.new(JSON.parse(insurance_policy_attributes))
-      insurance = find_insurance(JSON.parse(insurance_attributes))
-      insurance_policy.insurance = insurance if insurance
-
-      insurance_policy
+                  :insurance_policy => insurance_policy)
     end
 
     def self.find_insurance(attributes)
-      insurance = Insurance.find_by_bsv_code(attributes['bsv_code'])
-      insurance ||= Insurance.find_by_ean_party(attributes['ean_party'])
-      insurance ||= Insurance.clever_find(attributes['name'])
+      insurance = Insurance.find_by_bsv_code(attributes[:bsv_code])
+      insurance ||= Insurance.find_by_ean_party(attributes[:ean_party])
+      insurance ||= Insurance.clever_find(attributes[:name])
 
       insurance
     end

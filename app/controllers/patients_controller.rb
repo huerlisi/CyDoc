@@ -112,9 +112,9 @@ class PatientsController < ApplicationController
   def new
     if params[:patient][:from_covercard].present?
       params[:patient].delete(:from_covercard)
-      insurance_policy = Covercard::Patient.insurance_policy(params[:patient].delete(:insurance_policy), params[:patient].delete(:insurance))
+      params[:patient]['insurance_policies_attributes'].delete('1')
       @patient = Patient.new(params[:patient])
-      @patient.insurance_policies << insurance_policy
+      @patient.insurance_policies << InsurancePolicy.new(:policy_type => 'UVG')
     else
       @patient = Patient.new(params[:patient])
       @patient.vcard = Vcard.new(params[:patient])
