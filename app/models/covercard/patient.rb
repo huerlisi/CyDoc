@@ -76,6 +76,7 @@ module Covercard
 
     def update(patient)
       updated_attributes = {}
+      updated_insurance_policies = {}
 
       # Common attributes
       [:birth_date, :sex, :only_year_of_birth, :covercard_code].each do |attr|
@@ -104,7 +105,23 @@ module Covercard
         end
       end
 
-      [patient, updated_attributes]
+      # Insurance policy
+      if patient.insurance_policies.empty?
+        patient.insurance_policies << self.insurance_policy
+      else
+        patient.insurance_policies.each_with_index do |p, i|
+          if p.policy_type && p.policy_type.eql?(self.insurance_policy.policy_type)
+            [:policy_type, :insurance_id, :number].each do |attr|
+              value = p.send(attr)
+              new_value = self.insurance_policy.send(attr)
+              updated_insurance_policies["insurance_policies_attributes_#{i}_#{attr}"] = value unless value.eql?(new_value)
+              p.send("#{attr}=", new_value)
+            end
+          end
+        end
+      end
+
+      [patient, updated_attributes, updated_insurance_policies]
     end
 
     # Proxy accessors

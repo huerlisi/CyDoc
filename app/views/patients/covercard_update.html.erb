@@ -6,6 +6,10 @@
 
 <script type="text/javascript">
   <% @updated_attributes.each do |k, v| %>
+    jQuery('#patient_<%= k %>').addClass('attribute-updated').after('<a href="#" class="reset-updated-attribute" data-value="<%= v %>"><%= t_action(:revert) %></a>');
+  <% end %>
+
+  <% @updated_insurance_policies.each do |k, v| %>
     jQuery('#patient_<%= k %>').addClass('attribute-updated').after('<a href="#" class="reset-updated-attribute" data-value="<%= v %>"><%= t_action(:revert) %></a>')
   <% end %>
 </script>
