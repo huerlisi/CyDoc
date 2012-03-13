@@ -194,58 +194,56 @@ module Prawn
           I18n::translate(:cantonal, :scope => "activerecord.attributes.invoice"),
           "0.00",
           nil
+        ],
+        [
+          {:content => "▪ " + I18n::translate(:total_amount, :scope => "activerecord.attributes.invoice"), :colspan => 2},
+          invoice.amount.currency_round,
+          nil,
+          I18n::translate(:amount_pfl, :scope => "activerecord.attributes.invoice"),
+          invoice.obligation_amount.currency_round,
+          nil,
+          I18n::translate(:prepayment, :scope => "activerecord.attributes.invoice"),
+          "0.00",
+          nil,
+          I18n::translate(:amount_due, :scope => "activerecord.attributes.invoice"),
+          sprintf('%0.2f', invoice.amount.currency_round),
+          nil
         ]
       ]
 
       move_cursor_to 6.5.cm
-      font_size MEDIUM_FONT_SIZE
-      table content, :width => bounds.width do
-        # General
-        cells.borders = []
-        cells.padding = [0.5, 2, 0.5, 2]
+      font_size SMALL_FONT_SIZE do
+        table content, :width => bounds.width do
+          # General
+          cells.borders = []
+          cells.padding = [0.5, 2, 0.5, 2]
 
-        # Outer cells
-        column(0).padding_left = 0
-        column(-1).padding_right = 0
+          # Outer cells
+          column(0).padding_left = 0
+          column(-1).padding_right = 0
 
-        # Padding
-        column(4).padding_left = 1.cm
+          # Padding
+          column(4).padding_left = 1.cm
 
-        # Fonts
-        column(0).font_style = :bold
+          # Fonts
+          column(0).font_style = :bold
 
-        column(0).size = 6.5
-        column(1).size = 6.5
-        column(4).size = 6.5
-        column(7).size = 6.5
-        column(10).size = 6.5
-        column(13).size = 6.5
+          # Alignments
+          column(2).align = :right
+          column(3).align = :right
+          column(5).align = :right
+          column(6).align = :right
+          column(8).align = :right
+          column(9).align = :right
+          column(11).align = :right
+          column(12).align = :right
+          column(14).align = :right
+          column(15).align = :right
 
-        # Alignments
-        column(2).align = :right
-        column(3).align = :right
-        column(5).align = :right
-        column(6).align = :right
-        column(8).align = :right
-        column(9).align = :right
-        column(11).align = :right
-        column(12).align = :right
-        column(14).align = :right
-        column(15).align = :right
-
-        # Width
-        column(0).width = 1.5.cm
-        column(1).width = 1.7.cm
-        column(2).width = 1.3.cm
-        column(3).width = 1.3.cm
-        column(4).width = 2.3.cm
-        column(5).width = 1.7.cm
-        column(6).width = 1.2.cm
-        column(7).width = 1.3.cm
-        column(8).width = 1.5.cm
-        column(9).width = 1.3.cm
-        column(10).width = 1.9.cm
-        column(11).width = 1.7.cm
+          # Total row styling
+          row(2).font_style = :bold
+          row(2).padding = [10, 0, 0, 0]
+        end
       end
     end
 
@@ -407,68 +405,11 @@ module Prawn
     end
 
     def summary(invoice)
-      content = [
-        [
-          "▪ " + I18n::translate(:total_amount, :scope => "activerecord.attributes.invoice"),
-          invoice.amount.currency_round,
-          nil,
-          I18n::translate(:amount_pfl, :scope => "activerecord.attributes.invoice"),
-          invoice.obligation_amount.currency_round,
-          nil,
-          I18n::translate(:prepayment, :scope => "activerecord.attributes.invoice"),
-          "0.00",
-          nil,
-          I18n::translate(:amount_due, :scope => "activerecord.attributes.invoice"),
-          sprintf('%0.2f', invoice.amount.currency_round),
-          nil
-        ]
-      ]
-
       move_down 8
-      font_size 8
-      table content do
-        # General
-        cells.borders = []
-        cells.padding = [0.5, 2, 0.5, 2]
 
-        # Outer cells
-        column(0).padding_left = 0
-        column(-1).padding_right = 0
-
-        # Padding
-        column(3).padding_left = 1.cm
-
-        # Fonts
-        row(0).font_style = :bold
-
-        column(0).size = 6.5
-        column(3).size = 6.5
-        column(6).size = 6.5
-        column(9).size = 6.5
-
-        # Alignments
-        column(1).align = :right
-        column(4).align = :right
-        column(7).align = :right
-        column(10).align = :right
-
-        # Width
-        column(0).width = 2.8.cm
-        column(1).width = 1.7.cm
-        column(2).width = 1.3.cm
-        column(3).width = 3.cm
-        column(4).width = 1.2.cm
-        column(5).width = 1.2.cm
-        column(6).width = 1.8.cm
-        column(7).width = 1.cm
-        column(8).width = 1.3.cm
-        column(9).width = 2.4.cm
-        column(10).width = 1.2.cm
+      font_size SMALL_FONT_SIZE do
+        text "▪ " + I18n::translate(:vat_number, :scope => "activerecord.attributes.invoice"), :style => :bold
       end
-
-      move_down 8
-      font_size 6.5
-      text "▪ " + I18n::translate(:vat_number, :scope => "activerecord.attributes.invoice"), :style => :bold
 
       header = [
         [
@@ -499,29 +440,31 @@ module Prawn
       ]
 
       move_down 2.cm
-      font_size 8
-      table header + content + footer do
-        # General
-        cells.borders = []
-        cells.padding = [0.5, 2, 0.5, 2]
+      
+      font_size MEDIUM_FONT_SIZE do
+        table header + content + footer do
+          # General
+          cells.borders = []
+          cells.padding = [0.5, 2, 0.5, 2]
 
-        # Outer cells
-        column(0).padding_left = 0
-        column(-1).padding_right = 0
+          # Outer cells
+          column(0).padding_left = 0
+          column(-1).padding_right = 0
 
-        # Alignments
-        cells.align = :right
-        column(0).align = :left
+          # Alignments
+          cells.align = :right
+          column(0).align = :left
 
-        # Fonts
-        row(0).font_style = :bold
-        row(-1).font_style = :bold
+          # Fonts
+          row(0).font_style = :bold
+          row(-1).font_style = :bold
 
-        row(0).size = 6.5
+          row(0).size = 6.5
 
-        # Column widths
-        cells.width = 2.cm
-        column(0).width = 1.cm
+          # Column widths
+          cells.width = 2.cm
+          column(0).width = 1.cm
+        end
       end
     end
   end
