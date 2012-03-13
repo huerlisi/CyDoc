@@ -44,11 +44,7 @@ module Prawn
       # Service records
       service_records(invoice)
 
-      # Tarmed footer
-      tarmed_footer(invoice)
-
-      # Summary
-      summary(invoice)
+      footer_last_page(invoice)
 
       # Page number
       number_pages "<page>", :at => [bounds.width - 5.3.cm, bounds.height - 0.1.cm], :font_size => SMALL_FONT_SIZE
@@ -173,6 +169,26 @@ module Prawn
       end
     end
 
+    def footer_last_page(invoice)
+      start_new_page if new_page?
+
+      bounding_box [0, footer_position], :width => bounds.width do
+        # Tarmed footer
+        tarmed_footer(invoice)
+
+        # Summary
+        summary(invoice)
+      end
+    end
+
+    def new_page?
+      cursor < footer_position
+    end
+
+    def footer_position
+      bounds.bottom + 5.2.cm
+    end
+
     def tarmed_footer(invoice)
       content = [
         [
@@ -221,7 +237,6 @@ module Prawn
         ]
       ]
 
-      move_cursor_to 6.5.cm
       font_size SMALL_FONT_SIZE do
         table content, :width => bounds.width do
           # General
@@ -255,8 +270,6 @@ module Prawn
           row(2).padding = [10, 0, 0, 0]
         end
       end
-
-      new_line
     end
 
     def service_records(invoice)
@@ -266,17 +279,19 @@ module Prawn
       first_page_records.each {|record| service_entry(record) }
       sub_total(first_page_records)
       start_new_page
-      page_records = all_records.each_slice(24).to_a
+      page_records = all_records.each_slice(27).to_a
 
       page_records.each do |records|
         bounding_box [0, cursor - 3.cm], :width => bounds.width do
           service_record_header
           records.each {|record| service_entry(record) }
-          sub_total(records) unless records.eql?(page_records.last) 
+          sub_total(records) if !records.eql?(page_records.last)
         end
 
         start_new_page unless records.eql?(page_records.last)
       end
+
+      sub_total(page_records.last) if new_page?
     end
 
     def sub_total(records)
@@ -409,8 +424,6 @@ module Prawn
     end
 
     def summary(invoice)
-      move_down 8
-
       font_size SMALL_FONT_SIZE do
         text "▪ " + I18n::translate(:vat_number, :scope => "activerecord.attributes.invoice"), :style => :bold
       end
