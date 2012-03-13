@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/prawnpdf/prawn.git
+  revision: 91164e49a29bb6d0e5b3635217349189a3ea0e91
+  specs:
+    prawn (1.0.0.rc1)
+      pdf-reader (>= 0.9.0)
+      ttfunk (~> 1.0.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -75,9 +83,6 @@ GEM
     pdf-reader (1.0.0)
       Ascii85 (~> 1.0.0)
       ruby-rc4
-    prawn (0.12.0)
-      pdf-reader (>= 0.9.0)
-      ttfunk (~> 1.0.2)
     prawnto (0.0.4)
       prawn
       rails (>= 2.1)
@@ -128,7 +133,7 @@ DEPENDENCIES
   inherited_resources_views
   ledermann-rails-settings
   mysql2 (~> 0.2.18)
-  prawn
+  prawn!
   prawnto
   rails (~> 2.3.10)
   rdoc

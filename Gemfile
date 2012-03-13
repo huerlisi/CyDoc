@@ -62,7 +62,7 @@ gem 'inherited_resources_views'
 gem 'carrierwave'
 
 # PDF
-gem 'prawn'
+gem 'prawn', :git => 'https://github.com/prawnpdf/prawn.git'
 gem 'prawnto'
 
 gem 'csv-mapper'
