@@ -2,7 +2,7 @@ module Prawn
   class InsuranceRecipe < Prawn::LetterDocument
     include InvoicesHelper
 
-    RECORD_INDENT = 2.2.cm
+    RECORD_INDENT = 3.1.cm
     SMALL_FONT_SIZE = 6.5
     MEDIUM_FONT_SIZE = 8
 
