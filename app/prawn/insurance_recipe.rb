@@ -24,15 +24,12 @@ module Prawn
         title
       end
 
-      move_up 0.5.cm
-      y1 = self.y
-      bounding_box [0, cursor], :width => bounds.width, :height => 12.cm do
+      bounding_box [0, bounds.height], :width => bounds.width, :height => 12.cm do
         info_header(invoice)
       end
 
       repeat (lambda { |pg| pg != 1 }) do
-        self.y = y1
-        bounding_box [0, cursor], :width => bounds.width, :height => 4.cm do
+        bounding_box [0, bounds.height], :width => bounds.width, :height => 4.cm do
           info_header(invoice, :small)
         end
       end
@@ -246,6 +243,104 @@ module Prawn
     end
 
     def service_records(invoice)
+      service_record_header
+
+      first_page_records = invoice.service_records.first(17)
+
+      for record in first_page_records
+        font_size 6.5
+        service_entry(record)
+      end
+
+      sub_total(first_page_records)
+
+      start_new_page
+
+      next_page_records = invoice.service_records.shift(17)
+
+      page_records = next_page_records.each_slice(24).to_a
+
+      page_records.each do |records|
+        bounding_box [0, cursor - 3.5.cm], :width => bounds.width do
+          service_record_header
+
+          records.each do |record|
+            service_entry(record)
+          end
+
+          unless records.eql?(page_records.last)
+            sub_total(records) 
+          else
+            
+          end
+        end
+
+        start_new_page unless records.eql?(page_records.last)
+      end
+    end
+
+    def sub_total(records)
+      text "Zwischentotal"
+      text "#{records.sum(&:amount)}", :font_weight => :bold
+    end
+
+    def service_entry(record)
+      group do
+        indent 2.2.cm do
+          text record.text, :style => :bold, :leading => -1
+        end
+
+        font_size 8
+        data = [
+          "▪ " + record.date.to_date.to_s,
+          sprintf('%03i', record.tariff_type),
+          record.code,
+          record.ref_code,
+          record.session,
+          sprintf('%.2f', record.quantity),
+          sprintf('%.2f', record.amount_mt),
+          sprintf('%.2f', record.unit_factor_mt),
+          sprintf('%.2f', record.unit_mt),
+          sprintf('%.2f', record.amount_tt),
+          sprintf('%.2f', record.unit_factor_tt),
+          sprintf('%.2f', record.unit_tt),
+          1,
+          1,
+          0,
+          0,
+          sprintf('%.2f', record.amount)
+        ]
+
+        table [data], :cell_style => {:overflow => :shrink_to_fit} do
+          cells.borders = []
+          cells.padding = 0
+
+          column(0).width = 2.2.cm
+          column(1).width = 0.9.cm
+          column(2).width = 1.5.cm
+          column(3).width = 1.7.cm
+          column(4).width = 0.8.cm
+          column(5).width = 1.cm
+          column(6).width = 1.7.cm
+          column(7).width = 1.4.cm
+          column(8).width = 1.4.cm
+          column(9).width = 1.4.cm
+          column(10).width = 1.1.cm
+          column(11).width = 1.1.cm
+          column(12).width = 0.5.cm
+          column(13).width = 0.3.cm
+          column(14).width = 0.3.cm
+          column(15).width = 0.3.cm
+          column(16).width = 1.4.cm
+
+          column(5..16).align = :right
+        end
+
+        move_down 3
+      end
+    end
+
+    def service_record_header
       font_size = 6.5
       data = [
         "Datum",
@@ -294,182 +389,124 @@ module Prawn
       end
 
       move_down 5
+    end
 
-      for record in invoice.service_records
-        font_size 6.5
+    def summary(invoice)
+      content = [
+        [
+          "▪ " + I18n::translate(:total_amount, :scope => "activerecord.attributes.invoice"),
+          invoice.amount.currency_round,
+          nil,
+          I18n::translate(:amount_pfl, :scope => "activerecord.attributes.invoice"),
+          invoice.obligation_amount.currency_round,
+          nil,
+          I18n::translate(:prepayment, :scope => "activerecord.attributes.invoice"),
+          "0.00",
+          nil,
+          I18n::translate(:amount_due, :scope => "activerecord.attributes.invoice"),
+          sprintf('%0.2f', invoice.amount.currency_round),
+          nil
+        ]
+      ]
 
-        group do
-          indent 2.2.cm do
-            text record.text, :style => :bold, :leading => -1
-          end
+      move_down 8
+      font_size 8
+      table content do
+        # General
+        cells.borders = []
+        cells.padding = [0.5, 2, 0.5, 2]
 
-          font_size 8
-          data = [
-            "▪ " + record.date.to_date.to_s,
-            sprintf('%03i', record.tariff_type),
-            record.code,
-            record.ref_code,
-            record.session,
-            sprintf('%.2f', record.quantity),
-            sprintf('%.2f', record.amount_mt),
-            sprintf('%.2f', record.unit_factor_mt),
-            sprintf('%.2f', record.unit_mt),
-            sprintf('%.2f', record.amount_tt),
-            sprintf('%.2f', record.unit_factor_tt),
-            sprintf('%.2f', record.unit_tt),
-            1,
-            1,
-            0,
-            0,
-            sprintf('%.2f', record.amount)
-          ]
+        # Outer cells
+        column(0).padding_left = 0
+        column(-1).padding_right = 0
 
-          table [data], :cell_style => {:overflow => :shrink_to_fit} do
-            cells.borders = []
-            cells.padding = 0
+        # Padding
+        column(3).padding_left = 1.cm
 
-            column(0).width = 2.2.cm
-            column(1).width = 0.9.cm
-            column(2).width = 1.5.cm
-            column(3).width = 1.7.cm
-            column(4).width = 0.8.cm
-            column(5).width = 1.cm
-            column(6).width = 1.7.cm
-            column(7).width = 1.4.cm
-            column(8).width = 1.4.cm
-            column(9).width = 1.4.cm
-            column(10).width = 1.1.cm
-            column(11).width = 1.1.cm
-            column(12).width = 0.5.cm
-            column(13).width = 0.3.cm
-            column(14).width = 0.3.cm
-            column(15).width = 0.3.cm
-            column(16).width = 1.4.cm
+        # Fonts
+        row(0).font_style = :bold
 
-            column(5..16).align = :right
-          end
+        column(0).size = 6.5
+        column(3).size = 6.5
+        column(6).size = 6.5
+        column(9).size = 6.5
 
-          move_down 3
-        end
+        # Alignments
+        column(1).align = :right
+        column(4).align = :right
+        column(7).align = :right
+        column(10).align = :right
+
+        # Width
+        column(0).width = 2.8.cm
+        column(1).width = 1.7.cm
+        column(2).width = 1.3.cm
+        column(3).width = 3.cm
+        column(4).width = 1.2.cm
+        column(5).width = 1.2.cm
+        column(6).width = 1.8.cm
+        column(7).width = 1.cm
+        column(8).width = 1.3.cm
+        column(9).width = 2.4.cm
+        column(10).width = 1.2.cm
       end
 
-      def summary(invoice)
-        content = [
-          [
-            "▪ " + I18n::translate(:total_amount, :scope => "activerecord.attributes.invoice"),
-            invoice.amount.currency_round,
-            nil,
-            I18n::translate(:amount_pfl, :scope => "activerecord.attributes.invoice"),
-            invoice.obligation_amount.currency_round,
-            nil,
-            I18n::translate(:prepayment, :scope => "activerecord.attributes.invoice"),
-            "0.00",
-            nil,
-            I18n::translate(:amount_due, :scope => "activerecord.attributes.invoice"),
-            sprintf('%0.2f', invoice.amount.currency_round),
-            nil
-          ]
+      move_down 8
+      font_size 6.5
+      text "▪ " + I18n::translate(:vat_number, :scope => "activerecord.attributes.invoice"), :style => :bold
+
+      header = [
+        [
+          "▪ " + I18n::translate(:vat_code, :scope => "activerecord.attributes.invoice"),
+          I18n::translate(:vat_rate, :scope => "activerecord.attributes.invoice"),
+          I18n::translate(:vat_amount, :scope => "activerecord.attributes.invoice"),
+          I18n::translate(:vat, :scope => "activerecord.attributes.invoice")
         ]
+      ]
 
-        move_down 8
-        font_size 8
-        table content do
-          # General
-          cells.borders = []
-          cells.padding = [0.5, 2, 0.5, 2]
-
-          # Outer cells
-          column(0).padding_left = 0
-          column(-1).padding_right = 0
-
-          # Padding
-          column(3).padding_left = 1.cm
-
-          # Fonts
-          row(0).font_style = :bold
-
-          column(0).size = 6.5
-          column(3).size = 6.5
-          column(6).size = 6.5
-          column(9).size = 6.5
-
-          # Alignments
-          column(1).align = :right
-          column(4).align = :right
-          column(7).align = :right
-          column(10).align = :right
-
-          # Width
-          column(0).width = 2.8.cm
-          column(1).width = 1.7.cm
-          column(2).width = 1.3.cm
-          column(3).width = 3.cm
-          column(4).width = 1.2.cm
-          column(5).width = 1.2.cm
-          column(6).width = 1.8.cm
-          column(7).width = 1.cm
-          column(8).width = 1.3.cm
-          column(9).width = 2.4.cm
-          column(10).width = 1.2.cm
-        end
-
-        move_down 8
-        font_size 6.5
-        text "▪ " + I18n::translate(:vat_number, :scope => "activerecord.attributes.invoice"), :style => :bold
-
-        header = [
-          [
-            "▪ " + I18n::translate(:vat_code, :scope => "activerecord.attributes.invoice"),
-            I18n::translate(:vat_rate, :scope => "activerecord.attributes.invoice"),
-            I18n::translate(:vat_amount, :scope => "activerecord.attributes.invoice"),
-            I18n::translate(:vat, :scope => "activerecord.attributes.invoice")
-          ]
+      total_vat_amount = 0.0
+      content = [
+        [
+          "0",
+          "0.00",
+          sprintf('%0.2f', invoice.amount.currency_round),
+          "0.00"
         ]
+      ]
 
-        total_vat_amount = 0.0
-        content = [
-          [
-            "0",
-            "0.00",
-            sprintf('%0.2f', invoice.amount.currency_round),
-            "0.00"
-          ]
+      footer = [
+        [
+          I18n::translate(:total, :scope => "activerecord.attributes.invoice"),
+          nil,
+          invoice.amount.currency_round,
+          "0.00"
         ]
+      ]
 
-        footer = [
-          [
-            I18n::translate(:total, :scope => "activerecord.attributes.invoice"),
-            nil,
-            invoice.amount.currency_round,
-            "0.00"
-          ]
-        ]
+      move_down 2.cm
+      font_size 8
+      table header + content + footer do
+        # General
+        cells.borders = []
+        cells.padding = [0.5, 2, 0.5, 2]
 
-        move_down 2.cm
-        font_size 8
-        table header + content + footer do
-          # General
-          cells.borders = []
-          cells.padding = [0.5, 2, 0.5, 2]
+        # Outer cells
+        column(0).padding_left = 0
+        column(-1).padding_right = 0
 
-          # Outer cells
-          column(0).padding_left = 0
-          column(-1).padding_right = 0
+        # Alignments
+        cells.align = :right
+        column(0).align = :left
 
-          # Alignments
-          cells.align = :right
-          column(0).align = :left
+        # Fonts
+        row(0).font_style = :bold
+        row(-1).font_style = :bold
 
-          # Fonts
-          row(0).font_style = :bold
-          row(-1).font_style = :bold
+        row(0).size = 6.5
 
-          row(0).size = 6.5
-
-          # Column widths
-          cells.width = 2.cm
-          column(0).width = 1.cm
-        end
+        # Column widths
+        cells.width = 2.cm
+        column(0).width = 1.cm
       end
     end
   end
