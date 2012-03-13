@@ -42,13 +42,11 @@ module Prawn
       # Service records
       service_records(invoice)
 
-      # start_new_page if invoice.service_records.count > 10
-
       # Tarmed footer
-      # tarmed_footer(invoice)
+      tarmed_footer(invoice)
 
       # Summary
-      # summary(invoice)
+      summary(invoice)
 
       repeat :all do
         font_size 10
