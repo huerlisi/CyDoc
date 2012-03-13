@@ -51,7 +51,7 @@ module Prawn
       summary(invoice)
 
       # Page number
-      number_pages "<page>", :at => [bounds.width - 6.5.cm, bounds.height - 0.1.cm], :font_size => SMALL_FONT_SIZE
+      number_pages "<page>", :at => [bounds.width - 5.3.cm, bounds.height - 0.1.cm], :font_size => SMALL_FONT_SIZE
 
       repeat :all do
         font_size 10
