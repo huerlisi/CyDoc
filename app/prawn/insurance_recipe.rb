@@ -6,6 +6,7 @@ module Prawn
     RECORD_INDENT = 3.1.cm
     SMALL_FONT_SIZE = 6.5
     MEDIUM_FONT_SIZE = 8
+    BORDER_WIDTH = 0.75
 
     def default_options
       parent_options = super
@@ -126,19 +127,20 @@ module Prawn
         cells.padding = [0.5, 2, 0.5, 2]
         
         # Surrounding Border
-        row(0).border_top_width = 0.75
-        row(-1).border_bottom_width = 0.75
-        column(0).border_left_width = 0.75
-        column(-1).border_right_width = 0.75
+        row(0).border_top_width = BORDER_WIDTH
+        row(-1).border_bottom_width = BORDER_WIDTH
+        row(-1).border_bottom_width = BORDER_WIDTH
+        column(0).border_left_width = BORDER_WIDTH
+        column(-1).border_right_width = BORDER_WIDTH
         row(0).padding_top = 1
         row(-1).padding_bottom = 1
 
         # Separators
-        row(4).border_bottom_width = 0.75
-        row(23).border_bottom_width = 0.75
-        row(24).border_bottom_width = 0.75
-        row(25).border_bottom_width = 0.75
-        row(26).border_bottom_width = 0.75
+        row(4).border_bottom_width = BORDER_WIDTH
+        row(23).border_bottom_width = BORDER_WIDTH
+        row(24).border_bottom_width = BORDER_WIDTH
+        row(25).border_bottom_width = BORDER_WIDTH
+        row(26).border_bottom_width = BORDER_WIDTH
 
         row(4).padding_bottom = 1
         row(5).padding_top = 1
