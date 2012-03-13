@@ -261,25 +261,17 @@ module Prawn
 
     def service_records(invoice)
       service_record_header
-
-      first_page_records = invoice.service_records.first(17)
-
-      for record in first_page_records
-        service_entry(record)
-      end
-
+      all_records = invoice.service_records
+      first_page_records = all_records.shift(17)
+      first_page_records.each {|record| service_entry(record) }
       sub_total(first_page_records)
       start_new_page
-      page_records = invoice.service_records.shift(17).each_slice(24).to_a
+      page_records = all_records.each_slice(24).to_a
 
       page_records.each do |records|
         bounding_box [0, cursor - 3.cm], :width => bounds.width do
           service_record_header
-
-          records.each do |record|
-            service_entry(record)
-          end
-
+          records.each {|record| service_entry(record) }
           sub_total(records) unless records.eql?(page_records.last) 
         end
 
