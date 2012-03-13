@@ -176,13 +176,13 @@ module Prawn
         [
           "▪ " + I18n::translate(:pfl, :scope => "activerecord.attributes.invoice"),
           I18n::translate(:tarmed_al, :scope => "activerecord.attributes.invoice"),
-          sprintf('%0.2f', invoice.amount_mt("001").currency_round),
+          currency_fmt(invoice.amount_mt("001").currency_round),
           tax_points_mt(invoice, "001"),
           I18n::translate(:physio, :scope => "activerecord.attributes.invoice"),
-          sprintf('%0.2f', invoice.amount("311").currency_round),
+          currency_fmt(invoice.amount("311").currency_round),
           tax_points(invoice, "311"),
           I18n::translate(:mi_gel, :scope => "activerecord.attributes.invoice"),
-          sprintf('%0.2f', invoice.amount("452").currency_round),
+          currency_fmt(invoice.amount("452").currency_round),
           tax_points(invoice, "452"),
           I18n::translate(:others, :scope => "activerecord.attributes.invoice"),
           "0.00",
@@ -191,13 +191,13 @@ module Prawn
         [
           nil,
           I18n::translate(:tarmed_tl, :scope => "activerecord.attributes.invoice"),
-          sprintf('%0.2f', invoice.amount_tt("001").currency_round),
+          currency_fmt(invoice.amount_tt("001").currency_round),
           tax_points_tt(invoice, "001"),
           I18n::translate(:laboratory, :scope => "activerecord.attributes.invoice"),
-          sprintf('%0.2f', invoice.amount(["316", "317"]).currency_round),
+          currency_fmt(invoice.amount(["316", "317"]).currency_round),
           tax_points(invoice, ["316", "317"]),
           I18n::translate(:medi, :scope => "activerecord.attributes.invoice"),
-          sprintf('%0.2f', invoice.amount("400").currency_round),
+          currency_fmt(invoice.amount("400").currency_round),
           tax_points(invoice, "400"),
           I18n::translate(:cantonal, :scope => "activerecord.attributes.invoice"),
           "0.00",
@@ -205,16 +205,16 @@ module Prawn
         ],
         [
           {:content => "▪ " + I18n::translate(:total_amount, :scope => "activerecord.attributes.invoice"), :colspan => 2},
-          invoice.amount.currency_round,
+          currency_fmt(invoice.amount.currency_round),
           nil,
           I18n::translate(:amount_pfl, :scope => "activerecord.attributes.invoice"),
-          invoice.obligation_amount.currency_round,
+          currency_fmt(invoice.obligation_amount.currency_round),
           nil,
           I18n::translate(:prepayment, :scope => "activerecord.attributes.invoice"),
           "0.00",
           nil,
           I18n::translate(:amount_due, :scope => "activerecord.attributes.invoice"),
-          sprintf('%0.2f', invoice.amount.currency_round),
+          currency_fmt(invoice.amount.currency_round),
           nil
         ]
       ]
@@ -435,7 +435,7 @@ module Prawn
         [
           "0",
           "0.00",
-          sprintf('%0.2f', invoice.amount.currency_round),
+          currency_fmt(invoice.amount.currency_round),
           "0.00"
         ]
       ]
@@ -444,7 +444,7 @@ module Prawn
         [
           I18n::translate(:total, :scope => "activerecord.attributes.invoice"),
           nil,
-          invoice.amount.currency_round,
+          currency_fmt(invoice.amount.currency_round),
           "0.00"
         ]
       ]
