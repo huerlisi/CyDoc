@@ -114,10 +114,10 @@ module Prawn
         ["Auftraggeber", "EAN-Nr./ZSR-Nr.", "▪ #{ean_zsr(invoice.referrer) if invoice.referrer}", invoice.referrer ? full_address(invoice.referrer, ', ') : nil],
         ["Diagnose", "▪ " + invoice.treatment.medical_cases.map {|d| d.diagnosis.type}.uniq.join('; '), "▪ " + invoice.treatment.medical_cases.map {|d| d.diagnosis.code}.join('; '), nil],
         ["EAN-Liste", invoice.biller.ean_party.present? ? ("▪ 1/" + invoice.biller.ean_party) : nil, nil, nil],
-        ["Bemerkungen", {:content => invoice.remark, :colspan => 3}],
+        ["Bemerkungen", {:content => invoice.remark, :colspan => 2}, nil],
       ]
 
-      patient = [["Patient", {:content => "#{invoice.patient_vcard.family_name} #{invoice.patient_vcard.given_name}, #{invoice.patient.birth_date}", :colspan => 3}]]
+      patient = [["Patient", {:content => "#{invoice.patient_vcard.family_name} #{invoice.patient_vcard.given_name}, #{invoice.patient.birth_date}", :colspan => 2}, nil]]
 
       content = (format.eql?(:small) ? small_content + patient : small_content + large_content)
 
