@@ -284,7 +284,7 @@ module Prawn
       font_size(MEDIUM_FONT_SIZE) do
         text "Zwischentotal", :style => :bold
         text_box "CHF", :at => [RECORD_INDENT, temp_cursor], :style => :bold
-        text_box "#{currency_fmt(records.sum(&:amount))}", :width => 2.cm, 
+        text_box "#{currency_fmt(records.sum(&:amount).currency_round)}", :width => 2.cm, 
                                              :at => [bounds.width - 2.cm, temp_cursor], 
                                              :align => :right, 
                                              :style => :bold
