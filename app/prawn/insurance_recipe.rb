@@ -110,10 +110,12 @@ module Prawn
         ["Auftraggeber", "EAN-Nr./ZSR-Nr.", "▪ #{ean_zsr(invoice.referrer) if invoice.referrer}", invoice.referrer ? full_address(invoice.referrer, ', ') : nil],
         ["Diagnose", "▪ " + invoice.treatment.medical_cases.map {|d| d.diagnosis.type}.uniq.join('; '), "▪ " + invoice.treatment.medical_cases.map {|d| d.diagnosis.code}.join('; '), nil],
         ["EAN-Liste", invoice.biller.ean_party.present? ? ("▪ 1/" + invoice.biller.ean_party) : nil, nil, nil],
-        ["Bemerkungen", invoice.remark, nil, nil],
+        ["Bemerkungen", {:content => invoice.remark, :colspan => 3}],
       ]
 
-      content = (format.eql?(:small) ? small_content : small_content + large_content)
+      patient = [["Patient", {:content => "#{invoice.patient_vcard.family_name} #{invoice.patient_vcard.given_name}, #{invoice.patient.birth_date}", :colspan => 3}]]
+
+      content = (format.eql?(:small) ? small_content + patient : small_content + large_content)
 
       table content, :width => bounds.width, :cell_style => { :inline_format => true } do
         # General
@@ -155,7 +157,7 @@ module Prawn
         column(0).size = 6.5
         column(3).size = 6.5
 
-        row(-1).height = 20
+        row(-1).height = (format.eql?(:small) ? 12 : 20)
       end
 
       # Patient address
