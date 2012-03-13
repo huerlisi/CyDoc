@@ -52,7 +52,10 @@ module Prawn
       repeat :all do
         font_size 10
         font Rails.root.join('data', 'ocrb10.ttf')
-        draw_text invoice.esr9(invoice.biller.esr_account), :at => [5.6.cm, 0.cm]
+        text_box invoice.esr9(invoice.biller.esr_account), :width => bounds.width, 
+                                                           :height => 1.cm, 
+                                                           :at => [0.cm, 0.cm], 
+                                                           :align => :right
       end
 
       render
@@ -245,6 +248,8 @@ module Prawn
           row(2).padding = [10, 0, 0, 0]
         end
       end
+
+      new_line
     end
 
     def service_records(invoice)
@@ -413,7 +418,7 @@ module Prawn
 
       header = [
         [
-          "▪ " + I18n::translate(:vat_code, :scope => "activerecord.attributes.invoice"),
+          I18n::translate(:vat_code, :scope => "activerecord.attributes.invoice"),
           I18n::translate(:vat_rate, :scope => "activerecord.attributes.invoice"),
           I18n::translate(:vat_amount, :scope => "activerecord.attributes.invoice"),
           I18n::translate(:vat, :scope => "activerecord.attributes.invoice")
@@ -439,8 +444,6 @@ module Prawn
         ]
       ]
 
-      move_down 2.cm
-      
       font_size MEDIUM_FONT_SIZE do
         table header + content + footer do
           # General
