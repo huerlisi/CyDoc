@@ -289,13 +289,13 @@ module Prawn
 
     def sub_total(records)
       new_line
-      temp_cursor = cursor
-
+      
       font_size(MEDIUM_FONT_SIZE) do
-        text "Zwischentotal", :style => :bold
+        temp_cursor = cursor
+        text_box "Zwischentotal", :style => :bold, :at => [0, temp_cursor]
         text_box "CHF", :at => [RECORD_INDENT, temp_cursor], :style => :bold
-        text_box "#{currency_fmt(records.sum(&:amount).currency_round)}", :width => 2.cm, 
-                                             :at => [bounds.width - 2.cm, temp_cursor], 
+        text_box "#{currency_fmt(records.sum(&:amount).currency_round)}", :width => 5.cm, 
+                                             :at => [bounds.width - 5.cm, temp_cursor], 
                                              :align => :right, 
                                              :style => :bold
       end
