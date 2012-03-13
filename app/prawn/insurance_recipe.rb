@@ -49,6 +49,9 @@ module Prawn
       # Summary
       summary(invoice)
 
+      # Page number
+      number_pages "<page>", :at => [bounds.width - 6.5.cm, bounds.height - 0.1.cm], :font_size => MEDIUM_FONT_SIZE
+
       repeat :all do
         font_size 10
         font Rails.root.join('data', 'ocrb10.ttf')
@@ -79,7 +82,7 @@ module Prawn
     def info_header(invoice, format = :default)
       # Head
       small_content = [
-        ["Dokument", nil, "▪ #{invoice.id} #{invoice.updated_at.strftime('%d.%m.%Y %H:%M:%S')}", " "*30 + "Seite    <font size='8'>▪ 1</font>"], # This uses a non-breaking space!
+        ["Dokument", nil, "▪ #{invoice.id} #{invoice.updated_at.strftime('%d.%m.%Y %H:%M:%S')}", " "*30 + "Seite    <font size='8'>▪ </font>"], # This uses a non-breaking space!
         ["Rechnungs-", "EAN-Nr.", "▪ #{invoice.biller.ean_party}", full_address(invoice.biller.vcard, ', ')],
         ["steller", "ZSR-Nr.", "▪ #{invoice.biller.zsr}", contact(invoice.biller.vcard, ', ')],
         ["Leistungs-", "EAN-Nr.", "▪ #{invoice.provider.ean_party}", full_address(invoice.provider.vcard, ', ')],
