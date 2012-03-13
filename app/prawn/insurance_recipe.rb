@@ -2,6 +2,10 @@ module Prawn
   class InsuranceRecipe < Prawn::LetterDocument
     include InvoicesHelper
 
+    RECORD_INDENT = 2.2.cm
+    SMALL_FONT_SIZE = 6.5
+    MEDIUM_FONT_SIZE = 8
+
     def default_options
       parent_options = super
       parent_options.merge(:top_margin => 1.4.cm, :left_margin => 1.cm, :right_margin => 1.cm, :bottom_margin => 1.8.cm)
@@ -57,13 +61,16 @@ module Prawn
 
     def title
       bounding_box [0, cursor + 0.3.cm], :width => bounds.width, :height => 0.7.cm do
-        font_size 16
         line = bounds.top
-        draw_text "Rückforderungsbeleg", :style => :bold, :at => [bounds.left, line]
-        draw_text "M", :style => :bold, :at => [bounds.right - 14, line]
+
+        font_size(16) do
+          draw_text "Rückforderungsbeleg", :style => :bold, :at => [bounds.left, line]
+          draw_text "M", :style => :bold, :at => [bounds.right - 14, line]
+        end
+
         font_size 7
         draw_text "Release ▪ 4.0M/de", :at => [bounds.right - 100, line]
-        font_size 8
+        font_size MEDIUM_FONT_SIZE
       end
     end
 
@@ -150,10 +157,11 @@ module Prawn
       end
 
       # Patient address
-      font_size 10
-      bounding_box [12.cm, bounds.top - 3.5.cm], :width => 7.cm do
-        draw_address(invoice.billing_vcard)
-      end unless format.eql?(:small)
+      font_size 10 do
+        bounding_box [12.cm, bounds.top - 3.5.cm], :width => 7.cm do
+          draw_address(invoice.billing_vcard)
+        end unless format.eql?(:small)
+      end
     end
 
     def tarmed_footer(invoice)
@@ -191,7 +199,7 @@ module Prawn
       ]
 
       move_cursor_to 6.5.cm
-      font_size 8
+      font_size MEDIUM_FONT_SIZE
       table content, :width => bounds.width do
         # General
         cells.borders = []
@@ -248,31 +256,22 @@ module Prawn
       first_page_records = invoice.service_records.first(17)
 
       for record in first_page_records
-        font_size 6.5
         service_entry(record)
       end
 
       sub_total(first_page_records)
-
       start_new_page
-
-      next_page_records = invoice.service_records.shift(17)
-
-      page_records = next_page_records.each_slice(24).to_a
+      page_records = invoice.service_records.shift(17).each_slice(24).to_a
 
       page_records.each do |records|
-        bounding_box [0, cursor - 3.5.cm], :width => bounds.width do
+        bounding_box [0, cursor - 3.cm], :width => bounds.width do
           service_record_header
 
           records.each do |record|
             service_entry(record)
           end
 
-          unless records.eql?(page_records.last)
-            sub_total(records) 
-          else
-            
-          end
+          sub_total(records) unless records.eql?(page_records.last) 
         end
 
         start_new_page unless records.eql?(page_records.last)
@@ -280,40 +279,104 @@ module Prawn
     end
 
     def sub_total(records)
-      text "Zwischentotal"
-      text "#{records.sum(&:amount)}", :font_weight => :bold
+      new_line
+      temp_cursor = cursor
+
+      font_size(MEDIUM_FONT_SIZE) do
+        text "Zwischentotal", :style => :bold
+        text_box "CHF", :at => [RECORD_INDENT, temp_cursor], :style => :bold
+        text_box "#{records.sum(&:amount)}", :width => 2.cm, 
+                                             :at => [bounds.width - 2.cm, temp_cursor], 
+                                             :align => :right, 
+                                             :style => :bold
+      end
     end
 
     def service_entry(record)
       group do
-        indent 2.2.cm do
-          text record.text, :style => :bold, :leading => -1
+        font_size SMALL_FONT_SIZE do
+          indent RECORD_INDENT do
+            text record.text, :style => :bold, :leading => -1
+          end
         end
 
-        font_size 8
+        font_size MEDIUM_FONT_SIZE do
+          data = [
+            "▪ " + record.date.to_date.to_s,
+            sprintf('%03i', record.tariff_type),
+            record.code,
+            record.ref_code,
+            record.session,
+            sprintf('%.2f', record.quantity),
+            sprintf('%.2f', record.amount_mt),
+            sprintf('%.2f', record.unit_factor_mt),
+            sprintf('%.2f', record.unit_mt),
+            sprintf('%.2f', record.amount_tt),
+            sprintf('%.2f', record.unit_factor_tt),
+            sprintf('%.2f', record.unit_tt),
+            1,
+            1,
+            0,
+            0,
+            sprintf('%.2f', record.amount)
+          ]
+
+          table [data], :cell_style => {:overflow => :shrink_to_fit} do
+            cells.borders = []
+            cells.padding = 0
+
+            column(0).width = 2.2.cm
+            column(1).width = 0.9.cm
+            column(2).width = 1.5.cm
+            column(3).width = 1.7.cm
+            column(4).width = 0.8.cm
+            column(5).width = 1.cm
+            column(6).width = 1.7.cm
+            column(7).width = 1.4.cm
+            column(8).width = 1.4.cm
+            column(9).width = 1.4.cm
+            column(10).width = 1.1.cm
+            column(11).width = 1.1.cm
+            column(12).width = 0.5.cm
+            column(13).width = 0.3.cm
+            column(14).width = 0.3.cm
+            column(15).width = 0.3.cm
+            column(16).width = 1.4.cm
+
+            column(5..16).align = :right
+          end
+        end
+
+        move_down 3
+      end
+    end
+
+    def service_record_header
+      font_size SMALL_FONT_SIZE do
         data = [
-          "▪ " + record.date.to_date.to_s,
-          sprintf('%03i', record.tariff_type),
-          record.code,
-          record.ref_code,
-          record.session,
-          sprintf('%.2f', record.quantity),
-          sprintf('%.2f', record.amount_mt),
-          sprintf('%.2f', record.unit_factor_mt),
-          sprintf('%.2f', record.unit_mt),
-          sprintf('%.2f', record.amount_tt),
-          sprintf('%.2f', record.unit_factor_tt),
-          sprintf('%.2f', record.unit_tt),
-          1,
-          1,
-          0,
-          0,
-          sprintf('%.2f', record.amount)
+          "Datum",
+          "Tarif",
+          "Tarifziffer",
+          "Bezugsziffer",
+          "Si St",
+          "Anzahl",
+          "TP AL/Preis",
+          "f AL",
+          "TPW AL",
+          "TP TL",
+          "f TL",
+          "TPW TL",
+          "A",
+          "V",
+          "P",
+          "M",
+          "Betrag",
         ]
 
-        table [data], :cell_style => {:overflow => :shrink_to_fit} do
+        table [data], :cell_style => {:overflow => :shrink_to_fit, :font_style => :bold} do
           cells.borders = []
           cells.padding = 0
+          cells.size = 6.5
 
           column(0).width = 2.2.cm
           column(1).width = 0.9.cm
@@ -336,59 +399,12 @@ module Prawn
           column(5..16).align = :right
         end
 
-        move_down 3
+        move_down 5
       end
     end
 
-    def service_record_header
-      font_size = 6.5
-      data = [
-        "Datum",
-        "Tarif",
-        "Tarifziffer",
-        "Bezugsziffer",
-        "Si St",
-        "Anzahl",
-        "TP AL/Preis",
-        "f AL",
-        "TPW AL",
-        "TP TL",
-        "f TL",
-        "TPW TL",
-        "A",
-        "V",
-        "P",
-        "M",
-        "Betrag",
-      ]
-
-      table [data], :cell_style => {:overflow => :shrink_to_fit} do
-        cells.borders = []
-        cells.padding = 0
-        cells.size = 6.5
-
-        column(0).width = 2.2.cm
-        column(1).width = 0.9.cm
-        column(2).width = 1.5.cm
-        column(3).width = 1.7.cm
-        column(4).width = 0.8.cm
-        column(5).width = 1.cm
-        column(6).width = 1.7.cm
-        column(7).width = 1.4.cm
-        column(8).width = 1.4.cm
-        column(9).width = 1.4.cm
-        column(10).width = 1.1.cm
-        column(11).width = 1.1.cm
-        column(12).width = 0.5.cm
-        column(13).width = 0.3.cm
-        column(14).width = 0.3.cm
-        column(15).width = 0.3.cm
-        column(16).width = 1.4.cm
-
-        column(5..16).align = :right
-      end
-
-      move_down 5
+    def new_line
+      text " "
     end
 
     def summary(invoice)
