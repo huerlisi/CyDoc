@@ -327,7 +327,7 @@ module Prawn
             1,
             0,
             0,
-            sprintf('%.2f', record.amount)
+            currency_fmt(record.amount)
           ]
 
           table [data], :cell_style => {:overflow => :shrink_to_fit} do
