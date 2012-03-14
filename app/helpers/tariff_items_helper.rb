@@ -11,7 +11,7 @@ module TariffItemsHelper
   end
 
   def type_as_string_collection
-    types = %w(TarmedTariffItem PhysioTariffItem LabTariffItem DrugTariffItem MigelTariffItem TariffItemGroup)
+    types = %w(TarmedTariffItem PhysioTariffItem LabTariffItem DrugTariffItem MigelTariffItem TariffItemGroup FreeTariffItem)
     types.map{|type| [t(type.underscore, :scope => [:activerecord, :models]), type]}
   end
 end
