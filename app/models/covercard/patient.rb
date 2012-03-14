@@ -1,5 +1,12 @@
+require 'net/http'
+require 'net/https'
+require 'uri'
+
 module Covercard
   class Patient < ActiveRecord::Base
+
+    SERVICE_URL = 'http://covercard.hin.ch/covercard/servlet/ch.ofac.ca.covercard.CaValidationHorizontale?type=XML&ReturnType=42a&langue=1&carte='
+
     # Tableless active record
     class_inheritable_accessor :columns
     self.columns = []
@@ -23,6 +30,10 @@ module Covercard
 
     def self.find(value)
       return nil unless value && value.length == 19
+
+      url = URI.parse(SERVICE_URL + value)
+      http = Net::HTTP::Proxy('127.0.0.1', 5016)
+      response = http.get_response(url)
       
       vcard = Vcard.new(:family_name => 'Simpson', 
                         :given_name => 'Homer', 
