@@ -1,5 +1,3 @@
-require 'json'
-
 module Covercard
   class Patient < ActiveRecord::Base
     # Tableless active record
