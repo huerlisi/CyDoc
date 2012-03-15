@@ -109,11 +109,11 @@ module Prawn
 
         ["Auftraggeber", "EAN-Nr./ZSR-Nr.", "▪ #{ean_zsr(invoice.referrer) if invoice.referrer}", invoice.referrer ? full_address(invoice.referrer, ', ') : nil],
         ["Diagnose", "▪ " + invoice.treatment.medical_cases.map {|d| d.diagnosis.type}.uniq.join('; '), "▪ " + invoice.treatment.medical_cases.map {|d| d.diagnosis.code}.join('; '), nil],
-        ["EAN-Liste", {:content => (invoice.biller.ean_party.present? ? ("▪ 1/" + invoice.biller.ean_party) : ""), :colspan => 2}, nil],
-        ["Bemerkungen", {:content => invoice.remark.to_s, :colspan => 2}, nil],
+        ["EAN-Liste", {:content => (invoice.biller.ean_party.present? ? ("▪ 1/" + invoice.biller.ean_party) : ""), :colspan => 3}],
+        ["Bemerkungen", {:content => invoice.remark.to_s, :colspan => 3}],
       ]
 
-      patient = [["Patient", {:content => "#{invoice.patient_vcard.family_name} #{invoice.patient_vcard.given_name}, #{invoice.patient.birth_date}", :colspan => 2}, nil]]
+      patient = [["Patient", {:content => "#{invoice.patient_vcard.family_name} #{invoice.patient_vcard.given_name}, #{invoice.patient.birth_date}", :colspan => 3}]]
 
       content = (format.eql?(:small) ? small_content + patient : small_content + large_content)
 
@@ -128,6 +128,9 @@ module Prawn
         row(-1).border_bottom_width = BORDER_WIDTH
         column(0).border_left_width = BORDER_WIDTH
         column(-1).border_right_width = BORDER_WIDTH
+        row(26).column(1).border_right_width = BORDER_WIDTH
+        row(27).column(1).border_right_width = BORDER_WIDTH
+
         row(0).padding_top = 1
         row(-1).padding_bottom = 1
 
@@ -158,7 +161,12 @@ module Prawn
         column(0).size = 6.5
         column(3).size = 6.5
 
-        row(-1).height = (format.eql?(:small) ? 12 : 20)
+        if format == :small
+          row(-1).height = 12
+          row(-1).column(1).border_right_width = BORDER_WIDTH
+        else
+          row(-1).height = 20
+        end
       end
 
       # Patient address
