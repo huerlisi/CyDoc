@@ -17,8 +17,10 @@ Settings.defaults = {
   'invoices.reminders.4.grace_period'   => 30.days,
   'validation.medical_case_present'     => true,
   'validation.tarmed'                   => true,
+
   'modules.hozr'                        => false,
   'cases.invoice_grace_period'          => 2.days,
+
   'modules.covercard'                   => false,
   'modules.covercard.host'              => '127.0.0.1',
   'modules.covercard.port'              => 5016
