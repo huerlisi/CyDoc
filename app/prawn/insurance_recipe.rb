@@ -470,7 +470,7 @@ module Prawn
         ]
       ]
 
-      font_size MEDIUM_FONT_SIZE do
+      font_size SMALL_FONT_SIZE do
         table header + content + footer do
           # General
           cells.borders = []
