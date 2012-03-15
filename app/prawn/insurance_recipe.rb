@@ -184,6 +184,8 @@ module Prawn
         # Tarmed footer
         tarmed_footer(invoice)
 
+        text " "
+
         # Summary
         summary(invoice)
       end
