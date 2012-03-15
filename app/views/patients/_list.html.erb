@@ -7,7 +7,7 @@
     <% end %>
 
     <% if @suggest_covercard_search %>
-      <td><tr><%= link_to t('cydoc.actions.covercard_search'), covercard_search_path(@suggest_covercard_search), 'data-remote' => true %></tr></td>
+      <td><tr><%= link_to t('cydoc.actions.covercard_search'), covercard_search_path(@suggest_covercard_search), 'data-remote' => true if Covercard::Patient.settings['modules.covercard'] %></tr></td>
     <% end %>
   </table>
 </div>
