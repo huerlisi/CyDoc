@@ -272,23 +272,27 @@ module Prawn
       end
     end
 
-    def service_records(invoice)
-      service_record_header
-      all_records = invoice.service_records
-      first_page_records = all_records.shift(17)
-      first_page_records.each {|record| service_entry(record) }
-      sub_total(first_page_records)
+    def new_page(printed_records)
+      sub_total(printed_records)
+
       start_new_page
-      page_records = all_records.each_slice(27).to_a
 
-      page_records.each do |records|
-        bounding_box [0, cursor - 3.cm], :width => bounds.width do
-          service_record_header
-          records.each {|record| service_entry(record) }
-          sub_total(records) if !records.eql?(page_records.last)
-        end
+      move_down 3.cm
+      service_record_header
+    end
 
-        start_new_page unless records.eql?(page_records.last)
+    def service_records(invoice)
+      # Print header
+      service_record_header
+
+      all_records = invoice.service_records
+      printed_records = []
+
+      all_records.each do |record|
+        service_entry(record)
+        printed_records << record
+
+        new_page(printed_records) if new_page?
       end
 
       sub_total(page_records.last) if new_page?
