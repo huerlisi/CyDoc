@@ -78,6 +78,9 @@ module Covercard
     end
 
     def self.clean_code(value)
+      # Guard against nil
+      return nil unless value
+
       value[0..18]
     end
 
