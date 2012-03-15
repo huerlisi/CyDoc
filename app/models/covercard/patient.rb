@@ -38,6 +38,8 @@ module Covercard
       xml = Nokogiri::XML(response.body).root
       sex = xml.search("identificationData/sex").text
 
+      return nil if sex.empty?
+
       vcard = Vcard.new(:family_name => xml.search("name/officialName").text.capitalize, 
                         :given_name => xml.search("name/firstName").text.capitalize, 
                         :street_address => xml.search("mailAddress/addressLine1").text,
