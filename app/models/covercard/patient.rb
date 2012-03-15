@@ -63,6 +63,12 @@ module Covercard
                :insurance_policy => insurance_policy)
     end
 
+    def self.settings
+      doctor ||= Doctor.find(Thread.current["doctor_id"]) if Doctor.exists?(Thread.current["doctor_id"])
+
+      doctor.present? ? doctor.settings : Settings
+    end
+
     def self.find_insurance(attributes)
       insurance = Insurance.find_by_bsv_code(attributes[:bsv_code])
       insurance ||= Insurance.find_by_ean_party(attributes[:ean_party])
