@@ -18,5 +18,8 @@ Settings.defaults = {
   'validation.medical_case_present'     => true,
   'validation.tarmed'                   => true,
   'modules.hozr'                        => false,
-  'cases.invoice_grace_period'          => 2.days
+  'cases.invoice_grace_period'          => 2.days,
+  'modules.covercard'                   => true,
+  'modules.covercard.host'              => '127.0.0.1',
+  'modules.covercard.port'              => 5016
 }
