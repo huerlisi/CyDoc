@@ -1,4 +1,6 @@
-function showPrintingFlash(flash_id, document_type, count) {
+function showPrintingFlash(document_type, count) {
+    var flash_id = 'notice_flash';
+
     if (count === undefined || count < 2) {
         text = document_type + ' wird zum Druck aufbereitet...';
     } else {

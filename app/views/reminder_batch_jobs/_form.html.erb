@@ -1,7 +1,7 @@
 <div id="reminder_batch_form">
   <h3>Rechnungslauf</h3>
   <div class="box">
-    <% semantic_remote_form_for @reminder_batch_job, :before => "showPrintingFlash('notice_flash', 'Rechnungslauf'); $('reminder_batch_form').remove()" do |form| %>
+    <% semantic_remote_form_for @reminder_batch_job, :before => "showPrintingFlash('Rechnungslauf'); $('reminder_batch_form').remove()" do |form| %>
       <% form.inputs do %>
         <%= form.input :count, :input_html => {:size => 12, :autocomplete => 'off', 'data-autofocus' => true} %>
       <% end %>
