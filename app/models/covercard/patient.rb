@@ -29,11 +29,18 @@ module Covercard
     serialize :vcard, Vcard
     serialize :billing_vcard, Vcard
 
+    # Settings
+    def self.settings
+      doctor ||= Doctor.find(Thread.current["doctor_id"]) if Doctor.exists?(Thread.current["doctor_id"])
+
+      doctor.present? ? doctor.settings : Settings
+    end
+
     def self.find(value)
       return nil if !(value && value.length == 19) or !settings['modules.covercard']
  
       url = URI.parse(SERVICE_URL + value)
-      http = Net::HTTP::Proxy('127.0.0.1', 5016)
+      http = Net::HTTP::Proxy(self.settings['modules.covercard.host'], self.settings['modules.covercard.port'])
       response = http.get_response(url)
       xml = Nokogiri::XML(response.body).root
       sex = xml.search("identificationData/sex").text
