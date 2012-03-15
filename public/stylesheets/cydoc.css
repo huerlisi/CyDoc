@@ -120,3 +120,5 @@ ul.case-history li { margin: 0; padding-left: 1em; background-color: white; }
 .reset-updated-attribute { vertical-align: bottom; }
 #covercard_result input[type=text] { border: none; background-color: #FFD; }
 #covercard_result .address input[type=text] { width: 100%; }
+.reset-updated-attribute { background: url(../images/reactivate.png) no-repeat top left; text-indent: -9999px; width: 18px; height: 18px; display: inline-block; }
+.names-block { float: left; }

@@ -5,6 +5,6 @@ jQuery(document).ready(function(){
     var input = link.prev();
 
     input.removeClass('attribute-updated').val(value);
-    link.hide();
+    link.css('visibility', 'hidden');
   });
 });
