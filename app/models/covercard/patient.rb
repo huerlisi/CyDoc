@@ -56,7 +56,7 @@ module Covercard
       self.new(:vcard => vcard,
                :billing_vcard => vcard,
                :birth_date => Date.strptime(xml.search("dateOfBirth/yearMonthDay").text, "%Y-%m-%d"),
-               :sex => vcard_sex(sex),
+               :sex => honorific_prefix(sex, :short),
                :covercard_code => value,
                :insurance_policy => insurance_policy)
     end
@@ -73,21 +73,12 @@ module Covercard
       value[0..18]
     end
 
-    def self.honorific_prefix(value)
-      case value
+    def self.honorific_prefix(value, format = :default)
+      case value.to_i
       when 2
-        'Herr'
+        format.eql?(:short) ? 'M' : 'Herr'
       when 1
-        'Frau'
-      end
-    end
-
-    def self.vcard_sex(value)
-      case value
-      when 2
-        'M'
-      when 1
-        'F'
+        format.eql?(:short) ? 'F' : 'Frau'
       end
     end
 
