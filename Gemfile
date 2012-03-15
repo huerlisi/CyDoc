@@ -81,3 +81,6 @@ gem 'cups'
 
 # CSV Export
 gem 'csv-mapper'
+
+# XML
+gem 'nokogiri'
