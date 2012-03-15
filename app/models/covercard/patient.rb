@@ -1,6 +1,7 @@
 require 'net/http'
 require 'net/https'
 require 'uri'
+require 'nokogiri'
 
 module Covercard
   class Patient < ActiveRecord::Base
@@ -34,26 +35,28 @@ module Covercard
       url = URI.parse(SERVICE_URL + value)
       http = Net::HTTP::Proxy('127.0.0.1', 5016)
       response = http.get_response(url)
-      
-      vcard = Vcard.new(:family_name => 'Simpson', 
-                        :given_name => 'Homer', 
-                        :street_address => 'Evergreen Terrace 742',
-                        :postal_code => '9373',
-                        :locality => 'Springfield',
-                        :honorific_prefix => honorific_prefix('M'))
+      xml = Nokogiri::XML(response.body).root
+      sex = xml.search("identificationData/sex").text
 
-      insurance = find_insurance({:name => 'CSS Versicherung',
-                                  :bsv_code => 8,
-                                  :ean_party => 7601003001082})
+      vcard = Vcard.new(:family_name => xml.search("name/officialName").text.capitalize, 
+                        :given_name => xml.search("name/firstName").text.capitalize, 
+                        :street_address => xml.search("mailAddress/addressLine1").text,
+                        :postal_code => xml.search("mailAddress/swissZipCode").text,
+                        :locality => xml.search("mailAddress/town").text.capitalize,
+                        :honorific_prefix => honorific_prefix(sex))
 
-      insurance_policy = InsurancePolicy.new(:number => '00033079540',
+      insurance = find_insurance({:name => xml.search("administrativeData/nameOfTheInstitution").text,
+                                  :bsv_code => xml.search("administrativeData/identificationNumberOfTheInstitution").text,
+                                  :ean_party => xml.search("nationalExtension/insurerInformation/contactEanNumber").text})
+
+      insurance_policy = InsurancePolicy.new(:number => xml.search("administrativeData/insuredNumber").text,
                                              :policy_type => 'KVG',
                                              :insurance => insurance)
 
       self.new(:vcard => vcard,
                :billing_vcard => vcard,
-               :birth_date => Date.new(1986, 3, 25),
-               :sex => 'M',
+               :birth_date => Date.strptime(xml.search("dateOfBirth/yearMonthDay").text, "%Y-%m-%d"),
+               :sex => vcard_sex(sex),
                :covercard_code => value,
                :insurance_policy => insurance_policy)
     end
@@ -72,10 +75,19 @@ module Covercard
 
     def self.honorific_prefix(value)
       case value
-      when 'M'
+      when 2
         'Herr'
-      when 'F'
+      when 1
         'Frau'
+      end
+    end
+
+    def self.vcard_sex(value)
+      case value
+      when 2
+        'M'
+      when 1
+        'F'
       end
     end
 
