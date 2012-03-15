@@ -143,12 +143,6 @@ class Patient < ActiveRecord::Base
     end
   end
 
-  before_save :clean_covercard_code
-
-  def clean_covercard_code
-    self[:covercard_code] = Covercard::Patient.clean_code(self.covercard_code)
-  end
-
   # Build an invoice containing all open sessions
   def build_invoice(options)
     invoice = invoices.new(options)
@@ -240,5 +234,13 @@ class Patient < ActiveRecord::Base
     service_record.provider ||= self.doctor
     service_record.biller ||= self.doctor
     service_record.responsible ||= self.doctor
+  end
+
+  # Covercard
+  # =========
+  before_save :clean_covercard_code
+
+  def clean_covercard_code
+    self[:covercard_code] = Covercard::Patient.clean_code(self.covercard_code)
   end
 end
