@@ -30,8 +30,8 @@ module Covercard
     serialize :billing_vcard, Vcard
 
     def self.find(value)
-      return nil unless value && value.length == 19
-
+      return nil if !(value && value.length == 19) or !settings['modules.covercard']
+ 
       url = URI.parse(SERVICE_URL + value)
       http = Net::HTTP::Proxy('127.0.0.1', 5016)
       response = http.get_response(url)
