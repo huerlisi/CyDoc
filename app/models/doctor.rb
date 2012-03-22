@@ -1,6 +1,11 @@
 class Doctor < ActiveRecord::Base
   # Settings
   has_settings
+  def self.settings
+    doctor = Doctor.find(Thread.current["doctor_id"]) if Doctor.exists?(Thread.current["doctor_id"])
+
+    doctor.present? ? doctor.settings : Settings
+  end
 
   has_vcards
 
