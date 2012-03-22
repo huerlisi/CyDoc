@@ -136,7 +136,6 @@ class PatientsController < ApplicationController
   # POST /patients
   def create
     @patient = Patient.new
-    @patient.vcard = Vcard.new
 
     if @patient.update_attributes(params[:patient])
       flash[:notice] = 'Patient erfasst.'
