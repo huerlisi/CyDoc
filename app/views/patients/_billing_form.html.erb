@@ -14,7 +14,7 @@
           <div class="names-block"><%= vcard.text_field :family_name %></div>
           <div class="names-block"><%= vcard.text_field :given_name %></div>
         </td>
-        <th><%= t_attr(:salutation, Patient) %></th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name } %></td>
+        <th><%= t_attr(:salutation, Patient) %></th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }, :include_blank => true %></td>
       </tr>
       <tr>
         <th><%= t_attr(:extended_address, Vcard) %></th><td><%= vcard.text_field :extended_address %></td>
