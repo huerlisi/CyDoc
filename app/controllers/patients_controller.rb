@@ -117,10 +117,17 @@ class PatientsController < ApplicationController
       @patient.insurance_policies << InsurancePolicy.new(:policy_type => 'UVG')
     else
       @patient = Patient.new(params[:patient])
-      @patient.vcard = Vcard.new(params[:patient])
-      # TODO: probably doctor specific...
-      @patient.sex = 'M'
-      @patient.vcard.honorific_prefix = 'Herr'
+      @patient.build_vcard unless @patient.vcard
+
+      # Use default sex from doctor settings
+      case Doctor.settings['patients.sex']
+      when 'M'
+        @patient.sex = 'M'
+        @patient.vcard.honorific_prefix = 'Herr'
+      when 'F'
+        @patient.sex = 'F'
+        @patient.vcard.honorific_prefix = 'Frau'
+      end
     end
 
     @patient.doctor_patient_nr = Patient.maximum('CAST(doctor_patient_nr AS UNSIGNED INTEGER)').to_i + 1

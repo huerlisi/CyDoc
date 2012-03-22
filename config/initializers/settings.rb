@@ -19,6 +19,8 @@ Settings.defaults = {
   'validation.medical_case_present'      => true,
   'validation.tarmed'                    => true,
 
+  'patients.sex'                         => 'M',
+
   'modules.hozr'                         => false,
   'cases.invoice_grace_period'           => 2.days,
 
