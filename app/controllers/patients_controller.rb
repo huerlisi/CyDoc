@@ -110,7 +110,7 @@ class PatientsController < ApplicationController
 
   # GET /patients/new
   def new
-    if params[:patient][:from_covercard].present?
+    if params[:patient] && params[:patient][:from_covercard].present?
       params[:patient].delete(:from_covercard)
       params[:patient]['insurance_policies_attributes'].delete('1')
       @patient = Patient.new(params[:patient])
