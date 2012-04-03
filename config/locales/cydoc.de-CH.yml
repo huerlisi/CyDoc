@@ -378,6 +378,8 @@ de-CH:
       patient_from_covercard: "Als Patient erfassen"
       trim_patient:       Abgleichen
       revert:             Zurücksetzen
+      insurance_recipe:   Rückforderungsbeleg
+      patient_letter:     Rechnung
       
 
   returned_invoices:

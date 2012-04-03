@@ -62,7 +62,7 @@ GEM
     has_scope (0.5.1)
     highline (1.6.11)
     i18n (0.6.0)
-    i18n_rails_helpers (0.17.1)
+    i18n_rails_helpers (1.0.2)
     in_place_editing (1.1.2)
     inherited_resources (1.0.6)
       has_scope (~> 0.5.0)
