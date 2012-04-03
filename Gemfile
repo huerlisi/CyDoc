@@ -34,7 +34,7 @@ gem 'formtastic'
 gem 'will_paginate', '< 3.0'
 gem 'inherited_resources', '< 1.1'
 gem 'has_scope'
-gem 'i18n_rails_helpers'
+gem 'i18n_rails_helpers', '< 1.0'
 gem 'show_for'
 
 # CyDoc
