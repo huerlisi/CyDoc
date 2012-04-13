@@ -107,7 +107,7 @@ module Prawn
         [nil, "Behandlung", "▪ #{invoice.date_begin} - #{invoice.date_end}", " "*4 + "Rechnungsnr.                  <font size='8'>▪ #{invoice.id}</font>"],
         [nil, "Erbringungsort", "▪ #{invoice.place_type}", " "*4 + "Rechnungs-/Mahndatum <font size='8'>▪ #{invoice.value_date}</font>"],
 
-        ["Auftraggeber", "EAN-Nr./ZSR-Nr.", "▪ #{ean_zsr(invoice.referrer) if invoice.referrer}", invoice.referrer ? full_address(invoice.referrer, ', ') : nil],
+        ["Auftraggeber", "EAN-Nr./ZSR-Nr.", "▪ #{ean_zsr(invoice.referrer) if invoice.referrer}", invoice.referrer ? full_address(invoice.referrer.vcard, ', ') : nil],
         ["Diagnose", "▪ " + invoice.treatment.medical_cases.map {|d| d.diagnosis.type}.uniq.join('; '), "▪ " + invoice.treatment.medical_cases.map {|d| d.diagnosis.code}.join('; '), nil],
         ["EAN-Liste", {:content => (invoice.biller.ean_party.present? ? ("▪ 1/" + invoice.biller.ean_party) : ""), :colspan => 3}],
         ["Bemerkungen", {:content => invoice.remark.to_s, :colspan => 3}],
