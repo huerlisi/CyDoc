@@ -163,7 +163,7 @@ xml.request :role => "test",
 
     # TODO: payment_period not hardcoded
     case @invoice.tiers
-      when TiersGarant: xml.tiers_garant :payment_periode => "P#{Invoice::PAYMENT_PERIOD}D" do tiers(xml) end
+      when TiersGarant: xml.tiers_garant :payment_periode => "P#{@invoice.payment_period}D" do tiers(xml) end
       when TiersPayant: xml.tiers_payant do tiers(xml) end
     end
 

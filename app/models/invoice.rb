@@ -1,6 +1,4 @@
 class Invoice < ActiveRecord::Base
-  PAYMENT_PERIOD = 30
-
   belongs_to :tiers, :autosave => true
   belongs_to :law, :autosave => true
   belongs_to :treatment, :autosave => true
@@ -116,6 +114,10 @@ class Invoice < ActiveRecord::Base
       else
         0
     end
+  end
+
+  def payment_period
+    settings["invoices.payment_period"]
   end
 
   def reminder_fee
@@ -267,7 +269,7 @@ class Invoice < ActiveRecord::Base
   
   def remind_first_time
     self.state = 'reminded'
-    self.reminder_due_date = Date.today + reminder_payment_period
+    self.reminder_due_date = Date.today.in(reminder_payment_period)
     build_reminder_booking
   end
   
@@ -278,13 +280,13 @@ class Invoice < ActiveRecord::Base
 
   def remind_second_time
     self.state = '2xreminded'
-    self.second_reminder_due_date = Date.today + reminder_payment_period
+    self.second_reminder_due_date = Date.today.in(reminder_payment_period)
     build_reminder_booking
   end
   
   def remind_third_time
     self.state = '3xreminded'
-    self.third_reminder_due_date = Date.today + reminder_payment_period
+    self.third_reminder_due_date = Date.today.in(reminder_payment_period)
     build_reminder_booking
   end
   
@@ -491,7 +493,7 @@ class Invoice < ActiveRecord::Base
 
   def value_date=(value)
     write_attribute(:value_date, Date.parse_europe(value))
-    self.due_date = value_date + PAYMENT_PERIOD unless value_date.nil?
+    self.due_date = value_date.in(payment_period).to_date unless value_date.nil?
   end
   
   def esr9(bank_account)
