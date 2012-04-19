@@ -194,6 +194,10 @@ class EsrRecord < ActiveRecord::Base
   end
 
 public
+  def create_write_off_booking
+    invoice.write_off("Korrektur nach VESR Zahlung").save
+  end
+
   def create_extra_earning_booking(comments = nil)
     if invoice
       invoice.book_extra_earning("Korrektur nach VESR Zahlung").save
