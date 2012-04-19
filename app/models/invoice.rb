@@ -39,13 +39,21 @@ class Invoice < ActiveRecord::Base
     )
 
     # Build Invoice
-    invoice_params = {
+    invoice_params = HashWithIndifferentAccess.new({
       :treatment     => treatment,
       :tiers         => tiers,
       :law           => treatment.law,
       :patient_vcard => treatment.patient.vcard,
-      :billing_vcard => treatment.patient.invoice_vcard
-    }.merge(params)
+      :billing_vcard => treatment.patient.invoice_vcard,
+      :remark        => '' # Simplify further processing
+    }).merge(params)
+    invoice_params[:remark].strip!
+
+    # Add remarks if tiers is soldant
+    if tiers.is_a?(TiersSoldant)
+      invoice_params[:remark] += "\nAbtretungserklärung liegt bei."
+    end
+
     invoice = self.new(invoice_params)
 
     # Assign service records
