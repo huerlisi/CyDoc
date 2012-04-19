@@ -8,6 +8,11 @@ class Invoice < ActiveRecord::Base
   belongs_to :billing_vcard, :class_name => 'Vcard', :autosave => true
 
   # Settings
+  def self.settings
+    doctor = Doctor.find(Thread.current["doctor_id"]) if Doctor.exists?(Thread.current["doctor_id"])
+
+    doctor.present? ? doctor.settings : Settings
+  end
   def settings
     doctor = biller
     doctor ||= Doctor.find(Thread.current["doctor_id"]) if Doctor.exists?(Thread.current["doctor_id"])
