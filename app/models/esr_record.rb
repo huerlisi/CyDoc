@@ -195,11 +195,15 @@ class EsrRecord < ActiveRecord::Base
 
 public
   def create_extra_earning_booking(comments = nil)
-    Booking.create(:title => "Ausserordentlicher Ertrag",
-                   :comments => comments || "Zahlung kann keiner Rechnung zugewiesen werden",
-                   :amount => self.amount,
-                   :debit_account  => Account.find_by_code(Invoice.settings['invoices.extra_earnings_account_code']),
-                   :credit_account => Account.find_by_code(Invoice.settings['invoices.balance_account_code']),
-                   :value_date => Date.today)
+    if invoice
+      invoice.book_extra_earning("Korrektur nach VESR Zahlung").save
+    else
+      Booking.create(:title => "Ausserordentlicher Ertrag",
+                     :comments => comments || "Zahlung kann keiner Rechnung zugewiesen werden",
+                     :amount => self.amount,
+                     :debit_account  => Account.find_by_code(Invoice.settings['invoices.extra_earnings_account_code']),
+                     :credit_account => Account.find_by_code(Invoice.settings['invoices.balance_account_code']),
+                     :value_date => Date.today)
+    end
   end
 end
