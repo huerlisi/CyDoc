@@ -13,6 +13,19 @@ module Prawn
       return s
     end
 
+    # Unescape HTML
+    def html_unescape(value)
+      # Return an empty string when value is nil.
+      return '' unless value
+
+      result = value
+
+      result.gsub!(/<div>|<p>|<br>/, '')
+      result.gsub!(/<\/div>|<\/p>|<\/br>|<br[ ]*\/>/, "\n")
+
+      return result
+    end
+
     def initialize_fonts
       font 'Helvetica'
       font_size 9.5
@@ -37,7 +50,7 @@ module Prawn
     end
     
     # Letter header with company logo, receiver address and place'n'date
-    def letter_header(sender, receiver, subject)
+    def letter_header(sender, receiver, subject, date = Date.today)
       move_down 60
 
       # Address
@@ -52,7 +65,7 @@ module Prawn
       move_down 4.cm
 
       # Place'n'Date
-      text [sender.vcard.try(:locality), I18n.l(Date.today, :format => :long)].compact.join(', ')
+      text [sender.vcard.try(:locality), I18n.l(date, :format => :long)].compact.join(', ')
 
       # Subject
       move_down 60
@@ -61,9 +74,10 @@ module Prawn
     
     # Freetext
     def free_text(text = "")
+      return unless text.present?
+
       text " "
-      text text, :inline_format => true
-      text " "
+      text html_unescape(text), :inline_format => true
     end
     
     # Draws the full address of a vcard
