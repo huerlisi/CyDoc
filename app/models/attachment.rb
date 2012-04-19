@@ -17,9 +17,25 @@ class Attachment < ActiveRecord::Base
 
     case format
       when :text
-        I18n::translate(raw, :scope => 'activerecord.attributes.attachments.code_enum')
+        raw.present? ? I18n::translate(raw, :scope => 'activerecord.attributes.attachment.code_enum') : ""
       else
         raw
+    end
+  end
+
+  # Lookup attachment for class
+  #
+  # Returns attachment with code set to the name of the klass. Walks the inheritance
+  # tree upwards to look for defaults.
+  def self.for_class(klass)
+    if attachment = find_by_code(klass.name)
+     return attachment
+   end
+
+    while klass = klass.superclass do
+      if attachment = find_by_code(klass.name)
+        return attachment
+      end
     end
   end
 

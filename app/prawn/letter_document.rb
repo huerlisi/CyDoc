@@ -40,7 +40,7 @@ module Prawn
       opts.reverse_merge!(default_options)
 
       # Set the template
-      letter_template = Attachment.find_by_code(self.class.name)
+      letter_template = Attachment.for_class(self.class)
       opts.reverse_merge!(:template => letter_template.file.current_path) if letter_template
       
       super
