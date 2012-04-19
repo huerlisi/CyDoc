@@ -1,7 +1,7 @@
 class EsrRecord < ActiveRecord::Base
   belongs_to :esr_file
   
-  belongs_to :booking, :dependent => :destroy
+  belongs_to :booking, :dependent => :destroy, :autosave => true
   belongs_to :invoice
   
   # State Machine
@@ -93,25 +93,29 @@ class EsrRecord < ActiveRecord::Base
   end
 
   def update_remarks
-    if invoice.state == 'paid'
-      # already paid
-      if invoice.amount == self.amount.currency_round
-        # paid twice
-        self.remarks += ", doppelt bezahlt"
-      else
-        self.remarks += ", bereits bezahlt"
-      end
-    elsif !(invoice.active)
-      # canceled invoice
-      self.remarks += ", wurde bereits #{invoice.state_adverb}"
-    elsif invoice.amount == self.amount.currency_round
-      # TODO much too open condition (issue #804)
-      # reminder fee not paid
-      self.remarks += ", Mahnspesen nicht bezahlt"
-    else
-      # bad amount
-      self.remarks += ", falscher Betrag"
+    # Invoice not found
+    if self.state == 'missing'
+      self.remarks += ", Rechnung ##{invoice_id} nicht gefunden"
+      return
     end
+
+    # Remark if invoice should not get payment according to state
+    if !(invoice.active)
+      self.remarks += ", wurde bereits #{invoice.state_adverb}"
+      return
+    end
+
+    # Perfect payment
+    return if invoice.balance == 0
+
+    # Paid more than once
+    if (self.state == 'overpaid') and (invoice.amount == self.amount)
+      self.remarks += ", mehrfach bezahlt"
+      return
+    end
+
+    # Simply mark bad amount otherwise
+    self.remarks += ", falscher Betrag"
   end
 
   def update_state
@@ -120,7 +124,7 @@ class EsrRecord < ActiveRecord::Base
       return
     end
 
-    balance = self.invoice.balance.currency_round
+    balance = self.invoice.balance
     if balance == 0
       self.state = 'paid'
     elsif balance > 0
@@ -138,7 +142,7 @@ class EsrRecord < ActiveRecord::Base
   end
 
   # Invoices
-  before_create :assign_invoice, :create_esr_booking
+  before_create :assign_invoice, :create_esr_booking, :update_state, :update_remarks, :update_invoice_state
   
   private
   def assign_invoice
@@ -149,17 +153,8 @@ class EsrRecord < ActiveRecord::Base
 
     if Invoice.exists?(invoice_id)
       self.invoice_id = invoice_id
-      update_remarks
-      update_state
-
-    elsif imported_invoice = Invoice.find(:first, :conditions => ["imported_esr_reference LIKE concat(?, '%')", reference])
+    elsif Invoice.column_names.include?(:imported_esr_reference) && imported_invoice = Invoice.find(:first, :conditions => ["imported_esr_reference LIKE concat(?, '%')", reference])
       self.invoice = imported_invoice
-      update_remarks
-      update_state
-
-    else
-      self.remarks += ", Rechnung ##{invoice_id} nicht gefunden"
-      self.state = "missing"
     end
   end
   
@@ -170,23 +165,32 @@ class EsrRecord < ActiveRecord::Base
   def create_esr_booking
     if invoice
       esr_booking = invoice.bookings.build
+      debit_account = invoice.balance_account
     else
       esr_booking = Booking.new
+      debit_account = Invoice.direct_account
     end
     
     esr_booking.update_attributes(
       :amount         => amount,
       :credit_account => vesr_account,
-      :debit_account  => Account.find_by_code(invoice.balance_account), # TODO: fails if invoice not set
+      :debit_account  => debit_account,
       :value_date     => value_date,
       :title          => "VESR Zahlung",
-      :comments       => remarks)
+      :comments       => remarks
+    )
     
     esr_booking.save
  
     self.booking = esr_booking
     
     return esr_booking
+  end
+
+  def update_invoice_state
+    if invoice
+      invoice.calculate_state
+    end
   end
 
 public
