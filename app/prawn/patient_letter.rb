@@ -44,7 +44,7 @@ module Prawn
       font_size 6.5
       text "Rechnungssteller/Leistungserbringer:"
       font_size 8
-      draw_address(invoice.biller.vcard)
+      draw_address(invoice.biller.vcard, true)
 
       font_size 6.5 do
         for contact in invoice.biller.vcard.contacts
@@ -61,7 +61,7 @@ module Prawn
       font_size 6.5
       text "Zuweisender Arzt:"
       font_size 8
-      draw_address(invoice.referrer.vcard) if invoice.referrer
+      draw_address(invoice.referrer.vcard, true) if invoice.referrer
       text " "
       font_size 6.5
       text "Behandlung vom:"
@@ -72,8 +72,7 @@ module Prawn
     # Billing Address
     def billing_address(invoice)
       font_size 10
-      text invoice.billing_vcard.honorific_prefix if invoice.billing_vcard.honorific_prefix
-      draw_address(invoice.billing_vcard)
+      draw_address(invoice.billing_vcard, true)
     end
 
     # Patient
