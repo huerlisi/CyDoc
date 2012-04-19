@@ -202,8 +202,7 @@ class InvoicesController < ApplicationController
   def create
     @treatment = Treatment.find(params[:treatment_id])
     @patient = @treatment.patient
-    @invoice = Invoice.create_from_treatment(@treatment, params[:tiers][:name], Doctor.find(Thread.current["doctor_id"]), Doctor.find(Thread.current["doctor_id"]))
-    @invoice.update_attributes(params[:invoice])
+    @invoice = Invoice.create_from_treatment(params[:invoice], @treatment, params[:tiers][:name], Doctor.find(Thread.current["doctor_id"]), Doctor.find(Thread.current["doctor_id"]))
 
     # Saving
     if @invoice.valid?

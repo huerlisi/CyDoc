@@ -29,7 +29,7 @@ class Invoice < ActiveRecord::Base
   end
 
   # Constructor
-  def self.create_from_treatment(treatment, tiers_name, provider, biller)
+  def self.create_from_treatment(params, treatment, tiers_name, provider, biller)
     # Prepare Tiers
     tiers = Object.const_get(tiers_name).new(
       :patient  => treatment.patient,
@@ -39,13 +39,14 @@ class Invoice < ActiveRecord::Base
     )
 
     # Build Invoice
-    invoice = self.new(
+    invoice_params = {
       :treatment     => treatment,
       :tiers         => tiers,
       :law           => treatment.law,
       :patient_vcard => treatment.patient.vcard,
       :billing_vcard => treatment.patient.invoice_vcard
-    )
+    }.merge(params)
+    invoice = self.new(invoice_params)
 
     # Assign service records
     sessions = treatment.sessions.open
