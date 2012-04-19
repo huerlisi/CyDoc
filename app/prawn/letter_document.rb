@@ -67,8 +67,14 @@ module Prawn
     end
     
     # Draws the full address of a vcard
-    def draw_address(vcard)
-      vcard.full_address_lines.each do |line|
+    def draw_address(vcard, include_honorific_prefix = false)
+      lines = [vcard.full_name, vcard.extended_address, vcard.street_address, vcard.post_office_box, "#{vcard.postal_code} #{vcard.locality}"]
+      lines.unshift(vcard.honorific_prefix) if include_honorific_prefix
+
+      # Strip all whitespace
+      lines = lines.map {|line| line.strip if line.present?}.compact
+
+      lines.each do |line|
         text line
       end
     end
