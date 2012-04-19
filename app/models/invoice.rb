@@ -344,6 +344,10 @@ class Invoice < ActiveRecord::Base
     Account.find_by_code(settings['invoices.profit_account_code'])
   end
 
+  def self.direct_account
+    Account.find_by_code(settings['invoices.balance_account_code'])
+  end
+
   def balance_account
     Account.find_by_code(settings['invoices.balance_account_code'])
   end
