@@ -15,9 +15,8 @@ class EsrRecordsController < ApplicationController
   # State events
   def write_off
     @esr_record = EsrRecord.find(params[:id])
-    @esr_record.create_write_off_booking
+    @esr_record.create_write_off_booking && @esr_record.write_off!
 
-    @esr_record.write_off!
     respond_to do |format|
       format.js {}
       format.html {redirect_to @esr_record.esr_file}
@@ -26,9 +25,8 @@ class EsrRecordsController < ApplicationController
 
   def book_extra_earning
     @esr_record = EsrRecord.find(params[:id])
-    @esr_record.create_extra_earning_booking
+    @esr_record.create_extra_earning_booking && @esr_record.book_extra_earning!
 
-    @esr_record.book_extra_earning!
     respond_to do |format|
       format.js {}
       format.html {redirect_to @esr_record.esr_file}
