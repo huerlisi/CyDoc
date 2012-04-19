@@ -21,6 +21,9 @@ Settings.defaults = {
 
   'patients.sex'                         => 'M',
 
+  'printing.pdf_links'                   => true,
+  'printing.cups'                        => false,
+
   'modules.hozr'                         => false,
   'cases.invoice_grace_period'           => 2.days,
 
