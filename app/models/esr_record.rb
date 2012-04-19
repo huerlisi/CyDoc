@@ -202,7 +202,7 @@ public
     if invoice
       invoice.book_extra_earning("Korrektur nach VESR Zahlung").save
     else
-      Booking.build(:title => "Ausserordentlicher Ertrag",
+      Booking.new(:title => "Ausserordentlicher Ertrag",
                      :comments => comments || "Zahlung kann keiner Rechnung zugewiesen werden",
                      :amount => self.amount,
                      :debit_account  => Account.find_by_code(Invoice.settings['invoices.extra_earnings_account_code']),
