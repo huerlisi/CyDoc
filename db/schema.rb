@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120308102222) do
+ActiveRecord::Schema.define(:version => 20120420065205) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -379,6 +379,8 @@ ActiveRecord::Schema.define(:version => 20120308102222) do
   end
 
   add_index "invoices_sessions", ["invoice_id", "session_id"], :name => "index_invoices_sessions_on_invoice_id_and_session_id"
+  add_index "invoices_sessions", ["invoice_id"], :name => "index_invoices_sessions_on_invoice_id"
+  add_index "invoices_sessions", ["session_id"], :name => "index_invoices_sessions_on_session_id"
 
   create_table "laws", :force => true do |t|
     t.string   "insured_id"
@@ -569,6 +571,7 @@ ActiveRecord::Schema.define(:version => 20120308102222) do
     t.integer  "imported_id"
   end
 
+  add_index "sessions", ["duration_from"], :name => "index_sessions_on_duration_from"
   add_index "sessions", ["patient_id"], :name => "index_sessions_on_patient_id"
   add_index "sessions", ["state"], :name => "index_sessions_on_state"
   add_index "sessions", ["treatment_id"], :name => "index_sessions_on_treatment_id"
