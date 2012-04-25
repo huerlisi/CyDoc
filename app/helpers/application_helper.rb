@@ -60,6 +60,19 @@ module ApplicationHelper
     end
   end
 
+  def link_to_remote(body, url_options = {}, html_options = {})
+    url = url_options.delete(:url)
+    url_options['data-remote'] = true
+    if confirm = url_options.delete(:confirm)
+      url_options['data-confirm'] = confirm
+    end
+    if method = url_options.delete(:method)
+      url_options['data-method'] = method
+    end
+
+    link_to body, url, url_options.merge(html_options)
+  end
+
   # Hozr
   def hozr_env
     if Rails.env.development?
