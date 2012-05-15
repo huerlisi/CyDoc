@@ -8,7 +8,26 @@ class InvoicesController < ApplicationController
   in_place_edit_for :invoice, :due_date
 
   def create_treatments
-    @case_count, @failed_cases = Case.create_all_treatments
+    lock_path = Rails.root.join('tmp', 'case_create_all_treatments.lock')
+    # Exit if lock not available
+    if File.exist?(lock_path)
+      logger.info('Lock not available')
+      return
+    end
+
+    # Lock available
+    begin
+      # Acquire lock
+      lock = File.new(lock_path, "w")
+      lock.close
+
+      # Act
+      @case_count, @failed_cases = Case.create_all_treatments
+
+    ensure
+      # Release lock
+      File.unlink(lock_path)
+    end
   end
 
   # POST /invoice/1/print
