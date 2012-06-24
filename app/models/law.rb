@@ -1,7 +1,9 @@
 class Law < ActiveRecord::Base
+  validates_presence_of :code
+
   has_many :invoices
 
   def name
-    self.class.to_s.gsub(/^Law/, '').upcase
+    code.gsub(/^Law/, '').upcase
   end
 end

@@ -5,8 +5,8 @@
       <%= form.input :date_begin, :as => :date_field, :input_html => {:size => 12} %>
       <%= form.input :date_end, :as => :date_field, :input_html => {:size => 12} %>
       <li class="required">
-        <label for="law[name]">Gesetz</label>
-        <%= select 'law', :name, [['KVG', LawKvg], ['UVG', LawUvg], ['IVG', LawIvg], ['MVG', LawMvg], ['VVG', LawVvg], ['ORG', LawOrg]] %>
+        <label for="law[code]">Gesetz</label>
+        <%= select 'law', :code, [['KVG', 'LawKvg'], ['UVG', 'LawUvg'], ['IVG', 'LawIvg'], ['MVG', 'LawMvg'], ['VVG', 'LawVvg'], ['ORG', 'LawOrg']] %>
       </li>
       <%= form.input :reason, :collection => ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'] %>
       <%= form.input :place_type, :collection => ['Praxis', 'Spital'] %>

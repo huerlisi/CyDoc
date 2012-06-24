@@ -58,14 +58,11 @@ class TreatmentsController < ApplicationController
     @treatment = @patient.treatments.build(params[:treatment])
     
     # Law
-    @law = Object.const_get(params[:law][:name]).new
+    @law = @treatment.build_law(:code => params[:law][:code])
     # TODO: don't just pick first one
     insurance_policy = @patient.insurance_policies.by_policy_type(@law.name).first
     @law.insured_id = insurance_policy.number unless insurance_policy.nil?
 
-    @law.save
-    @treatment.law = @law
-    
     # TODO make selectable
 #    @treatment.canton ||= @tiers.provider.vcard.address.region
 
