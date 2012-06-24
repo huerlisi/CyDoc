@@ -4,10 +4,9 @@
     <% form.inputs do %>
       <%= form.input :date_begin, :as => :date_field, :input_html => {:size => 12} %>
       <%= form.input :date_end, :as => :date_field, :input_html => {:size => 12} %>
-      <li class="required">
-        <label for="law[code]">Gesetz</label>
-        <%= select 'law', :code, [['KVG', 'LawKvg'], ['UVG', 'LawUvg'], ['IVG', 'LawIvg'], ['MVG', 'LawMvg'], ['VVG', 'LawVvg'], ['ORG', 'LawOrg']] %>
-      </li>
+      <% form.fields_for :law do |law| %>
+        <%= law.input :code, :collection => [['KVG', 'LawKvg'], ['UVG', 'LawUvg'], ['IVG', 'LawIvg'], ['MVG', 'LawMvg'], ['VVG', 'LawVvg'], ['ORG', 'LawOrg']] %>
+      <% end %>
       <%= form.input :reason, :collection => ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'] %>
       <%= form.input :place_type, :collection => ['Praxis', 'Spital'] %>
       <%= form.input :referrer %>
