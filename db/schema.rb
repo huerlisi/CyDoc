@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221091102) do
+ActiveRecord::Schema.define(:version => 20120627075924) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(:version => 20120221091102) do
     t.integer  "imported_id"
     t.boolean  "use_vesr"
     t.boolean  "print_payment_for"
+    t.integer  "esr_account_id"
   end
 
   add_index "doctors", ["imported_id"], :name => "index_doctors_on_imported_id"
