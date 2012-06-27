@@ -1,2 +1,0 @@
-class LawOrg < Law
-end

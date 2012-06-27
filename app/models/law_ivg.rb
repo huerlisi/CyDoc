@@ -1,2 +1,0 @@
-class LawIvg < Law
-end

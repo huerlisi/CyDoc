@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120420065205) do
+ActiveRecord::Schema.define(:version => 20120622221348) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -388,7 +388,7 @@ ActiveRecord::Schema.define(:version => 20120420065205) do
     t.datetime "case_date"
     t.string   "ssn"
     t.string   "nif"
-    t.string   "type"
+    t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -13,7 +13,7 @@ class Case < ActiveRecord::Base
     puts self.praxistar_eingangsnr
 
     # Law
-    law = LawKvg.new(:insured_id => patient.insurance_policies.by_policy_type('KVG').first.number)
+    law = Law.new(:code => 'LawKvg', :insured_id => patient.insurance_policies.by_policy_type('KVG').first.number)
     
     # Treatment
     treatment = patient.treatments.build(

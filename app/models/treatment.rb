@@ -3,7 +3,9 @@ class Treatment < ActiveRecord::Base
   has_many :invoices, :dependent => :destroy, :order => 'value_date DESC, created_at DESC'
   belongs_to :patient
   belongs_to :referrer, :class_name => 'Doctor'
-  belongs_to :law, :dependent => :destroy
+
+  belongs_to :law, :dependent => :destroy, :autosave => true
+  accepts_nested_attributes_for :law
 
   has_many :sessions, :order => 'duration_from DESC', :dependent => :destroy
   has_many :medical_cases, :order => 'type', :dependent => :destroy

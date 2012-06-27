@@ -1,2 +1,0 @@
-class LawKvg < Law
-end

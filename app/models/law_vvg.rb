@@ -1,2 +1,0 @@
-class LawVvg < Law
-end
