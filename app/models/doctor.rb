@@ -11,9 +11,7 @@ class Doctor < ActiveRecord::Base
 
   # Accounts
   has_accounts
-  def esr_account
-    accounts.find(:first, :conditions => {:type => 'BankAccount'})
-  end
+  belongs_to :esr_account, :class_name => 'BankAccount'
 
   has_many :patients
 

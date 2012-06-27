@@ -2,7 +2,7 @@
   <%= link_to "Ändern", edit_doctor_path(@doctor), :class => "icon icon-edit" %>
 </div>
 
-<h3>Rechnungswesen</h3>
+<h3>VESR Einstellungen</h3>
 
 <div class="box">
   <table>
@@ -10,18 +10,18 @@
       <th><%= t_attr :print_payment_for %>:</th>
       <td><%=h t(@doctor.print_payment_for, :scope => :boolean) %></td>
     </tr>
-    <% if @doctor.account %>
+    <% if @doctor.esr_account %>
       <tr>
-        <th>Kontonummer:</th>
-        <td><%=h @doctor.account.number %></td>
+        <th>Bank:</th>
+        <td><%=h @doctor.esr_account.bank %></td>
       </tr>
       <tr>
         <th>ESR:</th>
-        <td><%=h @doctor.account.esr_id %></td>
+        <td><%=h @doctor.esr_account.esr_id %></td>
       </tr>
       <tr>
         <th>Postcheck Konto:</th>
-        <td><%=h @doctor.account.pc_id %></td>
+        <td><%=h @doctor.esr_account.pc_id %></td>
       </tr>
     <% end %>
   </table>

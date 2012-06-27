@@ -40,20 +40,17 @@ class DoctorsController < ApplicationController
 
   def show
     @doctor = Doctor.find(params[:id])
-    @account = @doctor.account
   end
 
   # GET /posts/new
   def new
     doctor = params[:doctor]
     @doctor = Doctor.new(doctor)
-    @account = @doctor.build_account(params[:bank_account])
     @doctor.build_vcard(params[:vcard])
   end
 
   def create
     @doctor = Doctor.new(params[:doctor])
-    @doctor.build_account(params[:bank_account])
     @doctor.build_vcard(params[:vcard])
 
     if @doctor.save
@@ -66,17 +63,15 @@ class DoctorsController < ApplicationController
 
   def edit
     @doctor = Doctor.find(params[:id])
-    @account = @doctor.account
     render :action => 'edit'
   end
   
   def update
     @doctor = Doctor.find(params[:id])
 
-    @doctor.build_account unless @doctor.account
     @doctor.build_vcard unless @doctor.vcard
 
-    if @doctor.update_attributes(params[:doctor]) && @doctor.account.update_attributes(params[:bank_account]) && @doctor.vcard.update_attributes(params[:vcard])
+    if @doctor.update_attributes(params[:doctor]) && @doctor.vcard.update_attributes(params[:vcard])
       flash[:notice] = 'Arzt gespeichert.'
       redirect_to :action => :show, :id => @doctor
     else
