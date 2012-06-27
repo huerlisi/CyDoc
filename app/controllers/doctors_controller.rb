@@ -40,7 +40,6 @@ class DoctorsController < ApplicationController
 
   def show
     @doctor = Doctor.find(params[:id])
-    @account = @doctor.account
   end
 
   # GET /posts/new
