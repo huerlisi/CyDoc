@@ -360,6 +360,7 @@ de-CH:
       show_order_form:    Auftragsformular
       print_request_document: Adressanfrage
       next:               Speichern & weiter
+      update_remarks:     Notiz speichern
       pdf:                PDF
       resolved:           Abgeschlossen
       request_pending:    Pendent
