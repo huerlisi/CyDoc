@@ -1,0 +1,12 @@
+1.1.0 (unreleased)
+=====
+Close to 700 changes make this release almost a rewrite:-)
+
+Highlights:
+* Faster, nicer invoices
+* Support for multiple bank accounts for payments
+* Support for Billing addresses
+* Support for CoverCard patient information updates
+* Support for Swiss Physio Tariff
+* Much simpler problem handling for VESR payments
+* Tool to track patients with bad addresses
