@@ -1,9 +1,6 @@
 [submodule "vendor/plugins/has_accounts"]
 	path = vendor/plugins/has_accounts
 	url = http://github.com/huerlisi/has_accounts.git
-[submodule "vendor/plugins/attachment_fu"]
-	path = vendor/plugins/attachment_fu
-	url = http://github.com/technoweenie/attachment_fu.git
 [submodule "vendor/plugins/has_vcards"]
 	path = vendor/plugins/has_vcards
 	url = http://github.com/huerlisi/has_vcards.git

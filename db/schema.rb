@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120627075924) do
+ActiveRecord::Schema.define(:version => 20120706222200) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -239,12 +239,10 @@ ActiveRecord::Schema.define(:version => 20120627075924) do
   end
 
   create_table "esr_files", :force => true do |t|
-    t.integer  "size"
-    t.string   "content_type"
-    t.string   "filename"
+    t.string   "file"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remarks",      :default => ""
+    t.string   "remarks",    :default => ""
   end
 
   create_table "esr_records", :force => true do |t|

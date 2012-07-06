@@ -1,5 +1,12 @@
 class EsrFile < ActiveRecord::Base
-  has_attachment :storage => :file_system
+  # File upload
+  mount_uploader :file, EsrFileUploader
+
+  # TODO: drop when updating to CarrierWave for Rails > 3
+  def file_identifier
+    File.basename(file.url)
+  end
+
   has_many :esr_records, :dependent => :destroy
   
   def to_s(format = :default)
@@ -19,7 +26,7 @@ class EsrFile < ActiveRecord::Base
 
   private
   def create_records
-    File.new(full_filename).each {|line|
+    File.new(file.current_path).each {|line|
       self.esr_records << EsrRecord.new.parse(line) unless line[0..2] == '999'
     }
   end
