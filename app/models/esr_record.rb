@@ -195,6 +195,9 @@ class EsrRecord < ActiveRecord::Base
 
   def update_invoice_state
     if invoice
+      # Only call if callback is available
+      return unless invoice.respond_to?(:calculate_state)
+
       invoice.calculate_state
       invoice.save
     end
