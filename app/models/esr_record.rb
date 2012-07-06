@@ -114,6 +114,12 @@ class EsrRecord < ActiveRecord::Base
       return
     end
 
+    # Not fully paid
+    if (self.state == 'underpaid')
+      self.remarks += ", Teilzahlung"
+      return
+    end
+
     # Simply mark bad amount otherwise
     self.remarks += ", falscher Betrag"
   end
@@ -190,6 +196,7 @@ class EsrRecord < ActiveRecord::Base
   def update_invoice_state
     if invoice
       invoice.calculate_state
+      invoice.save
     end
   end
 
