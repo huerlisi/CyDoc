@@ -1,3 +1,11 @@
+1.1.1
+=====
+A major bug in 1.1.0 broke creating new treatments for patients.
+Some more bugs where fixed in this release:
+* VESR files fail to import if a referenced invoice is invalid
+* Booking view is empty
+
+
 1.1.0
 =====
 More than 700 changes make this release almost a rewrite:-)
