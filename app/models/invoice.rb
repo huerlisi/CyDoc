@@ -1,4 +1,20 @@
 class Invoice < ActiveRecord::Base
+  # Override touch to not use validation
+  # This is similar to Rails 3 and should be dropped
+  # when ported.
+  def touch(attribute = nil)
+      current_time = current_time_from_proper_timezone
+
+      if attribute
+        write_attribute(attribute, current_time)
+      else
+        write_attribute('updated_at', current_time) if respond_to?(:updated_at)
+        write_attribute('updated_on', current_time) if respond_to?(:updated_on)
+      end
+
+      save(false)
+  end
+
   belongs_to :tiers, :autosave => true
   belongs_to :law, :autosave => true
   belongs_to :treatment, :autosave => true
