@@ -39,6 +39,9 @@ class TreatmentsController < ApplicationController
   def new
     @treatment = Treatment.new
     @treatment.date_begin = Date.today
+
+    # Build associated Law object
+    @treatment.build_law
     
     respond_to do |format|
       format.html { }
