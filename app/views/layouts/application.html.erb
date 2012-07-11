@@ -37,7 +37,6 @@
             <div><%= render :partial => 'users/user_bar' %></div>
             <div><%= render :partial => '/search/form' %></div>
           </div>
-          <% cache [I18n.locale, :main_menu] do %>
           <div id="main-menu">
             <ul>
               <%- if @current_doctor %>
@@ -61,7 +60,6 @@
               <li><%= link_to t('cydoc.navigation.help'), :controller => 'help' %></li>
             </ul>
           </div>
-          <% end %>
         </div>
       </div>
       <div id="sidebar">
