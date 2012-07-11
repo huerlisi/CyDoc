@@ -6,8 +6,16 @@
         <%= render :partial => 'invoices/navigation_section' %>
       </td>
       <td style="vertical-align: top">
-        <%= navigation_section(:master_data, {:show_doctors => :doctors, :show_insurances => :insurances, :show_tariff_items => :tariff_items}, '48x48/catalogs.png') %>
-        <%= navigation_section(:accounting, {:show_accounts => :accounts, :show_debtors => account_path(Account.find_by_code(@current_doctor.settings['invoices.balance_account_code'])) }, '48x48/accounts.png') %>
+        <%= navigation_section(:master_data, {
+              :show_doctors => :doctors,
+              :show_insurances => :insurances,
+              :show_tariff_items => :tariff_items,
+              :show_drug_products => :drug_products,
+            }, '48x48/catalogs.png') %>
+        <%= navigation_section(:accounting, {
+              :show_accounts => :accounts,
+              :show_debtors => account_path(Account.find_by_code(@current_doctor.settings['invoices.balance_account_code']))
+            }, '48x48/accounts.png') %>
       </td>
     </tr>
   </table>
