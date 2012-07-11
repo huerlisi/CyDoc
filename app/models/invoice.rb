@@ -67,7 +67,7 @@ class Invoice < ActiveRecord::Base
 
     # Add remarks if tiers is soldant
     if tiers.is_a?(TiersSoldant)
-      invoice_params[:remark] += "\nAbtretungserklärung liegt bei."
+      invoice_params[:remark] = [invoice_params[:remark].presence, "Abtretungserklärung liegt bei."].compact.join("\n")
     end
 
     invoice = self.new(invoice_params)
