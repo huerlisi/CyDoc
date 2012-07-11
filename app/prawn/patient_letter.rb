@@ -61,8 +61,11 @@ module Prawn
       font_size 6.5
       text "Zuweisender Arzt:"
       font_size 8
-      draw_address(invoice.referrer.vcard, true) if invoice.referrer
+      draw_address(invoice.referrer.vcard, true)
       text " "
+    end
+
+    def treatment(invoice)
       font_size 6.5
       text "Behandlung vom:"
       font_size 8
@@ -138,7 +141,8 @@ module Prawn
         end
 
         bounding_box [0, bounds.top - 8.cm], :width => 7.cm do
-          referrer(invoice)
+          referrer(invoice) if invoice.referrer
+          treatment(invoice)
         end
 
         bounding_box [12.cm, bounds.top - 3.5.cm], :width => 7.cm do
