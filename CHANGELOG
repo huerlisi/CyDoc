@@ -1,3 +1,12 @@
+1.1.2
+=====
+* Refactor navigation and make some items visibility depending on
+  modules.* setting.
+* No blank options in Treatment form for law and reason fields.
+* Set ESR account for doctor.
+* Only show main menu if logged in.
+
+
 1.1.1
 =====
 A major bug in 1.1.0 broke creating new treatments for patients.
