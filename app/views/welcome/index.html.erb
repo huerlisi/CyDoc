@@ -2,20 +2,12 @@
   <table style="width: 100%">
     <tr>
       <td style="vertical-align: top">
-        <%= render :partial => 'patients/navigation_section' %>
-        <%= render :partial => 'invoices/navigation_section' %>
+        <%= navigation_section(:patients, patient_navigation, 'system-users.png') %>
+        <%= navigation_section(:payments, invoice_navigation, '48x48/invoice.png') %>
       </td>
       <td style="vertical-align: top">
-        <%= navigation_section(:master_data, {
-              :show_doctors => :doctors,
-              :show_insurances => :insurances,
-              :show_tariff_items => :tariff_items,
-              :show_drug_products => :drug_products,
-            }, '48x48/catalogs.png') %>
-        <%= navigation_section(:accounting, {
-              :show_accounts => :accounts,
-              :show_debtors => account_path(Account.find_by_code(@current_doctor.settings['invoices.balance_account_code']))
-            }, '48x48/accounts.png') %>
+        <%= navigation_section(:master_data, master_data_navigation, '48x48/catalogs.png') %>
+        <%= navigation_section(:accounting, accounting_navigation, '48x48/accounts.png') %>
       </td>
     </tr>
   </table>

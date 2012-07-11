@@ -24,6 +24,12 @@ Settings.defaults = {
   'printing.pdf_links'                   => true,
   'printing.cups'                        => false,
 
+  'modules.recalls'                      => true,
+
+  'modules.drugs'                        => true,
+
+  'modules.returned_invoices'            => true,
+
   'modules.hozr'                         => false,
   'cases.invoice_grace_period'           => 2.days,
 

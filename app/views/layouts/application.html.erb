@@ -42,13 +42,19 @@
             <ul>
               <li><%= link_to t('cydoc.navigation.home'), :controller => "/" %></li>
               <li><%= link_to t('cydoc.navigation.patients'), :controller => 'patients' %></li>
-              <li><%= link_to t('cydoc.navigation.recalls'), :controller => 'recalls' %></li>
+              <%- if @current_doctor.settings['modules.recalls'] %>
+                <li><%= link_to t('cydoc.navigation.recalls'), :controller => 'recalls' %></li>
+              <%- end %>
               <li><%= link_to t('cydoc.navigation.insurances'), :controller => 'insurances' %></li>
               <li><%= link_to t('cydoc.navigation.doctors'), :controller => 'doctors' %></li>
               <li><%= link_to t('cydoc.navigation.service'), :controller => 'tariff_items' %></li>
-              <li><%= link_to t('cydoc.navigation.drug_products'), :controller => 'drug_products' %></li>
+              <%- if @current_doctor.settings['modules.drugs'] %>
+                <li><%= link_to t('cydoc.navigation.drug_products'), :controller => 'drug_products' %></li>
+              <%- end %>
               <li><%= link_to t('cydoc.navigation.payments'), :controller => 'invoices' %></li>
-              <li><%= link_to t_title(:index, ReturnedInvoice), returned_invoices_path %></li>
+              <%- if @current_doctor.settings['modules.returned_invoices'] %>
+                <li><%= link_to t_title(:index, ReturnedInvoice), returned_invoices_path %></li>
+              <%- end %>
               <li><%= link_to t('cydoc.navigation.accounting'), :controller => 'bookkeeping' %></li>
               <li><%= link_to t('cydoc.navigation.help'), :controller => 'help' %></li>
             </ul>
