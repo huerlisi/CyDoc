@@ -5,9 +5,9 @@
       <%= form.input :date_begin, :as => :date_field, :input_html => {:size => 12} %>
       <%= form.input :date_end, :as => :date_field, :input_html => {:size => 12} %>
       <% form.fields_for :law do |law| %>
-        <%= law.input :code, :collection => [['KVG', 'LawKvg'], ['UVG', 'LawUvg'], ['IVG', 'LawIvg'], ['MVG', 'LawMvg'], ['VVG', 'LawVvg'], ['ORG', 'LawOrg']] %>
+        <%= law.input :code, :collection => [['KVG', 'LawKvg'], ['UVG', 'LawUvg'], ['IVG', 'LawIvg'], ['MVG', 'LawMvg'], ['VVG', 'LawVvg'], ['ORG', 'LawOrg']], :include_blank => false %>
       <% end %>
-      <%= form.input :reason, :collection => ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'] %>
+      <%= form.input :reason, :collection => ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'], :include_blank => false %>
       <%= form.input :place_type, :collection => ['Praxis', 'Spital'] %>
       <%= form.input :referrer %>
     <% end %>
