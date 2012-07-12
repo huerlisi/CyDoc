@@ -39,7 +39,7 @@ class RecallsController < ApplicationController
         format.js {
           render :update do |page|
             page.replace_html 'patient_recalls', :partial => 'recalls/patient_item', :collection => @patient.recalls.open
-            page.replace_html 'new_recall'
+            page.remove 'new_recall'
           end
         }
       end
