@@ -1,5 +1,6 @@
 Settings.defaults = {
   'invoices.payment_period'              => 30.days,
+  'invoices.grace_period'                => 0.days,
   'invoices.balance_account_code'        => '1100',
   'invoices.profit_account_code'         => '3200',
   'invoices.extra_earnings_account_code' => '8000',

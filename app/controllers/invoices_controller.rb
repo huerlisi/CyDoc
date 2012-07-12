@@ -135,7 +135,7 @@ class InvoicesController < ApplicationController
     query ||= params[:quick_search][:query] if params[:quick_search]
 
     @invoices = Invoice.clever_find(query).paginate(:page => params['page_search'], :per_page => 30, :order => 'id DESC')
-    @overdue = Invoice.overdue.dunning_active.paginate(:page => params['page_overdue'], :per_page => 30)
+    @overdue = Invoice.overdue(@current_doctor.settings['invoices.grace_period']).dunning_active.paginate(:page => params['page_overdue'], :per_page => 30)
     @prepared = Invoice.prepared.paginate(:page => params['page_prepared'], :per_page => 30, :order => 'id DESC')
     @treatments = Treatment.open.paginate(:page => params['page_open'], :per_page => 30, :include => {:patient => {:vcards => :addresses, :vcard => :addresses}, :law => [], :sessions => []})
     

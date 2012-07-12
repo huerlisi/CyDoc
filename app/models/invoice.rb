@@ -114,8 +114,15 @@ class Invoice < ActiveRecord::Base
     !(state == 'canceled' or state == 'reactivated' or state == 'written_off' or state == 'paid')
   end
 
-  # TODO: unify greeze period of 30 days and make configurable
-  named_scope :overdue, :conditions => ["(invoices.state IN ('booked', 'printed') AND due_date < :grace_date) OR (invoices.state = 'reminded' AND reminder_due_date < :today) OR (invoices.state = '2xreminded' AND second_reminder_due_date < :today) OR (invoices.state = '3xreminded' AND third_reminder_due_date < :today)", {:today => Date.today, :grace_date => Date.today.ago(30.days)}]
+  named_scope :overdue, lambda {|grace_period|
+    {
+      :conditions => [
+        "(invoices.state IN ('booked', 'printed') AND due_date < :grace_date) OR (invoices.state = 'reminded' AND reminder_due_date < :today) OR (invoices.state = '2xreminded' AND second_reminder_due_date < :today) OR (invoices.state = '3xreminded' AND third_reminder_due_date < :today)",
+        {:today => Date.today, :grace_date => Date.today.ago(grace_period)}
+      ]
+    }
+  }
+
   def overdue?
     return true if (state == 'booked' or state == 'printed') and due_date < Date.today
     return true if state == 'reminded' and (reminder_due_date.nil? or reminder_due_date < Date.today)
