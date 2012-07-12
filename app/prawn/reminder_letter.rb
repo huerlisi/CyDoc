@@ -92,7 +92,7 @@ module Prawn
         end
 
         bounding_box [0, bounds.top - 7.cm], :width => 7.cm do
-          referrer(invoice)
+          referrer(invoice) if invoice.referrer
         end
 
         bounding_box [12.cm, bounds.top - 3.5.cm], :width => 7.cm do
