@@ -2,8 +2,8 @@
 pdf.bounding_box([1.7.cm, 25.5.cm], :width => 7.cm) do
   pdf.text [@current_doctor.honorific_prefix, @current_doctor.given_name, @current_doctor.family_name].join(' ')
   pdf.font "Helvetica", :size => 8 do
-    pdf.text @current_doctor.street_address
-    pdf.text @current_doctor.postal_code + " " + @current_doctor.locality
+    pdf.text @current_doctor.vcard.street_address
+    pdf.text @current_doctor.vcard.postal_code + " " + @current_doctor.vcard.locality
 
     contacts = @current_doctor.vcard.contacts
     labels = contacts.collect{|contact| contact.label}
@@ -23,15 +23,15 @@ end
 
 # Date
 pdf.bounding_box([11.5.cm, 24.cm], :width => 6.cm) do
-  pdf.text @current_doctor.locality + ", " + Date.today.to_s
+  pdf.text @current_doctor.vcard.locality + ", " + Date.today.to_s
 end
 
 # receiver address
 pdf.bounding_box([11.5.cm, 21.5.cm], :width => 6.cm) do
   pdf.text @recall.patient.honorific_prefix
   pdf.text @recall.patient.given_name + " " + @recall.patient.family_name
-  pdf.text @recall.patient.street_address
-  pdf.text @recall.patient.postal_code + " " + @recall.patient.locality
+  pdf.text @recall.patient.vcard.street_address
+  pdf.text @recall.patient.vcard.postal_code + " " + @recall.patient.vcard.locality
 end
 
 # Subject
