@@ -3,8 +3,8 @@
 <% for state in recall.aasm_events_for_current_state -%>
 <%= 
 case state
-  when :obey:        link_to_remote image_tag('true.png'), {:url => obey_recall_path(recall)}, :title => t('cydoc.state.recall.accepted')
+  when :obey:        link_to_remote image_tag('true.png'), {:url => obey_recall_path(recall), :method => :post}, :title => t('cydoc.state.recall.accepted')
   when :cancel:      link_to_remote image_tag('delete.png'), {:url => recall_path(recall), :method => :delete}, :title => t('cydoc.state.recall.refused')
-  when :prepare:     link_to_remote image_tag('send.png'), {:url => prepare_recall_path(recall)}, :title => t('cydoc.state.recall.send')
+  when :prepare:     link_to_remote image_tag('send.png'), {:url => prepare_recall_path(recall), :method => :post}, :title => t('cydoc.state.recall.send')
 end %>
 <% end -%>
