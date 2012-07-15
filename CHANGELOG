@@ -1,11 +1,28 @@
 1.1.2
 =====
+Another patch release fixing many bugs in the recall system and giving
+more stable remote printing. Reminders can now be printed again directly
+from overdue invoices. One major feature made it, too: CyDoc now supports
+more than one account for ESR payment processing.
+
+Enhancements:
+* Use configurable grace period for invoices, default is 0 days.
+* Re-add direct reminder printing action.
+* Try printing 5 times before giving up.
+
+Bug fixes:
 * Refactor navigation and make some items visibility depending on
   modules.* setting.
 * No blank options in Treatment form for law and reason fields.
 * Set ESR account for doctor.
 * Only show main menu if logged in.
 * Try 5 times before giving up on missing printer
+* Only show referring doctor section title in patient letter if doctor
+  is recorded.
+* Fix reminder letter for treatments with no referrer.
+* No newline in tiers soldant invoice remark.
+* Adapt recall PDF to new has_vcards interface.
+* Fix creating more than one recall on the same page.
 
 
 1.1.1
