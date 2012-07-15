@@ -1,7 +1,10 @@
 <% cache [I18n.locale, @invoice.cache_key] do %>
 <div class="contextual">
-  <% if @invoice.overdue? or @invoice.reminded? %>
+  <% if @invoice.reminded? %>
     <%= link_to t('cydoc.actions.print_dunning_letter_copy'), print_reminder_letter_invoice_path(@invoice, :print_copy => true), :onclick => "showPrintingFlash('Mahnkopie')", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-print" %>
+  <% end %>
+  <% if @invoice.overdue? %>
+    <%= link_to t('cydoc.actions.print_dunning_letter'), print_reminder_letter_invoice_path(@invoice), :onclick => "showPrintingFlash('Mahnung')", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-print" %>
   <% end %>
   <% if @invoice.state == 'prepared' %>
     <%= link_to t('cydoc.actions.print'), print_invoice_path(@invoice), :onclick => "showPrintingFlash('#{t_model(Invoice)}')", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-print" %>
