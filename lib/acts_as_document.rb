@@ -15,19 +15,25 @@ module ActsAsDocument
     file.puts(document_to_pdf(document_type, params))
     file.close
 
-    # Try twice
+    # Try more than once
+    # TODO: try cupsffi gem
+    tries = 5
+    i = 1
     begin
       paper_copy = Cups::PrintJob.new(file.path, printer)
-    rescue
-      paper_copy = nil
-    end
-
-    begin
-      paper_copy ||= Cups::PrintJob.new(file.path, printer)
       paper_copy.print
     rescue RuntimeError => e
-      @printing_error = e.message
-      return false
+      logger.warn("Failed to print to #{printer}. Try ##{i}."
+      logger.warn(e.message)
+
+      if i == tries
+        logger.warn("Givin up.")
+        @printing_error = e.message
+        return false
+      end
+
+      i += 1
+      retry
     end
 
     return true
