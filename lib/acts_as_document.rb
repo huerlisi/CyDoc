@@ -23,7 +23,7 @@ module ActsAsDocument
       paper_copy = Cups::PrintJob.new(file.path, printer)
       paper_copy.print
     rescue RuntimeError => e
-      logger.warn("Failed to print to #{printer}. Try ##{i}."
+      logger.warn("Failed to print to #{printer}. Try ##{i}.")
       logger.warn(e.message)
 
       if i == tries
