@@ -33,6 +33,9 @@ module ActsAsDocument
       end
 
       i += 1
+      # Sleep for 4s
+      sleep 4
+
       retry
     end
 
