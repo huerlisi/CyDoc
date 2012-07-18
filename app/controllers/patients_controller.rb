@@ -46,7 +46,8 @@ class PatientsController < ApplicationController
     end
   end
 
-  # Covercard actions
+  # Covercard
+  # =========
   
   # Checks if the patient has new covercard infomations.
   # Returns a flash message when new infomations available.
@@ -80,7 +81,7 @@ class PatientsController < ApplicationController
     if query.present?
       @patients, query_type, covercard_code = Patient.clever_find(query, :page => params[:page])
 
-      @suggest_covercard_search = covercard_code if query_type.eql?('covercard')
+      @suggest_covercard_search = covercard_code if query_type == 'covercard'
       # Show selection list only if more than one hit
       return if !params[:all] && redirect_if_match(@patients)
     else
