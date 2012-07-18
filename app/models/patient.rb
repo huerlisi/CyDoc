@@ -181,7 +181,7 @@ class Patient < ActiveRecord::Base
 
   private
   def self.get_query_type(value)
-    if value.match(/^\d{19}/)
+    if value.match(/^80756\d{15}/)
       return "covercard"
     elsif value.match(/^[[:digit:]]*$/)
       return "number"

@@ -37,7 +37,7 @@ module Covercard
     end
 
     def self.find(value)
-      return nil if !(value && value.length == 19) or !settings['modules.covercard']
+      return nil if !(value && value.length == 20) or !settings['modules.covercard']
  
       url = URI.parse(SERVICE_URL + value)
       http = Net::HTTP::Proxy(self.settings['modules.covercard.host'], self.settings['modules.covercard.port'])
@@ -88,7 +88,7 @@ module Covercard
       # Guard against nil
       return nil unless value
 
-      value[0..18]
+      value[0..19]
     end
 
     def self.honorific_prefix(value, format = :default)
