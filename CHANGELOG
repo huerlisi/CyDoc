@@ -1,5 +1,8 @@
 1.1.4 (unreleased)
 =====
+Enhancements:
+* Sort overdue invoices by due_date in invoice index.
+
 Bug fixes:
 * Update nokogiri to 1.5.5 to fix build problem using ruby 1.9 on
   Debian/Ubuntu.
