@@ -13,6 +13,7 @@ class Insurance < ActiveRecord::Base
   end
 
   # Role
+  validates_presence_of :role
   named_scope :health_care, :conditions => {:role => 'H'}
   named_scope :accident, :conditions => {:role => 'A'}
 
