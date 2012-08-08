@@ -83,7 +83,7 @@ module Prawn
     end
 
     def closing(sender)
-      text "Bei allfälligen Unstimmigkeiten rufen Sie uns bitte an oder schreiben Sie eine E-Mail an #{sender.vcard.contacts.email.first}."
+      text "Bei allfälligen Unstimmigkeiten rufen Sie uns bitte an oder schreiben Sie eine E-Mail an #{sender.vcard.contacts.email.first.number}."
       common_closing(sender)
     end
 
