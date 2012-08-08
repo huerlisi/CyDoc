@@ -13,8 +13,8 @@ module Prawn
 
       font_size 7.5
 
-      text "Sehr geehrte Patientin,"
-      text " "
+      greeting(invoice.patient)
+
       text "Bei der Durchsicht meiner Buchhaltung habe ich festgestellt, dass die Zahlung der oben erwähnten Rechnung noch nicht verbucht ist. Falls Sie per E-Banking bezahlt haben, bitte ich Sie nochmals zu überpürfen, ob Sie die korrekte Konto- und Referenznummer angegeben haben."
       text " "
       text "- Wenn Sie tatsächlich noch nicht bezahlt haben, möchte ich Sie bitten, den Betrag in den nächsten Tagen zu überweisen."
@@ -30,8 +30,8 @@ module Prawn
 
       font_size 7.5
 
-      text "Sehr geehrte Patientin,"
-      text " "
+      greeting(invoice.patient)
+
       text "Bei der Durchsicht meiner Buchhaltung habe ich festgestellt, dass die oben erwähnte Rechnung trotz Mahnung noch nicht beglichen ist."
       text " "
       text "- Ich möchte Sie bitten, den Betrag sofort zu überweisen. Andernfalls werden wird unsere Forderung dem Inkasso zu übergeben."
@@ -47,8 +47,8 @@ module Prawn
 
       font_size 7.5
 
-      text "Sehr geehrte Patientin,"
-      text " "
+      greeting(invoice.patient)
+
       text "Bei der Durchsicht meiner Buchhaltung habe ich festgestellt, dass die oben erwähnte Rechnung trotz Mahnungen nicht beglichen ist."
       text " "
       text "- Überweisen Sie den Betrag unverzüglich. Andernfalls wird die Betreibung eingeleitet."
@@ -75,6 +75,11 @@ module Prawn
       text "Zahlbar bis:"
       font_size 8
       text invoice.due_date.to_s
+    end
+
+    def greeting(patient)
+      text patient.vcard.salutation
+      text " "
     end
 
     def closing(sender)
