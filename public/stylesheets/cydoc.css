@@ -63,6 +63,7 @@ vertical-align: middle;
 .icon-spinner { background-image: url(../images/indicator.gif); }
 .icon-print_request_document { background-image: url(../images/16x16/print_request_document.png); }
 .icon-show_all { background-image: url(../images/16x16/show_all.png); }
+.icon-remind { background-image: url(../images/16x16/mail-mark-important.png); }
 
 /* Sessions */
 table.session {
