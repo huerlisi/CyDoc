@@ -6,6 +6,7 @@ Enhancements:
 Bug fixes:
 * Update nokogiri to 1.5.5 to fix build problem using ruby 1.9 on
   Debian/Ubuntu.
+* Fix exception if Insurance has no code
 
 1.1.3
 =====
