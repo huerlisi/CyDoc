@@ -21,6 +21,9 @@ class Insurance < ActiveRecord::Base
     # TODO: should probably use Law model.
     raw = read_attribute(:role)
 
+    # Guard
+    return unless raw.present?
+
     case format
       when :text
         I18n::translate(raw, :scope => 'activerecord.attributes.insurance.role_enum')
