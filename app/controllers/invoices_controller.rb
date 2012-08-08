@@ -24,7 +24,7 @@ class InvoicesController < ApplicationController
         format.js {
           render :update do |page|
             page.replace_html "tab-content-invoices", :partial => 'show'
-            page.replace "notice_flash", :partial => 'printed_flash'
+            page.replace "notice_flash", :partial => 'printed_flash', :locals => {:model => 'invoice'}
           end
         }
       end
@@ -59,7 +59,7 @@ class InvoicesController < ApplicationController
         format.js {
           render :update do |page|
             page.replace_html "tab-content-invoices", :partial => 'show'
-            page.replace "notice_flash", :partial => 'reminded_flash'
+            page.replace "notice_flash", :partial => 'printed_flash', :locals => {:model => 'reminder'}
           end
         }
       end

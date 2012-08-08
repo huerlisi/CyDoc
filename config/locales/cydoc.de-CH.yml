@@ -206,6 +206,7 @@ de-CH:
       drug_tariff_item:   Medikament
       insurance:          Versicherung
       invoice:            Rechnung
+      reminder:           Mahnung
       invoice_batch_job:  Rechnungslauf
       reminder_batch_job: Mahnlauf
       lab_tariff_item:    Labor Leistung
@@ -382,7 +383,11 @@ de-CH:
       revert:             Zurücksetzen
       insurance_recipe:   Rückforderungsbeleg
       patient_letter:     Rechnung
-      
+      close:              Schliessen
+
+  printing:
+    preparing: %{model} wird aufbereitet...
+    done:      %{model} wurde an Drucker gesendet.
 
   returned_invoices:
     edit_ready:
