@@ -18,24 +18,36 @@ class InvoicesController < ApplicationController
       @invoice.save!
     end
     
-    if @invoice.print(@printers[:trays][:plain], @printers[:trays][:invoice])
-      respond_to do |format|
-        format.html { redirect_to invoices_path }
-        format.js {
-          render :update do |page|
-            page.replace_html "tab-content-invoices", :partial => 'show'
-            page.replace "notice_flash", :partial => 'printed_flash', :locals => {:model => 'invoice'}
-          end
-        }
+    if @invoice.settings['printing.cups']
+      if @invoice.print(@printers[:trays][:plain], @printers[:trays][:invoice])
+        respond_to do |format|
+          format.html { redirect_to invoices_path }
+          format.js {
+            render :update do |page|
+              page.replace_html "tab-content-invoices", :partial => 'show'
+              page.replace "notice_flash", :partial => 'printed_flash', :locals => {:model => 'invoice'}
+            end
+          }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to @invoice }
+          format.js {
+            render :update do |page|
+              page.replace_html "error_flash", :text => @invoice.printing_error
+              page.show "error_flash"
+              page.hide "notice_flash"
+            end
+          }
+        end
       end
     else
       respond_to do |format|
         format.html { redirect_to @invoice }
         format.js {
           render :update do |page|
-            page.replace_html "error_flash", :text => @invoice.printing_error
-            page.show "error_flash"
-            page.hide "notice_flash"
+            page.replace_html "tab-content-invoices", :partial => 'show'
+            page.replace "notice_flash", :partial => 'pdf_links_flash', :locals => {:views => [:patient_letter, :insurance_recipe]}
           end
         }
       end
@@ -53,24 +65,36 @@ class InvoicesController < ApplicationController
       @invoice.save!
     end
     
-    if @invoice.print_reminder(@printers[:trays][:invoice])
-      respond_to do |format|
-        format.html { redirect_to invoices_path }
-        format.js {
-          render :update do |page|
-            page.replace_html "tab-content-invoices", :partial => 'show'
-            page.replace "notice_flash", :partial => 'printed_flash', :locals => {:model => 'reminder'}
-          end
-        }
+    if @invoice.settings['printing.cups']
+      if @invoice.print_reminder(@printers[:trays][:invoice])
+        respond_to do |format|
+          format.html { redirect_to invoices_path }
+          format.js {
+            render :update do |page|
+              page.replace_html "tab-content-invoices", :partial => 'show'
+              page.replace "notice_flash", :partial => 'printed_flash', :locals => {:model => 'reminder'}
+            end
+          }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to @invoice }
+          format.js {
+            render :update do |page|
+              page.replace_html "error_flash", :text => @invoice.printing_error
+              page.show "error_flash"
+              page.hide "notice_flash"
+            end
+          }
+        end
       end
     else
       respond_to do |format|
         format.html { redirect_to @invoice }
         format.js {
           render :update do |page|
-            page.replace_html "error_flash", :text => @invoice.printing_error
-            page.show "error_flash"
-            page.hide "notice_flash"
+            page.replace_html "tab-content-invoices", :partial => 'show'
+            page.replace "notice_flash", :partial => 'pdf_links_flash', :locals => {:views => [:reminder_letter]}
           end
         }
       end

@@ -383,11 +383,13 @@ de-CH:
       revert:             Zurücksetzen
       insurance_recipe:   Rückforderungsbeleg
       patient_letter:     Rechnung
+      reminder_letter:    Mahnung
       close:              Schliessen
 
   printing:
     preparing: %{model} wird aufbereitet...
     done:      %{model} wurde an Drucker gesendet.
+    pdf_done:  "Dokument zum Download bereit:"
 
   returned_invoices:
     edit_ready:
