@@ -11,6 +11,7 @@ Bug fixes:
   Debian/Ubuntu.
 * Fix exception if Insurance has no code
 * Drop label "Mail" in reminder letter closing.
+* Handle doctor without email in reminder letter.
 
 1.1.3
 =====
