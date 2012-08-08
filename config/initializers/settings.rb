@@ -22,7 +22,6 @@ Settings.defaults = {
 
   'patients.sex'                         => 'M',
 
-  'printing.pdf_links'                   => true,
   'printing.cups'                        => false,
 
   'modules.recalls'                      => true,
