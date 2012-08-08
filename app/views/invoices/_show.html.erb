@@ -14,7 +14,7 @@
   <%= icon_link_to :patient_letter, patient_letter_invoice_path(@invoice, :format => :pdf), :icon => 'pdf', :target => 'patient_letter' %>
   <%= icon_link_to :insurance_recipe, insurance_recipe_invoice_path(@invoice, :format => :pdf), :icon => 'pdf', :target => 'insurance_recipe' %>
   <% if @invoice.open %>
-      <%= link_to t('cydoc.actions.cancel'), invoice_path(@invoice), 'data-method' => :delete, :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reverse')}?", 'data-remote' => true, :class => "icon icon-delete" %>
+      <%= link_to t('cydoc.actions.cancel'), invoice_path(@invoice), 'data-method' => :delete, :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.cancel')}?", 'data-remote' => true, :class => "icon icon-delete" %>
       <%= link_to t('cydoc.actions.reactivate'), reactivate_invoice_path(@invoice), 'data-confirm' => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-reactivate" %>
   <% elsif @invoice.state == 'canceled' or @invoice.state == 'written_off' %>
       <%= link_to t('cydoc.actions.reactivate'), reactivate_invoice_path(@invoice), 'data-confirm' => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-reactivate" %>

@@ -249,8 +249,7 @@ de-CH:
       print_dunning_letter: "Mahnung drucken"
       print_dunning_letter_copy: "Mahnkopie drucken"
       print_reclaim_pdf: "Rückforderungsbeleg PDF"
-      reactivate: reaktivieren
-      reverse: stornieren
+      reactivate: "Reaktivieren"
       save: "Speichern"
       show_all: "Alle anzeigen"
       show_letter: "Brief anzeigen"
