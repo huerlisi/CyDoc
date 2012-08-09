@@ -588,10 +588,6 @@ class Invoice < ActiveRecord::Base
   
   # PDF/Print
   include ActsAsDocument
-  def self.document_type_to_class(document_type)
-    "Prawn::#{document_type.to_s.camelcase}".constantize
-  end
-
   def print_insurance_recipe(printer)
     print_document(:insurance_recipe, printer)
   end

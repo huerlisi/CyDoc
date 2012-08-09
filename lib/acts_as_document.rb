@@ -46,6 +46,10 @@ module ActsAsDocument
     def document_to_pdf(document_type = nil)
       document_type_to_class(document_type).new.to_pdf(self)
     end
+
+    def document_type_to_class(document_type)
+      "Prawn::#{document_type.to_s.camelcase}".constantize
+    end
   end
 
   def self.included(base)
