@@ -6,6 +6,7 @@
 
     <% form.inputs t_model do %>
       <%= form.input :state, :as => :hidden %>
+      <%= form.input :doctor_id, :as => :hidden %>
       <%= form.input :due_date, :as => :date_field, :input_html => {:size => 12, :autocomplete => 'off', 'date-picker' => true} %>
       <%= form.input :remarks, :input_html => {:rows => 3} %>
     <% end %>

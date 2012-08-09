@@ -1,11 +1,13 @@
 class Recall < ActiveRecord::Base
   # Associations
   belongs_to :patient, :touch => true
+  belongs_to :doctor
   belongs_to :appointment
   accepts_nested_attributes_for :appointment
 
   # Validations
   validates_presence_of :patient
+  validates_presence_of :doctor
   validates_date :due_date
   
   # State Machine
@@ -67,4 +69,7 @@ class Recall < ActiveRecord::Base
     end
   end
 END
+
+  # PDF/Print
+  include ActsAsDocument
 end
