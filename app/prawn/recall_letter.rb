@@ -1,5 +1,10 @@
 module Prawn
   class RecallLetter < Prawn::LetterDocument
+    def greeting(patient)
+      text patient.vcard.salutation
+      text " "
+    end
+
     def to_pdf(recall, params = {})
       doctor = recall.doctor
 
@@ -48,9 +53,7 @@ module Prawn
 
       # Greeting
       bounding_box([1.7.cm, 14.5.cm], :width => 16.cm) do
-        text "Sehr geehrte Frau " + recall.patient.family_name # TODO could be man, too
-
-        text "\n"
+        greeting(recall.patient)
 
         text "Wie besprochen erlauben wir uns, Sie an die nächste Untersuchung zu erinnern."
         text "Wir haben für Sie folgenden Terminvorschlag reserviert:"
