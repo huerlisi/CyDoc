@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Patient < ActiveRecord::Base
   belongs_to :doctor
 
@@ -121,24 +123,30 @@ class Patient < ActiveRecord::Base
 
   def sex
     case read_attribute(:sex)
-      when 1: "M"
-      when 2: "F"
+      when 1
+        "M"
+      when 2
+        "F"
       else "unbekannt"
     end
   end
 
   def sex=(value)
     case value
-      when "M": write_attribute(:sex, 1)
-      when "F": write_attribute(:sex, 2)
+      when "M"
+        write_attribute(:sex, 1)
+      when "F"
+        write_attribute(:sex, 2)
       else write_attribute(:sex, nil)
     end
   end
 
   def sex_xml
     case read_attribute(:sex)
-      when 1: "male"
-      when 2: "female"
+      when 1
+        "male"
+      when 2
+        "female"
       else nil
     end
   end

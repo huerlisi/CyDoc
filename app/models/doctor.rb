@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Doctor < ActiveRecord::Base
   # Settings
   has_settings

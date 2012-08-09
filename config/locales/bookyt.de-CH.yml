@@ -154,10 +154,10 @@ de-CH:
       all_bookings:         'Alle Buchungen'
       PDF:                  'PDF'
     title:
-      select_booking_template: %{model} anlegen
-      select_booking: %{model} anlegen
-      current: Aktueller %{model}
+      select_booking_template: "%{model} anlegen"
+      select_booking: "%{model} anlegen"
+      current: "Aktueller %{model}"
       day:
-        new: Abrechnung von %{day}
+        new: "Abrechnung von %{day}"
     flash:
-      created_html: %{message} angelegt
+      created_html: "%{message} angelegt"
