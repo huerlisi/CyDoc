@@ -2,7 +2,7 @@
 =====
 Enhancements:
 * Sort overdue invoices by due_date in invoice index.
-* Greeting in reminder letter is not hardcoded to female anymore.
+* Greeting in reminder and recall letters is not hardcoded to female anymore.
 * Full support to use either CUPS printing or PDF downloads for
   invoices and reminders.
 
