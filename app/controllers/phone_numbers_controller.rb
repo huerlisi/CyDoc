@@ -32,7 +32,7 @@ class PhoneNumbersController < ApplicationController
         }
         format.js {
           render :update do |page|
-            page.insert_html :top, 'phone_numbers', :partial => 'phone_numbers/item', :object => @phone_number
+            page.insert_html :bottom, 'phone_numbers', :partial => 'phone_numbers/item', :object => @phone_number
             page.remove 'phone_number_form'
           end
         }
