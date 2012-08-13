@@ -13,4 +13,4 @@
 <div class="contextual">
   <%= link_to_remote t('cydoc.actions.new_contact'), {:url => new_vcard_phone_number_url(@doctor.vcard), :method => :get}, :class => "icon icon-add" unless @doctor.new_record?%>
 </div>
-<%= render 'phone_numbers/list', :phone_numbers => @doctor.phone_numbers %>
+<%= render 'phone_numbers/list', :phone_numbers => @doctor.vcard.contacts %>

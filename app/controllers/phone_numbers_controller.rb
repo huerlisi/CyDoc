@@ -20,7 +20,7 @@ class PhoneNumbersController < ApplicationController
   # PUT /phone_number
   def create
     @vcard = Vcard.find(params[:vcard_id])
-    @phone_number = @vcard.phone_numbers.build(params[:phone_number])
+    @phone_number = @vcard.contacts.build(params[:phone_number])
     
     if @phone_number.save
       flash[:notice] = 'Kontakt erfasst.'
@@ -32,7 +32,7 @@ class PhoneNumbersController < ApplicationController
         }
         format.js {
           render :update do |page|
-            page.insert_html :top, 'phone_numbers', :partial => 'phone_numbers/item', :object => @phone_number
+            page.insert_html :bottom, 'phone_numbers', :partial => 'phone_numbers/item', :object => @phone_number
             page.remove 'phone_number_form'
           end
         }

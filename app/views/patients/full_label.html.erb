@@ -22,7 +22,7 @@ body { margin: 0; padding: 1px; }
   <div style="height: 0.3em"/>
 
   <div id="phone_numbers" style="font-style: italic; font-size: 6pt">
-    <%= @patient.phone_numbers.find(:all, :limit => 2).map{|number| "#{number.phone_number_type}: #{number.number}"}.join('<br/>') %>
+    <%= @patient.vcard.contacts.find(:all, :limit => 2).map{|number| "#{number.phone_number_type}: #{number.number}"}.join('<br/>') %>
   </div>
 
   <div style="height: 0.3em"/>
