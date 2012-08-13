@@ -20,7 +20,7 @@ class PhoneNumbersController < ApplicationController
   # PUT /phone_number
   def create
     @vcard = Vcard.find(params[:vcard_id])
-    @phone_number = @vcard.phone_numbers.build(params[:phone_number])
+    @phone_number = @vcard.contacts.build(params[:phone_number])
     
     if @phone_number.save
       flash[:notice] = 'Kontakt erfasst.'
