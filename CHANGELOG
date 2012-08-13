@@ -1,4 +1,4 @@
-1.1.4 (unreleased)
+1.1.4
 =====
 Enhancements:
 * Sort overdue invoices by due_date in invoice index.
@@ -9,8 +9,9 @@ Enhancements:
 Bug fixes:
 * Update nokogiri to 1.5.5 to fix build problem using ruby 1.9 on
   Debian/Ubuntu.
-* Fix exception if Insurance has no code
+* Fix exception if Insurance has no code.
 * Drop label "Mail" in reminder letter closing.
+* Preselect current role in insurance form field.
 
 1.1.3
 =====
