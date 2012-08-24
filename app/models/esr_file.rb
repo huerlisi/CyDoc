@@ -1,4 +1,7 @@
 class EsrFile < ActiveRecord::Base
+  # Default sorting
+  default_scope :order => 'created_at DESC'
+
   # File upload
   mount_uploader :file, EsrFileUploader
 
@@ -9,6 +12,7 @@ class EsrFile < ActiveRecord::Base
 
   has_many :esr_records, :dependent => :destroy
   
+  # String
   def to_s(format = :default)
     case format
     when :long

@@ -1,13 +1,11 @@
 %table.list#esr_file_list
-  %tr   
-    %th= t_attr :updated_at, EsrFile
-    %th.right= t_attr :bookings, EsrFile
-    %th.right= t_attr :invalid_bookings, EsrFile
-    %th.right= t_attr :missing_bookings, EsrFile
-    %th.right= t_attr :total_amount, EsrFile
-    %th.action-links
-
-  = render @esr_files
-
-  %tr#invoices_list_footer
-    %th{:colspan => 5}= will_paginate @esr_files, :params => {:query => params[:query]}
+  %thead
+    %tr
+      %th= t_attr :updated_at, EsrFile
+      %th.right= t_attr :bookings, EsrFile
+      %th.right= t_attr :invalid_bookings, EsrFile
+      %th.right= t_attr :missing_bookings, EsrFile
+      %th.right= t_attr :total_amount, EsrFile
+      %th.action-links
+  %tbody
+    = render @esr_files
