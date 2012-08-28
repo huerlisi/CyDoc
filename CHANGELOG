@@ -1,5 +1,8 @@
 1.1.5 (unreleased)
 =====
+Enhancements:
+* Give tariff item group a push to be returned as top search results
+
 Bug fixes
 * Handle doctor without email in reminder letter.
 
