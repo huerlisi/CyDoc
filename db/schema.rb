@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120813071447) do
+ActiveRecord::Schema.define(:version => 20120828091216) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(:version => 20120813071447) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "date"
-    t.time     "from"
-    t.time     "to"
+    t.datetime "duration_from"
+    t.datetime "duration_to"
   end
 
   add_index "appointments", ["patient_id"], :name => "index_appointments_on_patient_id"

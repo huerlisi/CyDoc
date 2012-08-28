@@ -20,6 +20,7 @@ Bug fixes:
 * Fix exception if Insurance has no code.
 * Drop label "Mail" in reminder letter closing.
 * Preselect current role in insurance form field.
+* Fix timezone issue with recall.
 
 1.1.3
 =====
