@@ -174,18 +174,22 @@ class EsrRecord < ActiveRecord::Base
       esr_booking = Booking.new
     end
     
-    esr_booking.update_attributes(
-      :amount         => amount,
-      :credit_account => vesr_account,
-      :debit_account  => Invoice::DEBIT_ACCOUNT,
-      :value_date     => value_date,
-      :title          => "VESR Zahlung",
-      :comments       => remarks)
-    
-    esr_booking.save
- 
-    self.booking = esr_booking
-    
+    begin
+      esr_booking.update_attributes(
+        :amount         => amount,
+        :credit_account => vesr_account,
+        :debit_account  => Invoice::DEBIT_ACCOUNT,
+        :value_date     => value_date,
+        :title          => "VESR Zahlung",
+        :comments       => remarks)
+
+      esr_booking.save
+
+      self.booking = esr_booking
+    rescue
+      logger.error("Can't create ESR booking for invoice ##{invoice.id}")
+    end
+
     return esr_booking
   end
 
