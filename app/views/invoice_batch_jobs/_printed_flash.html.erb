@@ -2,6 +2,6 @@
   <p>Rechnungen wurde an Drucker gesendet...</p>
   <p>
     <%= link_to 'Journal', :controller => 'invoice_batch_jobs', :action => :show, :id => @invoice_batch_job.id %>
-    <%= button_to_function 'Schliessen', "Element.hide('invoice_flash')" %>
+    <%= button_to_function 'Schliessen', "Element.hide('notice_flash')" %>
   </p>
 </div>
