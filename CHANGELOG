@@ -1,8 +1,8 @@
-1.2.0 (unreleased)
+1.1.5 (unreleased)
 =====
 Enhancements:
-* Refactoring reminder letter to allow background PDF and more consistent
-  layout.
+* There's now a quick fix action for double payments.
+* Add support for UVG taxpoint units in TarmedTariff.
 
 Bug fixes
 * Handle doctor without email in reminder letter.
