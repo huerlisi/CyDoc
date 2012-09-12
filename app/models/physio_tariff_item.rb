@@ -1,7 +1,7 @@
 class PhysioTariffItem < TariffItem
   def unit_mt
     case reason
-      when "Unfall":
+      when "Unfall"
         1.0
       else
         1.03
@@ -10,7 +10,7 @@ class PhysioTariffItem < TariffItem
 
   def unit_tt
     case reason
-      when "Unfall":
+      when "Unfall"
         1.0
       else
         1.03
