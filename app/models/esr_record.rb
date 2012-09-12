@@ -22,7 +22,7 @@ class EsrRecord < ActiveRecord::Base
   end
 
   aasm_event :resolve do
-    transitions :from => :underpaid, :to => :resolved
+    transitions :from => [:overpaid, :missing, :underpaid], :to => :resolved
   end
 
   aasm_event :book_extra_earning do
