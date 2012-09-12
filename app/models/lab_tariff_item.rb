@@ -4,6 +4,6 @@ class LabTariffItem < TariffItem
   end
 
   def unit_tt
-    0.89
+    1
   end
 end
