@@ -29,6 +29,10 @@ class EsrRecord < ActiveRecord::Base
     transitions :from => [:overpaid, :missing], :to => :resolved
   end
 
+  aasm_event :book_payback do
+    transitions :from => [:overpaid, :missing], :to => :resolved
+  end
+
   named_scope :invalid, :conditions => {:state => ['overpaid', 'underpaid', 'resolved']}
   named_scope :unsolved, :conditions => {:state => ['overpaid', 'underpaid', 'missing']}
   named_scope :valid, :conditions => {:state => 'paid'}
@@ -204,6 +208,31 @@ class EsrRecord < ActiveRecord::Base
   end
 
 public
+  def create_payback_booking
+    if invoice
+      booking = invoice.bookings.build
+
+      credit_account = invoice.balance_account
+      amount = -invoice.due_amount
+    else
+      booking = Booking.new
+
+      credit_account ||= Account.find_by_code(Invoice.settings['invoices.balance_account_code'])
+      amount = self.amount
+    end
+
+    booking.attributes = {
+      :title => "Rückerstattung",
+      :comments => "Zuviel bezahlt",
+      :amount => amount,
+      :credit_account => credit_account,
+      :debit_account => vesr_account,
+      :value_date => Date.today
+    }
+
+    booking.save
+  end
+
   def create_write_off_booking
     invoice.write_off("Korrektur nach VESR Zahlung").save
   end

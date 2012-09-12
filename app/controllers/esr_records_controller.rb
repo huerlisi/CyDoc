@@ -56,6 +56,28 @@ class EsrRecordsController < ApplicationController
     end
   end
 
+  def book_payback
+    @esr_record = EsrRecord.find(params[:id])
+
+    if @esr_record.create_payback_booking
+      @esr_record.book_payback!
+
+      respond_to do |format|
+        format.js {}
+        format.html {redirect_to @esr_record.esr_file}
+      end
+    else
+      flash[:error] = 'Konnte Rückzahlungsbuchung nicht erstellen.'
+
+      respond_to do |format|
+        format.js {
+          render 'show_flash_message'
+        }
+        format.html {redirect_to @esr_record.esr_file}
+      end
+    end
+  end
+
   def resolve
     @esr_record = EsrRecord.find(params[:id])
     @esr_record.resolve!
