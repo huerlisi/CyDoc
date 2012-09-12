@@ -124,4 +124,12 @@ class TariffItem < ActiveRecord::Base
   def amount
     (self.amount_mt * self.unit_factor_mt * self.unit_mt) + (self.amount_tt * self.unit_factor_tt * self.unit_tt)
   end
+
+  def reason
+    return nil unless @session
+
+    @session.treatment.reason
+  end
+
+
 end

@@ -1,10 +1,4 @@
 class PhysioTariffItem < TariffItem
-  def reason
-    return nil unless @session
-
-    @session.treatment.reason
-  end
-
   def unit_mt
     case reason
       when "Unfall":
