@@ -130,6 +130,4 @@ class TariffItem < ActiveRecord::Base
 
     @session.treatment.reason
   end
-
-
 end
