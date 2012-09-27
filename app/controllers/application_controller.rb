@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
   # Authentication
   # ==============
   include AuthenticatedSystem
-  filter_parameter_logging :password, :password_confirmation, :old_password
   before_filter :login_required, :authenticate
 
   # Localization
@@ -31,7 +30,7 @@ class ApplicationController < ActionController::Base
   private
   def authenticate
     return if current_user.nil?
-    
+
     # Authenticate doctor login
     doctor = current_user.object
     unless doctor.nil?
@@ -66,7 +65,7 @@ class ApplicationController < ActionController::Base
   def render_to_pdf(options = {})
     logger.info("Generate PDF with media '#{options[:media]}'")
     html2ps_options = "--media #{options[:media]}" unless options[:media].blank?
-    
+
     logger.info("html2ps.php #{html2ps_options}")
     logger.info("Started PDF generation #{Time.now.strftime('%H:%M:%S')}")
     generator = IO.popen("html2ps.php #{html2ps_options}", "w+")
@@ -76,7 +75,7 @@ class ApplicationController < ActionController::Base
     data = generator.read
     generator.close
     logger.info("Finished PDF generation #{Time.now.strftime('%H:%M:%S')}")
-    
+
     return data
   end
 
@@ -98,7 +97,7 @@ class ApplicationController < ActionController::Base
           end
         }
       end
-      
+
       return true
     else
       return false
@@ -200,7 +199,7 @@ class Date
   def self.parse_europe(value, base = :future)
     return value if value.is_a?(Date)
     return value.to_date if value.is_a?(Time)
-    
+
     return nil if value.blank?
 
     if value.is_a?(String)
@@ -225,17 +224,17 @@ class Date
   def self.expand_year(value, base = :future)
     value = value.to_i
     return value unless value < 100
-    
+
     century = Date.today.year / 100
     year = Date.today.year % 100
-    
+
     case base
     when :future
       offset = value < year ? 100 : 0
     when :past
       offset = value <= year ? 0 : -100
     end
-    
+
     return 100 * century + value + offset
   end
 end
