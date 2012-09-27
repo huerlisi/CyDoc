@@ -24,7 +24,7 @@ class BookkeepingController < ApplicationController
 
   def open_invoices
     # TODO: hardcoded account id for debit account
-    @invoices = Invoice.find(:all,
+    @invoices = Invoice.all(
       :joins => :bookings,
       :conditions => ["invoices.value_date <= ? AND bookings.value_date <= ?", @value_date_end, @value_date_end],
       :group => "reference_id, reference_type",
@@ -33,7 +33,7 @@ class BookkeepingController < ApplicationController
   end
 
   def open_invoices_csv
-    @invoices = Invoice.find(:all,
+    @invoices = Invoice.all(
       :select => "invoices.*, sum(IF(bookings.debit_account_id = 3, -bookings.amount, bookings.amount)) AS current_due_amount",
       :joins => :bookings,
       :conditions => ["invoices.value_date <= ? AND bookings.value_date <= ?", @value_date_end, @value_date_end],
