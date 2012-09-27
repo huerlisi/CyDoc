@@ -28,8 +28,8 @@ module Importer
       errors = 0
 
       # Assure our data is loaded
-      ext_records = self.find(:all, options)
-      
+      ext_records = self..all(options)
+
       puts "  Importing #{ext_records.count} records..."
       for ext_record in ext_records
         begin
@@ -39,7 +39,7 @@ module Importer
           # Save new record
           int_record.save!
           int_record.reload
-          
+
           puts "    " + int_record.to_s
           success += 1
 
@@ -55,7 +55,7 @@ module Importer
           errors += 1
         end
       end
-      
+
       puts
       puts "  Success: #{success}; skipped: #{skipped}; errors: #{errors}"
       puts "Import done."
@@ -70,7 +70,7 @@ end
 class Importer::Data
 
   @@data = nil
-  
+
   # Abstract methods
   def self.import_all(do_clean = false)
   end

@@ -7,9 +7,9 @@ class DrugSubstance < ActiveRecord::Base
     return [] if query.nil? or query.empty?
 
     query_params = {}
-    
+
     query_params[:query] = "%#{query}%"
-    
-    find(:all, :conditions => ["name LIKE :query OR description LIKE :query", query_params], :order => 'name')
+
+    .all(:conditions => ["name LIKE :query OR description LIKE :query", query_params], :order => 'name')
   end
 end

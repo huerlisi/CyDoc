@@ -31,13 +31,13 @@ class InvoiceBatchJobsController < ApplicationController
   # POST /invoice_batch_jobs
   def create
     @invoice_batch_job = InvoiceBatchJob.new(params[:invoice_batch_job])
-    @treatments = Treatment.open.find(:all, :limit => @invoice_batch_job.count)
-    
+    @treatments = Treatment.open..all(:limit => @invoice_batch_job.count)
+
     value_date = @invoice_batch_job.value_date
     tiers_name = @invoice_batch_job.tiers_name
     provider   = Doctor.find(Thread.current["doctor_id"])
     biller     = Doctor.find(Thread.current["doctor_id"])
-    
+
     @invoice_batch_job.create_invoices(@treatments, value_date, tiers_name, provider, biller)
     @invoice_batch_job.print(@printers)
 
@@ -69,11 +69,11 @@ class InvoiceBatchJobsController < ApplicationController
   # POST /invoice_batch_jobs/1/redo
   def reprint
     @invoice_batch_job = InvoiceBatchJob.find(params[:id])
-    
+
     @invoice_batch_job.print(@printers)
-    
+
     @invoice_batch_job.save
-    
+
     redirect_to @invoice_batch_job
   end
 end

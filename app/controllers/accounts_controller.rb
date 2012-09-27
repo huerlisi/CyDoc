@@ -6,11 +6,11 @@ class AccountsController < ApplicationController
 
   # Scopes
   has_scope :by_value_period, :using => [:from, :to], :default => proc { |c| c.session[:has_scope] }
-  
+
   # GET /accounts
   def index
     @accounts = Account.paginate(:page => params['page'], :per_page => 20, :order => 'code')
-    
+
     respond_to do |format|
       format.html {
         render :action => 'list'
@@ -21,7 +21,7 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   def show
     @account = Account.find(params[:id])
-    
+
     @bookings = apply_scopes(Booking).by_account(@account).paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
     respond_to do |format|
       format.html {
@@ -34,8 +34,8 @@ class AccountsController < ApplicationController
   # POST /account/print/1
   def print
     @account = Account.find(params[:id])
-    @bookings = apply_scopes(Booking).by_account(@account).find(:all, :order => 'value_date, id')
-    
+    @bookings = apply_scopes(Booking).by_account(@account)..all(:order => 'value_date, id')
+
     respond_to do |format|
       format.html {
         render :action => 'show'

@@ -6,7 +6,7 @@
 
     <table style="width: 100%">
       <tr>
-        <th><%= t_attr(:salutation, Patient) %></th><td><%= vcard.select :honorific_prefix, HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }, :include_blank => true %></td>
+        <th><%= t_attr(:salutation, Patient) %></th><td><%= vcard.select :honorific_prefix, HonorificPrefix..all(:order => 'sex DESC, position').collect { |prefix| prefix.name }, :include_blank => true %></td>
         <th><%= t_attr(:gender, Patient) %></th><td><%= patient.select :sex, {t_attr(:female, Patient) => 'F', t_attr(:male, Patient) => 'M'}, :include_blank => true, :size => 12 %></td>
       </tr>
       <tr>

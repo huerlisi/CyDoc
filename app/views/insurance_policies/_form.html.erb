@@ -3,7 +3,7 @@
     <%= error_messages_for :insurance_policy %>
 
     <%= insurance_policy.select :policy_type, [['Krankenversicherung', 'KVG'], ['Unfallversicherung', 'UVG']] %>
-    <b>Versicherung:</b> <%= insurance_policy.select :insurance_id, Insurance.find(:all, :include => :vcard, :order => 'vcards.full_name').collect { |i| [i.to_s, i.id] }, :include_blank => true, :label => "Versicherung" %>
+    <b>Versicherung:</b> <%= insurance_policy.select :insurance_id, Insurance..all(:include => :vcard, :order => 'vcards.full_name').collect { |i| [i.to_s, i.id] }, :include_blank => true, :label => "Versicherung" %>
     <b>Nummer:</b> <%= insurance_policy.text_field :number, :size => 12, :autocomplete => 'off' %>
     <%= insurance_policy.submit "Zuweisen" %>
   </div>

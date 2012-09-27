@@ -4,7 +4,7 @@ class DrugProduct < ActiveRecord::Base
 
   # Validations
   validates_presence_of :name, :description
-  
+
   def to_s
     "#{name} - #{description}"
   end
@@ -13,9 +13,9 @@ class DrugProduct < ActiveRecord::Base
     return [] if query.nil? or query.empty?
 
     query_params = {}
-    
+
     query_params[:query] = "%#{query}%"
-    
-    find(:all, :conditions => ["name LIKE :query OR description LIKE :query", query_params], :order => 'name')
+
+    .all(:conditions => ["name LIKE :query OR description LIKE :query", query_params], :order => 'name')
   end
 end

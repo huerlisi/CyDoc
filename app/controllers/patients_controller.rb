@@ -17,7 +17,7 @@ class PatientsController < ApplicationController
   # TODO: is duplicated in ServiceRecordsController
   in_place_edit_for :service_record, :ref_code
   in_place_edit_for :service_record, :quantity
-                
+
   in_place_edit_for :invoice, :due_date
 
   respond_to :js, :only => :covercard_search
@@ -33,10 +33,10 @@ class PatientsController < ApplicationController
       page.call 'focus', 'patient_vcard_attributes_locality'
     end
   end
-  
+
   def postal_codes_for_locality
     render :update do |page|
-      postal_codes = PostalCode.find(:all, :conditions => ["locality LIKE CONCAT('%', ?, '%')", params[:locality]])
+      postal_codes = PostalCode..all(:conditions => ["locality LIKE CONCAT('%', ?, '%')", params[:locality]])
       if postal_codes.count == 1
         page.replace 'patient_vcard_attributes_postal_code', text_field_tag('patient[vcard_attributes][postal_code]', postal_codes[0].zip, :size => 9)
       elsif postal_codes.count > 1
@@ -48,7 +48,7 @@ class PatientsController < ApplicationController
 
   # Covercard
   # =========
-  
+
   # Checks if the patient has new covercard infomations.
   # Returns a flash message when new infomations available.
   def covercard_check_update
@@ -66,12 +66,12 @@ class PatientsController < ApplicationController
     @covercard_patient = Covercard::Patient.find(params[:code])
 
     if @covercard_patient
-      @exact_patients = Patient.by_date(@covercard_patient.birth_date).by_name(@covercard_patient.name)  
-      @date_patients = Patient.by_date(@covercard_patient.birth_date) 
-      @name_patients = Patient.by_name(@covercard_patient.name) 
+      @exact_patients = Patient.by_date(@covercard_patient.birth_date).by_name(@covercard_patient.name)
+      @date_patients = Patient.by_date(@covercard_patient.birth_date)
+      @name_patients = Patient.by_name(@covercard_patient.name)
     end
   end
-  
+
   # GET /patients
   def index
     query = params[:query]
@@ -87,7 +87,7 @@ class PatientsController < ApplicationController
     else
       @patients = Patient.paginate(:page => params['page'], :order => 'vcards.family_name, vcards.given_name')
     end
-    
+
     respond_to do |format|
       format.html {
         render :action => 'list'
@@ -203,7 +203,7 @@ class PatientsController < ApplicationController
   def show_tab
     respond_to do |format|
       @patient = Patient.find(params[:id])
-      
+
       format.js {
         # For partial updates used in form cancellation events
         if tab = params[:tab]
@@ -220,7 +220,7 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
 
     @patient.destroy
-    
+
     respond_to do |format|
       format.html {
         redirect_to patients_path
@@ -237,7 +237,7 @@ class PatientsController < ApplicationController
   print_action_for :label, :tray => :label, :media => 'Label'
   def label
     @patient = Patient.find(params[:id])
-    
+
     respond_to do |format|
       format.html {}
       format.pdf { render_pdf(:media => 'Label') }
@@ -248,7 +248,7 @@ class PatientsController < ApplicationController
   print_action_for :full_label, :tray => :label, :media => 'Label'
   def full_label
     @patient = Patient.find(params[:id])
-    
+
     respond_to do |format|
       format.html {}
       format.pdf { render_pdf(:media => 'Label') }

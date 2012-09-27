@@ -47,20 +47,20 @@ class Doctor < ActiveRecord::Base
   # ZSR sanitation
   def zsr=(value)
     value.delete!(' .') unless value.nil?
-    
+
     write_attribute(:zsr, value)
   end
 
   # Search
   def self.clever_find(query)
     return [] if query.nil? or query.empty?
-    
+
     query_params = {}
     query_params[:query] = "%#{query}%"
 
     vcard_condition = "(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)"
 
-    find(:all, :include => [:vcard], :conditions => ["#{vcard_condition}", query_params], :order => 'full_name, family_name, given_name')
+    .all(:include => [:vcard], :conditions => ["#{vcard_condition}", query_params], :order => 'full_name, family_name, given_name')
   end
 
   # Returned invoices

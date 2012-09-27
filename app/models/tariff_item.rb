@@ -2,14 +2,14 @@ class TariffItem < ActiveRecord::Base
   # Associations
   belongs_to :vat_class
   belongs_to :imported, :polymorphic => true
-  
+
   # Validations
   validates_presence_of :code, :remark
-  
+
   def self.to_s
     I18n.translate(self.name.underscore, :scope => [:activerecord, :models])
   end
-  
+
   def to_s
     [code, remark].compact.select{|item| not item.empty?}.join ' - '
   end
@@ -17,20 +17,20 @@ class TariffItem < ActiveRecord::Base
   def type_to_s
     self.class.to_s
   end
-  
+
   def type_as_string
     read_attribute(:type)
   end
-  
+
   def type_as_string=(value)
     write_attribute(:type, value)
   end
-  
+
   # Search
   # ======
   def self.clever_find(query, args = {})
     return [] if query.nil? or query.empty?
-    
+
     query_params = {}
     case get_query_type(query)
     when "lab"
@@ -46,7 +46,7 @@ class TariffItem < ActiveRecord::Base
     end
 
     find_args = {:conditions => ["(#{condition})", query_params], :order => "IF(type = 'TariffItemGroup', 0, 1), tariff_type DESC, code"}
-    find(:all, find_args.merge(args))
+    .all(find_args.merge(args))
   end
 
   private
@@ -119,7 +119,7 @@ class TariffItem < ActiveRecord::Base
   def tariff_type
     read_attribute(:tariff_type) || self.class.tariff_type
   end
-  
+
   # Calculated field
   def amount
     (self.amount_mt * self.unit_factor_mt * self.unit_mt) + (self.amount_tt * self.unit_factor_tt * self.unit_tt)

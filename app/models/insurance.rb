@@ -38,7 +38,7 @@ class Insurance < ActiveRecord::Base
   def members
     return [] if ean_party.blank?
 
-    Insurance.find(:all, :conditions => {:group_ean_party => ean_party})
+    Insurance..all(:conditions => {:group_ean_party => ean_party})
   end
 
   def group
@@ -55,6 +55,6 @@ class Insurance < ActiveRecord::Base
 
     vcard_condition = "(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)"
 
-    find(:all, :include => [:vcard], :conditions => ["#{vcard_condition}", query_params], :order => 'full_name, family_name, given_name')
+    .all(:include => [:vcard], :conditions => ["#{vcard_condition}", query_params], :order => 'full_name, family_name, given_name')
   end
 end
