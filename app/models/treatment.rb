@@ -70,11 +70,11 @@ class Treatment < ActiveRecord::Base
       "#{patient.nil? ? 'Patient unbekannt' : patient.name} #{reason}: #{I18n.l(date_begin) if date_begin} - #{I18n.l(date_end) if date_end}"
     end
   end
-  
+
   def amount
     sessions.to_a.sum(&:amount)
   end
-  
+
   # XML Invoices
   def reason_xml
     case reason

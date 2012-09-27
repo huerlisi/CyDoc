@@ -40,7 +40,7 @@ class Insurance < ActiveRecord::Base
 
     Insurance.find(:all, :conditions => {:group_ean_party => ean_party})
   end
-  
+
   def group
     return nil if group_ean_party.blank?
     Insurance.find(:first, :conditions => {:ean_party => group_ean_party})
@@ -49,7 +49,7 @@ class Insurance < ActiveRecord::Base
   # Search
   def self.clever_find(query)
     return [] if query.nil? or query.empty?
-    
+
     query_params = {}
     query_params[:query] = "%#{query}%"
 

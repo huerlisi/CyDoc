@@ -9,11 +9,11 @@ class Recall < ActiveRecord::Base
   validates_presence_of :patient
   validates_presence_of :doctor
   validates_date :due_date
-  
+
   # State Machine
   include AASM
   aasm_column :state
-  
+
   aasm_initial_state :scheduled
 
   aasm_state :scheduled
@@ -63,7 +63,7 @@ class Recall < ActiveRecord::Base
 <<END
   def initialize(attributes=nil)
     super
-    
+
     unless self.appointment
       self.build_appointment(:patient => self.patient)
     end

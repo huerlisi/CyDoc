@@ -68,7 +68,7 @@ class Patient < ActiveRecord::Base
       errors.add(:base, "Mindestens eines der Felder 'Strasse', 'Adresszusatz' oder 'Postfach' muss gesetzt sein")
     end
   end
-  
+
   def valid_for_invoice?(invoice)
     valid?
     validate_for_invoice(invoice)
@@ -83,7 +83,7 @@ class Patient < ActiveRecord::Base
   def last_session
     treatments.map{|t| t.sessions}.flatten.first
   end
-  
+
   # Services
   has_many :service_records, :order => 'date DESC', :before_add => :before_add_service_record
 
