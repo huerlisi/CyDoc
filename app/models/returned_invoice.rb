@@ -10,7 +10,7 @@ class ReturnedInvoice < ActiveRecord::Base
   # State Machine
   include AASM
   aasm_column :state
-  validates_presence_of :state
+  validates :state , :presence => true
 
   aasm_initial_state :ready
   aasm_state :ready
@@ -34,8 +34,8 @@ class ReturnedInvoice < ActiveRecord::Base
 
   # Invoice
   belongs_to :invoice
-  validates_presence_of :invoice_id
-  validates_presence_of :invoice, :message => 'Rechnung nicht gefunden'
+  validates :invoice_id , :presence => true
+  validates :invoice , :presence => true, :message => 'Rechnung nicht gefunden'
 
   def validate_on_create
     # Check if an open returned_invoice record with same invoice exists
