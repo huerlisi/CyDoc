@@ -1,117 +1,268 @@
-ActionController::Routing::Routes.draw do |map|
-  # Root
-  map.root :controller => "welcome"
+CyDoc::Application.routes.draw do
+  match '/' => 'welcome#index'
+  match 'locale' => '#index', :as => :filter
+  match '/logout' => 'authentication_sessions#destroy', :as => :logout
+  match '/login' => 'authentication_sessions#new', :as => :login
+  match '/register' => 'users#create', :as => :register
+  match '/signup' => 'users#new', :as => :signup
+  resources :users
+  resource :authentication_session
+  resources :vcards do
 
-  # I18n
-  map.filter 'locale'
 
-  # Authentication
-  map.logout '/logout', :controller => 'authentication_sessions', :action => 'destroy'
-  map.login '/login', :controller => 'authentication_sessions', :action => 'new'
-  map.register '/register', :controller => 'users', :action => 'create'
-  map.signup '/signup', :controller => 'users', :action => 'new'
-  map.resources :users
-  map.resource :authentication_session
-
-  # People
-  map.resources :vcards do |vcard|
-    vcard.resources :phone_numbers
-  end
-  map.resources :phone_numbers
-
-  # Billing
-  map.resources :invoices, :collection => {:print_all => :post}, :member => {:print => :post, :print_reminder_letter => :post, :insurance_recipe => :get, :patient_letter => :get, :reminder_letter => :get, :reactivate => :post} do |invoice|
-    invoice.resources :bookings
-  end
-  map.resources :invoice_batch_jobs, :member => {:reprint => :post}
-  map.resources :reminder_batch_jobs, :member => {:reprint => :post}
-  
-  map.resources :insurances
-
-  map.resources :doctors do |doctor|
-    doctor.resources :phone_numbers
+      resources :phone_numbers
   end
 
-  map.covercard_search '/patients/covercard_search/:code', :controller => :patients, :action => :covercard_search
-  map.covercard_update '/patients/:id/covercard_update/:covercard_code', :controller => :patients, :action => :covercard_update
+  resources :phone_numbers
+  resources :invoices do
+    collection do
+  post :print_all
+  end
+    member do
+  post :print_reminder_letter
+  get :insurance_recipe
+  get :patient_letter
+  get :reminder_letter
+  post :print
+  post :reactivate
+  end
+      resources :bookings
+  end
 
-  map.resources :patients, :member => {:show_tab => :get, 
-                                       :localities_for_postal_code => :post, 
-                                       :postal_codes_for_locality => :post, 
-                                       :print_label => :post, 
-                                       :label => :get, 
-                                       :print_full_label => :post, 
-                                       :full_label => :get, 
-                                       :covercard_update => :post} do |patient|
-    patient.resources :phone_numbers
-    patient.resources :tariff_items, :member => {:assign => :post}
-    patient.resources :invoices
+  resources :invoice_batch_jobs do
 
-    patient.resources :insurance_policies
-    
-    patient.resources :recalls, :member => {:obey => :post}
-    patient.resources :appointments, :member => {:obey => :post, :accept => :post}
-    patient.resources :sessions do |session|
-      session.resources :tariff_items
-      session.resources :service_records, :collection => {:select => :get}
+    member do
+  post :reprint
+  end
+
+  end
+
+  resources :reminder_batch_jobs do
+
+    member do
+  post :reprint
+  end
+
+  end
+
+  resources :insurances
+  resources :doctors do
+
+
+      resources :phone_numbers
+  end
+
+  match '/patients/covercard_search/:code' => 'patients#covercard_search', :as => :covercard_search
+  match '/patients/:id/covercard_update/:covercard_code' => 'patients#covercard_update', :as => :covercard_update
+  resources :patients do
+
+    member do
+  get :show_tab
+  post :localities_for_postal_code
+  post :postal_codes_for_locality
+  get :label
+  post :print_label
+  post :print_full_label
+  post :covercard_update
+  get :full_label
+  end
+      resources :phone_numbers
+    resources :tariff_items do
+
+        member do
+    post :assign
     end
-    patient.resources :treatments do |treatment|
-      treatment.resources :invoices
-      treatment.resources :diagnoses
-      treatment.resources :medical_cases, :member => {:assign => :post}
-      treatment.resources :sessions do |session|
-        session.resources :tariff_items, :collection => {:search => :get}, :member => {:assign => :post}
+
+    end
+
+    resources :invoices
+    resources :insurance_policies
+    resources :recalls do
+
+        member do
+    post :obey
+    end
+
+    end
+
+    resources :appointments do
+
+        member do
+    post :obey
+    post :accept
+    end
+
+    end
+
+    resources :sessions do
+
+
+          resources :tariff_items
+      resources :service_records do
+            collection do
+      get :select
+      end
+
+
+      end
+    end
+
+    resources :treatments do
+
+
+          resources :invoices
+      resources :diagnoses
+      resources :medical_cases do
+
+            member do
+      post :assign
+      end
+
+      end
+
+      resources :sessions do
+
+
+              resources :tariff_items do
+                collection do
+        get :search
+        end
+                member do
+        post :assign
+        end
+
+        end
       end
     end
   end
 
-  # Recalls
-  map.resources :recalls, :member => {:obey => :post, :prepare => :post, :send_notice => :put}
+  resources :recalls do
 
-  # Treatments
-  map.resources :medical_cases
-  map.resources :diagnosis_cases
-  map.resources :diagnoses
-  map.resources :treatments, :collection => {:create_all => :get}
-  map.resources :sessions do |session|
-    session.resources :tariff_items
+    member do
+  post :obey
+  put :send_notice
+  post :prepare
   end
 
-  # Tariff
-  map.resources :service_items
-
-  map.resources :tariff_items, :collection => {:search => :get}, :member => {:duplicate => :post} do |tariff_item|
-    tariff_item.resources :service_items, :collection => {:select => :get}
   end
 
-  map.resources :drug_products, :member => {:create_tariff_item => :put} do |drug_product|
-    drug_product.resources :drug_articles, :shallow => true
+  resources :medical_cases
+  resources :diagnosis_cases
+  resources :diagnoses
+  resources :treatments do
+    collection do
+  get :create_all
   end
 
-  # Accounting
-  map.resources :accounts, :collection => {:set_value_date_filter => :get, :statistics => :get}, :member => {:print => :post} do |account|
-    account.resources :bookings
+
   end
-  map.resources :bookings, :collection => {:list_csv => :get}
 
-  # Billing
-  map.resources :invoices, :collection => {:print_all => :post, :print_reminders_for_all => :post}, :member => {:print => :post, :print_reminder_letter => :post, :insurance_recipe => :get, :patient_letter => :get, :reminder => :get, :reactivate => :post} do |invoice|
-    invoice.resources :bookings
+  resources :sessions do
+
+
+      resources :tariff_items
   end
-  map.resources :invoice_batch_jobs, :member => {:reprint => :post}
 
-  map.resources :returned_invoices,
-    :collection => {:print_request_document => :post, :request_document => :get},
-    :member => {:reactivate => :post, :write_off => :post, :queue_request => :post}
+  resources :service_items
+  resources :tariff_items do
+    collection do
+  get :search
+  end
+    member do
+  post :duplicate
+  end
+      resources :service_items do
+        collection do
+    get :select
+    end
 
-  map.resources :esr_files
-  map.resources :esr_records,
-    :member => {:write_off => :post, :book_extra_earning => :post, :book_payback => :post, :resolve => :post}
 
-  # Attachments
-  map.resources :attachments, :member => {:download => :get}
+    end
+  end
 
-  # Install the default routes as the lowest priority.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  resources :drug_products do
+
+    member do
+  put :create_tariff_item
+  end
+      resources :drug_articles
+  end
+
+  resources :accounts do
+    collection do
+  get :set_value_date_filter
+  get :statistics
+  end
+    member do
+  post :print
+  end
+      resources :bookings
+  end
+
+  resources :bookings do
+    collection do
+  get :list_csv
+  end
+
+
+  end
+
+  resources :invoices do
+    collection do
+  post :print_reminders_for_all
+  post :print_all
+  end
+    member do
+  post :print_reminder_letter
+  get :reminder
+  get :insurance_recipe
+  get :patient_letter
+  post :print
+  post :reactivate
+  end
+      resources :bookings
+  end
+
+  resources :invoice_batch_jobs do
+
+    member do
+  post :reprint
+  end
+
+  end
+
+  resources :returned_invoices do
+    collection do
+  post :print_request_document
+  get :request_document
+  end
+    member do
+  post :queue_request
+  post :reactivate
+  post :write_off
+  end
+
+  end
+
+  resources :esr_files
+  resources :esr_records do
+
+    member do
+  post :book_extra_earning
+  post :resolve
+  post :book_payback
+  post :write_off
+  end
+
+  end
+
+  resources :attachments do
+
+    member do
+  get :download
+  end
+
+  end
+
+  match '/:controller(/:action(/:id))'
 end
