@@ -1,7 +1,7 @@
 <h3><%= t('cydoc.title.billing_data') %></h3>
 <div class="box" id="patient-billing">
-<% fields_for @patient do |patient| %>
-  <% patient.fields_for :billing_vcard do |vcard| %>
+<%= fields_for @patient do |patient| %>
+  <%= patient.fields_for :billing_vcard do |vcard| %>
 
     <table style="width: 100%">
       <tr>

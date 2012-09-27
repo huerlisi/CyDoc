@@ -1,8 +1,8 @@
 <div id="tariff_item_form">
-  <% semantic_remote_form_for @tariff_item.becomes(TariffItem) do |form| %>
+  <%= semantic_remote_form_for @tariff_item.becomes(TariffItem) do |form| %>
     <%= form.semantic_errors %>
 
-    <% form.inputs do %>
+    <%= form.inputs do %>
       <%= form.input :type_as_string, :as => :select, :required => true, :collection => type_as_string_collection %>
       <%= form.input :code, :input_html => {:size => 8} %>
       <%= form.input :remark, :input_html => {:rows => 3, :cols => 50} %>
@@ -10,16 +10,16 @@
     <% end %>
 
     <% unless @tariff_item.is_a? TariffItemGroup %>
-      <% form.inputs do %>
+      <%= form.inputs do %>
         <%= form.input :amount_mt, :input_html => {:size => 8, :style => 'text-align: right'} %>
         <%= form.input :amount_tt, :input_html => {:size => 8, :style => 'text-align: right'} %>
       <% end %>
     <% end %>
 
-    <% form.buttons do %>
+    <%= form.buttons do %>
       <%= form.commit_button :button_html => {:class => "icon icon-save"} %>
       <%= button_to_remote "Abbrechen", {:url => @tariff_item.becomes(TariffItem), :method => :get}, :class => "icon icon-cancel" %>
     <% end %>
   <% end %>
 </div>
- 
+

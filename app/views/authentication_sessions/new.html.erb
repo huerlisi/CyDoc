@@ -1,7 +1,7 @@
 <%= render 'users/demo' if Rails.env.demo? %>
 
 <div id="login-form">
-  <% form_tag authentication_session_path do -%>
+  <%= form_tag authentication_session_path do -%>
     <table>
       <tr>
           <td align="right"><label for="username"><%= t_attr(:login, User) %></label>:</td>

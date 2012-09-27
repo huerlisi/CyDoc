@@ -1,4 +1,4 @@
-<% remote_form_for :insurance_policy, @insurance_policy, :url => patient_insurance_policies_url(@patient) do |insurance_policy| %>
+<%= remote_form_for :insurance_policy, @insurance_policy, :url => patient_insurance_policies_url(@patient) do |insurance_policy| %>
   <div class="box" id="insurance_policy_form">
     <%= error_messages_for :insurance_policy %>
 

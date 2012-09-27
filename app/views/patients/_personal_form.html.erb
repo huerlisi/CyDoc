@@ -1,8 +1,8 @@
 <%= javascript_tag "$('patient_vcard_attributes_given_name').focus()" %>
 <h3><%= t('cydoc.title.personal_data') %></h3>
 <div class="box" id="patient-personal">
-<% fields_for @patient do |patient| %>
-  <% patient.fields_for :vcard do |vcard| %>
+<%= fields_for @patient do |patient| %>
+  <%= patient.fields_for :vcard do |vcard| %>
 
     <table style="width: 100%">
       <tr>

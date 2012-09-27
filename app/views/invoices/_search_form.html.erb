@@ -1,5 +1,5 @@
 <div class="box">
-  <% remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => invoices_path, :html => {:method => :get}, :method => :get do |f| %>
+  <%= remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => invoices_path, :html => {:method => :get}, :method => :get do |f| %>
     <%= f.label 'query', 'Suche' %>
     <%= f.text_field :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
     <%= image_submit_tag 'find.png', :title => 'Suchen' %>

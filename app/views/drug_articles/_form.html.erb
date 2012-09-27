@@ -1,8 +1,8 @@
 <div id="drug_form">
-  <% semantic_remote_form_for [@drug_product, @drug_article] do |form| %>
+  <%= semantic_remote_form_for [@drug_product, @drug_article] do |form| %>
     <%= form.semantic_errors %>
 
-    <% form.inputs do %>
+    <%= form.inputs do %>
       <%= form.input :code, :input_html => {:size => 10} %>
 
       <%= form.input :description, :as => :string, :label => t_attr(:name, DrugArticle) %>
@@ -16,7 +16,7 @@
       <%= form.input :price, :required => true, :input_html => {:size => 10} %>
     <% end %>
 
-    <% form.buttons do %>
+    <%= form.buttons do %>
       <%= form.commit_button :button_html => {:class => "icon icon-save"} %>
       <%= button_to_remote "Abbrechen", {:url => @drug_product, :method => :get}, :class => "icon icon-cancel" %>
     <% end %>

@@ -1,6 +1,6 @@
 <h2><%= t('cydoc.title.new_patient') %></h2>
 <div class="box">
-  <% form_for setup_patient(@patient) do |patient| %>
+  <%= form_for setup_patient(@patient) do |patient| %>
     <div class="contextual">
       <%= link_to_function t('cydoc.actions.save'), "this.up('form'.submit()", :class => "icon icon-save" %>
       <%= link_to t('cydoc.actions.abort'), patients_path, :class => "icon icon-cancel" %>

@@ -1,6 +1,6 @@
 <tr id="booking_<%= @booking.id %>">
   <td colspan="6">
-  <% remote_form_for :booking, @booking, :url => account_booking_url(@account), :method => :put do |booking| %>
+  <%= remote_form_for :booking, @booking, :url => account_booking_url(@account), :method => :put do |booking| %>
     <%= booking.date_field :value_date, :size => 12 %>
     Text: <%= booking.text_field :title, :size => 40 %>
     Rechnungsnr.: <%= booking.text_field :reference_id, :size => 6 %>

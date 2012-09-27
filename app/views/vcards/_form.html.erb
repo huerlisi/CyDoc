@@ -4,7 +4,7 @@ Event.observe(window, 'load', function() {$('vcard_honorific_prefix').focus()}, 
 //]]>
 </script>
 
-<% semantic_fields_for vcard_name, vcard do |address| %>
+<%= semantic_fields_for vcard_name, vcard do |address| %>
   <% address.inputs do %>
     <%= address.input :honorific_prefix, :collection => HonorificPrefix.all.collect { |prefix| prefix.name }, :include_blank => true %>
     <%= address.input :family_name, :size => 23 %>

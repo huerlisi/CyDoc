@@ -1,10 +1,10 @@
 <tr id="recall_form">
 <td colspan="5">
 <%= javascript_tag "$('recall_due_date').focus()" %>
-  <% semantic_remote_form_for [@patient, @recall] do |form| %>
+  <%= semantic_remote_form_for [@patient, @recall] do |form| %>
     <%= form.semantic_errors %>
 
-    <% form.inputs t_model do %>
+    <%= form.inputs t_model do %>
       <%= form.input :state, :as => :hidden %>
       <%= form.input :doctor_id, :as => :hidden %>
       <%= form.input :due_date, :as => :date_field, :input_html => {:size => 12, :autocomplete => 'off', 'date-picker' => true} %>
@@ -12,8 +12,8 @@
     <% end %>
 
     <% if @recall.appointment %>
-      <% form.inputs t_attr(:appointment) do %>
-        <% form.semantic_fields_for :appointment do |appointment| %>
+      <%= form.inputs t_attr(:appointment) do %>
+        <%= form.semantic_fields_for :appointment do |appointment| %>
           <%= appointment.input :patient_id, :as => :hidden, :value => @recall.patient.id %>
           <%= appointment.input :date, :as => :date_field, :input_html => {:size => 12, :autocomplete => 'off'} %>
           <%= appointment.input :from, :as => :time_field, :input_html => {:size => 12, :autocomplete => 'off'} %>
@@ -22,7 +22,7 @@
       <% end %>
     <% end %>
 
-    <% form.buttons do %>
+    <%= form.buttons do %>
       <% if @recall.state == 'prepared' %>
         <%= form.submit t('cydoc.actions.show_letter'), :name => 'send_notice', :class => "icon icon-save" %>
       <% else %>
