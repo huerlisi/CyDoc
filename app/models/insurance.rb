@@ -43,7 +43,7 @@ class Insurance < ActiveRecord::Base
 
   def group
     return nil if group_ean_party.blank?
-    Insurance.find(:first, :conditions => {:ean_party => group_ean_party})
+    Insurance.first(:conditions => {:ean_party => group_ean_party})
   end
 
   # Search

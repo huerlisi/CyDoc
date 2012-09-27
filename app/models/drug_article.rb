@@ -86,7 +86,7 @@ class DrugArticle < ActiveRecord::Base
   end
 
   def build_or_update_tariff_item
-    tariff_item = DrugTariffItem.find(:first, :conditions => {:tariff_type => "400", :code => code})
+    tariff_item = DrugTariffItem.first(:conditions => {:tariff_type => "400", :code => code})
 
     return build_tariff_item unless tariff_item
 

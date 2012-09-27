@@ -163,7 +163,7 @@ class EsrRecord < ActiveRecord::Base
 
     if Invoice.exists?(invoice_id)
       self.invoice_id = invoice_id
-    elsif Invoice.column_names.include?(:imported_esr_reference) && imported_invoice = Invoice.find(:first, :conditions => ["imported_esr_reference LIKE concat(?, '%')", reference])
+    elsif Invoice.column_names.include?(:imported_esr_reference) && imported_invoice = Invoice.first(:conditions => ["imported_esr_reference LIKE concat(?, '%')", reference])
       self.invoice = imported_invoice
     end
   end

@@ -28,7 +28,7 @@ class Tarmed::Base < ActiveRecord::Base
 
       int_class.find(ext_id)
     else
-      int_class.find(:first, :conditions => {int_id => ext_id})
+      int_class.first(:conditions => {int_id => ext_id})
     end
   end
 
