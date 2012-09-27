@@ -15,6 +15,6 @@
   <td style="border: none 0px; width: 62px">
     <%= link_to image_tag('16x16/show.png'), booking_path(@booking) %>
     <%= link_to image_tag('edit.png'), edit_booking_path(@booking) %>
-    <%= link_to_remote image_tag('delete.png'), {:url => booking_path(item), :method => :delete, :confirm => "Buchung #{item.to_s} löschen?"} %>
+    <%= link_to image_tag('delete.png'), {:url => booking_path(item), :method => :delete, :confirm => "Buchung #{item.to_s} löschen?"}, :remote => true %>
   </td>
 </tr>

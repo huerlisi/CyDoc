@@ -1,5 +1,5 @@
 <div class="contextual">
-  <%= link_to_remote t('cydoc.actions.new_recall'), {:url => new_patient_recall_url(@patient), :method => :get}, :class => "icon icon-add" unless @patient.new_record?%>
+  <%= link_to t('cydoc.actions.new_recall'), {:url => new_patient_recall_url(@patient), :method => :get}, :class => "icon icon-add" unless @patient.new_record?, :remote => true %>
 </div>
 <h3><%= t('cydoc.title.recall') %></h3>
 <div class="box">

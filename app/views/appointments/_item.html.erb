@@ -5,10 +5,10 @@
   <td><%=h item.remarks %></td>
   <td>
     <% for state in item.aasm_events_for_current_state -%>
-    <%= 
+    <%=
     case state
-      when :accept: link_to_remote image_tag('true.png'), :url => accept_patient_appointment_path(item.patient, item), :title => "Termin akzeptiert"
-      when :cancel: link_to_remote image_tag('delete.png'), :url => patient_appointment_path(item.patient, item), :title => "Termin löschen", :method => :delete
+      when :accept: link_to image_tag('true.png'), :url => accept_patient_appointment_path(item.patient, item), :title => "Termin akzeptiert", :remote => true
+      when :cancel: link_to image_tag('delete.png'), :url => patient_appointment_path(item.patient, item), :title => "Termin löschen", :method => :delete, :remote => true
     end -%>
     <% end -%>
   </td>

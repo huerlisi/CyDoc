@@ -3,7 +3,7 @@
     <% @vcard = patient.vcard %>
     <tr>
       <td>
-        <%= link_to_remote image_tag("select.png"), :update => 'edit_form', :url => { :controller => 'patients', :action => 'edit_inline', :id => @patient, :case_id => @case } %>
+        <%= link_to image_tag("select.png"), :update => 'edit_form', :url => { :controller => 'patients', :action => 'edit_inline', :id => @patient, :case_id => @case }, :remote => true %>
       </td>
       <td><%= in_place_editor_field :vcard, :family_name %></td>
       <td><%= in_place_editor_field :vcard, :given_name %></td>

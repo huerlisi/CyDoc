@@ -1,7 +1,7 @@
 <div class="contextual">
   <%= link_to t('cydoc.actions.new_booking'), new_booking_path, :class => "icon icon-add" %>
   <%= link_to t('cydoc.actions.accounts'), accounts_path, :class => "icon icon-index" %>
-  <%= link_to_remote t('cydoc.actions.print_account'), {:url => print_account_path(@account)}, :class => "icon icon-print" %>
+  <%= link_to t('cydoc.actions.print_account'), {:url => print_account_path(@account)}, :class => "icon icon-print", :remote => true %>
 </div>
 <h2><%= t_model(Account) %> - <%= @account.title %></h2>
 

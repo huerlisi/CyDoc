@@ -4,7 +4,7 @@
 <%= render :partial => 'recalls/patient_list' %>
 
 <div class="contextual">
-  <%= link_to_remote t('cydoc.actions.new_contact'), {:url => new_vcard_phone_number_url(@patient.vcard), :method => :get}, :class => "icon icon-add" unless @patient.new_record?%>
+  <%= link_to t('cydoc.actions.new_contact'), {:url => new_vcard_phone_number_url(@patient.vcard), :method => :get}, :class => "icon icon-add" unless @patient.new_record?, :remote => true %>
 </div>
 <%= render 'phone_numbers/list', :phone_numbers => @patient.vcard.contacts %>
 

@@ -1,7 +1,7 @@
 <%= remote_form_for setup_patient(@patient) do |patient| %>
   <div class="contextual">
-    <%= link_to_remote "Speichern", {:url => patient_path(@patient), :with => "this.up('form').serialize()"}, :class => "icon icon-save" %>
-    <%= link_to_remote "Abbrechen", {:url => patient_path(@patient), :method => :get}, :class => "icon icon-cancel" %>
+    <%= link_to "Speichern", {:url => patient_path(@patient), :with => "this.up('form').serialize()"}, :class => "icon icon-save", :remote => true %>
+    <%= link_to "Abbrechen", {:url => patient_path(@patient), :method => :get}, :class => "icon icon-cancel", :remote => true %>
   </div>
 
   <%= render :partial => 'form', :locals => {:patient => patient} %>

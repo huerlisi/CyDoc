@@ -1,7 +1,7 @@
 <div id="reminder_flash" class="flash notice" style="display: none"></div>
 
 <div class="contextual">
-  <%= link_to_remote "Alle Mahnungen drucken", {:url => new_reminder_batch_job_path, :method => :get}, :class => "icon icon-print" %>
+  <%= link_to "Alle Mahnungen drucken", {:url => new_reminder_batch_job_path, :method => :get}, :class => "icon icon-print", :remote => true %>
 </div>
 <div id="overdue_invoice_list">
   <h2>Überfällige Rechnungen</h2>

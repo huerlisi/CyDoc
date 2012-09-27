@@ -1,6 +1,6 @@
 <div class="contextual">
-  <%= link_to_remote "Erfassen", {:url => new_drug_product_path, :method => :get}, :class => "icon icon-add" %>
-  <%= link_to_remote "Alle anzeigen", {:url => drug_products_path(:all => true), :method => :get}, :class => "icon icon-index" %>
+  <%= link_to "Erfassen", {:url => new_drug_product_path, :method => :get}, :class => "icon icon-add", :remote => true %>
+  <%= link_to "Alle anzeigen", {:url => drug_products_path(:all => true), :method => :get}, :class => "icon icon-index", :remote => true %>
 </div>
 <%=
 tab_container 'catalogs', "Medikamente", [
