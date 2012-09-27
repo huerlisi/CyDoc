@@ -36,20 +36,20 @@ class Recall < ActiveRecord::Base
   end
 
   # Scopes
-  named_scope :open, :conditions => {:state => ['scheduled', 'prepared', 'sent']}
-  named_scope :queued, :conditions => {:state => ['scheduled', 'prepared']}
-  named_scope :by_period, lambda {|from, to| { :conditions => { :due_date => from..to } } }
-  
+  scope :open, :conditions => {:state => ['scheduled', 'prepared', 'sent']}
+  scope :queued, :conditions => {:state => ['scheduled', 'prepared']}
+  scope :by_period, lambda {|from, to| { :conditions => { :due_date => from..to } } }
+
   private
   def assign_appointment(appointment)
     appointment.patient = self.patient
     appointment.state = 'proposed'
   end
-  
+
   def sending
     self.sent_at = DateTime.now
   end
-  
+
   public
   def self.filter_months(limit = nil)
     months = Recall.open.find(:all, :select => "date_format(due_date, '%Y-%m-01') AS month, count(*) AS count", :group => "date_format(due_date, '%Y-%m-01')", :order => "due_date", :limit => limit)

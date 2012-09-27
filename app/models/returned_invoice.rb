@@ -29,8 +29,8 @@ class ReturnedInvoice < ActiveRecord::Base
     transitions :from => [:ready, :request_pending], :to => :resolved
   end
 
-  named_scope :by_state, lambda {|value| {:conditions => {:state => value} } }
-  named_scope :active, :conditions => {:state => ["ready", "request_pending"]}
+  scope :by_state, lambda {|value| {:conditions => {:state => value} } }
+  scope :active, :conditions => {:state => ["ready", "request_pending"]}
 
   # Invoice
   belongs_to :invoice
@@ -53,7 +53,7 @@ class ReturnedInvoice < ActiveRecord::Base
 
   # Doctor
   belongs_to :doctor
-  named_scope :by_doctor_id, lambda {|doctor_id| {:conditions => {:doctor_id => doctor_id}}}
+  scope :by_doctor_id, lambda {|doctor_id| {:conditions => {:doctor_id => doctor_id}}}
   before_save :set_doctor
 
 private

@@ -14,8 +14,8 @@ class Insurance < ActiveRecord::Base
 
   # Role
   validates_presence_of :role
-  named_scope :health_care, :conditions => {:role => 'H'}
-  named_scope :accident, :conditions => {:role => 'A'}
+  scope :health_care, :conditions => {:role => 'H'}
+  scope :accident, :conditions => {:role => 'A'}
 
   def role(format = :db)
     # TODO: should probably use Law model.

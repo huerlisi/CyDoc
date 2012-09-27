@@ -1,6 +1,6 @@
 class InsurancePolicy < ActiveRecord::Base
   # Scopes
-  named_scope :by_policy_type, lambda {|policy_type|
+  scope :by_policy_type, lambda {|policy_type|
     {:conditions => {:policy_type => policy_type}}
   }
 

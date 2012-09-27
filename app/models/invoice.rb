@@ -94,27 +94,27 @@ class Invoice < ActiveRecord::Base
   end
 
   # Dunning
-  named_scope :dunning_stopped, :include => {:treatment => :patient}, :conditions => {"patients.dunning_stop" => true}
-  named_scope :dunning_active, :include => {:treatment => :patient}, :conditions => {"patients.dunning_stop" => false}
+  scope :dunning_stopped, :include => {:treatment => :patient}, :conditions => {"patients.dunning_stop" => true}
+  scope :dunning_active, :include => {:treatment => :patient}, :conditions => {"patients.dunning_stop" => false}
 
   # State
   # =====
-  named_scope :prepared, :conditions => "invoices.state = 'prepared'"
-  named_scope :canceled, :conditions => "invoices.state = 'canceled'"
-  named_scope :reactivated, :conditions => "invoices.state = 'reactivated'"
-  named_scope :in_encashment, :conditions => ["invoices.state = 'encashment'"]
+  scope :prepared, :conditions => "invoices.state = 'prepared'"
+  scope :canceled, :conditions => "invoices.state = 'canceled'"
+  scope :reactivated, :conditions => "invoices.state = 'reactivated'"
+  scope :in_encashment, :conditions => ["invoices.state = 'encashment'"]
 
-  named_scope :active, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled', 'written_off'))"
+  scope :active, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled', 'written_off'))"
   def active
     !(state == 'canceled' or state == 'reactivated' or state == 'written_off')
   end
-  
-  named_scope :open, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled', 'written_off', 'paid'))"
+
+  scope :open, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled', 'written_off', 'paid'))"
   def open
     !(state == 'canceled' or state == 'reactivated' or state == 'written_off' or state == 'paid')
   end
 
-  named_scope :overdue, lambda {|grace_period|
+  scope :overdue, lambda {|grace_period|
     {
       :conditions => [
         "(invoices.state IN ('booked', 'printed') AND due_date < :grace_date) OR (invoices.state = 'reminded' AND reminder_due_date < :today) OR (invoices.state = '2xreminded' AND second_reminder_due_date < :today) OR (invoices.state = '3xreminded' AND third_reminder_due_date < :today)",
@@ -132,7 +132,7 @@ class Invoice < ActiveRecord::Base
     return false
   end
 
-  named_scope :reminded, :conditions => "invoices.state IN ('reminded', '2xreminded', '3xreminded', 'encashment')"
+  scope :reminded, :conditions => "invoices.state IN ('reminded', '2xreminded', '3xreminded', 'encashment')"
   def reminded?
     reminder_level > 0
   end

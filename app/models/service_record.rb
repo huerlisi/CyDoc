@@ -3,24 +3,24 @@ class ServiceRecord < ActiveRecord::Base
   belongs_to :biller, :class_name => 'Doctor'
   belongs_to :responsible, :class_name => 'Doctor'
 
-  named_scope :by_tariff_type, lambda {|tariff_type|
+  scope :by_tariff_type, lambda {|tariff_type|
     if tariff_type
       {:conditions => {:tariff_type => tariff_type}}
     end
   }
-  named_scope :obligate, :conditions => {:obligation => true}
+  scope :obligate, :conditions => {:obligation => true}
 
   belongs_to :vat_class
-  named_scope :full_vat, :conditions => {:vat_class_id => VatClass.full}
-  named_scope :reduced_vat, :conditions => {:vat_class_id => VatClass.reduced}
-  named_scope :excluded_vat, :conditions => {:vat_class_id => VatClass.excluded}
-  
+  scope :full_vat, :conditions => {:vat_class_id => VatClass.full}
+  scope :reduced_vat, :conditions => {:vat_class_id => VatClass.reduced}
+  scope :excluded_vat, :conditions => {:vat_class_id => VatClass.excluded}
+
   belongs_to :patient
 
   has_and_belongs_to_many :invoices
   has_and_belongs_to_many :sessions, :after_add => :touch_sessions, :after_remove => :touch_sessions
   after_save(:touch_sessions)
-  
+
   def touch_sessions(session = nil)
     if session
       session.touch

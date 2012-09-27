@@ -14,7 +14,7 @@ class Patient < ActiveRecord::Base
 
   # Vcards
   # FIX: This buggily needs this :select hack
-  named_scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcard, :conditions => Vcard.by_name_conditions(name)}}
+  scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcard, :conditions => Vcard.by_name_conditions(name)}}
   has_vcards
   # Hack to use 'private' address by default
   has_one :vcard, :as => 'object', :conditions => {:vcard_type => 'private'}
@@ -36,21 +36,21 @@ class Patient < ActiveRecord::Base
 
   default_scope :include => {:vcard => :addresses}
 
-  named_scope :by_date, lambda {|date| {:conditions => ['birth_date LIKE ?', Date.parse_europe(date).strftime('%%%y-%m-%d')] }}
+  scope :by_date, lambda {|date| {:conditions => ['birth_date LIKE ?', Date.parse_europe(date).strftime('%%%y-%m-%d')] }}
 
   # Invoices
-  named_scope :dunning_stopped, :conditions => {:dunning_stop => true}
+  scope :dunning_stopped, :conditions => {:dunning_stop => true}
 
   has_many :tiers
   has_many :invoices, :through => :tiers, :order => 'created_at DESC'
-  
+
   has_many :treatments, :order => 'date_begin DESC'
-      
+
   # Helpers
   def deletable?
     treatments.empty?
   end
-  
+
   public
   # Validation
   validates_presence_of :family_name, :given_name

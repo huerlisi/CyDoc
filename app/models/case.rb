@@ -47,21 +47,21 @@ class Case < ActiveRecord::Base
     if treatment.save
       self.session = session
       self.save
-      
+
       return nil
     else
       logger.info("[Error] Failed to create treatment for case #{self.praxistar_eingangsnr}:")
       logger.info(treatment.errors.full_messages.join("\n"))
-      
+
       return self
     end
 
     treatment
   end
 
-  named_scope :no_treatment, :conditions => ["session_id IS NULL"]
-  named_scope :finished, :conditions => ["screened_at IS NOT NULL AND (needs_review = ? OR review_at IS NOT NULL)", false]
-  named_scope :finished_at, proc {|date|
+  scope :no_treatment, :conditions => ["session_id IS NULL"]
+  scope :finished, :conditions => ["screened_at IS NOT NULL AND (needs_review = ? OR review_at IS NOT NULL)", false]
+  scope :finished_at, proc {|date|
     {
       :conditions => ["screened_at < :date AND (needs_review = :false OR review_at < :date)", {:date => date, :false => false}]
     }
