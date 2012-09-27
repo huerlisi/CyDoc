@@ -3,15 +3,15 @@ require 'fastercsv'
 module DiagnosisCodes
   class Base
     include Importer
-    
+
     def self.path(options = {})
       return options[:input] if options[:input]
 
       name = "#{self.name.demodulize}.csv"
-      
-      case ENV['RAILS_ENV']
-        when 'production': File.join(RAILS_ROOT, 'data', 'diagnosis_codes', name)
-        when 'development', 'test': File.join(RAILS_ROOT, 'test', 'fixtures', 'diagnosis_codes', name)
+
+      case env['Rails.env']
+        when 'production': File.join(Rails.root, 'data', 'diagnosis_codes', name)
+        when 'development', 'test': File.join(Rails.root, 'test', 'fixtures', 'diagnosis_codes', name)
       end
     end
 

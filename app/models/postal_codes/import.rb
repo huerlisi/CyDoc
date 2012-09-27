@@ -13,7 +13,7 @@ module PostalCodes
         :canton        => import_record[6],
         :imported_id   => import_record[0]
       }
-      
+
       self.save
       return self
     end
@@ -21,10 +21,10 @@ module PostalCodes
     def self.included(base)
       base.extend(ClassMethods)
     end
-    
+
     module ClassMethods
       def import_all
-        records = FasterCSV.parse(File.new(File.join(RAILS_ROOT, 'data', 'postal_code.csv')), {:col_sep => "\t", :headers => false})
+        records = FasterCSV.parse(File.new(File.join(Rails.root, 'data', 'postal_code.csv')), {:col_sep => "\t", :headers => false})
         PostalCode.transaction do
           for record in records
             puts PostalCode.new.import(record)

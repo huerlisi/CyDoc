@@ -5,11 +5,11 @@ module Google
     def self.import(r)
       p = Patient.new
       p.birth_date = Date.today
-      
+
       p.given_name = r['First Name']
       p.family_name = r['Last Name']
       p.remarks = r['Notes'] || ''
-      
+
       p.phone_numbers << PhoneNumber.new(:number => r['Home Phone'], :phone_number_type => 'Festnetz (Privat)') if r['Home Phone'].present?
       p.phone_numbers << PhoneNumber.new(:number => r['Business Phone'], :phone_number_type => 'Festnetz (gesch.)') if r['Business Phone'].present?
       p.phone_numbers << PhoneNumber.new(:number => r['Mobile Phone'], :phone_number_type => 'Mobile') if r['Mobile Phone'].present?
@@ -31,10 +31,10 @@ module Google
       end
       p.save
     end
-    
+
     def self.import_all
-      records = FasterCSV.parse(File.new(File.join(RAILS_ROOT, 'data', 'google', 'contacts.csv')), {:headers => true})
-      
+      records = FasterCSV.parse(File.new(File.join(Rails.root, 'data', 'google', 'contacts.csv')), {:headers => true})
+
       for record in records
         import(record)
       end

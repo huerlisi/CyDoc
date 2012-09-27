@@ -12,13 +12,13 @@ module Analyseliste
     protected
     def self.path(options = {})
       return options[:input] if options[:input]
-      
+
       options[:version] ||= 'new'
       name = (options[:version] == 'new') ? 'analyseliste.csv' : 'analyseliste_old.csv'
 
-      case ENV['RAILS_ENV']
-        when 'production', 'demo': File.join(RAILS_ROOT, 'data', name)
-        when 'development', 'test': File.join(RAILS_ROOT, 'test', 'fixtures', 'analyseliste', name)
+      case env['Rails.env']
+        when 'production', 'demo': File.join(Rails.root, 'data', name)
+        when 'development', 'test': File.join(Rails.root, 'test', 'fixtures', 'analyseliste', name)
       end
     end
 

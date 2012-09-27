@@ -12,9 +12,9 @@ module ApplicationHelper
   # PDF
   def render_inline_stylesheet(name)
     stylesheet = "<style type='text/css'>\n"
-    stylesheet += controller.send(:render_to_string, :file => File.join(RAILS_ROOT, 'public', 'stylesheets', "#{name}.css"))
+    stylesheet += controller.send(:render_to_string, :file => File.join(Rails.root, 'public', 'stylesheets', "#{name}.css"))
     stylesheet += "\n</style>\n"
-    
+
     return stylesheet
   end
 
