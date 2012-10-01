@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121001115733) do
+ActiveRecord::Schema.define(:version => 20121001141203) do
+
+  create_table "account_types", :force => true do |t|
+    t.string   "name",       :limit => 100
+    t.string   "title",      :limit => 100
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "account_types", ["name"], :name => "index_account_types_on_name"
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -25,7 +34,16 @@ ActiveRecord::Schema.define(:version => 20121001115733) do
     t.string   "holder_type"
     t.string   "title"
     t.string   "code"
+    t.integer  "parent_id"
+    t.integer  "account_type_id"
+    t.string   "iban"
   end
+
+  add_index "accounts", ["account_type_id"], :name => "index_accounts_on_account_type_id"
+  add_index "accounts", ["bank_id"], :name => "index_accounts_on_bank_id"
+  add_index "accounts", ["code"], :name => "index_accounts_on_code"
+  add_index "accounts", ["holder_id", "holder_type"], :name => "index_accounts_on_holder_id_and_holder_type"
+  add_index "accounts", ["type"], :name => "index_accounts_on_type"
 
   create_table "addresses", :force => true do |t|
     t.string   "post_office_box",  :limit => 50
@@ -78,7 +96,11 @@ ActiveRecord::Schema.define(:version => 20121001115733) do
     t.integer  "vcard_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "swift"
+    t.string   "clearing"
   end
+
+  add_index "banks", ["vcard_id"], :name => "index_banks_on_vcard_id"
 
   create_table "bookings", :force => true do |t|
     t.string   "title",             :limit => 100
@@ -92,11 +114,19 @@ ActiveRecord::Schema.define(:version => 20121001115733) do
     t.integer  "imported_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "scan"
+    t.string   "debit_currency",                                                  :default => "CHF"
+    t.string   "credit_currency",                                                 :default => "CHF"
+    t.float    "exchange_rate",                                                   :default => 1.0
+    t.integer  "template_id"
+    t.string   "template_type"
   end
 
   add_index "bookings", ["credit_account_id"], :name => "index_bookings_on_credit_account_id"
   add_index "bookings", ["debit_account_id"], :name => "index_bookings_on_debit_account_id"
   add_index "bookings", ["reference_id", "reference_type"], :name => "index_bookings_on_reference_id_and_reference_type"
+  add_index "bookings", ["template_id", "template_type"], :name => "index_bookings_on_template_id_and_template_type"
+  add_index "bookings", ["value_date"], :name => "index_bookings_on_value_date"
 
   create_table "diagnoses", :force => true do |t|
     t.string   "type"
