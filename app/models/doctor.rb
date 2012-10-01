@@ -12,7 +12,7 @@ class Doctor < ActiveRecord::Base
   has_vcards
 
   # Accounts
-  has_accounts
+  has_many :accounts
   belongs_to :esr_account, :class_name => 'BankAccount'
 
   has_many :patients
