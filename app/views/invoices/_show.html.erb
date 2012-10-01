@@ -11,7 +11,7 @@
   <% else %>
     <%= link_to t('cydoc.actions.print_copy'), print_invoice_path(@invoice, :print_copy => true), :onclick => "showPrintingFlash('Rechnungskopie')", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-print" %>
   <% end %>
-  <% if @invoice.open %>
+  <% if @invoice.active %>
       <%= link_to t('cydoc.actions.cancel'), invoice_path(@invoice), 'data-method' => :delete, :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.cancel')}?", 'data-remote' => true, :class => "icon icon-delete" %>
       <%= link_to t('cydoc.actions.reactivate'), reactivate_invoice_path(@invoice), 'data-confirm' => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?", 'data-remote' => true, 'data-method' => :post, :class => "icon icon-reactivate" %>
   <% elsif @invoice.state == 'canceled' or @invoice.state == 'written_off' %>
