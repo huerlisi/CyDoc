@@ -4,7 +4,7 @@
   <% if @treatment.chargeable? %>
     <%= link_to t('cydoc.actions.new_invoice'), new_patient_treatment_invoice_path(@treatment.patient, @treatment), 'data-remote' => true, :class => "icon icon-add" %>
   <% end %>
-  <% if @treatment.open? -%>
+  <% if @treatment.active? -%>
     <%= link_to t('cydoc.actions.delete'), treatment_path(@treatment), 'data-method' => :delete, 'data-remote' => true, 'data-confirm' => t('cydoc.actions.delete_treatment', :treatment => @treatment.to_s), :class => "icon icon-delete" %>
   <% end -%>
 </div>
@@ -15,7 +15,7 @@
 
 <div id="treatment_medical_cases">
   <div class="contextual">
-  <% if @treatment.open? -%>
+  <% if @treatment.active? -%>
     <%= link_to t('cydoc.actions.new_medical_case'), new_patient_treatment_medical_case_path(@treatment.patient, @treatment), 'data-remote' => true, :class => "icon icon-add" %>
   <% end -%>
   </div>

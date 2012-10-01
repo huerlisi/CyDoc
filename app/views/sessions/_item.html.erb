@@ -1,4 +1,4 @@
-<% editable = item.open? and @invoice.nil? %>
+<% editable = item.active? and @invoice.nil? %>
 <% current = item == item.treatment.sessions.first %>
 
 <div id="session_<%= item.id %>">

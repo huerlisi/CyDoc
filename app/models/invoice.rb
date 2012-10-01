@@ -75,7 +75,7 @@ class Invoice < ActiveRecord::Base
     invoice = self.new(invoice_params)
 
     # Assign service records
-    sessions = treatment.sessions.open
+    sessions = treatment.sessions.active
     invoice.service_records = sessions.collect{|s| s.service_records}.flatten
 
     invoice.valid? && Invoice.transaction do
@@ -111,8 +111,8 @@ class Invoice < ActiveRecord::Base
     !(state == 'canceled' or state == 'reactivated' or state == 'written_off')
   end
 
-  scope :open, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled', 'written_off', 'paid'))"
-  def open
+  scope :active, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled', 'written_off', 'paid'))"
+  def active
     !(state == 'canceled' or state == 'reactivated' or state == 'written_off' or state == 'paid')
   end
 

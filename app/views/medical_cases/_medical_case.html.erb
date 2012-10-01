@@ -1,7 +1,7 @@
 <tr id="medical_case_<%= item.id %>">
   <td><%= item.diagnosis.type %></td>
   <td><%= item.to_s %></td>
-  <% if @treatment.open? %>
-    <td><%= link_to image_tag('delete.png'), patient_treatment_medical_case_path(@treatment.patient, @treatment, item), 'data-remote' => true, 'data-method' => :delete %></td>
+  <% if @treatment.active? %>
+    <td><%= link_to image_tag('delete.png'), patient_treatment_medical_case_path(@treatment.patient, @treatment, item), :remote => true, :method => :delete %></td>
   <% end %>
 </tr>

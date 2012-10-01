@@ -31,15 +31,15 @@ class Treatment < ActiveRecord::Base
   end
 
   # State
-  scope :open, :conditions => "treatments.state = 'open'", :order => 'date_begin'
+  scope :active, :conditions => "treatments.state = 'open'", :order => 'date_begin'
   scope :charged, :conditions => "treatments.state = 'charged'", :order => 'date_begin'
 
-  def open?
+  def active?
     state == 'open'
   end
 
   def chargeable?
-    sessions.open.present?
+    sessions.active.present?
     # Checking for valid_for_invoice? would be a nice thing, too. But links depending on this would need AJAX updates.
   end
 

@@ -13,16 +13,16 @@ class Session < ActiveRecord::Base
   include AASM
   aasm_column :state
   
-  aasm_initial_state :open
+  aasm_initial_state :active
   
-  aasm_state :open
+  aasm_state :active
   aasm_state :charged
   
   aasm_event :charge do
-    transitions :to => :charged, :from => :open
+    transitions :to => :charged, :from => :active
   end
   aasm_event :reactivate do
-    transitions :to => :open, :from => :charged
+    transitions :to => :active, :from => :charged
   end
   
   def to_s(format = :default)
