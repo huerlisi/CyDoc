@@ -14,23 +14,23 @@
     <tr>
       <th rowspan="3" style="width: 15%; vertical-align: top"><%= t_attr(:address) %></th>
       <td rowspan="3">
-        <%= in_place_editor_field :vcard, :family_name %> <%= in_place_editor_field :vcard, :given_name %><br />
+        <%= @vcard.family_name %> <%= @vcard.given_name %><br />
         <%- if @vcard.extended_address.present? %>
-          <%= in_place_editor_field :vcard, :extended_address %><br />
+          <%= @vcard.extended_address %><br />
         <%- end %>
-        <%= in_place_editor_field :vcard, :street_address %><br />
+        <%= @vcard.street_address %><br />
         <%- if @vcard.post_office_box.present? %>
-          <%= in_place_editor_field :vcard, :post_office_box %><br />
+          <%= @vcard.post_office_box %><br />
         <%- end %>
-        <%= in_place_editor_field :vcard, :postal_code %> <%= in_place_editor_field :vcard, :locality %>
+        <%= @vcard.postal_code %> <%= @vcard.locality %>
      </td>
-      <th style="width: 15%"><%= t_attr(:birth_date) %></th><td><%=h @patient.birth_date.blank? ? 'unbekannt' : l(@patient.birth_date) %></td>
+      <th style="width: 15%"><%= t_attr(:birth_date) %></th><td><%= @patient.birth_date.blank? ? 'unbekannt' : l(@patient.birth_date) %></td>
     </tr>
     <tr>
-      <th><%= t_attr(:gender) %></th><td><%=h @patient.sex %></td>
+      <th><%= t_attr(:gender) %></th><td><%= @patient.sex %></td>
     </tr>
     <tr>
-      <th><%= t_attr(:doctor_patient_nr) %></th><td><%=h @patient.doctor_patient_nr %></td>
+      <th><%= t_attr(:doctor_patient_nr) %></th><td><%= @patient.doctor_patient_nr %></td>
     </tr>
     <tr>
       <th><%= t_attr(:covercard_code) %></th>
@@ -38,7 +38,7 @@
     </tr>
     <tr>
       <th><%= t_attr(:remarks) %></th>
-      <td colspan="3"><%= in_place_editor_field :patient, :remarks %></td>
+      <td colspan="3"><%= @patient.remarks %></td>
     </tr>
   </table>
   </div>
