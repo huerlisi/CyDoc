@@ -24,9 +24,12 @@ class VatClass < ActiveRecord::Base
 
   def code_name
     case code
-      when 'full': "Normal"
-      when 'reduced': "Reduziert"
-      when 'excluded': "Ausgenommen"
+      when 'full'
+        "Normal"
+      when 'reduced'
+        "Reduziert"
+      when 'excluded'
+        "Ausgenommen"
     end
   end
 end

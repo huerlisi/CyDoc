@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Invoice < ActiveRecord::Base
   # Override touch to not use validation
   # This is similar to Rails 3 and should be dropped
@@ -175,17 +177,28 @@ class Invoice < ActiveRecord::Base
   def state_noun(for_state = nil)
     for_state ||= state
     case for_state
-      when 'prepared':    "Offene Rechnung"
-      when 'booked':      "Verbuchte Rechnung"
-      when 'printed':     "Gedruckte Rechnung"
-      when 'canceled':    "Stornierte Rechnung"
-      when 'reactivated': "Reaktivierte Rechnung"
-      when 'reminded':    "1. Mahnung"
-      when '2xreminded':  "2. Mahnung"
-      when '3xreminded':  "3. Mahnung"
-      when 'encashment':  "Inkasso"
-      when 'paid':        "Bezahlte Rechnung"
-      when 'written_off': "Abgeschriebene Rechnung"
+      when 'prepared'
+        "Offene Rechnung"
+      when 'booked'
+        "Verbuchte Rechnung"
+      when 'printed'
+        "Gedruckte Rechnung"
+      when 'canceled'
+        "Stornierte Rechnung"
+      when 'reactivated'
+        "Reaktivierte Rechnung"
+      when 'reminded'
+        "1. Mahnung"
+      when '2xreminded'
+        "2. Mahnung"
+      when '3xreminded'
+        "3. Mahnung"
+      when 'encashment'
+        "Inkasso"
+      when 'paid'
+        "Bezahlte Rechnung"
+      when 'written_off'
+        "Abgeschriebene Rechnung"
     end
   end
 
@@ -296,10 +309,14 @@ class Invoice < ActiveRecord::Base
 
   def remind
     case state
-      when 'booked', 'printed': remind_first_time
-      when 'reminded':          remind_second_time
-      when '2xreminded':        remind_third_time
-      when '3xreminded':        encash
+      when 'booked', 'printed'
+        remind_first_time
+      when 'reminded'
+        remind_second_time
+      when '2xreminded'
+        remind_third_time
+      when '3xreminded'
+        encash
     end
   end
 
