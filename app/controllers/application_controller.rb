@@ -13,8 +13,6 @@ class ApplicationController < ActionController::Base
 
   # Authentication
   # ==============
-  include AuthenticatedSystem
-  before_filter :login_required, :authenticate
 
   # Localization
   # Code snippet from: https://github.com/svenfuchs/routing-filter/wiki/Localize-filter
@@ -28,37 +26,6 @@ class ApplicationController < ActionController::Base
   # Code snippet finished
 
   private
-  def authenticate
-    return if current_user.nil?
-
-    # Authenticate doctor login
-    doctor = current_user.object
-    unless doctor.nil?
-      logger.info("  Doctor login: '#{doctor.name}'")
-
-      @current_doctor_ids = doctor.colleagues.map{|c| c.id}.uniq
-      Thread.current["doctor_ids"] = @current_doctor_ids
-
-      @current_doctor = doctor
-      Thread.current["doctor_id"] = @current_doctor.id
-
-      @printers = doctor.office.printers
-      return true
-    end
-
-    # Authenticate doctor login
-    office = Office.find_by_login(current_user.login)
-    unless office.nil?
-      logger.info("  Praxis login: '#{office.name}'")
-
-      @current_doctor_ids = office.doctors.map{|c| c.id}.uniq
-      Thread.current["doctor_ids"] = @current_doctor_ids
-
-      @current_doctor = office
-      Thread.current["doctor_id"] = @current_doctor.id
-      return true
-    end
-  end
 
   # PDF generation
   # ==============

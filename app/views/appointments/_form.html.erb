@@ -1,6 +1,6 @@
 <%= javascript_tag "$('appointment_date').focus()" %>
 <div id="appointment_form">
-  <%= semantic_remote_form_for [@patient, @appointment] do |form| %>
+  <%= semantic_form_for [@patient, @appointment], :remote => true do |form| %>
     <%= form.semantic_errors %>
 
     <%= form.inputs do %>

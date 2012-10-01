@@ -20,7 +20,7 @@ class ReminderBatchJobsController < InvoiceBatchJobsController
   # POST /reminder_batch_jobs
   def create
     @reminder_batch_job = ReminderBatchJob.new(params[:reminder_batch_job])
-    @invoices = Invoice.overdue(@current_doctor.settings['invoices.grace_period']).dunning_active..all(:limit => @reminder_batch_job.count)
+    @invoices = Invoice.overdue(@current_doctor.settings['invoices.grace_period']).dunning_active.all(:limit => @reminder_batch_job.count)
 
     @reminder_batch_job.invoices = @invoices
     @reminder_batch_job.remind

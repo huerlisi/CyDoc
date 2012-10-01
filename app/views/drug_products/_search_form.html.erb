@@ -1,12 +1,7 @@
 <div class="box">
-  <%= remote_form_for 'search', :before => "Element.show('spinner')", :success => "Element.hide('spinner')", :url => drug_products_path, :html => {:method => :get}, :method => :get do |f| %>
+  <%= form_for 'search', drug_products_path, :method => :get, :remote => true do |f| %>
     <%= f.label 'query', 'Suche' %>
     <%= f.text_field :query, :label => "Suche", :size => 15, :autocomplete => 'off' %>
     <%= image_submit_tag 'find.png', :title => 'Suchen' %>
-    <%= image_tag("indicator.gif",
-                  :align => "absmiddle",
-                  :border => 0,
-                  :id => "spinner",
-                  :style =>"display: none;" ) %>
   <% end %>
 </div>

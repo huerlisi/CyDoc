@@ -1,6 +1,6 @@
 <%= javascript_tag "$('treatment_date_begin').focus(); $('treatment_date_begin').select()" %>
 <div id="treatment_form">
-  <%= semantic_remote_form_for [:patient, @treatment] do |form| %>
+  <%= semantic_form_for [:patient, @treatment], :remote => true do |form| %>
     <%= form.inputs do %>
       <%= form.input :date_begin, :as => :date_field, :input_html => {:size => 12} %>
       <%= form.input :date_end, :as => :date_field, :input_html => {:size => 12} %>

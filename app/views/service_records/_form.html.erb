@@ -3,16 +3,11 @@
 </script>
 
 <div class="box search_form">
-  <%= remote_form_for 'search', :before => "Element.show('session_#{@session.id}_service_record_spinner')", :success => "Element.hide('session_#{@session.id}_service_record_spinner')", :url => select_patient_session_service_records_path(@session.patient.id, @session.id), :html => {:method => :get}, :method => :get do |f| %>
+  <%= form_for 'search', select_patient_session_service_records_path(@session.patient.id, @session.id), :method => :get, :remote => true do |f| %>
     <%= f.label 'query', 'Leistung' %>
     <%= f.text_field :query, :label => "Suche", :size => 15, :autocomplete => 'off', :id => 'service_record_search_query' %>
 
     <%= image_submit_tag 'find.png', :title => 'Suchen' %>
-    <%= image_tag("indicator.gif",
-                  :align => "absmiddle",
-                  :border => 0,
-                  :id => "session_#{@session.id}_service_record_spinner",
-                  :style =>"display: none;" ) %>
   <% end %>
 
   <div id="session_<%= @session.id %>_search_results"></div>

@@ -5,7 +5,7 @@
   <%= error_messages_for :invoice %>
 
   <div class="box">
-    <%= semantic_remote_form_for [:patient, :treatment, @invoice] do |form| %>
+    <%= semantic_form_for [:patient, :treatment, @invoice], :remote => true do |form| %>
       <%= form.inputs do %>
         <%= form.input :value_date, :as => :date_field, :input_html => {:size => 12, :autocomplete => 'off'} %>
         <li class="select required">

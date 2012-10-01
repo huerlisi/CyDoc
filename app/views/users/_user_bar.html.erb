@@ -1,4 +1,4 @@
-<% if logged_in? -%>
+<% if signed_in? -%>
   <div id="user-bar-greeting"><%= t('cydoc.user_bar.logged_in_as') %> <%= link_to_current_user :content_method => :login %></div>
   <div id="user-bar-action"  >(<%= link_to t('cydoc.user_bar.logout'), logout_path, { :title => t('cydoc.user_bar.logout') }    %>)</div>
 <% else -%>

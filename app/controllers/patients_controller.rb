@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class PatientsController < ApplicationController
   in_place_edit_for :vcard, :family_name
   in_place_edit_for :vcard, :given_name
@@ -36,7 +38,7 @@ class PatientsController < ApplicationController
 
   def postal_codes_for_locality
     render :update do |page|
-      postal_codes = PostalCode..all(:conditions => ["locality LIKE CONCAT('%', ?, '%')", params[:locality]])
+      postal_codes = PostalCode.all(:conditions => ["locality LIKE CONCAT('%', ?, '%')", params[:locality]])
       if postal_codes.count == 1
         page.replace 'patient_vcard_attributes_postal_code', text_field_tag('patient[vcard_attributes][postal_code]', postal_codes[0].zip, :size => 9)
       elsif postal_codes.count > 1

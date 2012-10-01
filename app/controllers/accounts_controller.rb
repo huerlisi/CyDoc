@@ -34,7 +34,7 @@ class AccountsController < ApplicationController
   # POST /account/print/1
   def print
     @account = Account.find(params[:id])
-    @bookings = apply_scopes(Booking).by_account(@account)..all(:order => 'value_date, id')
+    @bookings = apply_scopes(Booking).by_account(@account).all(:order => 'value_date, id')
 
     respond_to do |format|
       format.html {

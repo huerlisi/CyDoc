@@ -4,16 +4,11 @@
 
 <div id="service_item_form" class="box">
   <%= error_messages_for :service_items %>
-  <%= remote_form_for 'search', :before => "Element.show('service_items_spinner')", :success => "Element.hide('service_items_spinner')", :url => select_tariff_item_service_items_path(@tariff_item), :method => :get do |f| %>
+  <%= form_for 'search', select_tariff_item_service_items_path(@tariff_item), :method => :get, :remote => true do |f| %>
     <%= f.label 'query', 'Suche' %>
     <%= f.text_field :query, :label => "Suche", :size => 15, :autocomplete => 'off', :id => 'service_items_search_query' %>
 
     <%= image_submit_tag 'find.png', :title => 'Suchen' %>
-    <%= image_tag("indicator.gif",
-                  :align => "absmiddle",
-                  :border => 0,
-                  :id => "service_items_spinner",
-                  :style =>"display: none;" ) %>
   <% end %>
 
   <div id="tariff_item_search_results"></div>

@@ -1,7 +1,7 @@
 <tr id="recall_form">
 <td colspan="5">
 <%= javascript_tag "$('recall_due_date').focus()" %>
-  <%= semantic_remote_form_for [@patient, @recall] do |form| %>
+  <%= semantic_form_for [@patient, @recall], :remote => true do |form| %>
     <%= form.semantic_errors %>
 
     <%= form.inputs t_model do %>

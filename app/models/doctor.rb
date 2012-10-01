@@ -60,7 +60,7 @@ class Doctor < ActiveRecord::Base
 
     vcard_condition = "(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)"
 
-    .all(:include => [:vcard], :conditions => ["#{vcard_condition}", query_params], :order => 'full_name, family_name, given_name')
+    self.all(:include => [:vcard], :conditions => ["#{vcard_condition}", query_params], :order => 'full_name, family_name, given_name')
   end
 
   # Returned invoices

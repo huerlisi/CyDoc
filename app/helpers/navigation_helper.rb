@@ -18,7 +18,7 @@ module NavigationHelper
       :reminder_batch_job => reminder_batch_jobs_path
     }
 
-    items[:create_treatments] = create_all_treatments_path if @current_doctor.settings['modules.hozr']
+    items[:create_treatments] = create_all_treatments_path# if @current_doctor.settings['modules.hozr']
 
     items
   end
@@ -37,7 +37,7 @@ module NavigationHelper
   def accounting_navigation
     items = {
               :show_accounts => :accounts,
-              :show_debtors => account_path(Account.find_by_code(@current_doctor.settings['invoices.balance_account_code']))
+#              :show_debtors => account_path(Account.find_by_code(@current_doctor.settings['invoices.balance_account_code']))
             }
 
     items

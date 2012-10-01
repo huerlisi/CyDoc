@@ -386,7 +386,7 @@ class Invoice < ActiveRecord::Base
   has_many :bookings, :class_name => 'Booking', :as => 'reference', :order => 'value_date', :dependent => :destroy
   def due_amount(value_date = nil)
     if value_date
-      included_bookings = bookings..all(:conditions => ["value_date <= ?", value_date])
+      included_bookings = bookings.all(:conditions => ["value_date <= ?", value_date])
     else
       included_bookings = bookings
     end
@@ -482,7 +482,7 @@ class Invoice < ActiveRecord::Base
     end
 
     args.merge!(:include => {:tiers => {:patient => {:vcards => :addresses}}}, :conditions => ["(#{patient_condition}) OR (#{invoice_condition})", query_params], :order => 'vcards.family_name, vcards.given_name')
-    .all(args)
+    self.all(args)
   end
 
   # Calculated fields

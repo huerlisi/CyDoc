@@ -1,4 +1,4 @@
-<%= remote_form_for setup_patient(@patient) do |patient| %>
+<%= form_for setup_patient(@patient), :remote => true do |patient| %>
   <div class="contextual">
     <%= link_to "Speichern", {:url => patient_path(@patient), :with => "this.up('form').serialize()"}, :class => "icon icon-save", :remote => true %>
     <%= link_to "Abbrechen", {:url => patient_path(@patient), :method => :get}, :class => "icon icon-cancel", :remote => true %>
@@ -8,6 +8,6 @@
 
   <p>
     <%= patient.submit 'Speichern', :class => "icon icon-save" %>
-    <%= button_to_remote "Abbrechen", {:url => patient_path(@patient), :method => :get}, :class => "icon icon-cancel" %>
+    <%= button_to "Abbrechen", patient_path(@patient), :method => :get, :method => remote, :class => "icon icon-cancel" %>
   </p>
 <% end %>

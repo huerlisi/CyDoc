@@ -31,7 +31,7 @@ class InvoiceBatchJobsController < ApplicationController
   # POST /invoice_batch_jobs
   def create
     @invoice_batch_job = InvoiceBatchJob.new(params[:invoice_batch_job])
-    @treatments = Treatment.open..all(:limit => @invoice_batch_job.count)
+    @treatments = Treatment.open.all(:limit => @invoice_batch_job.count)
 
     value_date = @invoice_batch_job.value_date
     tiers_name = @invoice_batch_job.tiers_name

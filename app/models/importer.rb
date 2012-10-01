@@ -28,7 +28,7 @@ module Importer
       errors = 0
 
       # Assure our data is loaded
-      ext_records = self..all(options)
+      ext_records = self.all(options)
 
       puts "  Importing #{ext_records.count} records..."
       for ext_record in ext_records

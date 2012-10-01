@@ -157,7 +157,7 @@ class Patient < ActiveRecord::Base
     end
 
     args.merge!(:include => [:vcard ], :conditions => ["(#{patient_condition})", query_params], :order => 'vcards.family_name, vcards.given_name')
-    patients = .all(args)
+    patients = self.all(args)
 
     [patients.paginate(:page => page), query_type, (patients.empty? ? query_params[:covercard_code] : nil)]
   end

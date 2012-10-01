@@ -29,15 +29,6 @@ module CyDoc
     # (by default production uses :info, the others :debug)
     # config.log_level = :debug
 
-    # Your secret key for verifying cookie session data integrity.
-    # If you change this key, all old sessions will become invalid!
-    # Make sure the secret is at least 30 characters and all random,
-    # no regular words or you'll be exposed to dictionary attacks.
-    config.action_controller.session = {
-      :key         => '_customers_session',
-      :secret      => 'ef84e093fd1ce07db659ac728c8ef1d3398384cae267854ce310a410950f3f2e744f8a381c9372a70bbc867694b4664466d299c9d5cfcfd1a6570ad54d3fdba2'
-    }
-
     # Use the database for sessions instead of the cookie-based default,
     # which shouldn't be used to store highly confidential information
     # (create the session table with 'rake db:sessions:create')
@@ -55,7 +46,8 @@ module CyDoc
     config.time_zone = 'Bern'
     config.active_record.default_timezone = :utc
 
-    # i18n
+    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
+    config.i18n.fallbacks = [:'de-CH', :de]
     config.i18n.default_locale = 'de-CH'
 
     # Authentication

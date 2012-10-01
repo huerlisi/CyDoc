@@ -10,6 +10,6 @@ class DrugSubstance < ActiveRecord::Base
 
     query_params[:query] = "%#{query}%"
 
-    .all(:conditions => ["name LIKE :query OR description LIKE :query", query_params], :order => 'name')
+    self.all(:conditions => ["name LIKE :query OR description LIKE :query", query_params], :order => 'name')
   end
 end

@@ -4,11 +4,11 @@ source 'http://rubygems.org'
 
 # Rails
 # =====
-gem 'rails', '~> 2.3.10'
+gem 'rails'
 
 # Database
-gem 'sqlite3-ruby', :require => 'sqlite3'
-gem 'mysql2', '~> 0.2.18'
+gem 'sqlite3'
+gem 'mysql2'
 
 # Development
 # ===========
@@ -31,10 +31,10 @@ end
 gem 'haml'
 
 gem 'formtastic'
-gem 'will_paginate', '< 3.0'
-gem 'inherited_resources', '< 1.1'
+gem 'will_paginate'
+gem 'inherited_resources'
 gem 'has_scope'
-gem 'i18n_rails_helpers', '< 1.0'
+gem 'i18n_rails_helpers'
 gem 'show_for'
 
 # CyDoc
@@ -43,7 +43,13 @@ gem 'show_for'
 gem 'aasm'
 
 # Date/Time handling
-gem 'validates_timeliness', '< 3.0'
+gem 'validates_timeliness'
+
+# Addresses
+gem 'has_vcards'
+
+# Billing
+gem 'has_accounts'
 
 # Import
 gem 'fastercsv'
@@ -57,6 +63,9 @@ gem 'in_place_editing'
 
 # CRUD helpers
 gem 'inherited_resources_views'
+
+# Authentication
+gem 'devise'
 
 # Uploads
 gem 'carrierwave'
