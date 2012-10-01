@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Treatment < ActiveRecord::Base
   # Associations
   has_many :invoices, :dependent => :destroy, :order => 'value_date DESC, created_at DESC'
@@ -78,11 +80,16 @@ class Treatment < ActiveRecord::Base
   # XML Invoices
   def reason_xml
     case reason
-      when 'Unfall': 'accident'
-      when 'Krankheit': 'disease'
-      when 'Mutterschaft': 'maternity'
-      when 'Prävention': 'prevention'
-      when 'Geburtsfehler': 'birthdefect'
+      when 'Unfall'
+        'accident'
+      when 'Krankheit'
+        'disease'
+      when 'Mutterschaft'
+        'maternity'
+      when 'Prävention'
+        'prevention'
+      when 'Geburtsfehler'
+        'birthdefect'
     end
   end
 
