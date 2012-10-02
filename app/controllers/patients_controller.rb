@@ -24,30 +24,6 @@ class PatientsController < ApplicationController
 
   respond_to :js, :only => :covercard_search
 
-  def localities_for_postal_code
-    render :update do |page|
-      localities = PostalCode.find_all_by_zip(params[:postal_code])
-      if localities.count == 1
-        page.replace 'patient_vcard_attributes_locality', text_field_tag('patient[vcard_attributes][locality]', localities[0].locality)
-      elsif localities.count > 1
-        page.replace 'patient_vcard_attributes_locality', select('patient[vcard_attributes]', 'locality', localities.collect {|p| p.locality })
-      end
-      page.call 'focus', 'patient_vcard_attributes_locality'
-    end
-  end
-
-  def postal_codes_for_locality
-    render :update do |page|
-      postal_codes = PostalCode.all(:conditions => ["locality LIKE CONCAT('%', ?, '%')", params[:locality]])
-      if postal_codes.count == 1
-        page.replace 'patient_vcard_attributes_postal_code', text_field_tag('patient[vcard_attributes][postal_code]', postal_codes[0].zip, :size => 9)
-      elsif postal_codes.count > 1
-        page.replace 'patient_vcard_attributes_postal_code', select('patient[vcard_attributes]', 'postal_code', postal_codes.collect {|p| ["#{p.zip} - #{p.locality}", p.zip] })
-      end
-      page.call 'focus', 'patient_vcard_attributes_postal_code'
-    end
-  end
-
   # Covercard
   # =========
 
