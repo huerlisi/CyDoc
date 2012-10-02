@@ -1,7 +1,6 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 
-require 'digest/sha2'
 require 'prawn/measurement_extensions'
 
 class ApplicationController < ActionController::Base
