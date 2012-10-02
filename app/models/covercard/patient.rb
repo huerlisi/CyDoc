@@ -9,7 +9,7 @@ module Covercard
     SERVICE_URL = 'http://covercard.hin.ch/covercard/servlet/ch.ofac.ca.covercard.CaValidationHorizontale?type=XML&ReturnType=42a&langue=1&carte='
 
     # Tableless active record
-    class_inheritable_accessor :columns
+    class_attribute :columns
     self.columns = []
    
     def self.column(name, sql_type = nil, default = nil, null = true)
