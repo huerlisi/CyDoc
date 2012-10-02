@@ -28,8 +28,23 @@ class Appointment < ActiveRecord::Base
   # Scopes
   named_scope :by_period, lambda {|from, to| { :conditions => { :date => from..to } } }
 
+  def from
+    duration_from.try(:to_time)
+  end
+
+  def from=(value)
+    self.duration_from = Time.zone.parse(value)
+  end
+
+  def to
+    duration_to.try(:to_time)
+  end
+
+  def to=(value)
+    self.duration_to = Time.zone.parse(value)
+  end
+
   def to_s
     "#{date} #{[from, to].compact.join(' - ')}"
   end
-
 end

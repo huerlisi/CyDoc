@@ -1,5 +1,9 @@
 1.1.5 (unreleased)
 =====
+Enhancements:
+* There's now a quick fix action for double payments.
+* Add support for UVG taxpoint units in TarmedTariff.
+
 Bug fixes
 * Handle doctor without email in reminder letter.
 
@@ -10,6 +14,7 @@ Enhancements:
 * Greeting in reminder and recall letters is not hardcoded to female anymore.
 * Full support to use either CUPS printing or PDF downloads for
   invoices and reminders.
+* Give tariff item group a push to be returned as top search results
 
 Bug fixes:
 * Update nokogiri to 1.5.5 to fix build problem using ruby 1.9 on
@@ -17,6 +22,8 @@ Bug fixes:
 * Fix exception if Insurance has no code.
 * Drop label "Mail" in reminder letter closing.
 * Preselect current role in insurance form field.
+* Fix timezone issue with recall.
+* Fix phone number setting for patients and doctors.
 
 1.1.3
 =====

@@ -368,6 +368,7 @@ de-CH:
       reactivate:         Reaktivieren
       write_off:          Abschreiben
       book_extra_earning: Ausserordentlicher Gewinn verbuchen
+      book_payback:       Rückzahlung verbuchen
       resolve:            Als erledigt markieren
       edit_ready:         Neue vorbereiten
       show_order_form:    Auftragsformular

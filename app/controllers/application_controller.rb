@@ -230,9 +230,9 @@ class Date
     year = Date.today.year % 100
     
     case base
-    when :future:
+    when :future
       offset = value < year ? 100 : 0
-    when :past:
+    when :past
       offset = value <= year ? 0 : -100
     end
     

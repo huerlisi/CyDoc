@@ -1,10 +1,20 @@
 class TarmedTariffItem < TariffItem
   def unit_mt
-    0.89
+    case reason
+    when 'Unfall'
+      0.92
+    else
+      0.89
+    end
   end
 
   def unit_tt
-    0.89
+    case reason
+    when 'Unfall'
+      0.92
+    else
+      0.89
+    end
   end
 
   def self.tariff_type

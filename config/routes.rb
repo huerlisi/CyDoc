@@ -106,7 +106,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :esr_files
   map.resources :esr_records,
-    :member => {:write_off => :post, :book_extra_earning => :post, :resolve => :post}
+    :member => {:write_off => :post, :book_extra_earning => :post, :book_payback => :post, :resolve => :post}
 
   # Attachments
   map.resources :attachments, :member => {:download => :get}
