@@ -11,7 +11,7 @@ DEADJOE
 db/*.sqlite3
 log/*.log
 tmp/**/*
-
+.sass-cache/
 # Vendor
 vendor/cache
 vendor/bundle
