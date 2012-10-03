@@ -10,12 +10,12 @@ class DrugProduct < ActiveRecord::Base
   end
 
   def self.clever_find(query, *args)
-    return [] if query.nil? or query.empty?
+    return self.scoped if query.nil? or query.empty?
 
     query_params = {}
 
     query_params[:query] = "%#{query}%"
 
-    self.all(:conditions => ["name LIKE :query OR description LIKE :query", query_params], :order => 'name')
+    self.where("name LIKE :query OR description LIKE :query", query_params).order('name')
   end
 end
