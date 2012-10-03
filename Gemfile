@@ -31,6 +31,7 @@ end
 gem 'haml'
 
 gem 'formtastic'
+gem 'simple_form'
 gem 'will_paginate'
 gem 'inherited_resources'
 gem 'has_scope'
