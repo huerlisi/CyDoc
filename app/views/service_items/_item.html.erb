@@ -1,13 +1,13 @@
 <% @service_item = item %>
 <tr id="service_item_<%= item.id %>">
   <td><%= in_place_editor_field(:service_item, :quantity) %>x</td>
-  <td style="text-align:right"><%=h item.code %></td>
+  <td style="text-align:right"><%= item.code %></td>
   <td>
     <%= "(#{in_place_editor_field :service_item, :ref_code, {}, :size => 8}) " unless @service_item.ref_code.blank? %>
-    <b><%=h item.text %></b>
+    <b><%= item.text %></b>
   </td>
-  <td style="text-align:right"><%=h sprintf('%.2f', item.amount_mt) %>&nbsp;AL</td>
-  <td style="text-align:right"><%=h sprintf('%.2f', item.amount_tt) %>&nbsp;TL</td>
-  <td style="text-align:right"><b><%=h sprintf('%.2f', item.amount) %></b>&nbsp;CHF</td>
+  <td style="text-align:right"><%= sprintf('%.2f', item.amount_mt) %>&nbsp;AL</td>
+  <td style="text-align:right"><%= sprintf('%.2f', item.amount_tt) %>&nbsp;TL</td>
+  <td style="text-align:right"><b><%= sprintf('%.2f', item.amount) %></b>&nbsp;CHF</td>
   <td><%= link_to image_tag('delete.png'), {:url => tariff_item_service_item_url(@tariff_item, item), :method => :delete}, :remote => true %></td>
 </tr>

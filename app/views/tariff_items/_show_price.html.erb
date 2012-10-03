@@ -6,8 +6,8 @@
     <th style="text-align: right"><%= t_attr(:amount, TariffItem) %></th>
   </tr>
   <tr>
-    <td style="text-align:right"><%=h currency_fmt(@tariff_item.amount_mt) %>&nbsp;TP</td>
-    <td style="text-align:right"><%=h currency_fmt(@tariff_item.amount_tt) %>&nbsp;TP</td>
-    <td style="text-align:right"><b><%=h currency_fmt(@tariff_item.amount) %></b>&nbsp;CHF</td>
+    <td style="text-align:right"><%= currency_fmt(@tariff_item.amount_mt) %>&nbsp;TP</td>
+    <td style="text-align:right"><%= currency_fmt(@tariff_item.amount_tt) %>&nbsp;TP</td>
+    <td style="text-align:right"><b><%= currency_fmt(@tariff_item.amount) %></b>&nbsp;CHF</td>
   </tr>
 </table>

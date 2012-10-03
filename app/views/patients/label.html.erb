@@ -3,6 +3,6 @@ body { margin: 0; padding: 1px; }
 </style>
 
 <div style="font-family: 'Vera Sans',Arial,sans-serif; font-size: 7pt; width: 6.5cm">
-  <%=h @patient.vcard.honorific_prefix %><br/>
+  <%= @patient.vcard.honorific_prefix %><br/>
   <%= render :partial => 'vcards/show', :locals => {:vcard => @patient.vcard} %>
 </div>

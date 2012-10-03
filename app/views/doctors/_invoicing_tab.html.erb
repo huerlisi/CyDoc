@@ -8,20 +8,20 @@
   <table>
     <tr>
       <th><%= t_attr :print_payment_for %>:</th>
-      <td><%=h t(@doctor.print_payment_for, :scope => :boolean) %></td>
+      <td><%= t(@doctor.print_payment_for, :scope => :boolean) %></td>
     </tr>
     <% if @doctor.esr_account %>
       <tr>
         <th>Bank:</th>
-        <td><%=h @doctor.esr_account.bank %></td>
+        <td><%= @doctor.esr_account.bank %></td>
       </tr>
       <tr>
         <th>ESR:</th>
-        <td><%=h @doctor.esr_account.esr_id %></td>
+        <td><%= @doctor.esr_account.esr_id %></td>
       </tr>
       <tr>
         <th>Postcheck Konto:</th>
-        <td><%=h @doctor.esr_account.pc_id %></td>
+        <td><%= @doctor.esr_account.pc_id %></td>
       </tr>
     <% end %>
   </table>

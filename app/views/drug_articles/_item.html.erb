@@ -1,9 +1,9 @@
 <tr id="drug_article_<%= item.id %>">
-  <td><b/><%=h item.description %></b></td>
-  <td><%=h "#{item.number_of_pieces} x #{item.quantity} #{item.quantity_unit}" %></td>
-  <td style="text-align: right"><%=h item.vat_class.try(:rate) %> %</td>
-  <td style="text-align: right">CHF <%=h currency_fmt(item.doctors_price) %></td>
-  <td style="text-align: right">CHF <%=h currency_fmt(item.price) %></td>
+  <td><b/><%= item.description %></b></td>
+  <td><%= "#{item.number_of_pieces} x #{item.quantity} #{item.quantity_unit}" %></td>
+  <td style="text-align: right"><%= item.vat_class.try(:rate) %> %</td>
+  <td style="text-align: right">CHF <%= currency_fmt(item.doctors_price) %></td>
+  <td style="text-align: right">CHF <%= currency_fmt(item.price) %></td>
   <td>
     <%= link_to image_tag('delete.png'), {:url => item, :method => :delete, :confirm => t_confirm_delete(item)}, :remote => true %>
     <%= link_to image_tag('edit.png'), {:url => edit_drug_article_path(item), :method => :get}, :remote => true %>

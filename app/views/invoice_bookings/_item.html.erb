@@ -3,7 +3,7 @@
   <td>
     <%= link_to item.title, item %>
     <%= '<hr style="height: 1px; margin: 0"/>' unless item.comments.blank? %>
-    <%=h item.comments %>
+    <%= item.comments %>
   </td>
-  <td style="text-align: right"><%=h sprintf("%0.2f", item.accounted_amount(@invoice.balance_account)) %>&nbsp;CHF</td>
+  <td style="text-align: right"><%= sprintf("%0.2f", item.accounted_amount(@invoice.balance_account)) %>&nbsp;CHF</td>
 </tr>
