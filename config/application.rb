@@ -50,9 +50,6 @@ module CyDoc
     config.i18n.fallbacks = [:'de-CH', :de]
     config.i18n.default_locale = 'de-CH'
 
-    # Authentication
-    config.active_record.observers = :user_observer
-
     # Filter parameters
     config.filter_parameters += [:password, :password_confirmation, :old_password]
 
