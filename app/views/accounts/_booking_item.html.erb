@@ -1,9 +1,9 @@
 <tr id="booking_<%= @booking.id %>">
-  <td><%=h @booking.value_date %></td>
+  <td><%= @booking.value_date %></td>
   <td>
-    <%=h @booking.title %>
+    <%= @booking.title %>
     <%= '<hr style="height: 1px; margin: 0"/>' unless (@booking.comments.blank?) %>
-    <i><%=h @booking.comments %></i>
+    <i><%= @booking.comments %></i>
   </td>
   <td><%= link_to @booking.reference.to_s, @booking.reference unless @booking.reference.nil? rescue 'Referenz' %></td>
   <td style="text-align: right"><%= (@booking.credit_account == @account) ? h(@booking.amount_as_string) : "<i>#{link_to(h(@booking.credit_account.code), account_path(@booking.credit_account), :title => h(@booking.credit_account.title))}</i>" %></td>

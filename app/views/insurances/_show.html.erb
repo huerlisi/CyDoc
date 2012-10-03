@@ -4,11 +4,11 @@
 <table>
   <tr>
     <th>Name:</th>
-    <td><%=h show.full_name %></td>
+    <td><%= show.full_name %></td>
   </tr>
   <tr>
     <th>Adresse:</th>
-    <td><%=h address(show.vcard, ', ') %></td>
+    <td><%= address(show.vcard, ', ') %></td>
   </tr>
 </table>
 
@@ -16,10 +16,10 @@
 <table>
   <tr>
     <th>Rolle:</th>
-    <td><%=h show.role(:text) %></td>
+    <td><%= show.role(:text) %></td>
   </tr>
   <tr>
     <th>EAN:</th>
-    <td><%=h show.ean_party %></td>
+    <td><%= show.ean_party %></td>
   </tr>
 </table>

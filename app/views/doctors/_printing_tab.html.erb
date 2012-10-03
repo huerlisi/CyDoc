@@ -7,7 +7,7 @@
 <% @doctor.office && printers = @doctor.office.printers %>
 <%- if printers %>
   <div class="box">
-    Druckserver: <%=h printers[:cups_host] %>
+    Druckserver: <%= printers[:cups_host] %>
     <table>
       <tr>
         <th>Zweck</th>
@@ -15,8 +15,8 @@
       </tr>
       <% printers[:trays].each do |ident, value| %>
       <tr>
-        <th><%=h ident %></th>
-        <td><%=h value %></td>
+        <th><%= ident %></th>
+        <td><%= value %></td>
       </tr>
       <% end %>
     </table>

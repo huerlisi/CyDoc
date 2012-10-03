@@ -1,5 +1,5 @@
 <fieldset>
-<legend><%= @patients.size %> Patienten f&uuml;r Suche nach '<%=h params[:query] %>'</legend>
+<legend><%= @patients.size %> Patienten f&uuml;r Suche nach '<%= params[:query] %>'</legend>
   <table class="list" style="margin-top: 0px">
     <%= render :partial => '/patients/list_header' %>
     <%= render :partial => '/patients/list', :collection => @patients %>

@@ -1,7 +1,7 @@
 <table class="list">
   <% for t in @tarmed_texts %>
     <tr style="cursor: pointer" onclick="window.location='<%= url_for(:only_path => false, :controller => 'tariff_items', :action => 'create', 'service_record[code]' => t.leistung.code, 'service_record[patient_id]' => params[:patient_id]) %>'">
-      <td><%=h t.leistung.code %></td><td><%=h t.BEZ_255 %></td>
+      <td><%= t.leistung.code %></td><td><%= t.BEZ_255 %></td>
     </tr>
   <% end %>
 </table>

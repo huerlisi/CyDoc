@@ -1,5 +1,5 @@
 <tr>
-  <td><%=h item.code %></td>
+  <td><%= item.code %></td>
   <td><%= link_to item.title, account_path(item, :by_value_period => params[:by_value_period]) %></td>
   <%- if @date %>
     <td style="text-align: right"><%= currency_fmt(item.saldo(@date)) %>
