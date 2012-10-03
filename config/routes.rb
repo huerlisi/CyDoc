@@ -220,6 +220,8 @@ CyDoc::Application.routes.draw do
     end
   end
 
+  resources :bookkeeping
+
   resources :attachments do
     member do
       get :download
