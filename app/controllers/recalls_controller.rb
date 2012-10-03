@@ -11,7 +11,7 @@ class RecallsController < ApplicationController
   # GET /patients/1/recalls/new
   def new
     @patient = Patient.find(params[:patient_id])
-    @recall  = @patient.recalls.build(:doctor => @current_doctor)
+    @recall  = @patient.recalls.build(:doctor => current_doctor)
 
     respond_to do |format|
       format.html { }

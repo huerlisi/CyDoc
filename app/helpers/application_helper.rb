@@ -1,5 +1,9 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  def current_doctor
+    current_user.object
+  end
+
   # Tabs
   def tab_container(name, heading, tabs)
     render :partial => 'shared/tabs', :locals => {:name => name, :heading => heading, :tabs => tabs}

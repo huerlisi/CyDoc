@@ -59,7 +59,7 @@ class MedicalCasesController < ApplicationController
     # TODO: generalize like this: @medical_case = Object.const_get(params[:medical_case][:type]).new(params[:medical_case])
     @medical_case = DiagnosisCase.new(params[:medical_case])
 
-    @medical_case.doctor = @current_doctor
+    @medical_case.doctor = current_doctor
     @medical_case.diagnosis = diagnosis
     @medical_case.treatment = @treatment
 
