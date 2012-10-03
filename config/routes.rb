@@ -85,7 +85,7 @@ CyDoc::Application.routes.draw do
       end
     end
 
-    resources :sessions do
+    resources :todo_sessions do
       resources :tariff_items
       resources :service_records do
         collection do
@@ -133,7 +133,7 @@ CyDoc::Application.routes.draw do
     end
   end
 
-  resources :sessions do
+  resources :todo_sessions do
     resources :tariff_items
   end
 
