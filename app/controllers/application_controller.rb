@@ -1,15 +1,13 @@
 require 'prawn/measurement_extensions'
 
 class ApplicationController < ActionController::Base
-  # See ActionController::RequestForgeryProtection for details
-  # Uncomment the :secret if you're not using the cookie session store
-  protect_from_forgery # :secret => '3fcb7aa9a24a90ec6fde37b3755a9ed7'
+  # Aspects
+  protect_from_forgery
 
   # Authentication
-  # ==============
+  before_filter :authenticate_user!
 
-  # Localization
-  # Code snippet from: https://github.com/svenfuchs/routing-filter/wiki/Localize-filter
+  # Set the user locale
   before_filter :set_locale
 
   def set_locale
@@ -17,7 +15,6 @@ class ApplicationController < ActionController::Base
     I18n.locale = locale.to_s
     cookies[:locale] = locale unless (cookies[:locale] && cookies[:locale] == locale.to_s)
   end
-  # Code snippet finished
 
   private
 

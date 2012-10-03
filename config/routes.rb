@@ -5,13 +5,14 @@ CyDoc::Application.routes.draw do
   # I18n
   filter 'locale'
 
-  match '/logout' => 'authentication_sessions#destroy', :as => :logout
-  match '/login' => 'authentication_sessions#new', :as => :login
-  match '/register' => 'users#create', :as => :register
-  match '/signup' => 'users#new', :as => :signup
+  # Authorization
+  devise_for :users
+  resources :users do
+    collection do
+      get :current
+    end
+  end
 
-  resources :users
-  resource :authentication_session
   resources :vcards do
     resources :phone_numbers
   end
