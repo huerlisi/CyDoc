@@ -90,7 +90,7 @@ class ReturnedInvoicesController < ApplicationController
     respond_to do |format|
       format.html {}
       format.pdf {
-        document = doctor.document_to_pdf(:returned_invoice_request, :sender => @current_doctor)
+        document = doctor.document_to_pdf(:returned_invoice_request, :sender => current_doctor)
 
         send_data document, :filename => "#{doctor.id}.pdf",
                             :type => "application/pdf",
@@ -102,7 +102,7 @@ class ReturnedInvoicesController < ApplicationController
   def print_request_document
     doctor = Doctor.find(params[:doctor_id])
 
-    doctor.print_document(:returned_invoice_request, @printers[:trays][:plain], :sender => @current_doctor)
+    doctor.print_document(:returned_invoice_request, @printers[:trays][:plain], :sender => current_doctor)
     doctor.request_all_returned_invoices
 
     redirect_to returned_invoices_path

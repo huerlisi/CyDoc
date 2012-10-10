@@ -1,7 +1,7 @@
 .contextual
   = icon_link_to :index, returned_invoices_path
   = icon_link_to :delete, @returned_invoice, :method => :delete
-  - if @current_doctor.settings['modules.hozr']
+  - if current_doctor.settings['modules.hozr']
     - if @returned_invoice.invoice.treatment.cases.first
       = icon_link_to :show_order_form, hozr_url_for("cases/order_form/#{@returned_invoice.invoice.treatment.cases.first.id}"), :target => hozr_env
 

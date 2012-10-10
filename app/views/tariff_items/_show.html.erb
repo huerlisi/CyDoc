@@ -9,7 +9,7 @@
   <table>
     <tr>
       <th><%= t_attr(:type_as_string) %>:</th>
-      <td><%=h @tariff_item.type_to_s %></td>
+      <td><%= @tariff_item.type_to_s %></td>
     </tr>
     <tr>
       <th><%= t_attr(:code) %>:</th>
@@ -21,11 +21,11 @@
     </tr>
     <tr>
       <th><%= t_attr(:obligation) %>:</th>
-      <td><%=h @tariff_item.obligation? ? "Ja" : "Nein" %></td>
+      <td><%= @tariff_item.obligation? ? "Ja" : "Nein" %></td>
     </tr>
     <tr>
       <th><%= t_attr(:vat_class) %>:</th>
-      <td><%=h @tariff_item.vat_class.to_s %></td>
+      <td><%= @tariff_item.vat_class.to_s %></td>
     </tr>
   </table>
 

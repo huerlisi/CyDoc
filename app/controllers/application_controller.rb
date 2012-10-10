@@ -1,28 +1,20 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
-
 require 'prawn/measurement_extensions'
 
 class ApplicationController < ActionController::Base
-  helper :all # include all helpers, all the time
-
-  # See ActionController::RequestForgeryProtection for details
-  # Uncomment the :secret if you're not using the cookie session store
-  protect_from_forgery # :secret => '3fcb7aa9a24a90ec6fde37b3755a9ed7'
+  # Aspects
+  protect_from_forgery
 
   # Authentication
-  # ==============
+  before_filter :authenticate_user!
 
-  # Localization
-  # Code snippet from: https://github.com/svenfuchs/routing-filter/wiki/Localize-filter
+  # Set the user locale
   before_filter :set_locale
 
   def set_locale
     locale = params[:locale] || cookies[:locale]
     I18n.locale = locale.to_s
-    cookies[:locale] = locale unless (cookies[:locale] && cookies[:locale] == locale)
+    cookies[:locale] = locale unless (cookies[:locale] && cookies[:locale] == locale.to_s)
   end
-  # Code snippet finished
 
   private
 

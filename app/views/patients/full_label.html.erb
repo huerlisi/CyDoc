@@ -6,17 +6,17 @@ body { margin: 0; padding: 1px; }
 
 <div style="font-family: 'Vera Sans',Arial,sans-serif; font-size: 6pt; width: 6.5cm">
   <div class="full_name" style="font-size: 7pt">
-    <%=h "##{@patient.doctor_patient_nr}" unless @patient.doctor_patient_nr.blank? %><br/>
-    <%=h vcard.full_name %>
-    <%=h @patient.birth_date %><br/>
+    <%= "##{@patient.doctor_patient_nr}" unless @patient.doctor_patient_nr.blank? %><br/>
+    <%= vcard.full_name %>
+    <%= @patient.birth_date %><br/>
 
   </div>
 
   <div style="height: 0.3em"/>
 
   <div class="address">
-    <%=h vcard.street_address  %><br/>
-    <%=h vcard.postal_code  %> <%=h vcard.locality %>
+    <%= vcard.street_address  %><br/>
+    <%= vcard.postal_code  %> <%= vcard.locality %>
   </div>
 
   <div style="height: 0.3em"/>
@@ -27,9 +27,9 @@ body { margin: 0; padding: 1px; }
 
   <div style="height: 0.3em"/>
     <% kvg = @patient.insurance_policies.by_policy_type('KVG').first %>
-    <%=h kvg.to_s if kvg %><br/>
+    <%= kvg.to_s if kvg %><br/>
     <% uvg = @patient.insurance_policies.by_policy_type('UVG').first %>
-    <%=h uvg.to_s if uvg %><br/>
+    <%= uvg.to_s if uvg %><br/>
   <div>
   </div>
 </div>

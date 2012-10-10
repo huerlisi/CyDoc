@@ -1,0 +1,14 @@
+= boot_page_title t('devise.sign_in')
+
+= render 'users/demo' if Rails.env.demo?
+
+= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  = f.input :email, :input_html => {'data-autofocus' => true}
+  = f.input :password, :hint => false
+  - if devise_mapping.rememberable?
+    = f.input :remember_me, :as => :boolean
+
+  .form-actions
+    = f.button :submit, t('devise.sign_in')
+
+= render "devise/shared/links"

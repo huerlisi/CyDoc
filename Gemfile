@@ -29,8 +29,10 @@ end
 # Standard helpers
 # ================
 gem 'haml'
+gem 'jquery-rails'
 
 gem 'formtastic'
+gem 'simple_form'
 gem 'will_paginate'
 gem 'inherited_resources'
 gem 'has_scope'

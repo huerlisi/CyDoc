@@ -11,7 +11,7 @@
       <td><%= in_place_editor_field :vcard, :postal_code %></td>
       <td><%= in_place_editor_field :vcard, :locality %></td>
       <td><%= in_place_editor_field :patient, :birth_date %></td>
-      <td><%=h patient.doctor.name if patient.doctor %></td>
+      <td><%= patient.doctor.name if patient.doctor %></td>
       <td><%= in_place_editor_field :patient, :doctor_patient_nr %></td>
       <td><%= patient.insurance.vcard.full_name if patient.insurance %></td>
       <td><%= in_place_editor_field :patient, :insurance_nr %></td>

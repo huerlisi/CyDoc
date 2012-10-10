@@ -1,7 +1,7 @@
 <tr id="appointment_<%= patient_item.id %>">
-  <th><%=h patient_item.date %></th>
-  <td><%=h [patient_item.from, patient_item.to].compact.join(' - ') %></td>
-  <td><%=h patient_item.remarks %></td>
+  <th><%= patient_item.date %></th>
+  <td><%= [patient_item.from, patient_item.to].compact.join(' - ') %></td>
+  <td><%= patient_item.remarks %></td>
   <td>
     <%= link_to image_tag('edit.png'), {:url => edit_patient_appointment_path(@patient, patient_item), :method => :get}, :remote => true %>
     <% for state in patient_item.aasm_events_for_current_state -%>
