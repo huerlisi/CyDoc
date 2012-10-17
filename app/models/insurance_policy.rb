@@ -1,4 +1,7 @@
 class InsurancePolicy < ActiveRecord::Base
+  # Access restrictions
+  attr_accessible :policy_type
+
   # Scopes
   scope :by_policy_type, lambda {|policy_type|
     {:conditions => {:policy_type => policy_type}}
