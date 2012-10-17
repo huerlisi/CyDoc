@@ -53,14 +53,14 @@ class Doctor < ActiveRecord::Base
 
   # Search
   def self.clever_find(query)
-    return [] if query.nil? or query.empty?
+    return scoped if query.nil? or query.empty?
 
     query_params = {}
     query_params[:query] = "%#{query}%"
 
     vcard_condition = "(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)"
 
-    self.all(:include => [:vcard], :conditions => ["#{vcard_condition}", query_params], :order => 'full_name, family_name, given_name')
+    self.includes(:vcard).where("#{vcard_condition}", query_params).order('full_name, family_name, given_name')
   end
 
   # Returned invoices
