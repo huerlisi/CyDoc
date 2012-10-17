@@ -220,7 +220,11 @@ CyDoc::Application.routes.draw do
     end
   end
 
-  resources :bookkeeping
+  resources :bookkeeping do
+    collection do
+      get :report, :open_invoices
+    end
+  end
 
   resources :attachments do
     member do
