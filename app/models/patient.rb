@@ -128,13 +128,12 @@ class Patient < ActiveRecord::Base
 
   # Search
   # ======
-  def self.clever_find(query, args = {})
-    return [] if query.blank?
+  def self.clever_find(query)
+    return scoped if query.blank?
 
     query.strip!
     query_params = {}
     query_type = get_query_type(query)
-    page = args.delete(:page)
 
     case query_type
     when "covercard"
@@ -156,10 +155,9 @@ class Patient < ActiveRecord::Base
       patient_condition = "#{name_condition} OR #{given_family_condition} or #{family_given_condition}"
     end
 
-    args.merge!(:include => [:vcard ], :conditions => ["(#{patient_condition})", query_params], :order => 'vcards.family_name, vcards.given_name')
-    patients = self.all(args)
+    patients = self.includes(:vcard).where("(#{patient_condition})", query_params).order('vcards.family_name, vcards.given_name')
 
-    [patients.paginate(:page => page), query_type, (patients.empty? ? query_params[:covercard_code] : nil)]
+    [patients, query_type, (patients.empty? ? query_params[:covercard_code] : nil)]
   end
 
   private

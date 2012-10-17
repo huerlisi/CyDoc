@@ -1,6 +1,10 @@
 # encoding: UTF-8
 
 class PatientsController < ApplicationController
+  inherit_resources
+
+  respond_to :js
+
   in_place_edit_for :vcard, :family_name
   in_place_edit_for :vcard, :given_name
   in_place_edit_for :vcard, :extended_address
@@ -21,8 +25,6 @@ class PatientsController < ApplicationController
   in_place_edit_for :service_record, :quantity
 
   in_place_edit_for :invoice, :due_date
-
-  respond_to :js, :only => :covercard_search
 
   # Covercard
   # =========
@@ -50,32 +52,20 @@ class PatientsController < ApplicationController
     end
   end
 
-  # GET /patients
   def index
-    query = params[:query]
     query ||= params[:search][:query] if params[:search]
-    query ||= params[:quick_search][:query] if params[:quick_search]
 
     if query.present?
-      @patients, query_type, covercard_code = Patient.clever_find(query, :page => params[:page])
+      patients, query_type, covercard_code = Patient.clever_find(query)
+      @patients = patients.paginate(:page => params['page'])
 
       @suggest_covercard_search = covercard_code if query_type == 'covercard'
       # Show selection list only if more than one hit
-      return if !params[:all] && redirect_if_match(@patients)
     else
       @patients = Patient.paginate(:page => params['page'], :order => 'vcards.family_name, vcards.given_name')
     end
 
-    respond_to do |format|
-      format.html {
-        render :action => 'list'
-      }
-      format.js {
-        render :update do |page|
-          page.replace_html 'search_results', :partial => 'list'
-        end
-      }
-    end
+    index!
   end
 
   def search

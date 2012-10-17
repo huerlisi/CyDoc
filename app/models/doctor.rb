@@ -53,7 +53,7 @@ class Doctor < ActiveRecord::Base
 
   # Search
   def self.clever_find(query)
-    return scoped if query.nil? or query.empty?
+    return scoped if query.blank?
 
     query_params = {}
     query_params[:query] = "%#{query}%"

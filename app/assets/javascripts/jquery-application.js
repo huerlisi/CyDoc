@@ -2,7 +2,6 @@ function initBehaviour() {
   // from cyt.js
   addAutofocusBehaviour();
   addDatePickerBehaviour();
-  addSortableBehaviour();
   addLinkifyContainersBehaviour();
 };
 
