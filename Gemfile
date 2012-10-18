@@ -68,6 +68,7 @@ gem 'inherited_resources_views'
 
 # Authentication
 gem 'devise'
+gem 'cancan'
 
 # Uploads
 gem 'carrierwave'

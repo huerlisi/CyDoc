@@ -43,6 +43,7 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     builder (3.0.3)
+    cancan (1.6.8)
     cap-recipes (0.3.39)
     capistrano (2.13.4)
       highline
@@ -198,6 +199,7 @@ PLATFORMS
 DEPENDENCIES
   aasm
   activerecord-sqlserver-adapter
+  cancan
   capones_recipes
   carrierwave
   csv-mapper

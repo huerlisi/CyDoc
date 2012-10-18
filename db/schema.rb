@@ -532,6 +532,22 @@ ActiveRecord::Schema.define(:version => 20121001141203) do
 
   add_index "returned_invoices", ["doctor_id"], :name => "index_returned_invoices_on_doctor_id"
 
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
+
+  add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
+  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
+
   create_table "service_items", :force => true do |t|
     t.integer "tariff_item_id"
     t.integer "tariff_item_group_id"
