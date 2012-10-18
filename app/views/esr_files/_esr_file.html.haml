@@ -1,6 +1,0 @@
-%tr[esr_file]
-  %td= link_to l(esr_file.updated_at), esr_file, 'data-href-container' => 'tr'
-  %td.right= esr_file.esr_records.paid.count
-  %td.right= esr_file.esr_records.invalid.count
-  %td.right= esr_file.esr_records.missing.count
-  %td.right= currency_fmt(esr_file.esr_records.sum(:amount) || 0.0)
