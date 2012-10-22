@@ -28,8 +28,8 @@ class TariffItem < ActiveRecord::Base
 
   # Search
   # ======
-  def self.clever_find(query, args = {})
-    return [] if query.nil? or query.empty?
+  def self.clever_find(query)
+    return scoped if query.blank?
 
     query_params = {}
     case get_query_type(query)
@@ -45,7 +45,7 @@ class TariffItem < ActiveRecord::Base
       condition = "remark LIKE :query OR code LIKE :query"
     end
 
-    find_args = {:conditions => ["(#{condition})", query_params], :order => "IF(type = 'TariffItemGroup', 0, 1), tariff_type DESC, code"}.all(find_args.merge(args))
+    self.where("(#{condition})", query_params).order("IF(type = 'TariffItemGroup', 0, 1), tariff_type DESC, code")
   end
 
   private
