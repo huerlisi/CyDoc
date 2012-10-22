@@ -1,4 +1,4 @@
-<tr title="<%= item.remark %>" style="cursor: pointer" onclick="<%= remote_function :url => tariff_item_url(item), :method => :get %>">
+<tr title="<%= item.remark %>" style="cursor: pointer" onclick="window.location='<%= tariff_item_url(item) %>'">
   <td style="text-align:right"><%= item.code %></td>
   <td><span style="font-weight: bold"><%= truncate(item.remark, :length => 80, :separator => ' ') %></span></td>
   <td style="text-align:right"><%= currency_fmt(item.amount_mt) %>&nbsp;TP</td>
