@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class BookingsController < ApplicationController
   in_place_edit_for :booking, :amount_as_string
   in_place_edit_for :booking, :value_date
@@ -65,22 +67,22 @@ class BookingsController < ApplicationController
     end
 
     case @booking.title
-      when "Barzahlung":
+      when "Barzahlung"
         @booking.credit_account = Account.find_by_code('1000')
         @booking.debit_account = Account.find_by_code('1100')
-      when "Bankzahlung":
+      when "Bankzahlung"
         @booking.credit_account = Account.find_by_code('1020')
         @booking.debit_account = Account.find_by_code('1100')
-      when "Skonto/Rabatt":
+      when "Skonto/Rabatt"
         @booking.credit_account = Account.find_by_code('3200')
         @booking.debit_account = Account.find_by_code('1100')
-      when "Zusatzleistung":
+      when "Zusatzleistung"
         @booking.credit_account = Account.find_by_code('1100')
         @booking.debit_account = Account.find_by_code('3200')
-      when "Debitorenverlust":
+      when "Debitorenverlust"
         @booking.credit_account = Account.find_by_code('3900') # Debitorenverlust
         @booking.debit_account = Account.find_by_code('1100') # Debitor
-      when "Rückerstattung":
+      when "Rückerstattung"
         if extra_earning_booking = @invoice.bookings.find_by_debit_account_id(Account.find_by_code('8000'))
           @booking.credit_account = Account.find_by_code('8000') # Ausserordentlicher Ertrag
         else
