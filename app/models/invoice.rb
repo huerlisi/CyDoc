@@ -474,8 +474,8 @@ class Invoice < ActiveRecord::Base
   end
 
   # Search
-  def self.clever_find(query, args = {})
-    return [] if query.blank?
+  def self.clever_find(query)
+    return scoped if query.blank?
 
     query_params = {}
     case query
@@ -498,8 +498,7 @@ class Invoice < ActiveRecord::Base
       invoice_condition = "invoices.remark LIKE :wildcard_value"
     end
 
-    args.merge!(:include => {:tiers => {:patient => {:vcards => :addresses}}}, :conditions => ["(#{patient_condition}) OR (#{invoice_condition})", query_params], :order => 'vcards.family_name, vcards.given_name')
-    self.all(args)
+    self.includes(:tiers => {:patient => {:vcards => :addresses}}).conditions("(#{patient_condition}) OR (#{invoice_condition})", query_params).order('vcards.family_name, vcards.given_name')
   end
 
   # Calculated fields
