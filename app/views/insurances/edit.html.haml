@@ -7,10 +7,9 @@
 %h2= t_title
 
 .box
-  - semantic_form_for @insurance do |form|
+  = simple_form_for @insurance do |form|
       
     = render 'form', :form => form
 
-    - form.buttons do
-      = form.commit_button t('cydoc.actions.save'), :button_html => {:class => "icon icon-save"}
-      = button_to_function t('cydoc.actions.abort'), "window.location.href = \"#{escape_javascript(insurances_path)}\"", :class => "icon icon-cancel"
+    = form.button :submit, t('cydoc.actions.save'), :button_html => {:class => "icon icon-save"}
+    = button_to_function t('cydoc.actions.abort'), "window.location.href = \"#{escape_javascript(insurances_path)}\"", :class => "icon icon-cancel"

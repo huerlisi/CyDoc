@@ -5,12 +5,12 @@
 
 <h2><%= @insurance.name %></h2>
 <div class="box">
-  <%= render :partial => 'show' %>
+  <%= render 'show' %>
 </div>
 
 <% if @insurance.group -%>
 <h2>Gruppe</h2>
 <div class="box">
-  <%= render :partial => 'group_show' %>
+  <%= render 'group_show' %>
 </div>
 <% end -%>
