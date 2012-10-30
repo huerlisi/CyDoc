@@ -1,5 +1,5 @@
-<tr style="cursor: pointer" onclick="<%= remote_function(:method => 'post', :url => patient_treatment_medical_cases_path(@patient, @treatment, :diagnosis_id => item.id)) %>">
+<tr>
   <td><%= item.type %></td>
-  <td><%= item.code %></td>
+  <td><%= link_to item.code, patient_treatment_medical_cases_path(@patient, @treatment, :diagnosis_id => item.id), 'data-href-container' => 'tr' %></td>
   <td><%= item.text %></td>
 </tr>

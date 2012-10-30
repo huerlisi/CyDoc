@@ -1,5 +1,5 @@
-<tr style="cursor: pointer" onclick="window.location='<%= reminder_batch_job_path(reminder_batch_job) %>'">
-  <td style="text-align: right"><%= reminder_batch_job.created_at.to_date %></td>
+<tr>
+  <td style="text-align: right"><%= link_to reminder_batch_job.created_at.to_date, reminder_batch_job, 'data-href-container' => 'tr' %></td>
   <td style="text-align: right"><%= reminder_batch_job.value_date %></td>
   <td style="text-align: right"><%= reminder_batch_job.count %></td>
   <td style="text-align: right"><%= reminder_batch_job.failed_job_count %></td>
