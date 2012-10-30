@@ -265,7 +265,7 @@ class InvoicesController < ApplicationController
     
     @invoice.cancel
     # Allow saving without validation as validation problem could be a reason to cancel
-    @invoice.save(false)
+    @invoice.save(:validate => false)
     @treatment.reload
     
     respond_to do |format|
@@ -291,7 +291,7 @@ class InvoicesController < ApplicationController
     
     @invoice.reactivate
     # Allow saving without validation as validation problem could be a reason to reactivate
-    @invoice.save(false)
+    @invoice.save(:validate => false)
     @treatment.reload
 
     respond_to do |format|
