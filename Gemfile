@@ -31,6 +31,11 @@ end
 gem 'haml'
 gem 'jquery-rails'
 
+# Styling
+gem 'lyb_sidebar'
+gem 'twitter-bootstrap-rails'
+gem 'bootstrap-will_paginate'
+
 gem 'formtastic'
 gem 'simple_form'
 gem 'will_paginate'
@@ -38,6 +43,7 @@ gem 'inherited_resources'
 gem 'has_scope'
 gem 'i18n_rails_helpers'
 gem 'show_for'
+
 
 # CyDoc
 # =====

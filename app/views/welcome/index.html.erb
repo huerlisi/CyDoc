@@ -1,14 +1,6 @@
-<div style="text-align: center; margin-top: 3em; width: 100%">
-  <table style="width: 100%">
-    <tr>
-      <td style="vertical-align: top">
-        <%= navigation_section(:patients, patient_navigation, 'system-users.png') %>
-        <%= navigation_section(:payments, invoice_navigation, '48x48/invoice.png') %>
-      </td>
-      <td style="vertical-align: top">
-        <%= navigation_section(:master_data, master_data_navigation, '48x48/catalogs.png') %>
-        <%= navigation_section(:accounting, accounting_navigation, '48x48/accounts.png') %>
-      </td>
-    </tr>
-  </table>
-</div>
+<ul class="thumbnails">
+  <%= navigation_section(:patients, patient_navigation, 'system-users.png') %>
+  <%= navigation_section(:payments, invoice_navigation, '48x48/invoice.png') %>
+  <%= navigation_section(:master_data, master_data_navigation, '48x48/catalogs.png') %>
+  <%= navigation_section(:accounting, accounting_navigation, '48x48/accounts.png') %>
+</ul>

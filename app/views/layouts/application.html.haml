@@ -1,0 +1,69 @@
+!!! 5
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:charset => 'utf-8'}/
+    %meta{:content => "Simon Huerlimann &lt;simon.huerlimann@cyt.ch&gt;", :name => "author"}/
+
+    %link{:rel => "shortcut icon", :href => image_path('favicon.ico')}/
+
+    = stylesheet_link_tag 'application', :media => 'screen, projection, print'
+    = stylesheet_link_tag 'print', :media => 'print'
+
+    = javascript_include_tag "application"
+
+    = csrf_meta_tag
+    %title
+      = "#{content_for :page_title} - #{t('application.title')}"
+
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to root_path, :class => 'brand' do
+            CyDoc
+          .nav-collapse
+            %ul.nav
+              - if user_signed_in?
+                %li= link_to t('cydoc.navigation.home'), root_path
+                %li= link_to t('cydoc.navigation.patients'), :controller => 'patients'
+                - if current_doctor.settings['modules.recalls']
+                  %li= link_to t('cydoc.navigation.recalls'), :controller => 'recalls'
+                %li= link_to t('cydoc.navigation.insurances'), :controller => 'insurances'
+                %li= link_to t('cydoc.navigation.doctors'), :controller => 'doctors'
+                %li= link_to t('cydoc.navigation.service'), :controller => 'tariff_items'
+                - if current_doctor.settings['modules.drugs']
+                  %li= link_to t('cydoc.navigation.drug_products'), :controller => 'drug_products'
+                %li= link_to t('cydoc.navigation.payments'), :controller => 'invoices'
+                - if current_doctor.settings['modules.returned_invoices']
+                  %li= link_to t_title(:index, ReturnedInvoice), returned_invoices_path
+                %li= link_to t('cydoc.navigation.accounting'), :controller => 'bookkeeping'
+                %li= link_to t('cydoc.navigation.help'), :controller => '/help'
+            .pull-right
+              = form_tag "/search", :method => :get, :class => "navbar-search pull-left" do
+                = text_field_tag "query", params[:query], :placeholder => t('placeholder.search'), :class => "search-query"
+              %div= render :partial => 'users/user_bar'
+    .container-fluid
+      .row-fluid
+        .span2
+          .sidebar.well
+            = yield :sidebar
+        .span10
+          .content
+            - if notice
+              = boot_alert(notice, 'success')
+            - if alert
+              = boot_alert(alert, 'error')
+            = yield
+
+    %footer.footer
+      .container-fluid
+        %p.pull-right
+          = link_to "Deutsch", :locale => 'de-CH'
+          = link_to "English", :locale => 'en'
+        %p
+          CyDoc is built by <a href="http://cyt.ch" target="_blank">CyT GmbH</a>.
+          Code licensed under the <a href="http://www.gnu.org/licenses/agpl-3.0.html" target="_blank">GNU AGPL 3</a>.
