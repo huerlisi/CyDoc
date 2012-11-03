@@ -1,0 +1,7 @@
+#reminder_flash.flash.notice{:style => "display: none"}
+.contextual
+  = link_to "Alle Mahnungen drucken", {:url => new_reminder_batch_job_path, :method => :get}, :class => "icon icon-print", :remote => true
+#overdue_invoice_list
+  %h2 Überfällige Rechnungen
+  - @invoices = @overdue
+  = render :partial => 'list'

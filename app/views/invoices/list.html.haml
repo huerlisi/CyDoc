@@ -1,0 +1,10 @@
+#invoice_list_flash.flash.notice{:style => "display: none"}
+.contextual
+  = link_to "VESR Liste", esr_files_path, :class => "icon icon-book"
+= tabs = [                                                                                                   |
+    {:name => 'search', :partial => 'search_tab', :label => 'Suche'},                                        |
+    {:name => 'overdue', :partial => 'overdue_tab', :label => 'Mahnliste'},                                  |
+    {:name => 'open', :partial => 'open_tab', :label => 'Offene Fälle'}                                      |
+  ]                                                                                                          |
+  tabs << {:name => 'prepared', :partial => 'prepared_tab', :label => 'Zum Drucken'} unless @prepared.empty? |
+  tab_container 'invoice', "Rechnungen", tabs                                                                |

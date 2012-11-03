@@ -1,0 +1,11 @@
+%tr{:id => "appointment_#{item.id}"}
+  %td= item.date
+  %td= [item.from, item.to].compact.join(' - ')
+  %td= link_to item.patient, item.patient
+  %td= item.remarks
+  %td
+    - for state in item.aasm_events_for_current_state
+      = case state                                                                                                                                                             |
+          when :accept: link_to image_tag('true.png'), :url => accept_patient_appointment_path(item.patient, item), :title => "Termin akzeptiert", :remote => true             |
+          when :cancel: link_to image_tag('delete.png'), :url => patient_appointment_path(item.patient, item), :title => "Termin löschen", :method => :delete, :remote => true |
+        end                                                                                                                                                                    |

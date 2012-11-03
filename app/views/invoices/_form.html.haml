@@ -1,0 +1,17 @@
+= render :partial => 'treatments/show_main'
+#invoice_form
+  %h3 Neue Rechnung
+  = error_messages_for :invoice
+  .box
+    = semantic_form_for [:patient, :treatment, @invoice], :remote => true do |form|
+      = form.inputs do
+        = form.input :value_date, :as => :date_field, :input_html => {:size => 12, :autocomplete => 'off'}
+        %li.select.required
+          %label{:for => "tiers[name]"} Vergütungsart
+          = select 'tiers', :name, [['Tiers Garant', TiersGarant], ['Tiers Soldant', TiersSoldant], ['Tiers Payant', TiersPayant]]
+        = form.input :remark, :input_html => {:rows => 2}
+      = form.buttons do
+        = form.submit "Erstellen", :class => "icon icon-save"
+        = button_to_function "Abbrechen", "showTab('treatments')", :class => "icon icon-cancel"
+= render :partial => 'invoices/medical_case_list'
+= render :partial => 'invoices/service_record_list'

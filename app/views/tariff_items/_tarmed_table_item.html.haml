@@ -1,0 +1,5 @@
+%table.list
+  - for t in @tarmed_texts
+    %tr
+      %td= link_to t.leistung.code, url_for(:only_path => false, :controller => 'tariff_items', :action => 'create', 'service_record[code]' => t.leistung.code, 'service_record[patient_id]' => params[:patient_id]), 'data-href-container' => 'tr'
+      %td= t.BEZ_255

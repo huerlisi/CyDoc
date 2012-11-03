@@ -1,0 +1,6 @@
+#notice_flash.flash.notice
+  %p Rechnung wurde verbucht...
+  %p
+    Möchten Sie die Rechnung drucken?
+    \#{button_to_function 'Ja', remote_function(:url => print_invoice_url(@invoice), :before => "showPrintingFlash('Rechnung')")}
+    \#{button_to_function 'Nein', "Element.hide('notice_flash')"}

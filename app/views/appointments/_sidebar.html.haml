@@ -1,0 +1,8 @@
+- content_for :sidebar do
+  .sub-tabs
+    %h3 Filter
+    %ul
+      %li= link_to "Alle", url_for(:overwrite_params => {:by_period => nil})
+      - for in_month in 0..6
+        - month = Date.today.in(in_month.month)
+        %li= link_to l(month, :format => :month), url_for(:params => params.merge({:by_period => {:from => month.beginning_of_month.to_s(:db), :to => month.end_of_month.to_s(:db)}}))

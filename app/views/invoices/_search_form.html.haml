@@ -1,0 +1,5 @@
+.box
+  = form_for 'search', {:url => invoices_path, :method => :get, :remote => true} do |f|
+    = f.label 'query', 'Suche'
+    = f.text_field :query, :label => "Suche", :size => 15, :autocomplete => 'off'
+    = image_submit_tag 'find.png', :title => 'Suchen'

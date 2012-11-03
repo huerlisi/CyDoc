@@ -1,6 +1,0 @@
-<% for @account in Account.all -%>
-  <h3><%= link_to @account.title, account_path(@account) %></h3>
-  <%= render :partial => 'statistics' %>
-<% end -%>
-
-<%= render :partial => 'bookings/sidebar' %>

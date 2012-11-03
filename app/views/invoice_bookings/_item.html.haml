@@ -1,0 +1,9 @@
+%tr
+  %td{:style => "width: 10em"}= l item.value_date
+  %td
+    = link_to item.title, item
+    = '<hr style="height: 1px; margin: 0"/>'.html_safe unless item.comments.blank?
+    = item.comments
+  %td{:style => "text-align: right"}
+    = sprintf("%0.2f", item.accounted_amount(@invoice.balance_account))
+    \&nbsp;CHF

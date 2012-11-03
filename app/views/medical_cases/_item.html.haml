@@ -1,0 +1,4 @@
+- begin
+  = render :partial => item.class.name.tableize.singularize, :object => item
+- rescue ActionView::ActionViewError
+  = render :partial => '/medical_cases/medical_case', :locals => {:item => item}

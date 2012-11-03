@@ -1,0 +1,48 @@
+%h3
+  = t_model(Invoice)
+  \##{@invoice.id}
+.box
+  %table{:style => "width: 100%"}
+    %tr
+      %th
+        = t_attr(:patient, Invoice)
+        \:
+      %td= full_address(@invoice.patient_vcard, ', ')
+      %th
+        = t_attr(:law, Invoice)
+        \:
+      %td= @invoice.law.name
+    %tr
+      %th
+        = t_attr(:billing_address, Invoice)
+        \:
+      %td= full_address(@invoice.billing_vcard, ', ')
+      %th
+        = t_attr(:tiers, Invoice)
+        \:
+      %td= @invoice.tiers.name
+    %tr
+      %th
+        = t_attr(:referrer, Invoice)
+        \:
+      %td= @invoice.referrer.to_s
+      %th
+        = t_attr(:state, Invoice)
+        \:
+      %td#invoice_state= t @invoice.state, :scope => 'invoice.state'
+    %tr
+      %th
+        = t_attr(:treatment_reason, Invoice)
+        \:
+      %td= @invoice.treatment.reason
+      %th
+        = t_attr(:value_date, Invoice)
+        \:
+      %td= l @invoice.value_date
+    %tr
+      %th
+      %td
+      %th
+        = t_attr(:due_date, Invoice)
+        \:
+      %td= @invoice.due_date

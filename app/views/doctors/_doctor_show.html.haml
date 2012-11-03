@@ -1,0 +1,11 @@
+.contextual
+  = link_to "Ändern", edit_doctor_path(@doctor), :class => "icon icon-edit"
+%h3 Arzt Information
+.box
+  %table
+    %tr
+      %th ZSR:
+      %td= @doctor.zsr
+    %tr
+      %th EAN:
+      %td= @doctor.ean_party

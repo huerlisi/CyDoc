@@ -1,0 +1,9 @@
+= form_for :insurance_policy, @insurance_policy, patient_insurance_policies_url(@patient), :remote => true do |insurance_policy|
+  #insurance_policy_form.box
+    = error_messages_for :insurance_policy
+    = insurance_policy.select :policy_type, [['Krankenversicherung', 'KVG'], ['Unfallversicherung', 'UVG']]
+    %b Versicherung:
+    = insurance_policy.select :insurance_id, Insurance.all(:include => :vcard, :order => 'vcards.full_name').collect { |i| [i.to_s, i.id] }, :include_blank => true, :label => "Versicherung"
+    %b Nummer:
+    = insurance_policy.text_field :number, :size => 12, :autocomplete => 'off'
+    = insurance_policy.submit "Zuweisen"

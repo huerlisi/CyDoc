@@ -1,1 +1,1 @@
-jQuery('#esr_record_<%= @esr_record.id %>').replaceWith('<%= escape_javascript(render @esr_record) %>');
+jQuery('#esr_record_#{@esr_record.id}').replaceWith('#{escape_javascript(render @esr_record)}');

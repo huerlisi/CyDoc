@@ -1,0 +1,5 @@
+#notice_flash.flash.notice
+  %p Rechnungen wurde an Drucker gesendet...
+  %p
+    = link_to 'Journal', :controller => 'invoice_batch_jobs', :action => :show, :id => @invoice_batch_job.id
+    = button_to_function 'Schliessen', "Element.hide('invoice_flash')"

@@ -1,0 +1,4 @@
+.box
+  %h3
+    Neue #{@medical_case.class.to_s}
+  = render :partial => @medical_case.class.name.underscore + '_form'

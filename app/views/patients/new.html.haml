@@ -1,0 +1,10 @@
+%h2= t('cydoc.title.new_patient')
+.box
+  = form_for setup_patient(@patient) do |patient|
+    .contextual
+      = link_to_function t('cydoc.actions.save'), "this.up('form'.submit()", :class => "icon icon-save"
+      = link_to t('cydoc.actions.abort'), patients_path, :class => "icon icon-cancel"
+    = render :partial => 'form', :locals => {:patient => patient}
+    %p
+      = patient.submit t('cydoc.actions.save'), :class => "icon icon-save"
+      = button_to_function t('cydoc.actions.abort'), "window.location.href = \"#{escape_javascript(patients_path)}\"", :class => "icon icon-cancel"

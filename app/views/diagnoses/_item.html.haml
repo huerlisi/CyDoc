@@ -1,0 +1,4 @@
+%tr
+  %td= item.type
+  %td= link_to item.code, patient_treatment_medical_cases_path(@patient, @treatment, :diagnosis_id => item.id), 'data-href-container' => 'tr'
+  %td= item.text

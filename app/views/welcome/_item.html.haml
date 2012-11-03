@@ -1,0 +1,10 @@
+- title ||= "Home"
+- controller ||= 'welcome'
+- action ||= 'index'
+- image ||= "#{controller}_#{action}.png"
+- url ||= {:controller => controller, :action => action}
+%div{:style => "margin: 2em; margin-bottom: 3.5em"}
+  %h2= link_to title, url
+  %p{:style => "width: 100%"}
+    = link_to image_tag(image), url, :style => "margin-right: 0.5em; float: left"
+    %i{:style => "font-size: 13pt"}= description

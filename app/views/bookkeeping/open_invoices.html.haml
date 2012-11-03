@@ -1,0 +1,9 @@
+.contextual
+  = link_to "Als CSV", {:action => 'open_invoices_csv', :by_value_period => params[:by_value_period]}, :class => "icon icon-show"
+%h2
+  Offene Posten per #{Date.parse(@value_date_end)}
+%table.list.booking_list
+  = render :partial => 'open_invoice_list_header'
+  = render :partial => 'open_invoice_item', :collection => @invoices
+  = render :partial => 'open_invoice_list_footer'
+= render :partial => 'bookings/sidebar'

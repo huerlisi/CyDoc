@@ -1,0 +1,31 @@
+= form_for setup_patient(Patient.new), :url => new_patient_path, :method => :get do |f|
+  #covercard_patient
+    %h2= t('cydoc.covercard_search.result')
+    .left-box
+      - [:covercard_code, :birth_date, :sex].each do |attr|
+        %p
+          %label= t_attr(attr, Patient)
+          = f.text_field attr, :value => @covercard_patient.send(attr), :readonly => true
+    .right-box
+      - [:vcard, :billing_vcard].each do |v|
+        = vcard = @covercard_patient.send(v)
+        .address-box
+          %label= t_attr(v, Patient)
+          %p.address
+            = f.fields_for v do |vcard_field|
+              - [:honorific_prefix, :given_name, :family_name, :extended_address, :street_address, :postal_code, :locality].each do |attr|
+                - value = vcard.send(attr)
+                - if value
+                  = vcard_field.text_field attr, :value => value, :readonly => true
+    %div
+      .address-box
+        %label= t_attr(:insurance_policy, Patient)
+        = @covercard_patient.insurance_policy.to_s
+      .address-box
+        %label= t_attr(:insurance, Patient)
+        = @covercard_patient.insurance_policy.insurance.to_s
+  = f.fields_for :insurance_policies do |p|
+    - [:number, :policy_type, :insurance_id].each do |attr|
+      = p.hidden_field attr, :value => @covercard_patient.insurance_policy.send(attr)
+  = hidden_field :patient, :from_covercard, :value => true
+  = f.submit t_action(:patient_from_covercard), :class => "icon icon-save"

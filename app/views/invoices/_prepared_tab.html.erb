@@ -1,6 +1,0 @@
-<div class="contextual">
-  <%= link_to "Rechnungen drucken", {:url => new_invoice_batch_job_path, :method => :get}, :class => "icon icon-print", :remote => true %>
-</div>
-<h2>Rechnungen zum Drucken</h2>
-<% @invoices = @prepared %>
-<%= render :partial => 'list' %>

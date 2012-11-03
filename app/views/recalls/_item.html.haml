@@ -1,0 +1,9 @@
+%tr{:id => "recall_#{item.id}"}
+  %td= l item.due_date
+  %td= link_to item.patient, item.patient
+  %td= item.appointment unless item.appointment.nil?
+  %td= link_to_last_session(item)
+  %td= l(item.sent_at.to_date) if item.sent_at
+  %td= item.remarks
+  %td
+    = render :partial => 'recalls/action_links', :locals => {:recall => item}

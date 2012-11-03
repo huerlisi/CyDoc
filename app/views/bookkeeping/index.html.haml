@@ -1,0 +1,9 @@
+%div{:style => "text-align: center; margin-top: 3em; width: 100%"}
+  %table{:style => "width: 100%"}
+    %tr
+      %td{:style => "vertical-align: top"}
+        = navigation_section(:payments, invoice_navigation, '48x48/invoice.png')
+        = render :partial => 'esr_files/navigation_section'
+      %td{:style => "vertical-align: top; padding-left: 4em"}
+        = render :partial => 'bookkeeping/navigation_section'
+        = render :partial => 'accounts/navigation_section'

@@ -1,0 +1,5 @@
+#search_result
+  %table.list
+    = render :partial => 'list_header'
+    = render :partial => 'item', :collection => @doctors
+    = render :partial => 'list_footer'

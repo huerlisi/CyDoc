@@ -1,0 +1,7 @@
+- content_for :sidebar do
+  .sub-tabs
+    %h3= t('cydoc.title.filter')
+    %ul
+      %li= link_to t('cydoc.actions.all'), url_for(:overwrite_params => {:by_period => nil, :page => nil})
+      - for (month, count) in Recall.filter_months
+        %li= link_to "#{l(month, :format => :month)} (#{count})", url_for(:params => params.merge({:by_period => {:from => month.beginning_of_month.to_s(:db), :to => month.end_of_month.to_s(:db)}, :page => nil}))

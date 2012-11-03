@@ -1,0 +1,15 @@
+= error_messages_for :medical_cases
+= form_for :medical_case, :url => {:action => 'create'} do |f|
+  %table
+    %tr
+      %th Datum:
+      %td= f.text_field :date
+    %tr
+      %th Text:
+      %td= f.text_area :remarks, :rows => 4
+    %tr
+      %td{:colspan => "2"}
+        = f.hidden_field :type
+        = f.hidden_field :doctor_id
+        = f.hidden_field :patient_id
+        = f.submit "Erfassen"

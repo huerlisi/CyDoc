@@ -1,0 +1,84 @@
+%h2#accounting Rechnungswesen
+%h3#open_case Fall eröffnen
+%p
+  %a{:href => "images/docs/add_case.png"}
+    %img.right{:src => "images/docs/small/add_case.png"}/
+  Öffnen Sie eine PatientIn und klicken Sie anschliessend oben rechts auf „Fall eröffnen“. Geben Sie dann die nötigen Informationen wie Anfangsdatum und Behandlungsgrund an und beenden mit „speichern.“
+%h3#add_new_service_item Leistung erfassen
+%p
+  %a{:href => "images/docs/add_service.png"}
+    %img.right{:src => "images/docs/small/add_service.png"}/
+  Öffnen Sie einen Patienten und klicken Sie links auf Fälle. Der aktuelle Fall wird angezeigt und Sie können mit dem Erfassen von Leistungen (Tarmed, Analysenliste, Medikamente) beginnen. Klicken Sie erst auf den Link „Neue Konsultation“. Nun können Leistungen anhand der Tarifnummer oder der Beschreibung gesucht werden. Wenn nur eine Leistung zum Suchbegriff gefunden wird, übernimmt CyDoc diese automatisch. Falls mehrere Leistungen gefunden werden, müssen Sie eine mit der Maus anklicken.
+%h3#erase_service_item Leistung löschen
+%p
+  %a{:href => "images/docs/erase_service.png"}
+    %img.right{:src => "images/docs/small/erase_service.png"}/
+  Um eine Leistung zu löschen, klicken Sie einfach Rechts neben dem Text auf das rote Kreuz.
+%h3#add_diagnose Diagnose erfassen
+%p
+  %a{:href => "images/docs/add_diagnose.png"}
+    %img.right{:src => "images/docs/small/add_diagnose.png"}/
+  Im Suchfeld unter „Diagnosen“ können Sie nach Diagnosen suchen. Wenn die Suche eindeutig ist, wird die Diagnose automatisch erfasst, falls es mehrere Treffer gibt, müssen Sie eine Position wählen. Selbstverständlich können Sie nach den Diagnosecodes oder auch nach dem Diagnosetext suchen. Um weitere Diagnosen eingeben zu können klicken Sie auf „neue Diagnose“.
+%h3#open_cases Fälle Administrieren
+%p
+  %a{:href => "images/docs/non_closed_cases.png"}
+    %img.right{:src => "images/docs/small/non_closed_cases.png"}/
+  Um eine Übersicht über die offenen Fälle zu bekommen, klicken Sie auf "Rechnungen". Fahren Sie dann im Bild nach unten bis Sie den Titel "Nicht abgeschlossene Fälle" finden. Dort sehen Sie jetzt eine Liste aller Patientinnen die einen offen Fall haben. Um einen Fall zu bearbeiten oder eine Rechnung zu erstellen, klicken Sie auf entsprechende Fallnummer.
+%h3#create_invoice Rechnung erstellen
+%p
+  %a{:href => "images/docs/create_invoice.png"}
+    %img.right{:src => "images/docs/small/create_invoice.png"}/
+  Um aus den erfassten Leistungen eine Rechnung zu generieren, klicken Sie auf „Rechnung stellen“.
+%p
+  Ein neues Formular wird geöffnet, bei dem Sie das Rechnungsdatum, den Garanten und nach Wunsch auch Bemerkungen angeben können. Erstellen Sie nun die Rechnung indem Sie auf „Erstellen“ klicken.
+%p
+  %br/
+  %br/
+  %br/
+  %br/
+  %br/
+  %br/
+  %br/
+  %br/
+  %br/
+  %br/
+  %br/
+  %a{:href => "images/docs/create_invoice2.png"}
+    %img.right{:src => "images/docs/small/create_invoice2.png"}/
+  Die Rechnung wurde nun automatisch verbucht. Klicken Sie nun auf "ja" wenn Sie die Rechnung gleich drucken wollen.
+%h3#cancel_invoice Rechnung stornieren
+%p
+  %a{:href => "images/docs/cancel_invoice.png"}
+    %img.right{:src => "images/docs/small/cancel_invoice.png"}/
+  Falls die Rechnung komplett falsch war, zum Beispiel wenn die Leistungen auf einen falschen Patienten erfasst wurde, können Sie die Rechnung stornieren.
+%p
+  Klicken Sie hierfür auf "stornieren", sie werden anschliessend gefragt, ob Sie sicher sind. Falls dies so ist bestätigen Sie mit "OK".
+%h3#reactivate_invoice Rechnung reaktivieren
+%p
+  %a{:href => "images/docs/reactivate_invoice.png"}
+    %img.right{:src => "images/docs/small/reactivate_invoice.png"}/
+  Falls Sie lediglich eine Position vergessen haben, oder noch eine ergänzen möchten, ist die Funktion "Reaktivieren" sinnvoll. Klicken Sie hierfür auf "Reaktivieren". Sie werden dann gefragt ob Sie sicher sind, was Sie mit "OK" bestätigen können.
+%h3#copy_of_invoice_print
+  Rechnungskopie drucken
+%p
+  %a{:href => "images/docs/print_invoice_copy.png"}
+    %img.right{:src => "images/docs/small/print_invoice_copy.png"}/
+  Wählen Sie einen Patienten aus (wenden Sie dazu die Suche an, welche weiter oben genauer beschrieben ist). Nun klicken Sie im linken Menu auf den Link „Rechnungen“. Im Fenster erscheint die aktuellste Rechnung. Um eine ältere Rechnung auszuwählen, klicken Sie rechts auf die gewünschte Rechnung. Sie können nun eine Rechnungskopie drucken, indem Sie auf „Rechnungskopie drucken“ klicken.
+%h3#book_payment Zahlung verbuchen
+%h4#with_vers_or_besr mit VESR/BESR
+%p
+  %a{:href => "images/docs/vesr1.png"}
+    %img.right{:src => "images/docs/small/vesr1.png"}/
+  Laden Sie die VESR-Datei von Ihrer Bank herunter und merken Sie sich, in welchen Ordner Sie die Datei gespeichert haben.
+%br/
+%br/
+%br/
+%p
+  %a{:href => "images/docs/vesr2.png"}
+    %img.right{:src => "images/docs/small/vesr2.png"}/
+  Gehen Sie dann in CyDoc (Home-Site) auf „VESR-Liste“und klicken Sie auf „VESR Datei einlesen“. Danach klicken auf Durchsuchen, wählen die richtige Datei und  bestätigen mit „Öffnen“. Wenn Sie nun auf Einlesen klicken, wird die Datei hoch geladen und verbucht. Als Bestätigung wird ein Protokoll angezeigt, welches Sie bei bedarf ausdrucken können.
+%h4#book_payment_manually manuell verbuchen
+%p
+  %a{:href => "images/docs/book_reminder.png"}
+    %img.right{:src => "images/docs/small/book_reminder.png"}/
+  Um manuell eine Zahlung zu verbuchen, öffnen Sie bitte die betreffende Rechnung. Klicken Sie dann unter „Buchungen“ auf „Manuell buchen“. Geben Sie dann das Zahlungsdatum, die Zahlungsart, optional eine Bemerkung und den Betrag an. Dann klicken Sie abschliessend auf „Buchen“.

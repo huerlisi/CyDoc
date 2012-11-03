@@ -1,0 +1,3 @@
+= fields_for phone_number_form do |phone_number|
+  = address.select :honorific_prefix, HonorificPrefix.all.collect { |prefix| prefix.name }, :include_blank => true, :label => "Anrede"
+  = address.text_field :family_name, :size => 23, :label => ""

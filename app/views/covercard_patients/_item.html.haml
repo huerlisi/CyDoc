@@ -1,0 +1,6 @@
+%tr
+  %td= link_to item.full_name, item, 'data-href-container' => 'tr'
+  %td= address(item.vcard, ', ')
+  %td{:style => "text-align: right"}= item.doctor_patient_nr
+  %td{:style => "text-align: right"}= item.birth_date
+  %td= link_to t_action(:trim_patient), covercard_update_path(item, @covercard_patient.covercard_code) if Covercard::Patient.settings['modules.covercard']

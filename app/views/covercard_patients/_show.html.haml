@@ -1,0 +1,20 @@
+#covercard_patient
+  %h2= t('cydoc.covercard_search.result')
+  .left-box
+    - [:name, :birth_date, :sex].each do |attr|
+      %p
+        %label= t_attr(attr, Patient)
+        = @covercard_patient.send(attr)
+  .right-box
+    - [:vcard, :billing_vcard].each do |vcard|
+      - address = @covercard_patient.send(vcard)
+      .address-box
+        %label= t_attr(vcard, Patient)
+        %p.address
+          - if address.extended_address
+            = address.extended_address
+            %br/
+          = address.street_address
+          %br/
+          = address.postal_code
+          = address.locality

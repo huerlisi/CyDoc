@@ -1,0 +1,6 @@
+%tr#bookings_footer
+  %th{:style => "width: 10em"}= l Date.today
+  %th= @invoice.due_amount.currency_round >= 0 ? t_attr(:open_amount, Invoice) : t_attr(:balance, Invoice)
+  %th{:style => "text-align: right"}
+    = sprintf("%0.2f", @invoice.due_amount)
+    \&nbsp;CHF

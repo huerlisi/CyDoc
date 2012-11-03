@@ -1,9 +1,0 @@
-<div class="contextual">
-  <%= link_to "Erfassen", {:url => new_tariff_item_path, :method => :get}, :class => "icon icon-add", :remote => true %>
-  <%= link_to "Alle anzeigen", {:url => tariff_items_path(:all => true), :method => :get}, :class => "icon icon-index", :remote => true %>
-</div>
-<%=
-tab_container 'catalogs', "Leistungskatalog", [
-  {:name => 'all', :partial => 'tariff_items/list_tab', :label => 'Alle'},
-]
-%>

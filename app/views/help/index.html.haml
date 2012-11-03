@@ -1,0 +1,38 @@
+:css
+  .help-sidebar {
+    position: fixed;
+  }
+  
+  .help {
+    float: left;
+  }
+  
+  .help h2, .help h3, .help h4 {
+    clear: both;
+    margin-top: 2em;
+  }
+  
+  .help img.left {
+    float: left;
+    margin-right: 2em;
+    margin-bottom: 1em;
+    padding: 0.5em;
+    border: 1px solid gray;
+  }
+  
+  .help img.right {
+    float: right;
+    margin-left: 2em;
+    margin-bottom: 1em;
+    padding: 0.5em;
+    border: 1px solid gray;
+  }
+= render :partial => 'sidebar'
+.help
+  .contextual
+  %div
+    = render :partial => 'first_steps'
+    = render :partial => 'billing'
+    = render :partial => 'reminding'
+    = render :partial => 'basic_claims'
+    = render :partial => 'tips'

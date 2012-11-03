@@ -1,0 +1,27 @@
+= vcard = @patient.vcard
+:css
+  body { margin: 0; padding: 1px; }
+%div{:style => "font-family: 'Vera Sans',Arial,sans-serif; font-size: 6pt; width: 6.5cm"}
+  .full_name{:style => "font-size: 7pt"}
+    = "##{@patient.doctor_patient_nr}" unless @patient.doctor_patient_nr.blank?
+    %br/
+    = vcard.full_name
+    = @patient.birth_date
+    %br/
+  %div{:style => "height: 0.3em"}
+    .address
+      = vcard.street_address
+      %br/
+      = vcard.postal_code
+      = vcard.locality
+    %div{:style => "height: 0.3em"}
+      #phone_numbers{:style => "font-style: italic; font-size: 6pt"}
+        = @patient.vcard.contacts.all(:limit => 2).map{|number| "#{number.phone_number_type}: #{number.number}"}.join('<br/>')
+      %div{:style => "height: 0.3em"}
+        - kvg = @patient.insurance_policies.by_policy_type('KVG').first
+        = kvg.to_s if kvg
+        %br/
+        - uvg = @patient.insurance_policies.by_policy_type('UVG').first
+        = uvg.to_s if uvg
+        %br/
+        %div

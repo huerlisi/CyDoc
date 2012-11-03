@@ -1,0 +1,4 @@
+= render :partial => 'show', :object => @insurance.group
+%h3 Mitglieder
+- @insurances = @insurance.group.members.paginate(:page => params[:page])
+= render :partial => 'list'

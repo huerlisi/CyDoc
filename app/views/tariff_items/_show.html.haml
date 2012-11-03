@@ -1,0 +1,37 @@
+.box
+  .contextual
+    = link_to "Editieren", {:url => edit_tariff_item_path(@tariff_item), :method => :get}, :class => "icon icon-edit", :remote => true
+    = link_to "Duplizieren", {:url => duplicate_tariff_item_path(@tariff_item), :method => :post}, :class => "icon icon-add", :remote => true
+    = link_to "Löschen", {:url => tariff_item_path(@tariff_item), :method => :delete, :confirm => t_confirm_delete(@tariff_item)}, :class => "icon icon-delete", :remote => true
+    = link_to "Katalog anzeigen", tariff_items_path(:all => true), :class => "icon icon-index"
+  %h3 Leistung
+  %table
+    %tr
+      %th
+        = t_attr(:type_as_string)
+        \:
+      %td= @tariff_item.type_to_s
+    %tr
+      %th
+        = t_attr(:code)
+        \:
+      %td= text_field :tariff_item, :code
+    %tr
+      %th
+        = t_attr(:remark)
+        \:
+      %td= text_field :tariff_item, :remark
+    %tr
+      %th
+        = t_attr(:obligation)
+        \:
+      %td= @tariff_item.obligation? ? "Ja" : "Nein"
+    %tr
+      %th
+        = t_attr(:vat_class)
+        \:
+      %td= @tariff_item.vat_class.to_s
+  - if @tariff_item.is_a? TariffItemGroup
+    = render 'show_tariff_item_group'
+  - else
+    = render 'show_price'

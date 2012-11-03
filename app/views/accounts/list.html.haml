@@ -1,0 +1,8 @@
+.contextual
+  = link_to t('cydoc.actions.esr'), esr_files_path, :class => "icon icon-book"
+%h2= t('cydoc.title.accounts')
+%table.list
+  = render :partial => 'accounts/list_header'
+  = render :partial => 'accounts/item', :collection => @accounts
+  = render :partial => 'accounts/list_footer'
+= render :partial => 'bookings/sidebar'

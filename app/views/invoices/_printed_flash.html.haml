@@ -1,0 +1,4 @@
+#notice_flash.flash.notice
+  %p
+    = button_to_function t_action(:close), "Element.hide('notice_flash')", :style => 'float: right'
+    = t('printing.done', :model => t(model, :scope => 'activerecord.models'))

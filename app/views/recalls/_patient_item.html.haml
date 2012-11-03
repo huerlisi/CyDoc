@@ -1,0 +1,10 @@
+%tr{:id => "recall_#{patient_item.id}"}
+  %th= l patient_item.due_date
+  %td= t('cydoc.recall.appointed_time', :appointment => patient_item.appointment) unless patient_item.appointment.nil?
+  %td
+    = t('cydoc.recall.last_appointment')
+    = link_to_last_session(patient_item)
+  %td= patient_item.sent_at ? t('cydoc.recall.offer_printed', :offer => l(patient_item.sent_at.to_date)) : nil
+  %td= patient_item.remarks
+  %td
+    = render :partial => 'recalls/action_links', :locals => {:recall => patient_item}

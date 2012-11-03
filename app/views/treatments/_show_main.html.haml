@@ -1,0 +1,33 @@
+%h3= t('cydoc.title.treatment')
+#treatment.box
+  %table{:style => "width: 100%"}
+    %tr
+      %th= t_attr(:patient, Treatment)
+      %td= full_address(@treatment.patient.vcard, ', ')
+      %th
+        = t_attr(:law, Treatment)
+        \:
+      %td= @treatment.law.name if @treatment.law
+    %tr
+      %th
+        = t_attr(:date_begin, Treatment)
+        \:
+      %td= l(@treatment.date_begin) if @treatment.date_begin
+      %th
+        = t_attr(:place_type, Treatment)
+        \:
+      %td= @treatment.place_type
+    %tr
+      %th
+        = t_attr(:date_end, Treatment)
+        \:
+      %td= l(@treatment.date_end) if @treatment.date_end
+      %th
+        = t_attr(:reason, Treatment)
+        \:
+      %td= @treatment.reason
+    %tr
+      %th
+        = t_attr(:referrer, Treatment)
+        \:
+      %td= @treatment.referrer.to_s if @treatment.referrer

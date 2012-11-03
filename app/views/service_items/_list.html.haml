@@ -1,0 +1,4 @@
+%table#service_items.list
+  = render :partial => 'service_items/list_header'
+  = render :partial => 'service_items/item', :collection => @tariff_item.service_items
+  = render :partial => 'service_items/list_footer'

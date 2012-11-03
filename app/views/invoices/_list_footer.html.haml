@@ -1,0 +1,2 @@
+%tr
+  %th{:colspan => "8", :style => "text-align: right"}= will_paginate @invoices, :param_name => "page_#{@tab_name}", :params => params.merge(:tab => @tab_name)

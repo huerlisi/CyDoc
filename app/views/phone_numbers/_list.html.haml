@@ -1,0 +1,5 @@
+%h3= t('cydoc.title.contact')
+.box
+  #new_phone_number.new_phone_number
+  %table#phone_numbers
+    = render :partial => 'phone_numbers/item', :collection => phone_numbers

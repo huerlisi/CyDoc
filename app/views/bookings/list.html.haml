@@ -1,0 +1,7 @@
+.contextual
+  = link_to "Erfassen", new_booking_path, :class => "icon icon-add"
+  = link_to "Alle anzeigen", {:url => bookings_path(:all => true), :method => :get}, :class => "icon icon-index", :remote => true
+  = link_to "Als CSV", {:action => 'list_csv', :by_value_period => params[:by_value_period]}, :class => "icon icon-show"
+%h2= t('cydoc.title.bookings')
+= render :partial => 'list'
+= render :partial => 'bookings/sidebar'

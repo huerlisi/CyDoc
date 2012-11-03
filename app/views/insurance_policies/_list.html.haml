@@ -1,0 +1,10 @@
+.contextual
+  = link_to t('cydoc.actions.add_insurance'), new_patient_insurance_policy_url(@patient), :method => :get, :remote => true, :class => "icon icon-add" unless @patient.new_record?
+%h3= t('cydoc.title.insurance')
+%div
+  - if @patient.new_record?
+    = render :partial => 'insurance_policies/form'
+  - else
+    #new_insurance_policy.new_insurance_policy
+  %table#insurance_policies.list
+    = render :partial => 'insurance_policies/item', :collection => @patient.insurance_policies

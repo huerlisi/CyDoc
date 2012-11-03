@@ -1,0 +1,17 @@
+- show ||= @insurance
+%h3 Kontakt
+%table
+  %tr
+    %th Name:
+    %td= show.full_name
+  %tr
+    %th Adresse:
+    %td= address(show.vcard, ', ')
+%h3 Information
+%table
+  %tr
+    %th Rolle:
+    %td= show.role(:text)
+  %tr
+    %th EAN:
+    %td= show.ean_party

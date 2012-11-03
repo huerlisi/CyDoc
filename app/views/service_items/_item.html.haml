@@ -1,0 +1,19 @@
+- @service_item = item
+%tr{:id => "service_item_#{item.id}"}
+  %td
+    = in_place_editor_field(:service_item, :quantity)
+    x
+  %td{:style => "text-align:right"}= item.code
+  %td
+    = "(#{in_place_editor_field :service_item, :ref_code, {}, :size => 8}) " unless @service_item.ref_code.blank?
+    %b= item.text
+  %td{:style => "text-align:right"}
+    = sprintf('%.2f', item.amount_mt)
+    \&nbsp;AL
+  %td{:style => "text-align:right"}
+    = sprintf('%.2f', item.amount_tt)
+    \&nbsp;TL
+  %td{:style => "text-align:right"}
+    %b>= sprintf('%.2f', item.amount)
+    \&nbsp;CHF
+  %td= link_to image_tag('delete.png'), {:url => tariff_item_service_item_url(@tariff_item, item), :method => :delete}, :remote => true

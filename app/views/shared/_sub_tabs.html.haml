@@ -1,0 +1,10 @@
+- if params[:sub_tab_id] and params[:tab] == type
+- sub_tab = tabs.find(params[:sub_tab_id])
+- elsif tabs.first
+- sub_tab = tabs.first
+- end
+- selected_tab = "#{type}_#{sub_tab.id}" unless sub_tab.nil?
+%div{:class => "sub-tab-container sub-tab-#{type}"}
+  %div{:id => "sub-tab-content-#{type}"}
+    - eval "@#{type.singularize} = sub_tab"
+    = render :partial => "#{type}/show" unless sub_tab.nil?

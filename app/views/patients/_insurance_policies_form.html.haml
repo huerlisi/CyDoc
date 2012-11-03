@@ -1,0 +1,8 @@
+%h3= t('cydoc.title.insurance')
+#insurance_policy_form.box
+  = fields_for @patient do |patient|
+    = patient.fields_for :insurance_policies do |insurance_policy|
+      %p
+        = insurance_policy.select :policy_type, {t_attr(:health_insurance) => t_attr(:health_insurance_short_cut), t_attr(:accident_insurance) => t_attr(:accident_insurance_short_cut)}, :label => t_attr(:policy_type)
+        = insurance_policy.select :insurance_id, Insurance.all(:include => {:vcard => :address}, :order => 'vcards.full_name').collect { |i| [i.to_s, i.id] }, :include_blank => true, :label => t_attr(:insurance)
+        = insurance_policy.text_field :number, :size => 12, :autocomplete => 'off', :label => t_attr(:insurance_number)

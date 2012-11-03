@@ -1,0 +1,5 @@
+= tab_container 'recalls', t('cydoc.tab_container.recall.list'), [                                                                   |
+    {:name => 'scheduled_recalls', :partial => 'recalls/scheduled_list', :label => t('cydoc.tab_container.recall.applied_recalls')}, |
+    {:name => 'sent_recalls', :partial => 'recalls/sent_list', :label => t('cydoc.tab_container.recall.send_recalls')},              |
+  ]                                                                                                                                  |
+= render :partial => 'sidebar'

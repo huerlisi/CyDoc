@@ -1,0 +1,9 @@
+%h3= t('cydoc.title.contact')
+#phone_number_form.box
+  = fields_for @patient do |patient|
+    = patient.fields_for :vcard do |vcard|
+      - vcard.object.contacts.build_defaults
+      = vcard.fields_for :contacts do |phone_number|
+        %p
+          = phone_number.select :phone_number_type, [t_attr(:private_phone, PhoneNumber), t_attr(:business_phone, PhoneNumber), t_attr(:mobile, PhoneNumber), t_attr(:fax, PhoneNumber), t_attr(:email, PhoneNumber)], :label => t_attr(:phone_number_type, PhoneNumber)
+          = phone_number.text_field :number, :size => 12, :autocomplete => 'off', :label => t_attr(:phone_number, PhoneNumber)

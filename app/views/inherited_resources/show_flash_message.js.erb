@@ -1,6 +1,5 @@
-<%- if flash[:error].present? %>
-showFlashMessage('error', '<%= escape_javascript(flash[:error]) %>');
-<%- elsif flash[:notice].present? %>
-showFlashMessage('notice', '<%= escape_javascript(flash[:notice]) %>');
-<%- end %>
-<%- flash.discard %>
+- if flash[:error].present?
+  showFlashMessage('error', '#{escape_javascript(flash[:error])}');
+- elsif flash[:notice].present?
+  showFlashMessage('notice', '#{escape_javascript(flash[:notice])}');
+- flash.discard

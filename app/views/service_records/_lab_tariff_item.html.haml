@@ -1,0 +1,23 @@
+%tr
+  %td
+  %td
+  %td{:colspan => "15", :style => "font-size: 80%; font-weight: bold; padding-top: 0.3em; padding-bottom: 0"}= record.text
+%tr
+  %td
+    ■&nbsp;#{l record.date.to_date}
+  %td= sprintf('%03i', record.tariff_type)
+  %td= record.code
+  %td
+  %td
+  %td{:style => "text-align: right"}= sprintf('%.2f', record.quantity)
+  %td{:style => "text-align: right"}= sprintf('%.2f', record.amount_tt)
+  %td
+  %td{:style => "text-align: right"}= sprintf('%.2f', record.unit_tt)
+  %td
+  %td
+  %td
+  %td
+  %td
+  %td{:style => "text-align: right"} 0
+  %td{:style => "text-align: right"} 0
+  %td{:style => "text-align: right"}= sprintf('%.2f', record.amount)

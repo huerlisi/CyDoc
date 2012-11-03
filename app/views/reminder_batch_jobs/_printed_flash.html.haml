@@ -1,0 +1,5 @@
+#reminder_flash.flash.notice
+  %p Rechnungen wurde an Drucker gesendet...
+  %p
+    = link_to 'Journal', :controller => 'reminder_batch_jobs', :action => :show, :id => @reminder_batch_job.id
+    = button_to_function 'Schliessen', "Element.hide('reminder_flash')"

@@ -1,0 +1,3 @@
+- unless @tariff_items.nil?
+  %table.list
+    = render :partial => 'service_records/select_item', :collection => @tariff_items

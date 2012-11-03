@@ -1,0 +1,12 @@
+%tr
+  %td{:style => "width: 6em"}
+    %b= service_record.date.to_date
+  %td{:style => "width: 2em; text-align: right"}
+    = service_record.quantity
+    x
+  %td{:style => "width: 6em"}= service_record.code
+  %td
+    = "(#{service_record.ref_code}) " unless service_record.ref_code.blank?
+    = service_record.text
+  %td{:style => "text-align: right"}
+    %b= currency_fmt(service_record.amount)

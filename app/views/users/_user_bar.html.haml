@@ -1,0 +1,6 @@
+- if user_signed_in?
+  #user-bar-greeting= link_to current_user.email, user_path(current_user)
+  #user-bar-action
+    (#{link_to t('cydoc.user_bar.logout'), destroy_user_session_path, :method => :delete})
+- else
+  #user-bar-action= link_to t('cydoc.user_bar.login'), new_user_session_path

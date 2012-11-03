@@ -1,0 +1,10 @@
+%tr{:id => "booking_#{@booking.id}"}
+  %td{:colspan => "6"}
+    = form_for :booking, @booking, account_booking_url(@account), :method => :put, :remote => true do |booking|
+      = booking.date_field :value_date, :size => 12
+      Text: #{booking.text_field :title, :size => 40}
+      Rechnungsnr.: #{booking.text_field :reference_id, :size => 6}
+      Soll-Konto: #{booking.select :credit_account_id, Account.all(:order => "code").collect{|account| ["#{account.code} - #{account.title}", account.id]}}
+      Haben-Konto: #{booking.select :debit_account_id, Account.all(:order => "code").collect{|account| ["#{account.code} - #{account.title}", account.id]}}
+      Betrag: #{booking.text_field :amount, :size => 6}
+      \#{booking.submit "Buchen"}

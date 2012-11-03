@@ -1,0 +1,7 @@
+.contextual
+  = link_to "Termin erfassen", {:url => new_patient_appointment_url(@patient), :method => :get}, :class => "icon icon-add" unless @patient.new_record?, :remote => true
+%h3 Termine
+.box
+  #new_appointment.new_appointment
+  %table#appointments
+    = render :partial => 'appointments/patient_item', :collection => @patient.appointments.open

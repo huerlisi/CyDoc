@@ -1,0 +1,9 @@
+.contextual
+  = link_to "Ändern", edit_doctor_path(@doctor), :class => "icon icon-edit"
+%h3 Adresse
+.box
+  %table
+    = full_address(@doctor.vcard)
+.contextual
+  = link_to t('cydoc.actions.new_contact'), new_vcard_phone_number_url(@doctor.vcard), :method => :get, :remote => true, :class => "icon icon-add" unless @doctor.new_record?
+= render 'phone_numbers/list', :phone_numbers => @doctor.vcard.contacts

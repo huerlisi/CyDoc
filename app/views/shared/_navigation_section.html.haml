@@ -1,0 +1,7 @@
+%li.span4
+  .thumbnail
+    = image_tag(image)
+    %h3= t(section_title, :scope => 'cydoc.navigation')
+    %ul
+      - for item in items
+        %li= link_to t(item[:title], :scope => 'cydoc.navigation'), item[:url]

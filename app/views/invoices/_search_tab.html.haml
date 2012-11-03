@@ -1,0 +1,6 @@
+:javascript
+  Event.observe(window, 'load', function() {$('search_query').focus()}, false);
+#search_form
+  = render :partial => 'search_form'
+#search_results
+  = render :partial => 'list'

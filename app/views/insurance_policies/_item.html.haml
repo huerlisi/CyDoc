@@ -1,0 +1,5 @@
+%tr{:id => "insurance_policy_#{item.id}"}
+  %td= item.policy_type
+  %td= link_to item.insurance.to_s, item.insurance
+  %td= item.number
+  %td= link_to image_tag('delete.png'), {:url => patient_insurance_policy_path(@patient, item), :method => :delete}, :remote => true

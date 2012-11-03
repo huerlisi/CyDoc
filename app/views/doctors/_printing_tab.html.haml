@@ -1,0 +1,15 @@
+.contextual
+  = link_to "Ändern", edit_doctor_path(@doctor), :class => "icon icon-edit"
+%h3 Drucker
+- @doctor.office && printers = @doctor.office.printers
+- if printers
+  .box
+    Druckserver: #{printers[:cups_host]}
+    %table
+      %tr
+        %th Zweck
+        %th Schacht
+      - printers[:trays].each do |ident, value|
+        %tr
+          %th= ident
+          %td= value

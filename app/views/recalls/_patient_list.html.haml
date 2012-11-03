@@ -1,0 +1,8 @@
+.contextual
+  = link_to t('cydoc.actions.new_recall'), new_patient_recall_url(@patient), :method => :get, :remote => true, :class => "icon icon-add" unless @patient.new_record?
+%h3= t('cydoc.title.recall')
+.box
+  #new_recall.new_recall
+  #recalls{:style => "display: none"}
+  %table#patient_recalls{:style => "width: 100%"}
+    = render :partial => 'recalls/patient_item', :collection => @patient.recalls.queued + @patient.recalls.sent

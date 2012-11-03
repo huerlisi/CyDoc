@@ -1,0 +1,18 @@
+- for patient in @patients
+  - @patient = patient
+  - @vcard = patient.vcard
+  %tr
+    %td
+      = link_to image_tag("select.png"), :update => 'edit_form', :url => { :controller => 'patients', :action => 'edit_inline', :id => @patient, :case_id => @case }, :remote => true
+    %td= in_place_editor_field :vcard, :family_name
+    %td= in_place_editor_field :vcard, :given_name
+    %td= in_place_editor_field :vcard, :street_address
+    %td= in_place_editor_field :vcard, :postal_code
+    %td= in_place_editor_field :vcard, :locality
+    %td= in_place_editor_field :patient, :birth_date
+    %td= patient.doctor.name if patient.doctor
+    %td= in_place_editor_field :patient, :doctor_patient_nr
+    %td= patient.insurance.vcard.full_name if patient.insurance
+    %td= in_place_editor_field :patient, :insurance_nr
+    %td
+      = link_to image_tag("show.png"), :controller => 'patients', :action => 'show', :id => @patient

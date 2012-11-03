@@ -1,0 +1,3 @@
+.contextual{:style => "margin-right: 2em"}
+  = link_to t('cydoc.actions.new_case'), {:url => new_patient_treatment_path(@patient), :method => :get}, :class => "icon icon-add", :remote => true
+%h3{:style => "margin-right: 1em"}= t('cydoc.title.cases')

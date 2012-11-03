@@ -1,0 +1,10 @@
+.contextual
+  = icon_link_to :search, insurances_path
+  = contextual_link_to :edit
+%h2= @insurance.name
+.box
+  = render 'show'
+- if @insurance.group
+  %h2 Gruppe
+  .box
+    = render 'group_show'
