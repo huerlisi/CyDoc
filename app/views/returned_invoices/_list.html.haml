@@ -7,7 +7,7 @@
   - else
     %h3= t('cydoc.title.unknown_assigning_doctor')
 
-  %table.list{:class => "#{collection.first.class.to_s.downcase.pluralize} collection"}
+  %table.table{:class => "#{collection.first.class.to_s.downcase.pluralize} collection"}
     %thead
       %tr
         %th{:style => "width: 15%"}= t_attr(:state)

@@ -6,5 +6,5 @@
     = render :partial => 'insurance_policies/form'
   - else
     #new_insurance_policy.new_insurance_policy
-  %table#insurance_policies.list
+  %table#insurance_policies.table
     = render :partial => 'insurance_policies/item', :collection => @patient.insurance_policies
