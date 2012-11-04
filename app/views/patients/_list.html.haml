@@ -1,9 +1,11 @@
-#search_result
-  %table.table
-    = render :partial => 'list_header'
-    - if @patients
-      = render :partial => 'item', :collection => @patients
-      = render :partial => 'list_footer'
-    - if @suggest_covercard_search
-      %td/
-      %tr= link_to t('cydoc.actions.covercard_search'), covercard_search_path(@suggest_covercard_search), 'data-remote' => true if Covercard::Patient.settings['modules.covercard']
+%table#patients.table.table-bordered.table-striped.table-condensed
+  %tr
+    %th= t_attr(:full_name, Vcard)
+    %th= t_attr(:street_address, Vcard)
+    %th= t_attr(:postal_code, Vcard) + "/" + t_attr(:locality, Vcard)
+    %th= t_attr(:birth_date, Patient)
+    %th= t_model(Doctor)
+    %th= t_attr(:doctor_patient_nr, Patient)
+    %th= t_attr(:insurance, Patient)
+
+  = render @patients.select{|patient| patient.vcard}

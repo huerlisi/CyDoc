@@ -1,0 +1,8 @@
+%tr[patient]
+  %td= link_to patient.vcard.full_name, patient, 'data-href-container' => 'tr'
+  %td= patient.vcard.street_address
+  %td= [patient.vcard.postal_code, patient.vcard.locality].join(" ")
+  %td= patient.birth_date
+  %td= patient.doctor.name if patient.doctor
+  %td= patient.doctor_patient_nr
+  %td= patient.insurance_policies.first

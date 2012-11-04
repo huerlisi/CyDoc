@@ -1,0 +1,5 @@
+.box
+  = form_for 'search', {:url => patients_path, :method => :get, :remote => true} do |f|
+    = f.label 'query', t('cydoc.search.search')
+    = f.text_field :query, :label => t('cydoc.search.search'), :size => 15, :autocomplete => 'off'
+    = image_submit_tag 'find.png', :title => t('cydoc.search.searching')

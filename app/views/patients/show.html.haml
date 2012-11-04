@@ -1,5 +1,11 @@
-.contextual48
-= tab_container 'patient', @patient.to_s,                                                                        |
-  [{:name => 'personal', :partial => 'patients/show', :label => t('cydoc.tab_container.patient.personal_data')}, |
-   {:name => 'invoices', :partial => 'patients/invoice_tab', :label => t('cydoc.tab_container.patient.invoice')} |
-  ]                                                                                                              |
+.contextual
+  = icon_link_to :update, '#', :type => 'primary', :icon => 'download-alt', :class => 'submit-button'
+  = contextual_link_to :delete, nil, :type => 'danger'
+  = contextual_link_to :index
+
+= boot_page_title
+
+= render 'form'
+
+- content_for :sidebar do
+  =# render 'cases/compact_list', :cases => @patient.cases

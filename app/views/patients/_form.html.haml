@@ -1,4 +1,8 @@
-  = render 'personal_form'
-  = render 'billing_form'
-  = render 'contacts_form'
-  = render 'insurance_policies_form'
+= boot_alert(t('flash.action.dunning_stop'), 'error') if @patient.dunning_stop?
+
+= simple_form_for @patient do |f|
+  = render 'patients/form_fields', :f => f
+
+  .row-fluid.hidden-actions
+    .form-actions
+      = f.button :submit

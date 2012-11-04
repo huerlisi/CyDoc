@@ -1,0 +1,34 @@
+#propose_merge.modal.hide
+  = modal_header t_action(:merge)
+
+  .modal-body
+    .row-fluid
+      .span6
+        = [@patient1.vcard.given_name, @patient1.vcard.family_name].join(" ")
+      .span6
+        = [@patient2.vcard.given_name, @patient2.vcard.family_name].join(" ")
+    .row-fluid
+      .span6
+        = @patient1.vcard.street_address
+      .span6
+        = @patient2.vcard.street_address
+    .row-fluid
+      .span6
+        = [@patient1.vcard.postal_code, @patient1.vcard.locality].join(" ")
+      .span6
+        = [@patient2.vcard.postal_code, @patient2.vcard.locality].join(" ")
+
+    .row-fluid
+      .span6
+        = link_to t_action(:choose_as_target), merge_patients_path(:target_patient_id => @patient1.id, :drop_patient_id => @patient2.id), :remote => true, :method => :post, :class => 'btn btn-primary'
+      .span6
+        = link_to t_action(:choose_as_target), merge_patients_path(:target_patient_id => @patient2.id, :drop_patient_id => @patient1.id), :remote => true, :method => :post, :class => 'btn btn-primary'
+
+    .row-fluid
+      .span6
+        = render 'cases/compact_list', :cases => @patient1.cases
+      .span6
+        = render 'cases/compact_list', :cases => @patient2.cases
+
+  .modal-footer
+    = link_to t_action(:cancel), '#', :class => 'btn', 'data-dismiss' => 'modal'

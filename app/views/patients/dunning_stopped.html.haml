@@ -1,0 +1,13 @@
+%table.table.table-bordered.table-striped.table-condensed
+  %tr
+    %th Patient
+    %th Bemerkungen
+    %th Arzt
+  - for patient in @patients
+    %tr
+      %td
+        = h link_to patient.to_s, :action => 'show', :id => patient
+      %td
+        = h patient.remarks
+      %td
+        = h link_to patient.doctor, :controller => :doctors, :action => 'show', :id => patient.doctor_id

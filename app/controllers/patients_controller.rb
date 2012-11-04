@@ -1,5 +1,7 @@
 # encoding: UTF-8
 
+require 'swissmatch/location/autoload'
+
 class PatientsController < ApplicationController
   inherit_resources
 

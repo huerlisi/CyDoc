@@ -35,6 +35,9 @@ config/initializers/site_keys.rb
 # carrier-wave
 uploads/
 
+# SwissMatch
+config/swissmatch.yml
+
 # CyDoc
 # =====
 data/

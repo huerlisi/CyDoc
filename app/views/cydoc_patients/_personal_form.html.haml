@@ -1,0 +1,43 @@
+= javascript_tag "$('patient_vcard_attributes_given_name').focus()"
+%h3= t('cydoc.title.personal_data')
+#patient-personal.box
+  = fields_for @patient do |patient|
+    = patient.fields_for :vcard do |vcard|
+      %table{:style => "width: 100%"}
+        %tr
+          %th= t_attr(:salutation, Patient)
+          %td= vcard.select :honorific_prefix, HonorificPrefix.all(:order => 'sex DESC, position').collect { |prefix| prefix.name }, :include_blank => true
+          %th= t_attr(:gender, Patient)
+          %td= patient.select :sex, {t_attr(:female, Patient) => 'F', t_attr(:male, Patient) => 'M'}, :include_blank => true, :size => 12
+        %tr
+          %th
+            = t_attr(:family_name, Patient)
+            , #{t_attr(:given_name, Patient)}
+          %td
+            .names-block= vcard.text_field :family_name
+            .names-block= vcard.text_field :given_name
+          %th= t_attr(:birth_date, Patient)
+          %td= patient.date_field :birth_date, :size => 12, :autocomplete => false
+        %tr
+          %th= t_attr(:street_address, Patient)
+          %td= vcard.text_field :street_address
+          %th= t_attr(:doctor_patient_nr, Patient)
+          %td= patient.text_field :doctor_patient_nr, :size => 15, :readonly => true
+        %tr
+          %th= t_attr(:extended_address, Vcard)
+          %td= vcard.text_field :extended_address
+          %th= t_attr(:post_office_box, Vcard)
+          %td= vcard.text_field :post_office_box
+        %tr
+          %th
+            = t_attr(:postal_code, Patient)
+            , #{t_attr(:locality, Patient)}
+          %td
+            = vcard.text_field :postal_code, :size => 9
+            = vcard.text_field :locality
+        %tr
+          %th= t_attr(:covercard_code, Patient)
+          %td= patient.text_field :covercard_code, :size => 20
+        %tr
+          %th= t_attr(:remarks, Patient)
+          %td{:colspan => "3"}= patient.text_area :remarks, :rows => 3

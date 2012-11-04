@@ -1,12 +1,47 @@
 # encoding: utf-8
 
 class Patient < ActiveRecord::Base
+  # Access restrictions
+  attr_accessible :vcard_attributes, :dunning_stop, :birth_date, :doctor_patient_nr, :doctor_id, :insurance_policies_attributes, :use_billing_address, :billing_vcard_attributes, :remarks
+
   belongs_to :doctor
 
   # Insurance
   has_many :insurance_policies
   accepts_nested_attributes_for :insurance_policies, :reject_if => proc { |attrs| attrs['insurance_id'].blank? }
   has_many :insurances, :through => :insurance_policies
+
+  def kvg_insurance_policy
+    policy = insurance_policies.by_policy_type('KVG').first
+
+    policy ||= insurance_policies.build(:policy_type => 'KVG')
+
+    return policy
+  end
+
+  def insurance
+    kvg_insurance_policy.insurance
+  end
+  def insurance=(value)
+    kvg_insurance_policy.insurance = value
+    kvg_insurance_policy.save
+  end
+
+  def insurance_id
+    kvg_insurance_policy.insurance_id
+  end
+  def insurance_id=(value)
+    kvg_insurance_policy.insurance_id = value
+    kvg_insurance_policy.save
+  end
+
+  def insurance_nr
+    kvg_insurance_policy.number
+  end
+  def insurance_nr=(value)
+    kvg_insurance_policy.number = value
+    kvg_insurance_policy.save
+  end
 
   has_many :sessions
   has_many :recalls, :order => 'due_date', :dependent => :destroy

@@ -1,43 +1,39 @@
-= javascript_tag "$('patient_vcard_attributes_given_name').focus()"
-%h3= t('cydoc.title.personal_data')
-#patient-personal.box
-  = fields_for @patient do |patient|
-    = patient.fields_for :vcard do |vcard|
-      %table{:style => "width: 100%"}
-        %tr
-          %th= t_attr(:salutation, Patient)
-          %td= vcard.select :honorific_prefix, HonorificPrefix.all(:order => 'sex DESC, position').collect { |prefix| prefix.name }, :include_blank => true
-          %th= t_attr(:gender, Patient)
-          %td= patient.select :sex, {t_attr(:female, Patient) => 'F', t_attr(:male, Patient) => 'M'}, :include_blank => true, :size => 12
-        %tr
-          %th
-            = t_attr(:family_name, Patient)
-            , #{t_attr(:given_name, Patient)}
-          %td
-            .names-block= vcard.text_field :family_name
-            .names-block= vcard.text_field :given_name
-          %th= t_attr(:birth_date, Patient)
-          %td= patient.date_field :birth_date, :size => 12, :autocomplete => false
-        %tr
-          %th= t_attr(:street_address, Patient)
-          %td= vcard.text_field :street_address
-          %th= t_attr(:doctor_patient_nr, Patient)
-          %td= patient.text_field :doctor_patient_nr, :size => 15, :readonly => true
-        %tr
-          %th= t_attr(:extended_address, Vcard)
-          %td= vcard.text_field :extended_address
-          %th= t_attr(:post_office_box, Vcard)
-          %td= vcard.text_field :post_office_box
-        %tr
-          %th
-            = t_attr(:postal_code, Patient)
-            , #{t_attr(:locality, Patient)}
-          %td
-            = vcard.text_field :postal_code, :size => 9
-            = vcard.text_field :locality
-        %tr
-          %th= t_attr(:covercard_code, Patient)
-          %td= patient.text_field :covercard_code, :size => 20
-        %tr
-          %th= t_attr(:remarks, Patient)
-          %td{:colspan => "3"}= patient.text_area :remarks, :rows => 3
+= f.fields_for :vcard do |v|
+  = v.fields_for :address do |a|
+    .row-fluid
+      .span7
+        .control-group{:class => "#{'error' if v.object.errors.include?(:honorific_prefix)}"}
+          %label.control-label= "#{t_attr(:honorific_prefix, Vcard)}"
+          .controls
+            = v.input :honorific_prefix, :collection => HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }, :wrapper => :inline
+            = link_to '#', 'data-directory-lookup' => 'patient[vcard_attributes]', :title => t_action(:directory_lookup) do
+              %i.icon-search.btn
+      .span5
+        = f.input :dunning_stop
+    .row-fluid
+      .span7
+        .control-group{:class => "#{'error' if v.object.errors.include?(:family_name) or v.object.errors.include?(:given_name)}"}
+          %label.control-label= "#{t_attr(:family_name, Vcard)}, #{t_attr(:given_name, Vcard)}"
+          .controls
+            = v.input :family_name, :wrapper => :inline, :input_html => {'data-autofocus' => true}
+            = v.input :given_name, :wrapper => :inline
+      .span5
+        = f.input :birth_date, :as => :string
+    .row-fluid
+      .span7
+        = a.input :street_address
+      .span5
+        = f.input :doctor_patient_nr
+    .row-fluid
+      .span7
+        = a.input :extended_address, :input_html => {'tabindex' => 1000}
+      .span5
+        = a.input :post_office_box, :input_html => {'tabindex' => 1001}
+    .row-fluid
+      .span7
+        .control-group{:class => "#{'error' if a.object.errors.include?(:postal_code) or a.object.errors.include?(:locality)}"}
+          %label.control-label= "#{t_attr(:postal_code, Vcard)} #{t_attr(:locality, Vcard)}"
+          .controls
+            = a.input :zip_locality, :wrapper => :inline
+      .span5
+        = f.association :doctor, :as => :combobox, :collection => doctors_collection, :input_html => {'tabindex' => 2000}

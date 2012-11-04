@@ -1,6 +1,12 @@
 # encoding: utf-8
 
 class Doctor < ActiveRecord::Base
+  scope :active, where(:active => true)
+
+  has_one :praxis, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'praxis'}
+  has_one :private, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'private'}
+  belongs_to :billing_doctor, :class_name => 'Doctor'
+  
   # Settings
   has_settings
   def self.settings

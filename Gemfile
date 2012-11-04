@@ -54,10 +54,13 @@ gem 'aasm'
 gem 'validates_timeliness'
 
 # Addresses
-gem 'has_vcards'
+gem 'unicode_utils'
+gem 'has_vcards', :path => '../has_vcards'
+gem 'autocompletion'
+gem 'swissmatch'
 
 # Billing
-gem 'has_accounts'
+gem 'has_accounts', :path => '../has_accounts'
 
 # Import
 gem 'fastercsv'

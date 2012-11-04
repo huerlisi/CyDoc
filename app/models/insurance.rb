@@ -1,4 +1,7 @@
 class Insurance < ActiveRecord::Base
+  # Default sorting
+  scope :sorted, includes(:vcard).order('vcards.full_name')
+
   # String
   def to_s
     "#{[vcard.full_name, vcard.locality].compact.join(', ')} (#{role(:code)})"

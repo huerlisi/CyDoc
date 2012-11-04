@@ -1,0 +1,11 @@
+= render 'patients/personal_form', :f => f
+
+= f.fields_for :insurance_policies, @patient.kvg_insurance_policy do |insurance_policy|
+  = render 'insurance_policies/form_fields', :f => insurance_policy
+
+#billing_data
+  = render 'patients/billing_form', :f => f
+
+.row-fluid
+  .span12
+    = f.input :remarks, :input_html => {:class => 'span11', :rows => 4}

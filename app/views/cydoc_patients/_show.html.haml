@@ -1,0 +1,9 @@
+= render 'show_personal'
+= render 'show_billing'
+= render 'recalls/patient_list'
+.contextual
+  = link_to t('cydoc.actions.new_contact'), new_vcard_phone_number_url(@patient.vcard), :remote => true, :class => "icon icon-add" unless @patient.new_record?
+= render 'phone_numbers/list', :phone_numbers => @patient.vcard.contacts
+= render 'insurance_policies/list'
+- content_for :sidebar do
+  = render 'sidebar'

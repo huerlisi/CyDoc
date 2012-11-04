@@ -1,0 +1,5 @@
+.row-fluid
+  .span7
+    = f.association :insurance, :collection => Insurance.sorted
+  .span5
+    = f.input :number, :autocomplete => 'off'
