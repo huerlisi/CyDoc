@@ -1,12 +1,8 @@
 = simple_form_for @insurance do |f|
-  = f.fields_for :vcard do |vcard|
-    = vcard.input :full_name
-    = vcard.input :extended_address
-    = vcard.input :street_address
-    = vcard.input :post_office_box
-    = vcard.input :postal_code
-    = vcard.input :locality
+  = render "vcards/form", :f => f
 
   = f.input :ean_party
   = f.input :group_ean_party
   = f.input :role, :collection => insurance_role_collection
+
+  = f.button :submit

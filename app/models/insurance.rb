@@ -1,4 +1,7 @@
 class Insurance < ActiveRecord::Base
+  # Access restrictions
+  attr_accessible :vcard_attributes, :ean_party, :group_ean_party, :role
+
   # Default sorting
   scope :sorted, includes(:vcard).order('vcards.full_name')
 
