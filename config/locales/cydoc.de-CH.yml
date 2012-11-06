@@ -1,4 +1,6 @@
 de-CH:
+  application: 
+    title: CyDoc
   activerecord:
     attributes:
       vcard:
