@@ -44,6 +44,8 @@ gem 'has_scope'
 gem 'i18n_rails_helpers'
 gem 'show_for'
 
+# Navigation
+gem 'simple-navigation'
 
 # CyDoc
 # =====

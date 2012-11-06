@@ -26,22 +26,7 @@
           = link_to root_path, :class => 'brand' do
             CyDoc
           .nav-collapse
-            %ul.nav
-              - if user_signed_in?
-                %li= link_to t('cydoc.navigation.home'), root_path
-                %li= link_to t('cydoc.navigation.patients'), :controller => 'patients'
-                - if current_doctor.settings['modules.recalls']
-                  %li= link_to t('cydoc.navigation.recalls'), :controller => 'recalls'
-                %li= link_to t('cydoc.navigation.insurances'), :controller => 'insurances'
-                %li= link_to t('cydoc.navigation.doctors'), :controller => 'doctors'
-                %li= link_to t('cydoc.navigation.service'), :controller => 'tariff_items'
-                - if current_doctor.settings['modules.drugs']
-                  %li= link_to t('cydoc.navigation.drug_products'), :controller => 'drug_products'
-                %li= link_to t('cydoc.navigation.payments'), :controller => 'invoices'
-                - if current_doctor.settings['modules.returned_invoices']
-                  %li= link_to t_title(:index, ReturnedInvoice), returned_invoices_path
-                %li= link_to t('cydoc.navigation.accounting'), :controller => 'bookkeeping'
-                %li= link_to t('cydoc.navigation.help'), :controller => '/help'
+            = render_navigation :renderer => BootstrapTopbarList
             .pull-right
               = form_tag "/search", :method => :get, :class => "navbar-search pull-left" do
                 = text_field_tag "query", params[:query], :placeholder => t('placeholder.search'), :class => "search-query"

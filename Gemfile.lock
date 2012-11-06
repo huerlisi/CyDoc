@@ -188,6 +188,8 @@ GEM
     show_for (0.2.5)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    simple-navigation (3.9.0)
+      activesupport (>= 2.3.2)
     simple_form (2.0.4)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -268,6 +270,7 @@ DEPENDENCIES
   rdoc
   routing-filter
   show_for
+  simple-navigation
   simple_form
   sqlite3
   swissmatch
