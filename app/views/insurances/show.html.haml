@@ -2,10 +2,14 @@
 
 = boot_page_title
 
-%ul.nav.nav-tabs
-  %li.active= link_to t('.tab.show'), '#tab-show', {:data => {:toggle => 'tab'}}
-  %li= link_to t('.tab.group_show'), '#tab-group_show', {:data => {:toggle => 'tab'}}
+- unless @insurance.group.blank?
+  %ul.nav.nav-tabs
+    %li.active= link_to t('.tab.show'), '#tab-show', {:data => {:toggle => 'tab'}}
+    %li= link_to t('.tab.group_show'), '#tab-group_show', {:data => {:toggle => 'tab'}}
 
-.tab-content
-  #tab-show.tab-pane.active= render 'show'
-  #tab-group_show.tab-pane= render 'group_show'
+  .tab-content
+    #tab-show.tab-pane.active= render 'form'
+    #tab-group_show.tab-pane= render 'group_show'
+
+-else
+  = render 'form'
