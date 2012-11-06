@@ -18,7 +18,7 @@ PATH
 PATH
   remote: ../has_vcards
   specs:
-    has_vcards (0.16.0)
+    has_vcards (0.19.0)
       inherited_resources
       rails (~> 3.0)
 

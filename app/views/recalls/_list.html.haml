@@ -1,5 +1,12 @@
-#patient_recalls{:style => "display: none"}
-%table#recalls.table
-  = render :partial => 'recalls/list_header'
-  = render :partial => 'recalls/item', :collection => @recalls
-  = render :partial => 'recalls/list_footer'
+%table.table.table-striped.collection
+  %tr
+    %th= t_attr(:expire_date)
+    %th= t_attr(:patient)
+    %th= t_attr(:offer)
+    %th= t_attr(:last_appointment)
+    %th= t_attr(:printed)
+    %th= t_attr(:remark)
+    %th{:style => "min-width: 70px;"}
+  = render recalls
+  %tr
+    %th{:colspan => "7", :style => "text-align: right"}= will_paginate recalls

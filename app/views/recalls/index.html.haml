@@ -1,5 +1,13 @@
-= tab_container 'recalls', t('cydoc.tab_container.recall.list'), [                                                                   |
-    {:name => 'scheduled_recalls', :partial => 'recalls/scheduled_list', :label => t('cydoc.tab_container.recall.applied_recalls')}, |
-    {:name => 'sent_recalls', :partial => 'recalls/sent_list', :label => t('cydoc.tab_container.recall.send_recalls')},              |
-  ]                                                                                                                                  |
-= render :partial => 'sidebar'
+= render 'sidebar'
+
+= boot_page_title
+
+%ul.nav.nav-tabs
+  %li.active= link_to t('cydoc.recall.applied_recalls'), '#tab-scheduled_list', {:data => {:toggle => 'tab'}}
+  %li= link_to t('cydoc.recall.sent_recalls'), '#tab-sent_recalls', {:data => {:toggle => 'tab'}}
+
+.tab-content
+  #tab-scheduled_list.tab-pane.active= render 'list', :recalls => @scheduled_recalls
+  #tab-sent_recalls.tab-pane= render 'list', :recalls => @sent_recalls
+
+
