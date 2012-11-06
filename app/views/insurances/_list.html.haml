@@ -1,5 +1,10 @@
-#search_result
-  %table.table
-    = render :partial => 'list_header'
-    = render :partial => 'item', :collection => @insurances
-    = render :partial => 'list_footer'
+%table.table.table-striped.collection
+  %tr
+    %th Name
+    %th Adresse
+    %th Rolle
+
+  = render insurances
+
+  %tr
+    %th{:colspan => "3", :style => "text-align: right"}= will_paginate insurances, :params => {:query => params[:query]}

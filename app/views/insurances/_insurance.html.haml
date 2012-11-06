@@ -1,0 +1,4 @@
+%tr[insurance]
+  %td= link_to insurance.vcard.full_name, insurance, 'data-href-container' => 'tr'
+  %td= address(insurance.vcard, ', ')
+  %td= insurance.role(:code)

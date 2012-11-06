@@ -1,8 +1,5 @@
-.contextual
-  = link_to "Alle anzeigen", {:url => insurances_path(:all => true), :method => :get}, :class => "icon icon-index", :remote => true
-  = contextual_link_to :new
-%h2 Versicherungen
-#search_form
-  = render :partial => 'search_form'
-#search_results
-  = render :partial => 'list'
+= contextual_links
+
+= boot_page_title
+
+= render 'list', :insurances => @insurances
