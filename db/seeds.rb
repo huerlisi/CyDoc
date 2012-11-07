@@ -17,6 +17,15 @@ VatClass.create!([
   {:code => "full", :rate => 7.6, :valid_from => '2001-01-01'}
 ])
 
+# Authorization
+# =============
+Role.create!([
+  {:name => 'sysadmin'},
+  {:name => 'doctor'},
+  {:name => 'employee'},
+  {:name => 'admin'}
+])
+
 # Demo Seeds
 # ==========
 doctor = Doctor.create!(
