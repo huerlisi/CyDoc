@@ -1,7 +1,7 @@
 %tr
   %td{:style => "text-align:right"}= link_to item.code, item, 'data-href-container' => 'tr'
   %td
-    %span{:style => "font-weight: bold"}= truncate(item.remark, :length => 80, :separator => ' ')
+    %span= truncate(item.remark, :length => 80, :separator => ' ')
   %td{:style => "text-align:right"}
     = currency_fmt(item.amount_mt)
     \&nbsp;TP
@@ -9,5 +9,5 @@
     = currency_fmt(item.amount_tt)
     \&nbsp;TP
   %td{:style => "text-align:right"}
-    %b>= currency_fmt(item.amount)
+    = currency_fmt(item.amount)
     \&nbsp;CHF

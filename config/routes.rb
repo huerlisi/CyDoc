@@ -152,6 +152,11 @@ CyDoc::Application.routes.draw do
     end
   end
 
+  resources :tarmed_tariff_items, :controller => "tariff_items"
+  resources :drug_tariff_items, :controller => "tariff_items"
+  resources :tariff_item_group, :controller => "tariff_items"
+  resources :physio_tariff_item, :controller => "tariff_items"
+
   resources :drug_products do
     member do
       put :create_tariff_item

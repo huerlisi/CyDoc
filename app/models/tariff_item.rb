@@ -1,4 +1,9 @@
+# encoding: UTF-8
+
 class TariffItem < ActiveRecord::Base
+  # Access restrictions
+  attr_accessible :code, :remark, :obligation, :amount_mt, :amount_tt, :type_as_string
+
   # Associations
   belongs_to :vat_class
   belongs_to :imported, :polymorphic => true
@@ -6,7 +11,8 @@ class TariffItem < ActiveRecord::Base
   # Validations
   validates_presence_of :code, :remark
 
-  def self.to_s
+  #TODO
+  def self.to_string
     I18n.translate(self.name.underscore, :scope => [:activerecord, :models])
   end
 

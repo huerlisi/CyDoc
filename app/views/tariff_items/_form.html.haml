@@ -1,15 +1,10 @@
-#tariff_item_form
-  = semantic_form_for @tariff_item.becomes(TariffItem), :remote => true do |form|
-    = form.semantic_errors
-    = form.inputs do
-      = form.input :type_as_string, :as => :select, :required => true, :collection => type_as_string_collection
-      = form.input :code, :input_html => {:size => 8}
-      = form.input :remark, :input_html => {:rows => 3, :cols => 50}
-      = form.input :obligation
-    - unless @tariff_item.is_a? TariffItemGroup
-      = form.inputs do
-        = form.input :amount_mt, :input_html => {:size => 8, :style => 'text-align: right'}
-        = form.input :amount_tt, :input_html => {:size => 8, :style => 'text-align: right'}
-    = form.buttons do
-      = form.commit_button :button_html => {:class => "icon icon-save"}
-      = button_to "Abbrechen", @tariff_item.becomes(TariffItem), :method => :get, :remote => true, :class => "icon icon-cancel"
+= simple_form_for  @tariff_item.becomes(TariffItem) do |f|
+  = f.input :type_as_string, :as => :select, :required => true, :collection => type_as_string_collection
+  = f.input :code, :input_html => {:size => 8}
+  = f.input :remark, :input_html => {:rows => 3, :cols => 50}
+  = f.input :obligation
+  - unless @tariff_item.is_a? TariffItemGroup
+    = f.input :amount_mt, :as => :string, :input_html => {:size => 8, :style => 'text-align: right'}
+    = f.input :amount_tt, :as => :string, :input_html => {:size => 8, :style => 'text-align: right'}
+
+  = f.button :submit
