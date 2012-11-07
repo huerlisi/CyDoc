@@ -33,6 +33,8 @@ gem 'jquery-rails'
 
 # Styling
 gem 'lyb_sidebar'
+gem 'therubyracer'
+gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-will_paginate'
 
