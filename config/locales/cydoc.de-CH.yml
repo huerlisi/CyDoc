@@ -409,3 +409,7 @@ de-CH:
 
   placeholder:
     search: Suche
+
+  cancan:
+    roles:
+      admin: Administrator
