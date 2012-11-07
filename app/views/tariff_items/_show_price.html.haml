@@ -1,5 +1,5 @@
 %h3 Preis
-%table.list
+%table.table.table-striped.collection
   %tr
     %th{:style => "text-align: right"}= t_attr(:amount_mt, TariffItem)
     %th{:style => "text-align: right"}= t_attr(:amount_tt, TariffItem)
@@ -12,5 +12,5 @@
       = currency_fmt(@tariff_item.amount_tt)
       \&nbsp;TP
     %td{:style => "text-align:right"}
-      %b>= currency_fmt(@tariff_item.amount)
+      = currency_fmt(@tariff_item.amount)
       \&nbsp;CHF

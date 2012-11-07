@@ -178,8 +178,8 @@ de-CH:
         remarks:  Bemerkungen
       tariff_item:
         amount:         Betrag
-        amount_mt:      TP&nbsp;AL/Preis
-        amount_tt:      TP&nbsp;TL
+        amount_mt:      TP AL/Preis
+        amount_tt:      TP TL
         code:           Code
         obligation:     Kassenpflichtig
         remark:         Beschreibung

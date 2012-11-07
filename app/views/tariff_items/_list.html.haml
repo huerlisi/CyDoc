@@ -1,4 +1,12 @@
-%table.table
-  = render :partial => 'tariff_items/list_header'
-  = render :partial => 'tariff_items/item', :collection => @tariff_items
-  = render :partial => 'tariff_items/list_footer'
+%table.table.table-striped.collection
+  %tr
+    %th{:style => "text-align: right"}= t_attr(:code, TariffItem)
+    %th= t_attr(:remark, TariffItem)
+    %th{:style => "text-align: right"}= t_attr(:amount_mt, TariffItem)
+    %th{:style => "text-align: right"}= t_attr(:amount_tt, TariffItem)
+    %th{:style => "text-align: right"}= t_attr(:amount, TariffItem)
+
+  = render :partial => 'item', :collection => @tariff_items
+
+  %tr
+    %th{:colspan => "5", :style => "text-align: right"}= will_paginate @tariff_items, :params => {:query => params[:query]}

@@ -1,4 +1,9 @@
+# encoding: UTF-8
+
 class TariffItem < ActiveRecord::Base
+  # Access restrictions
+  attr_accessible :code, :remark, :obligation, :amount_mt, :amount_tt, :type_as_string
+
   # Associations
   belongs_to :vat_class
   belongs_to :imported, :polymorphic => true
