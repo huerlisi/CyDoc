@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Role < ActiveRecord::Base
   # Access restrictions
   attr_accessible :name
@@ -9,6 +11,6 @@ class Role < ActiveRecord::Base
 
   # Helpers
   def to_s
-    name == nil ? "" : I18n.translate(name, :scope => 'cancan.roles')
+    I18n.translate(name, :scope => 'cancan.roles')
   end
 end
