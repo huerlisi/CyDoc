@@ -164,23 +164,6 @@ CyDoc::Application.routes.draw do
     resources :drug_articles
   end
 
-  resources :accounts do
-    collection do
-      get :set_value_date_filter
-      get :statistics
-    end
-    member do
-      post :print
-    end
-    resources :bookings
-  end
-
-  resources :bookings do
-    collection do
-      get :list_csv
-    end
-  end
-
   resources :invoices do
     collection do
       post :print_reminders_for_all
