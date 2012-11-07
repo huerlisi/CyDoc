@@ -6,7 +6,8 @@ class TariffItem < ActiveRecord::Base
   # Validations
   validates_presence_of :code, :remark
 
-  def self.to_s
+  #TODO
+  def self.to_string
     I18n.translate(self.name.underscore, :scope => [:activerecord, :models])
   end
 
