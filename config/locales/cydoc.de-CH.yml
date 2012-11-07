@@ -413,3 +413,8 @@ de-CH:
   cancan:
     roles:
       admin: Administrator
+
+  devise:
+    sign_in:  Anmelden
+    sign_out: Abmelden
+    profile:  Profil

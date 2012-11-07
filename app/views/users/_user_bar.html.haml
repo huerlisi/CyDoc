@@ -1,6 +1,10 @@
 - if user_signed_in?
-  #user-bar-greeting= link_to current_user.email, user_path(current_user)
-  #user-bar-action
-    (#{link_to t('cydoc.user_bar.logout'), destroy_user_session_path, :method => :delete})
-- else
-  #user-bar-action= link_to t('cydoc.user_bar.login'), new_user_session_path
+  .btn-group.pull-right
+    = link_to '#', :class => 'btn dropdown-toggle', 'data-toggle' => 'dropdown' do
+      %i.icon-user
+      = current_user
+      %span.caret
+    %ul.dropdown-menu
+      %li= link_to t('devise.profile'), current_user
+      %li.divider
+      %li= link_to t('devise.sign_out'), destroy_user_session_path, :method => :delete
