@@ -23,22 +23,23 @@ class BookkeepingController < ApplicationController
   end
 
   def open_invoices
-    # TODO: hardcoded account id for debit account
+    debit_account_id = Account.find_by_code(@current_doctor.settings['invoices.balance_account_code']).id
     @invoices = Invoice.find(:all,
       :joins => :bookings,
       :conditions => ["invoices.value_date <= ? AND bookings.value_date <= ?", @value_date_end, @value_date_end],
       :group => "reference_id, reference_type",
-      :having => "sum(IF(bookings.debit_account_id = 3, bookings.amount, -bookings.amount)) != 0"
+      :having => ["sum(IF(bookings.debit_account_id = ?, bookings.amount, -bookings.amount)) != 0", debit_account_id]
     ).paginate(:page => params['page'], :per_page => params['per_page'] || 30)
   end
 
   def open_invoices_csv
+    debit_account_id = Account.find_by_code(@current_doctor.settings['invoices.balance_account_code']).id
     @invoices = Invoice.find(:all,
-      :select => "invoices.*, sum(IF(bookings.debit_account_id = 3, -bookings.amount, bookings.amount)) AS current_due_amount",
+      :select => "invoices.*, sum(IF(bookings.debit_account_id = #{debit_account_id}, -bookings.amount, bookings.amount)) AS current_due_amount",
       :joins => :bookings,
       :conditions => ["invoices.value_date <= ? AND bookings.value_date <= ?", @value_date_end, @value_date_end],
       :group => "reference_id, reference_type",
-      :having => "sum(IF(bookings.debit_account_id = 3, bookings.amount, -bookings.amount)) != 0"
+      :having => ["sum(IF(bookings.debit_account_id = ?, bookings.amount, -bookings.amount)) != 0", debit_account_id]
     )
     send_csv @invoices, :only => ["patient.to_s", :value_date, :due_date, :id, :amount, :current_due_amount], :filename => "Offene Posten per %s.csv" % [@value_end_date]
   end
