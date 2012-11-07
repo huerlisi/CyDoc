@@ -231,7 +231,7 @@ GEM
     use_db (0.2.0)
     validates_timeliness (3.0.14)
       timeliness (~> 0.3.6)
-    vesr (0.12.6)
+    vesr (0.12.7)
     warden (1.2.1)
       rack (>= 1.0)
     will_paginate (3.0.3)

@@ -215,16 +215,6 @@ CyDoc::Application.routes.draw do
     end
   end
 
-  resources :esr_files
-  resources :esr_records do
-    member do
-      post :book_extra_earning
-      post :resolve
-      post :book_payback
-      post :write_off
-    end
-  end
-
   resources :bookkeeping do
     collection do
       get :report, :open_invoices
