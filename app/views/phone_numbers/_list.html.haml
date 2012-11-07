@@ -1,5 +1,3 @@
 %h3= t('cydoc.title.contact')
-.box
-  #new_phone_number.new_phone_number
-  %table.table#phone_numbers
-    = render :partial => 'phone_numbers/item', :collection => phone_numbers
+%table.table.table-striped.collection
+  = render :partial => 'phone_numbers/item', :collection => phone_numbers

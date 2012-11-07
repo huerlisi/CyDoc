@@ -54,13 +54,13 @@ class DoctorsController < ApplicationController
     @doctor = Doctor.find(params[:id])
     render :action => 'edit'
   end
-  
+
   def update
     @doctor = Doctor.find(params[:id])
 
     @doctor.build_vcard unless @doctor.vcard
 
-    if @doctor.update_attributes(params[:doctor]) && @doctor.vcard.update_attributes(params[:vcard])
+    if @doctor.update_attributes(params[:doctor])
       flash[:notice] = 'Arzt gespeichert.'
       redirect_to :action => :show, :id => @doctor
     else

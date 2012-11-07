@@ -1,3 +1,9 @@
-= render :partial => 'doctor_form'
-= render :partial => 'invoicing_form'
-= render :partial => 'contact_form'
+= simple_form_for @doctor do |f|
+  = render "vcards/form", :f => f
+
+  // = render 'invoicing_form'
+
+  = f.input :ean_party
+  = f.input :zsr
+
+  = f.button :submit
