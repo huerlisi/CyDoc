@@ -28,4 +28,13 @@ class User < ActiveRecord::Base
   def role_texts=(role_names)
     self.roles = Role.where(:name => role_names)
   end
+
+  # Helpers
+  def to_s
+    if object
+      return object.name
+    else
+      return email
+    end
+  end
 end
