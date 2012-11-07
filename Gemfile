@@ -80,6 +80,7 @@ gem 'inherited_resources_views'
 # Authentication
 gem 'devise'
 gem 'cancan'
+gem 'lyb_devise_admin'
 
 # Uploads
 gem 'carrierwave'

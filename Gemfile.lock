@@ -128,6 +128,7 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.2.0)
     libv8 (3.3.10.4)
+    lyb_devise_admin (0.3.0)
     lyb_sidebar (0.1.1)
       rails (~> 3.1)
     mail (2.4.4)
@@ -261,6 +262,7 @@ DEPENDENCIES
   inherited_resources_views
   jquery-rails
   ledermann-rails-settings
+  lyb_devise_admin
   lyb_sidebar
   mysql2
   nokogiri
