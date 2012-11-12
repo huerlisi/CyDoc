@@ -1,4 +1,10 @@
-1.1.5 (unreleased)
+1.1.6
+=====
+Bug fixes
+* Fix bookkeeping to not use hardcoded debit account.
+* Some ordering and pagination fixes in VESR views.
+
+1.1.5
 =====
 Enhancements:
 * There's now a quick fix action for double payments.
