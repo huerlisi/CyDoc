@@ -412,4 +412,7 @@ de-CH:
 
   cancan:
     roles:
-      admin: Administrator
+      admin:    Administrator
+      sysadmin: System Administration
+      employee:   Mitarbeiter
+      doctor:   Arzt

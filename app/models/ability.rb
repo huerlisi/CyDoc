@@ -33,4 +33,8 @@ class Ability
   def admin(user)
     can :manage, :all
   end
+
+  def sysadmin(user)
+    can :manage, :all
+  end
 end
