@@ -36,7 +36,7 @@ class AuthorizedController < InheritedResources::Base
   def set_locale
     locale = params[:locale] || cookies[:locale]
     I18n.locale = locale.to_s
-    cookies[:locale] = locale unless (cookies[:locale] && cookies[:locale] == locale)
+    cookies[:locale] = locale unless (cookies[:locale] && cookies[:locale] == locale.to_s)
   end
 
   # Resource setup
