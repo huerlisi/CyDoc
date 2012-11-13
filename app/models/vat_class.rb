@@ -1,4 +1,7 @@
 class VatClass < ActiveRecord::Base
+  # Access restrictions
+  attr_accessible :code, :rate, :valid_from
+
   # Scopes
   scope :valid, :conditions => ['valid_from <= ?', Date.today], :order => 'valid_from DESC'
   scope :full, :conditions => {:code => 'full'}
