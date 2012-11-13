@@ -6,11 +6,7 @@ class User < ActiveRecord::Base
   belongs_to :object, :polymorphic => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email,
-                  :password,
-                  :password_confirmation,
-                  :remember_me,
-                  :sender_email
+  attr_accessible :login, :email, :password, :password_confirmation, :remember_me, :sender_email
 
   # Authorization roles
   has_and_belongs_to_many :roles, :autosave => true
