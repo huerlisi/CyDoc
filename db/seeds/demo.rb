@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 # Demo Seeds
 # ==========
 doctor = Doctor.create!(
@@ -12,11 +14,9 @@ doctor = Doctor.create!(
 )
 
 user = User.create!(
-  :name => "Demo Benützer", :login => "doctor", :password => "doctor1234", :password_confirmation => "doctor1234", :email => "cydoc-demo@cyt.ch"
+  :login => "doctor", :password => "doctor1234", :password_confirmation => "doctor1234", :email => "cydoc-demo@cyt.ch"
 )
 user.object = doctor
-user.register!
-user.activate!
 
 doctor.offices.create!(
   :name => "Demo Praxis",
