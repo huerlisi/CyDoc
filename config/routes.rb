@@ -124,6 +124,8 @@ CyDoc::Application.routes.draw do
     end
   end
 
+  resources :accounts
+
   resources :medical_cases
   resources :diagnosis_cases
   resources :diagnoses
