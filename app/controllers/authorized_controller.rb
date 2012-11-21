@@ -2,6 +2,9 @@ class AuthorizedController < InheritedResources::Base
   # Authorization
   load_and_authorize_resource
 
+  # Set scope for pagination
+  has_scope :page, :default => 1
+
   rescue_from CanCan::AccessDenied do |exception|
     flash[:alert] = t('cancan.access_denied')
 
@@ -38,10 +41,4 @@ class AuthorizedController < InheritedResources::Base
     I18n.locale = locale.to_s
     cookies[:locale] = locale unless (cookies[:locale] && cookies[:locale] == locale.to_s)
   end
-
-  # Resource setup
-  protected
-    def collection
-      instance_eval("@#{controller_name.pluralize} ||= end_of_association_chain.accessible_by(current_ability, :list).paginate(:page => params[:page], :per_page => params[:per_page])")
-    end
 end
