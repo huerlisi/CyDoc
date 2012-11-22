@@ -1,23 +1,13 @@
-.box
-  .contextual
-    = link_to "Tarif erzeugen", {:url => create_tariff_item_drug_product_path(@drug_product), :method => :put}, :class => "icon icon-add", :remote => true
-    = link_to "Editieren", {:url => edit_drug_product_path(@drug_product), :method => :get}, :class => "icon icon-edit", :remote => true
-    = link_to "Löschen", {:url => @drug_product, :method => :delete, :confirm => t_confirm_delete(@drug_product)}, :class => "icon icon-delete", :remote => true
-    = link_to "Katalog anzeigen", drug_products_path(:all => true), :class => "icon icon-index"
-  %h3 Information
-  %table
-    %tr
-      %th
-        = t_attr(:name)
-        \:
-      %td= @drug_product.name
-    %tr
-      %th
-        = t_attr(:description)
-        \:
-      %td= @drug_product.description
-  .contextual
-    = link_to "Packung erfassen", {:url => new_drug_product_drug_article_path(@drug_product), :method => :get}, :class => "icon icon-add", :remote => true
-  %h3 Packungen
-  #drug_article_view
-  = render :partial => 'drug_articles/list'
+.contextual
+  = link_to "Tarif erzeugen", create_tariff_item_drug_product_path(resource)
+  = link_to "Packung erfassen", new_drug_product_drug_article_path(resource)
+
+%table.table.table-striped.collection
+  %tr
+    %th= t_attr(:name)
+    %td= resource.name
+  %tr
+    %th= t_attr(:description)
+    %td= resource.description
+%h3 Packungen
+= render 'drug_articles/list'

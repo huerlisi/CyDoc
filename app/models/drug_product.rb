@@ -1,4 +1,7 @@
 class DrugProduct < ActiveRecord::Base
+  # Access restrictions
+  attr_accessible :name, :description
+
   # Associations
   has_many :drug_articles, :dependent => :destroy
 

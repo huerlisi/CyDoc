@@ -1,9 +1,4 @@
-#drug_form
-  = semantic_form_for @drug_product, :remot => true do |form|
-    = form.semantic_errors
-    = form.inputs do
-      = form.input :name
-      = form.input :description, :input_html => {:rows => 3}
-    = form.buttons do
-      = form.commit_button :button_html => {:class => "icon icon-save"}
-      = button_to "Abbrechen", @drug_product, :method => :get, :remote => true, :class => "icon icon-cancel"
+= simple_form_for resource do |f|
+  = f.input :name
+  = f.input :description, :input_html => {:rows => 3}
+  = f.submit

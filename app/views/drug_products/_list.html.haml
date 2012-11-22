@@ -1,4 +1,9 @@
-%table.table
-  = render :partial => 'list_header'
-  = render :partial => 'item', :collection => @drug_products
-  = render :partial => 'list_footer'
+%table.table.table-striped.collection
+  %tr
+    %th= t_attr(:name)
+    %th= t_attr(:description)
+
+  = render collection
+
+  %tr
+    %th{:colspan => "2", :style => "text-align: right"}= paginate collection
