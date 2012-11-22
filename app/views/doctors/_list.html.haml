@@ -1,5 +1,11 @@
-#search_result
-  %table.table
-    = render :partial => 'list_header'
-    = render :partial => 'item', :collection => @doctors
-    = render :partial => 'list_footer'
+%table.table.table-striped.collection
+  %tr
+    %th Name
+    %th Adresse
+    %th ZSR
+    %th EAN
+
+  = render collection
+
+  %tr
+    %th{ :colspan => "4", :style => "text-align: right" }= paginate @doctors

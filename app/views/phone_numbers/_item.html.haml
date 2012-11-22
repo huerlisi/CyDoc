@@ -1,9 +1,0 @@
-- @phone_number = item
-- if @phone_number.new_record?
-  = render :partial => 'phone_numbers/new_form'
-- else
-  %tr{:id => "phone_number_#{item.id}"}
-    %th= @phone_number.phone_number_type
-    %td= @phone_number.number
-    %td
-      = link_to image_tag('delete.png'), phone_number_path(item), :method => :delete, :remote => true

@@ -7,6 +7,12 @@ class Doctor < ActiveRecord::Base
   scope :active, where(:active => true)
 
   has_one :praxis, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'praxis'}
+
+  # TODO support multiple vcards
+  has_one :vcard, :as => :object
+  accepts_nested_attributes_for :vcard
+  attr_accessible :vcard_attributes
+
   has_one :private, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'private'}
   belongs_to :billing_doctor, :class_name => 'Doctor'
 

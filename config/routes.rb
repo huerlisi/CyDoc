@@ -48,6 +48,10 @@ CyDoc::Application.routes.draw do
   resources :insurances
   resources :doctors do
     resources :phone_numbers
+
+    member do
+      get :new_phone_number
+    end
   end
 
   match '/patients/covercard_search/:code' => 'patients#covercard_search', :as => :covercard_search

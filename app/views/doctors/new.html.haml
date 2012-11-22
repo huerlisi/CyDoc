@@ -1,9 +1,0 @@
-.contextual
-  = link_to "Suchen", doctors_path, :class => "icon icon-search"
-  = link_to "Erfassen", new_doctor_path, :class => "icon icon-add"
-%h2 Arzt erfassen
-= semantic_form_for @doctor do |f|
-  .box
-    = render :partial => 'form'
-    - f.buttons do
-      = f.commit_button
