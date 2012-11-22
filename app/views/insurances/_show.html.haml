@@ -1,17 +1,16 @@
-- show ||= @insurance
 %h3 Kontakt
-%table
+%table.table.table-striped.collection
   %tr
     %th Name:
-    %td= show.full_name
+    %td= resource.full_name
   %tr
     %th Adresse:
-    %td= address(show.vcard, ', ')
+    %td= address(resource.vcard, ', ')
 %h3 Information
 %table
   %tr
     %th Rolle:
-    %td= show.role(:text)
+    %td= resource.role(:text)
   %tr
     %th EAN:
-    %td= show.ean_party
+    %td= resource.ean_party

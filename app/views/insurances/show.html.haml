@@ -2,14 +2,14 @@
 
 = boot_page_title
 
-- unless @insurance.group.blank?
+- if resource.group
   %ul.nav.nav-tabs
     %li.active= link_to t('.tab.show'), '#tab-show', {:data => {:toggle => 'tab'}}
     %li= link_to t('.tab.group_show'), '#tab-group_show', {:data => {:toggle => 'tab'}}
 
   .tab-content
-    #tab-show.tab-pane.active= render 'form'
-    #tab-group_show.tab-pane= render 'group_show'
+    #tab-show.tab-pane.active= render 'form', :resource => resource
+    #tab-group_show.tab-pane= render 'group_show', :resource => resource.group
 
 -else
-  = render 'form'
+  = render 'form', :resource => resource

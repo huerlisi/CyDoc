@@ -42,7 +42,7 @@ class Insurance < ActiveRecord::Base
 
   # Group
   def members
-    return scoped if ean_party.blank?
+    return [] if ean_party.blank?
 
     Insurance.where(:group_ean_party => ean_party)
   end
