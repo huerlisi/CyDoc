@@ -23,7 +23,7 @@ class BookkeepingController < ApplicationController
   end
 
   def open_invoices
-    debit_account_id = Account.find_by_code(@current_doctor.settings['invoices.balance_account_code']).id
+    debit_account_id = Account.find_by_code(current_doctor.settings['invoices.balance_account_code']).id
     @invoices = Invoice.all(
       :joins => :bookings,
       :conditions => ["invoices.value_date <= ? AND bookings.value_date <= ?", @value_date_end, @value_date_end],
@@ -33,7 +33,7 @@ class BookkeepingController < ApplicationController
   end
 
   def open_invoices_csv
-    debit_account_id = Account.find_by_code(@current_doctor.settings['invoices.balance_account_code']).id
+    debit_account_id = Account.find_by_code(current_doctor.settings['invoices.balance_account_code']).id
     @invoices = Invoice.all(
       :select => "invoices.*, sum(IF(bookings.debit_account_id = #{debit_account_id}, -bookings.amount, bookings.amount)) AS current_due_amount",
       :joins => :bookings,
