@@ -24,12 +24,12 @@ class BookkeepingController < ApplicationController
 
   def open_invoices
     debit_account_id = Account.find_by_code(current_doctor.settings['invoices.balance_account_code']).id
-    @invoices = Invoice.all(
-      :joins => :bookings,
-      :conditions => ["invoices.value_date <= ? AND bookings.value_date <= ?", @value_date_end, @value_date_end],
-      :group => "reference_id, reference_type",
-      :having => ["sum(IF(bookings.debit_account_id = ?, bookings.amount, -bookings.amount)) != 0", debit_account_id]
-    ).paginate(:page => params['page'], :per_page => params['per_page'] || 30)
+    @invoices = Invoice
+      .joins(:bookings)
+      .where("invoices.value_date <= ? AND bookings.value_date <= ?", @value_date_end, @value_date_end)
+      .group("reference_id, reference_type")
+      .having("sum(IF(bookings.debit_account_id = ?, bookings.amount, -bookings.amount)) != 0", debit_account_id)
+      .page(params[:page] || 0)
   end
 
   def open_invoices_csv
