@@ -1,12 +1,4 @@
 class InvoicesController < AuthorizedController
-  # TODO: is duplicated in Patients and Treatment controllers
-
-  in_place_edit_for :session, :date
-  in_place_edit_for :service_record, :ref_code
-  in_place_edit_for :service_record, :quantity
-
-  in_place_edit_for :invoice, :due_date
-
   # POST /invoice/1/print
   def print
     @invoice = Invoice.find(params[:id])
