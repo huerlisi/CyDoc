@@ -3,7 +3,6 @@
   = link_to "Erneut drucken", reprint_reminder_batch_job_path, :method => :post, :class => "icon icon-print"
 %h2= t_title
 %h3= t_attr :failed_jobs
-= failed_jobs(@reminder_batch_job)
+= failed_jobs(resource)
 %h3 Rechnungen
-- @invoices = @reminder_batch_job.invoices.paginate(:page => params[:page], :per_page => 50)
-= render 'invoices/list'
+= render 'invoices/list', :collection => resource.invoices.page(0).per(resource.invoices.count)
