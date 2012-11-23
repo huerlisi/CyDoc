@@ -733,6 +733,14 @@ ActiveRecord::Schema.define(:version => 20121122135624) do
     t.datetime "confirmation_sent_at"
     t.string   "reset_password_token"
     t.datetime "remember_created_at"
+    t.datetime "locked_at"
+    t.string   "unlock_token"
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.integer  "sign_in_count",                            :default => 0
+    t.integer  "failed_attempts",                          :default => 0
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

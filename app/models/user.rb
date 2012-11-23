@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable,
-         :recoverable, :rememberable, :confirmable, :validatable
+  # Strategies
+  devise :database_authenticatable, :recoverable, :trackable, :timeoutable, :lockable, :rememberable, :validatable
 
   # CyDoc
   belongs_to :object, :polymorphic => true
