@@ -4,7 +4,7 @@ class InvoiceBatchJobsController < AuthorizedController
     @invoice_batch_job = InvoiceBatchJob.new
 
     @invoice_batch_job.tiers_name = "TiersGarant"
-    @invoice_batch_job.count = Treatment.open.count
+    @invoice_batch_job.count = Treatment.active.count
     @invoice_batch_job.value_date = Date.today
 
     respond_to do |format|
@@ -21,12 +21,12 @@ class InvoiceBatchJobsController < AuthorizedController
   # POST /invoice_batch_jobs
   def create
     @invoice_batch_job = InvoiceBatchJob.new(params[:invoice_batch_job])
-    @treatments = Treatment.open.all(:limit => @invoice_batch_job.count)
+    @treatments = Treatment.active.all(:limit => @invoice_batch_job.count)
 
     value_date = @invoice_batch_job.value_date
     tiers_name = @invoice_batch_job.tiers_name
-    provider   = Doctor.find(Thread.current["doctor_id"])
-    biller     = Doctor.find(Thread.current["doctor_id"])
+    provider   = current_doctor
+    biller     = current_doctor
 
     @invoice_batch_job.create_invoices(@treatments, value_date, tiers_name, provider, biller)
     @invoice_batch_job.print(@printers)

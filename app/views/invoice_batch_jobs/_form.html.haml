@@ -1,11 +1,5 @@
-#invoice_batch_form
-  %h3 Rechnungslauf
-  .box
-    = semantic_form_for @invoice_batch_job, :before => "showPrintingFlash('Rechnungslauf'); $('invoice_batch_form').remove()", :remote => true do |form|
-      = form.inputs do
-        = form.input :value_date, :as => :date_field, :input_html => {:size => 12, :autocomplete => 'off', 'date-picker' => true, 'data-autofocus' => true}
-        = form.input :count, :input_html => {:size => 12, :autocomplete => 'off'}
-        = form.input :tiers_name, :as => :hidden
-      = form.buttons do
-        = form.submit "Drucken", :class => "icon icon-print"
-        = button_to_function "Abbrechen", "$('invoice_batch_form').remove()", :class => "icon icon-cancel"
+= simple_form_for resource, :remote => true, :before => "showPrintingFlash('Rechnungslauf'); $('invoice_batch_f').remove()" do |f|
+  = f.input :value_date, :as => :date_field
+  = f.input :count
+  = f.input :tiers_name, :as => :hidden
+  = f.submit

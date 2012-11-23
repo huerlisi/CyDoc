@@ -1,5 +1,8 @@
 # Information about invoice batch printing jobs.
 class InvoiceBatchJob < ActiveRecord::Base
+  # Access Restricitons
+  attr_accessible :value_date, :count, :tiers_name
+
   # Columns
   serialize :failed_jobs
 
