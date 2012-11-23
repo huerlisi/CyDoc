@@ -1,6 +1,9 @@
 # encoding: UTF-8
 
 class DrugArticle < ActiveRecord::Base
+  # Access restrictions
+  attr_accessible :code, :description, :number_of_pieces, :quantity, :quantity_unit, :vat_class_id, :vat_class, :doctors_price, :price
+
   # Constants
   QUANTITY_UNITS = ["Stück", "ml", "g", "m", "Paar", "kg", "l", "Beutel", "Dosen", "mg", "Platten", "Blätter", "dl", "Becher", "Zäpfchen", "Vaginal Zäpfchen"]
 

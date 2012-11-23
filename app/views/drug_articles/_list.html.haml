@@ -1,3 +1,15 @@
-%table#drug_article_list.table
-  = render :partial => 'drug_articles/list_header'
-  = render :partial => 'drug_articles/item', :collection => @drug_product.drug_articles
+%table.table.table-striped.collection
+  %tr
+    %th= t_attr(:name, DrugArticle)
+    %th= t_attr(:content, DrugArticle)
+    %th{:style => "text-align: right"}
+      = t_attr(:vat_class, DrugArticle)
+      \%
+    %th{:style => "text-align: right"}= t_attr(:doctors_price, DrugArticle)
+    %th{:style => "text-align: right"}= t_attr(:price, DrugArticle)
+    %th
+
+    = render collection
+
+  %tr
+    %th{ :colspan => "4", :style => "text-align: right" }= paginate collection

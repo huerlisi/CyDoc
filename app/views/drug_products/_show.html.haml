@@ -10,4 +10,5 @@
     %th= t_attr(:description)
     %td= resource.description
 %h3 Packungen
-= render 'drug_articles/list'
+
+= render 'drug_articles/list', :collection => resource.drug_articles.page(0).per(resource.drug_articles.count)
