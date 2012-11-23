@@ -1,4 +1,4 @@
 %h3= t('cydoc.title.treatment_sessions')
 #service_list
-  %table.service_records{:style => "width: 97%"}
-    = render :partial => 'invoices/service_record', :collection => @invoice.service_records
+  %table.table.table-striped.service_records
+    = render @invoice.service_records

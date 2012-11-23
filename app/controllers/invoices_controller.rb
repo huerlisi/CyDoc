@@ -152,25 +152,6 @@ class InvoicesController < AuthorizedController
     # @treatments = Treatment.open.page(params['page_open'])
   end
 
-  # GET /invoice/1
-  # GET /patients/1/invoices/2
-  def show
-    @invoice = Invoice.find(params[:id])
-    @treatment = @invoice.treatment
-
-    respond_to do |format|
-      format.html {
-        redirect_to :controller => :patients, :action => :show, :id => @invoice.patient.id, :tab => 'invoices', :sub_tab_id => @invoice.id
-      }
-      format.js {
-        render :update do |page|
-          page.replace_html "tab-content-invoices", :partial => 'show'
-          page.call 'showTab', controller_name
-        end
-      }
-    end
-  end
-
   # GET /invoices/new
   def new
     @invoice = Invoice.new
