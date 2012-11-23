@@ -1,5 +1,4 @@
-#search_result
-  %table.table
-    = render :partial => 'invoices/list_header'
-    = render :partial => 'invoices/item', :collection => @invoices
-    = render :partial => 'invoices/list_footer'
+%table.table
+  = render 'invoices/list_header'
+  = render collection
+  = render 'invoices/list_footer'
