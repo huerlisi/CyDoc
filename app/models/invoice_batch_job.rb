@@ -14,6 +14,10 @@ class InvoiceBatchJob < ActiveRecord::Base
     failed_jobs.size
   end
 
+  def to_s
+    "Rechnungslauf vom #{value_date}"
+  end
+
   def initialize(params = {})
     super
     self.failed_jobs = []
