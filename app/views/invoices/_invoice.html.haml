@@ -1,0 +1,17 @@
+%tr[invoice]
+  %td= link_to (invoice.imported_invoice_id.blank? ? invoice.id : "#{invoice.id} (Triamun #{invoice.imported_invoice_id})"), invoice
+  %td= link_to invoice.patient.full_name, invoice.patient
+  %td= invoice.value_date
+  %td= invoice.due_date
+  %td{:style => "text-align: right"}= sprintf("%0.2f", invoice.amount)
+  %td{:style => "text-align: right"}= sprintf("%0.2f", invoice.due_amount.currency_round)
+  %td{:style => "text-align: right"}= t invoice.state, :scope => 'invoice.state'
+  %td
+    - if invoice.overdue?
+      = link_to image_tag('print.png'), print_reminder_letter_invoice_path(invoice), :title => "Drucken", :method => :post
+    - else
+      = link_to image_tag('print.png'), print_invoice_path(invoice), :title => "Drucken", :method => :post
+    = link_to image_tag('delete.png'), invoice_path(invoice), :method => :delete, :confirm => "Rechnung #{invoice.to_s} stornieren?", :remote => true
+    /
+      <haml:loud> link_to &amp;quot;KK-Beleg&amp;quot;, insurance_recipe_invoice_path(invoice) </haml:loud>
+      <haml:loud> link_to &amp;quot;KK-Beleg PDF&amp;quot;, insurance_recipe_invoice_path(invoice, :format =&amp;gt; :pdf) </haml:loud>

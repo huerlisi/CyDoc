@@ -1,14 +1,4 @@
-class InvoiceBatchJobsController < ApplicationController
-  inherit_resources
-
-  # Inherited Resources
-  protected
-    def collection
-      instance_eval("@#{controller_name.pluralize} ||= end_of_association_chain.paginate(:page => params[:page], :per_page => params[:per_page], :order => 'created_at DESC')")
-    end
-
-  public
-
+class InvoiceBatchJobsController < AuthorizedController
   # GET /invoice_batch_jobs/new
   def new
     @invoice_batch_job = InvoiceBatchJob.new
