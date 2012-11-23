@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
     cookies[:locale] = locale unless (cookies[:locale] && cookies[:locale] == locale.to_s)
   end
 
+  def current_doctor
+    current_user.object
+  end
+
   private
 
   # PDF generation
