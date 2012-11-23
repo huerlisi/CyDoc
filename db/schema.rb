@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121113113412) do
+ActiveRecord::Schema.define(:version => 20121122135624) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(:version => 20121113113412) do
     t.float    "exchange_rate",                                                   :default => 1.0
     t.integer  "template_id"
     t.string   "template_type"
+    t.string   "code"
   end
 
   add_index "bookings", ["credit_account_id"], :name => "index_bookings_on_credit_account_id"

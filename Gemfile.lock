@@ -9,7 +9,7 @@ GIT
 PATH
   remote: ../has_accounts
   specs:
-    has_accounts (0.18.3)
+    has_accounts (0.18.4)
       has_vcards
       inherited_resources
       rails (~> 3.1)

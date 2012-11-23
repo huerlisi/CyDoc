@@ -28,3 +28,14 @@ Role.create!([
   {:name => 'admin'}
 ])
 
+# Account Types
+# =============
+current_assets, capital_assets, outside_capital, equity_capital, costs, earnings =
+AccountType.create!([
+  {:name => "current_assets", :title => "Umlaufvermögen"},
+  {:name => "capital_assets", :title => "Anlagevermögen"},
+  {:name => "outside_capital", :title => "Fremdkapital"},
+  {:name => "equity_capital", :title => "Eigenkapital"},
+  {:name => "costs", :title => "Aufwand"},
+  {:name => "earnings", :title => "Ertrag"},
+])
