@@ -1,4 +1,6 @@
 class ReminderBatchJobsController < InvoiceBatchJobsController
+  defaults :resource_class => ReminderBatchJob
+
   # GET /reminder_batch_jobs/new
   def new
     @reminder_batch_job = ReminderBatchJob.new

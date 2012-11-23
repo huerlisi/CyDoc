@@ -1,4 +1,6 @@
 class InvoiceBatchJobsController < AuthorizedController
+  defaults :resource_class => InvoiceBatchJob
+
   # GET /invoice_batch_jobs/new
   def new
     @invoice_batch_job = InvoiceBatchJob.new

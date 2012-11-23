@@ -1,9 +1,3 @@
-#reminder_batch_form
-  %h3 Rechnungslauf
-  .box
-    = semantic_form_for @reminder_batch_job, :before => "showPrintingFlash('Rechnungslauf'); $('reminder_batch_form').remove()", :remote => true do |form|
-      = form.inputs do
-        = form.input :count, :input_html => {:size => 12, :autocomplete => 'off', 'data-autofocus' => true}
-      = form.buttons do
-        = form.submit "Drucken", :class => "icon icon-print"
-        = button_to_function "Abbrechen", "$('reminder_batch_form').remove()", :class => "icon icon-cancel"
+= simple_form_for  resource, :before => "showPrintingFlash('Rechnungslauf'); $('reminder_batch_f').remove()", :remote => true do |f|
+  = f.input :count, :input_html => {:size => 12, :autocomplete => 'off', 'data-autofocus' => true}
+  = f.submit
