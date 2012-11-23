@@ -1,8 +1,0 @@
-%tr{:style => "border-top: double 2px black; background-color: grey"}
-  %td{:colspan => "2"} Total
-  %td
-  %td
-  %td
-  %td{:style => "text-align: right"}= currency_fmt(@invoices.collect{|i| i.due_amount(@value_date_end)}.sum)
-%tr
-  %th{:colspan => "6", :style => "text-align: right"}= will_paginate @invoices, :params => {:query => params[:query]}

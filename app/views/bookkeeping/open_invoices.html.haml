@@ -1,9 +1,26 @@
 .contextual
   = link_to "Als CSV", {:action => 'open_invoices_csv', :by_value_period => params[:by_value_period]}, :class => "icon icon-show"
-%h2
-  Offene Posten per #{Date.parse(@value_date_end)}
-%table.list.booking_list
-  = render :partial => 'open_invoice_list_header'
-  = render :partial => 'open_invoice_item', :collection => @invoices
-  = render :partial => 'open_invoice_list_footer'
-= render :partial => 'bookings/sidebar'
+= boot_page_title "Offene Posten per #{Date.parse(@value_date_end)}"
+
+%table.table.table-striped
+  %tr
+    %th Patient
+    %th Rechnungsdatum
+    %th Fälligkeit
+    %th{:style => "text-align: right"} Rechnungsnr.
+    %th{:style => "text-align: right"} Rechnungsbetrag
+    %th{:style => "text-align: right"}
+      Offener Betrag per #{Date.parse(@value_date_end)}
+
+  = render :partial => 'bookkeeping/invoice', :collection => @invoices
+
+  %tr{:style => "border-top: double 2px black; background-color: grey"}
+    %td{:colspan => "2"} Total
+    %td
+    %td
+    %td
+    %td{:style => "text-align: right"}= currency_fmt(@invoices.collect{|i| i.due_amount(@value_date_end)}.sum)
+  %tr
+    %th{:colspan => "6", :style => "text-align: right"}= paginate @invoices
+
+= render 'bookings/sidebar'

@@ -207,7 +207,7 @@ CyDoc::Application.routes.draw do
 
   resources :bookkeeping do
     collection do
-      get :report, :open_invoices
+      get :report, :open_invoices, :open_invoices_csv
     end
   end
 

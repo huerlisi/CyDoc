@@ -1,0 +1,7 @@
+%tr[invoice]
+  %td= link_to invoice.patient.full_name, invoice.patient
+  %td= invoice.value_date
+  %td= invoice.due_date
+  %td{:style => "text-align: right"}= link_to (invoice.imported_invoice_id.blank? ? invoice.id : "#{invoice.id} (Triamun #{invoice.imported_invoice_id})"), invoice
+  %td{:style => "text-align: right"}= sprintf("%0.2f", invoice.amount)
+  %td{:style => "text-align: right"}= sprintf("%0.2f", invoice.due_amount(@value_date_end))
