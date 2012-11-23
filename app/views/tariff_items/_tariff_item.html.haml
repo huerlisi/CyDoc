@@ -1,0 +1,13 @@
+%tr
+  %td{:style => "text-align:right"}= link_to tariff_item.code, tariff_item, 'data-href-container' => 'tr'
+  %td
+    %span= truncate(tariff_item.remark, :length => 80, :separator => ' ')
+  %td{:style => "text-align:right"}
+    = currency_fmt(tariff_item.amount_mt)
+    \&nbsp;TP
+  %td{:style => "text-align:right"}
+    = currency_fmt(tariff_item.amount_tt)
+    \&nbsp;TP
+  %td{:style => "text-align:right"}
+    = currency_fmt(tariff_item.amount)
+    \&nbsp;CHF

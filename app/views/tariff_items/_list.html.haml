@@ -6,7 +6,7 @@
     %th{:style => "text-align: right"}= t_attr(:amount_tt, TariffItem)
     %th{:style => "text-align: right"}= t_attr(:amount, TariffItem)
 
-  = render :partial => 'item', :collection => @tariff_items
+  = render :partial => 'tariff_item', :collection => collection
 
   %tr
-    %th{:colspan => "5", :style => "text-align: right"}= will_paginate @tariff_items, :params => {:query => params[:query]}
+    %th{:colspan => "5", :style => "text-align: right"}= paginate collection

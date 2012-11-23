@@ -2,7 +2,7 @@
 
 class TariffItem < ActiveRecord::Base
   # Access restrictions
-  attr_accessible :code, :remark, :obligation, :amount_mt, :amount_tt, :type_as_string
+  attr_accessible :code, :remark, :obligation, :amount_mt, :amount_tt, :type_as_string, :vat_class, :tariff_type
 
   # Associations
   belongs_to :vat_class
