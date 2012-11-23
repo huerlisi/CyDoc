@@ -169,6 +169,7 @@ CyDoc::Application.routes.draw do
     end
     resources :drug_articles
   end
+  resources :drug_articles
 
   resources :invoices do
     collection do
