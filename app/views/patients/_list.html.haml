@@ -8,4 +8,7 @@
     %th= t_attr(:doctor_patient_nr, Patient)
     %th= t_attr(:insurance, Patient)
 
-  = render @patients.select{|patient| patient.vcard}
+  = render collection
+
+  %tr
+    %th{ :colspan => "4", :style => "text-align: right" }= paginate collection
