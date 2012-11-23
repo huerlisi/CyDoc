@@ -29,6 +29,20 @@ class PatientsController < AuthorizedController
     end
   end
 
+  def new
+    # Use default sex from doctor settings
+    case Doctor.settings['patients.sex']
+      when 'M'
+        resource.sex = 'M'
+        resource.vcard.honorific_prefix = 'Herr'
+      when 'F'
+        resource.sex = 'F'
+        resource.vcard.honorific_prefix = 'Frau'
+    end
+
+    resource.doctor_patient_nr = Patient.maximum('CAST(doctor_patient_nr AS UNSIGNED INTEGER)').to_i + 1
+  end
+
   def search
     query = params[:query] || params[:search]
     query ||= params[:search][:query] if params[:search]
