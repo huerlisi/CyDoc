@@ -1,13 +1,9 @@
 %tr[drug_article]
   %td= link_to drug_article, drug_article, 'data-href-container' => 'tr'
   %td= "#{drug_article.number_of_pieces} x #{drug_article.quantity} #{drug_article.quantity_unit}"
-  %td{:style => "text-align: right"}
-    = drug_article.vat_class.try(:rate)
-    \%
-  %td{:style => "text-align: right"}
-    CHF #{currency_fmt(drug_article.doctors_price)}
-  %td{:style => "text-align: right"}
-    CHF #{currency_fmt(drug_article.price)}
+  %td.currency= "#{drug_article.vat_class.try(:rate)} %"
+  %td.currency= "#{currency_fmt(drug_article.doctors_price)}"
+  %td.currency= "#{currency_fmt(drug_article.price)}"
   %td
-    = link_to image_tag('delete.png'), drug_article, :method => :delete, :confirm => t_confirm_delete(drug_article), :remote => true
-    = link_to image_tag('edit.png'), edit_drug_article_path(drug_article)
+    = list_link_for(:delete, drug_article)
+    = list_link_for(:edit, drug_article)

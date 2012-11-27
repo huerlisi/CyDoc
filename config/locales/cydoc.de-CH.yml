@@ -50,7 +50,7 @@ de-CH:
         price:            Publikumspreis
         quantity:         Anzahl
         quantity_unit:    Einheit
-        vat_class:        MwSt
+        vat_class:        MwSt %
       drug_product:
         description: Beschreibung
         name:        Name
