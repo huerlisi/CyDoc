@@ -1,16 +1,8 @@
 de-CH:
-  application: 
+  application:
     title: CyDoc
   activerecord:
     attributes:
-      vcard:
-        full_name:           Name
-        street_address:      Strasse
-        extended_address:    Adresszusatz
-        post_office_box:     Postfach
-        postal_code:         PLZ
-        locality:            Ort
-
       account:
         balance:          Saldo
         credit:           Haben
@@ -399,6 +391,10 @@ de-CH:
       title:              Neue vorbereiten
     index:
       title:              Inkasso
+  doctors:
+    show:
+      tab:
+        show:             Doktor Informationen
 
   boolean:
     true:  Ja

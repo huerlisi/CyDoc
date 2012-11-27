@@ -1,11 +1,10 @@
-%table.table.table-striped.collection
+%table.table.table-striped
   %tr
-    %th Name
-    %th Adresse
-    %th ZSR
-    %th EAN
+    %th= t_attr(:full_name)
+    %th= t_attr(:address)
+    %th= t_attr(:zsr)
+    %th= t_attr(:ean)
 
   = render collection
 
-  %tr
-    %th{ :colspan => "4", :style => "text-align: right" }= paginate collection
+  = paginate collection
