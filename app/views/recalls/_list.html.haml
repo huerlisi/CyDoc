@@ -8,7 +8,7 @@
     %th= t_attr(:remark)
     %th{:style => "min-width: 70px;"}
 
-  = render recalls
+  = render collection
 
   %tr
-    %th{:colspan => "7", :style => "text-align: right"}= will_paginate recalls
+    %th{:colspan => "7", :style => "text-align: right"}= paginate collection

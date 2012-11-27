@@ -1,4 +1,4 @@
-class ServiceItemsController < ApplicationController
+class ServiceItemsController < AuthorizedController
   in_place_edit_for :service_item, :ref_code
   in_place_edit_for :service_item, :quantity
 
@@ -7,9 +7,9 @@ class ServiceItemsController < ApplicationController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    @tariff_items = TariffItem.clever_find(query).paginate(:page => params['page'])
+    @tariff_items = TariffItem.clever_find(query).page params['page']
     @tariff_item = TariffItem.find(params[:tariff_item_id])
-    
+
     # Show selection list only if more than one hit
     if @tariff_items.size == 1
       params[:tariff_item_id] = @tariff_item.id
@@ -17,7 +17,7 @@ class ServiceItemsController < ApplicationController
       create
       return
     end
-    
+
     respond_to do |format|
       format.html { }
       format.js {
@@ -49,9 +49,9 @@ class ServiceItemsController < ApplicationController
   # POST /service_items
   def create
     @tariff_item = TariffItem.find(params[:tariff_item_id])
-    
+
     tariff_item = TariffItem.find(params[:select_item_id])
-    
+
     # Handle TariffItemGroups
     if tariff_item.is_a? TariffItemGroup
       @tariff_item.service_items << tariff_item.service_items
@@ -81,7 +81,7 @@ class ServiceItemsController < ApplicationController
     @service_item = ServiceItem.find(params[:id])
 
     @service_item.destroy
-    
+
     respond_to do |format|
       format.html { }
       format.js {

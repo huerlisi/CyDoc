@@ -1,2 +1,2 @@
 %tr
-  %th{:colspan => "6", :style => "text-align: right"}= will_paginate @treatments, :param_name => "page_#{@tab_name}", :params => params.merge(:tab => @tab_name)
+  %th{:colspan => "6", :style => "text-align: right"}= paginate collection

@@ -16,7 +16,7 @@ class Appointment < ActiveRecord::Base
   aasm_state :proposed
   aasm_state :scheduled
   aasm_state :canceled
-  scope :open, :conditions => {:state => ['proposed', 'scheduled']}
+  scope :active, :conditions => {:state => ['proposed', 'scheduled']}
 
   aasm_event :accept do
     transitions :to => :scheduled, :from => :proposed

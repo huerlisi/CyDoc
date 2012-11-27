@@ -36,7 +36,8 @@ class Recall < ActiveRecord::Base
   end
 
   # Scopes
-  scope :open, :conditions => {:state => ['scheduled', 'prepared', 'sent']}
+  default_scope order("due_date DESC")
+  scope :active, :conditions => {:state => ['scheduled', 'prepared', 'sent']}
   scope :queued, :conditions => {:state => ['scheduled', 'prepared']}
   scope :by_period, lambda {|from, to| { :conditions => { :due_date => from..to } } }
 
@@ -52,7 +53,7 @@ class Recall < ActiveRecord::Base
 
   public
   def self.filter_months(limit = nil)
-    months = Recall.open.all(:select => "date_format(due_date, '%Y-%m-01') AS month, count(*) AS count", :group => "date_format(due_date, '%Y-%m-01')", :order => "due_date", :limit => limit)
+    months = Recall.active.all(:select => "date_format(due_date, '%Y-%m-01') AS month, count(*) AS count", :group => "date_format(due_date, '%Y-%m-01')", :order => "due_date", :limit => limit)
     months.map{|recall|
       [Date.parse(recall.month), recall.count]
     }

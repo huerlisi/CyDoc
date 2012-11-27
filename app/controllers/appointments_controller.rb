@@ -1,13 +1,13 @@
-class AppointmentsController < ApplicationController
+class AppointmentsController < AuthorizedController
   # Filter
   has_scope :by_period, :using => [:from, :to]
 
   # GET /appointments
   def index
-    @appointments = apply_scopes(Appointment).open.paginate(:page => params['page'], :order => 'date, `from`')
-    @recalls = apply_scopes(Recall).open.paginate(:page => params['page'], :order => 'due_date')
+    @appointments = apply_scopes(Appointment).active.order(:date).page params['page']
+    @recalls = apply_scopes(Recall).active.order(:due_date).page params['page']
   end
-  
+
   # GET /patients/1/appointments/new
   def new
     @patient = Patient.find(params[:patient_id])
@@ -27,13 +27,13 @@ class AppointmentsController < ApplicationController
   def create
     @patient = Patient.find(params[:patient_id])
     @appointment  = @patient.appointments.build(params[:appointment])
-    
+
     if @appointment.save
       respond_to do |format|
         format.html { }
         format.js {
           render :update do |page|
-            page.replace_html 'appointments', :partial => 'appointments/patient_item', :collection => @patient.appointments.open
+            page.replace_html 'appointments', :partial => 'appointments/patient_item', :collection => @patient.appointments.active
             page.replace_html 'new_appointment'
           end
         }
@@ -54,7 +54,7 @@ class AppointmentsController < ApplicationController
   def edit
     @patient = Patient.find(params[:patient_id])
     @appointment = Appointment.find(params[:id])
-    
+
     respond_to do |format|
       format.html { }
       format.js {
@@ -64,19 +64,19 @@ class AppointmentsController < ApplicationController
       }
     end
   end
-  
+
   # PUT /appointment/1
   # PUT /patients/1/appointment/2
   def update
     @patient = Patient.find(params[:patient_id])
     @appointment = Appointment.find(params[:id])
-    
+
     if @appointment.update_attributes(params[:appointment])
       respond_to do |format|
         format.html { }
         format.js {
           render :update do |page|
-            page.replace_html 'appointments', :partial => 'appointments/patient_item', :collection => @patient.appointments.open
+            page.replace_html 'appointments', :partial => 'appointments/patient_item', :collection => @patient.appointments.active
             page.replace_html 'new_appointment'
           end
         }
@@ -98,7 +98,7 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.find(params[:id])
     @appointment.obey
     @appointment.save
-    
+
     respond_to do |format|
       format.html { }
       format.js {
@@ -108,12 +108,12 @@ class AppointmentsController < ApplicationController
       }
     end
   end
-  
+
   # DELETE /appointment/1
   def destroy
     @appointment = Appointment.find(params[:id])
     @appointment.destroy
-    
+
     respond_to do |format|
       format.html { }
       format.js {

@@ -21,6 +21,6 @@
     %td
     %td{:style => "text-align: right"}= currency_fmt(@invoices.collect{|i| i.due_amount(@value_date_end)}.sum)
   %tr
-    %th{:colspan => "6", :style => "text-align: right"}= paginate @invoices
+    %th{:colspan => "6", :style => "text-align: right"}= paginate collection
 
 = render 'bookings/sidebar'
