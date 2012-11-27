@@ -1,3 +1,20 @@
-= render 'show', :resource => resource
-%h3 Mitglieder
-= render 'list', :collection => resource.members.page(params[:page] || 0).per(collection.count)
+%h3= t_attr(:contact)
+%table.table.table-striped
+  %tr
+    %th= t_attr(:full_name)
+    %td= resource.full_name
+  %tr
+    %th= t_attr(:address)
+    %td= address(resource.vcard, ', ')
+
+%h3= t_attr(:informations)
+%table.table.table-striped
+  %tr
+    %th= t_attr(:role)
+    %td= resource.role(:text)
+  %tr
+    %th= t_attr(:ean_party)
+    %td= resource.ean_party
+
+%h3= t_attr(:members)
+= render 'list', :collection => resource.members

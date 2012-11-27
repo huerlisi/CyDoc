@@ -1,16 +1,11 @@
-%h3 Kontakt
-%table.table.table-striped.collection
-  %tr
-    %th Name:
-    %td= resource.full_name
-  %tr
-    %th Adresse:
-    %td= address(resource.vcard, ', ')
-%h3 Information
-%table
-  %tr
-    %th Rolle:
-    %td= resource.role(:text)
-  %tr
-    %th EAN:
-    %td= resource.ean_party
+- if resource.group
+  %ul.nav.nav-tabs
+    %li.active= link_to t('.tab.show'), '#tab-show', {:data => {:toggle => 'tab'}}
+    %li= link_to t('.tab.group_show'), '#tab-group_show', {:data => {:toggle => 'tab'}}
+
+  .tab-content
+    #tab-show.tab-pane.active= render 'form', :resource => resource
+    #tab-group_show.tab-pane= render 'group_show', :resource => resource.group
+
+-else
+  = render 'form', :resource => resource

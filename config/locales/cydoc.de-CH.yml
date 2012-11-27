@@ -56,6 +56,9 @@ de-CH:
         name:        Name
         packages:    Packungen
       insurance:
+        contact:          Kontakt
+        informations:     Informationen
+        members:          Mitglieder
         ean_party:        EAN-Nummer
         group_ean_party:  EAN-Gruppe
         role:             Rolle
@@ -396,7 +399,11 @@ de-CH:
     show:
       tab:
         show:             Doktor Informationen
-
+  insurances:
+    show:
+      tab:
+        show:             Versicherung
+        group_show:       Versicherungsgruppe
   boolean:
     true:  Ja
     false: Nein
