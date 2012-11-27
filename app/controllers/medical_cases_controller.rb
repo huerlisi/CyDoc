@@ -1,4 +1,4 @@
-class MedicalCasesController < ApplicationController
+class MedicalCasesController < AuthorizedController
   # CRUD actions
   def index
     @patient = Patient.find(params[:patient_id])
@@ -7,14 +7,14 @@ class MedicalCasesController < ApplicationController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    @diagnoses = Diagnosis.paginate(:page => params['page'], :per_page => 20, :conditions => ['code LIKE :query OR text LIKE :query', {:query => "%#{query}%"}], :order => 'code')
+    @diagnoses = Diagnosis.order(:code).page params['page']
 
     # Show selection list only if more than one hit
     if @diagnoses.size == 1
       params[:diagnosis_id] = @diagnoses.first.id
       create
       return
-    end    
+    end
     respond_to do |format|
       format.html {
         render :action => 'select_list'
@@ -28,7 +28,7 @@ class MedicalCasesController < ApplicationController
     end
   end
   alias :search :index
-  
+
   # GET /medical_cases/new
   def new
     # TODO: generalize like this: @medical_case = Object.const_get(params[:type]).new
@@ -37,7 +37,7 @@ class MedicalCasesController < ApplicationController
     @treatment = Treatment.find(params[:treatment_id])
 
     @medical_case.date = Date.today
-    
+
     respond_to do |format|
       format.html { }
       format.js {
@@ -82,11 +82,11 @@ class MedicalCasesController < ApplicationController
     end
   end
 
-  # DELETE 
+  # DELETE
   def destroy
     @medical_case = MedicalCase.find(params[:id])
     @medical_case.destroy
-    
+
     respond_to do |format|
       format.html { }
       format.js {

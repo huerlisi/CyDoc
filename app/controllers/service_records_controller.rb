@@ -1,4 +1,4 @@
-class ServiceRecordsController < ApplicationController
+class ServiceRecordsController < AuthorizedController
   in_place_edit_for :session, :date
   in_place_edit_for :service_record, :ref_code
   in_place_edit_for :service_record, :quantity
@@ -33,7 +33,7 @@ class ServiceRecordsController < ApplicationController
     @session = Session.find(params[:session_id])
 
     service_record = @session.build_service_record(tariff_item)
-    
+
     @session.save
 
     flash[:notice] = 'Erfolgreich erfasst.'
@@ -57,17 +57,17 @@ class ServiceRecordsController < ApplicationController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    @tariff_items = TariffItem.clever_find(query).paginate(:page => params['page'])
+    @tariff_items = TariffItem.clever_find(query).page params['page']
     @patient = Patient.find(params[:patient_id])
     @session = Session.find(params[:session_id])
-    
+
     # Show selection list only if more than one hit
     if @tariff_items.size == 1
       params[:tariff_item_id] = @tariff_items.first.id
       create
       return
     end
-      
+
     respond_to do |format|
       format.html { }
       format.js {
@@ -85,7 +85,7 @@ class ServiceRecordsController < ApplicationController
     @session = Session.find(params[:session_id])
 
     service_record.destroy
-    
+
     respond_to do |format|
       format.html {
         redirect_to :controller => 'patients', :action => 'show', :id => @patient, :tab => 'services'

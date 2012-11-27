@@ -1,4 +1,4 @@
-class AttachmentsController < ApplicationController
+class AttachmentsController < AuthorizedController
   inherit_resources
 
   belongs_to :doctor, :polymorphic => true, :optional => true
@@ -17,9 +17,4 @@ class AttachmentsController < ApplicationController
     send_file path
   end
 
-  # Inherited Resources
-  protected
-    def collection
-      instance_eval("@#{controller_name.pluralize} ||= end_of_association_chain.paginate(:page => params[:page], :per_page => params[:per_page])")
-    end
 end
