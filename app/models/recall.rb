@@ -1,4 +1,7 @@
 class Recall < ActiveRecord::Base
+  # Access restrictions
+  attr_accessible :state, :doctor_id, :due_date, :remarks, :appointment_attributes
+
   # Associations
   belongs_to :patient, :touch => true
   belongs_to :doctor
@@ -59,17 +62,9 @@ class Recall < ActiveRecord::Base
     }
   end
 
-  # Fix for nested attributes problem
-  # See http://www.pixellatedvisions.com/2009/03/18/rails-2-3-nested-model-forms-and-nil-new-record
-<<END
-  def initialize(attributes=nil)
-    super
-
-    unless self.appointment
-      self.build_appointment(:patient => self.patient)
-    end
+  def to_s
+   "#{patient} #{state} #{due_date}"
   end
-END
 
   # PDF/Print
   include ActsAsDocument
