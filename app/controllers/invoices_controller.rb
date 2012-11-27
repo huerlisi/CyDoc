@@ -36,12 +36,7 @@ class InvoicesController < AuthorizedController
     else
       respond_to do |format|
         format.html { redirect_to @invoice }
-        format.js {
-          render :update do |page|
-            page.replace_html "tab-content-invoices", :partial => 'show'
-            page.replace "notice_flash", :partial => 'pdf_links_flash', :locals => {:views => [:patient_letter, :insurance_recipe]}
-          end
-        }
+        format.js
       end
     end
   end
