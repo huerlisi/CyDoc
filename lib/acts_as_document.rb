@@ -48,7 +48,7 @@ module ActsAsDocument
     end
 
     def document_type_to_class(document_type)
-      "Prawn::#{document_type.to_s.camelcase}".constantize
+      document_type.to_s.camelcase.constantize
     end
   end
 

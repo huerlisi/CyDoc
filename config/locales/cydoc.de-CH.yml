@@ -399,6 +399,7 @@ de-CH:
     show:
       tab:
         show:             Doktor Informationen
+        invoicing:        Rechnungseinstellungen
   insurances:
     show:
       tab:

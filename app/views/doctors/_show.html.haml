@@ -1,9 +1,9 @@
 %ul.nav.nav-tabs
   %li.active= link_to t('.tab.show'), '#tab-show', {:data => {:toggle => 'tab'}}
-  // %li= link_to t('.tab.invoicing_tab'), '#tab-invoicing_tab', {:data => {:toggle => 'tab'}}
+  %li= link_to t('.tab.invoicing'), '#tab-invoicing_tab', {:data => {:toggle => 'tab'}}
   // %li= link_to t('.tab.printing_tab'), '#tab-printing_tab', {:data => {:toggle => 'tab'}}
 
 .tab-content
   #tab-show.tab-pane.active= render 'form'
-  // #tab-invoicing_tab.tab-pane= render 'invoicing_tab'
+  #tab-invoicing_tab.tab-pane= render 'invoicing_form'
   // #tab-printing_tab.tab-pane= render 'printing_tab'
