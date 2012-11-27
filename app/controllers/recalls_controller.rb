@@ -72,50 +72,6 @@ class RecallsController < AuthorizedController
     end
   end
 
-  # PUT /recall/1
-  # PUT /patients/1/recall/2
-  def update
-    @patient = Patient.find(params[:patient_id]) if params[:patient_id]
-    @recall = Recall.find(params[:id])
-
-    if @recall.update_attributes(params[:recall])
-      if params['send_notice']
-        @recall.send_notice
-        @recall.save
-
-        render :update do |page|
-          page.remove "recall_form"
-          page.redirect_to :action => 'show', :format => :pdf
-        end
-        return
-      end
-      respond_to do |format|
-        format.html { }
-        format.js {
-          render :update do |page|
-            if @patient
-              # reload all recalls when called in patient view to reflect sorting
-              page.replace_html 'recalls', :partial => 'recalls/patient_item', :collection => @patient.recalls.active
-            else
-              page.replace "recall_#{@recall.id}", :partial => 'item', :object => @recall
-              page.remove "recall_form"
-            end
-          end
-        }
-      end
-    else
-      respond_to do |format|
-        format.html { }
-        format.js {
-          render :update do |page|
-            page.replace 'recall_form', :partial => 'recalls/form'
-            page.call(:initBehaviour)
-          end
-        }
-      end
-    end
-  end
-
   # POST /recall/1/prepare
   def prepare
     @recall = Recall.find(params[:id])
@@ -183,6 +139,7 @@ class RecallsController < AuthorizedController
     @patient = @recall.patient
 
     respond_to do |format|
+      format.html
       format.pdf {
         document = @recall.document_to_pdf(:recall_letter)
 

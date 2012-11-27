@@ -1,23 +1,12 @@
-%tr#recall_form
-  %td{:colspan => "5"}
-    = javascript_tag "$('recall_due_date').focus()"
-    = semantic_form_for [@patient, @recall], :remote => true do |form|
-      = form.semantic_errors
-      = form.inputs t_model do
-        = form.input :state, :as => :hidden
-        = form.input :doctor_id, :as => :hidden
-        = form.input :due_date, :as => :date_field, :input_html => {:size => 12, :autocomplete => 'off', 'date-picker' => true}
-        = form.input :remarks, :input_html => {:rows => 3}
-      - if @recall.appointment
-        = form.inputs t_attr(:appointment) do
-          = form.semantic_fields_for :appointment do |appointment|
-            = appointment.input :patient_id, :as => :hidden, :value => @recall.patient.id
-            = appointment.input :date, :as => :date_field, :input_html => {:size => 12, :autocomplete => 'off'}
-            = appointment.input :from, :as => :time_field, :input_html => {:size => 12, :autocomplete => 'off'}
-            = appointment.input :to, :as => :time_field, :input_html => {:size => 12, :autocomplete => 'off'}
-      = form.buttons do
-        - if @recall.state == 'prepared'
-          = form.submit t('cydoc.actions.show_letter'), :name => 'send_notice', :class => "icon icon-save"
-        - else
-          = form.submit t('cydoc.actions.save'), :class => "icon icon-save"
-        = button_to_function t('cydoc.actions.abort'), "Element.remove('recall_form')", :class => "icon icon-cancel"
+= simple_form_for resource do |f|
+  = f.input :state, :as => :hidden
+  = f.input :doctor_id, :as => :hidden
+  = f.input :due_date, :as => :date_field, 'data-autofocus' => true
+  = f.input :remarks, :input_html => {:rows => 3}
+  - if @recall.appointment
+    = f.simple_fields_for :appointment do |appointment|
+      = appointment.input :patient_id, :as => :hidden, :value => @recall.patient.id
+      = appointment.input :date, :as => :date_field
+      = appointment.input :from
+      = appointment.input :to
+  = f.submit
