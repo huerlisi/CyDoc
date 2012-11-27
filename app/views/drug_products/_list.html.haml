@@ -1,9 +1,8 @@
-%table.table.table-striped.collection
+%table.table.table-striped
   %tr
     %th= t_attr(:name)
     %th= t_attr(:description)
 
   = render collection
 
-  %tr
-    %th{:colspan => "2", :style => "text-align: right"}= paginate collection
+  = paginate collection

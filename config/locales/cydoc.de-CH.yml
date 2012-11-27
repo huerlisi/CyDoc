@@ -54,6 +54,7 @@ de-CH:
       drug_product:
         description: Beschreibung
         name:        Name
+        packages:    Packungen
       insurance:
         ean_party:        EAN-Nummer
         group_ean_party:  EAN-Gruppe

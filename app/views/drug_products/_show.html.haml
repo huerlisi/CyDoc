@@ -2,13 +2,14 @@
   = link_to "Tarif erzeugen", create_tariff_item_drug_product_path(resource), :method => :put
   = link_to "Packung erfassen", new_drug_product_drug_article_path(resource)
 
-%table.table.table-striped.collection
+%table.table.table-striped
   %tr
     %th= t_attr(:name)
     %td= resource.name
   %tr
     %th= t_attr(:description)
     %td= resource.description
-%h3 Packungen
+
+%h3= t_attr(:packages)
 
 = render 'drug_articles/list', :collection => resource.drug_articles.page(0).per(resource.drug_articles.count)
