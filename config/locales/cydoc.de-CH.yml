@@ -395,6 +395,7 @@ de-CH:
     show:
       tab:
         show:             Doktor Informationen
+        invoicing:        Rechnungseinstellungen
 
   boolean:
     true:  Ja

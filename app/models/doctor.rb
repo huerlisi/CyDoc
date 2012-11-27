@@ -2,7 +2,7 @@
 
 class Doctor < ActiveRecord::Base
   # Access restrictions
-  attr_accessible :vcard, :ean_party, :zsr
+  attr_accessible :vcard, :ean_party, :zsr, :print_payment_for
 
   scope :active, where(:active => true)
 
@@ -29,6 +29,7 @@ class Doctor < ActiveRecord::Base
   # Accounts
   has_many :accounts
   belongs_to :esr_account, :class_name => 'BankAccount'
+  attr_accessible :esr_account_id
 
   has_many :patients
 

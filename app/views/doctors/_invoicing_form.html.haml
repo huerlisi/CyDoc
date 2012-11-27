@@ -1,5 +1,6 @@
 %h3 VESR
-= semantic_fields_for @doctor do |f|
-  - f.inputs do
-    = f.input :print_payment_for
-    = f.input :esr_account
+= simple_form_for resource do |f|
+  = f.input :print_payment_for
+  = f.association :esr_account
+
+  = f.button :submit
