@@ -1,6 +1,6 @@
 %tr
-  %td{:style => "text-align: right"}= link_to reminder_batch_job.created_at.to_date, reminder_batch_job, 'data-href-container' => 'tr'
-  %td{:style => "text-align: right"}= reminder_batch_job.value_date
-  %td{:style => "text-align: right"}= reminder_batch_job.count
-  %td{:style => "text-align: right"}= reminder_batch_job.failed_job_count
+  %td.right= link_to reminder_batch_job.created_at.to_date, reminder_batch_job, 'data-href-container' => 'tr'
+  %td.right= reminder_batch_job.value_date
+  %td.right= reminder_batch_job.count
+  %td.right= reminder_batch_job.failed_job_count
   %td= failed_jobs(reminder_batch_job)

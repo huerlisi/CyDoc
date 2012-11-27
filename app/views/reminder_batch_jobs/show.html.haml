@@ -4,5 +4,5 @@
 = boot_page_title
 %h3= t_attr :failed_jobs
 = failed_jobs(resource)
-%h3 Rechnungen
+%h3= t_attr(:bills)
 = render 'invoices/list', :collection => resource.invoices.page(0).per(resource.invoices.count)
