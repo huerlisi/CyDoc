@@ -1,6 +1,6 @@
-%tr
-  %td{:style => "text-align: right"}= link_to invoice_batch_job.created_at.to_date, invoice_batch_job, 'data-href-container' => 'tr'
-  %td{:style => "text-align: right"}= invoice_batch_job.value_date
-  %td{:style => "text-align: right"}= invoice_batch_job.count
-  %td{:style => "text-align: right"}= invoice_batch_job.failed_job_count
+%tr[invoice_batch_job]
+  %td.right= link_to invoice_batch_job.created_at.to_date, invoice_batch_job, 'data-href-container' => 'tr'
+  %td.right= invoice_batch_job.value_date
+  %td.right= invoice_batch_job.count
+  %td.right= invoice_batch_job.failed_job_count
   %td= failed_jobs(invoice_batch_job)

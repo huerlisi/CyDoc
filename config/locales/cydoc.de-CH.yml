@@ -115,6 +115,7 @@ de-CH:
         total_count:  Total
         failed_count: Fehlerhaft
         failed_jobs:  Fehler
+        bills:        Rechnungen
       law:
         code:         Gesetz
       reminder_batch_job:

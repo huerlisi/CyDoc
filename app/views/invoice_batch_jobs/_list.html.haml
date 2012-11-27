@@ -1,10 +1,10 @@
 %table.table.table-striped
   %tr
-    %th{:style => "text-align: right"}= t_attr :created_at
-    %th{:style => "text-align: right"}= t_attr :value_date
-    %th{:style => "text-align: right"}= t_attr :total_count
-    %th{:style => "text-align: right"}= t_attr :failed_count
+    %th.right= t_attr :created_at
+    %th.right= t_attr :value_date
+    %th.right= t_attr :total_count
+
+    %th.right= t_attr :failed_count
     %th= t_attr :failed_jobs
+
   = render collection
-  %tr
-    %th{:colspan => "5", :style => "text-align: right"}= paginate collection
