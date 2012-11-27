@@ -7,5 +7,5 @@
   %li= link_to t('cydoc.recall.sent_recalls'), '#tab-sent_recalls', {:data => {:toggle => 'tab'}}
 
 .tab-content
-  #tab-scheduled_list.tab-pane.active= render 'list', :recalls => @scheduled_recalls
-  #tab-sent_recalls.tab-pane= render 'list', :recalls => @sent_recalls
+  #tab-scheduled_list.tab-pane.active= render 'list', :collection => @scheduled_recalls
+  #tab-sent_recalls.tab-pane= render 'list', :collection => @sent_recalls
