@@ -8,9 +8,9 @@
   %td{:style => "text-align: right"}= t invoice.state, :scope => 'invoice.state'
   %td
     - if invoice.overdue?
-      = link_to image_tag('print.png'), print_reminder_letter_invoice_path(invoice), :title => "Drucken", :method => :post
+      = link_to image_tag('print.png'), print_reminder_letter_invoice_path(invoice), :title => "Drucken", :method => :post, :remote => true
     - else
-      = link_to image_tag('print.png'), print_invoice_path(invoice), :title => "Drucken", :method => :post
+      = link_to image_tag('print.png'), print_invoice_path(invoice), :title => "Drucken", :method => :post, :remote => true
     = link_to image_tag('delete.png'), invoice_path(invoice), :method => :delete, :confirm => "Rechnung #{invoice.to_s} stornieren?", :remote => true
     /
       <haml:loud> link_to &amp;quot;KK-Beleg&amp;quot;, insurance_recipe_invoice_path(invoice) </haml:loud>
