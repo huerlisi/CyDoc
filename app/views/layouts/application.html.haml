@@ -38,6 +38,7 @@
             = yield :sidebar
         .span10
           .content
+            #notice_flash
             - if notice
               = boot_alert(notice, 'success')
             - if alert

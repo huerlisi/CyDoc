@@ -1,8 +1,8 @@
 %tr[recall]
-  %td= l recall.due_date
+  %td= recall.due_date
   %td= link_to recall.patient, recall.patient
   %td= recall.appointment unless recall.appointment.nil?
   %td= link_to_last_session(recall)
-  %td= l(recall.sent_at.to_date) if recall.sent_at
+  %td= recall.sent_at.try(:to_date)
   %td= recall.remarks
   %td= render 'action_links', :recall => recall

@@ -1,12 +1,4 @@
 class InvoicesController < AuthorizedController
-  # TODO: is duplicated in Patients and Treatment controllers
-
-  in_place_edit_for :session, :date
-  in_place_edit_for :service_record, :ref_code
-  in_place_edit_for :service_record, :quantity
-
-  in_place_edit_for :invoice, :due_date
-
   # POST /invoice/1/print
   def print
     @invoice = Invoice.find(params[:id])
@@ -44,12 +36,7 @@ class InvoicesController < AuthorizedController
     else
       respond_to do |format|
         format.html { redirect_to @invoice }
-        format.js {
-          render :update do |page|
-            page.replace_html "tab-content-invoices", :partial => 'show'
-            page.replace "notice_flash", :partial => 'pdf_links_flash', :locals => {:views => [:patient_letter, :insurance_recipe]}
-          end
-        }
+        format.js
       end
     end
   end
@@ -158,25 +145,6 @@ class InvoicesController < AuthorizedController
     @overdue = Invoice.overdue(current_user.object.settings['invoices.grace_period']).dunning_active.page(params['page_overdue'])
     @prepared = Invoice.prepared.page(params['page_prepared'])
     # @treatments = Treatment.open.page(params['page_open'])
-  end
-
-  # GET /invoice/1
-  # GET /patients/1/invoices/2
-  def show
-    @invoice = Invoice.find(params[:id])
-    @treatment = @invoice.treatment
-
-    respond_to do |format|
-      format.html {
-        redirect_to :controller => :patients, :action => :show, :id => @invoice.patient.id, :tab => 'invoices', :sub_tab_id => @invoice.id
-      }
-      format.js {
-        render :update do |page|
-          page.replace_html "tab-content-invoices", :partial => 'show'
-          page.call 'showTab', controller_name
-        end
-      }
-    end
   end
 
   # GET /invoices/new

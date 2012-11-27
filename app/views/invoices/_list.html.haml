@@ -1,4 +1,13 @@
-%table.table
-  = render 'invoices/list_header'
+%table.table.table-striped
+  %tr
+    %th Nummer
+    %th Patient
+    %th Datum
+    %th Fällig
+    %th{:style => "text-align: right"} Betrag
+    %th{:style => "text-align: right"} Saldo
+    %th{:style => "text-align: right"} Status
+    %th
   = render collection
-  = render 'invoices/list_footer'
+  %tr
+    %th{:colspan => "8", :style => "text-align: right"}= paginate collection

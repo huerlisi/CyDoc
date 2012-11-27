@@ -1,4 +1,3 @@
 %h3= t('cydoc.title.medical_cases')
-#box
-  %table#invoice_medical_cases{:style => "width: 100%"}
-    = render :partial => 'medical_cases/item', :collection => @invoice.treatment.medical_cases
+%table.table.table-striped#invoice_medical_cases
+  = render @invoice.treatment.medical_cases

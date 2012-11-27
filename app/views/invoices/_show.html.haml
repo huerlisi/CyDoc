@@ -1,23 +1,28 @@
-- cache [I18n.locale, @invoice.cache_key] do
-  .contextual
-    - if @invoice.reminded?
-      = link_to t('cydoc.actions.print_dunning_letter_copy'), print_reminder_letter_invoice_path(@invoice, :print_copy => true), :onclick => "showPrintingFlash('Mahnkopie')", 'data-method' => :post, :class => "icon icon-remind"
-    - if @invoice.overdue?
-      = link_to t('cydoc.actions.print_dunning_letter'), print_reminder_letter_invoice_path(@invoice), :onclick => "showPrintingFlash('Mahnung')", 'data-method' => :post, :class => "icon icon-remind"
-    - if @invoice.state == 'prepared'
-      = link_to t('cydoc.actions.print'), print_invoice_path(@invoice), :onclick => "showPrintingFlash('#{t_model(Invoice)}')", 'data-method' => :post, :class => "icon icon-print"
-    - else
-      = link_to t('cydoc.actions.print_copy'), print_invoice_path(@invoice, :print_copy => true), :onclick => "showPrintingFlash('Rechnungskopie')", 'data-method' => :post, :class => "icon icon-print"
-    - if @invoice.active
-      = link_to t('cydoc.actions.cancel'), invoice_path(@invoice), 'data-method' => :delete, :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.cancel')}?", :class => "icon icon-delete"
-      = link_to t('cydoc.actions.reactivate'), reactivate_invoice_path(@invoice), 'data-confirm' => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?", 'data-method' => :post, :class => "icon icon-reactivate"
-    - elsif @invoice.state == 'canceled' or @invoice.state == 'written_off'
-      = link_to t('cydoc.actions.reactivate'), reactivate_invoice_path(@invoice), 'data-confirm' => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?", 'data-method' => :post, :class => "icon icon-reactivate"
-  = render 'invoices/show_main'
-  .contextual
-    = link_to t('cydoc.actions.book_manual'), new_invoice_booking_path(@invoice), 'data-remote' => true, :class => "icon icon-book"
-  %h3= t('cydoc.title.bookings')
-  #invoice_booking_list
-    = render :partial => 'invoice_bookings/list', :object => @invoice.bookings
-  = render 'invoices/medical_case_list'
-  = render 'invoices/service_record_list'
+.contextual
+  - if @invoice.reminded?
+    = link_to t('cydoc.actions.print_dunning_letter_copy'), print_reminder_letter_invoice_path(@invoice, :print_copy => true), :onclick => "showPrintingFlash('Mahnkopie')", 'data-method' => :post, :class => "icon icon-remind"
+  - if @invoice.overdue?
+    = link_to t('cydoc.actions.print_dunning_letter'), print_reminder_letter_invoice_path(@invoice), :onclick => "showPrintingFlash('Mahnung')", 'data-method' => :post, :class => "icon icon-remind"
+  - if @invoice.state == 'prepared'
+    = link_to t('cydoc.actions.print'), print_invoice_path(@invoice), :onclick => "showPrintingFlash('#{t_model(Invoice)}')", :remote => true, :method => :post, :class => "icon icon-print"
+  - else
+    = link_to t('cydoc.actions.print_copy'), print_invoice_path(@invoice, :print_copy => true), :method => :post, :remote => true, :class => "icon icon-print"
+  - if @invoice.active
+    = link_to t('cydoc.actions.cancel'), invoice_path(@invoice), 'data-method' => :delete, :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.cancel')}?", :class => "icon icon-delete"
+    = link_to t('cydoc.actions.reactivate'), reactivate_invoice_path(@invoice), 'data-confirm' => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?", 'data-method' => :post, :class => "icon icon-reactivate"
+  - elsif @invoice.state == 'canceled' or @invoice.state == 'written_off'
+    = link_to t('cydoc.actions.reactivate'), reactivate_invoice_path(@invoice), 'data-confirm' => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?", 'data-method' => :post, :class => "icon icon-reactivate"
+
+= render 'invoices/show_main'
+
+.contextual
+  = link_to t('cydoc.actions.book_manual'), new_invoice_booking_path(@invoice), 'data-remote' => true, :class => "icon icon-book"
+
+%h3= t('cydoc.title.bookings')
+
+#invoice_booking_list
+  = render :partial => 'invoice_bookings/list', :object => @invoice.bookings
+
+= render 'invoices/medical_case_list'
+
+= render 'invoices/service_record_list'
