@@ -1,8 +1,0 @@
-.well.well-small
-  %legend Patient
-  = link_to patient.vcard.full_name, patient
-  %dl
-    %dt= t_attr(:doctor, Patient)
-    %dd= link_to patient.doctor, patient.doctor
-
-= render 'cases/compact_list', :cases => patient.cases

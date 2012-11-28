@@ -1,4 +1,4 @@
-%table#patients.table.table-bordered.table-striped.table-condensed
+%table.table.table-striped
   %tr
     %th= t_attr(:full_name, Vcard)
     %th= t_attr(:street_address, Vcard)
@@ -9,6 +9,3 @@
     %th= t_attr(:insurance, Patient)
 
   = render collection
-
-  %tr
-    %th{ :colspan => "4", :style => "text-align: right" }= paginate collection

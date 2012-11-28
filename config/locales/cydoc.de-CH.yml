@@ -157,6 +157,10 @@ de-CH:
         dunning_stop: Mahnstopp
         use_billing_address: Rechnungsadresse aktiv
         covercard_code: Covercard-ID
+        doctor: Doktor
+      insurance_policy:
+        number: Versicherungsnr.
+        insurance: Versicherung
       phone_number:
         phone_number: "Nummer"
         phone_number_type: "Art"
