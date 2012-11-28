@@ -176,6 +176,7 @@ de-CH:
         remark: Bemerkungen
         remarks:  Bemerkungen
       tariff_item:
+        price:          Preis
         amount:         Betrag
         amount_mt:      TP AL/Preis
         amount_tt:      TP TL

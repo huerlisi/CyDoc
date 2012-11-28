@@ -1,6 +1,6 @@
 = render 'form'
 
-- if @tariff_item.is_a? TariffItemGroup
+- if resource.is_a? TariffItemGroup
   = render 'show_tariff_item_group'
 - else
   = render 'show_price'

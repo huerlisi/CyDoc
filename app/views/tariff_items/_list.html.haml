@@ -1,12 +1,9 @@
-%table.table.table-striped.collection
+%table.table.table-striped
   %tr
-    %th{:style => "text-align: right"}= t_attr(:code, TariffItem)
+    %th.right= t_attr(:code, TariffItem)
     %th= t_attr(:remark, TariffItem)
-    %th{:style => "text-align: right"}= t_attr(:amount_mt, TariffItem)
-    %th{:style => "text-align: right"}= t_attr(:amount_tt, TariffItem)
-    %th{:style => "text-align: right"}= t_attr(:amount, TariffItem)
+    %th.right= t_attr(:amount_mt, TariffItem)
+    %th.right= t_attr(:amount_tt, TariffItem)
+    %th.right= t_attr(:amount, TariffItem)
 
   = render :partial => 'tariff_item', :collection => collection
-
-  %tr
-    %th{:colspan => "5", :style => "text-align: right"}= paginate collection

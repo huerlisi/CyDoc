@@ -1,9 +1,9 @@
-= simple_form_for  @tariff_item.becomes(TariffItem) do |f|
+= simple_form_for resource do |f|
   = f.input :type_as_string, :as => :select, :required => true, :collection => type_as_string_collection
   = f.input :code, :input_html => {:size => 8}
   = f.input :remark, :input_html => {:rows => 3, :cols => 50}
   = f.input :obligation
-  - unless @tariff_item.is_a? TariffItemGroup
+  - unless resource.is_a? TariffItemGroup
     = f.input :amount_mt, :as => :string, :input_html => {:size => 8, :style => 'text-align: right'}
     = f.input :amount_tt, :as => :string, :input_html => {:size => 8, :style => 'text-align: right'}
 

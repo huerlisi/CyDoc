@@ -1,16 +1,10 @@
-%h3 Preis
-%table.table.table-striped.collection
+%h3= t_attr(:price)
+%table.table.table-striped
   %tr
-    %th{:style => "text-align: right"}= t_attr(:amount_mt, TariffItem)
-    %th{:style => "text-align: right"}= t_attr(:amount_tt, TariffItem)
-    %th{:style => "text-align: right"}= t_attr(:amount, TariffItem)
-  %tr
-    %td{:style => "text-align:right"}
-      = currency_fmt(@tariff_item.amount_mt)
-      \&nbsp;TP
-    %td{:style => "text-align:right"}
-      = currency_fmt(@tariff_item.amount_tt)
-      \&nbsp;TP
-    %td{:style => "text-align:right"}
-      = currency_fmt(@tariff_item.amount)
-      \&nbsp;CHF
+    %th.right= t_attr(:amount_mt, TariffItem)
+    %th.right= t_attr(:amount_tt, TariffItem)
+    %th.right= t_attr(:amount, TariffItem)
+  %tr[resource]
+    %td.right= currency_fmt(resource.amount_mt)
+    %td.right= currency_fmt(resource.amount_tt)
+    %td.right= currency_fmt(resource.amount)
