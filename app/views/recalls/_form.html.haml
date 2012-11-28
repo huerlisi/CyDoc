@@ -3,9 +3,9 @@
   = f.input :doctor_id, :as => :hidden
   = f.input :due_date, :as => :date_field, 'data-autofocus' => true
   = f.input :remarks, :input_html => {:rows => 3}
-  - if @recall.appointment
+  - if resource.appointment
     = f.simple_fields_for :appointment do |appointment|
-      = appointment.input :patient_id, :as => :hidden, :value => @recall.patient.id
+      = appointment.input :patient_id, :as => :hidden, :value => resource.patient.id
       = appointment.input :date, :as => :date_field
       = appointment.input :from
       = appointment.input :to

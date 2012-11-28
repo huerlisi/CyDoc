@@ -1,6 +1,6 @@
 %tr[recall]
   %td= recall.due_date
-  %td= link_to recall.patient, recall.patient
+  %td= link_to recall.patient, recall.patient, 'data-href-container' => 'tr'
   %td= recall.try(:appointment)
   %td= link_to_last_session(recall)
   %td= recall.sent_at.try(:to_date)

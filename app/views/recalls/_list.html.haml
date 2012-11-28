@@ -1,4 +1,4 @@
-%table.table.table-striped.collection
+%table.table.table-striped
   %tr
     %th= t_attr(:expire_date)
     %th= t_attr(:patient)
@@ -10,5 +10,4 @@
 
   = render collection
 
-  %tr
-    %th{:colspan => "7", :style => "text-align: right"}= paginate collection
+  = paginate collection

@@ -3,8 +3,8 @@
 = boot_page_title
 
 %ul.nav.nav-tabs
-  %li.active= link_to t('cydoc.recall.applied_recalls'), '#tab-scheduled_list', {:data => {:toggle => 'tab'}}
-  %li= link_to t('cydoc.recall.sent_recalls'), '#tab-sent_recalls', {:data => {:toggle => 'tab'}}
+  %li.active= link_to t('.recall.applied_recalls'), '#tab-scheduled_list', {:data => {:toggle => 'tab'}}
+  %li= link_to t('.recall.sent_recalls'), '#tab-sent_recalls', {:data => {:toggle => 'tab'}}
 
 .tab-content
   #tab-scheduled_list.tab-pane.active= render 'list', :collection => @scheduled_recalls
