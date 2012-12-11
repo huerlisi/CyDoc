@@ -80,7 +80,7 @@ module Prawn
     # Balance
     def balance(invoice)
       font_size 6.5
-      text "Kontoauszug:"
+      text "Zahlbar innert 30 Tagen:"
       font_size 8
       content = invoice.bookings.map{|booking|
         [
