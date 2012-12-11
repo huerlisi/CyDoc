@@ -6,7 +6,7 @@ class Invoice < ActiveRecord::Base
 
   REMINDER_FEE = {'reminded' => 0.0, '2xreminded' => 10.0, '3xreminded' => 10.0, 'encashment' => 0.0}
   REMINDER_PAYMENT_PERIOD = {'reminded' => 20, '2xreminded' => 10, '3xreminded' => 10, 'encashment' => 0}
-  REMINDER_GRACE_PERIOD = {'reminded' => 30, '2xreminded' => 30, '3xreminded' => 30, 'encashment' => 30}
+  REMINDER_GRACE_PERIOD = {'reminded' => 50, '2xreminded' => 30, '3xreminded' => 30, 'encashment' => 30}
   
   belongs_to :tiers, :autosave => true
   belongs_to :law, :autosave => true
