@@ -421,6 +421,10 @@ de-CH:
   placeholder:
     search: Suche
 
+  crud:
+    action:
+      more: "Mehr"
+
   cancan:
     roles:
       admin:    Administrator
