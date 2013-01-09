@@ -6,6 +6,8 @@
   = f.fields_for :insurance_policies, resource.kvg_insurance_policy do |insurance_policy|
     = render 'insurance_policies/form_fields', :f => insurance_policy
     = render 'patients/billing_form', :f => f
-
-    = f.input :remarks, :input_html => {:class => 'span11', :rows => 4}
-  = f.button :submit
+    .row-fluid
+      .span12
+        = f.input :remarks, :input_html => {:class => 'span11', :rows => 4}
+  .form-actions
+    = f.button :submit

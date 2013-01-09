@@ -1,10 +1,12 @@
 = simple_form_for resource do |f|
   = f.input :type_as_string, :as => :select, :required => true, :collection => type_as_string_collection
   = f.input :code, :input_html => {:size => 8}
-  = f.input :remark, :input_html => {:rows => 3, :cols => 50}
+  .row-fluid
+    .span12
+      = f.input :remark, :input_html => {:class => 'span11', :rows => 4}
   = f.input :obligation
   - unless resource.is_a? TariffItemGroup
     = f.input :amount_mt, :as => :string, :input_html => {:size => 8, :style => 'text-align: right'}
     = f.input :amount_tt, :as => :string, :input_html => {:size => 8, :style => 'text-align: right'}
-
-  = f.button :submit
+  .form-actions
+    = f.button :submit
