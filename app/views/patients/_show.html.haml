@@ -1,4 +1,4 @@
 = render 'form'
 
 - content_for :sidebar do
-  =# render 'cases/compact_list', :cases => @patient.cases
+  = render 'patients/sidebar', :resource => resource
