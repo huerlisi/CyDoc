@@ -1,0 +1,8 @@
+%ul.nav.nav-tabs
+  %li.active= link_to t('.tab.show'), '#tab-show', {:data => {:toggle => 'tab'}}
+  %li= link_to t('.tab.printing'), '#tab-printing', {:data => {:toggle => 'tab'}}
+
+.tab-content
+  #tab-show.tab-pane.active= render 'form'
+  #tab-printing.tab-pane= render 'printing'
+

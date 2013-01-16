@@ -1,0 +1,11 @@
+= simple_form_for resource do |f|
+  = f.fields_for :settings do |s|
+    .row-fluid
+      .span6= s.input 'patients.sex', :label => t('activerecord.attributes.tenant.settings.patients.sex'), :as => :select, :collection => ['M', 'F'], :selected => f.object.settings['patients.sex']
+
+  .row-fluid
+    .span6= f.association :users, :label_method => :to_s
+
+  .form-actions
+    = f.button :submit
+

@@ -20,6 +20,11 @@ class ApplicationController < ActionController::Base
     current_user.object
   end
 
+  # Tenancy
+  def current_tenant
+    current_user.tenant
+  end
+
   private
 
   # PDF generation

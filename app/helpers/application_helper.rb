@@ -4,6 +4,11 @@ module ApplicationHelper
     current_user.object
   end
 
+  # Tenancy
+  def current_tenant
+    current_user.tenant
+  end
+
   # Tabs
   def tab_container(name, heading, tabs)
     render :partial => 'shared/tabs', :locals => {:name => name, :heading => heading, :tabs => tabs}

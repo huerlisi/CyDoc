@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :login, :email, :password, :password_confirmation, :remember_me, :sender_email
 
+  # Tenancy
+  belongs_to :tenant
+  attr_accessible :tenant
+
   # Authorization roles
   has_and_belongs_to_many :roles, :autosave => true
   scope :by_role, lambda{|role| include(:roles).where(:name => role)}

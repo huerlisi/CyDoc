@@ -1,0 +1,32 @@
+= simple_form_for resource do |f|
+  .row-fluid
+    .span6= f.input 'printing.cups_hostname', :as => :setting_string
+
+  .row-fluid
+    .span6= f.input 'format.order_form', :as => :setting_select, :collection => ['A4', 'A5']
+
+  .row-fluid
+    .span6= f.input 'printing.order_form', :as => :setting_string
+
+  .row-fluid
+    .span6= f.input 'printing.mailing_overview', :as => :setting_string
+
+  .row-fluid
+    .span6= f.input 'format.result_report', :as => :setting_select, :collection => ['A4', 'A5']
+
+  .row-fluid
+    .span6= f.input 'printing.result_report_a4', :as => :setting_string
+  .row-fluid
+    .span6= f.input 'printing.result_report_a5', :as => :setting_string
+  .row-fluid
+    .span6= f.input 'printing.result_report_a5', :as => :setting_string
+
+  .row-fluid
+    .span6= f.input 'printing.barcode_label', :as => :setting_string
+
+  .row-fluid
+    .span6= f.input 'scanning.order_form', :as => :setting_string
+
+  .form-actions
+    = f.button :submit
+
