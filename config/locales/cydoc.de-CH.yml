@@ -199,8 +199,12 @@ de-CH:
         reason: Behandlungsgrund
         referrer: Zuweisender Arzt
       user:
-        login:    Login
-        password: Passwort
+        email:     E-Mail
+        password:  Passwort
+        login:     Benutzername
+        locked_at: Gesperrt seit
+        last_sign_in_at: Letzter Login
+        object_reference:     Verknüpfte Person
     models:
       account:            Konto
       attachment:         Anhang
@@ -208,6 +212,7 @@ de-CH:
       drug_article:       Medikamentenpackung
       drug_product:       Medikament
       drug_tariff_item:   Medikament
+      employee:           Mitarbeiter
       insurance:          Versicherung
       invoice:            Rechnung
       reminder:           Mahnung

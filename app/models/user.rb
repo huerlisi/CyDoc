@@ -1,12 +1,26 @@
+# encoding: utf-8
+
 class User < ActiveRecord::Base
   # Strategies
   devise :database_authenticatable, :recoverable, :trackable, :timeoutable, :lockable, :rememberable, :validatable
 
-  # CyDoc
-  belongs_to :object, :polymorphic => true
-
   # Setup accessible (or protected) attributes for your model
   attr_accessible :login, :email, :password, :password_confirmation, :remember_me, :sender_email
+
+  # Person
+  attr_accessible :object
+  belongs_to :object, :polymorphic => true
+  accepts_nested_attributes_for :object
+  attr_accessible :object_attributes
+  attr_accessible :object_id, :object_type
+
+  def object_reference
+    "#{object_type}:#{object_id}"
+  end
+  def object_reference=(value)
+    self.object_type, self.object_id = value.split(':')
+  end
+  attr_accessible :object_reference
 
   # Tenancy
   belongs_to :tenant
@@ -32,7 +46,7 @@ class User < ActiveRecord::Base
   # Helpers
   def to_s
     if object
-      return object.name
+      return object.to_s
     else
       return email
     end

@@ -1,0 +1,19 @@
+= simple_form_for resource do |f|
+  %h3= t('users.form.credentials')
+  .row-fluid
+    .span6= f.input :login if resource.respond_to? :login
+    .span6= f.input :email
+  .row-fluid
+    .span6= f.input :password, :hint => !f.object.new_record?, :input_html => {:autocomplete => "off"}
+    .span6= f.input :password_confirmation
+  - unless can?(:manage, User)
+    .row-fluid
+      .span6= f.input :current_password, :required => true
+  .row-fluid
+    .span6= f.input :role_texts, :as => :select, :collection => Ability.roles_for_collection, :include_blank => false, :input_html => {:multiple => 'multiple'}, :required => true if can?(:manage, Role)
+
+  .row-fluid
+    .span12= f.input :object_reference, :as => :grouped_select, :group_method => :last, :include_blank => false, :collection => user_object_collection, :input_html => {:class => 'span12 select2'}
+
+  .form-actions
+    = f.button :submit
