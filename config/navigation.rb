@@ -6,6 +6,7 @@ SimpleNavigation::Configuration.run do |navigation|
     if user_signed_in?
       primary.item :home, t('cydoc.navigation.home'), root_path
       primary.item :patients, t('cydoc.navigation.patients'), patients_path do |entry|
+        entry.item :patients_index, t_title(:index, Patient), patients_path
         if current_tenant.settings['modules.recalls']
           entry.item :recalls, t('cydoc.navigation.recalls'), recalls_path
         end
@@ -13,16 +14,28 @@ SimpleNavigation::Configuration.run do |navigation|
 
       primary.item :insurances, t('cydoc.navigation.insurances'), insurances_path
       primary.item :doctors, t('cydoc.navigation.doctors'), doctors_path
-      primary.item :tariff_items, t('cydoc.navigation.service'), tariff_items_path
 
-      if current_tenant.settings['modules.drugs']
-        primary.item :drug_products, t('cydoc.navigation.drug_products'), drug_products_path
+      primary.item :tariff_items, t_title(:index, TariffItem), tariff_items_path do |entry|
+        entry.item :traiff_items_index, t_title(:index, TariffItem), tariff_items_path
+
+        if current_tenant.settings['modules.drugs']
+          entry.item :drug_products, t_title(:index, DrugProduct), drug_products_path
+        end
       end
 
-      primary.item :invoices, t('cydoc.navigation.payments'), invoices_path
+      primary.item :invoices, t_title(:index, Invoice), invoices_path do |entry|
+        entry.item :invoices_index, t_title(:index, Invoice), invoices_path
 
-      if current_tenant.settings['modules.returned_invoices']
-        primary.item :returned_invoices, t_model(ReturnedInvoice), returned_invoices_path
+        entry.item :divider, "", :class => 'divider'
+
+        entry.item :new_esr_file, t_title(:new, EsrFile), new_esr_file_path
+        entry.item :esr_files, t_title(:index, EsrFile), esr_files_path
+
+        entry.item :divider, "", :class => 'divider'
+
+        if current_tenant.settings['modules.returned_invoices']
+          entry.item :returned_invoices, t_model(ReturnedInvoice), returned_invoices_path
+        end
       end
 
       primary.item :bookkeeping, t('cydoc.navigation.accounting'), bookkeeping_index_path
