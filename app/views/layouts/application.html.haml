@@ -32,9 +32,6 @@
             %div= render 'users/user_bar'
     .container-fluid
       .row-fluid
-        .span2
-          .sidebar.well
-            = yield :sidebar
         .span10
           .content
             #notice_flash
@@ -43,6 +40,9 @@
             - if alert
               = boot_alert(alert, 'error')
             = yield
+        .span2
+          .sidebar.well
+            = yield :sidebar
 
     %footer.footer
       .container-fluid
