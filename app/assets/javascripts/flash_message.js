@@ -1,8 +1,8 @@
-function showFlashMessage(type, message) {
-  // Hide all flash messages
-  jQuery('.flash').hide();
+function addFlashMessageBehaviour() {
+  $('.alert-success').delay(2500).slideUp();
+}
 
-  var flash = jQuery('.flash.' + type);
-  flash.html(message);
-  flash.show();
+function showFlashMessage(message) {
+  $('#main').prepend(message);
+  addFlashMessageBehaviour();
 }

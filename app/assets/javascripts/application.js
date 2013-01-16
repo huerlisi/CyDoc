@@ -14,3 +14,24 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+
+// Initialize behaviours
+function initializeBehaviours() {
+  // Init settings
+
+  // from cyt.js
+  addAutofocusBehaviour();
+  addDatePickerBehaviour();
+  addLinkifyContainersBehaviour();
+
+  // from flash_message
+  addFlashMessageBehaviour();
+
+  // from directory_lookup.js
+  addDirectoryLookupBehaviour();
+
+  // application
+}
+
+// Loads functions after DOM is ready
+$(document).ready(initializeBehaviours);
