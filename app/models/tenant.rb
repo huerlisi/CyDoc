@@ -2,9 +2,11 @@ class Tenant < ActiveRecord::Base
   # Associations
   belongs_to :doctor, :foreign_key => :person_id
   has_many :users
+  attr_accessible :user_ids
 
   # Settings
   has_settings
+  attr_accessible :settings
 
   def to_s
     doctor.to_s
