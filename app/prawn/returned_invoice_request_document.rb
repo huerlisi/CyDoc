@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Prawn
   class ReturnedInvoiceRequestDocument < Prawn::LetterDocument
     def to_pdf(doctor, params)
@@ -9,7 +11,7 @@ module Prawn
 
       free_text(
         "Rechnungen an folgende Patientinnen konnten von der Post nicht zugestellt werden.
-        
+
         Dürfen wir Sie bitten, die Adressen mit ihrer Patientenkartei zu überprüfen. Wir wären froh, wenn sie die Adressen allenfalls korrigieren und uns dieses Blatt zurückfaxen würden."
       )
       text " "
