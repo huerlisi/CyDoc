@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 CyDoc::Application.routes.draw do
   # Root
   root :to => 'welcome#index'
@@ -7,7 +9,9 @@ CyDoc::Application.routes.draw do
 
   # Authorization
   devise_for :users
-  resources :users do
+
+  # Tenant
+  resources :tenants do
     collection do
       get :current
     end

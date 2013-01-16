@@ -131,7 +131,7 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.2.0)
     libv8 (3.3.10.4)
-    lyb_devise_admin (0.3.2)
+    lyb_devise_admin (0.3.5)
     lyb_sidebar (0.1.1)
       rails (~> 3.1)
     mail (2.4.4)
