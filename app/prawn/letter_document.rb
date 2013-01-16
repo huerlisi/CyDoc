@@ -4,7 +4,7 @@ class LetterDocument < Prawn::Document
 
   include ApplicationHelper
   include ActionView::Helpers::TranslationHelper
-  include I18nRailsHelpers
+  include I18nHelpers
   include HasVcardsHelper
   include Prawn::Measurements
 
