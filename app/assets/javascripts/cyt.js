@@ -1,36 +1,36 @@
 // Combobox
 function addComboboxBehaviour() {
-  jQuery("select.combobox").combobox();
+  $("select.combobox").combobox();
 }
 
 // Autofocus element having attribute data-autofocus
 function addAutofocusBehaviour() {
-  jQuery('*[data-autofocus=true]')
-    .filter(function() {return jQuery(this).parents('.form-view').length < 1})
+  $('*[data-autofocus=true]')
+    .filter(function() {return $(this).parents('.form-view').length < 1})
     .first().focus();
 };
 
 // Add datepicker
 function addDatePickerBehaviour() {
-  jQuery('*[date-picker=true]').each(function(){
-    jQuery(this).datepicker({ dateFormat: 'dd.mm.yy' });
+  $('*[date-picker=true]').each(function(){
+    $(this).datepicker({ dateFormat: 'dd.mm.yy' });
   });
 };
 
 //
 function addSortableBehaviour() {
-  jQuery(".sortable").sortable({
+  $(".sortable").sortable({
     placeholder: 'ui-state-highlight'
   });
-  jQuery(".sortable").disableSelection();
+  $(".sortable").disableSelection();
 };
 
 
 // Linkify containers having attribute data-href-container
 function addLinkifyContainersBehaviour() {
-  var elements = jQuery('*[data-href-container]');
+  var elements = $('*[data-href-container]');
   elements.each(function() {
-    var element = jQuery(this);
+    var element = $(this);
     var container = element.closest(element.data('href-container'));
     container.css('cursor', "pointer");
     container.addClass('linkified_container')
@@ -39,7 +39,7 @@ function addLinkifyContainersBehaviour() {
 
     container.delegate('*', 'click', {href: href}, function(event) {
       // Don't override original link behaviour
-      if (event.target.nodeName != 'A' && jQuery(event.target).parents('a').length == 0) {
+      if (event.target.nodeName != 'A' && $(event.target).parents('a').length == 0) {
         document.location.href = href;
       };
     });
@@ -48,14 +48,14 @@ function addLinkifyContainersBehaviour() {
 
 // Autogrow
 function addAutogrowBehaviour() {
-  jQuery(".autogrow").elastic();
+  $(".autogrow").elastic();
 };
 
 // Add tooltips for overview
 function addTooltipBehaviour() {
-  jQuery(".tooltip-title[title]").each(function() {
-    if ( jQuery(this).attr('title') != '' ) {
-      jQuery(this).tooltip({
+  $(".tooltip-title[title]").each(function() {
+    if ( $(this).attr('title') != '' ) {
+      $(this).tooltip({
         position: 'top center',
         predelay: 500,
         effect: 'fade'
@@ -66,7 +66,7 @@ function addTooltipBehaviour() {
 
 // Add tooltips for overview
 function addOverviewTooltipBehaviour() {
-  jQuery('.overview-list li a[title]').tooltip({
+  $('.overview-list li a[title]').tooltip({
     position: 'center right',
     predelay: 500,
     effect: 'fade'
@@ -75,7 +75,7 @@ function addOverviewTooltipBehaviour() {
 
 // Add icon action tooltips
 function addIconTooltipBehaviour() {
-  jQuery('a.icon-tooltip[title]').tooltip({
+  $('a.icon-tooltip[title]').tooltip({
     tipClass: 'icon-tooltip-popup',
     effect: 'fade',
     fadeOutSpeed: 100
@@ -83,5 +83,5 @@ function addIconTooltipBehaviour() {
 };
 
 function addTimeCheckBehaviour() {
-  jQuery('*[data-check-hours=true]').setMask();
+  $('*[data-check-hours=true]').setMask();
 }
