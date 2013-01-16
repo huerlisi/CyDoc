@@ -26,7 +26,7 @@
             = t('application.title')
 
           .nav-collapse
-            = render_navigation :renderer => BootstrapTopbarList
+            = render_navigation(:level => 1..2, :renderer => BootstrapTopbarList, :expand_all => true)
             = form_tag "/search", :method => :get, :class => "navbar-search pull-left" do
               = text_field_tag "query", params[:query], :placeholder => t('placeholder.search'), :class => "search-query"
             %div= render 'users/user_bar'

@@ -3,9 +3,10 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     if user_signed_in?
       primary.item :home, t('cydoc.navigation.home'), root_path
-      primary.item :patients, t('cydoc.navigation.patients'), patients_path
-      if current_tenant.settings['modules.recalls']
-        primary.item :recalls, t('cydoc.navigation.recalls'), recalls_path
+      primary.item :patients, t('cydoc.navigation.patients'), patients_path do |entry|
+        if current_tenant.settings['modules.recalls']
+          entry.item :recalls, t('cydoc.navigation.recalls'), recalls_path
+        end
       end
 
       primary.item :insurances, t('cydoc.navigation.insurances'), insurances_path

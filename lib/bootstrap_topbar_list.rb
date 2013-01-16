@@ -7,7 +7,7 @@ class BootstrapTopbarList < SimpleNavigation::Renderer::Base
 
   def render(item_container)
     if options[:is_subnavigation]
-      ul_class = ""
+      ul_class = "dropdown-menu"
     else
       ul_class = "nav"
     end
@@ -15,7 +15,7 @@ class BootstrapTopbarList < SimpleNavigation::Renderer::Base
     list_content = item_container.items.inject([]) do |list, item|
       li_options = item.html_options.reject {|k, v| k == :link}
       if include_sub_navigation?(item)
-        li_options[:class] = [li_options[:class], ""].flatten.compact.join(' ')
+        li_options[:class] = [li_options[:class], "dropdown"].flatten.compact.join(' ')
       end
       li_content = tag_for(item)
       if include_sub_navigation?(item)
@@ -26,7 +26,7 @@ class BootstrapTopbarList < SimpleNavigation::Renderer::Base
     if skip_if_empty? && item_container.empty?
       ''
     else
-      content_tag(:ul, list_content, { :id => item_container.dom_id, :class => [item_container.dom_class, ul_class].flatten.compact.join(' ') })
+      content_tag(:ul, list_content, { :id => item_container.dom_id, :class => [item_container.dom_class, ul_class].flatten.compact.join(' '), 'data-dropdown' => 'dropdown' })
     end
   end
 
@@ -49,11 +49,16 @@ class BootstrapTopbarList < SimpleNavigation::Renderer::Base
   def link_options_for(item)
     special_options = {:method => item.method}.reject {|k, v| v.nil? }
     link_options = item.html_options[:link] || {}
-    link_options['data-toggle'] = ''
+    link_options['data-toggle'] = 'dropdown' if  include_sub_navigation?(item) && !options[:is_subnavigation]
     opts = special_options.merge(link_options)
-    opts[:class] = [link_options[:class], item.selected_class].flatten.compact.join(' ')
+    opts[:class] = [link_options[:class], item.selected_class, dropdown_link_class(item)].flatten.compact.join(' ')
     opts.delete(:class) if opts[:class].nil? || opts[:class] == ''
     opts
   end
 
+  def dropdown_link_class(item)
+    if include_sub_navigation?(item) && !options[:is_subnavigation]
+      "dropdown-toggle"
+    end
+  end
 end
