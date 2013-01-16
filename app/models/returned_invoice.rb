@@ -1,4 +1,7 @@
 class ReturnedInvoice < ActiveRecord::Base
+  # Access Restrictions
+  attr_accessible :invoice_id, :state, :remarks
+
   # Sorting
   default_scope :order => "doctor_id, state, id"
 
@@ -36,6 +39,8 @@ class ReturnedInvoice < ActiveRecord::Base
   belongs_to :invoice
   validates :invoice_id , :presence => true
   validates :invoice , :presence => {:message => 'Rechnung nicht gefunden'}
+  accepts_nested_attributes_for :invoice
+  attr_accessible :invoice_attributes
 
   def validate_on_create
     # Check if an open returned_invoice record with same invoice exists

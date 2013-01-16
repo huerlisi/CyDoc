@@ -1,12 +1,8 @@
-class ReturnedInvoicesController < ApplicationController
-  # Inherited Resources
-  inherit_resources
-
+class ReturnedInvoicesController < AuthorizedController
   # Scopes
   has_scope :by_doctor_id
   has_scope :by_state
 
-  public
   def index
     params[:by_state] = 'ready' if params[:by_state].blank?
 
@@ -26,8 +22,7 @@ class ReturnedInvoicesController < ApplicationController
   def update
     @returned_invoice = ReturnedInvoice.find(params[:id])
 
-    @patient = @returned_invoice.patient
-    unless @patient.update_attributes(params[:patient]) and @returned_invoice.update_attributes(params[:returned_invoice])
+    unless @returned_invoice.update_attributes(params[:returned_invoice])
       render 'edit' and return
     end
 

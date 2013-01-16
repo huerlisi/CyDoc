@@ -1,25 +1,19 @@
-- semantic_form_for resource do |f|
-  = error_messages_for :patient
+= simple_form_for resource do |f|
 
   - @invoice = resource.invoice
   = render 'invoices/show_main'
 
-  - @patient = resource.patient
-
-  = render 'patients/personal_form'
-  = render 'patients/billing_form'
-  = render 'patients/contacts_form'
+  = f.fields_for :invoice do |i|
+    = i.fields_for :patient do |p|
+      = render 'patients/personal_form', :f => p
+      = render 'patients/billing_form', :f => p
 
   - content_for :sidebar do
-    = render 'patients/sidebar'
+    = render 'patients/sidebar', :resource => resource.patient
 
-  = f.semantic_errors
+  = f.input :remarks, :input_html => {:rows => 4, :cols => 40}
 
-  - f.inputs do
-    = f.semantic_errors :invoice
-    = f.input :remarks, :input_html => {:rows => 4, :cols => 40}
-
-  - f.buttons do
-    %button{:name => 'commit', :value => 'next'}= t_action(:update_remarks)
+  .form-actions
+    %button.btn{:name => 'commit', :value => 'next'}= t_action(:update_remarks)
     - for event in resource.aasm_events_for_current_state
-      %button{:name => 'commit', :value => event}= t_action(event)
+      %button.btn{:name => 'commit', :value => event}= t_action(event)

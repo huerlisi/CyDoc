@@ -5,6 +5,8 @@ class Invoice < ActiveRecord::Base
   belongs_to :law, :autosave => true
   belongs_to :treatment, :autosave => true
   has_one :patient, :through => :treatment
+  accepts_nested_attributes_for :patient
+  attr_accessible :patient_attributes
 
   belongs_to :patient_vcard, :class_name => 'Vcard', :autosave => true
   belongs_to :billing_vcard, :class_name => 'Vcard', :autosave => true
