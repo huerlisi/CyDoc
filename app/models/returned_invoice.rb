@@ -35,7 +35,7 @@ class ReturnedInvoice < ActiveRecord::Base
   # Invoice
   belongs_to :invoice
   validates :invoice_id , :presence => true
-  validates :invoice , :presence => true, :message => 'Rechnung nicht gefunden'
+  validates :invoice , :presence => {:message => 'Rechnung nicht gefunden'}
 
   def validate_on_create
     # Check if an open returned_invoice record with same invoice exists
