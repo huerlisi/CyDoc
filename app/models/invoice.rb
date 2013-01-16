@@ -9,6 +9,9 @@ class Invoice < ActiveRecord::Base
   belongs_to :patient_vcard, :class_name => 'Vcard', :autosave => true
   belongs_to :billing_vcard, :class_name => 'Vcard', :autosave => true
 
+  # Access restrictions
+  attr_accessible :treatment, :tiers, :law, :patient_vcard, :billing_vcard, :remark, :value_date
+
   # Settings
   def self.settings
     doctor = Doctor.find(Thread.current["doctor_id"]) if Doctor.exists?(Thread.current["doctor_id"])
