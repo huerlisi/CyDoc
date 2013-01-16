@@ -58,7 +58,7 @@ gem 'validates_timeliness'
 
 # Addresses
 gem 'unicode_utils'
-gem 'has_vcards', :path => '../has_vcards'
+gem 'has_vcards'
 gem 'autocompletion'
 gem 'swissmatch'
 

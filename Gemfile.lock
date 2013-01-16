@@ -15,13 +15,6 @@ PATH
       rails (~> 3.1)
       validates_timeliness
 
-PATH
-  remote: ../has_vcards
-  specs:
-    has_vcards (0.19.0)
-      inherited_resources
-      rails (~> 3.0)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -104,6 +97,9 @@ GEM
       json (>= 1.4.6)
     haml (3.1.7)
     has_scope (0.5.1)
+    has_vcards (0.20.0)
+      inherited_resources
+      rails (~> 3.0)
     hashery (2.0.1)
     highline (1.6.15)
     hike (1.2.1)
@@ -258,7 +254,7 @@ DEPENDENCIES
   haml
   has_accounts!
   has_scope
-  has_vcards!
+  has_vcards
   i18n_rails_helpers
   in_place_editing
   inherited_resources
