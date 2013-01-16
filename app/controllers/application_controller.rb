@@ -27,30 +27,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # PDF generation
-  # ==============
-  def render_to_pdf(options = {})
-    logger.info("Generate PDF with media '#{options[:media]}'")
-    html2ps_options = "--media #{options[:media]}" unless options[:media].blank?
-
-    logger.info("html2ps.php #{html2ps_options}")
-    logger.info("Started PDF generation #{Time.now.strftime('%H:%M:%S')}")
-    generator = IO.popen("html2ps.php #{html2ps_options}", "w+")
-    generator.puts render_to_string(options)
-    generator.close_write
-
-    data = generator.read
-    generator.close
-    logger.info("Finished PDF generation #{Time.now.strftime('%H:%M:%S')}")
-
-    return data
-  end
-
-  def render_pdf(options = {})
-    options.merge!(:template => "#{controller_name}/#{action_name}.html.erb", :layout => 'simple')
-    send_data(render_to_pdf(options))
-  end
-
   # Show single search match
   def redirect_if_match(collection)
     if collection.size == 1
@@ -206,51 +182,6 @@ class Date
   end
 end
 
-module Print
-  def self.included(base)
-    base.extend(ClassMethods)
-  end
-
-  module ClassMethods
-    def print_action_for(method, options = {})
-      define_method("print_#{method}") do
-        self.send("#{method}")
-        cups_host = options[:cups_host] || @printers[:cups_host]
-        tray = options[:tray].to_sym || :plain
-        device = options[:device] || @printers[:trays][tray]
-        media = options[:media] || 'A4'
-
-        # You probably need the pdftops filter from xpdf, not poppler on the cups host
-        # In my setup it generated an empty page otherwise
-        pdf_string = render_to_pdf(:template => "#{controller_name}/#{method}.html.erb", :layout => 'simple', :media => media)
-
-        logger.info("lp -h #{cups_host} -d #{device}")
-        generator = IO.popen("lp -h #{cups_host} -d #{device}", "w+")
-
-        logger.info("Started printing #{Time.now.strftime('%H:%M:%S')}")
-        generator.puts pdf_string
-        logger.info("Finished printing #{Time.now.strftime('%H:%M:%S')}")
-        generator.close_write
-
-        # Just read to not create zombie processes... TODO: fix
-        data = generator.read
-        generator.close
-
-        respond_to do |format|
-          format.html {}
-#          format.js {
-#            render :update do |page|
-#              page.select('.icon-spinner') do |spinner|
-#                spinner.toggleClassName('icon-spinner')
-#              end
-#            end
-#          }
-        end
-      end
-    end
-  end
-end
-
 class ActiveRecord::Base
    def becomes(klass)
      became = klass.new
@@ -262,5 +193,3 @@ class ActiveRecord::Base
      became
    end
 end
-
-ActionController::Base.send :include, Print
