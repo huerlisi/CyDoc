@@ -27,10 +27,9 @@
 
           .nav-collapse
             = render_navigation :renderer => BootstrapTopbarList
-            .pull-right
-              = form_tag "/search", :method => :get, :class => "navbar-search pull-left" do
-                = text_field_tag "query", params[:query], :placeholder => t('placeholder.search'), :class => "search-query"
-              %div= render :partial => 'users/user_bar'
+            = form_tag "/search", :method => :get, :class => "navbar-search pull-left" do
+              = text_field_tag "query", params[:query], :placeholder => t('placeholder.search'), :class => "search-query"
+            %div= render 'users/user_bar'
     .container-fluid
       .row-fluid
         .span2
