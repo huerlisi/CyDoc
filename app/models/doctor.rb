@@ -35,8 +35,10 @@ class Doctor < ActiveRecord::Base
 
   has_and_belongs_to_many :offices
 
+  # Helpers
+  # =======
   def to_s
-    [vcard.honorific_prefix, vcard.given_name, vcard.family_name].compact.select{|f| not f.empty?}.join(" ")
+    [vcard.honorific_prefix, vcard.full_name].map(&:presence).compact.join(" ")
   end
 
   # Proxy accessors
