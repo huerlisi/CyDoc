@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require select2
 //= require_tree .
 
 // Initialize behaviours
@@ -29,6 +30,9 @@ function initializeBehaviours() {
 
   // from directory_lookup.js
   addDirectoryLookupBehaviour();
+
+  // select2
+  $('.select2').select2();
 
   // application
 }

@@ -189,6 +189,8 @@ GEM
       actionpack
     ruby-rc4 (0.1.5)
     rubyzip (0.9.9)
+    select2-rails (3.2.1)
+      thor (~> 0.14)
     show_for (0.2.5)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -274,6 +276,7 @@ DEPENDENCIES
   rails
   rdoc
   routing-filter
+  select2-rails
   show_for
   simple-navigation
   simple_form

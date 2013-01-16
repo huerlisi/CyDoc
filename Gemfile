@@ -74,6 +74,7 @@ gem 'use_db'
 
 # Forms
 gem 'in_place_editing'
+gem 'select2-rails'
 
 # CRUD helpers
 gem 'inherited_resources_views'
