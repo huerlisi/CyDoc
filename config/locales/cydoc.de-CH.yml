@@ -232,41 +232,6 @@ de-CH:
       treatment:          Fall
       user:               Benutzer
   cydoc:
-    actions:
-      abort: "Abbrechen"
-      accounts: "Kontoliste"
-      add_insurance: "Versicherung zuweisen"
-      address_label: "Adress-Etikette"
-      all: "Alle"
-      book_manual: "Manuell buchen"
-      cancel: "Stornieren"
-      create: "Erfassen"
-      delete: "Löschen"
-      delete_treatment: "Fall %{treatment} löschen?"
-      edit_recall: "Recall editieren"
-      esr: "VESR Liste"
-      kg_label: "KG-Etikette"
-      new_booking: "Neue Buchung"
-      new_case: "Fall eröffnen"
-      new_contact: "Kontakt erfassen"
-      new_invoice: "Rechung stellen"
-      new_medical_case: "Neue Diagnose"
-      new_recall: "Recall erfassen"
-      new_treatment_session: "Neue Konsultation"
-      print: "Drucken"
-      print_account: "Kontoauszug drucken"
-      print_copy: "Rechnungskopie drucken"
-      print_dunning_letter: "Mahnung drucken"
-      print_dunning_letter_copy: "Mahnkopie drucken"
-      print_reclaim_pdf: "Rückforderungsbeleg PDF"
-      reactivate: "Reaktivieren"
-      save: "Speichern"
-      show_all: "Alle anzeigen"
-      show_letter: "Brief anzeigen"
-      to_pdf: "Als PDF"
-      update: "Ändern"
-      covercard_update: "Covercard-Abgleich"
-      covercard_search: "HIN-Abfrage starten"
     covercard_search:
       date_patients: "Treffer mit dem Geburtstag"
       exact_patients: "Volltreffer"
@@ -368,34 +333,6 @@ de-CH:
       paid:        bezahlt
       written_off: abgeschrieben
 
-  # CRUD
-  crud:
-    action:
-      search:             Suchen
-      queue_request:      Anfragen
-      queue_all_requests: Alle anfragen
-      reactivate:         Reaktivieren
-      write_off:          Abschreiben
-      book_extra_earning: Ausserordentlicher Gewinn verbuchen
-      book_payback:       Rückzahlung verbuchen
-      resolve:            Als erledigt markieren
-      edit_ready:         Neue vorbereiten
-      show_order_form:    Auftragsformular
-      print_request_document: Adressanfrage
-      next:               Speichern & weiter
-      update_remarks:     Notiz speichern
-      pdf:                PDF
-      resolved:           Abgeschlossen
-      request_pending:    Pendent
-      ready:              Neu
-      patient_from_covercard: "Als Patient erfassen"
-      trim_patient:       Abgleichen
-      revert:             Zurücksetzen
-      insurance_recipe:   Rückforderungsbeleg
-      patient_letter:     Rechnung
-      reminder_letter:    Mahnung
-      close:              Schliessen
-
   printing:
     preparing: "%{model} wird aufbereitet..."
     done:      "%{model} wurde an Drucker gesendet."
@@ -429,6 +366,64 @@ de-CH:
   crud:
     action:
       more: "Mehr"
+      abort: "Abbrechen"
+      accounts: "Kontoliste"
+      add_insurance: "Versicherung zuweisen"
+      address_label: "Adress-Etikette"
+      all: "Alle"
+      book_manual: "Manuell buchen"
+      cancel: "Stornieren"
+      create: "Erfassen"
+      delete: "Löschen"
+      delete_treatment: "Fall %{treatment} löschen?"
+      edit_recall: "Recall editieren"
+      esr: "VESR Liste"
+      kg_label: "KG-Etikette"
+      new_booking: "Neue Buchung"
+      new_case: "Fall eröffnen"
+      new_contact: "Kontakt erfassen"
+      new_invoice: "Rechung stellen"
+      new_medical_case: "Neue Diagnose"
+      new_recall: "Recall erfassen"
+      new_treatment_session: "Neue Konsultation"
+      print: "Drucken"
+      print_account: "Kontoauszug drucken"
+      print_copy: "Rechnungskopie drucken"
+      print_dunning_letter: "Mahnung drucken"
+      print_dunning_letter_copy: "Mahnkopie drucken"
+      print_reclaim_pdf: "Rückforderungsbeleg PDF"
+      reactivate: "Reaktivieren"
+      save: "Speichern"
+      show_all: "Alle anzeigen"
+      show_letter: "Brief anzeigen"
+      to_pdf: "Als PDF"
+      update: "Ändern"
+      covercard_update: "Covercard-Abgleich"
+      covercard_search: "HIN-Abfrage starten"
+      search:             Suchen
+      queue_request:      Anfragen
+      queue_all_requests: Alle anfragen
+      reactivate:         Reaktivieren
+      write_off:          Abschreiben
+      book_extra_earning: Ausserordentlicher Gewinn verbuchen
+      book_payback:       Rückzahlung verbuchen
+      resolve:            Als erledigt markieren
+      edit_ready:         Neue vorbereiten
+      show_order_form:    Auftragsformular
+      print_request_document: Adressanfrage
+      next:               Speichern & weiter
+      update_remarks:     Notiz speichern
+      pdf:                PDF
+      resolved:           Abgeschlossen
+      request_pending:    Pendent
+      ready:              Neu
+      patient_from_covercard: "Als Patient erfassen"
+      trim_patient:       Abgleichen
+      revert:             Zurücksetzen
+      insurance_recipe:   Rückforderungsbeleg
+      patient_letter:     Rechnung
+      reminder_letter:    Mahnung
+      close:              Schliessen
 
   cancan:
     roles:
