@@ -1,10 +1,9 @@
-!!! 5
-%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+!!!
+%html
   %head
     %meta{:charset => 'utf-8'}/
-    %meta{:content => "Simon Huerlimann &lt;simon.huerlimann@cyt.ch&gt;", :name => "author"}/
 
-    %link{:rel => "shortcut icon", :href => image_path('favicon.ico')}/
+    = favicon_link_tag
 
     = stylesheet_link_tag 'application', :media => 'screen, projection, print'
     = stylesheet_link_tag 'print', :media => 'print'
@@ -15,16 +14,17 @@
     %title
       = "#{content_for :page_title} - #{t('application.title')}"
 
-  %body{:style => 'margin-top: 120px'}
+  %body{:style => 'margin-top: 60px'}
     .navbar.navbar-fixed-top
       .navbar-inner
-        .container
+        .container-fluid
           %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
           = link_to root_path, :class => 'brand' do
-            CyDoc
+            = t('application.title')
+
           .nav-collapse
             = render_navigation :renderer => BootstrapTopbarList
             .pull-right
