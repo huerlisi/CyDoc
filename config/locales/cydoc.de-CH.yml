@@ -431,3 +431,6 @@ de-CH:
       sysadmin: System Administration
       employee:   Mitarbeiter
       doctor:   Arzt
+  flash:
+    action:
+      dunning_stop:     Mahnstopp gesetzt
