@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122135624) do
+ActiveRecord::Schema.define(:version => 20130103115455) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -104,20 +104,20 @@ ActiveRecord::Schema.define(:version => 20121122135624) do
 
   create_table "bookings", :force => true do |t|
     t.string   "title",             :limit => 100
-    t.decimal  "amount",                            :precision => 8, :scale => 2
+    t.decimal  "amount",                           :precision => 8, :scale => 2
     t.integer  "credit_account_id"
     t.integer  "debit_account_id"
     t.date     "value_date"
-    t.string   "comments",          :limit => 1000,                               :default => ""
+    t.text     "comments"
     t.integer  "reference_id"
     t.string   "reference_type"
     t.integer  "imported_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "scan"
-    t.string   "debit_currency",                                                  :default => "CHF"
-    t.string   "credit_currency",                                                 :default => "CHF"
-    t.float    "exchange_rate",                                                   :default => 1.0
+    t.string   "debit_currency",                                                 :default => "CHF"
+    t.string   "credit_currency",                                                :default => "CHF"
+    t.float    "exchange_rate",                                                  :default => 1.0
     t.integer  "template_id"
     t.string   "template_type"
     t.string   "code"
@@ -471,12 +471,34 @@ ActiveRecord::Schema.define(:version => 20121122135624) do
     t.string   "name"
     t.integer  "imported_id"
     t.string   "covercard_code"
+    t.boolean  "delta",               :default => true,  :null => false
   end
 
   add_index "patients", ["doctor_id"], :name => "patients_doctor_id_index"
   add_index "patients", ["doctor_patient_nr"], :name => "index_patients_on_doctor_patient_nr"
   add_index "patients", ["dunning_stop"], :name => "index_patients_on_dunning_stop"
   add_index "patients", ["updated_at"], :name => "patients_updated_at_index"
+
+  create_table "people", :force => true do |t|
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at"
+    t.string   "type"
+    t.date     "date_of_birth"
+    t.date     "date_of_death"
+    t.integer  "sex"
+    t.string   "social_security_nr"
+    t.string   "social_security_nr_12"
+    t.integer  "civil_status_id"
+    t.integer  "religion_id"
+    t.boolean  "delta",                 :default => true, :null => false
+    t.string   "nationality"
+    t.string   "swift"
+    t.string   "clearing"
+  end
+
+  add_index "people", ["civil_status_id"], :name => "index_people_on_civil_status_id"
+  add_index "people", ["religion_id"], :name => "index_people_on_religion_id"
+  add_index "people", ["type"], :name => "index_people_on_type"
 
   create_table "phone_numbers", :force => true do |t|
     t.string   "number",            :limit => 50
@@ -672,6 +694,14 @@ ActiveRecord::Schema.define(:version => 20121122135624) do
   add_index "tariff_items", ["type"], :name => "index_tariff_items_on_type"
   add_index "tariff_items", ["vat_class_id"], :name => "index_tariff_items_on_vat_class_id"
 
+  create_table "tenants", :force => true do |t|
+    t.integer  "person_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "tenants", ["person_id"], :name => "index_tenants_on_person_id"
+
   create_table "tiers", :force => true do |t|
     t.integer  "biller_id"
     t.integer  "provider_id"
@@ -730,6 +760,7 @@ ActiveRecord::Schema.define(:version => 20121122135624) do
     t.datetime "deleted_at"
     t.integer  "object_id"
     t.string   "object_type"
+    t.integer  "tenant_id"
     t.datetime "confirmation_sent_at"
     t.string   "reset_password_token"
     t.datetime "remember_created_at"
