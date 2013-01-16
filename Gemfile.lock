@@ -224,7 +224,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     ttfunk (1.0.3)
-    twitter-bootstrap-rails (2.1.6)
+    twitter-bootstrap-rails (2.2.0)
       actionpack (>= 3.1)
       execjs
       railties (>= 3.1)
