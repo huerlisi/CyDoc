@@ -10,7 +10,7 @@ class InvoicesController < AuthorizedController
       @invoice.save!
     end
 
-    if @invoice.settings['printing.cups']
+    if current_tenant.settings['printing.cups']
       if @invoice.print(@printers[:trays][:plain], @printers[:trays][:invoice])
         respond_to do |format|
           format.html { redirect_to invoices_path }
@@ -52,7 +52,7 @@ class InvoicesController < AuthorizedController
       @invoice.save!
     end
 
-    if @invoice.settings['printing.cups']
+    if current_tenant.settings['printing.cups']
       if @invoice.print_reminder(@printers[:trays][:invoice])
         respond_to do |format|
           format.html { redirect_to invoices_path }
