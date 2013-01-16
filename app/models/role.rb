@@ -4,6 +4,11 @@ class Role < ActiveRecord::Base
   # Access restrictions
   attr_accessible :name
 
+  # Available Roles
+  NAMES = [
+    'sysadmin', 'doctor', 'employee', 'admin'
+  ]
+
   # Associations
   has_and_belongs_to_many :users
 

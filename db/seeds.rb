@@ -21,12 +21,9 @@ VatClass.create!([
 
 # Authorization
 # =============
-Role.create!([
-  {:name => 'sysadmin'},
-  {:name => 'doctor'},
-  {:name => 'employee'},
-  {:name => 'admin'}
-])
+Role::NAMES.each do |name|
+  Role.create!(:name => name)
+end
 
 # Account Types
 # =============
