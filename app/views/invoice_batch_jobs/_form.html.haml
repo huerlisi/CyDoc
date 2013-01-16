@@ -1,5 +1,8 @@
 = simple_form_for resource, :remote => true, :before => "showPrintingFlash('Rechnungslauf'); $('invoice_batch_f').remove()" do |f|
-  = f.input :value_date, :as => :date_field
-  = f.input :count
   = f.input :tiers_name, :as => :hidden
-  = f.submit
+  .row-fluid
+    .span6= f.input :value_date, :as => :date_field
+    .span6= f.input :count
+
+  .form-actions
+    = f.button :submit
