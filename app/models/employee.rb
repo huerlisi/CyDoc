@@ -1,19 +1,27 @@
-class Employee < ActiveRecord::Base
-  has_vcards
-  
-  # Authentication
-  has_one :user, :as => :object
+# encoding: utf-8
 
-  def to_s
-    "#{name} (#{user.login})"
+class Employee < Person
+  # Access restrictions
+  attr_accessible :code, :born_on, :workload
+
+  def code
+    vcard.nickname || vcard.abbreviated_name
   end
-  
-  # Proxy accessors
-  def name
-    if vcard.nil?
-      ""
-    else
-      vcard.full_name || ""
-    end
+
+  def code=(value)
+    vcard.nickname = value
   end
+
+  def born_on
+    date_of_birth
+  end
+
+  def born_on=(value)
+    date_of_birth = value
+  end
+
+  # User
+  # =====
+  has_one :user, :as => :object, :autosave => true
+  attr_accessible :user
 end
