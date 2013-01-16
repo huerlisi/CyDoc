@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 SimpleNavigation::Configuration.run do |navigation|
+  navigation.selected_class = 'active'
+
   navigation.items do |primary|
     if user_signed_in?
       primary.item :home, t('cydoc.navigation.home'), root_path
