@@ -1,5 +1,5 @@
 %tr[invoice]
-  %td= link_to (invoice.imported_invoice_id.blank? ? invoice.id : "#{invoice.id} (Triamun #{invoice.imported_invoice_id})"), invoice
+  %td= link_to (invoice.imported_invoice_id.blank? ? invoice.id : "#{invoice.id} (Triamun #{invoice.imported_invoice_id})"), invoice, 'data-href-container' => 'tr'
   %td= link_to invoice.patient.full_name, invoice.patient
   %td= invoice.value_date
   %td= invoice.due_date
