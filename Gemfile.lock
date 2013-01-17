@@ -6,15 +6,6 @@ GIT
       pdf-reader (>= 0.9.0, < 2.0)
       ttfunk (~> 1.0.3)
 
-PATH
-  remote: ../has_accounts
-  specs:
-    has_accounts (0.19.0)
-      has_vcards
-      inherited_resources
-      rails (~> 3.1)
-      validates_timeliness
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -96,6 +87,11 @@ GEM
     gherkin (2.11.5)
       json (>= 1.4.6)
     haml (3.1.7)
+    has_accounts (0.19.0)
+      has_vcards
+      inherited_resources
+      rails (~> 3.1)
+      validates_timeliness
     has_scope (0.5.1)
     has_vcards (0.20.0)
       inherited_resources
@@ -258,7 +254,7 @@ DEPENDENCIES
   fastercsv
   formtastic
   haml
-  has_accounts!
+  has_accounts
   has_scope
   has_vcards
   i18n_rails_helpers

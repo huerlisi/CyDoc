@@ -67,7 +67,7 @@ gem 'autocompletion'
 gem 'swissmatch'
 
 # Billing
-gem 'has_accounts', :path => '../has_accounts'
+gem 'has_accounts'
 
 # Import
 gem 'fastercsv'
