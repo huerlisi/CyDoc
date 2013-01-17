@@ -1,8 +1,3 @@
-:javascript
-  $('service_record_search_query').focus()
 .box.search_form
   = simple_form_for 'search', :url => select_patient_session_service_records_path(@session.patient.id, @session.id), :method => :get, :remote => true do |f|
-    = f.label 'query', 'Leistung'
-    = f.text_field :query, :label => "Suche", :size => 15, :autocomplete => 'off', :id => 'service_record_search_query'
-    = image_submit_tag 'find.png', :title => 'Suchen'
-  %div{:id => "session_#{@session.id}_search_results"}
+    = f.input :query, :as => :select, :collection => TariffItem.all, :autocomplete => 'off', 'data-autofocus' => true, :input_html => {:class => 'select2'}

@@ -1,13 +1,15 @@
 - editable = item.active? and @invoice.nil?
+
+- editable = true
 - current = item == item.treatment.sessions.first
-%div{:id => "session_#{item.id}"}
+%div[item]
   - if editable
     .contextual
       = link_to "Leistung erfassen", new_patient_session_service_record_url(item.patient, item), :method => :get, :class => "icon icon-add", :remote => true
-      = link_to "Kons löschen", patient_session_url(item.patient, item), :method => :delete, :confirm => t_confirm_delete(item), :class => "icon icon-delete", :remote => true
+      = icon_link_to :delete, patient_session_url(item.patient, item), :method => :delete, :confirm => t_confirm_delete(item), :remote => true
   - @session = item
   %h4
-    - if editable
+    - if false #editable
       = in_place_editor_field :session, :date
       \: #{item.remarks.blank? ? "Konsultation" : item.remarks}
     - else
@@ -20,7 +22,7 @@
       - @service_record = service_record
       %tr
         %td{:style => "width: 2em; text-align: right"}
-          - if editable
+          - if false #editable
             %b
               = in_place_editor_field :service_record, :quantity, {}, :size => 3
               x
@@ -30,7 +32,7 @@
               x
         %td{:style => "width: 6em"}= service_record.code
         %td
-          - if editable
+          - if false #editable
             = "(#{in_place_editor_field :service_record, :ref_code, {}, :size => 8}) " unless @service_record.ref_code.blank?
           - else
             = "(#{@service_record.ref_code}) " unless @service_record.ref_code.blank?
