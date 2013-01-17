@@ -1,6 +1,4 @@
 class AttachmentsController < AuthorizedController
-  inherit_resources
-
   belongs_to :doctor, :polymorphic => true, :optional => true
 
   def create
@@ -16,5 +14,4 @@ class AttachmentsController < AuthorizedController
     path = @attachment.file.current_path
     send_file path
   end
-
 end
