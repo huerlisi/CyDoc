@@ -18,7 +18,7 @@ function import() {
 local input="${2:-$NAME.csv}"
 
 	# Import
-	echo "Insurances::Import; Insurance.import_all; nil" | bundle exec ../script/console
+	echo "Insurances::Import; Insurance.import_all; nil" | bundle exec rails console
 }
 
 
