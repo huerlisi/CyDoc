@@ -6,12 +6,14 @@ require 'capones_recipes/cookbook/rails'
 require 'capones_recipes/tasks/database/setup'
 require 'capones_recipes/tasks/carrier_wave'
 require 'capones_recipes/tasks/sync'
+load 'lib/recipes/bluepill'
+
+load 'deploy/assets'
 
 # Staging
 set :default_stage, "staging"
 
 # Deployment
-set :server, :passenger
 set :user, "deployer"                               # The server's user for deploys
 
 # Sync directories
