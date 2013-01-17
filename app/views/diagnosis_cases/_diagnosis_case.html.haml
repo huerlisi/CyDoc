@@ -1,5 +1,3 @@
 %tr[diagnosis_case]
   %td= diagnosis_case.diagnosis.type
   %td= diagnosis_case.to_s
-  - if @treatment && @treatment.active?
-    %td= link_to image_tag('delete.png'), patient_treatment_medical_case_path(@treatment.patient, @treatment, diagnosis_case), :remote => true, :method => :delete

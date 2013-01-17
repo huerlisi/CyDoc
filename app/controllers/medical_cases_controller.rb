@@ -82,19 +82,4 @@ class MedicalCasesController < AuthorizedController
       render :action => 'new'
     end
   end
-
-  # DELETE
-  def destroy
-    @medical_case = MedicalCase.find(params[:id])
-    @medical_case.destroy
-
-    respond_to do |format|
-      format.html { }
-      format.js {
-        render :update do |page|
-          page.remove "medical_case_#{@medical_case.id}"
-        end
-      }
-    end
-  end
 end

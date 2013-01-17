@@ -1,26 +1,22 @@
 - cache [I18n.locale, @treatment.cache_key] do
   .contextual
-    = link_to t('cydoc.actions.update'), edit_treatment_path(@treatment), :remote => true, :class => "icon icon-edit"
+    = icon_link_to :edit, edit_treatment_path(@treatment), :remote => true
     - if @treatment.chargeable?
-      = link_to t('cydoc.actions.new_invoice'), new_patient_treatment_invoice_path(@treatment.patient, @treatment), 'data-remote' => true, :class => "icon icon-add"
+      = link_to t('cydoc.actions.new_invoice'), new_patient_treatment_invoice_path(@treatment.patient, @treatment), :remote => true
     - if @treatment.active?
-      = link_to t('cydoc.actions.delete'), treatment_path(@treatment), 'data-method' => :delete, 'data-remote' => true, 'data-confirm' => t('cydoc.actions.delete_treatment', :treatment => @treatment.to_s), :class => "icon icon-delete"
+      = icon_link_to :delete, treatment_path(@treatment), :method => :delete, :remote => true, 'data-confirm' => t_confirm_delete(@treatment)
+
   = render 'treatments/show_main'
+
   #new_treatment_invoice
-  #treatment_medical_cases
-    .contextual
-      - if @treatment.active?
-        = link_to t('cydoc.actions.new_medical_case'), new_patient_treatment_medical_case_path(@treatment.patient, @treatment), 'data-remote' => true, :class => "icon icon-add"
-    %h3= t('cydoc.title.medical_cases')
-    .box
-      #treatment_new_medical_case
-        - if @treatment.medical_cases.empty?
-          = render :partial => 'medical_cases/form'
-      %table#treatment_medical_case_list{:style => "width: 100%"}
-        = render :partial => 'medical_cases/item', :collection => @treatment.medical_cases
+
+  %h3= t('cydoc.title.medical_cases')
+  %table.table
+    = render @treatment.medical_cases
+
   #treatment_sessions
     .contextual
-      = link_to t('cydoc.actions.new_treatment_session'), new_patient_treatment_session_path(@treatment.patient, @treatment), 'data-remote' => true, :class => "icon icon-add"
+      = icon_link_to :new_treatment_session, new_patient_treatment_session_path(@treatment.patient, @treatment), 'remote' => true
     %h3= t('cydoc.title.treatment_sessions')
     #treatment_session_list.box
       = render :partial => 'sessions/list', :object => @treatment.sessions
