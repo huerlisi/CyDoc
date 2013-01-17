@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-class RecallLetter < Prawn::LetterDocument
+class RecallLetter < LetterDocument
   def greeting(patient)
     text patient.vcard.salutation
     text " "

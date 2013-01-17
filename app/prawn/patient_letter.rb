@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-class PatientLetter < Prawn::LetterDocument
+class PatientLetter < LetterDocument
   include InvoicesHelper
   include Prawn::EsrRecipe
 
