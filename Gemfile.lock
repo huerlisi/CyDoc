@@ -119,6 +119,7 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    kgio (2.7.4)
     ledermann-rails-settings (1.2.0)
       activerecord (>= 2.3)
     less (2.2.2)
@@ -176,6 +177,7 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
+    raindrops (0.10.0)
     rake (10.0.3)
     rdoc (3.12)
       json (~> 1.4)
@@ -228,6 +230,10 @@ GEM
       railties (>= 3.1)
     tzinfo (0.3.35)
     unicode_utils (1.4.0)
+    unicorn (4.3.1)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
     use_db (0.2.0)
     validates_timeliness (3.0.14)
       timeliness (~> 0.3.6)
@@ -281,6 +287,7 @@ DEPENDENCIES
   therubyracer
   twitter-bootstrap-rails
   unicode_utils
+  unicorn
   use_db
   validates_timeliness
   vesr
