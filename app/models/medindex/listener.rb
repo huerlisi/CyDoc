@@ -79,7 +79,7 @@ module Medindex
     # Stream handlers
     def tag_start(name, attrs)
       case name
-        when record_name:
+        when record_name
           @int_record = self.class.int_class.new
       end
       @text = ""
@@ -87,9 +87,9 @@ module Medindex
 
     def tag_end(name)
       case name
-        when record_name:
+        when record_name
           assign
-        when 'DEL':
+        when 'DEL'
           @to_delete = @text == 'true'
       end
     end

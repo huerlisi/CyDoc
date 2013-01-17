@@ -7,5 +7,6 @@
     - for state in patient_item.aasm_events_for_current_state
       = case state                                                                                                                                                           |
         #      when :obey:   link_to image_tag('true.png'), :url => obey_patient_appointment_path(patient_item.patient, patient_item), :title => "Erledigt", :remote => true |
-          when :cancel: link_to image_tag('delete.png'), :url => patient_appointment_path(patient_item.patient, patient_item), :method => :delete, :remote => true           |
+          when :cancel |
+            link_to image_tag('delete.png'), :url => patient_appointment_path(patient_item.patient, patient_item), :method => :delete, :remote => true           |
         end                                                                                                                                                                  |

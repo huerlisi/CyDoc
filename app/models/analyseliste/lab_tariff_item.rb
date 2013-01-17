@@ -2,12 +2,12 @@ module Analyseliste
   class LabTariffItem < Base
     def self.import_record(ext_record, options)
       raise SkipException if ext_record[2].nil?
-      
+
       case options[:version]
-        when 'new':
+        when 'new'
           tariff_type = 317
           code = ext_record[2]
-        when 'old':
+        when 'old'
           tariff_type = 316
           code = ext_record[3]
       end
@@ -18,7 +18,7 @@ module Analyseliste
               :amount_tt => ext_record[4],
               :remark => ext_record[5]
       )
-    
+
       return int_record
     end
   end

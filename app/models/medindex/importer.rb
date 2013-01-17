@@ -16,8 +16,10 @@ module Medindex
     protected
     def self.path(import_class)
       case env['Rails.env']
-        when 'production': File.join(Rails.root, 'data', 'Medindex', "DownloadMedindex#{import_class.name.demodulize}_out.xml")
-        when 'development', 'test': File.join(Rails.root, 'test', 'fixtures', 'medindex', "DownloadMedindex#{import_class.name.demodulize}_out.xml")
+        when 'production'
+          File.join(Rails.root, 'data', 'Medindex', "DownloadMedindex#{import_class.name.demodulize}_out.xml")
+        when 'development', 'test'
+          File.join(Rails.root, 'test', 'fixtures', 'medindex', "DownloadMedindex#{import_class.name.demodulize}_out.xml")
       end
     end
   end

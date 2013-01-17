@@ -67,7 +67,8 @@ end
 
 def service_record_to_xml(xml, service_record)
   case service_record.tariff_type
-    when "001": tarmed_record_to_xml(xml, service_record)
+    when "001"
+      tarmed_record_to_xml(xml, service_record)
   end
 end
 
@@ -163,8 +164,10 @@ xml.request :role => "test",
 
     # TODO: payment_period not hardcoded
     case @invoice.tiers
-      when TiersGarant: xml.tiers_garant :payment_periode => "P#{@invoice.payment_period}D" do tiers(xml) end
-      when TiersPayant: xml.tiers_payant do tiers(xml) end
+      when TiersGarant
+        xml.tiers_garant :payment_periode => "P#{@invoice.payment_period}D" do tiers(xml) end
+      when TiersPayant
+        xml.tiers_payant do tiers(xml) end
     end
 
     xml.detail :date_begin => @invoice.date_begin.xmlschema, :date_end => @invoice.date_end.xmlschema, :canton => @invoice.treatment.canton, :service_locality => (@invoice.place_type || "practice") do
@@ -177,9 +180,12 @@ xml.request :role => "test",
       opt_attrs = {}
       opt_attrs[:patient_id] = @invoice.patient.insurance_id unless @invoice.patient.insurance_id.blank?
       case @invoice.law.name.downcase
-        when 'kvg': xml.kvg :reason => @invoice.treatment.reason_xml, :case_date => @invoice.date_begin.xmlschema, *opt_attrs
-        when 'mvg': xml.kvg :reason => @invoice.treatment.reason_xml, :case_date => @invoice.date_begin.xmlschema, *opt_attrs
-        when 'uvg': xml.uvg :reason => @invoice.treatment.reason_xml, :case_date => @invoice.date_begin.xmlschema, *opt_attrs
+        when 'kvg'
+          xml.kvg :reason => @invoice.treatment.reason_xml, :case_date => @invoice.date_begin.xmlschema, *opt_attrs
+        when 'mvg'
+          xml.kvg :reason => @invoice.treatment.reason_xml, :case_date => @invoice.date_begin.xmlschema, *opt_attrs
+        when 'uvg'
+          xml.uvg :reason => @invoice.treatment.reason_xml, :case_date => @invoice.date_begin.xmlschema, *opt_attrs
       end
 
       xml.services do

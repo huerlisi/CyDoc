@@ -6,8 +6,10 @@ module Tarifcodes
 
     def self.path
       case env['Rails.env']
-        when 'production': File.join(Rails.root, 'data', 'tarifcodes.csv')
-        when 'development', 'test': File.join(Rails.root, 'test', 'fixtures', 'tarifcodes', 'tarifcodes.csv')
+        when 'production'
+          File.join(Rails.root, 'data', 'tarifcodes.csv')
+        when 'development', 'test'
+          File.join(Rails.root, 'test', 'fixtures', 'tarifcodes', 'tarifcodes.csv')
       end
     end
 
