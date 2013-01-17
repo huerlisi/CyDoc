@@ -3,3 +3,6 @@
   = link_to "Drucken", print_invoice_path(resource), :method => :post, :class => "icon icon-print"
 
 = render 'show'
+
+- content_for :sidebar do
+  = render 'patients/sidebar', :resource => resource.patient
