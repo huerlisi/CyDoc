@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddBsvCodeToInsurance < ActiveRecord::Migration
   def self.up
     add_column :insurances, :bsv_code, :integer

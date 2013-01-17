@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MakePhoneNumbersPolymorphic < ActiveRecord::Migration
   def self.up
     add_column :phone_numbers, :object_id, :integer

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 #!/usr/bin/ruby1.8
 
 #!/usr/local/bin/ruby

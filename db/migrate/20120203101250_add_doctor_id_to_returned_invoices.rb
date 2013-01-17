@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddDoctorIdToReturnedInvoices < ActiveRecord::Migration
   def self.up
     add_column :returned_invoices, :doctor_id, :integer

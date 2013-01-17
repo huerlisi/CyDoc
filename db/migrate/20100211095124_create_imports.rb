@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateImports < ActiveRecord::Migration
   def self.up
     create_table :imports do |t|

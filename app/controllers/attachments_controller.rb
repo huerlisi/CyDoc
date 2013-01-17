@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AttachmentsController < AuthorizedController
   belongs_to :doctor, :polymorphic => true, :optional => true
 

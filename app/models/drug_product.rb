@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DrugProduct < ActiveRecord::Base
   # Access restrictions
   attr_accessible :name, :description

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddVesrFieldsToDoctors < ActiveRecord::Migration
   def self.up
     add_column :doctors, :use_vesr, :boolean

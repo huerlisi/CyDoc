@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddTimeStampsToHasVcardsTables < ActiveRecord::Migration
   def self.up
     add_column :addresses, :created_at, :datetime

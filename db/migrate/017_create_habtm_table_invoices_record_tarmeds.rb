@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateHabtmTableInvoicesRecordTarmeds < ActiveRecord::Migration
   def self.up
     create_table "invoices_record_tarmeds", :id => false do |t|

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddCreatedAndUpdatedAtToBookings < ActiveRecord::Migration
   def self.up
     add_column :bookings, :created_at, :datetime

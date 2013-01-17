@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # -*- coding: utf-8 -*-
 SimpleNavigation::Configuration.run do |navigation|
   navigation.selected_class = 'active'

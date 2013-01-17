@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SetEsrAccountForDoctor < ActiveRecord::Migration
   def self.up
     User.find_each do |user|

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module RecallsHelper
   def link_to_last_session(recall)
     session = recall.patient.last_session

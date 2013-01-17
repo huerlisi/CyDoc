@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module UserHelper
   def user_object_collection
     [

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateTenants < ActiveRecord::Migration
   def self.up
     create_table :tenants do |t|

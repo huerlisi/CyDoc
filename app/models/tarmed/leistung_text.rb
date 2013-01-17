@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Tarmed::LeistungText < Tarmed::Base
   set_table_name 'LEISTUNG_TEXT'
   set_primary_key "LNR"

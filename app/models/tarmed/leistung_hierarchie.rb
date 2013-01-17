@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Tarmed::LeistungHierarchie < Tarmed::Base
   set_table_name "LEISTUNG_HIERARCHIE"
 

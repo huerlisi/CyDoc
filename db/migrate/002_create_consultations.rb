@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateConsultations < ActiveRecord::Migration
   def self.up
     create_table :consultations do |t|

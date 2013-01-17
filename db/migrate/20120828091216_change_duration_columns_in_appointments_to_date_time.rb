@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ChangeDurationColumnsInAppointmentsToDateTime < ActiveRecord::Migration
   def self.up
     add_column :appointments, :duration_from, :datetime

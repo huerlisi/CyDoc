@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ReminderBatchJobsController < InvoiceBatchJobsController
   defaults :resource_class => ReminderBatchJob
 

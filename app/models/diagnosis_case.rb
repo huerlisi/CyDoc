@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DiagnosisCase < MedicalCase
   belongs_to :diagnosis
 

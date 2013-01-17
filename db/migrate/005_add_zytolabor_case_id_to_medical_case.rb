@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddZytolaborCaseIdToMedicalCase < ActiveRecord::Migration
   def self.up
     add_column :medical_cases, :zytolabor_case_id, :integer

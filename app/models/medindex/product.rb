@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Medindex
   class Product < Listener
     # Meta info

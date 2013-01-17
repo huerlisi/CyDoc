@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Information about invoice batch printing jobs.
 class InvoiceBatchJob < ActiveRecord::Base
   # Access Restricitons

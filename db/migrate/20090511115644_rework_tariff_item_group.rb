@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ReworkTariffItemGroup < ActiveRecord::Migration
   def self.up
     rename_table 'tariff_items_tariff_items', 'tariff_item_groups_tariff_items'

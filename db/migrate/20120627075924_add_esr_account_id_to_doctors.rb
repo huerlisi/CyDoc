@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddEsrAccountIdToDoctors < ActiveRecord::Migration
   def self.up
     add_column :doctors, :esr_account_id, :integer

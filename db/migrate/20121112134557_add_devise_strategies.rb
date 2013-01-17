@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddDeviseStrategies < ActiveRecord::Migration
   def up
     # lockable

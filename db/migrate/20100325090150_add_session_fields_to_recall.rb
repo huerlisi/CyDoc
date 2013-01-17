@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddSessionFieldsToRecall < ActiveRecord::Migration
   def self.up
     add_column :recalls, :session_id, :integer

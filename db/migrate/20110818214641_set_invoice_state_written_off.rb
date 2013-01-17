@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SetInvoiceStateWrittenOff < ActiveRecord::Migration
   def self.up
     # Collect all invoices with write off bookings

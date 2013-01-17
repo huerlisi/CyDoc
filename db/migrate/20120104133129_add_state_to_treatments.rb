@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddStateToTreatments < ActiveRecord::Migration
   def self.up
     add_column :treatments, :state, :string, :default => 'open'

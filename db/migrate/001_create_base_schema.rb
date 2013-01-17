@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateBaseSchema < ActiveRecord::Migration
   def self.up
     create_table "addresses", :force => true do |t|

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateInvoices < ActiveRecord::Migration
   def self.up
     create_table :invoices do |t|

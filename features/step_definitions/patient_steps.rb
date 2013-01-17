@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Given /I am on the new patient page/ do
   visit "/patients/new"
 end

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'patient.rb'
 class Patient
   belongs_to :insurance

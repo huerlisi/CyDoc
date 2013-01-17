@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddIndexToVatClasses < ActiveRecord::Migration
   def self.up
     add_index :vat_classes, :code

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Given "an anonymous user" do
   get '/sessions/destroy'
   response.should redirect_to('/session/new')

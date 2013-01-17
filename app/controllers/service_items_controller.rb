@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ServiceItemsController < AuthorizedController
   in_place_edit_for :service_item, :ref_code
   in_place_edit_for :service_item, :quantity

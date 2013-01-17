@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddStaticInvoiceFieldsToTreatments < ActiveRecord::Migration
   def self.up
     add_column :treatments, :law_id, :integer

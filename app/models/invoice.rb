@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 
 class Invoice < ActiveRecord::Base
   belongs_to :tiers, :autosave => true

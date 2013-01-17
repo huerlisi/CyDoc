@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Insurance < ActiveRecord::Base
   # Access restrictions
   attr_accessible :vcard_attributes, :ean_party, :group_ean_party, :role

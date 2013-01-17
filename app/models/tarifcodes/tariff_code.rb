@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Tarifcodes
   class TariffCode < Base
     def self.sheet_range

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class UseCodeForAccountNumber < ActiveRecord::Migration
   def self.up
     add_column :accounts, :code, :string

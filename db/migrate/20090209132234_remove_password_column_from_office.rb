@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RemovePasswordColumnFromOffice < ActiveRecord::Migration
   def self.up
     remove_column :offices, :password

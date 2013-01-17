@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RenameClientIdToPcIdOnEsrRecords < ActiveRecord::Migration
   def self.up
     rename_column :esr_records, :client_nr, :bank_pc_id

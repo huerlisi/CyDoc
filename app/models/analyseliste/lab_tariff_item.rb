@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Analyseliste
   class LabTariffItem < Base
     def self.import_record(ext_record, options)

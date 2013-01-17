@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddDefaultsToRecordTarmeds < ActiveRecord::Migration
   def self.up
     rename_column :record_tarmeds, :unit_tm, :unit_mt

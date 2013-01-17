@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DrugProductsController < AuthorizedController
   # PUT /drug_produc/1/create_tariff_item
   def create_tariff_item

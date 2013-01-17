@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class UseDecimalForCurrencyFields < ActiveRecord::Migration
   def self.up
     change_column :bookings, :amount, :decimal, :precision => 8, :scale => 2

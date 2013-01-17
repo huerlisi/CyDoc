@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# -*- encoding : utf-8 -*-
 class InsuranceRecipe < LetterDocument
   include InvoicesHelper
   include AccountsHelper

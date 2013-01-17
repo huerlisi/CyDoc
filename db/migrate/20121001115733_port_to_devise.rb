@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class PortToDevise < ActiveRecord::Migration
   def up
     #encrypting passwords and authentication related fields

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class BuildAppointmentsForRecalls < ActiveRecord::Migration
   def self.up
     for recall in Recall.find(:all, :conditions => {:appointment_id => nil})

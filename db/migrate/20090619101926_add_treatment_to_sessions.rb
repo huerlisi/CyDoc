@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddTreatmentToSessions < ActiveRecord::Migration
   def self.up
     add_column :sessions, :treatment_id, :integer

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ReturnedInvoice < ActiveRecord::Base
   # Access Restrictions
   attr_accessible :invoice_id, :state, :remarks

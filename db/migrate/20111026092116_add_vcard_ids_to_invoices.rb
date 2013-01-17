@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddVcardIdsToInvoices < ActiveRecord::Migration
   def self.up
     add_column :invoices, :patient_vcard_id, :integer

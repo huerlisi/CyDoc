@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddDoctorIdToRecalls < ActiveRecord::Migration
   def self.up
     add_column :recalls, :doctor_id, :integer

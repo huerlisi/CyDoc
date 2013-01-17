@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MigelTariffItem < TariffItem
   def unit_mt
     0.0

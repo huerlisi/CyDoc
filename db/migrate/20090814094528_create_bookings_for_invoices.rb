@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateBookingsForInvoices < ActiveRecord::Migration
   def self.up
     Accounting::Account.new(:number => Invoice::DEBIT_ACCOUNT, :title => 'Debitoren').save

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DrugTariffItem < TariffItem
   def unit_mt
     1.0

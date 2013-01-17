@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateDiagnoses < ActiveRecord::Migration
   def self.up
     create_table :diagnoses do |t|

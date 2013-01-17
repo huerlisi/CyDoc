@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class TariffItemGroup < TariffItem
   has_many :service_items, :order => 'position'
 

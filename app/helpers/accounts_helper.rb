@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module AccountsHelper
   include ActionView::Helpers::NumberHelper
   

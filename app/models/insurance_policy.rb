@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class InsurancePolicy < ActiveRecord::Base
   # Access restrictions
   attr_accessible :policy_type, :insurance_id, :number

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateTiers < ActiveRecord::Migration
   def self.up
     create_table :tiers do |t|

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Use german, human readable date and time formats.
 Date::DATE_FORMATS[:default] = '%d.%m.%Y'
 Time::DATE_FORMATS[:default] = '%d.%m.%Y %H:%M'

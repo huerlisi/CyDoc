@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module TariffItemsHelper
   def duration(items)
     duration_from = items.collect {|item| item.date}.min

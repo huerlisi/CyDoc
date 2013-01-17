@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class TreatmentsController < ApplicationController
   in_place_edit_for :session, :date
   # TODO: is duplicated in ServiceRecordsController

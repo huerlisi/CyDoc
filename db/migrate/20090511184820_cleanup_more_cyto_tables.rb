@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CleanupMoreCytoTables < ActiveRecord::Migration
   def self.up
     drop_table :finding_groups

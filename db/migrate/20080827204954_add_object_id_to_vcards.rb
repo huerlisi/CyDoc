@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddObjectIdToVcards < ActiveRecord::Migration
   def self.up
     add_column :vcards, :object_id, :integer

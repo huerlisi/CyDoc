@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Recall < ActiveRecord::Base
   # Access restrictions
   attr_accessible :state, :doctor_id, :due_date, :remarks, :appointment_attributes

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateMedicalCases < ActiveRecord::Migration
   def self.up
     create_table :medical_cases do |t|

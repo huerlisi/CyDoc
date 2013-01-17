@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateDrugPrices < ActiveRecord::Migration
   def self.up
     create_table :drug_prices do |t|

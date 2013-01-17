@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class LegacyEmployee < ActiveRecord::Base
   self.table_name = 'employees'
   def work_vcard

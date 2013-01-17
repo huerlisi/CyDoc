@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 
 class Patient < ActiveRecord::Base
   # Access restrictions

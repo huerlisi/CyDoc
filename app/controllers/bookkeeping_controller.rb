@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class BookkeepingController < ApplicationController
   before_filter :set_value_period
 

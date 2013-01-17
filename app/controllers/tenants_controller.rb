@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class TenantsController < AuthorizedController
   # Actions
   def current

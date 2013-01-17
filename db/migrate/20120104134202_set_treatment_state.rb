@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SetTreatmentState < ActiveRecord::Migration
   def self.up
     # SQL version of Treatment.update_state

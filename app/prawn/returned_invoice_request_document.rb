@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# -*- encoding : utf-8 -*-
 
 class ReturnedInvoiceRequestDocument < LetterDocument
   def to_pdf(doctor, params)

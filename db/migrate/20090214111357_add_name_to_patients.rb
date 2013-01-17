@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddNameToPatients < ActiveRecord::Migration
   def self.up
     add_column :patients, :name, :string

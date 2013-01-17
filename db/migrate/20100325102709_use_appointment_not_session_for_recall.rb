@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class UseAppointmentNotSessionForRecall < ActiveRecord::Migration
   def self.up
     # Create appointments table

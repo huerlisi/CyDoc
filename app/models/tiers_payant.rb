@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class TiersPayant < Tiers
   belongs_to :guarantor, :class_name => 'Insurance'
   

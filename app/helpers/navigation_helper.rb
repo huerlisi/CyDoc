@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module NavigationHelper
   # Navigation
   def navigation_section(section_title, items = {}, image = "#{title}.png")

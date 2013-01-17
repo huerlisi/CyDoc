@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SettingSelectInput < SimpleForm::Inputs::CollectionInput
   def input
     @builder.fields_for :settings do |s|

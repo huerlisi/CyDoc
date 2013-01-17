@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddOutOfSaleOnToDrugArticles < ActiveRecord::Migration
   def self.up
     add_column :drug_articles, :out_of_sale_on, :date

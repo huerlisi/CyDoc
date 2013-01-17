@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Tenant < ActiveRecord::Base
   # Associations
   belongs_to :doctor, :foreign_key => :person_id

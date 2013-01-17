@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DrugSubstance < ActiveRecord::Base
   def to_s
     name

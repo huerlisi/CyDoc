@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateDrugSubstances < ActiveRecord::Migration
   def self.up
     create_table :drug_substances, :id => false do |t|

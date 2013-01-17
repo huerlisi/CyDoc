@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class InsurancePoliciesController < ApplicationController
   # GET /insurance_policies/select
   def select

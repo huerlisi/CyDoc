@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Given /^a user "(.*)" with password "(.*)"$/ do |user, password|
   User.destroy_all(:login => user)
   @new_user = User.create!(:login => user, :email => "#{user}@example.com", :password => password, :password_confirmation => password )

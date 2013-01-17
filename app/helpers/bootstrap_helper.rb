@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module BootstrapHelper
   def boot_page_title(action_or_title = nil, model = nil)
     if action_or_title.is_a? String

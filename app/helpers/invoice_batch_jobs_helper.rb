@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module InvoiceBatchJobsHelper
   def failed_jobs(invoice_batch_job)
     return unless invoice_batch_job.failed_jobs

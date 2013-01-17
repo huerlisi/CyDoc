@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Attachment < ActiveRecord::Base
   # Association
   belongs_to :object, :polymorphic => true

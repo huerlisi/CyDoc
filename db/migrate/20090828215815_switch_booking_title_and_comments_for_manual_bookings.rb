@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SwitchBookingTitleAndCommentsForManualBookings < ActiveRecord::Migration
   def self.up
     for booking in Accounting::Booking.find :all, :conditions => {:comments => ['Barzahlung', 'Bankzahlung', 'Skonto/Rabatt', 'Zusatzleistung']}

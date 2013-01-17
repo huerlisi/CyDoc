@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateDiagnosesSessions < ActiveRecord::Migration
   def self.up
     create_table :diagnoses_sessions, :id => false do |t|

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SetDoctorIdOnRecalls < ActiveRecord::Migration
   def self.up
     # Guessing tenant

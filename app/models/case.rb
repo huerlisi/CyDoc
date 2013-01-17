@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Case < ActiveRecord::Base
   belongs_to :classification
   belongs_to :patient

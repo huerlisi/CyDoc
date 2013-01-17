@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Application
 set :application, 'cydoc'
 set :repository,  'git@github.com:huerlisi/CyDoc.git'

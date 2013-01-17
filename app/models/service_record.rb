@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ServiceRecord < ActiveRecord::Base
   belongs_to :provider, :class_name => 'Doctor'
   belongs_to :biller, :class_name => 'Doctor'

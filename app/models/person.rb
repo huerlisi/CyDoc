@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Person < ActiveRecord::Base
   # Validations
   validates_date :date_of_birth, :date_of_death, :allow_nil => true, :allow_blank => true

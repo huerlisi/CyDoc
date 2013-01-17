@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module InvoicesHelper
   def ean_zsr(doctor)
     [doctor.ean_party.presence, doctor.zsr.presence].compact.join(" / ")

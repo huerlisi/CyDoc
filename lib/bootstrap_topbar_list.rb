@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Renders an ItemContainer as a <ul> element and its containing items as <li> elements.
 # Prepared to use inside the topbar of Twitter Bootstrap http://twitter.github.com/bootstrap/#navigation
 #

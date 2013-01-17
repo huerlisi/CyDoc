@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AuthorizedController < InheritedResources::Base
   # Authorization
   load_and_authorize_resource

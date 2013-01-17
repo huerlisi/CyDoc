@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 #
 # Sugar for turning a story's attribute list into list, array, etc.
 #

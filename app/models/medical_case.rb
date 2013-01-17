@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MedicalCase < ActiveRecord::Base
   belongs_to :doctor
   belongs_to :treatment, :touch => true

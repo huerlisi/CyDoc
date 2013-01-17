@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddUnitMtAndUnitTtToRecordTarmeds < ActiveRecord::Migration
   def self.up
     add_column :record_tarmeds, :unit_mt, :float, :null => false

@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# -*- encoding : utf-8 -*-
 
 CyDoc::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb

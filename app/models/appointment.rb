@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Appointment < ActiveRecord::Base
   # Associations
   belongs_to :patient

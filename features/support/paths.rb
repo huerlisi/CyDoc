@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 def path_to(page_name)
   case page_name
   

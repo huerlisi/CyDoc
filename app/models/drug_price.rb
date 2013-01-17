@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DrugPrice < ActiveRecord::Base
   # Access Restrictions
   attr_accessible :price_type, :valid_from

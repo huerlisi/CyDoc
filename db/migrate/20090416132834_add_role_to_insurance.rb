@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddRoleToInsurance < ActiveRecord::Migration
   def self.up
     add_column :insurances, :role, :string

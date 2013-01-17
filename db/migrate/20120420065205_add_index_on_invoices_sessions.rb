@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddIndexOnInvoicesSessions < ActiveRecord::Migration
   def self.up
     add_index :invoices_sessions, :invoice_id

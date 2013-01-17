@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class VatClass < ActiveRecord::Base
   # Access restrictions
   attr_accessible :code, :rate, :valid_from

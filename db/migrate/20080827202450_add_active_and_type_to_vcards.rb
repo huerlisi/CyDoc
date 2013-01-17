@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddActiveAndTypeToVcards < ActiveRecord::Migration
   def self.up
     add_column :vcards, :active, :boolean, :default => true

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddDatesToInvoice < ActiveRecord::Migration
   def self.up
     add_column :invoices, :value_date, :date

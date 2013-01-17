@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateSettingsTable < ActiveRecord::Migration
   def self.up
     create_table :settings, :force => true do |t|

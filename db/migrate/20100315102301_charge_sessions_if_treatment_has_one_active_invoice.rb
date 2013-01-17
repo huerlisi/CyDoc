@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ChargeSessionsIfTreatmentHasOneActiveInvoice < ActiveRecord::Migration
   def self.up
     for t in Treatment.all

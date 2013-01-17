@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ReParentPhoneNumbersFromPatientToVcard < ActiveRecord::Migration
   def self.up
     PhoneNumber.transaction do

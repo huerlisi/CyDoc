@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # This migration comes from has_accounts (originally 20111108000000)
 #
 # Has been adapted to only migrate changes

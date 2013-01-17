@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AllowNullForProviderAndResponsibleInRecordTarmed < ActiveRecord::Migration
   def self.up
     change_column :record_tarmeds, :provider_id, :integer, :null => true

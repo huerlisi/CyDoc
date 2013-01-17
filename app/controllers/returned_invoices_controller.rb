@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ReturnedInvoicesController < AuthorizedController
   # Scopes
   has_scope :by_doctor_id

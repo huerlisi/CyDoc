@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DoctorsController < AuthorizedController
   # has_many :phone_numbers
   def new_phone_number

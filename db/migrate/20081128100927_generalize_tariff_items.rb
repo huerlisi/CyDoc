@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class GeneralizeTariffItems < ActiveRecord::Migration
   def self.up
     remove_column :tariff_items, :patient_id

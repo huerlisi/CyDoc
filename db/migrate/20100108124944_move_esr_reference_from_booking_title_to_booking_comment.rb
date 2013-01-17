@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MoveEsrReferenceFromBookingTitleToBookingComment < ActiveRecord::Migration
   def self.up
     vesr_bookings = Accounting::Booking.find(:all, :conditions => "title LIKE 'VESR Zahlung %'")

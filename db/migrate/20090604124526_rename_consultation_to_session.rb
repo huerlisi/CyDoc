@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RenameConsultationToSession < ActiveRecord::Migration
   def self.up
     rename_table :consultations, :sessions

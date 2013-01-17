@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class PortEsrFilesToCarrierwave < ActiveRecord::Migration
   def self.up
     rename_column :esr_files, :filename, :file

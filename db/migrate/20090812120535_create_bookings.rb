@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateBookings < ActiveRecord::Migration
   def self.up
     create_table "bookings", :force => true do |t|

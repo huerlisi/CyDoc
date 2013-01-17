@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateTariffItemGroupsTariffItems < ActiveRecord::Migration
   def self.up
     create_table :tariff_item_groups_tariff_items, :id => false do |t|

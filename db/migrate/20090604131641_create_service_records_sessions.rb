@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateServiceRecordsSessions < ActiveRecord::Migration
   def self.up
     create_table :service_records_sessions, :id => false do |t|

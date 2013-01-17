@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddReminderDueDatesToInvoices < ActiveRecord::Migration
   def self.up
     add_column :invoices, :reminder_due_date, :date

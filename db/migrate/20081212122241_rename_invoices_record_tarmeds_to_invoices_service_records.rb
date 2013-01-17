@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RenameInvoicesRecordTarmedsToInvoicesServiceRecords < ActiveRecord::Migration
   def self.up
     rename_table :invoices_record_tarmeds, :invoices_service_records

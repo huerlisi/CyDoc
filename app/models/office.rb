@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Office < ActiveRecord::Base
   # Access restrictions
   attr_accessible :name, :printers

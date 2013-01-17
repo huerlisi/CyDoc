@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateTariffItems < ActiveRecord::Migration
   def self.up
     create_table :tariff_items do |t|

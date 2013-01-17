@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddObjectTypeToVcards < ActiveRecord::Migration
   def self.up
     add_column :vcards, :object_type, :string

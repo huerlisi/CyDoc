@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddVatClassIdToTariffItems < ActiveRecord::Migration
   def self.up
     add_column :tariff_items, :vat_class_id, :integer

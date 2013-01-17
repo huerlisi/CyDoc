@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateRecordTarmeds < ActiveRecord::Migration
   def self.up
     create_table :record_tarmeds do |t|

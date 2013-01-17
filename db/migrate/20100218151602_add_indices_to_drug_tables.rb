@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddIndicesToDrugTables < ActiveRecord::Migration
   def self.up
     add_index :drug_articles, :code

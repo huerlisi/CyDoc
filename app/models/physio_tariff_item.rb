@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class PhysioTariffItem < TariffItem
   def unit_mt
     case reason

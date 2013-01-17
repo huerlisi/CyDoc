@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class UseOnlyDateForTreatments < ActiveRecord::Migration
   def self.up
     change_column :treatments, :date_begin, :date

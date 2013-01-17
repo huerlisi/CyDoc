@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
     set :bluepill_app, "#{client}.#{domain}"

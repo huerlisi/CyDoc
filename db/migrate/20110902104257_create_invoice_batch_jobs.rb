@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateInvoiceBatchJobs < ActiveRecord::Migration
   def self.up
     create_table :invoice_batch_jobs do |t|

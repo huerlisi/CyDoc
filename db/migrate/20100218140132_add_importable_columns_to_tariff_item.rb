@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddImportableColumnsToTariffItem < ActiveRecord::Migration
   def self.up
     add_column :tariff_items, :imported_id, :integer

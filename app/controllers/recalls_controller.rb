@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RecallsController < AuthorizedController
   # Filter
   has_scope :by_period, :using => [:from, :to]

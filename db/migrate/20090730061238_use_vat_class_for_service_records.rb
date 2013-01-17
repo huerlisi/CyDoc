@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class UseVatClassForServiceRecords < ActiveRecord::Migration
   def self.up
     add_column :service_records, :vat_class_id, :integer

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RemoveVcardIdsFromEmployee < ActiveRecord::Migration
   def self.up
     remove_column :employees, :work_vcard_id

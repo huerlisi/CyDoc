@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddActiveToEmployee < ActiveRecord::Migration
   def self.up
     add_column :employees, :active, :boolean, :default => true

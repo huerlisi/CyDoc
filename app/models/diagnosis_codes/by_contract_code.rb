@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module DiagnosisCodes
   class ByContractCode < Base
     def self.int_class

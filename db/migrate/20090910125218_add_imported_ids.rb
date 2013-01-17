@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddImportedIds < ActiveRecord::Migration
   def self.up
     add_column :patients, :imported_id, :integer

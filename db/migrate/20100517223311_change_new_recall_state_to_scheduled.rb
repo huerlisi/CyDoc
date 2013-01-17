@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ChangeNewRecallStateToScheduled < ActiveRecord::Migration
   def self.up
     Recall.update_all("state = 'scheduled'", "state = 'new'")

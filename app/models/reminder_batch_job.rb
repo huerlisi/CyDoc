@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ReminderBatchJob < InvoiceBatchJob
   def remind
     for invoice in invoices

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateInsurancePolicies < ActiveRecord::Migration
   def self.up
     create_table :insurance_policies do |t|

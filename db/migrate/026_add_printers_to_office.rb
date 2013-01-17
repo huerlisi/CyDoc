@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddPrintersToOffice < ActiveRecord::Migration
   def self.up
     add_column :offices, :printers, :string

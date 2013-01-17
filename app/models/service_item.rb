@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ServiceItem < ActiveRecord::Base
   belongs_to :tariff_item_group
   belongs_to :tariff_item

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MakeMedicalCaseSuperclass < ActiveRecord::Migration
   def self.up
     add_column :medical_cases, :type, :string

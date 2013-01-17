@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RemoveVcardReferencesFromDoctor < ActiveRecord::Migration
   def self.up
     remove_column :doctors, :praxis_vcard

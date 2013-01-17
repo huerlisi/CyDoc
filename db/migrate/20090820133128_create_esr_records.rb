@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateEsrRecords < ActiveRecord::Migration
   def self.up
     create_table :esr_records do |t|

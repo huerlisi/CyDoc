@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddIndexToVcards < ActiveRecord::Migration
   def self.up
     add_index :vcards, [:object_id, :object_type]

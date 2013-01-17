@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateTenantIfNone < ActiveRecord::Migration
   def up
     return unless Tenant.count == 0

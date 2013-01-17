@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddReferenceToBookings < ActiveRecord::Migration
   def self.up
     add_column :bookings, :reference_id, :integer

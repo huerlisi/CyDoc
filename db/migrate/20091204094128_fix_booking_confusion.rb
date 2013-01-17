@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class FixBookingConfusion < ActiveRecord::Migration
   def self.up
     # No negative booking amounts:

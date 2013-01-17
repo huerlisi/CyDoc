@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddColumGroupEanToInsurance < ActiveRecord::Migration
   def self.up
     add_column :insurances, :group_ean_party, :string, :limit => 13

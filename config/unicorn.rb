@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# -*- encoding : utf-8 -*-
 
 # Location
 app_path = File.expand_path("../../", __FILE__)

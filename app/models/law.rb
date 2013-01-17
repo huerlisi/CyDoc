@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Law < ActiveRecord::Base
   validates_presence_of :code
 

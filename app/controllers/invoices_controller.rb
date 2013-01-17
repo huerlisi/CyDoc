@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class InvoicesController < AuthorizedController
   # POST /invoice/1/print
   def print
