@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-require 'fastercsv'
 
 module DiagnosisCodes
   class Base
@@ -10,7 +9,7 @@ module DiagnosisCodes
 
       name = "#{self.name.demodulize}.csv"
 
-      case env['Rails.env']
+      case Rails.env
         when 'production'
           File.join(Rails.root, 'data', 'diagnosis_codes', name)
         when 'development', 'test'
@@ -18,8 +17,8 @@ module DiagnosisCodes
       end
     end
 
-    def self.find(selector, options = {})
-      FasterCSV.read(path(options), :col_sep => ';', :headers => false)
+    def self.all(options = {})
+      CSV.read(path(options), :col_sep => ';', :headers => false)
     end
 
     def self.import_all(do_clean = false, options = {})

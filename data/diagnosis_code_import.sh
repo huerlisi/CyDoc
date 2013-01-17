@@ -54,7 +54,7 @@ function import() {
 local input="${2:-$NAME.csv}"
 
 	# Import as TariffItems
-	echo "DiagnosisCodes::Base.import_all(true, :input => '$input')" | ../script/console
+	echo "DiagnosisCodes::Base.import_all(true, :input => 'data/$input')" | bundle exec rails console
 }
 
 function cleanup() {

@@ -51,7 +51,7 @@ module Importer
 
         # If something goes wrong...
         rescue Exception => ex
-          puts "Error (#{ext_record.id}): #{ex.message}"
+          puts "Error (#{ext_record.inspect}): #{ex.message}"
           puts ex.backtrace.join("\n\t")
           errors += 1
         end
