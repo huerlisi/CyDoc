@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class TreatmentsController < ApplicationController
+class TreatmentsController < AuthorizedController
   in_place_edit_for :session, :date
   # TODO: is duplicated in ServiceRecordsController
   in_place_edit_for :service_record, :ref_code
@@ -9,11 +9,9 @@ class TreatmentsController < ApplicationController
   # GET /patients/1/treatments/2
   def show
     @treatment = Treatment.find(params[:id])
-    
+
     respond_to do |format|
-      format.html {
-        redirect_to :controller => :patients, :action => :show, :id => @treatment.patient_id, :tab => 'treatments', :sub_tab_id => @treatment.id
-      }
+      format.html { }
       format.js {
         render :update do |page|
           page.replace_html "tab-content-treatments", :partial => 'show'
@@ -43,7 +41,7 @@ class TreatmentsController < ApplicationController
 
     # Build associated Law object
     @treatment.build_law
-    
+
     respond_to do |format|
       format.html { }
       format.js {
@@ -60,7 +58,7 @@ class TreatmentsController < ApplicationController
   def create
     @patient = Patient.find(params[:patient_id])
     @treatment = @patient.treatments.build(params[:treatment])
-    
+
     # Law
     law = @treatment.law
     # TODO: don't just pick first one
@@ -108,7 +106,7 @@ class TreatmentsController < ApplicationController
     if @treatment.update_attributes(params[:treatment])
       flash[:notice] = 'Erfolgreich erstellt.'
       respond_to do |format|
-        format.html { 
+        format.html {
           redirect_to @treatment
         }
         format.js {
@@ -133,9 +131,9 @@ class TreatmentsController < ApplicationController
   def destroy
     @treatment = Treatment.find(params[:id])
     @patient = @treatment.patient
-    
+
     @treatment.destroy
-    
+
     respond_to do |format|
       format.html {
         redirect_to @patient

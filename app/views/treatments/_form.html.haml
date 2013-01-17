@@ -1,13 +1,16 @@
-= javascript_tag "$('treatment_date_begin').focus(); $('treatment_date_begin').select()"
-#treatment_form
-  = semantic_form_for [:patient, @treatment], :remote => true do |form|
-    = form.inputs do
-      = form.input :date_begin, :as => :date_field, :input_html => {:size => 12}
-      = form.input :date_end, :as => :date_field, :input_html => {:size => 12}
-      = form.fields_for :law do |law|
-        = law.input :code, :collection => [['KVG', 'LawKvg'], ['UVG', 'LawUvg'], ['IVG', 'LawIvg'], ['MVG', 'LawMvg'], ['VVG', 'LawVvg'], ['ORG', 'LawOrg']], :include_blank => false
-      = form.input :reason, :collection => ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'], :include_blank => false
-      = form.input :place_type, :collection => ['Praxis', 'Spital']
-      = form.input :referrer
-    = form.buttons do
-      = form.commit_button :button_html => {:class => "icon icon-save"}
+= simple_form_for [:patient, @treatment] do |f|
+  .row-fluid
+    .span6= f.input :date_begin, :as => :date_field
+    .span6= f.input :date_end, :as => :date_field
+  .row-fluid
+    = f.fields_for :law do |law|
+      .span6= law.input :code, :collection => [['KVG', 'LawKvg'], ['UVG', 'LawUvg'], ['IVG', 'LawIvg'], ['MVG', 'LawMvg'], ['VVG', 'LawVvg'], ['ORG', 'LawOrg']], :include_blank => false
+    .span6= f.input :reason, :collection => ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'], :include_blank => false
+  .row-fluid
+    .span6= f.association :referrer
+    .span6= f.input :place_type, :collection => ['Praxis', 'Spital']
+  .row-fluid
+    .span6= f.association :diagnoses, :input_html => {:class => 'select2'}
+
+  .form-actions
+    = f.button :submit

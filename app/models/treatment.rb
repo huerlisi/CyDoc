@@ -1,6 +1,9 @@
 # -*- encoding : utf-8 -*-
 
 class Treatment < ActiveRecord::Base
+  # Access restrictions
+  attr_accessible :date_begin, :date_end, :reason, :referrer_id, :place_type
+
   # Associations
   has_many :invoices, :dependent => :destroy, :order => 'value_date DESC, created_at DESC'
   belongs_to :patient
@@ -8,9 +11,16 @@ class Treatment < ActiveRecord::Base
 
   belongs_to :law, :dependent => :destroy, :autosave => true
   accepts_nested_attributes_for :law
+  attr_accessible :law_attributes
 
   has_many :sessions, :order => 'duration_from DESC', :dependent => :destroy
+
+  # Medical Cases
   has_many :medical_cases, :order => 'type', :dependent => :destroy
+  accepts_nested_attributes_for :medical_cases
+  has_many :diagnosis_cases, :dependent => :destroy
+  has_many :diagnoses, :through => :diagnosis_cases
+  attr_accessible :diagnosis_ids
 
   # Validation
   validates_presence_of :reason, :place_type

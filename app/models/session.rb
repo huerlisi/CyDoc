@@ -1,5 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Session < ActiveRecord::Base
+  # Access restrictions
+  attr_accessible :duration_from
+
   # Associations
   has_and_belongs_to_many :invoices
   belongs_to :treatment, :touch => true
@@ -9,23 +12,23 @@ class Session < ActiveRecord::Base
 
   # Validations
   validates_presence_of :duration_from
-  
+
   # State Machine
   include AASM
   aasm_column :state
-  
+
   aasm_initial_state :active
-  
+
   aasm_state :active
   aasm_state :charged
-  
+
   aasm_event :charge do
     transitions :to => :charged, :from => :active
   end
   aasm_event :reactivate do
     transitions :to => :active, :from => :charged
   end
-  
+
   def to_s(format = :default)
     case format
     when :short
@@ -36,19 +39,19 @@ class Session < ActiveRecord::Base
       "#{title} (#{state}): #{patient.name} #{duration}, #{service_records.count} positions"
     end
   end
-  
+
   def patient
     treatment.patient
   end
-  
+
   def amount
     service_records.to_a.sum(&:amount).to_f
   end
-  
+
   def date
     duration_from.to_date unless duration_from.nil?
   end
-  
+
   def date=(value)
     new_date = Date.parse_europe(value)
 
@@ -59,7 +62,7 @@ class Session < ActiveRecord::Base
       service_record.date = new_date
     }
   end
-  
+
   def build_service_record(tariff_item)
     # Type information
     service_record = tariff_item.create_service_record(self)
