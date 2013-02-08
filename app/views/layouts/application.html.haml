@@ -39,9 +39,8 @@
             - if alert
               = boot_alert(alert, 'error')
             = yield
-        .span2
-          .sidebar.well
-            = yield :sidebar
+        #sidebar.span2
+          = render_sidebars
 
     %footer.footer
       .container-fluid
