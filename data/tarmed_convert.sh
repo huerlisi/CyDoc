@@ -27,7 +27,7 @@ function convert_mysql {
 
 # make required changes for SQLite3
 function convert_sqlite3 {
-  cat | sed -e 's/DROP TABLE/DROP TABLE IF EXISTS/'
+  cat | sed -e 's/DROP TABLE/DROP TABLE IF EXISTS/' | grep -v '^COMMENT ON ' | grep -v '^ALTER TABLE ".*" ADD CONSTRAINT' | grep -v '^SET client_encoding ='
 }
 
 # handle parameters
@@ -73,6 +73,6 @@ fi
 
 echo "BEGIN;"
 
-for f in `mdb-tables $DB`; do mdb-export -q "'" -I -D '%Y-%m-%d %H:%M:%S' $DB $f; done | sed -e 's/)$/);/'
+for f in `mdb-tables $DB`; do mdb-export -q "'" -I postgres -D '%Y-%m-%d %H:%M:%S' $DB $f; done | sed -e 's/)$/);/'
 
 echo "COMMIT;"
