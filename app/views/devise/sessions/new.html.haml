@@ -2,7 +2,7 @@
 
 = render 'users/demo' if Rails.env.demo?
 
-= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+= simple_form_for(resource, :as => resource_name, :url => [resource_name, :session]) do |f|
   = f.input :login, :input_html => {'data-autofocus' => true}
   = f.input :password, :hint => false
   - if devise_mapping.rememberable?
