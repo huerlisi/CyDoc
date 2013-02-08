@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Tarmed::Base < ActiveRecord::Base
+  self.abstract_class = true
+
   use_db :prefix => "tarmed_"
 
   def self.condition_validity
