@@ -1,6 +1,6 @@
-.contextual48
-  = link_to "Patient anzeigen", resource.patient, :class => "icon icon-show"
-  = link_to "Drucken", print_invoice_path(resource), :method => :post, :class => "icon icon-print"
+.contextual
+  = icon_link_to "Patient anzeigen", resource.patient, :class => "icon icon-show"
+  = contextual_link_to :print, nil, :method => :post, :remote => true
 
 = render 'show'
 
