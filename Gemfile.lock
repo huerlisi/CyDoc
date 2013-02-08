@@ -46,7 +46,7 @@ GEM
     builder (3.0.4)
     cancan (1.6.8)
     cap-recipes (0.3.39)
-    capistrano (2.13.5)
+    capistrano (2.14.2)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
@@ -55,7 +55,7 @@ GEM
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
     capistrano_colors (0.5.5)
-    capones_recipes (1.15.5)
+    capones_recipes (1.18.0)
       cap-recipes
       capistrano
       capistrano-ext
@@ -141,13 +141,13 @@ GEM
     mime-types (1.19)
     multi_json (1.5.0)
     mysql2 (0.3.11)
-    net-scp (1.0.4)
-      net-ssh (>= 1.99.1)
-    net-sftp (2.0.5)
-      net-ssh (>= 2.0.9)
-    net-ssh (2.6.1)
-    net-ssh-gateway (1.1.0)
-      net-ssh (>= 1.99.1)
+    net-scp (1.1.0)
+      net-ssh (>= 2.6.5)
+    net-sftp (2.1.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.6.5)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
     nokogiri (1.5.6)
     orm_adapter (0.4.0)
     pdf-reader (1.2.0)

@@ -5,9 +5,10 @@ set :repository,  'git@github.com:huerlisi/CyDoc.git'
 
 require 'capones_recipes/cookbook/rails'
 require 'capones_recipes/tasks/database/setup'
+require 'capones_recipes/tasks/thinking_sphinx'
 require 'capones_recipes/tasks/carrier_wave'
 require 'capones_recipes/tasks/sync'
-load 'lib/recipes/bluepill'
+require 'capones_recipes/tasks/bluepill'
 
 load 'deploy/assets'
 
@@ -34,6 +35,7 @@ set :copy_exclude, [".git", "spec", "test", "stories"]
 
 # Dependencies
 depend :remote, :gem, 'bundler', '> 0'
+depend :remote, :gem, 'bluepill', ''
 
 # Headers for gem compilation
 depend :remote, :deb, "build-essential", ''
