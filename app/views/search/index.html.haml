@@ -1,1 +1,7 @@
-= render :partial => 'form'
+= boot_page_title(number_with_delimiter(@collection.total_entries) + " Treffer")
+
+= paginate @collection
+
+= render 'patients/list', :collection => @collection
+
+= paginate @collection

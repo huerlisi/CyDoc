@@ -236,6 +236,9 @@ CyDoc::Application.routes.draw do
     end
   end
 
+  # Search
+  match 'search' => 'search#index', :as => :search
+
   # Help
   match '/help' => 'help#index'
   match '/help(/:action)', :controller => HelpController

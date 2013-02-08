@@ -35,6 +35,11 @@ config/initializers/site_keys.rb
 # carrier-wave
 uploads/
 
+# Sphinx Freetext Search
+db/sphinx
+config/*.sphinx.conf
+config/sphinx/
+
 # SwissMatch
 config/swissmatch.yml
 

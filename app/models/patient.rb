@@ -161,51 +161,77 @@ class Patient < ActiveRecord::Base
     end
   end
 
-  # Search
-  # ======
-  def self.clever_find(query)
-    return scoped if query.blank?
+  # Sphinx Search
+  # =============
+  define_index do
+    # Delta index
+    set_property :delta => true
 
-    query.strip!
-    query_params = {}
-    query_type = get_query_type(query)
+    indexes birth_date
 
-    case query_type
-    when "covercard"
-      query_params[:covercard_code] = Covercard::Patient.clean_code(query)
-      patient_condition = "patients.covercard_code = :covercard_code"
-    when "number"
-      query_params[:query] = query
-      patient_condition = "patients.doctor_patient_nr = :query"
-    when "date"
-      query_params[:query] = Date.parse_europe(query).strftime('%%%y-%m-%d')
-      patient_condition = "(patients.birth_date LIKE :query)"
-    when "text"
-      query_params[:query] = "%#{query}%"
-      query_params[:wildcard_value] = '%' + query.gsub(/[ -.]+/, '%') + '%'
-      name_condition = "(vcards.given_name LIKE :wildcard_value) OR (vcards.family_name LIKE :wildcard_value) OR (vcards.full_name LIKE :wildcard_value)"
-      given_family_condition = "( concat(vcards.given_name, ' ', vcards.family_name) LIKE :wildcard_value)"
-      family_given_condition = "( concat(vcards.family_name, ' ', vcards.given_name) LIKE :wildcard_value)"
+    indexes vcard.full_name
+    indexes vcard.nickname
+    indexes vcard.family_name, :as => :family_name, :sortable => true
+    indexes vcard.given_name, :as => :given_name, :sortable => true
+    indexes vcard.additional_name
+    indexes vcard.address.street_address
+    indexes vcard.address.postal_code
+    indexes vcard.address.locality
+    indexes vcard.address.extended_address
+    indexes vcard.address.post_office_box
 
-      patient_condition = "#{name_condition} OR #{given_family_condition} or #{family_given_condition}"
-    end
+    indexes billing_vcard.full_name
+    indexes billing_vcard.nickname
+    indexes billing_vcard.family_name
+    indexes billing_vcard.given_name
+    indexes billing_vcard.additional_name
+    indexes billing_vcard.address.street_address
+    indexes billing_vcard.address.postal_code
+    indexes billing_vcard.address.locality
+    indexes billing_vcard.address.extended_address
+    indexes billing_vcard.address.post_office_box
 
-    patients = self.includes(:vcard).where("(#{patient_condition})", query_params).order('vcards.family_name, vcards.given_name')
+    indexes doctor_patient_nr
 
-    [patients, query_type, (patients.empty? ? query_params[:covercard_code] : nil)]
+    indexes cases.praxistar_eingangsnr
   end
 
-  private
-  def self.get_query_type(value)
-    if value.match(/^80756\d{15}/)
-      return "covercard"
-    elsif value.match(/^[[:digit:]]*$/)
-      return "number"
-    elsif value.match(/([[:digit:]]{1,2}\.){2}/)
-      return "date"
+  def self.by_text(query, options = {})
+    options.merge!({:match_mode => :extended, :order => 'family_name ASC, given_name ASC'})
+
+    search(build_query(query), options)
+  end
+
+  def self.quote_query(query)
+    "\"#{query}\""
+  end
+
+  def self.build_query_part(part)
+    case part
+    when /([0-9]{1,2})\/([0-9]{1,5})/
+      # Use .to_i as leading 0 let's them be interpreted as octal otherwise
+      eingangs_nr = "%02i/%05i" % [$1.to_i, $2.to_i]
+      quote_query(eingangs_nr)
+    when /[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}/
+      day, month, year = part.split('.').map(&:to_i)
+      if year < 100
+        year1900 = quote_query(Date.new(1900 + year, month, day).to_s(:db))
+        year2000 = quote_query(Date.new(2000 + year, month, day).to_s(:db))
+        return "(#{year1900} | #{year2000})"
+      else
+        return quote_query(Date.new(year, month, day).to_s(:db))
+      end
     else
-      return "text"
+      return part
     end
+  end
+
+  def self.build_query(query)
+    return '' unless query.present?
+
+    parts = query.split(/ /)
+
+    parts.map{|part| build_query_part(part)}.join(' ')
   end
 
   # Tarmed

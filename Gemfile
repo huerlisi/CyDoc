@@ -96,6 +96,9 @@ gem 'devise'
 gem 'cancan'
 gem 'lyb_devise_admin'
 
+# Search
+gem 'thinking-sphinx'
+
 # Uploads
 gem 'carrierwave'
 

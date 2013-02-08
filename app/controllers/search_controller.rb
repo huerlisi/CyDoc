@@ -1,14 +1,18 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8'
 class SearchController < ApplicationController
-  def results
-    value = params[:query]
-    value ||= params[:search][:query] if params[:search]
-    value ||= params[:quick_search][:query] if params[:quick_search]
+  def index
+    query = params[:query]
 
-    # Set default param for rendering in result view
-    params[:query] = value
-    @patients = Patient.clever_find(value)
+    case query
+    when /B?([0-9]{8})/
+      # CaseCode
+      code = $1
+      cases = Case.where(:praxistar_eingangsnr => code)
+      if cases.exists?
+        redirect_to cases.first
+      end
+    end
 
-    render :template => 'patients/list'
+    @collection = Patient.by_text(query, :star => true, :per_page => 30, :page => params[:page])
   end
 end

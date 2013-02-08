@@ -29,6 +29,10 @@ class PatientsController < AuthorizedController
     end
   end
 
+  def index
+    @patients = Patient.by_text params[:query], :star => true, :retry_stale => true, :per_page => 50
+  end
+
   def new
     # Use default sex from doctor settings
     case Doctor.settings['patients.sex']
@@ -41,15 +45,6 @@ class PatientsController < AuthorizedController
     end
 
     resource.doctor_patient_nr = Patient.maximum('CAST(doctor_patient_nr AS UNSIGNED INTEGER)').to_i + 1
-  end
-
-  def search
-    query = params[:query] || params[:search]
-    query ||= params[:search][:query] if params[:search]
-    query ||= params[:quick_search][:query] if params[:quick_search]
-    @patients = Patient.clever_find(query)
-
-    render :partial => 'list', :layout => false
   end
 
   # GET /patients/1/show_tab
