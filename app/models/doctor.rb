@@ -26,6 +26,13 @@ class Doctor < Person
 
   has_many :patients
 
+  # User
+  has_one :user, :as => :object, :autosave => true
+  attr_accessible :user
+  def email
+    vcard.contacts.where(:phone_number_type => 'E-Mail').first
+  end
+
   # Settings
   has_settings
   def self.settings
