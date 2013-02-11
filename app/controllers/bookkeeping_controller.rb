@@ -14,9 +14,9 @@ class BookkeepingController < ApplicationController
   end
 
   def report
-    @total_invoiced    = Account.find_by_code(current_doctor.settings['invoices.profit_account_code']).saldo(@value_date_range)
+    @total_invoiced    = Account.find_by_code(current_tenant.settings['invoices.profit_account_code']).saldo(@value_date_range)
     @total_paid        = Account.find_by_code('1000').saldo(@value_date_range) + Account.find_by_code('1020').saldo(@value_date_range)
-    @open_items        = Account.find_by_code(current_doctor.settings['invoices.balance_account_code']).saldo(@value_date_end)
+    @open_items        = Account.find_by_code(current_tenant.settings['invoices.balance_account_code']).saldo(@value_date_end)
     @debtors_write_off = Account.find_by_code('3900').saldo(@value_date_range)
     @started_work      = Session.all(:include => :invoices, :conditions => ["duration_from <= ? AND (invoices.value_date > ? OR invoices.id IS NULL)", @value_date_end, @value_date_end]).to_a.sum(&:amount)
     @drugs_stock       = Account.find_by_code('1210').saldo(@value_date_end)
@@ -24,7 +24,7 @@ class BookkeepingController < ApplicationController
   end
 
   def open_invoices
-    debit_account_id = Account.find_by_code(current_doctor.settings['invoices.balance_account_code']).id
+    debit_account_id = Account.find_by_code(current_tenant.settings['invoices.balance_account_code']).id
     @invoices = Invoice
       .joins(:bookings)
       .where("invoices.value_date <= ? AND bookings.value_date <= ?", @value_date_end, @value_date_end)
@@ -34,7 +34,7 @@ class BookkeepingController < ApplicationController
   end
 
   def open_invoices_csv
-    debit_account_id = Account.find_by_code(current_doctor.settings['invoices.balance_account_code']).id
+    debit_account_id = Account.find_by_code(current_tenant.settings['invoices.balance_account_code']).id
     @invoices = Invoice.all(
       :select => "invoices.*, sum(IF(bookings.debit_account_id = #{debit_account_id}, -bookings.amount, bookings.amount)) AS current_due_amount",
       :joins => :bookings,
