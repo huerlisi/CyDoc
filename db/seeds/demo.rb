@@ -18,11 +18,6 @@ user = User.create!(
 )
 user.object = doctor
 
-doctor.offices.create!(
-  :name => "Demo Praxis",
-  :printers => {:cups_host=>"localhost", :trays=>{:invoice=>"invoice_tray", :label=>"label_tray", :plain=>"plain_tray"}}
-)
-
 # Accounting
 bank = Bank.create!(
   :vcard => Vcard.new(
@@ -33,16 +28,21 @@ bank = Bank.create!(
   )
 )
 
-doctor.accounts << BankAccount.create!([
+BankAccount.create!([
   {:pc_id => "01-123456-7", :esr_id => "444444", :code => "1020", :title => "Bankkonto", :bank => bank, :holder => doctor}
 ])
 
-doctor.accounts << Account.create!([
-  {:code => "1000", :title => "Kasse"},
-  {:code => "1100", :title => "Debitoren"},
-  {:code => "1210", :title => "Lager Medikamente"},
-  {:code => "3200", :title => "Dienstleistungsertrag"},
-  {:code => "3900", :title => "Debitorenverlust"},
-  {:code => "4000", :title => "Aufwand Medikamente"},
-  {:code => "8000", :title => "Ausserordentlicher Ertrag"}
+current_assets = AccountType.find_by_name('current_assets')
+capital_assets = AccountType.find_by_name('capital_assets')
+earnings = AccountType.find_by_name('earnings')
+costs = AccountType.find_by_name('costs')
+
+Account.create!([
+  {:code => "1000", :title => "Kasse", :account_type => current_assets},
+  {:code => "1100", :title => "Debitoren", :account_type => current_assets},
+  {:code => "1210", :title => "Lager Medikamente", :account_type => capital_assets},
+  {:code => "3200", :title => "Dienstleistungsertrag", :account_type => earnings},
+  {:code => "3900", :title => "Debitorenverlust", :account_type => costs},
+  {:code => "4000", :title => "Aufwand Medikamente", :account_type => costs},
+  {:code => "8000", :title => "Ausserordentlicher Ertrag", :account_type => earnings}
 ])
