@@ -28,7 +28,7 @@ module NavigationHelper
     items = {
               :show_doctors => :doctors,
               :show_insurances => :insurances,
-              :show_tariff_items => :tariff_items,
+              t_title(:index, TariffItem) => :tariff_items,
               :show_drug_products => :drug_products,
             }
 

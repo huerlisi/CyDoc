@@ -272,7 +272,6 @@ de-CH:
       show_doctors: "Ärzte anzeigen"
       show_drug_products: "Medikamente anzeigen"
       show_insurances: "Versicherungen anzeigen"
-      show_tariff_items: "Leistungen anzeigen"
     recall:
       appointed_time: "Terminvorschlag"
       last_appointment: "Letzter Termin"
@@ -338,6 +337,12 @@ de-CH:
     done:      "%{model} wurde an Drucker gesendet."
     pdf_done:  "Dokument zum Download bereit:"
 
+  tariff_items:
+    index:
+      title:              Leistungskatalog
+  invoices:
+    index:
+      title:              Rechnungen
   returned_invoices:
     edit_ready:
       title:              Neue vorbereiten
