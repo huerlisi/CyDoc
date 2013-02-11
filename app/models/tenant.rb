@@ -18,7 +18,7 @@ class Tenant < ActiveRecord::Base
   validates_date :fiscal_year_ends_on
 
   def fiscal_year_ends_on
-    settings[:fiscal_year_ends_on] || Booking.first.value_date.end_of_year
+    settings[:fiscal_year_ends_on] || Booking.first.try(:value_date).try(:end_of_year) || Date.today.end_of_year
   end
 
   def fiscal_period(year)
