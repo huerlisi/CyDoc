@@ -143,7 +143,7 @@ class InvoicesController < AuthorizedController
   # GET /invoices
   def index
     @invoices = Invoice.page(params['page_search'])
-    @overdue = Invoice.overdue(current_user.object.settings['invoices.grace_period']).dunning_active.page(params['page_overdue'])
+    @overdue = Invoice.overdue(current_tenant.settings['invoices.grace_period']).dunning_active.page(params['page_overdue'])
     @prepared = Invoice.prepared.page(params['page_prepared'])
     # @treatments = Treatment.open.page(params['page_open'])
   end

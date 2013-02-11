@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_doctor
-    current_user.object
+    current_tenant
   end
 
   # Tenancy
