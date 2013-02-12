@@ -1,11 +1,13 @@
 # -*- encoding : utf-8 -*-
 class Session < ActiveRecord::Base
   # Access restrictions
-  attr_accessible :duration_from
+  attr_accessible :duration_from, :duration_to
 
   # Associations
   has_and_belongs_to_many :invoices
   belongs_to :treatment, :touch => true
+  attr_accessible :treatment
+
   has_and_belongs_to_many :diagnoses
   has_and_belongs_to_many :service_records, :autosave => true
   belongs_to :patient
