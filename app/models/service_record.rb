@@ -1,5 +1,8 @@
 # -*- encoding : utf-8 -*-
 class ServiceRecord < ActiveRecord::Base
+  # Access restrictions
+  attr_accessible :quantity, :code, :ref_code, :remark, :amount
+
   belongs_to :provider, :class_name => 'Doctor'
   belongs_to :biller, :class_name => 'Doctor'
   belongs_to :responsible, :class_name => 'Doctor'

@@ -33,20 +33,7 @@ class ServiceRecordsController < AuthorizedController
 
     @session.save
 
-    flash[:notice] = 'Erfolgreich erfasst.'
-
-    respond_to do |format|
-      format.html {
-        redirect_to :controller => 'patients', :action => 'show', :id => @patient, :tab => 'services'
-        return
-      }
-      format.js {
-        render :update do |page|
-          page.replace_html "session_#{@session.id}", :partial => 'sessions/item', :object => @session
-          page.replace_html "treatment_service_list_total", "Total: #{'%0.2f' % @session.treatment.amount.currency_round}"
-        end
-      }
-    end
+    render 'create'
   end
 
   # GET /service_records/select
@@ -63,15 +50,6 @@ class ServiceRecordsController < AuthorizedController
       params[:tariff_item_id] = @tariff_items.first.id
       create
       return
-    end
-
-    respond_to do |format|
-      format.html { }
-      format.js {
-        render :update do |page|
-          page.replace_html "session_#{@session.id}_search_results", :partial => 'select_list'
-        end
-      }
     end
   end
 

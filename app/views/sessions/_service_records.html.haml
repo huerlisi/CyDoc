@@ -1,0 +1,20 @@
+#session-service-records
+  = simple_form_for session, :wrapper => :inline, :html => {:class => 'no-well'} do |f|
+    %table.table.table-striped.table-bordered
+      = f.fields_for :service_records, :wrapper => :inline do |s|
+        %tr[f.object]
+          %td
+            = s.input :quantity, :as => :string, :input_html => {:style => "width: 3em; text-align: right"}
+          %td
+            = s.object.code
+            - if s.object.needs_ref_code?
+              %br
+              = s.input :ref_code, :placeholder => 'Referenzcode'
+          %td
+            = s.object.remark
+          %td{:style => "text-align: right"}
+            %b= s.object.amount
+          %td
+            %span=# link_to image_tag('delete.png'), {:url => patient_session_service_record_path(item.patient, item, service_record), :method => :delete}, :remote => true
+    .form-actions
+      = f.button :submit

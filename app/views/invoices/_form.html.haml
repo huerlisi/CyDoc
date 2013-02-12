@@ -9,8 +9,7 @@
     = form.input :remark, :input_html => {:rows => 2}
 
     .form-actions
-      = form.button :submit, "Erstellen", :class => "icon icon-save"
-      = button_to_function "Abbrechen", "showTab('treatments')", :class => "btn icon icon-cancel"
+      = form.button :submit, "Erstellen"
 
 = render :partial => 'invoices/medical_case_list'
 = render :partial => 'invoices/service_record_list'

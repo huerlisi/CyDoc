@@ -5,40 +5,11 @@
 %div[item]
   - if editable
     .contextual
-      = link_to "Leistung erfassen", new_patient_session_service_record_url(item.patient, item), :method => :get, :class => "icon icon-add", :remote => true
       = icon_link_to :delete, patient_session_url(item.patient, item), :method => :delete, :confirm => t_confirm_delete(item), :remote => true
-  - @session = item
   %h4
-    - if false #editable
-      = in_place_editor_field :session, :date
-      \: #{item.remarks.blank? ? "Konsultation" : item.remarks}
-    - else
-      = @session.date
-      \: #{item.remarks.blank? ? "Konsultation" : item.remarks}
+    = item.date
+    \: #{item.remarks.blank? ? "Konsultation" : item.remarks}
   .new_session_service_record{:id => "new_session_#{item.id}_service_record"}
-    = render :partial => 'service_records/form' if editable and current
-  %table.session{:style => "width: 97%"}
-    - for service_record in item.service_records.reverse
-      - @service_record = service_record
-      %tr
-        %td{:style => "width: 2em; text-align: right"}
-          - if false #editable
-            %b
-              = in_place_editor_field :service_record, :quantity, {}, :size => 3
-              x
-          - else
-            %b
-              = @service_record.quantity
-              x
-        %td{:style => "width: 6em"}= service_record.code
-        %td
-          - if false #editable
-            = "(#{in_place_editor_field :service_record, :ref_code, {}, :size => 8}) " unless @service_record.ref_code.blank?
-          - else
-            = "(#{@service_record.ref_code}) " unless @service_record.ref_code.blank?
-          = service_record.text
-        %td{:style => "text-align: right"}
-          %b= currency_fmt(service_record.amount)
-        - if editable
-          %td
-            %span= link_to image_tag('delete.png'), {:url => patient_session_service_record_path(item.patient, item, service_record), :method => :delete}, :remote => true
+    = render 'service_records/form', :session => item if editable and current
+
+  = render 'sessions/service_records', :session => item

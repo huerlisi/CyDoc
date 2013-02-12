@@ -1,3 +1,3 @@
-.box.search_form
-  = simple_form_for 'search', :url => select_patient_session_service_records_path(@session.patient.id, @session.id), :method => :get, :remote => true do |f|
-    = f.input :query, :as => :select, :collection => TariffItem.all, :autocomplete => 'off', 'data-autofocus' => true, :input_html => {:class => 'select2'}
+.search_form
+  = simple_form_for 'search', :url => select_patient_session_service_records_path(session.patient, session), :method => :get, :remote => true do |f|
+    = f.input :query, :as => :string, :autocomplete => 'off', 'data-autofocus' => true

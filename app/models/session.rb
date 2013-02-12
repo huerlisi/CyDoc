@@ -10,6 +10,9 @@ class Session < ActiveRecord::Base
 
   has_and_belongs_to_many :diagnoses
   has_and_belongs_to_many :service_records, :autosave => true
+  accepts_nested_attributes_for :service_records
+  attr_accessible :service_records_attributes
+
   belongs_to :patient
 
   # Validations

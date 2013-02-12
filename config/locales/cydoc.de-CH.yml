@@ -198,6 +198,7 @@ de-CH:
         place_type: Erbringungsort
         reason: Behandlungsgrund
         referrer: Zuweisender Arzt
+        diagnoses: Diagnose Codes
       user:
         email:     E-Mail
         password:  Passwort
