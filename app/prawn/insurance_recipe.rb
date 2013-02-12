@@ -366,7 +366,7 @@ class InsuranceRecipe < LetterDocument
           column(13).width = 0.3.cm
           column(14).width = 0.3.cm
           column(15).width = 0.3.cm
-          column(16).width = 1.4.cm
+          column(16).width = 1.3.cm
 
           column(5..16).align = :right
         end
@@ -419,7 +419,7 @@ class InsuranceRecipe < LetterDocument
         column(13).width = 0.3.cm
         column(14).width = 0.3.cm
         column(15).width = 0.3.cm
-        column(16).width = 1.4.cm
+        column(16).width = 1.3.cm
 
         column(5..16).align = :right
       end
