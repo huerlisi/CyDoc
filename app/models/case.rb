@@ -10,6 +10,10 @@ class Case < ActiveRecord::Base
     "#{patient.to_s}: PAP Abstrich #{praxistar_eingangsnr}"
   end
 
+  def examination_date
+    self[:examination_date] || review_at
+  end
+
   def create_treatment(provider)
     puts self.praxistar_eingangsnr
 
