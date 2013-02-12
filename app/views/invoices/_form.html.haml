@@ -1,14 +1,15 @@
-#invoice_form
-  %h3 Neue Rechnung
-  = simple_form_for [:patient, :treatment, @invoice] do |form|
-    = form.input :value_date, :as => :date_field, :input_html => {:autocomplete => 'off'}
+= simple_form_for [:patient, :treatment, @invoice] do |form|
+  .row-fluid
+    .span6= form.input :value_date, :as => :date_field, :input_html => {:autocomplete => 'off'}
+  .row-fluid
     = form.fields_for :tiers do |t|
-      = t.association :biller, :input_html => {:class => 'select2'}
-      = t.association :provider, :input_html => {:class => 'select2'}
-    = form.input :remark, :input_html => {:rows => 2}
+      .span6= t.association :biller, :collection => Employee.by_role('doctor'), :placeholder => 'Bitte wählen', :input_html => {:class => 'select2'}
+      .span6= t.association :provider, :collection => Employee.by_role('doctor'), :placeholder => 'Bitte wählen', :input_html => {:class => 'select2'}
+  .row-fluid
+    .span10= form.input :remark, :input_html => {:rows => 2, :class => 'span12'}
 
-    .form-actions
-      = form.button :submit, "Erstellen"
+  .form-actions
+    = form.button :submit, "Erstellen"
 
 = render 'treatments/show_main'
 = render 'invoices/medical_case_list'

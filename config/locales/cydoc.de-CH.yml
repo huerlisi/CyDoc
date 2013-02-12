@@ -68,6 +68,9 @@ de-CH:
         role_enum_code:
           H:              KVG
           A:              UVG
+      tiers:
+        biller:           Rechnungssteller
+        provider:         Leistungserbringer
       invoice:
         amount_due: Fälliger Betrag
         amount_pfl: davon PFL
