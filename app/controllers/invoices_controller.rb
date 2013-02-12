@@ -152,7 +152,7 @@ class InvoicesController < AuthorizedController
     @invoice.treatment = @treatment
 
     # Sessions
-    sessions = @treatment.sessions.open
+    sessions = @treatment.sessions.active
     @invoice.service_records = sessions.collect{|s| s.service_records}.flatten
 
     @invoice.valid?
