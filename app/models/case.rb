@@ -54,7 +54,7 @@ class Case < ActiveRecord::Base
       logger.info("[Error] Failed to create treatment for case #{self.praxistar_eingangsnr}:")
       logger.info(treatment.errors.full_messages.join("\n"))
 
-      return self
+      return treatment
     end
 
     treatment
