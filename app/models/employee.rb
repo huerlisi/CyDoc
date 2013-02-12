@@ -20,6 +20,12 @@ class Employee < Person
     date_of_birth = value
   end
 
+  # Accounts
+  def esr_account
+    # TODO: configurable using settings
+    BankAccount.first
+  end
+
   # User
   # =====
   has_one :user, :as => :object, :autosave => true

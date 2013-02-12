@@ -46,12 +46,6 @@ class Doctor < Person
     doctor.present? ? doctor.settings : Settings
   end
 
-  # Accounts
-  def esr_account
-    # TODO: configurable using settings
-    BankAccount.first
-  end
-
   # Returned invoices
   has_many :returned_invoices
   def request_all_returned_invoices
