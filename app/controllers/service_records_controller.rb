@@ -1,9 +1,5 @@
 # -*- encoding : utf-8 -*-
 class ServiceRecordsController < AuthorizedController
-  in_place_edit_for :session, :date
-  in_place_edit_for :service_record, :ref_code
-  in_place_edit_for :service_record, :quantity
-
   # GET /service_records/new
   def new
     @service_record = ServiceRecord.new
