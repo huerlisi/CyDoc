@@ -47,9 +47,10 @@ class Doctor < Person
   end
 
   # Accounts
-  has_many :accounts
-  belongs_to :esr_account, :class_name => 'BankAccount'
-  attr_accessible :esr_account_id
+  def esr_account
+    # TODO: configurable using settings
+    BankAccount.first
+  end
 
   # Returned invoices
   has_many :returned_invoices
