@@ -1,5 +1,5 @@
 .contextual
-  = icon_link_to "Patient anzeigen", resource.patient, :class => "icon icon-show"
+  = icon_link_to t_title(:show, Patient), resource.patient
   = contextual_link_to :print, nil, :method => :post, :remote => true
 
 = render 'show'
