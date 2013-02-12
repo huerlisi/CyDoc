@@ -1,6 +1,6 @@
 #session-service-records
   = simple_form_for session, :wrapper => :inline, :html => {:class => 'no-well'} do |f|
-    %table.table.table-striped.table-bordered
+    %table.table.table-striped.table-bordered.table-condensed
       = f.fields_for :service_records, :wrapper => :inline do |s|
         %tr[f.object]
           %td
