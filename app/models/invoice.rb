@@ -16,15 +16,11 @@ class Invoice < ActiveRecord::Base
 
   # Settings
   def self.settings
-    doctor = Doctor.find(Thread.current["doctor_id"]) if Doctor.exists?(Thread.current["doctor_id"])
-
-    doctor.present? ? doctor.settings : Settings
+    # TODO: use actual tenant
+    Tenant.first.settings
   end
   def settings
-    doctor = biller
-    doctor ||= Doctor.find(Thread.current["doctor_id"]) if Doctor.exists?(Thread.current["doctor_id"])
-
-    doctor.present? ? doctor.settings : Settings
+    Tenant.first.settings
   end
 
   # Treatment hook
