@@ -1,11 +1,4 @@
 - cache [I18n.locale, @treatment.cache_key] do
-  .contextual
-    = icon_link_to :edit, edit_treatment_path(@treatment), :remote => true
-    - if @treatment.chargeable?
-      = link_to t('cydoc.actions.new_invoice'), new_patient_treatment_invoice_path(@treatment.patient, @treatment), :remote => true
-    - if @treatment.active?
-      = icon_link_to :delete, treatment_path(@treatment), :method => :delete, :remote => true, 'data-confirm' => t_confirm_delete(@treatment)
-
   = render 'treatments/show_main'
 
   #new_treatment_invoice
