@@ -1,4 +1,3 @@
-= render :partial => 'treatments/show_main'
 #invoice_form
   %h3 Neue Rechnung
   = simple_form_for [:patient, :treatment, @invoice] do |form|
@@ -11,5 +10,6 @@
     .form-actions
       = form.button :submit, "Erstellen"
 
-= render :partial => 'invoices/medical_case_list'
-= render :partial => 'invoices/service_record_list'
+= render 'treatments/show_main'
+= render 'invoices/medical_case_list'
+= render 'invoices/service_record_list'
