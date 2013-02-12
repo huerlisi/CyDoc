@@ -36,22 +36,11 @@ class TreatmentsController < AuthorizedController
   end
 
   def new
-    @treatment = Treatment.new
-    @treatment.date_begin = Date.today
+    @treatment = Treatment.new(params[:treatment])
+    @treatment.date_begin ||= Date.today
 
     # Build associated Law object
     @treatment.build_law
-
-    respond_to do |format|
-      format.html { }
-      format.js {
-        render :update do |page|
-          page.replace_html 'tab-content-treatments', :partial => 'new'
-          page.call 'showTab', controller_name
-          page.call(:initBehaviour)
-        end
-      }
-    end
   end
 
   # PUT /patients/1/treatment
