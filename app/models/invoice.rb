@@ -1,7 +1,14 @@
 # -*- encoding : utf-8 -*-
 
 class Invoice < ActiveRecord::Base
-  belongs_to :tiers, :autosave => true
+  belongs_to :tiers, :class_name => 'TiersGarant', :autosave => true
+  attr_accessible :tiers, :tiers_attributes
+  accepts_nested_attributes_for :tiers
+  def tiers_with_autobuild
+    tiers_without_autobuild || build_tiers
+  end
+  alias_method_chain :tiers, :autobuild
+
   belongs_to :law, :autosave => true
   belongs_to :treatment, :autosave => true
   has_one :patient, :through => :treatment
@@ -12,7 +19,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :billing_vcard, :class_name => 'Vcard', :autosave => true
 
   # Access restrictions
-  attr_accessible :treatment, :tiers, :law, :patient_vcard, :billing_vcard, :remark, :value_date
+  attr_accessible :treatment, :law, :patient_vcard, :billing_vcard, :remark, :value_date
 
   # Settings
   def self.settings
@@ -32,19 +39,10 @@ class Invoice < ActiveRecord::Base
   end
 
   # Constructor
-  def self.create_from_treatment(params, treatment, tiers_name, provider, biller)
-    # Prepare Tiers
-    tiers = Object.const_get(tiers_name).new(
-      :patient  => treatment.patient,
-      :provider => provider,
-      :biller   => biller,
-      :referrer => treatment.referrer
-    )
-
+  def self.create_from_treatment(params, treatment)
     # Build Invoice
     invoice_params = HashWithIndifferentAccess.new({
       :treatment     => treatment,
-      :tiers         => tiers,
       :law           => treatment.law,
       :patient_vcard => treatment.patient.vcard,
       :billing_vcard => treatment.patient.invoice_vcard,
@@ -52,12 +50,11 @@ class Invoice < ActiveRecord::Base
     }).merge(params)
     invoice_params[:remark].strip!
 
-    # Add remarks if tiers is soldant
-    if tiers.is_a?(TiersSoldant)
-      invoice_params[:remark] = [invoice_params[:remark].presence, "Abtretungserklärung liegt bei."].compact.join("\n")
-    end
-
     invoice = self.new(invoice_params)
+
+    # Prepare Tiers
+    invoice.tiers.patient = treatment.patient
+    invoice.tiers.referrer = treatment.referrer
 
     # Assign service records
     sessions = treatment.sessions.active

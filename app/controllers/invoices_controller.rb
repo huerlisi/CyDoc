@@ -174,7 +174,7 @@ class InvoicesController < AuthorizedController
   def create
     @treatment = Treatment.find(params[:treatment_id])
     @patient = @treatment.patient
-    @invoice = Invoice.create_from_treatment(params[:invoice], @treatment, params[:tiers][:name], Doctor.find(Thread.current["doctor_id"]), Doctor.find(Thread.current["doctor_id"]))
+    @invoice = Invoice.create_from_treatment(params[:invoice], @treatment)
 
     # Saving
     if @invoice.valid?
