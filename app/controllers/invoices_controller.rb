@@ -25,13 +25,7 @@ class InvoicesController < AuthorizedController
       else
         respond_to do |format|
           format.html { redirect_to @invoice }
-          format.js {
-            render :update do |page|
-              page.replace_html "error_flash", :text => @invoice.printing_error
-              page.show "error_flash"
-              page.hide "notice_flash"
-            end
-          }
+          format.js
         end
       end
     else
