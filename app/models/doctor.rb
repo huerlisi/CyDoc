@@ -6,6 +6,11 @@ class Doctor < Person
 
   scope :active, where(:active => true)
 
+  # TODO
+  def print_payment_for?
+    true
+  end
+
   # Helpers
   # =======
   def to_s
