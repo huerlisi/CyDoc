@@ -21,6 +21,11 @@ class Employee < Person
   end
 
   # Accounts
+  # TODO
+  def print_payment_for?
+    false
+  end
+
   def esr_account
     # TODO: configurable using settings
     BankAccount.first
