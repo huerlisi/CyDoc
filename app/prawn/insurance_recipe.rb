@@ -11,6 +11,8 @@ class InsuranceRecipe < LetterDocument
   def default_options
     parent_options = super
     parent_options.merge(:top_margin => 1.8.cm, :left_margin => 1.cm, :right_margin => 1.cm, :bottom_margin => 1.8.cm)
+    parent_options[:template] = nil
+    parent_options
   end
 
   def initialize_fonts
