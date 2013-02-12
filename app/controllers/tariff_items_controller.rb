@@ -6,6 +6,8 @@ class TariffItemsController < AuthorizedController
   in_place_edit_for :service_item, :ref_code
   in_place_edit_for :service_item, :quantity
 
+  has_scope :clever_find
+
   # Show single search match
   #
   # Cast match to TariffItem.
