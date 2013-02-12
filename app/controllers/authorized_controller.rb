@@ -5,6 +5,7 @@ class AuthorizedController < InheritedResources::Base
 
   # Set scope for pagination
   has_scope :page, :default => 1
+  has_scope :per
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:alert] = t('cancan.access_denied')
