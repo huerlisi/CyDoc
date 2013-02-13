@@ -3,14 +3,15 @@
 
   #new_treatment_invoice
 
-  %h3= t('cydoc.title.medical_cases')
-  %table.table
-    = render @treatment.medical_cases
+  - if @treatment.medical_cases.present?
+    %h3= t('cydoc.title.medical_cases')
+    %table.table
+      = render @treatment.medical_cases
 
   #treatment_sessions
     .contextual
       = icon_link_to :new_treatment_session, new_patient_treatment_session_path(@treatment.patient, @treatment), 'remote' => true
-    %h3= t('cydoc.title.treatment_sessions')
+
     #treatment_session_list
       = render 'sessions/list', :collection => @treatment.sessions
     %h4#treatment_service_list_total

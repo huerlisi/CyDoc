@@ -1,9 +1,9 @@
 .contextual
-  = icon_link_to :edit, edit_treatment_path(@treatment), :remote => true
+  = icon_link_to :edit, edit_treatment_path(@treatment)
   - if @treatment.chargeable?
     = link_to t_title(:new, Invoice), new_patient_treatment_invoice_path(@treatment.patient, @treatment), :class => 'btn'
   - if @treatment.active?
-    = icon_link_to :delete, treatment_path(@treatment), :method => :delete, :remote => true, 'data-confirm' => t_confirm_delete(@treatment)
+    = icon_link_to :delete, treatment_path(@treatment), :method => :delete, 'data-confirm' => t_confirm_delete(@treatment)
 
 = boot_page_title
 
