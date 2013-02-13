@@ -15,15 +15,6 @@ class ServiceItemsController < AuthorizedController
       create
       return
     end
-
-    respond_to do |format|
-      format.html { }
-      format.js {
-        render :update do |page|
-          page.replace_html "tariff_item_search_results", :partial => 'select_list'
-        end
-      }
-    end
   end
 
   # GET /service_records/new
@@ -33,15 +24,6 @@ class ServiceItemsController < AuthorizedController
 
     # Defaults
     @service_item.quantity = 1
-
-    respond_to do |format|
-      format.html { }
-      format.js {
-        render :update do |page|
-          page.replace_html "new_service_item", :partial => 'form'
-        end
-      }
-    end
   end
 
   # POST /service_items
@@ -59,17 +41,6 @@ class ServiceItemsController < AuthorizedController
       service_item.quantity = 1
 
       service_item.save!
-    end
-
-    respond_to do |format|
-      format.html { }
-      format.js {
-        render :update do |page|
-          page["service_items_search_query"].activate
-          page.replace_html "tariff_item_search_results", ""
-          page.replace "service_items", :partial => 'service_items/list'
-        end
-      }
     end
   end
 
