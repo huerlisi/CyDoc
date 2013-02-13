@@ -16,7 +16,7 @@ class TariffItem < ActiveRecord::Base
     I18n.translate(self.name.underscore, :scope => [:activerecord, :models])
   end
 
-  def to_s
+  def to_s(format = :default)
     [code, remark].compact.select{|item| not item.empty?}.join ' - '
   end
 

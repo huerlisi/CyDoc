@@ -6,9 +6,13 @@ class TariffItemGroup < TariffItem
     "Blockleistung"
   end
 
-  def to_s
+  def to_s(format = :default)
     group_s = super
-    group_s + " (#{service_items.count} pos.):\n" + service_items.map{|item| "      " + item.to_s}.join("\n")
+    if format == :long
+      group_s + " (#{service_items.count} pos.):\n" + service_items.map{|item| "      " + item.to_s}.join("\n")
+    end
+
+    group_s
   end
 
   def clone
@@ -23,11 +27,11 @@ class TariffItemGroup < TariffItem
   def amount_mt
     service_items.map{|s| s.amount_mt}.sum
   end
-  
+
   def amount_tt
     service_items.map{|s| s.amount_tt}.sum
   end
-  
+
   def amount
     service_items.map{|s| s.amount}.sum
   end
