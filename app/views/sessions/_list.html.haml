@@ -1,1 +1,5 @@
-= render :partial => 'sessions/item', :collection => (list || [])
+- for session in collection do
+  - if session.active?
+    = render 'sessions/form', :session => session
+  - else
+    = render session
