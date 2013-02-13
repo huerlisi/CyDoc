@@ -4,7 +4,7 @@ class TariffItemGroup < TariffItem
   accepts_nested_attributes_for :service_items
   attr_accessible :service_items_attributes
 
-  def self.to_s
+  def tariff_type
     "Blockleistung"
   end
 

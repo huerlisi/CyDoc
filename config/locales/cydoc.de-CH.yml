@@ -344,6 +344,9 @@ de-CH:
   tariff_items:
     index:
       title:              Leistungskatalog
+  tariff_item_groups:
+    index:
+      title:              Blockleistungen
   invoices:
     index:
       title:              Rechnungen

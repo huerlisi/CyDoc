@@ -18,6 +18,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
       primary.item :tariff_items, t_title(:index, TariffItem), tariff_items_path do |entry|
         entry.item :traiff_items_index, t_title(:index, TariffItem), tariff_items_path
+        entry.item :traiff_item_groups_index, t_title(:index, TariffItemGroup), tariff_item_groups_path
 
         if current_tenant.settings['modules.drugs']
           entry.item :drug_products, t_title(:index, DrugProduct), drug_products_path
