@@ -2,8 +2,13 @@
   .contextual
     = icon_link_to :delete, patient_session_url(session.patient, session), :method => :delete, :confirm => t_confirm_delete(session), :remote => true
 
-  %h4= session.to_s
-  .new_session_service_record{:id => "new_session_#{session.id}_service_record"}
-    = render 'service_records/form', :session => session
+  %h3= t_title :edit, Session
+  = simple_form_for session do |f|
+    .row-fluid
+      .span6= f.input :date
+      .span6= f.input :remarks, :as => :string
+
+    .form-actions
+      = f.button :submit
 
   = render 'sessions/service_records', :session => session

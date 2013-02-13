@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Session < ActiveRecord::Base
   # Access restrictions
-  attr_accessible :duration_from, :duration_to
+  attr_accessible :duration_from, :duration_to, :date, :remarks
 
   # Associations
   has_and_belongs_to_many :invoices

@@ -1,8 +1,12 @@
-#session-service-records
-  = simple_form_for session, :wrapper => :inline, :html => {:class => 'no-well'} do |f|
-    %table.table.table-striped.table-bordered.table-condensed
+.service_records.list.well
+  = simple_form_for 'search', :url => select_patient_session_service_records_path(session.patient, session), :method => :get, :remote => true, :html => {:class => 'no-well'} do |f|
+    = render 'sessions/new_service_record_form', :f => f
+
+  = simple_form_for session, :remote => true, :html => {:class => 'no-well'} do |f|
+    %table.table.table-condensed
       = f.fields_for :service_records, :wrapper => :inline do |s|
-        %tr[f.object]
+        %tr[s.object]
+          %td= s.object.date.to_date
           %td
             = s.input :quantity, :as => :string, :input_html => {:style => "width: 3em; text-align: right"}
           %td
@@ -15,6 +19,6 @@
           %td{:style => "text-align: right"}
             %b= s.object.amount
           %td
-            %span=# link_to image_tag('delete.png'), {:url => patient_session_service_record_path(item.patient, item, service_record), :method => :delete}, :remote => true
-    .form-actions
-      = f.button :submit
+            = link_to image_tag('delete.png'), s.object, :method => :delete, :remote => true
+
+    = f.button :submit

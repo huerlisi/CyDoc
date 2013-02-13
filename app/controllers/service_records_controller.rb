@@ -32,8 +32,6 @@ class ServiceRecordsController < AuthorizedController
     service_record = @session.build_service_record(tariff_item)
 
     @session.save
-
-    render 'create'
   end
 
   # GET /service_records/select
@@ -50,28 +48,6 @@ class ServiceRecordsController < AuthorizedController
       params[:tariff_item_id] = @tariff_items.first.id
       create
       return
-    end
-  end
-
-  # DELETE /service_record/1
-  def destroy
-    service_record = ServiceRecord.find(params[:id])
-    @patient = Patient.find(params[:patient_id])
-    @session = Session.find(params[:session_id])
-
-    service_record.destroy
-
-    respond_to do |format|
-      format.html {
-        redirect_to :controller => 'patients', :action => 'show', :id => @patient, :tab => 'services'
-        return
-      }
-      format.js {
-        render :update do |page|
-          page.replace_html "session_#{@session.id}", :partial => 'sessions/item', :object => @session
-          page.replace_html "treatment_service_list_total", "Total: #{@session.treatment.amount.currency_round}"
-        end
-      }
     end
   end
 end

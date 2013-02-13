@@ -157,6 +157,7 @@ CyDoc::Application.routes.draw do
     end
   end
 
+  resources :service_records
   resources :sessions do
     resources :tariff_items
   end
