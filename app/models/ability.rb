@@ -25,17 +25,21 @@ class Ability
     alias_action :current, :to => :show
 
     # Load the abilities for all roles.
-    user.roles.each do |role|
-      self.send(role.name, user)
+    if user.role? :admin
+      admin_abilities
+    end
+
+    if user.role? :sysadmin
+      sysadmin_abilities
     end
   end
 
   # Admin abilities
-  def admin(user)
+  def admin_abilities
     can :manage, :all
   end
 
-  def sysadmin(user)
+  def sysadmin_abilities
     can :manage, :all
   end
 end
