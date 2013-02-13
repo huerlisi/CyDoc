@@ -1,11 +1,5 @@
 # -*- encoding : utf-8 -*-
 class TariffItemsController < AuthorizedController
-  in_place_edit_for :tariff_item, :remark
-  in_place_edit_for :tariff_item, :code
-
-  in_place_edit_for :service_item, :ref_code
-  in_place_edit_for :service_item, :quantity
-
   has_scope :clever_find
 
   # Show single search match

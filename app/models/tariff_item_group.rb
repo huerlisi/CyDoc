@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class TariffItemGroup < TariffItem
   has_many :service_items, :order => 'position'
+  accepts_nested_attributes_for :service_items
+  attr_accessible :service_items_attributes
 
   def self.to_s
     "Blockleistung"

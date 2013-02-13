@@ -1,0 +1,25 @@
+.service_items.list.well
+  = simple_form_for 'search', :url => select_tariff_item_service_items_path(resource), :method => :get, :remote => true, :html => {:class => 'no-well'} do |f|
+    = f.input :query, :label => "Neue Leistung", :autocomplete => 'off'
+
+  = simple_form_for resource, :remote => true, :html => {:class => 'no-well'} do |f|
+    %table.table.table-condensed
+      = f.fields_for :service_items, :wrapper => :inline do |s|
+        = render 'service_items/form', :f => s
+      %th
+      %th
+      %th{:style => "text-align: left"}
+        = resource.service_items.count
+        \&nbsp;Positionen
+      %th{:style => "text-align: right"}
+        = sprintf('%.2f', resource.amount_mt)
+        \&nbsp;AL
+      %th{:style => "text-align: right"}
+        = sprintf('%.2f', resource.amount_mt)
+        \&nbsp;TL
+      %th{:style => "text-align: right"}
+        = sprintf('%.2f', resource.amount)
+        \&nbsp;CHF
+      %th
+
+    = f.button :submit

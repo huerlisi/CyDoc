@@ -1,13 +1,11 @@
-- service_item = f.object
-
 %tr[service_item]
   %td{:style => "text-align:right"}
-    = f.input :quantity, :as => :string, :input_html => {:style => "width: 3em; text-align: right"}
+    = service_item.quantity
+    x
   %td{:style => "text-align:right"}
     = service_item.code
     - if service_item.needs_ref_code?
-      %br
-      = f.input :ref_code, :placeholder => 'Referenzcode'
+      = service_item.ref_code
   %td= service_item.text
   %td{:style => "text-align:right"}
     = sprintf('%.2f', service_item.amount_mt)
@@ -17,5 +15,4 @@
     \&nbsp;TL
   %td{:style => "text-align:right"}
     %b>= sprintf('%.2f', service_item.amount)
-  %td
-    = link_to image_tag('delete.png'), service_item, :method => :delete, :remote => true
+    \&nbsp;CHF

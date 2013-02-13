@@ -1,7 +1,0 @@
-%tr{:onclick => remote_function(:method => 'post', :url => tariff_item_service_items_path(@tariff_item, :select_item_id => select_item.id)), :style => "cursor: pointer", :title => select_item.remark}
-  %td{:style => "text-align:right"}= select_item.code
-  %td
-    %span{:style => "font-weight: bold"}= truncate(select_item.remark, :length => 100, :separator => ' ')
-  %td{:style => "text-align:right"}
-    %b>= sprintf('%.2f', select_item.amount)
-    \&nbsp;CHF

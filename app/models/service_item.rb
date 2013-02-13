@@ -1,5 +1,8 @@
 # -*- encoding : utf-8 -*-
 class ServiceItem < ActiveRecord::Base
+  # Access restrictions
+  attr_accessible :quantity, :ref_code
+
   belongs_to :tariff_item_group
   belongs_to :tariff_item
 

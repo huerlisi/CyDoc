@@ -179,7 +179,7 @@ CyDoc::Application.routes.draw do
 
   resources :tarmed_tariff_items, :controller => "tariff_items"
   resources :drug_tariff_items, :controller => "tariff_items"
-  resources :tariff_item_group, :controller => "tariff_items"
+  resources :tariff_item_groups
   resources :physio_tariff_item, :controller => "tariff_items"
   resources :free_tariff_item, :controller => "tariff_items"
 
