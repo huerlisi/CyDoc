@@ -437,6 +437,21 @@ de-CH:
       reminder_letter:    Mahnung
       close:              Schliessen
 
+  # Filters
+  invoice_state:
+    2xreminded: "2x gemahnt"
+    3xreminded: "3x gemahnt"
+    all: Alle
+    booked: offen
+    canceled: storniert
+    encashment: "in Inkasso"
+    overdue: überfällig
+    paid: bezahlt
+    reactivated: reaktiviert
+    reminded: "1x gemahnt"
+    title: Rechnungsfilter
+    written_off: abgeschrieben
+
   cancan:
     roles:
       admin:    Administrator

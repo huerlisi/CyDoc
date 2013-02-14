@@ -1,5 +1,9 @@
 # -*- encoding : utf-8 -*-
 class InvoicesController < AuthorizedController
+  # States
+  has_scope :invoice_state, :default => proc {|controller| 'booked' if controller.params[:by_text].nil?}, :only => :index
+  has_scope :overdue, :type => :boolean
+
   # POST /invoice/1/print
   def print
     @invoice = Invoice.find(params[:id])
@@ -132,14 +136,6 @@ class InvoicesController < AuthorizedController
                             :disposition => 'inline'
       }
     end
-  end
-
-  # GET /invoices
-  def index
-    @invoices = Invoice.page(params['page_search'])
-    @overdue = Invoice.overdue(current_tenant.settings['invoices.grace_period']).dunning_active.page(params['page_overdue'])
-    @prepared = Invoice.prepared.page(params['page_prepared'])
-    # @treatments = Treatment.open.page(params['page_open'])
   end
 
   # GET /invoices/new

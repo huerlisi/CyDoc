@@ -83,6 +83,11 @@ class Invoice < ActiveRecord::Base
 
   # State
   # =====
+  STATES = ['booked', 'canceled', 'paid', 'reactivated', 'reminded', '2xreminded', '3xreminded', 'encashment', 'written_off']
+  scope :invoice_state, lambda {|value|
+    where(:state => value) unless (value.nil? or value == 'all')
+  }
+
   scope :prepared, :conditions => "invoices.state = 'prepared'"
   scope :canceled, :conditions => "invoices.state = 'canceled'"
   scope :reactivated, :conditions => "invoices.state = 'reactivated'"
