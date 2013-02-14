@@ -1,7 +1,9 @@
 # -*- encoding : utf-8 -*-
 module ActsAsDocument
-  def pdf_name
-    "#{I18n.transliterate(to_s)}.pdf"
+  def pdf_name(name = '')
+    name = name.strip
+    name = ' ' + name if name.present?
+    I18n.transliterate(to_s) + name + '.pdf'
   end
 
   def document_to_pdf(document_type = nil, params = {})
