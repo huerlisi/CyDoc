@@ -160,7 +160,7 @@ de-CH:
         dunning_stop: Mahnstopp
         use_billing_address: Rechnungsadresse aktiv
         covercard_code: Covercard-ID
-        doctor: Doktor
+        doctor: Arzt
       insurance_policy:
         number: Versicherungsnr.
         insurance: Versicherung
@@ -358,7 +358,7 @@ de-CH:
   doctors:
     show:
       tab:
-        show:             Doktor Informationen
+        show:             Arzt Informationen
         invoicing:        Rechnungseinstellungen
   insurances:
     show:
