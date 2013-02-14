@@ -1,3 +1,14 @@
+2.0.0.beta1
+===========
+Rewrite of most parts. Mainly porting to Rails 3, switching UI to be
+built on Twitter Bootstrap, and providing fulltext search for patients
+and more.
+
+It also uses more common code with other projects like Bookyt and Hozr
+by using factored out gems.
+
+This is a beta release.
+
 1.1.7
 =====
 This is a security update fixing an extremely critical issue, you should
