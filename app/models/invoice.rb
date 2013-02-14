@@ -347,23 +347,23 @@ class Invoice < ActiveRecord::Base
 
   def valid_service_records?
     service_records.map{|service_record|
-      errors.add_to_base(service_record.errors.full_messages.join('</li><li>')) unless service_record.valid_for_invoice?(self)
+      errors.add(:service_records, service_record.errors.full_messages.join('</li><li>')) unless service_record.valid_for_invoice?(self)
     }
 
     return errors.empty?
   end
 
   def valid_treatment?
-    errors.add_to_base(treatment.errors.full_messages.join('</li><li>')) unless treatment.valid_for_invoice?(self)
+    errors.add(:treatment, treatment.errors.full_messages.join('</li><li>')) unless treatment.valid_for_invoice?(self)
 
     return errors.empty?
   end
 
   def valid_patient?
     if treatment.patient
-      errors.add_to_base(treatment.patient.errors.full_messages.join('</li><li>')) unless treatment.patient.valid_for_invoice?(self)
+      errors.add(:patient, treatment.patient.errors.full_messages.join('</li><li>')) unless treatment.patient.valid_for_invoice?(self)
     else
-      errors.add_to_base("Patient fehlt") unless treatment.patient
+      errors.add(:patient, "Patient fehlt") unless treatment.patient
     end
 
     return errors.empty?

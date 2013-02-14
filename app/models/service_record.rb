@@ -39,7 +39,7 @@ class ServiceRecord < ActiveRecord::Base
 
   def validate_for_invoice(invoice)
     if invoice.settings['validation.tarmed']
-      errors.add_to_base("Position '#{code}' verlangt Referenzcode") unless valid_ref_code?
+      errors.add(:base, "Position '#{code}' verlangt Referenzcode") unless valid_ref_code?
     end
   end
 

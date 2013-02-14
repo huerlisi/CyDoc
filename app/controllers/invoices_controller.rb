@@ -180,28 +180,9 @@ class InvoicesController < AuthorizedController
     if @invoice.valid?
       flash[:notice] = 'Erfolgreich erstellt.'
 
-      respond_to do |format|
-        format.html { redirect_to @invoice }
-        format.js {
-          render :update do |page|
-            page.replace_html 'tab-content-invoices', :partial => 'show'
-            page.replace_html 'patient-sidebar', :partial => 'patients/sidebar'
-            page.call 'showTab', "invoices"
-            page.replace "notice_flash", :partial => 'created_flash'
-          end
-        }
-      end
+      redirect_to @invoice
     else
-      respond_to do |format|
-        format.html { }
-        format.js {
-          render :update do |page|
-            page.replace_html 'tab-content-invoices', :partial => 'form'
-            page.call(:initBehaviour)
-            page['invoice_value_date'].select
-          end
-        }
-      end
+      render 'new'
     end
   end
 

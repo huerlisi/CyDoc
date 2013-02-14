@@ -1,4 +1,10 @@
 = simple_form_for [:patient, :treatment, @invoice] do |form|
+  - unless @invoice.valid?
+    = boot_alert(:error) do
+      %ul
+        - @invoice.errors.full_messages.each do |message|
+          %li= message
+
   .row-fluid
     .span6= form.input :value_date, :as => :date_field, :input_html => {:autocomplete => 'off'}
   .row-fluid

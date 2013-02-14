@@ -30,7 +30,7 @@ class Treatment < ActiveRecord::Base
 
   def validate_for_invoice(invoice)
     if invoice.settings['validation.medical_case_present']
-      errors.add_to_base("Keine Diagnose eingegeben.") if medical_cases.empty?
+      errors.add(:base, "Keine Diagnose eingegeben.") if medical_cases.empty?
     end
   end
 
