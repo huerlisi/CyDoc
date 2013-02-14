@@ -1,0 +1,10 @@
+de:
+  i18n:
+    transliterate:
+      rule:
+        ü: "ue"
+        ö: "oe"
+        ä: "ae"
+        Ü: "UE"
+        Ö: "OE"
+        Ä: "AE"
