@@ -7,9 +7,9 @@ class PortEsrFilesToCarrierwave < ActiveRecord::Migration
 
     old_dir = Rails.root.join('public', 'esr_files')
     new_base = Rails.root.join('uploads', 'esr_files')
-    Dir.mkdir(new_base)
+    FileUtils.mkdir_p(new_base)
     new_dir = new_base.join('file')
-    Dir.mkdir(new_dir)
+    FileUtils.mkdir_p(new_dir)
 
     old_paths = Dir.glob(old_dir.join('*/*'))
     old_paths.each do |path|
@@ -17,7 +17,7 @@ class PortEsrFilesToCarrierwave < ActiveRecord::Migration
       File.rename(path, new_dir.join(id))
     end
   end
-  
+
   def self.down
     add_column :esr_files, :size, :integer
     add_column :esr_files, :content_type, :string
