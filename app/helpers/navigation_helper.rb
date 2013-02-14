@@ -14,7 +14,7 @@ module NavigationHelper
     items = {
       :payment_overview => :invoices,
       :reminder_list    => {:controller => 'invoices', :tab => 'overdue'},
-      :open_cases       => {:controller => 'invoices', :tab => 'open'},
+      :open_cases       => treatments_path(:by_state => 'active'),
       :invoice_batch_job => invoice_batch_jobs_path,
       :reminder_batch_job => reminder_batch_jobs_path
     }

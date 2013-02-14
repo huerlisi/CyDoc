@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class TreatmentsController < AuthorizedController
+  has_scope :by_state
+
   in_place_edit_for :session, :date
   # TODO: is duplicated in ServiceRecordsController
   in_place_edit_for :service_record, :ref_code
