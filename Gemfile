@@ -118,7 +118,7 @@ gem 'ledermann-rails-settings', :require => 'rails-settings'
 gem 'vesr'
 
 # Printing
-gem 'cups'
+gem 'cupsffi', :git => 'git://github.com/huerlisi/cupsffi.git'
 
 # CSV Export
 gem 'csv-mapper'
