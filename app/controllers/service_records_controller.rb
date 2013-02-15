@@ -36,18 +36,13 @@ class ServiceRecordsController < AuthorizedController
 
   # GET /service_records/select
   def select
-    query = params[:query]
-    query ||= params[:search][:query] if params[:search]
+    query = params[:search][:query]
 
-    @tariff_items = TariffItem.clever_find(query).page params['page']
     @patient = Patient.find(params[:patient_id])
     @session = Session.find(params[:session_id])
 
-    # Show selection list only if more than one hit
-    if @tariff_items.size == 1
-      params[:tariff_item_id] = @tariff_items.first.id
-      create
-      return
-    end
+    @tariff_items = TariffItem.clever_find(query).page params['page']
+    params[:tariff_item_id] = TariffItem.find_by_code(query)
+    create && return
   end
 end
