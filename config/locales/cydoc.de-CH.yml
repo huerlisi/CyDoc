@@ -355,6 +355,11 @@ de-CH:
       title:              Neue vorbereiten
     index:
       title:              Inkasso
+  patients:
+    dunning_stopped:
+      title:              Patienten mit Mahnstopp
+    index:
+      title:            Patienten
   doctors:
     show:
       tab:

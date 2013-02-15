@@ -1,15 +1,13 @@
-%table.table.table-bordered.table-striped.table-condensed
+= boot_page_title
+
+%table.table.table-striped
   %tr
-    %th Patient
-    %th Bemerkungen
-    %th Arzt
+    %th= t_model(Patient)
+    %th= t_attr(:remarks, Patient)
+    %th= t_attr(:doctor, Patient)
+
   - collection.each do |resource|
     %tr
-      %td
-        = link_to resource, :action => 'show', :id => resource
-      %td
-        = resource.remarks
-      %td
-        = link_to resource.doctor, :controller => :doctors, :action => 'show', :id => resource.doctor_id
-
-
+      %td= link_to resource, resource, 'data-href-container' => 'tr'
+      %td= resource.remarks
+      %td= resource.doctor

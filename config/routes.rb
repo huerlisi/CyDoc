@@ -77,6 +77,9 @@ CyDoc::Application.routes.draw do
   match '/patients/covercard_search/:code' => 'patients#covercard_search', :as => :covercard_search
   match '/patients/:id/covercard_update/:covercard_code' => 'patients#covercard_update', :as => :covercard_update
   resources :patients do
+    collection do
+      get :dunning_stopped
+    end
     member do
       get :show_tab
       post :localities_for_postal_code
