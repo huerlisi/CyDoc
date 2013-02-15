@@ -11,3 +11,6 @@
         = f.input :remarks, :input_html => {:class => 'span11', :rows => 4}
   .form-actions
     = f.button :submit
+
+- content_for :sidebar do
+  = render 'patients/sidebar', :resource => resource
