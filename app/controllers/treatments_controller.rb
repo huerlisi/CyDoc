@@ -63,78 +63,11 @@ class TreatmentsController < AuthorizedController
     @treatment.sessions.build(:duration_from => @treatment.date_begin)
 #    @treatment.diagnoses = medical_cases.map{|medical_case| medical_case.diagnosis}
 
-    # Saving
-    if @treatment.save
-      flash[:notice] = 'Erfolgreich erstellt.'
-      respond_to do |format|
-        format.html {
-          redirect_to @treatment
-        }
-        format.js {
-          render :update do |page|
-            page.redirect_to @treatment
-          end
-        }
-      end
-    else
-      respond_to do |format|
-        format.html { }
-        format.js {
-          render :update do |page|
-            page.replace_html "treatment", :partial => 'form'
-            page.call(:initBehaviour)
-          end
-        }
-      end
-    end
-  end
-
-  # PUT /treatment/1
-  def update
-    @treatment = Treatment.find(params[:id])
-
-    # Saving
-    if @treatment.update_attributes(params[:treatment])
-      flash[:notice] = 'Erfolgreich erstellt.'
-      respond_to do |format|
-        format.html {
-          redirect_to @treatment
-        }
-        format.js {
-          render :update do |page|
-            page.replace_html "tab-content-treatments", :partial => 'show'
-          end
-        }
-      end
-    else
-      respond_to do |format|
-        format.html { }
-        format.js {
-          render :update do |page|
-            page.replace_html 'treatment', :partial => 'form'
-            page.call(:initBehaviour)
-          end
-        }
-      end
-    end
+    create!
   end
 
   def destroy
-    @treatment = Treatment.find(params[:id])
-    @patient = @treatment.patient
-
-    @treatment.destroy
-
-    respond_to do |format|
-      format.html {
-        redirect_to @patient
-      }
-      format.js {
-        render :update do |page|
-          page.redirect_to @patient
-        end
-      }
-    end
+    destroy! { @treatment.patient }
   end
 
   # Hozr Integration
