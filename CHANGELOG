@@ -1,3 +1,15 @@
+2.0.0.beta2
+===========
+Features:
+* Add transliteration rules for :de local.
+* Use shorter Invoice.to_s by default.
+* Use proper names for invoice PDFs.
+* Port invoice filtering from Bookyt.
+* Better german wording for doctor.
+* Consistent translation for .biller.
+* Fix open treatment navigation link.
+* Validate presence of Tiers.biller and .provider.
+
 2.0.0.beta1
 ===========
 Rewrite of most parts. Mainly porting to Rails 3, switching UI to be
