@@ -2,7 +2,8 @@
 
 class Treatment < ActiveRecord::Base
   # Access restrictions
-  attr_accessible :date_begin, :date_end, :reason, :place_type, :canton
+  attr_accessible :date_begin, :date_end, :reason, :place_type, :canton, :imported_id
+
   # Associations
   has_many :invoices, :dependent => :destroy, :order => 'value_date DESC, created_at DESC'
   belongs_to :patient

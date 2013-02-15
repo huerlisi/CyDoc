@@ -1,4 +1,5 @@
 = simple_form_for [:patient, @treatment] do |f|
+  = f.input :imported_id, :as => :hidden
   .row-fluid
     .span6= f.input :date_begin, :as => :date_field
     .span6= f.input :date_end, :as => :date_field
