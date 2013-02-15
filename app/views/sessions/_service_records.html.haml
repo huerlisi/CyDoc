@@ -2,7 +2,7 @@
   = simple_form_for 'search', :url => select_patient_session_service_records_path(session.patient, session), :method => :get, :remote => true, :html => {:class => 'no-well'} do |f|
     = render 'sessions/new_service_record_form', :f => f
 
-  = simple_form_for session, :remote => true, :html => {:class => 'no-well'} do |f|
+  = simple_form_for [session.treatment, session], :remote => true, :html => {:class => 'no-well'} do |f|
     %table.table.table-condensed
       = f.fields_for :service_records, :wrapper => :inline do |s|
         %tr[s.object]
