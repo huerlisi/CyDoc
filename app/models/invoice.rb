@@ -65,7 +65,7 @@ class Invoice < ActiveRecord::Base
         session.invoices << invoice
         session.charge
         # Touch session as it won't autosave otherwise
-        session.touch
+        session.save
       end
 
       # Build booking
