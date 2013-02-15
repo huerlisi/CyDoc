@@ -9,9 +9,6 @@
       = render @treatment.medical_cases
 
   #treatment_sessions
-    .contextual
-      = icon_link_to :new_treatment_session, new_patient_treatment_session_path(@treatment.patient, @treatment), 'remote' => true
-
     #treatment_session_list
       = render 'sessions/list', :collection => @treatment.sessions
     %h4#treatment_service_list_total
