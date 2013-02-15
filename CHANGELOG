@@ -1,3 +1,18 @@
+2.0.0.beta4
+===========
+Features:
+* Fix treatment view.
+* Unify people views with hozr.
+* Drop Hozr specific create_all_treatments.
+* Only include service_items form in tariff_item_group form when persisted.
+* No need for obligation field in tariff item group form.
+* Do not use a template for PatientLetter.
+* Handle exception in AuthorizedController.interpolation_options.
+* Massiv cleanup of treatments controller.
+* Show sidebar in patient edit.
+* Fix treatment duration.
+* Increment session number for sessions on same date when creating an invoice.
+
 2.0.0.beta3
 ===========
 Features:
