@@ -1,2 +1,1 @@
-$('#treatment_session_list').html('<%=j render :partial => 'list', :object => @treatment.sessions %>')
-
+$('#treatment_session_list').html('<%=j render 'sessions/list', :collection => @treatment.sessions %>')

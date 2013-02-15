@@ -155,12 +155,11 @@ CyDoc::Application.routes.draw do
     collection do
       get :create_all
     end
+
+    resources :sessions
   end
 
   resources :service_records
-  resources :sessions do
-    resources :tariff_items
-  end
 
   resources :service_items
   resources :tariff_items do

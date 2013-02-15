@@ -1,9 +1,9 @@
-%div[session]
+%div[resource]
   .contextual
-    = icon_link_to :delete, patient_session_url(session.patient, session), :method => :delete, :confirm => t_confirm_delete(session), :remote => true
+    = icon_link_to :delete, treatment_session_url(resource.treatment, resource), :method => :delete, :confirm => t_confirm_delete(resource), :remote => true
 
   %h3= t_title :edit, Session
-  = simple_form_for session do |f|
+  = simple_form_for [@treatment, resource], :remote => true do |f|
     .row-fluid
       .span6= f.input :date
       .span6= f.input :remarks, :as => :string
@@ -11,4 +11,4 @@
     .form-actions
       = f.button :submit
 
-  = render 'sessions/service_records', :session => session
+  = render 'sessions/service_records', :session => resource

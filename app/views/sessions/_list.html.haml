@@ -1,5 +1,5 @@
 - for session in collection do
   - if session.active?
-    = render 'sessions/form', :session => session
+    = render 'sessions/form', :resource => session
   - else
-    = render session
+    = render session, :resource => session
