@@ -19,8 +19,6 @@ module NavigationHelper
       :reminder_batch_job => reminder_batch_jobs_path
     }
 
-    items[:create_treatments] = create_all_treatments_path# if current_tenant.settings['modules.hozr']
-
     items
   end
 

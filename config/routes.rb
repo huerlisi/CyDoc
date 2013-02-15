@@ -157,10 +157,6 @@ CyDoc::Application.routes.draw do
   resources :diagnosis_cases
   resources :diagnoses
   resources :treatments do
-    collection do
-      get :create_all
-    end
-
     resources :sessions
   end
 

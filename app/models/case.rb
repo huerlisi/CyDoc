@@ -71,18 +71,4 @@ class Case < ActiveRecord::Base
       :conditions => ["screened_at < :date AND (needs_review = :false OR review_at < :date)", {:date => date, :false => false}]
     }
   }
-
-  def self.create_all_treatments
-    doctor = Doctor.find_by_code(Thread.current["doctor_id"])
-    date = DateTime.now.ago(doctor.settings['cases.invoice_grace_period'])
-
-    failed_cases = []
-
-    cases = self.finished_at(date).no_treatment
-    for a_case in cases
-      failed_cases << a_case.create_treatment(doctor)
-    end
-
-    return cases.count, failed_cases.compact!
-  end
 end
