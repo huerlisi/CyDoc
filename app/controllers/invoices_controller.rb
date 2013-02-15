@@ -10,7 +10,6 @@ class InvoicesController < AuthorizedController
   def print
     @invoice = Invoice.find(params[:id])
     @treatment = @invoice.treatment
-    @patient = @treatment.patient
 
     if @invoice.state == "prepared" and !params[:print_copy]
       @invoice.state = 'printed'
