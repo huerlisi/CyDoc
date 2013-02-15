@@ -452,11 +452,11 @@ class Invoice < ActiveRecord::Base
   end
 
   def date_begin
-    service_records.minimum(:date).to_date
+    service_records.minimum(:date)
   end
 
   def date_end
-    service_records.maximum(:date).to_date
+    service_records.maximum(:date)
   end
 
   # Calculated fields
