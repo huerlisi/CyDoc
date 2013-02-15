@@ -2,36 +2,6 @@
 class TreatmentsController < AuthorizedController
   has_scope :by_state
 
-  # GET /treatments/1
-  # GET /patients/1/treatments/2
-  def show
-    @treatment = Treatment.find(params[:id])
-
-    respond_to do |format|
-      format.html { }
-      format.js {
-        render :update do |page|
-          page.replace_html "tab-content-treatments", :partial => 'show'
-          page.call 'showTab', controller_name
-        end
-      }
-    end
-  end
-
-  def edit
-    @treatment = Treatment.find(params[:id])
-
-    respond_to do |format|
-      format.html { }
-      format.js {
-        render :update do |page|
-          page.replace_html "treatment", :partial => 'form'
-          page.call(:initBehaviour)
-        end
-      }
-    end
-  end
-
   def new
     @treatment = Treatment.new(params[:treatment])
     @treatment.date_begin ||= Date.today
