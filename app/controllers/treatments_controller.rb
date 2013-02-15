@@ -69,9 +69,4 @@ class TreatmentsController < AuthorizedController
   def destroy
     destroy! { @treatment.patient }
   end
-
-  # Hozr Integration
-  def create_all
-    @case_count, @failed_cases = Case.create_all_treatments
-  end
 end
