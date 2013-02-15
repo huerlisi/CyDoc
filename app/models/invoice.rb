@@ -58,7 +58,16 @@ class Invoice < ActiveRecord::Base
 
     # Assign service records
     sessions = treatment.sessions.active
-    invoice.service_records = sessions.collect{|s| s.service_records}.flatten
+    session_count = {}
+    invoice.service_records = sessions.collect do |s|
+      session_count[s.date] ||= 0
+      session_count[s.date] += 1
+
+      s.service_records.map do |service_record|
+        service_record.session = session_count[s.date]
+        service_record
+      end
+    end.flatten
 
     invoice.valid? && Invoice.transaction do
       for session in sessions
@@ -336,7 +345,7 @@ class Invoice < ActiveRecord::Base
   end
 
   has_and_belongs_to_many :sessions, :autosave => true
-  has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC, if(ref_code IS NULL, code, ref_code), concat(code,ref_code)'
+  has_and_belongs_to_many :service_records, :order => 'tariff_type, date, session DESC, if(ref_code IS NULL, code, ref_code), concat(code,ref_code)'
 
   # Validation
   validates_presence_of :value_date
