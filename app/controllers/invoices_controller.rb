@@ -145,6 +145,14 @@ class InvoicesController < AuthorizedController
     @treatment = Treatment.find(params[:treatment_id])
 
     @invoice.treatment = @treatment
+    begin
+      @invoice.tiers.biller = Employee.find(current_tenant.settings['invoices.defaults.biller_id'])
+    rescue
+    end
+    begin
+      @invoice.tiers.provider = Employee.find(current_tenant.settings['invoices.defaults.provider_id'])
+    rescue
+    end
 
     # Sessions
     sessions = @treatment.sessions.active
