@@ -15,38 +15,12 @@ module ActsAsDocument
   end
 
   def print_document(document_type, printer, params = {})
-    @printing_error = nil
-
-    # Workaround TransientJob not yet accepting options
     file = Tempfile.new('')
+    file.binmode
     file.puts(document_to_pdf(document_type, params))
     file.close
 
-    # Try more than once
-    # TODO: try cupsffi gem
-    tries = 5
-    i = 1
-    begin
-      paper_copy = Cups::PrintJob.new(file.path, printer)
-      paper_copy.print
-    rescue RuntimeError => e
-      logger.warn("Failed to print to #{printer}. Try ##{i}.")
-      logger.warn(e.message)
-
-      if i == tries
-        logger.warn("Givin up.")
-        @printing_error = e.message
-        return false
-      end
-
-      i += 1
-      # Sleep for 4s
-      sleep 4
-
-      retry
-    end
-
-    return true
+    printer.print_file(file.path)
   end
 
   module ClassMethods
