@@ -17,22 +17,18 @@ class InvoicesController < AuthorizedController
     end
 
     if current_tenant.settings['printing.cups']
-      if @invoice.print(@printers[:trays][:plain], @printers[:trays][:invoice])
-        respond_to do |format|
-          format.html { redirect_to invoices_path }
-          format.js {
-            render :update do |page|
-              page.replace_html "tab-content-invoices", :partial => 'show'
-              page.replace "notice_flash", :partial => 'printed_flash', :locals => {:model => 'invoice'}
-            end
-          }
-        end
-      else
-        respond_to do |format|
-          format.html { redirect_to @invoice }
-          format.js
-        end
+      begin
+        patient_letter_printer = current_tenant.printer_for(:invoice)
+        insurance_recipe_printer = current_tenant.printer_for(:plain)
+
+        @invoice.print(patient_letter_printer, insurance_recipe_printer)
+        flash.now[:notice] = "#{@case} an Drucker gesendet"
+
+      rescue RuntimeError => e
+        flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
       end
+
+      render 'show_flash'
     else
       respond_to do |format|
         format.html { redirect_to @invoice }
