@@ -1,5 +1,4 @@
-#search_result
-  %table.table
-    = render :partial => 'treatments/list_header'
-    = render :partial => 'treatments/item', :collection => @treatments
-    = render :partial => 'treatments/list_footer'
+%table.table.table-striped
+  = render 'treatments/list_header'
+  = render @treatments
+  = render 'treatments/list_footer'

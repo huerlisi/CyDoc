@@ -1,0 +1,6 @@
+%tr[treatment]
+  %td= link_to treatment.patient.full_name, treatment.patient
+  %td= l(treatment.date_begin) if treatment.date_begin
+  %td= link_to treatment.reason, treatment, 'data-href-container' => 'tr'
+  %td= treatment.law.name if treatment.law
+  %td{:style => "text-align: right"}= currency_fmt(treatment.amount.currency_round)
