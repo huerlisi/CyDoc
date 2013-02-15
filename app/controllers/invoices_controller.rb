@@ -4,6 +4,8 @@ class InvoicesController < AuthorizedController
   has_scope :invoice_state, :default => proc {|controller| 'booked' if controller.params[:by_text].nil?}, :only => :index
   has_scope :overdue, :type => :boolean
 
+  include I18nHelpers
+
   # POST /invoice/1/print
   def print
     @invoice = Invoice.find(params[:id])
@@ -97,7 +99,7 @@ class InvoicesController < AuthorizedController
       format.pdf {
         document = @invoice.document_to_pdf(:insurance_recipe)
 
-        send_data document, :filename => "#{@invoice.id}.pdf",
+        send_data document, :filename => @invoice.pdf_name(t_action(:insurance_recipe)),
                             :type => "application/pdf",
                             :disposition => 'inline'
       }
@@ -114,7 +116,7 @@ class InvoicesController < AuthorizedController
       format.pdf {
         document = @invoice.document_to_pdf(:patient_letter)
 
-        send_data document, :filename => "#{@invoice.id}.pdf",
+        send_data document, :filename => @invoice.pdf_name,
                             :type => "application/pdf",
                             :disposition => 'inline'
       }
@@ -131,7 +133,7 @@ class InvoicesController < AuthorizedController
       format.pdf {
         document = @invoice.document_to_pdf(:reminder_letter)
 
-        send_data document, :filename => "#{@invoice.id}.pdf",
+        send_data document, :filename => @invoice.pdf_name(t_action(:reminder_letter)),
                             :type => "application/pdf",
                             :disposition => 'inline'
       }

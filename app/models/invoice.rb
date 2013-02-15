@@ -424,8 +424,10 @@ class Invoice < ActiveRecord::Base
     case format
     when :short
       "##{id}: #{I18n.l(value_date) if value_date}"
-    else
+    when :long
       "#{patient.name}, Rechnung ##{id} #{I18n.l(value_date)} über #{sprintf('%0.2f', amount)} CHF"
+    else
+      "#{patient.name}, Rechnung ##{id} #{I18n.l(value_date)}"
     end
   end
 

@@ -1,5 +1,11 @@
 # -*- encoding : utf-8 -*-
 module ActsAsDocument
+  def pdf_name(name = '')
+    name = name.strip
+    name = ' ' + name if name.present?
+    I18n.transliterate(to_s + name) + '.pdf'
+  end
+
   def document_to_pdf(document_type = nil, params = {})
     self.class.document_type_to_class(document_type).new.to_pdf(self, params)
   end
