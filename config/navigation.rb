@@ -42,6 +42,13 @@ SimpleNavigation::Configuration.run do |navigation|
       end
 
       primary.item :bookkeeping, t('cydoc.navigation.accounting'), bookkeeping_index_path
+
+      primary.item :administration, 'Administration', '#' do |administration|
+        administration.item :attachments, t_title(:index, Attachment), tenant_attachments_path(current_tenant)
+        administration.item :current_tenant, t_model(Tenant), current_tenants_path
+        administration.item :users, t_model(User), users_path
+      end
+
       primary.item :help, t('cydoc.navigation.help'), help_path
     end
   end
