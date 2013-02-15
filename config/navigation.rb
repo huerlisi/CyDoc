@@ -28,6 +28,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
       primary.item :invoices, t_title(:index, Invoice), invoices_path do |entry|
         entry.item :invoices_index, t_title(:index, Invoice), invoices_path
+        entry.item :open_cases, t('cydoc.navigation.open_cases'), treatments_path(:by_state => 'active')
 
         entry.item :divider, "", :class => 'divider'
 
