@@ -209,6 +209,17 @@ de-CH:
         locked_at: Gesperrt seit
         last_sign_in_at: Letzter Login
         object_reference:     Verknüpfte Person
+      tenant:
+        settings:
+          patients:
+            sex:   Geschlecht
+          printing:
+            cups:  Drucken per CUPS
+            cups_hostname: CUPS-Server
+            invoice:    Rechnungsformulare
+            plain:      Normalpapier
+        users:     Benutzer
+
     models:
       account:            Konto
       attachment:         Anhang
@@ -235,6 +246,7 @@ de-CH:
       tarmed_tariff_item: Tarmed Leistung
       treatment:          Fall
       user:               Benutzer
+      tenant:             Mandant
   cydoc:
     covercard_search:
       date_patients: "Treffer mit dem Geburtstag"
