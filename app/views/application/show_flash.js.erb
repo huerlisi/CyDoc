@@ -1,0 +1,6 @@
+<%- if notice %>
+showFlashMessage('<%=j boot_alert(notice, 'success') %>');
+<%- end %>
+<%- if alert %>
+showFlashMessage('<%=j boot_alert(alert, 'error') %>');
+<%- end %>

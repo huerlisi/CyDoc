@@ -32,7 +32,9 @@ class InvoicesController < AuthorizedController
     else
       respond_to do |format|
         format.html { redirect_to @invoice }
-        format.js
+        format.js {
+          render 'print', :locals => {:views => [:patient_letter, :insurance_recipe]}
+        }
       end
     end
   end
