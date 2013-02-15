@@ -159,14 +159,7 @@ class InvoicesController < AuthorizedController
     @patient = @treatment.patient
     @invoice = Invoice.create_from_treatment(params[:invoice], @treatment)
 
-    # Saving
-    if @invoice.valid?
-      flash[:notice] = 'Erfolgreich erstellt.'
-
-      redirect_to @invoice
-    else
-      render 'new'
-    end
+    create!
   end
 
   # DELETE /invoices/1
