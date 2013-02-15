@@ -1,6 +1,7 @@
 = simple_form_for resource do |f|
   .row-fluid
     .span6= f.input 'printing.cups', :as => :setting_select
+    .span6= f.input 'printing.cups_hostname', :as => :setting_string
 
   .row-fluid
     .span6= f.input 'printing.plain', :as => :setting_string
