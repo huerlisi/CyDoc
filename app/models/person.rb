@@ -42,11 +42,6 @@ class Person < ActiveRecord::Base
   end
   alias_method_chain :vcard, :autobuild
 
-  # Search
-  scope :by_name, lambda {|value|
-    includes(:vcard).where("(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)", :query => "%#{value}%")
-  }
-
   # Constructor
   def initialize(attributes = nil, options = {})
     super

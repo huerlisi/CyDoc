@@ -48,8 +48,6 @@ class Patient < ActiveRecord::Base
   has_many :appointments, :order => 'date', :dependent => :destroy
 
   # Vcards
-  # FIX: This buggily needs this :select hack
-  scope :by_name, lambda {|name| {:select => '*, patients.id', :joins => :vcard, :conditions => Vcard.by_name_conditions(name)}}
   has_vcards
   # Hack to use 'private' address by default
   has_one :vcard, :as => 'object', :conditions => {:vcard_type => 'private'}
