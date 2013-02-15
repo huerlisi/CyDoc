@@ -1,6 +1,0 @@
-.contextual
-  = link_to t('cydoc.actions.create'), new_patient_path, :class => "icon icon-add"
-  = link_to t('cydoc.actions.show_all'), {:url => patients_path(:all => true), :method => :get}, :class => "icon icon-index", :remote => true
-%h2 Patienten
-#search_form
-  = render :partial => 'search_form'
