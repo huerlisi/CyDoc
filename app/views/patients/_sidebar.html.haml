@@ -1,12 +1,9 @@
-#patient-sidebar.sub-tabs
-  .contextual{:style => "margin-right: 2em"}
-    = link_to t('cydoc.actions.new_case'), new_patient_treatment_path(resource), :method => :get, :class => "icon icon-add"
-  %h3{:style => "margin-right: 1em"}= t('cydoc.title.cases')
-  %ul
+.well.well-small
+  %legend= t_title(:index, Treatment)
+  %ul.nav.nav-list
     - for treatment in resource.treatments
-      %li{:id => "sub-tab-treatments-#{treatment.id}"}
-        = link_to "#{treatment.to_s(:short)}", treatment, :method => :get
-        %ul
-          - for invoice in treatment.invoices
-            %li{:id => "sub-tab-invoices-#{invoice.id}"}
-              = link_to "#{invoice.to_s(:short)}", invoice, :method => :get, :class => ['invoice', invoice.state, invoice.reminded? ? "reminded" : ""].join(' ')
+      %li.nav-header
+        = link_to treatment.to_s(:short), treatment
+      - for invoice in treatment.invoices
+        %li
+          = link_to invoice.to_s(:short), invoice, :class => ['invoice', invoice.state, invoice.reminded? ? "reminded" : ""].join(' ')
