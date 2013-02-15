@@ -1,0 +1,7 @@
+= simple_form_for resource do |f|
+  .row-fluid
+    .span6= f.input 'invoices.defaults.biller_id', :as => :setting_select, :collection => Employee.by_role('doctor').collect{|e| [e.to_s, e.id]}
+    .span6= f.input 'invoices.defaults.provider_id', :as => :setting_select, :collection => Employee.by_role('doctor').collect{|e| [e.to_s, e.id]}
+
+  .form-actions
+    = f.button :submit

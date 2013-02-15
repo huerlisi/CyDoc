@@ -218,6 +218,10 @@ de-CH:
             cups_hostname: CUPS-Server
             invoice:    Rechnungsformulare
             plain:      Normalpapier
+          invoices:
+            defaults:
+              biller_id:  Standart Rechnungssteller
+              provider_id: Standart Leistungserbringer
         users:     Benutzer
 
     models:
