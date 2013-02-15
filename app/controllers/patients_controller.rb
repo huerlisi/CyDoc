@@ -23,6 +23,7 @@ class PatientsController < AuthorizedController
     @covercard_patient = Covercard::Patient.find(params[:code])
 
     if @covercard_patient
+      # TODO .by_name is broken
       @exact_patients = Patient.by_date(@covercard_patient.birth_date).by_name(@covercard_patient.name)
       @date_patients = Patient.by_date(@covercard_patient.birth_date)
       @name_patients = Patient.by_name(@covercard_patient.name)
