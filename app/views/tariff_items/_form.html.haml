@@ -5,10 +5,10 @@
   .row-fluid
     .span12
       = f.input :remark, :input_html => {:class => 'span11', :rows => 4}
-  .row-fluid
-    = f.input :obligation
 
   - unless resource.is_a? TariffItemGroup
+    .row-fluid
+      = f.input :obligation
     .row-fluid
       .span6= f.input :amount_mt, :as => :string
       .span6= f.input :amount_tt, :as => :string
