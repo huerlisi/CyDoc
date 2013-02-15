@@ -151,18 +151,6 @@ class InvoicesController < AuthorizedController
     @invoice.service_records = sessions.collect{|s| s.service_records}.flatten
 
     @invoice.valid?
-
-    respond_to do |format|
-      format.html { }
-      format.js {
-        render :update do |page|
-          page.replace_html 'tab-content-invoices', :partial => 'form'
-          page.call 'showTab', "invoices"
-          page.call(:initBehaviour)
-          page['invoice_value_date'].select
-        end
-      }
-    end
   end
 
   # POST /invoices
