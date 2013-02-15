@@ -1,3 +1,24 @@
+2.0.0.beta3
+===========
+Features:
+* Port invoices#print to new printing framework.
+* Port ActsAsDocument.print_document.
+* Port invoice printing.
+* Better patient sidebar.
+* Also show service_items in tariff_item edit.
+* Save passed in imported_id when creating a treatment.
+* Fix sessions#new action.
+* Mark sessions as charged if invoice is created.
+* Update attachments logic from hozr.
+* Add patients#dunning_stoped from Hozr.
+* Translations für tenant form.
+* Add administration menu.
+* Add billing tab to tenant form.
+* Add link to open_cases in invoices menu.
+* Set default biller and provider when creating an invoice.
+* Fix open_invoices list.
+* Add printing.cups_hostname tenant setting.
+
 2.0.0.beta2
 ===========
 Features:
