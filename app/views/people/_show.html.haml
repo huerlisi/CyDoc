@@ -1,0 +1,7 @@
+.tabbable
+  %ul.nav.nav-tabs
+    %li.active= link_to t_model, '#tab-contact', {:data => {:toggle => 'tab'}}
+
+  .tab-content
+    #tab-contact.tab-pane.active
+      = render "form"
