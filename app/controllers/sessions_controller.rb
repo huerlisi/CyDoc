@@ -9,13 +9,4 @@ class SessionsController < AuthorizedController
 
     new!
   end
-
-  def show
-    @session = Session.find(params[:id])
-    treatment = @session.treatment
-
-    invoice = treatment.invoices.last
-
-    redirect_to invoice || treatment
-  end
 end
