@@ -33,6 +33,10 @@ class PatientsController < AuthorizedController
     @patients = Patient.by_text params[:query], :star => true, :retry_stale => true, :per_page => 50
   end
 
+  def dunning_stopped
+    @patients = Patient.dunning_stopped.all
+  end
+
   def new
     # Use default sex from doctor settings
     case Doctor.settings['patients.sex']

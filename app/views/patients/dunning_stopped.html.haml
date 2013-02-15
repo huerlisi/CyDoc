@@ -1,0 +1,15 @@
+%table.table.table-bordered.table-striped.table-condensed
+  %tr
+    %th Patient
+    %th Bemerkungen
+    %th Arzt
+  - collection.each do |resource|
+    %tr
+      %td
+        = link_to resource, :action => 'show', :id => resource
+      %td
+        = resource.remarks
+      %td
+        = link_to resource.doctor, :controller => :doctors, :action => 'show', :id => resource.doctor_id
+
+

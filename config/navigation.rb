@@ -8,6 +8,7 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :home, t('cydoc.navigation.home'), root_path
       primary.item :patients, t('cydoc.navigation.patients'), patients_path do |entry|
         entry.item :patients_index, t_title(:index, Patient), patients_path
+        entry.item :dunning_stopped_patients, 'Patienten mit Mahnstopp', dunning_stopped_patients_path
         if current_tenant.settings['modules.recalls']
           entry.item :recalls, t('cydoc.navigation.recalls'), recalls_path
         end
