@@ -459,34 +459,6 @@ class Invoice < ActiveRecord::Base
     service_records.maximum(:date).to_date
   end
 
-  # Search
-  def self.clever_find(query)
-    return scoped if query.blank?
-
-    query_params = {}
-    case query
-    when /^[[:digit:]]*$/
-      query_params[:query] = query
-      patient_condition = "patients.doctor_patient_nr = :query"
-      invoice_condition = "invoices.id = :query OR invoices.imported_invoice_id = :query"
-    when /([[:digit:]]{1,2}\.){2}/
-      query_params[:query] = Date.parse_europe(query, :past).strftime('%%%y-%m-%d%')
-      patient_condition = "patients.birth_date LIKE :query"
-      invoice_condition = "invoices.created_at LIKE :query"
-    else
-      query_params[:query] = "%#{query}%"
-      query_params[:wildcard_value] = '%' + query.gsub(/[ -.]+/, '%') + '%'
-      name_condition = "(vcards.given_name LIKE :wildcard_value) OR (vcards.family_name LIKE :wildcard_value) OR (vcards.full_name LIKE :wildcard_value)"
-      given_family_condition = "( concat(vcards.given_name, ' ', vcards.family_name) LIKE :wildcard_value)"
-      family_given_condition = "( concat(vcards.family_name, ' ', vcards.given_name) LIKE :wildcard_value)"
-
-      patient_condition = "#{name_condition} OR #{given_family_condition} or #{family_given_condition}"
-      invoice_condition = "invoices.remark LIKE :wildcard_value"
-    end
-
-    self.includes(:tiers => {:patient => {:vcards => :addresses}}).conditions("(#{patient_condition}) OR (#{invoice_condition})", query_params).order('vcards.family_name, vcards.given_name')
-  end
-
   # Calculated fields
   def amount_mt(tariff_type = nil, options = {})
     service_records.by_tariff_type(tariff_type).to_a.sum(&:amount_mt)
