@@ -15,6 +15,8 @@ CyDoc::Application.routes.draw do
     collection do
       get :current
     end
+
+    resources :attachments
   end
 
   resources :vcards do

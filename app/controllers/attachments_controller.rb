@@ -1,6 +1,9 @@
-# -*- encoding : utf-8 -*-
 class AttachmentsController < AuthorizedController
-  belongs_to :doctor, :polymorphic => true, :optional => true
+  belongs_to :invoice, :polymorphic => true, :optional => true
+  belongs_to :employee, :polymorphic => true, :optional => true
+  belongs_to :person, :polymorphic => true, :optional => true
+  belongs_to :tenant, :polymorphic => true, :optional => true
+  belongs_to :case, :polymorphic => true, :optional => true
 
   def create
     create! {
@@ -13,6 +16,10 @@ class AttachmentsController < AuthorizedController
     @attachment = Attachment.find(params[:id])
 
     path = @attachment.file.current_path
-    send_file path
+    if @attachment.visible_filename
+      send_file path, :filename => @attachment.visible_filename
+    else
+      send_file path
+    end
   end
 end
