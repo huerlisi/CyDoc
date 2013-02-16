@@ -1,3 +1,13 @@
+2.0.0.beta5
+===========
+Features:
+
+* Switch order by session of service_records in invoices.
+* Restyle and translate invoice action links.
+* Fix invoices#destroy action.
+* Add link to new invoice_batch_job to treatments index.
+* Implement AJAX update for treatment amount.
+
 2.0.0.beta4
 ===========
 Features:
