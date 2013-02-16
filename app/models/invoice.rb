@@ -345,7 +345,7 @@ class Invoice < ActiveRecord::Base
   end
 
   has_and_belongs_to_many :sessions, :autosave => true
-  has_and_belongs_to_many :service_records, :order => 'tariff_type, date, session DESC, if(ref_code IS NULL, code, ref_code), concat(code,ref_code)'
+  has_and_belongs_to_many :service_records, :order => 'tariff_type, date, session, if(ref_code IS NULL, code, ref_code), concat(code,ref_code)'
 
   # Validation
   validates_presence_of :value_date
