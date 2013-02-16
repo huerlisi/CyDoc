@@ -1,2 +1,4 @@
 $('#session_<%= @session.id %> .service_records.list').replaceWith('<%=j render('sessions/service_records', :session => @session) %>')
 $("#session_<%= @session.id %> input[name='search[query]']").focus()
+
+$("#treatment_total").replaceWith('<%=j render('treatments/show_total', :treatment => @session.treatment) %>')

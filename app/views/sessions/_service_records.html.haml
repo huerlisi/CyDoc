@@ -19,6 +19,6 @@
           %td{:style => "text-align: right"}
             %b= s.object.amount
           %td
-            = link_to image_tag('delete.png'), s.object, :method => :delete, :remote => true
+            = link_to image_tag('delete.png'), [session.patient, session, s.object], :method => :delete, :remote => true
 
     = f.button :submit

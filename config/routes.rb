@@ -160,8 +160,6 @@ CyDoc::Application.routes.draw do
     resources :sessions
   end
 
-  resources :service_records
-
   resources :service_items
   resources :tariff_items do
     collection do

@@ -45,4 +45,9 @@ class ServiceRecordsController < AuthorizedController
     params[:tariff_item_id] = TariffItem.find_by_code(query)
     create && return
   end
+
+  def destroy
+    @session = Session.find(params[:session_id])
+    destroy!
+  end
 end
