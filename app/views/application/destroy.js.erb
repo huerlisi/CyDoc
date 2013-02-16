@@ -1,2 +1,6 @@
 $('#<%= "#{resource_class.model_name.underscore}_#{resource.id}" %>').remove();
+
+// Delete for nested attributes
+$("input[name*='[<%= resource_class.model_name.underscore %>'][name$='[id]'][type='hidden'][value='<%= resource.id %>']").remove();
+
 initializeBehaviours();
