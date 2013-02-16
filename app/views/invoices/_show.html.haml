@@ -1,17 +1,17 @@
 .contextual
   - if @invoice.reminded?
-    = link_to t('cydoc.actions.print_dunning_letter_copy'), print_reminder_letter_invoice_path(@invoice, :print_copy => true), :onclick => "showPrintingFlash('Mahnkopie')", 'data-method' => :post, :class => "icon icon-remind btn"
+    = icon_link_to :print_dunning_letter_copy, print_reminder_letter_invoice_path(@invoice, :print_copy => true), :onclick => "showPrintingFlash('Mahnkopie')", 'data-method' => :post
   - if @invoice.overdue?
-    = link_to t('cydoc.actions.print_dunning_letter'), print_reminder_letter_invoice_path(@invoice), :onclick => "showPrintingFlash('Mahnung')", 'data-method' => :post, :class => "icon icon-remind"
+    = icon_link_to :print_dunning_letter, print_reminder_letter_invoice_path(@invoice), :onclick => "showPrintingFlash('Mahnung')", 'data-method' => :post
   - if @invoice.state == 'prepared'
-    = link_to t('cydoc.actions.print'), print_invoice_path(@invoice), :onclick => "showPrintingFlash('#{t_model(Invoice)}')", :remote => true, :method => :post, :class => "icon icon-print"
+    = icon_link_to :print, print_invoice_path(@invoice), :onclick => "showPrintingFlash('#{t_model(Invoice)}')", :remote => true, :method => :post
   - else
-    = link_to t('cydoc.actions.print_copy'), print_invoice_path(@invoice, :print_copy => true), :method => :post, :remote => true, :class => "icon icon-print"
+    = icon_link_to :print_copy, print_invoice_path(@invoice, :print_copy => true), :method => :post, :remote => true
   - if @invoice.active
-    = link_to t('cydoc.actions.cancel'), invoice_path(@invoice), 'data-method' => :delete, :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.cancel')}?", :class => "icon icon-delete"
-    = link_to t('cydoc.actions.reactivate'), reactivate_invoice_path(@invoice), 'data-confirm' => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?", 'data-method' => :post, :class => "icon icon-reactivate"
+    = icon_link_to :cancel, invoice_path(@invoice), 'data-method' => :delete, :confirm => "#{t_model(Invoice)} #{@invoice.to_s} #{t_action(:cancel)}?"
+    = icon_link_to :reactivate, reactivate_invoice_path(@invoice), 'data-confirm' => "#{t_model(Invoice)} #{@invoice.to_s} #{t_action(:reactivate)}?", 'data-method' => :post
   - elsif @invoice.state == 'canceled' or @invoice.state == 'written_off'
-    = link_to t('cydoc.actions.reactivate'), reactivate_invoice_path(@invoice), 'data-confirm' => "#{t_model(Invoice)} #{@invoice.to_s} #{t('cydoc.actions.reactivate')}?", 'data-method' => :post, :class => "icon icon-reactivate"
+    = icon_link_to :reactivate, reactivate_invoice_path(@invoice), 'data-confirm' => "#{t_model(Invoice)} #{@invoice.to_s} #{t_action(:reactivate)}?", 'data-method' => :post
 
 = render 'invoices/show_main'
 
