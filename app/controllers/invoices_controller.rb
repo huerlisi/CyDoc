@@ -182,17 +182,10 @@ class InvoicesController < AuthorizedController
     @treatment.reload
 
     respond_to do |format|
-      format.html { }
-      format.js {
-        render :update do |page|
-          if params[:context] == "list"
-            page.replace "invoice_#{@invoice.id}", :partial => 'item', :object => @invoice
-          else
-            page.replace_html "tab-content-invoices", :partial => 'show'
-            page.replace_html 'patient-sidebar', :partial => 'patients/sidebar'
-          end
-        end
+      format.html {
+        redirect_to @invoice
       }
+      format.js { }
     end
   end
 
