@@ -1,0 +1,11 @@
+.contextual
+  = contextual_links_for :index
+  = icon_link_to t_title(:new, InvoiceBatchJob), new_invoice_batch_job_path
+
+= boot_page_title
+
+= paginate collection
+
+= render 'list', :collection => collection
+
+= paginate collection
