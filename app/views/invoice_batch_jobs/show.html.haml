@@ -8,4 +8,4 @@
 = failed_jobs(resource)
 
 %h3= t_attr(:bills)
-= render :partial => 'invoices/list', :collection => resource.invoices
+= render :partial => 'invoices/list', :locals => {:collection => resource.invoices}
