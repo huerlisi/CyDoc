@@ -76,9 +76,19 @@ class PatientLetter < LetterDocument
   end
 
   # Billing Address
-  def billing_address(invoice)
-    font_size 10
-    draw_address(invoice.billing_vcard, true)
+  def billing_address(sender, receiver_vcard)
+    # Address
+    float do
+      canvas do
+        bounding_box [12.cm, bounds.top - 5.cm], :width => 10.cm do
+          font_size 5.5 do
+            text full_address(sender.vcard, ', ') if sender
+          end
+          text " "
+          draw_address(receiver_vcard, true) if receiver_vcard
+        end
+      end
+    end
   end
 
   # Patient
@@ -148,9 +158,7 @@ class PatientLetter < LetterDocument
         treatment(invoice)
       end
 
-      bounding_box [12.cm, bounds.top - 3.5.cm], :width => 7.cm do
-        billing_address(invoice)
-      end
+      billing_address(invoice.biller, invoice.billing_vcard)
 
       bounding_box [12.cm, bounds.top - 8.cm], :width => 7.cm do
         patient(invoice)
