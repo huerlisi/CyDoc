@@ -32,6 +32,11 @@ SimpleNavigation::Configuration.run do |navigation|
 
         entry.item :divider, "", :class => 'divider'
 
+        entry.item :new_invoice_batch_job, t_title(:new, InvoiceBatchJob), new_invoice_batch_job_path
+        entry.item :invoice_batch_jobs, t_title(:index, InvoiceBatchJob), invoice_batch_jobs_path
+
+        entry.item :divider, "", :class => 'divider'
+
         entry.item :new_esr_file, t_title(:new, EsrFile), new_esr_file_path
         entry.item :esr_files, t_title(:index, EsrFile), esr_files_path
 
