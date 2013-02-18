@@ -1,0 +1,6 @@
+%table.table.table-striped
+  - collection.each do |invalid_treatment|
+    %tr
+      - treatment = Treatment.find(invalid_treatment[:treatment_id])
+      %td= link_to treatment, treatment, 'data-href-container' => 'tr'
+      %td= invalid_treatment[:message].join("<br/>").html_safe

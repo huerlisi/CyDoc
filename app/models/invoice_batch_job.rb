@@ -28,18 +28,12 @@ class InvoiceBatchJob < ActiveRecord::Base
     self.failed_jobs = self.failed_jobs.reject{|job| job[:invoice_id]}
   end
 
-  def print(printers)
+  def print(patient_letter_printer, insurance_recipe_printer)
     clean_failed_invoice_jobs
 
     invoices.each_with_index do |invoice, index|
-      # Sleep for 4min every 50 treatments
-      if index > 0 and index.modulo(50) == 0
-        sleep 4 * 60
-      end
-
-      # Print
       begin
-        invoice.print(printers[:trays][:plain], printers[:trays][:invoice])
+        invoice.print(patient_letter_printer, insurance_recipe_printer)
       rescue RuntimeError => e
         failed_jobs << {:invoice_id => invoice.id, :message => e.message }
       end

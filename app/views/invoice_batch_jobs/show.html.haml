@@ -5,7 +5,7 @@
 = boot_page_title
 
 %h3= t_attr :failed_jobs
-= failed_jobs(resource)
+= render 'invalid_treatments', :collection => resource.failed_jobs
 
 %h3= t_attr(:bills)
-= render :partial => 'invoices/list', :locals => {:collection => resource.invoices}
+= render 'invoices/list', :collection => resource.invoices

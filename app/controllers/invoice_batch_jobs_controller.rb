@@ -27,7 +27,18 @@ class InvoiceBatchJobsController < AuthorizedController
     end
 
     @invoice_batch_job.create_invoices(@treatments, value_date, tiers_name, provider, biller)
-    #@invoice_batch_job.print(@printers)
+    if current_tenant.settings['printing.cups']
+      begin
+        patient_letter_printer = current_tenant.printer_for(:invoice)
+        insurance_recipe_printer = current_tenant.printer_for(:plain)
+
+        @invoice_batch_job.print(patient_letter_printer, insurance_recipe_printer)
+        flash.now[:notice] = "#{@case_invoice_batch_job} an Drucker gesendet"
+
+      rescue RuntimeError => e
+        flash[:alert] = "Drucken fehlgeschlagen: #{e.message}"
+      end
+    end
 
     create!
   end
@@ -36,7 +47,18 @@ class InvoiceBatchJobsController < AuthorizedController
   def reprint
     @invoice_batch_job = InvoiceBatchJob.find(params[:id])
 
-    @invoice_batch_job.print(@printers)
+    if current_tenant.settings['printing.cups']
+      begin
+        patient_letter_printer = current_tenant.printer_for(:invoice)
+        insurance_recipe_printer = current_tenant.printer_for(:plain)
+
+        @invoice_batch_job.print(patient_letter_printer, insurance_recipe_printer)
+        flash.now[:notice] = "#{@case_invoice_batch_job} an Drucker gesendet"
+
+      rescue RuntimeError => e
+        flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
+      end
+    end
 
     @invoice_batch_job.save
 
