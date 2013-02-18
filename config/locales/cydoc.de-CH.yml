@@ -24,9 +24,10 @@ de-CH:
         title:            Titel
         code:           Verwenden als
         code_enum:
-          'Prawn::LetterDocument': Briefvorlage
-          'Prawn::PatientLetter':  Rechnungsvorlage
-          'Prawn::ReminderLetter': Mahnvorlage
+          DoctorOrderForm: Auftragsformular
+          LetterDocument: Briefvorlage
+          PatientLetter:  Rechnungsvorlage
+          ReminderLetter: Mahnvorlage
       booking:
         amount:           Summe
         average:          Durchschnitt
@@ -357,6 +358,9 @@ de-CH:
     done:      "%{model} wurde an Drucker gesendet."
     pdf_done:  "Dokument zum Download bereit:"
 
+  attachments:
+    index:
+      title:         Dokumente
   tariff_items:
     index:
       title:              Leistungskatalog
