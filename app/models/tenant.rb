@@ -5,6 +5,12 @@ class Tenant < ActiveRecord::Base
   has_many :users
   attr_accessible :user_ids
 
+  # Person
+  # ======
+  belongs_to :person
+  accepts_nested_attributes_for :person
+  attr_accessible :person_attributes
+
   # Settings
   has_settings
   attr_accessible :settings
