@@ -158,7 +158,7 @@ class PatientLetter < LetterDocument
         treatment(invoice)
       end
 
-      billing_address(invoice.biller, invoice.billing_vcard)
+      billing_address(invoice.biller.user.tenant.person, invoice.billing_vcard)
 
       bounding_box [12.cm, bounds.top - 8.cm], :width => 7.cm do
         patient(invoice)
