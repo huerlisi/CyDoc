@@ -8,7 +8,7 @@ class PatientLetter < LetterDocument
   def default_options
     parent_options = super
     parent_options.merge(:top_margin => 35, :left_margin => 12, :right_margin => 12, :bottom_margin => 23)
-    parent_options[:template] = nil
+
     parent_options
   end
 
