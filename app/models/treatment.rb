@@ -48,7 +48,7 @@ class Treatment < ActiveRecord::Base
   scope :charged, where(:state => 'charged').order(:date_begin)
 
   def active?
-    state == 'open'
+    state == 'active'
   end
 
   def chargeable?
@@ -64,7 +64,7 @@ class Treatment < ActiveRecord::Base
     else
       if chargeable?
         # Set state to 'open' if any session is open
-        new_state = 'open'
+        new_state = 'active'
       else
         # Set state to 'charged' as no session is ready to bill
         new_state = 'charged'
