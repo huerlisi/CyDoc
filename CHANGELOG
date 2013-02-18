@@ -1,3 +1,12 @@
+2.0.0.beta6
+===========
+Features:
+* Fix invoice reactivation to mark treatment as open.
+* Fix action buttons in invoice_batch_jobs.
+* Add navigation links to invoice_batch_jobs.
+* Fix invoice_batch_jobs view.
+* Refactor invoice_batch_printing.
+
 2.0.0.beta5
 ===========
 Features:
