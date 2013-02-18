@@ -50,8 +50,16 @@ class InvoiceBatchJob < ActiveRecord::Base
     treatments.each do |treatment_readonly|
       treatment = Treatment.find(treatment_readonly.id)
 
+      invoice_params = {
+        :value_date => value_date,
+        :tiers_attributes => {
+          :provider_id => provider.id,
+          :biller_id => biller.id
+        }
+      }
+
       # Create invoice
-      invoice = Invoice.create_from_treatment({:value_date => value_date}, treatment, tiers_name, provider, biller)
+      invoice = Invoice.create_from_treatment(invoice_params, treatment)
 
       if invoice.new_record?
         # Invoice was invalid in some way

@@ -1,4 +1,4 @@
-= simple_form_for resource, :remote => true, :before => "showPrintingFlash('Rechnungslauf'); $('invoice_batch_f').remove()" do |f|
+= simple_form_for resource, :before => "showPrintingFlash('Rechnungslauf'); $('invoice_batch_f').remove()" do |f|
   = f.input :tiers_name, :as => :hidden
   .row-fluid
     .span6= f.input :value_date, :as => :date_field
