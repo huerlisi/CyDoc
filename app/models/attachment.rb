@@ -1,5 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Attachment < ActiveRecord::Base
+  # Access restriction
+  attr_accessible :title, :file, :code, :object_id, :object_type
+
   # Association
   belongs_to :object, :polymorphic => true
 
@@ -11,7 +14,7 @@ class Attachment < ActiveRecord::Base
   def to_s(format = :default)
     title == nil ? "" : title
   end
-  
+
   def code(format = :db)
     # TODO: should probably use Law model.
     raw = read_attribute(:code)
