@@ -44,8 +44,8 @@ class Treatment < ActiveRecord::Base
 
   # State
   scope :by_state, lambda {|state| where(:state => state)}
-  scope :active, :conditions => "treatments.state = 'open'", :order => 'date_begin'
-  scope :charged, :conditions => "treatments.state = 'charged'", :order => 'date_begin'
+  scope :active, where(:state => 'active').order(:date_begin)
+  scope :charged, where(:state => 'charged').order(:date_begin)
 
   def active?
     state == 'open'
