@@ -1,3 +1,11 @@
+2.0.0.beta7
+===========
+* Update some locales from Hozr.
+* Add access restrictions for Attachment.
+* Use template in PatientLetter document.
+* Port address part of patient letter from Hozr.
+* Use tenant as sender in invoice address.
+
 2.0.0.beta6
 ===========
 Features:
