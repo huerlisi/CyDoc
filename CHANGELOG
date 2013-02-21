@@ -1,3 +1,8 @@
+2.0.0.beta8
+===========
+* Add invoices#index.
+* Use same font-size for patient address for patient_letter as for insurance_recipe.
+
 2.0.0.beta7
 ===========
 * Update some locales from Hozr.
