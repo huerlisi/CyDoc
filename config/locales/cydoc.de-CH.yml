@@ -98,7 +98,7 @@ de-CH:
         provider: Leistungserbringer
         reclaim_recipe: Rückforderungsbeleg
         referrer: Zuweisender Arzt
-        remark:     Bemerkungen
+        remark:     Interne Bemerkungen
         state: Status
         tarmed_al: Tarmed AL
         tarmed_tl: Tarmed TL

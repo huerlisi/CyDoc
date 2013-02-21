@@ -46,3 +46,8 @@
         = t_attr(:due_date, Invoice)
         \:
       %td= @invoice.due_date
+    %tr
+      %th
+        = t_attr(:remark, Invoice)
+        \:
+      %td{:colspan => 3}= @invoice.remark
