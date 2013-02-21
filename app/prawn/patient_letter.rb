@@ -84,8 +84,10 @@ class PatientLetter < LetterDocument
           font_size 5.5 do
             text full_address(sender.vcard, ', ') if sender
           end
-          text " "
-          draw_address(receiver_vcard, true) if receiver_vcard
+          font_size 10 do
+            text " "
+            draw_address(receiver_vcard, true) if receiver_vcard
+          end
         end
       end
     end
