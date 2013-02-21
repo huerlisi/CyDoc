@@ -2,6 +2,7 @@
 ===========
 * Add invoices#index.
 * Use same font-size for patient address for patient_letter as for insurance_recipe.
+* Show remarks in invoice view.
 
 2.0.0.beta7
 ===========
