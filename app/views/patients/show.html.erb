@@ -1,3 +1,14 @@
+<%- if @patient.dunning_stop %>
+  <div class="flash error">
+    <p>
+      <%= flash[:alert] = t('flash.action.dunning_stop') %>
+    </p>
+    <p>
+      <%= flash[:alert] = t('flash.action.returned_invoice_html', :link => link_to("Link", [:edit, @patient.returned_invoices.first])) if  @patient.returned_invoices.present? %>
+    </p>
+  </div>
+<%- end %>
+
 <div class="contextual48">
 </div>
 

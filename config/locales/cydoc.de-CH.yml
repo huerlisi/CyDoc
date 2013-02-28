@@ -377,3 +377,8 @@ de-CH:
 
   letters:
     greetings:        Freundliche Grüsse
+
+  flash:
+    action:
+      dunning_stop:     Mahnstopp gesetzt
+      returned_invoice_html: Unzustellbare Rechnung %{link}
