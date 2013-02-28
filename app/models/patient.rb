@@ -37,7 +37,11 @@ class Patient < ActiveRecord::Base
 
   has_many :tiers
   has_many :invoices, :through => :tiers, :order => 'created_at DESC'
-  
+  # Returned Invoices
+  def returned_invoices
+    invoices.collect{|i| i.returned_invoices.active}.flatten
+  end
+
   has_many :treatments, :order => 'date_begin DESC'
       
   # Helpers

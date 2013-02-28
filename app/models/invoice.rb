@@ -539,4 +539,7 @@ class Invoice < ActiveRecord::Base
   def print_reminder(printer)
     print_document(:reminder_letter, printer)
   end
+
+  # Returned invoices
+  has_many :returned_invoices
 end
