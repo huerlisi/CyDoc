@@ -36,15 +36,14 @@ class ReturnedInvoicesController < ApplicationController
 
     case params[:commit]
     when 'queue_request'
-      @returned_invoice.queue_request!
+      queue_request
+      return
     when 'reactivate'
-      @returned_invoice.invoice.reactivate.save
-      @returned_invoice.patient.update_attribute(:dunning_stop, false)
-      @returned_invoice.reactivate!
+      reactivate
+      return
     when 'write_off'
-      @returned_invoice.invoice.write_off.save
-      @returned_invoice.patient.update_attribute(:dunning_stop, false)
-      @returned_invoice.write_off!
+      write_off
+      return
     else
     end
 
@@ -57,11 +56,35 @@ class ReturnedInvoicesController < ApplicationController
     # Remember previous state to redirect to this list
     previous_state = @returned_invoice.state
 
-    @returned_invoice.invoice.reactivate.save
-    @returned_invoice.patient.update_attribute(:dunning_stop, false)
-    @returned_invoice.reactivate!
+    @treatment = @returned_invoice.invoice.treatment
+    @patient = @treatment.patient
+    @old_invoice = @returned_invoice.invoice
 
-    redirect_to returned_invoices_path(:by_state => previous_state)
+    # Saving
+    if @old_invoice.valid?
+      @returned_invoice.invoice.reactivate.save
+      @returned_invoice.patient.update_attribute(:dunning_stop, false)
+
+      @invoice = Invoice.create_from_treatment(@treatment, Date.today, "TiersGarant", Doctor.find(Thread.current["doctor_id"]), Doctor.find(Thread.current["doctor_id"]))
+      if @invoice.print(@printers[:trays][:plain], @printers[:trays][:invoice])
+        flash[:notice] = 'Neue Rechnung an Drucker gesendet.'
+        @invoice.state = 'printed'
+        @invoice.save!
+
+        @returned_invoice.reactivate!
+        redirect_to returned_invoices_path(:by_state => previous_state) and return
+      else
+        flash[:error] = 'Rechnung konnte nicht gedruckt werden.'
+      end
+    end
+
+    respond_to do |format|
+      format.html { render 'edit' }
+      format.js {
+        page.replace_html "error_flash", flash[:error]
+        page.show "error_flash"
+      }
+    end
   end
 
   def write_off
