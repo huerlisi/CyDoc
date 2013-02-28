@@ -53,27 +53,39 @@ class ReturnedInvoicesController < ApplicationController
 
   def reactivate
     @returned_invoice = ReturnedInvoice.find(params[:id])
+
+    # Remember previous state to redirect to this list
+    previous_state = @returned_invoice.state
+
     @returned_invoice.invoice.reactivate.save
     @returned_invoice.patient.update_attribute(:dunning_stop, false)
     @returned_invoice.reactivate!
 
-    redirect_to returned_invoices_path
+    redirect_to returned_invoices_path(:by_state => previous_state)
   end
 
   def write_off
     @returned_invoice = ReturnedInvoice.find(params[:id])
+
+    # Remember previous state to redirect to this list
+    previous_state = @returned_invoice.state
+
     @returned_invoice.invoice.write_off.save
     @returned_invoice.patient.update_attribute(:dunning_stop, false)
     @returned_invoice.write_off!
 
-    redirect_to returned_invoices_path
+    redirect_to returned_invoices_path(:by_state => previous_state)
   end
 
   def queue_request
     @returned_invoice = ReturnedInvoice.find(params[:id])
+
+    # Remember previous state to redirect to this list
+    previous_state = @returned_invoice.state
+
     @returned_invoice.queue_request!
 
-    redirect_to returned_invoices_path
+    redirect_to returned_invoices_path(:by_state => previous_state)
   end
 
   def queue_all_requests
