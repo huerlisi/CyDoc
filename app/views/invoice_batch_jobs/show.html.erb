@@ -8,5 +8,5 @@
 <%= failed_jobs(@invoice_batch_job) %>
 
 <h3>Rechnungen</h3>
-<%- @invoices = @invoice_batch_job.invoices.paginate(:page => params[:page], :per_page => 50) %>
+<%- @invoices = @invoice_batch_job.invoices.paginate(:page => params[:page], :per_page => (params[:per_page] || 500)) %>
 <%= render 'invoices/list' %>
