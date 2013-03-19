@@ -1,3 +1,11 @@
+2.0.0.beta10
+============
+This is a security update. Everyone is advised to update.
+
+This fixes a few issues in the underlying framework Ruby on Rails. Malicious
+users may run attacks on other users, or a denial of service attach could be
+done from the internet.
+
 2.0.0.beta9
 ===========
 * Do not fail if invoice or treatment which failed in invoice batch job does not exist anymore.
