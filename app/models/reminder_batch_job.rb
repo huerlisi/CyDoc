@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ReminderBatchJob < InvoiceBatchJob
   def to_s
-    "Mahnlauf vom #{value_date}"
+    "Mahnlauf vom #{created_at.to_date}"
   end
 
   def remind
@@ -15,18 +15,12 @@ class ReminderBatchJob < InvoiceBatchJob
     end
   end
 
-  def print(printers)
+  def print(printer)
     clean_failed_invoice_jobs
 
-    invoices.each_with_index do |invoice, index|
-      # Sleep for 4min every 50 treatments
-      if index > 0 and index.modulo(50) == 0
-        sleep 4 * 60
-      end
-
-      # Print
+    invoices.each do |invoice|
       begin
-        invoice.print_reminder(printers[:trays][:invoice])
+        invoice.print_reminder(printer)
       rescue RuntimeError => e
         failed_jobs << {:invoice_id => invoice.id, :message => e.message }
       end

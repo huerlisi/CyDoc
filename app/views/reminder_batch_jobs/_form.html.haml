@@ -1,4 +1,4 @@
-= simple_form_for  resource, :before => "showPrintingFlash('Rechnungslauf'); $('reminder_batch_f').remove()", :remote => true do |f|
+= simple_form_for resource do |f|
   .row-fluid
     .span6= f.input :count, :input_html => {:size => 12, :autocomplete => 'off', 'data-autofocus' => true}
 

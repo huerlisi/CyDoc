@@ -6,51 +6,50 @@ class ReminderBatchJobsController < InvoiceBatchJobsController
   def new
     @reminder_batch_job = ReminderBatchJob.new
 
-    @reminder_batch_job.count = Invoice.overdue(current_doctor.settings['invoices.grace_period']).dunning_active.count
+    @reminder_batch_job.count = reminder.overdue.no_grace.dunning_active.count
     @reminder_batch_job.value_date = Date.today
-
-    respond_to do |format|
-      format.html { }
-      format.js {
-        render :update do |page|
-          page.insert_html :before, 'overdue_invoice_list', :partial => 'form'
-          page.call(:initBehaviour)
-        end
-      }
-    end
   end
 
   # POST /reminder_batch_jobs
   def create
     @reminder_batch_job = ReminderBatchJob.new(params[:reminder_batch_job])
-    @invoices = Invoice.overdue(current_doctor.settings['invoices.grace_period']).dunning_active.all(:limit => @reminder_batch_job.count)
+    @reminders = reminder.overdue.no_grace.dunning_active.all(:limit => @reminder_batch_job.count)
 
-    @reminder_batch_job.invoices = @invoices
+    @reminder_batch_job.reminders = @reminders
     @reminder_batch_job.remind
-    @reminder_batch_job.print(@printers)
+    if current_tenant.settings['printing.cups']
+      begin
+        reminder_printer = current_tenant.printer_for(:invoice)
 
-    # Saving
-    if @reminder_batch_job.save
-      flash[:notice] = 'Erfolgreich erstellt.'
+        @reminder_batch_job.print(reminder_printer)
+        flash[:notice] = "#{@reminder_batch_job} an Drucker gesendet"
 
-      respond_to do |format|
-        format.html { redirect_to @reminder_batch_job }
-        format.js {
-          render :update do |page|
-            page.replace "reminder_flash", :partial => 'printed_flash'
-          end
-        }
-      end
-    else
-      respond_to do |format|
-        format.html { }
-        format.js {
-          render :update do |page|
-            page.replace_html 'tab-content-invoices', :partial => 'form'
-            page.call(:initBehaviour)
-          end
-        }
+      rescue RuntimeError => e
+        flash[:alert] = "Drucken fehlgeschlagen: #{e.message}"
       end
     end
+
+    create!
+  end
+
+  # POST /reminder_batch_jobs/1/redo
+  def reprint
+    @reminder_batch_job = ReminderBatchJob.find(params[:id])
+
+    if current_tenant.settings['printing.cups']
+      begin
+        reminder_printer = current_tenant.printer_for(:invoice)
+
+        @reminder_batch_job.print(reminder_printer)
+        flash[:notice] = "#{@reminder_batch_job} an Drucker gesendet"
+
+      rescue RuntimeError => e
+        flash[:alert] = "Drucken fehlgeschlagen: #{e.message}"
+      end
+    end
+
+    @reminder_batch_job.save
+
+    redirect_to @reminder_batch_job
   end
 end
