@@ -22,7 +22,7 @@ class InvoicesController < AuthorizedController
         insurance_recipe_printer = current_tenant.printer_for(:plain)
 
         @invoice.print(patient_letter_printer, insurance_recipe_printer)
-        flash.now[:notice] = "#{@case} an Drucker gesendet"
+        flash.now[:notice] = "#{@invoice} an Drucker gesendet"
 
       rescue RuntimeError => e
         flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
