@@ -33,7 +33,7 @@ class InvoiceBatchJobsController < AuthorizedController
         insurance_recipe_printer = current_tenant.printer_for(:plain)
 
         @invoice_batch_job.print(patient_letter_printer, insurance_recipe_printer)
-        flash.now[:notice] = "#{@case_invoice_batch_job} an Drucker gesendet"
+        flash[:notice] = "#{@invoice_batch_job} an Drucker gesendet"
 
       rescue RuntimeError => e
         flash[:alert] = "Drucken fehlgeschlagen: #{e.message}"
@@ -53,10 +53,10 @@ class InvoiceBatchJobsController < AuthorizedController
         insurance_recipe_printer = current_tenant.printer_for(:plain)
 
         @invoice_batch_job.print(patient_letter_printer, insurance_recipe_printer)
-        flash.now[:notice] = "#{@case_invoice_batch_job} an Drucker gesendet"
+        flash[:notice] = "#{@invoice_batch_job} an Drucker gesendet"
 
       rescue RuntimeError => e
-        flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
+        flash[:alert] = "Drucken fehlgeschlagen: #{e.message}"
       end
     end
 
