@@ -37,6 +37,11 @@ SimpleNavigation::Configuration.run do |navigation|
 
         entry.item :divider, "", :class => 'divider'
 
+        entry.item :new_reminder_batch_job, t_title(:new, ReminderBatchJob), new_reminder_batch_job_path
+        entry.item :reminder_batch_jobs, t_title(:index, ReminderBatchJob), reminder_batch_jobs_path
+
+        entry.item :divider, "", :class => 'divider'
+
         entry.item :new_esr_file, t_title(:new, EsrFile), new_esr_file_path
         entry.item :esr_files, t_title(:index, EsrFile), esr_files_path
 
