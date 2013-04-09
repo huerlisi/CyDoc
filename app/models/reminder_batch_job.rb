@@ -1,5 +1,9 @@
 # -*- encoding : utf-8 -*-
 class ReminderBatchJob < InvoiceBatchJob
+  def to_s
+    "Mahnlauf vom #{value_date}"
+  end
+
   def remind
     for invoice in invoices
       begin
@@ -7,7 +11,7 @@ class ReminderBatchJob < InvoiceBatchJob
         invoice.save!
       rescue RuntimeError => e
         failed_jobs << {:invoice_id => invoice.id, :message => e.message }
-      end 
+      end
     end
   end
 
