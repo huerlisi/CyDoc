@@ -1,8 +1,8 @@
 .contextual
   - if @invoice.reminded?
-    = icon_link_to :print_dunning_letter_copy, print_reminder_letter_invoice_path(@invoice, :print_copy => true), :onclick => "showPrintingFlash('Mahnkopie')", 'data-method' => :post
+    = icon_link_to :print_dunning_letter_copy, print_reminder_letter_invoice_path(@invoice, :print_copy => true), :onclick => "showPrintingFlash('Mahnkopie')", :remote => true, 'data-method' => :post
   - if @invoice.overdue?
-    = icon_link_to :print_dunning_letter, print_reminder_letter_invoice_path(@invoice), :onclick => "showPrintingFlash('Mahnung')", 'data-method' => :post
+    = icon_link_to :print_dunning_letter, print_reminder_letter_invoice_path(@invoice), :onclick => "showPrintingFlash('Mahnung')", :remote => true, 'data-method' => :post
   - if @invoice.state == 'prepared'
     = icon_link_to :print, print_invoice_path(@invoice), :onclick => "showPrintingFlash('#{t_model(Invoice)}')", :remote => true, :method => :post
   - else
