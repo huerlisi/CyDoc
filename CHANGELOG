@@ -1,8 +1,9 @@
 2.0.0.beta11
 ============
+Fix and improve invoice reminder management.
 
 Upgrading:
-  Invoice and reminder grace period settings are now taken as days, not seconds. Please check and update
+  Invoice and reminder period settings are now taken as days, not seconds. Please check and update
   those values.
 
 2.0.0.beta10
