@@ -370,6 +370,12 @@ de-CH:
   invoices:
     index:
       title:              Rechnungen
+  invoice_batch_jobs:
+    index:
+      title:              Rechnungsläufe
+  reminder_batch_jobs:
+    index:
+      title:              Mahnläufe
   returned_invoices:
     edit_ready:
       title:              Neue vorbereiten
