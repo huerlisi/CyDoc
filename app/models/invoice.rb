@@ -154,15 +154,15 @@ class Invoice < ActiveRecord::Base
   end
 
   def payment_period
-    settings["invoices.payment_period"]
+    settings["invoices.payment_period"].to_i.days
   end
 
   def payment_grace_period
-    settings["invoices.grace_period"]
+    settings["invoices.grace_period"].to_i.days
   end
 
   def reminder_fee
-    settings["invoices.reminders.#{reminder_level}.fee"]
+    BigDecimal.new(settings["invoices.reminders.#{reminder_level}.fee"].to_s)
   end
 
   def reminder_grace_period(level = nil)
@@ -171,7 +171,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def reminder_payment_period
-    settings["invoices.reminders.#{reminder_level}.payment_period"]
+    settings["invoices.reminders.#{reminder_level}.payment_period"].to_i.days
   end
 
   def state_adverb
