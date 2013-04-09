@@ -1,8 +1,11 @@
 .contextual
-  = link_to "Liste", reminder_batch_jobs_path
-  = link_to "Erneut drucken", reprint_reminder_batch_job_path, :method => :post
+  = icon_link_to :index
+  = icon_link_to "Erneut drucken", reprint_reminder_batch_job_path, :method => :post
+
 = boot_page_title
+
 %h3= t_attr :failed_jobs
 = failed_jobs(resource)
+
 %h3= t_attr(:bills)
 = render 'invoices/list', :collection => resource.invoices.page(0).per(resource.invoices.count)
