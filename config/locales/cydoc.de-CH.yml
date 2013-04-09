@@ -223,6 +223,22 @@ de-CH:
             defaults:
               biller_id:  Standart Rechnungssteller
               provider_id: Standart Leistungserbringer
+            payment_period:  Zahlungsfrist
+            grace_period:    Gnadenfrist
+            reminders:
+              '1':
+                payment_period: Zahlungsfrist
+                grace_period:   Gnadenfrist
+                fee:            Mahngebühr
+              '2':
+                payment_period: Zahlungsfrist
+                grace_period:   Gnadenfrist
+                fee:            Mahngebühr
+              '3':
+                payment_period: Zahlungsfrist
+                grace_period:   Gnadenfrist
+                fee:            Mahngebühr
+
         users:     Benutzer
 
     models:
