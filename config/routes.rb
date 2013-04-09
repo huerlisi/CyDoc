@@ -27,6 +27,7 @@ CyDoc::Application.routes.draw do
   resources :invoices do
     collection do
       post :print_all
+      get :overdue, :action => :index, :overdue => true
     end
     member do
       post :print_reminder_letter

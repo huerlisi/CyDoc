@@ -37,6 +37,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
         entry.item :divider, "", :class => 'divider'
 
+        entry.item :overdue_invoices, t_title(:overdue, Invoice), overdue_invoices_path
         entry.item :new_reminder_batch_job, t_title(:new, ReminderBatchJob), new_reminder_batch_job_path
         entry.item :reminder_batch_jobs, t_title(:index, ReminderBatchJob), reminder_batch_jobs_path
 
