@@ -51,36 +51,22 @@ class InvoicesController < AuthorizedController
     end
 
     if current_tenant.settings['printing.cups']
-      if @invoice.print_reminder(@printers[:trays][:invoice])
-        respond_to do |format|
-          format.html { redirect_to invoices_path }
-          format.js {
-            render :update do |page|
-              page.replace_html "tab-content-invoices", :partial => 'show'
-              page.replace "notice_flash", :partial => 'printed_flash', :locals => {:model => 'reminder'}
-            end
-          }
-        end
-      else
-        respond_to do |format|
-          format.html { redirect_to @invoice }
-          format.js {
-            render :update do |page|
-              page.replace_html "error_flash", :text => @invoice.printing_error
-              page.show "error_flash"
-              page.hide "notice_flash"
-            end
-          }
-        end
+      begin
+        reminder_printer = current_tenant.printer_for(:invoice)
+
+        @invoice.print_reminder(reminder_printer)
+        flash.now[:notice] = "#{@invoice} an Drucker gesendet"
+
+      rescue RuntimeError => e
+        flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
       end
+
+      render 'show_flash'
     else
       respond_to do |format|
         format.html { redirect_to @invoice }
         format.js {
-          render :update do |page|
-            page.replace_html "tab-content-invoices", :partial => 'show'
-            page.replace "notice_flash", :partial => 'pdf_links_flash', :locals => {:views => [:reminder_letter]}
-          end
+          render 'print', :locals => {:views => [:reminder_letter]}
         }
       end
     end
