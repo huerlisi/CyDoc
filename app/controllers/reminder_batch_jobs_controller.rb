@@ -6,14 +6,14 @@ class ReminderBatchJobsController < InvoiceBatchJobsController
   def new
     @reminder_batch_job = ReminderBatchJob.new
 
-    @reminder_batch_job.count = reminder.overdue.no_grace.dunning_active.count
+    @reminder_batch_job.count = Invoice.overdue.no_grace.dunning_active.count
     @reminder_batch_job.value_date = Date.today
   end
 
   # POST /reminder_batch_jobs
   def create
     @reminder_batch_job = ReminderBatchJob.new(params[:reminder_batch_job])
-    @reminders = reminder.overdue.no_grace.dunning_active.all(:limit => @reminder_batch_job.count)
+    @invoices = Invoice.overdue.no_grace.dunning_active.all(:limit => @reminder_batch_job.count)
 
     @reminder_batch_job.reminders = @reminders
     @reminder_batch_job.remind
