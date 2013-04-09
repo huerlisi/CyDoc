@@ -386,6 +386,8 @@ de-CH:
   invoices:
     index:
       title:              Rechnungen
+    overdue:
+      title:              Überfällige Rechnungen
   invoice_batch_jobs:
     index:
       title:              Rechnungsläufe
