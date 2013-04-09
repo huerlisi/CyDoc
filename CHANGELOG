@@ -1,3 +1,10 @@
+2.0.0.beta11
+============
+
+Upgrading:
+  Invoice and reminder grace period settings are now taken as days, not seconds. Please check and update
+  those values.
+
 2.0.0.beta10
 ============
 This is a security update. Everyone is advised to update.

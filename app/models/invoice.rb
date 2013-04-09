@@ -112,22 +112,25 @@ class Invoice < ActiveRecord::Base
     !(state == 'canceled' or state == 'reactivated' or state == 'written_off' or state == 'paid')
   end
 
-  scope :overdue, lambda {|grace_period|
-    {
-      :conditions => [
-        "(invoices.state IN ('booked', 'printed') AND due_date < :grace_date) OR (invoices.state = 'reminded' AND reminder_due_date < :today) OR (invoices.state = '2xreminded' AND second_reminder_due_date < :today) OR (invoices.state = '3xreminded' AND third_reminder_due_date < :today)",
-        {:today => Date.today, :grace_date => Date.today.ago(grace_period)}
-      ]
-    }
+  scope :overdue, lambda {
+    where(
+      "(invoices.state IN ('booked', 'printed') AND due_date < :today) OR (invoices.state = 'reminded' AND reminder_due_date < :today) OR (invoices.state = '2xreminded' AND second_reminder_due_date < :today) OR (invoices.state = '3xreminded' AND third_reminder_due_date < :today)",
+      :today => Date.today
+    )
+  }
+
+  scope :no_grace, lambda {
+    where(
+      "(invoices.state IN ('booked', 'printed') AND due_date < :due_date) OR (invoices.state = 'reminded' AND reminder_due_date < :reminder_due_date) OR (invoices.state = '2xreminded' AND second_reminder_due_date < :second_reminder_due_date) OR (invoices.state = '3xreminded' AND third_reminder_due_date < :third_reminder_due_date)",
+      :due_date => Date.today.ago(settings["invoices.grace_period"].to_i.days),
+      :reminder_due_date => Date.today.ago(settings["invoices.reminders.1.grace_period"].to_i.days),
+      :second_reminder_due_date => Date.today.ago(settings["invoices.reminders.2.grace_period"].to_i.days),
+      :third_reminder_due_date => Date.today.ago(settings["invoices.reminders.3.grace_period"].to_i.days)
+    )
   }
 
   def overdue?
-    return true if (state == 'booked' or state == 'printed') and due_date < Date.today
-    return true if state == 'reminded' and (reminder_due_date.nil? or reminder_due_date < Date.today)
-    return true if state == '2xreminded' and (second_reminder_due_date.nil? or second_reminder_due_date < Date.today)
-    return true if state == '3xreminded' and (third_reminder_due_date.nil? or third_reminder_due_date < Date.today)
-
-    return false
+    Invoice.overdue.where(:id => self.id).exists?
   end
 
   scope :reminded, :conditions => "invoices.state IN ('reminded', '2xreminded', '3xreminded', 'encashment')"
@@ -154,12 +157,17 @@ class Invoice < ActiveRecord::Base
     settings["invoices.payment_period"]
   end
 
+  def payment_grace_period
+    settings["invoices.grace_period"]
+  end
+
   def reminder_fee
     settings["invoices.reminders.#{reminder_level}.fee"]
   end
 
-  def reminder_grace_period
-    settings["invoices.reminders.#{reminder_level}.grace_period"]
+  def reminder_grace_period(level = nil)
+    level ||= reminder_level
+    settings["invoices.reminders.#{level}.grace_period"]
   end
 
   def reminder_payment_period
