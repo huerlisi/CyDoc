@@ -74,7 +74,7 @@ class ReminderLetter < PatientLetter
     font_size 6.5
     text "Zahlbar bis:"
     font_size 8
-    text invoice.due_date.to_s
+    text invoice.latest_reminder_due_date.to_s
   end
 
   def greeting(patient)
