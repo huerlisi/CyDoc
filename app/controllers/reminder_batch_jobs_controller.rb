@@ -15,7 +15,7 @@ class ReminderBatchJobsController < InvoiceBatchJobsController
     @reminder_batch_job = ReminderBatchJob.new(params[:reminder_batch_job])
     @invoices = Invoice.overdue.no_grace.dunning_active.all(:limit => @reminder_batch_job.count)
 
-    @reminder_batch_job.reminders = @reminders
+    @reminder_batch_job.invoices = @invoices
     @reminder_batch_job.remind
     if current_tenant.settings['printing.cups']
       begin
