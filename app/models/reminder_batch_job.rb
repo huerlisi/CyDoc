@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ReminderBatchJob < InvoiceBatchJob
   def to_s
-    "Mahnlauf vom #{created_at.to_date}"
+    "Mahnlauf vom #{created_at.try(:to_date)}"
   end
 
   def remind
