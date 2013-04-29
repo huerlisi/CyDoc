@@ -1,3 +1,7 @@
+2.0.0.beta13
+============
+* Fix bugs in reminder batch job.
+
 2.0.0.beta11
 ============
 Fix and improve invoice reminder management.
