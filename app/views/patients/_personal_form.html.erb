@@ -33,5 +33,5 @@
 <% end %>
 </div>
 
-<%= observe_field 'patient_vcard_attributes_postal_code', :url => {:action => 'localities_for_postal_code'}, :with => 'postal_code' %>
-<%= observe_field 'patient_vcard_attributes_locality', :url => {:action => 'postal_codes_for_locality'}, :with => 'locality' %>
+<%= observe_field 'patient_vcard_attributes_postal_code', :url => {:controller => 'patients', :action => 'localities_for_postal_code'}, :with => 'postal_code' %>
+<%= observe_field 'patient_vcard_attributes_locality', :url => {:controller => 'patients', :action => 'postal_codes_for_locality'}, :with => 'locality' %>
