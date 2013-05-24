@@ -11,4 +11,6 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.uncountable %w( tiers )
+  inflect.irregular 'fax', 'faxes'
+  inflect.irregular 'invoice_fax', 'invoice_faxes'
 end

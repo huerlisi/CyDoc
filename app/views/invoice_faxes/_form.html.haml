@@ -1,0 +1,7 @@
+.invoice_fax_form
+  %h3 Fax senden
+  - semantic_remote_form_for 'fax', :url => invoice_invoice_faxes_path(@invoice) do |form|
+    - form.inputs do
+      = form.input :number
+    - form.buttons do
+      = form.commit_button :button_html => {:class => 'icon icon-save'}
