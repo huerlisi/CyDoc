@@ -335,6 +335,19 @@ class Invoice < ActiveRecord::Base
     return reminder_booking.try(:value_date)
   end
 
+  def latest_reminder_due_date
+    case state
+    when 'reminded'
+      reminder_due_date
+    when '2xreminded'
+      second_reminder_due_date
+    when '3xreminded'
+      third_reminder_due_date
+    else
+      due_date
+    end
+  end
+
   def remind_second_time
     self.state = '2xreminded'
     self.second_reminder_due_date = Date.today.in(reminder_payment_period)
