@@ -23,6 +23,7 @@ public/stylesheets/all.css
 
 # Local
 config/database.yml
+system
 
 # Passenger
 # =========
