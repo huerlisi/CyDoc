@@ -34,7 +34,7 @@ class ReminderLetter < PatientLetter
 
     text "Bei der Durchsicht meiner Buchhaltung habe ich festgestellt, dass die oben erwähnte Rechnung trotz Mahnung noch nicht beglichen ist."
     text " "
-    text "- Ich möchte Sie bitten, den Betrag sofort zu überweisen. Andernfalls werden wird unsere Forderung dem Inkasso zu übergeben."
+    text "- Ich möchte Sie bitten, den Betrag sofort zu überweisen. Andernfalls werden wir unsere Forderung dem Inkasso zu übergeben."
     text "- Sollte sich Ihre Zahlung mit der Mahnung kreuzen, betrachten Sie dieses Schreiben als gegenstandslos."
     text "- Für die Bezahlung benützen Sie unbedingt den beiligenden Einzahlungschein."
     text " "
