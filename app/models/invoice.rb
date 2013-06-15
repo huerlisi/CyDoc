@@ -605,7 +605,8 @@ class Invoice < ActiveRecord::Base
   end
 
   # Reminders
-  def print_reminder(printer)
+  def print_reminder(printer, insurance_recipe_printer = nil)
     print_document(:reminder_letter, printer)
+    print_insurance_recipe(insurance_recipe_printer) if insurance_recipe_printer
   end
 end

@@ -9,19 +9,23 @@
     .span4= f.input 'invoices.payment_period', :as => :setting_string
     .span4= f.input 'invoices.grace_period', :as => :setting_string
 
-  %h3 1. Mahnung
+  %h3 Mahnungen
+  .row-fluid
+    .span6= f.input 'invoices.reminders.print_insurance_recipe', :as => :setting_select
+
+  %h4 1. Mahnung
   .row-fluid
     .span4= f.input 'invoices.reminders.1.payment_period', :as => :setting_string
     .span4= f.input 'invoices.reminders.1.grace_period', :as => :setting_string
     .span4= f.input 'invoices.reminders.1.fee', :as => :setting_string
 
-  %h3 2. Mahnung
+  %h4 2. Mahnung
   .row-fluid
     .span4= f.input 'invoices.reminders.2.payment_period', :as => :setting_string
     .span4= f.input 'invoices.reminders.2.grace_period', :as => :setting_string
     .span4= f.input 'invoices.reminders.2.fee', :as => :setting_string
 
-  %h3 3. Mahnung
+  %h4 3. Mahnung
   .row-fluid
     .span4= f.input 'invoices.reminders.3.payment_period', :as => :setting_string
     .span4= f.input 'invoices.reminders.3.grace_period', :as => :setting_string

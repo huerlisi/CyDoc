@@ -53,8 +53,9 @@ class InvoicesController < AuthorizedController
     if current_tenant.settings['printing.cups']
       begin
         reminder_printer = current_tenant.printer_for(:invoice)
+        insurance_recipe_printer = current_tenant.settings['invoices.reminders.print_insurance_recipe'] ? current_tenant.printer_for(:plain) : nil
 
-        @invoice.print_reminder(reminder_printer)
+        @invoice.print_reminder(reminder_printer, insurance_recipe_printer)
         flash.now[:notice] = "#{@invoice} an Drucker gesendet"
 
       rescue RuntimeError => e

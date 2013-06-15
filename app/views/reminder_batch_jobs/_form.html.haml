@@ -1,6 +1,7 @@
 = simple_form_for resource do |f|
   .row-fluid
     .span6= f.input :count, :input_html => {:size => 12, :autocomplete => 'off', 'data-autofocus' => true}
+    .span6= f.input :print_insurance_recipe
 
   .form-actions
     = f.button :submit

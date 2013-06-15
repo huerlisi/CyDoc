@@ -226,6 +226,7 @@ de-CH:
             payment_period:  Zahlungsfrist
             grace_period:    Gnadenfrist
             reminders:
+              print_insurance_recipe: Rückforderungsbeleg drucken
               '1':
                 payment_period: Zahlungsfrist
                 grace_period:   Gnadenfrist

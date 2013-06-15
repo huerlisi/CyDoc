@@ -6,22 +6,23 @@ class ReminderBatchJobsController < InvoiceBatchJobsController
   def new
     @reminder_batch_job = ReminderBatchJob.new
 
-    @reminder_batch_job.count = reminder.overdue.no_grace.dunning_active.count
+    @reminder_batch_job.count = Invoice.overdue.no_grace.dunning_active.count
     @reminder_batch_job.value_date = Date.today
   end
 
   # POST /reminder_batch_jobs
   def create
     @reminder_batch_job = ReminderBatchJob.new(params[:reminder_batch_job])
-    @reminders = reminder.overdue.no_grace.dunning_active.all(:limit => @reminder_batch_job.count)
+    @reminders = Invoice.overdue.no_grace.dunning_active.all(:limit => @reminder_batch_job.count)
 
-    @reminder_batch_job.reminders = @reminders
+    @reminder_batch_job.invoices = @reminders
     @reminder_batch_job.remind
     if current_tenant.settings['printing.cups']
       begin
         reminder_printer = current_tenant.printer_for(:invoice)
+        insurance_recipe_printer = current_tenant.settings['invoices.reminders.print_insurance_recipe'] ? current_tenant.printer_for(:plain) : nil
 
-        @reminder_batch_job.print(reminder_printer)
+        @reminder_batch_job.print(reminder_printer, insurance_recipe_printer)
         flash[:notice] = "#{@reminder_batch_job} an Drucker gesendet"
 
       rescue RuntimeError => e
@@ -39,8 +40,11 @@ class ReminderBatchJobsController < InvoiceBatchJobsController
     if current_tenant.settings['printing.cups']
       begin
         reminder_printer = current_tenant.printer_for(:invoice)
+        insurance_recipe_printer = current_tenant.printer_for(:plain)
 
-        @reminder_batch_job.print(reminder_printer)
+        insurance_recipe_printer = current_tenant.settings['invoices.reminders.print_insurance_recipe'] ? current_tenant.printer_for(:plain) : nil
+
+        @reminder_batch_job.print(reminder_printer, insurance_recipe_printer)
         flash[:notice] = "#{@reminder_batch_job} an Drucker gesendet"
 
       rescue RuntimeError => e
