@@ -1,6 +1,10 @@
-2.0.0.beta11
+2.0.0.beta13 (unreleased)
 ============
 Fix and improve invoice reminder management.
+
+* Show reminder due date on reminders.
+* Fixed text for second reminder.
+* Allow printing insurance_recipe in reminder batch jobs.
 
 Upgrading:
   Invoice and reminder period settings are now taken as days, not seconds. Please check and update
