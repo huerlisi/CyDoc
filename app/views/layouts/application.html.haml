@@ -20,18 +20,13 @@
     .navbar.navbar-fixed-top
       .navbar-inner
         .container-fluid
-          %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
           = link_to root_path, :class => 'brand' do
             = t('application.title')
 
-          .nav-collapse
-            = render_navigation(:level => 1..2, :renderer => BootstrapTopbarList, :expand_all => true)
-            = form_tag search_path, :class => "navbar-search pull-left" do
-              %input.search-query{:name => "query", :placeholder => "Suche", :type => "text"}/
-            %div= render 'users/user_bar'
+          = render_navigation(:level => 1..2, :renderer => BootstrapTopbarList, :expand_all => true)
+          = form_tag search_path, :class => "navbar-search pull-left" do
+            %input.search-query{:name => "query", :placeholder => "Suche", :type => "text"}/
+          %div= render 'users/user_bar'
     .container-fluid
       .row-fluid
         #main.span10
