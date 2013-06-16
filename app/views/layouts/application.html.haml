@@ -11,7 +11,10 @@
 
     = csrf_meta_tag
     %title
-      = "#{content_for :page_title} - #{t('application.title')}"
+      - if current_user
+        = "#{current_user.tenant}: #{content_for :page_title} - #{t('application.title')}"
+      - else
+        = "#{content_for :page_title} - #{t('application.title')}"
 
   %body{:style => 'margin-top: 60px'}
     .navbar.navbar-fixed-top
