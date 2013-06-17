@@ -23,10 +23,11 @@
           = link_to root_path, :class => 'brand' do
             = t('application.title')
 
-          = render_navigation(:level => 1..2, :renderer => BootstrapTopbarList, :expand_all => true)
-          = form_tag search_path, :class => "navbar-search pull-left" do
-            %input.search-query{:name => "query", :placeholder => "Suche", :type => "text"}/
-          %div= render 'users/user_bar'
+          - if user_signed_in?
+            = render_navigation(:level => 1..2, :renderer => BootstrapTopbarList, :expand_all => true)
+            = form_tag search_path, :method => :get, :class => "navbar-search pull-left" do
+              = text_field_tag "query", params[:query], :placeholder => t('placeholder.search'), :class => "search-query"
+            %div= render 'users/user_bar'
     .container-fluid
       .row-fluid
         #main.span10
