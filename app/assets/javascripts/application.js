@@ -21,7 +21,9 @@ function initializeBehaviours() {
   // Init settings
 
   // from cyt.js
+  addComboboxBehaviour();
   addAutofocusBehaviour();
+  addDatePickerBehaviour();
   addLinkifyContainersBehaviour();
 
   // from flash_message
