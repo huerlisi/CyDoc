@@ -25,6 +25,7 @@ function initializeBehaviours() {
   addAutofocusBehaviour();
   addDatePickerBehaviour();
   addLinkifyContainersBehaviour();
+  addModalBehaviour();
 
   // from flash_message
   addFlashMessageBehaviour();
