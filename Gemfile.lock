@@ -103,13 +103,13 @@ GEM
     gherkin (2.11.5)
       json (>= 1.4.6)
     haml (3.1.7)
-    has_accounts (1.0.2)
+    has_accounts (1.1.0)
       acts-as-taggable-on
       has_vcards
       inherited_resources
       rails (~> 3.1)
       validates_timeliness
-    has_accounts_engine (1.0.4)
+    has_accounts_engine (1.1.0)
       acts-as-taggable-on
       has_accounts (>= 1.0.2)
       has_vcards
