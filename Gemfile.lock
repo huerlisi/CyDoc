@@ -103,7 +103,7 @@ GEM
     gherkin (2.11.5)
       json (>= 1.4.6)
     haml (3.1.7)
-    has_accounts (1.1.0)
+    has_accounts (1.1.1)
       acts-as-taggable-on
       has_vcards
       inherited_resources
