@@ -1,4 +1,9 @@
-2.0.0.beta13 (unreleased)
+2.0.0.beta14
+============
+Bugfix:
+* Do not fail when showing invoice batch if failed treatment has been deleted.
+
+2.0.0.beta13
 ============
 Fix and improve invoice reminder management.
 
