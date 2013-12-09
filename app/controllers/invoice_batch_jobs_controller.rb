@@ -19,8 +19,8 @@ class InvoiceBatchJobsController < AuthorizedController
     value_date = @invoice_batch_job.value_date
     tiers_name = @invoice_batch_job.tiers_name
     begin
-      biller = Employee.find(current_tenant.settings['invoices.defaults.biller_id'])
-      provider = Employee.find(current_tenant.settings['invoices.defaults.provider_id'])
+      biller = Doctor.find(current_tenant.settings['invoices.defaults.biller_id'])
+      provider = Doctor.find(current_tenant.settings['invoices.defaults.provider_id'])
     rescue
       # TODO
       raise "Standart Leistungserbringer oder Rechnungssteller in Mandant nicht gesetzt"

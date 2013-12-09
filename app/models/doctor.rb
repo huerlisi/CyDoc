@@ -24,6 +24,10 @@ class Doctor < Person
     write_attribute(:zsr, value)
   end
 
+  def esr_account
+    BankAccount.first
+  end
+
   has_many :patients
 
   # User

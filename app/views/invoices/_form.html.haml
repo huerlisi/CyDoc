@@ -9,8 +9,8 @@
     .span6= form.input :value_date, :as => :date_field, :input_html => {:autocomplete => 'off'}
   .row-fluid
     = form.fields_for :tiers do |t|
-      .span6= t.association :biller, :collection => Employee.by_role('doctor'), :placeholder => 'Bitte wählen', :input_html => {:class => 'select2'}
-      .span6= t.association :provider, :collection => Employee.by_role('doctor'), :placeholder => 'Bitte wählen', :input_html => {:class => 'select2'}
+      .span6= t.association :biller, :collection => Doctor.all, :placeholder => 'Bitte wählen', :input_html => {:class => 'select2'}
+      .span6= t.association :provider, :collection => Doctor.all, :placeholder => 'Bitte wählen', :input_html => {:class => 'select2'}
   .row-fluid
     .span10= form.input :remark, :input_html => {:rows => 2, :class => 'span12'}
 
