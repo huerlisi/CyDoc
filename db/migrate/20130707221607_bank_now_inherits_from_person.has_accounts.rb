@@ -5,8 +5,8 @@ end
 
 class BankNowInheritsFromPerson < ActiveRecord::Migration
   def up
-    add_column :people, :swift, :string
-    add_column :people, :clearing, :string
+    add_column :people, :swift, :string unless Person.column_names.include?('swift')
+    add_column :people, :clearing, :string unless Person.column_names.include?('clearing')
 
     for bank in LegacyBank.all
       vcard = Vcard.where(:object_type => 'Bank', :object_id => bank.id).first
