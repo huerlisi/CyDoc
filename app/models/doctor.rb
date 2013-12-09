@@ -2,7 +2,7 @@
 
 class Doctor < Person
   # Access restrictions
-  attr_accessible :vcard, :ean_party, :zsr
+  attr_accessible :vcard, :ean_party, :zsr, :active
 
   scope :active, where(:active => true)
 
