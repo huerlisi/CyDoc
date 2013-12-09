@@ -18,6 +18,7 @@ Settings.defaults = {
   'invoices.reminders.4.payment_period'  => 0,
   'invoices.reminders.4.grace_period'    => 30,
   'invoices.reminders.print_insurance_recipe' => false,
+  'invoices.print_payment_for'           => true,
 
   'validation.medical_case_present'      => true,
   'validation.tarmed'                    => true,
