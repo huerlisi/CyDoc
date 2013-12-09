@@ -41,6 +41,7 @@ end
 # Standard helpers
 # ================
 gem 'haml'
+gem 'sass'
 gem 'jquery-rails'
 
 # Styling
