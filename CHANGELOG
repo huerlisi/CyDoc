@@ -1,3 +1,22 @@
+2.0.0.beta15
+============
+* Show tenant in page title if available (à la Bookyt).
+* Drop non-functional responsive navigation drop-down.
+* Only render navigation if user logged in.
+* Use select2 for comboboxes.
+* Add JS for modal dialogs.
+* Add select2 JS handlers.
+* Port show_modal.js view from Hozr.
+* Implement simple bookings for invoices.
+* Add Doctor.active to attr_accessible.
+* Fix PortDoctorToPerson migration to only run Hozr/CyLab specific code if needed.
+* Only run BankNowInheritsFromPerson column adding if needed.
+* Update haml and sass gems.
+* Move attr_accessible for vcard, vcard_attributes below has_vcards.
+* Use Doctor instead of Employee for biller and provider in Tiers.
+* Use print_payment_for setting instead of Employee attribute.
+* Add tenant config for setting for validations.
+
 2.0.0.beta14
 ============
 Bugfix:
