@@ -21,8 +21,11 @@ function initializeBehaviours() {
   // Init settings
 
   // from cyt.js
+  addComboboxBehaviour();
   addAutofocusBehaviour();
+  addDatePickerBehaviour();
   addLinkifyContainersBehaviour();
+  addModalBehaviour();
 
   // from flash_message
   addFlashMessageBehaviour();
@@ -34,7 +37,17 @@ function initializeBehaviours() {
   addNestedFormBehaviour();
 
   // select2
-  $('.select2').select2();
+  $('.select2').select2({
+      allowClear: true
+  });
+  $('.select2-tags').each(function(index, element) {
+    var tags = $(element).data('tags') || '';
+
+    $(element).select2({
+      tags: tags,
+      tokenSeparators: [","]
+    })
+  })
 
   // application
 }

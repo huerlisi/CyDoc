@@ -1,9 +1,12 @@
 class LegacyDoctor < ActiveRecord::Base
   self.table_name = 'doctors'
+
   serialize :channels
+
   def vcard
     Vcard.where(:object_id => id, :object_type => 'Doctor').first
   end
+
   def user
     User.where(:object_id => id, :object_type => 'Doctor').first
   end
@@ -21,13 +24,20 @@ class PortDoctorToPerson < ActiveRecord::Migration
         :vcard => doctor.vcard,
         :user => doctor.user,
         :ean_party => doctor.ean_party,
-        :zsr => doctor.zsr,
-        :channels => doctor.channels
+        :zsr => doctor.zsr
       )
-
-      Mailing.where(:doctor_id => doctor.id).update_all(:doctor_id => new_doctor.id)
-      Case.where(:doctor_id => doctor.id).update_all(:doctor_id => new_doctor.id)
       Patient.where(:doctor_id => doctor.id).update_all(:doctor_id => new_doctor.id)
+
+      # Support for older CyLab instances
+      if LegacyDoctor.column_names.include?('channels')
+        new_doctor.update_attribute(:channels, doctor.channels)
+      end
+
+      # Support for Hozr instances
+      if defined?(Mailing) && defined?(Case)
+        Mailing.where(:doctor_id => doctor.id).update_all(:doctor_id => new_doctor.id)
+        Case.where(:doctor_id => doctor.id).update_all(:doctor_id => new_doctor.id)
+      end
     end
 
     drop_table :doctors

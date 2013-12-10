@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Insurance < ActiveRecord::Base
   # Access restrictions
-  attr_accessible :vcard, :vcard_attributes, :ean_party, :group_ean_party, :role, :imported_id
+  attr_accessible :ean_party, :group_ean_party, :role, :imported_id
 
   # Default sorting
   scope :sorted, includes(:vcard).order('vcards.full_name')
@@ -14,7 +14,7 @@ class Insurance < ActiveRecord::Base
   # Vcard
   has_vcards
   accepts_nested_attributes_for :vcard
-
+  attr_accessible :vcard, :vcard_attributes
   def name
     vcard.full_name
   end

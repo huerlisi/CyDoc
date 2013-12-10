@@ -2,7 +2,7 @@
 
 class Doctor < Person
   # Access restrictions
-  attr_accessible :vcard, :ean_party, :zsr
+  attr_accessible :vcard, :ean_party, :zsr, :active
 
   scope :active, where(:active => true)
 
@@ -22,6 +22,10 @@ class Doctor < Person
     value.delete!(' .') unless value.nil?
 
     write_attribute(:zsr, value)
+  end
+
+  def esr_account
+    BankAccount.first
   end
 
   has_many :patients

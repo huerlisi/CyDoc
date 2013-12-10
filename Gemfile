@@ -41,6 +41,7 @@ end
 # Standard helpers
 # ================
 gem 'haml'
+gem 'sass'
 gem 'jquery-rails'
 
 # Styling
@@ -76,6 +77,8 @@ gem 'swissmatch'
 
 # Billing
 gem 'has_accounts'
+gem 'has_accounts_engine'
+gem 'acts-as-taggable-on'
 
 # Import
 gem 'fastercsv'

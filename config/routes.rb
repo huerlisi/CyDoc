@@ -37,7 +37,7 @@ CyDoc::Application.routes.draw do
       post :print
       post :reactivate
     end
-    resources :bookings
+    resources :simple_bookings
   end
 
   resources :invoice_batch_jobs do
@@ -223,6 +223,8 @@ CyDoc::Application.routes.draw do
       post :write_off
     end
   end
+
+  resources :booking_templates
 
   resources :bookkeeping do
     collection do

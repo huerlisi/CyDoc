@@ -273,7 +273,7 @@ class Invoice < ActiveRecord::Base
                    :value_date => Date.today)
     booking.comments = comments if comments.present?
 
-    # Cancel reset if needed
+    # Cancel rest if needed
     if due_amount > 0
       bookings.build(:title => "Debitorenverlust",
                      :comments => "Storniert",

@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130116155708) do
+ActiveRecord::Schema.define(:version => 20130709081712) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -92,15 +92,22 @@ ActiveRecord::Schema.define(:version => 20130116155708) do
   add_index "attachments", ["code"], :name => "index_attachments_on_code"
   add_index "attachments", ["object_id", "object_type"], :name => "index_attachments_on_object_id_and_object_type"
 
-  create_table "banks", :force => true do |t|
-    t.integer  "vcard_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "swift"
-    t.string   "clearing"
+  create_table "booking_templates", :force => true do |t|
+    t.string   "title"
+    t.string   "amount"
+    t.integer  "credit_account_id"
+    t.integer  "debit_account_id"
+    t.text     "comments"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.string   "code"
+    t.string   "matcher"
+    t.string   "amount_relates_to"
+    t.string   "type"
+    t.string   "charge_rate_code"
+    t.string   "salary_declaration_code"
+    t.integer  "position"
   end
-
-  add_index "banks", ["vcard_id"], :name => "index_banks_on_vcard_id"
 
   create_table "bookings", :force => true do |t|
     t.string   "title",             :limit => 100
@@ -145,29 +152,6 @@ ActiveRecord::Schema.define(:version => 20130116155708) do
   create_table "diagnoses_treatments", :id => false, :force => true do |t|
     t.integer "diagnosis_id"
     t.integer "treatment_id"
-  end
-
-  create_table "doctors", :force => true do |t|
-    t.string   "code"
-    t.string   "speciality"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "active",                          :default => true
-    t.string   "login"
-    t.string   "ean_party",         :limit => 13
-    t.string   "zsr",               :limit => 7
-    t.text     "remarks"
-    t.integer  "imported_id"
-    t.boolean  "use_vesr"
-    t.boolean  "print_payment_for"
-    t.integer  "esr_account_id"
-  end
-
-  add_index "doctors", ["imported_id"], :name => "index_doctors_on_imported_id"
-
-  create_table "doctors_offices", :id => false, :force => true do |t|
-    t.integer "office_id"
-    t.integer "doctor_id"
   end
 
   create_table "drug_articles", :force => true do |t|
@@ -362,6 +346,7 @@ ActiveRecord::Schema.define(:version => 20130116155708) do
     t.datetime "updated_at"
     t.text     "failed_jobs"
     t.string   "type"
+    t.boolean  "print_insurance_recipe"
   end
 
   create_table "invoice_batch_jobs_invoices", :id => false, :force => true do |t|
@@ -447,14 +432,6 @@ ActiveRecord::Schema.define(:version => 20130116155708) do
   add_index "medical_cases", ["treatment_id"], :name => "index_medical_cases_on_treatment_id"
   add_index "medical_cases", ["type"], :name => "index_medical_cases_on_type"
 
-  create_table "offices", :force => true do |t|
-    t.string "name"
-    t.string "login"
-    t.string "printers"
-  end
-
-  add_index "offices", ["login"], :name => "index_offices_on_login"
-
   create_table "patients", :force => true do |t|
     t.date     "birth_date"
     t.integer  "sex"
@@ -480,7 +457,7 @@ ActiveRecord::Schema.define(:version => 20130116155708) do
   add_index "patients", ["updated_at"], :name => "patients_updated_at_index"
 
   create_table "people", :force => true do |t|
-    t.datetime "created_at",                              :null => false
+    t.datetime "created_at",                                            :null => false
     t.datetime "updated_at"
     t.string   "type"
     t.date     "date_of_birth"
@@ -490,10 +467,14 @@ ActiveRecord::Schema.define(:version => 20130116155708) do
     t.string   "social_security_nr_12"
     t.integer  "civil_status_id"
     t.integer  "religion_id"
-    t.boolean  "delta",                 :default => true, :null => false
+    t.boolean  "delta",                               :default => true, :null => false
     t.string   "nationality"
     t.string   "swift"
     t.string   "clearing"
+    t.boolean  "active",                              :default => true
+    t.string   "ean_party",             :limit => 13
+    t.string   "zsr",                   :limit => 7
+    t.text     "channels"
   end
 
   add_index "people", ["civil_status_id"], :name => "index_people_on_civil_status_id"
@@ -592,7 +573,7 @@ ActiveRecord::Schema.define(:version => 20130116155708) do
     t.string   "ref_code",           :limit => 10
     t.integer  "session",                                                         :default => 1
     t.decimal  "quantity",                          :precision => 8, :scale => 2, :default => 1.0
-    t.datetime "date",                                                                                         :null => false
+    t.date     "date",                                                                                         :null => false
     t.integer  "provider_id"
     t.integer  "responsible_id"
     t.integer  "location_id"
@@ -642,7 +623,7 @@ ActiveRecord::Schema.define(:version => 20130116155708) do
     t.text     "remarks"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "state",         :default => "open"
+    t.string   "state",         :default => "active"
     t.integer  "treatment_id"
     t.integer  "imported_id"
   end
@@ -662,6 +643,23 @@ ActiveRecord::Schema.define(:version => 20130116155708) do
   end
 
   add_index "settings", ["target_type", "target_id", "var"], :name => "index_settings_on_target_type_and_target_id_and_var", :unique => true
+
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       :limit => 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "tariff_codes", :force => true do |t|
     t.string   "tariff_code"
@@ -737,7 +735,7 @@ ActiveRecord::Schema.define(:version => 20130116155708) do
     t.integer  "referrer_id"
     t.string   "place_type",  :default => "Praxis"
     t.integer  "imported_id"
-    t.string   "state",       :default => "open"
+    t.string   "state",       :default => "active"
   end
 
   add_index "treatments", ["law_id"], :name => "index_treatments_on_law_id"
