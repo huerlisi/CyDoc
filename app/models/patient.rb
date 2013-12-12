@@ -2,7 +2,7 @@
 
 class Patient < ActiveRecord::Base
   # Access restrictions
-  attr_accessible :vcard_attributes, :dunning_stop, :birth_date, :doctor_patient_nr, :doctor_id, :insurance_policies_attributes, :use_billing_address, :billing_vcard_attributes, :remarks
+  attr_accessible :dunning_stop, :birth_date, :doctor_patient_nr, :doctor_id, :insurance_policies_attributes, :use_billing_address, :remarks
 
   belongs_to :doctor
 
@@ -49,6 +49,8 @@ class Patient < ActiveRecord::Base
 
   # Vcards
   has_vcards
+  attr_accessible :vcard_attributes, :billing_vcard_attributes
+
   # Hack to use 'private' address by default
   has_one :vcard, :as => 'object', :conditions => {:vcard_type => 'private'}
   accepts_nested_attributes_for :vcard
