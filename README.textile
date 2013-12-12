@@ -46,9 +46,11 @@ Issue tracking is done using "Redmine":http://redmine.cyt.ch/projects/CyDoc/issu
 
 h2. License
 
-Copyright 2007-2012 Simon Hürlimann <simon.huerlimann@cyt.ch>
+Copyright 2007-2013 Simon Hürlimann <simon.huerlimann@cyt.ch>
+Copyright 2012-2013 Andi Staub <andi.staub@cyt.ch>
 Copyright 2010-2012 Ramon Egloff <ramon.egloff@cyt.ch>
 Copyright 2010-2012 Roman Simecek <roman.simecek@cyt.ch>
+Copyright 2010 David Hürlimann <david.huerlimann@cyt.ch>
 Copyright 2007-2012 CyT <info@cyt.ch>
 Copyright 2007-2012 ZytoLabor <info@zyto-labor.com>
 
