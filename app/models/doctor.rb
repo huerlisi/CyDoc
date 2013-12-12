@@ -37,14 +37,6 @@ class Doctor < Person
     vcard.contacts.where(:phone_number_type => 'E-Mail').first
   end
 
-  # Settings
-  has_settings
-  def self.settings
-    doctor = Doctor.find(Thread.current["doctor_id"]) if Doctor.exists?(Thread.current["doctor_id"])
-
-    doctor.present? ? doctor.settings : Settings
-  end
-
   # Returned invoices
   has_many :returned_invoices
   def request_all_returned_invoices

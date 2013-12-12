@@ -3,7 +3,7 @@ class ReminderBatchJob < InvoiceBatchJob
   attr_accessible :print_insurance_recipe
 
   def print_insurance_recipe
-    self[:print_insurance_recipe] || Tenant.settings['invoices.reminders.print_insurance_recipe']
+    self[:print_insurance_recipe] || Tenant.first.settings['invoices.reminders.print_insurance_recipe']
   end
 
   def to_s

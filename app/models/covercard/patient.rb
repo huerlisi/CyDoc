@@ -12,11 +12,11 @@ module Covercard
     # Tableless active record
     class_attribute :columns
     self.columns = []
-   
+
     def self.column(name, sql_type = nil, default = nil, null = true)
       columns << ActiveRecord::ConnectionAdapters::Column.new(name.to_s, default, sql_type.to_s, null)
     end
-   
+
     column :vcard, :string
     column :billing_vcard, :string
     column :birth_date, :date
@@ -32,14 +32,16 @@ module Covercard
 
     # Settings
     def self.settings
-      doctor ||= Doctor.find(Thread.current["doctor_id"]) if Doctor.exists?(Thread.current["doctor_id"])
-
-      doctor.present? ? doctor.settings : Settings
+      # TODO: use actual tenant
+      Tenant.first.settings
+    end
+    def settings
+      Tenant.first.settings
     end
 
     def self.find(value)
       return nil if !(value && value.length == 20) or !settings['modules.covercard']
- 
+
       url = URI.parse(SERVICE_URL + value)
       http = Net::HTTP::Proxy(self.settings['modules.covercard.host'], self.settings['modules.covercard.port'])
       response = http.get_response(url)
@@ -48,8 +50,8 @@ module Covercard
 
       return nil if sex.empty?
 
-      vcard = Vcard.new(:family_name => xml.search("name/officialName").text.capitalize, 
-                        :given_name => xml.search("name/firstName").text.capitalize, 
+      vcard = Vcard.new(:family_name => xml.search("name/officialName").text.capitalize,
+                        :given_name => xml.search("name/firstName").text.capitalize,
                         :street_address => xml.search("mailAddress/addressLine1").text,
                         :postal_code => xml.search("mailAddress/swissZipCode").text,
                         :locality => xml.search("mailAddress/town").text.capitalize,
@@ -69,12 +71,6 @@ module Covercard
                :sex => honorific_prefix(sex, :short),
                :covercard_code => value,
                :insurance_policy => insurance_policy)
-    end
-
-    def self.settings
-      doctor ||= Doctor.find(Thread.current["doctor_id"]) if Doctor.exists?(Thread.current["doctor_id"])
-
-      doctor.present? ? doctor.settings : Settings
     end
 
     def self.find_insurance(attributes)
@@ -112,7 +108,7 @@ module Covercard
 
         unless value.eql?(new_value)
           patient.send("#{attr}=", new_value)
-          updated_attributes[attr] = value  
+          updated_attributes[attr] = value
         end
       end
 

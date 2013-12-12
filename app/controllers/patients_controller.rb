@@ -39,8 +39,8 @@ class PatientsController < AuthorizedController
   end
 
   def new
-    # Use default sex from doctor settings
-    case Doctor.settings['patients.sex']
+    # Use default sex from settings
+    case current_tenant.settings['patients.sex']
       when 'M'
         resource.sex = 'M'
         resource.vcard.honorific_prefix = 'Herr'
