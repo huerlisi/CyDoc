@@ -138,6 +138,19 @@ by using factored out gems.
 
 This is a beta release.
 
+1.1.8
+=====
+This is yet another security update fixing a critical issue. You should update
+as soon as possible!
+
+If you do not update, attackers might work around access restrictions, run code
+on your webservers and much more. Take it seriously!
+
+There's been a number of security updates in the last few weeks. This is the
+result of a critical view on some parts of the underlying framework Ruby on Rails.
+While the high number of issues is disturbing, it is also a sign that the
+framework is actually reviewed and flaws are found and fixed.
+
 1.1.7
 =====
 This is a security update fixing an extremely critical issue, you should
