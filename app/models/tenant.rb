@@ -1,7 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Tenant < ActiveRecord::Base
   # Associations
-  belongs_to :doctor, :foreign_key => :person_id
   has_many :users
   attr_accessible :user_ids
 
@@ -16,7 +15,7 @@ class Tenant < ActiveRecord::Base
   attr_accessible :settings
 
   def to_s
-    doctor.to_s
+    person.to_s
   end
 
   # Fiscal Years
