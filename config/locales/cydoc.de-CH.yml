@@ -219,6 +219,9 @@ de-CH:
             cups_hostname: CUPS-Server
             invoice:    Rechnungsformulare
             plain:      Normalpapier
+          validation:
+            medical_case_present:  Diagnose-Code Validierung
+            tarmed:                Tarmed Validierung
           invoices:
             defaults:
               biller_id:  Standart Rechnungssteller
