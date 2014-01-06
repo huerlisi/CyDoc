@@ -262,6 +262,7 @@ de-CH:
       migel_tariff_item:  MiGel Leistung
       free_tariff_item:   Leistung
       patient:            Patient
+      person:             Person
       physio_tariff_item: Physiotherapie Leistung
       recall:             Recall
       returned_invoice:   Unzustellbare Rechnungen
