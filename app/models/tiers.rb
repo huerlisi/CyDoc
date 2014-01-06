@@ -2,11 +2,11 @@
 class Tiers < ActiveRecord::Base
   has_many :invoices
 
-  belongs_to :biller, :class_name => 'Doctor'
+  belongs_to :biller, :class_name => 'Person'
   attr_accessible :biller, :biller_id
   validates :biller, :presence => true
 
-  belongs_to :provider, :class_name => 'Doctor'
+  belongs_to :provider, :class_name => 'Person'
   attr_accessible :provider, :provider_id
   validates :provider, :presence => true
 
