@@ -173,7 +173,7 @@ class PatientLetter < LetterDocument
     end
 
     # VESR form
-    draw_esr(invoice, invoice.biller.esr_account, invoice.biller, invoice.biller.settings.all('invoices.print_payment_for'))
+    draw_esr(invoice, invoice.biller.esr_account, invoice.biller, invoice.biller.settings['invoices.print_payment_for'])
 
     render
   end
