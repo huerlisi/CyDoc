@@ -38,6 +38,13 @@ group :test do
   gem 'cucumber'
 end
 
+group :test, :development do
+  # Console
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-debugger'
+end
+
 # Standard helpers
 # ================
 gem 'haml'
