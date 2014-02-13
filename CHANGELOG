@@ -11,6 +11,7 @@ Features:
 * Add link to new treatment in patient view.
 * Add de translations for tenant view tabs.
 * Add pry console and debugger.
+* Add link to booking templates to bookkeeping page.
 
 Fixes:
 * Rails security updates.
