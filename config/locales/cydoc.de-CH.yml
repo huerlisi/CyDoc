@@ -414,6 +414,12 @@ de-CH:
       tab:
         show:             Arzt Informationen
         invoicing:        Rechnungseinstellungen
+  tenants:
+    show:
+      tab:
+        billing:          Rechnungen
+        printing:         Drucken
+        show:             Allgemein
   insurances:
     show:
       tab:
