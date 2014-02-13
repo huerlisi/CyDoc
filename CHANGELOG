@@ -1,3 +1,26 @@
+2.0.0.beta16
+============
+Features:
+* Use Person, not Doctor for Tiers#biller and #provider.
+* Use all Person, not only Doctor for select in default biller and provider tenant fields.
+* Show all persons as possible objects in the user relation form field.
+* Add german translations for validation settings.
+* Common pagination style for treatments list.
+* Unify usage of settings on Tenant.
+* Add de translation for Person model.
+* Add link to new treatment in patient view.
+* Add de translations for tenant view tabs.
+* Add pry console and debugger.
+
+Fixes:
+* Rails security updates.
+* Fix stack overflow for Patient on newer Ruby/Rails versions.
+* Properly use print_payment_for setting from tenant.
+* Do not raise an exception when showing a session view for a session with no date set.
+* Update rails and support gems.
+* Update i18n_rails_helpers.
+* Fix invoices.print_payment_for setting usage in patient letter and reminder.
+
 2.0.0.beta15
 ============
 * Show tenant in page title if available (à la Bookyt).
