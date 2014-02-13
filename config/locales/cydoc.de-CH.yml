@@ -286,6 +286,7 @@ de-CH:
       accounts_statistics: "Konto Statistiken"
       all_bookings: "Alle Buchungen"
       balance_sheet: "Jahresabschluss"
+      booking_templates: Buchungsvorlagen
       create: "Erfassen"
       doctors: "Ärzte"
       drug_products: "Medikamente"
