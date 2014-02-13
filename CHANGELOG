@@ -1,5 +1,13 @@
-2.0.0.beta16
-============
+2.0.0.rc1
+=========
+This is a release candidate for CyDoc 2.0. It already got quite some heavy testing during
+the last year or so by it's users. But it also collected quite some new features.
+
+Expect a final stable release soonish:-)
+
+A couple of small features also made it into this release. Most are small usability and
+translation fixes.
+
 Features:
 * Use Person, not Doctor for Tiers#biller and #provider.
 * Use all Person, not only Doctor for select in default biller and provider tenant fields.
