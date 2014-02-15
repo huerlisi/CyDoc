@@ -43,4 +43,32 @@ class BookkeepingController < ApplicationController
     )
     send_csv @invoices, :only => ["patient.to_s", :value_date, :due_date, :id, :amount, :current_due_amount], :filename => "Offene Posten per %s.csv" % [@value_end_date]
   end
+
+  def write_all_off
+    value_date = Date.parse(params[:value_date])
+    up_to_value_date = params[:up_to_value_date]
+    year = value_date.year
+
+    invoices = Invoice.find(:all,
+      :joins => :bookings,
+      :conditions => ["invoices.value_date <= ? AND bookings.value_date <= ?", up_to_value_date, value_date],
+      :group => "reference_id, reference_type",
+      :having => "sum(IF(bookings.debit_account_id = 3, bookings.amount, -bookings.amount)) != 0"
+    )
+
+    for ro_invoice in invoices
+      # We get readonly record, and therefore need to load them again
+      invoice = Invoice.find ro_invoice.id
+
+      if invoice.due_amount > 0
+	invoice.write_off "Jahresabschluss #{year}", value_date
+      else
+	invoice.book_extra_earning "Jahresabschluss #{year}", value_date
+      end
+
+      invoice.save!
+    end
+
+    redirect_to :action => 'open_invoices'
+  end
 end

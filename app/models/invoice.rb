@@ -153,14 +153,16 @@ class Invoice < ActiveRecord::Base
     return self
   end
   
-  def write_off(comments = nil)
+  def write_off(comments = nil, value_date = nil)
+    value_date ||= Date.today
+
     if due_amount > 0
       bookings.build(:title => "Debitorenverlust",
                      :comments => comments || "Abgeschrieben",
                      :amount => due_amount,
                      :credit_account => EARNINGS_ACCOUNT,
                      :debit_account => DEBIT_ACCOUNT,
-                     :value_date => Date.today)
+                     :value_date => value_date)
     end
 
     self.state = 'written_off'
@@ -168,14 +170,16 @@ class Invoice < ActiveRecord::Base
     return self
   end
 
-  def book_extra_earning(comments = nil)
+  def book_extra_earning(comments = nil, value_date = nil)
+    value_date ||= Date.today
+
     if due_amount < 0
       bookings.build(:title => "Ausserordentlicher Ertrag",
                      :comments => comments || "Zuviel bezahlt",
                      :amount => -due_amount,
                      :debit_account  => EXTRA_EARNINGS_ACCOUNT,
                      :credit_account => DEBIT_ACCOUNT,
-                     :value_date => Date.today)
+                     :value_date => value_date)
     end
 
     return self
