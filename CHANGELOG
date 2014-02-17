@@ -1,3 +1,10 @@
+2.0.0.rc2
+=========
+Fixes:
+* Keep settings after tenant saving.
+* Fix mixup of printers in invoice printing.
+* Fix print insurance recipe setting for reminder batch runs.
+
 2.0.0.rc1
 =========
 This is a release candidate for CyDoc 2.0. It already got quite some heavy testing during
