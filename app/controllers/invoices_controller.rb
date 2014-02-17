@@ -16,7 +16,7 @@ class InvoicesController < AuthorizedController
       @invoice.save!
     end
 
-    if current_tenant.settings['printing.cups']
+    if current_tenant.settings['printing.cups'] == "1"
       begin
         patient_letter_printer = current_tenant.printer_for(:invoice)
         insurance_recipe_printer = current_tenant.printer_for(:plain)
@@ -50,10 +50,10 @@ class InvoicesController < AuthorizedController
       @invoice.save!
     end
 
-    if current_tenant.settings['printing.cups']
+    if current_tenant.settings['printing.cups'] == "1"
       begin
         reminder_printer = current_tenant.printer_for(:invoice)
-        insurance_recipe_printer = current_tenant.settings['invoices.reminders.print_insurance_recipe'] ? current_tenant.printer_for(:plain) : nil
+        insurance_recipe_printer = current_tenant.printer_for(:plain)
 
         @invoice.print_reminder(reminder_printer, insurance_recipe_printer)
         flash.now[:notice] = "#{@invoice} an Drucker gesendet"

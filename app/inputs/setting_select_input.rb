@@ -10,4 +10,3 @@ class SettingSelectInput < SimpleForm::Inputs::CollectionInput
     I18n.translate('activerecord.attributes.' + @builder.lookup_model_names.last + '.settings.' + attribute_name)
   end
 end
-

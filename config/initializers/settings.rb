@@ -17,26 +17,26 @@ Settings.defaults = {
   'invoices.reminders.4.fee'             => 0.0,
   'invoices.reminders.4.payment_period'  => 0,
   'invoices.reminders.4.grace_period'    => 30,
-  'invoices.reminders.print_insurance_recipe' => false,
-  'invoices.print_payment_for'           => true,
+  'invoices.reminders.print_insurance_recipe' => "0",
+  'invoices.print_payment_for'           => "1",
 
-  'validation.medical_case_present'      => true,
-  'validation.tarmed'                    => true,
+  'validation.medical_case_present'      => "1",
+  'validation.tarmed'                    => "1",
 
   'patients.sex'                         => 'M',
 
-  'printing.cups'                        => false,
+  'printing.cups'                        => "0",
 
-  'modules.recalls'                      => true,
+  'modules.recalls'                      => "1",
 
-  'modules.drugs'                        => true,
+  'modules.drugs'                        => "1",
 
-  'modules.returned_invoices'            => true,
+  'modules.returned_invoices'            => "1",
 
-  'modules.hozr'                         => false,
+  'modules.hozr'                         => "1",
   'cases.invoice_grace_period'           => 2.days,
 
-  'modules.covercard'                    => false,
+  'modules.covercard'                    => "0",
   'modules.covercard.host'               => '127.0.0.1',
   'modules.covercard.port'               => 5016
 }

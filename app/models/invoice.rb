@@ -616,13 +616,17 @@ class Invoice < ActiveRecord::Base
     print_document(:patient_letter, printer)
   end
 
-  def print(insurance_recipe_printer, patient_letter_printer)
+  def print(patient_letter_printer, insurance_recipe_printer)
     print_patient_letter(patient_letter_printer) && print_insurance_recipe(insurance_recipe_printer)
   end
 
   # Reminders
-  def print_reminder(printer, insurance_recipe_printer = nil)
+  def print_reminder(printer)
     print_document(:reminder_letter, printer)
-    print_insurance_recipe(insurance_recipe_printer) if insurance_recipe_printer
+  end
+
+  def print_reminder_with_insurance_recipe(printer, insurance_recipe_printer)
+    print_reminder(printer)
+    print_insurance_recipe(insurance_recipe_printer)
   end
 end

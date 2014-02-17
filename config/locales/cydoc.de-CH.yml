@@ -125,6 +125,7 @@ de-CH:
       reminder_batch_job:
         created_at:   Vom
         value_date:   Rechnungsdatum
+        print_insurance_recipe: Mit Rückforderungsbeleg
         count:        Anzahl Rechnungen
         total_count:  Total
         failed_count: Fehlerhaft

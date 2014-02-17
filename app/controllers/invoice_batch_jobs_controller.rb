@@ -27,7 +27,7 @@ class InvoiceBatchJobsController < AuthorizedController
     end
 
     @invoice_batch_job.create_invoices(@treatments, value_date, tiers_name, provider, biller)
-    if current_tenant.settings['printing.cups']
+    if current_tenant.settings['printing.cups'] == "1"
       begin
         patient_letter_printer = current_tenant.printer_for(:invoice)
         insurance_recipe_printer = current_tenant.printer_for(:plain)
@@ -47,7 +47,7 @@ class InvoiceBatchJobsController < AuthorizedController
   def reprint
     @invoice_batch_job = InvoiceBatchJob.find(params[:id])
 
-    if current_tenant.settings['printing.cups']
+    if current_tenant.settings['printing.cups'] == "1"
       begin
         patient_letter_printer = current_tenant.printer_for(:invoice)
         insurance_recipe_printer = current_tenant.printer_for(:plain)

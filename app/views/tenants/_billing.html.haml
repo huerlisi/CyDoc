@@ -4,8 +4,8 @@
     .span4= f.input 'invoices.defaults.biller_id', :as => :setting_select, :collection => Person.all.collect{|e| [e.to_s, e.id]}
     .span4= f.input 'invoices.defaults.provider_id', :as => :setting_select, :collection => Person.all.collect{|e| [e.to_s, e.id]}
   .row-fluid
-    .span4= f.input 'validation.medical_case_present', :as => :setting_select
-    .span4= f.input 'validation.tarmed', :as => :setting_select
+    .span4= f.input 'validation.medical_case_present', :as => :setting_boolean
+    .span4= f.input 'validation.tarmed', :as => :setting_boolean
 
   %h3 Rechnung
   .row-fluid
@@ -14,7 +14,7 @@
 
   %h3 Mahnungen
   .row-fluid
-    .span6= f.input 'invoices.reminders.print_insurance_recipe', :as => :setting_select
+    .span6= f.input 'invoices.reminders.print_insurance_recipe', :as => :setting_boolean
 
   %h4 1. Mahnung
   .row-fluid

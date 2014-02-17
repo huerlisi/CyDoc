@@ -40,7 +40,7 @@ module Covercard
     end
 
     def self.find(value)
-      return nil if !(value && value.length == 20) or !settings['modules.covercard']
+      return nil if !(value && value.length == 20) or !(settings['modules.covercard'] == "1")
 
       url = URI.parse(SERVICE_URL + value)
       http = Net::HTTP::Proxy(self.settings['modules.covercard.host'], self.settings['modules.covercard.port'])
