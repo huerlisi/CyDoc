@@ -334,6 +334,13 @@ class Invoice < ActiveRecord::Base
     # Mark as paid unless canceled or reactivated
     if self.due_amount <= 0.0
       update_attribute(:state, 'paid')
+
+      returned_invoices.active.find_each do |returned_invoice|
+        returned_invoice.update_attribute(:state, :resolved)
+      end
+
+      patient.update_attribute(:dunning_stop, false)
+
     elsif !self.reminded? and (self.due_amount > 0.0)
       update_attribute(:state, 'booked')
     end
