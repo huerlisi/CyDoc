@@ -129,6 +129,7 @@ gem 'vesr'
 
 # Printing
 gem 'cupsffi'
+gem 'ffi'
 
 # CSV Export
 gem 'csv-mapper'
