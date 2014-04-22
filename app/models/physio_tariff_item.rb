@@ -5,7 +5,7 @@ class PhysioTariffItem < TariffItem
     when "Unfall"
       1.0
     else
-      1.03
+      1.11
     end
   end
 
@@ -14,7 +14,7 @@ class PhysioTariffItem < TariffItem
     when "Unfall"
       1.0
     else
-      1.03
+      1.11
     end
   end
 
