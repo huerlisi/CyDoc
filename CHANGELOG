@@ -1,3 +1,10 @@
+2.0.0.rc3
+=========
+Some gems get updated, mostly to fix security issues in Rails etc.
+
+* Update rails and some other gems.
+* Use stock cupsffi gem.
+
 2.0.0.rc2
 =========
 Fixes:
