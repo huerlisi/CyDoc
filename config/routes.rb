@@ -182,6 +182,12 @@ CyDoc::Application.routes.draw do
   resources :physio_tariff_item, :controller => "tariff_items"
   resources :free_tariff_item, :controller => "tariff_items"
 
+  resources :tariff_prices do
+    member do
+      get :copy
+    end
+  end
+
   resources :drug_products do
     member do
       put :create_tariff_item

@@ -72,6 +72,17 @@ de-CH:
       tiers:
         biller:           Rechnungssteller
         provider:         Leistungserbringer
+      item_price:
+        code: Code
+        amount: Wert
+        valid_from: Gültig ab
+        valid_to: Gültig bis
+      tariff_price:
+        code: Code
+        canton: Kanton
+        reason: Behandlungsgrund
+        amount: Taxpunktwert
+        unit: Leistungstyp
       invoice:
         amount_due: Fälliger Betrag
         amount_pfl: davon PFL
@@ -274,6 +285,7 @@ de-CH:
       treatment:          Fall
       user:               Benutzer
       tenant:             Mandant
+      tariff_price:       Taxpunktwert
   cydoc:
     covercard_search:
       date_patients: "Treffer mit dem Geburtstag"

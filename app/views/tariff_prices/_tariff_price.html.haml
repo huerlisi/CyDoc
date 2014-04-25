@@ -1,0 +1,8 @@
+%tr[tariff_price]
+  %td.right= link_to tariff_price.code, tariff_price, 'data-href-container' => 'tr'
+  %td= tariff_price.canton
+  %td= tariff_price.reason
+  %td= tariff_price.unit
+  %td.right= currency_fmt(tariff_price.amount)
+  %td= tariff_price.valid_from
+  %td= tariff_price.valid_to

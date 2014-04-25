@@ -1,0 +1,15 @@
+= simple_form_for resource do |f|
+  .row-fluid
+    .span6= f.input :code
+    .span6= f.input :canton
+  .row-fluid
+    .span6= f.input :reason
+    .span6= f.input :unit
+  .row-fluid
+    .span6= f.input :amount
+  .row-fluid
+    .span6= f.input :valid_from, :as => :date_field
+    .span6= f.input :valid_to, :as => :date_field
+
+  .form-actions
+    = f.button :submit

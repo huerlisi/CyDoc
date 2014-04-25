@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 
 class Treatment < ActiveRecord::Base
+  REASON_ENUM = ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler']
+
   # Access restrictions
   attr_accessible :date_begin, :date_end, :reason, :place_type, :canton, :imported_id
 

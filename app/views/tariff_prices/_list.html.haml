@@ -1,0 +1,11 @@
+%table.table.table-striped
+  %tr
+    %th.right= t_attr(:code, TariffPrice)
+    %th= t_attr(:canton, TariffPrice)
+    %th= t_attr(:reason, TariffPrice)
+    %th= t_attr(:unit, TariffPrice)
+    %th.right= t_attr(:amount, TariffPrice)
+    %th= t_attr(:valid_from, TariffPrice)
+    %th= t_attr(:valid_to, TariffPrice)
+
+  = render collection

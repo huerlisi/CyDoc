@@ -63,8 +63,9 @@ class Session < ActiveRecord::Base
     write_attribute(:duration_from, new_date)
 
     # Update service_records
-    service_records.map{|service_record|
+    service_records.map{ |service_record|
       service_record.date = new_date
+      service_record.tariff_item.set_tariff_prices(service_record, self, treatment.reason)
     }
   end
 

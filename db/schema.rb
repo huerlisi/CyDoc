@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140217095557) do
+ActiveRecord::Schema.define(:version => 20140425053158) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -400,6 +400,19 @@ ActiveRecord::Schema.define(:version => 20140217095557) do
   add_index "invoices_sessions", ["invoice_id", "session_id"], :name => "index_invoices_sessions_on_invoice_id_and_session_id"
   add_index "invoices_sessions", ["invoice_id"], :name => "index_invoices_sessions_on_invoice_id"
   add_index "invoices_sessions", ["session_id"], :name => "index_invoices_sessions_on_session_id"
+
+  create_table "item_prices", :force => true do |t|
+    t.string   "code"
+    t.decimal  "amount",     :precision => 5, :scale => 2
+    t.date     "valid_from"
+    t.date     "valid_to"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  add_index "item_prices", ["code"], :name => "index_item_prices_on_code"
+  add_index "item_prices", ["valid_from"], :name => "index_item_prices_on_valid_from"
+  add_index "item_prices", ["valid_to"], :name => "index_item_prices_on_valid_to"
 
   create_table "laws", :force => true do |t|
     t.string   "insured_id"

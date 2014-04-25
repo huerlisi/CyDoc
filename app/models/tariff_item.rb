@@ -71,6 +71,11 @@ class TariffItem < ActiveRecord::Base
     ServiceRecord
   end
 
+  def set_tariff_prices(service_record, session, reason)
+    service_record.unit_mt = unit_mt(reason, session.date)
+    service_record.unit_tt = unit_tt(reason, session.date)
+  end
+
   def create_service_record(session)
     # Type information
     service_record = service_record_class.new
@@ -83,25 +88,26 @@ class TariffItem < ActiveRecord::Base
     service_record.code = code
 
     service_record.amount_mt = amount_mt
-    service_record.unit_mt = unit_mt
     service_record.unit_factor_mt = unit_factor_mt
 
     service_record.amount_tt = amount_tt
-    service_record.unit_tt = unit_tt
     service_record.unit_factor_tt = unit_factor_tt
+
+    set_tariff_prices(service_record, session, session.treatment.reason)
 
     service_record.remark = remark
 
     return service_record
   end
 
-  # "Constant" fields
-  def unit_mt
-    0.89
+  def unit_mt(reason, value_date = nil)
+    value_date ||= Date.today
+    TariffPrice.tagged_with(["reason:#{reason}", "unit:medical"]).current(self.tariff_type, value_date).amount
   end
 
-  def unit_tt
-    0.89
+  def unit_tt(reason, value_date = nil)
+    value_date ||= Date.today
+    TariffPrice.tagged_with(["reason:#{reason}", "unit:technical"]).current(self.tariff_type, value_date).amount
   end
 
   def unit_factor_mt
@@ -112,7 +118,6 @@ class TariffItem < ActiveRecord::Base
     1.0
   end
 
-  # Fallbacks
   def amount_mt
     read_attribute(:amount_mt) || 0
   end
