@@ -402,6 +402,9 @@ de-CH:
   tariff_item_groups:
     index:
       title:              Blockleistungen
+  tariff_prices:
+    copy:
+      title:              Taxpunktwert kopieren
   invoices:
     index:
       title:              Rechnungen
