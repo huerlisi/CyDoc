@@ -17,12 +17,13 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :doctors, t('cydoc.navigation.doctors'), doctors_path
 
     primary.item :tariff_items, t_title(:index, TariffItem), tariff_items_path do |entry|
-      entry.item :traiff_items_index, t_title(:index, TariffItem), tariff_items_path
-      entry.item :traiff_item_groups_index, t_title(:index, TariffItemGroup), tariff_item_groups_path
+      entry.item :tariff_items_index, t_title(:index, TariffItem), tariff_items_path
+      entry.item :tariff_item_groups_index, t_title(:index, TariffItemGroup), tariff_item_groups_path
 
       if current_tenant.settings['modules.drugs']
         entry.item :drug_products, t_title(:index, DrugProduct), drug_products_path
       end
+      entry.item :tariff_prices_index, t_title(:index, TariffPrice), tariff_prices_path
     end
 
     primary.item :invoices, t_title(:index, Invoice), invoices_path do |entry|
