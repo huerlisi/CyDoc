@@ -1,9 +1,14 @@
 2.0.0.rc3
 =========
 Some gems get updated, mostly to fix security issues in Rails etc.
+We now support setting taxpoints using the web frontend.
 
 * Update rails and some other gems.
 * Use stock cupsffi gem.
+* Implement support for taxpoint changes and support multiple cantons.
+* Add menu entry for tariff prices.
+* Add contextual_links to default new template.
+* Add UI to copy tariff prices.
 
 2.0.0.rc2
 =========
