@@ -1,8 +1,8 @@
 = simple_form_for resource do |f|
   %h3 Rechnungs Vorgaben
   .row-fluid
-    .span4= f.input 'invoices.defaults.biller_id', :as => :setting_select, :collection => Person.all.collect{|e| [e.to_s, e.id]}
-    .span4= f.input 'invoices.defaults.provider_id', :as => :setting_select, :collection => Person.all.collect{|e| [e.to_s, e.id]}
+    .span4= f.input 'invoices.defaults.biller_id', :as => :setting_select, :collection => Person.all, :label_method => :to_s
+    .span4= f.input 'invoices.defaults.provider_id', :as => :setting_select, :collection => Person.all, :label_method => :to_s
   .row-fluid
     .span4= f.input 'validation.medical_case_present', :as => :setting_boolean
     .span4= f.input 'validation.tarmed', :as => :setting_boolean
