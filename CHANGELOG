@@ -9,6 +9,7 @@ We now support setting taxpoints using the web frontend.
 * Add menu entry for tariff prices.
 * Add contextual_links to default new template.
 * Add UI to copy tariff prices.
+* Fix input fields with people as options to not only work with doctors.
 
 2.0.0.rc2
 =========
