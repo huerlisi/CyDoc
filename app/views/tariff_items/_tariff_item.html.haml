@@ -4,4 +4,7 @@
     %span= truncate(tariff_item.remark, :length => 80, :separator => ' ')
   %td.right= currency_fmt(tariff_item.amount_mt)
   %td.right= currency_fmt(tariff_item.amount_tt)
-  %td.right= currency_fmt(tariff_item.amount)
+  %td.right
+    = currency_fmt(tariff_item.amount('Krankheit'))
+    = "/"
+    = currency_fmt(tariff_item.amount('Unfall'))

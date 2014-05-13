@@ -3,8 +3,13 @@
   %tr
     %th.right= t_attr(:amount_mt, TariffItem)
     %th.right= t_attr(:amount_tt, TariffItem)
-    %th.right= t_attr(:amount, TariffItem)
+    %th.right
+      = t_attr(:amount, TariffItem)
+      Krankheit / Unfall
   %tr[resource]
     %td.right= currency_fmt(resource.amount_mt)
     %td.right= currency_fmt(resource.amount_tt)
-    %td.right= currency_fmt(resource.amount)
+    %td.right
+      = currency_fmt(resource.amount('Krankheit'))
+      = "/"
+      = currency_fmt(resource.amount('Unfall'))

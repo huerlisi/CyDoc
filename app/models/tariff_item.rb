@@ -102,12 +102,14 @@ class TariffItem < ActiveRecord::Base
 
   def unit_mt(reason, value_date = nil)
     value_date ||= Date.today
-    TariffPrice.tagged_with(["reason:#{reason}", "unit:medical"]).current(self.tariff_type, value_date).amount
+    price = TariffPrice.tagged_with(["reason:#{reason}", "unit:medical"]).current(self.tariff_type, value_date)
+    price ? price.amount : 0.0
   end
 
   def unit_tt(reason, value_date = nil)
     value_date ||= Date.today
-    TariffPrice.tagged_with(["reason:#{reason}", "unit:technical"]).current(self.tariff_type, value_date).amount
+    price = TariffPrice.tagged_with(["reason:#{reason}", "unit:technical"]).current(self.tariff_type, value_date)
+    price ? price.amount : 0.0
   end
 
   def unit_factor_mt
@@ -131,8 +133,8 @@ class TariffItem < ActiveRecord::Base
   end
 
   # Calculated field
-  def amount
-    (self.amount_mt * self.unit_factor_mt * self.unit_mt) + (self.amount_tt * self.unit_factor_tt * self.unit_tt)
+  def amount(reason)
+    (self.amount_mt * self.unit_factor_mt * self.unit_mt(reason)) + (self.amount_tt * self.unit_factor_tt * self.unit_tt(reason))
   end
 
   def reason
