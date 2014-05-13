@@ -1,3 +1,13 @@
+2.0.0.rc4
+=========
+This release fixes the interface to administer tariff items that
+broke in RC3 where we introduces dynamic tax point prices.
+
+We also detect and gracefully handle duplicate uploads of VESR files
+for debit invoice clearing.
+
+* Fix tariff item views for dynamic tax point prices.
+
 2.0.0.rc3
 =========
 Some gems get updated, mostly to fix security issues in Rails etc.
