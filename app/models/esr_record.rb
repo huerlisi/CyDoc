@@ -185,7 +185,6 @@ class EsrRecord < ActiveRecord::Base
   end
 
   def create_esr_booking
-    raise duplicate_of.inspect
     return if duplicate_of.present?
 
     if invoice
