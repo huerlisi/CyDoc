@@ -30,7 +30,7 @@ class EsrRecord < ActiveRecord::Base
     transitions :from => [:overpaid, :missing], :to => :resolved
   end
 
-  named_scope :invalid, :conditions => {:state => ['overpaid', 'underpaid', 'resolved', 'duplicate']}
+  named_scope :invalid, :conditions => {:state => ['overpaid', 'underpaid', 'resolved']}
   named_scope :unsolved, :conditions => {:state => ['overpaid', 'underpaid', 'missing']}
   named_scope :valid, :conditions => {:state => 'paid'}
 

@@ -9,6 +9,10 @@
   %h3 Falscher Betrag
   = render 'esr_records/list', :esr_records => @esr_file.esr_records.invalid
 
+- unless @esr_file.esr_records.duplicate.empty?
+  %h3 Doppelt heruntergeladen
+  = render 'esr_records/list', :esr_records => @esr_file.esr_records.duplicate
+
 - unless @esr_file.esr_records.missing.empty?
   %h3 Rechnung nicht gefunden
   = render 'esr_records/list', :esr_records => @esr_file.esr_records.missing
