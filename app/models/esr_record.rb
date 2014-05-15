@@ -181,7 +181,10 @@ class EsrRecord < ActiveRecord::Base
 
   # Tries to find a record this would duplicate
   def duplicate_of
-    EsrRecord.find(:first, :conditions => {:reference => reference, :bank_pc_id => bank_pc_id, :amount => amount, :payment_date => payment_date, :transaction_date => transaction_date})
+    candidates = EsrRecord.find(:all, :conditions => {:reference => reference, :bank_pc_id => bank_pc_id, :amount => amount, :payment_date => payment_date, :transaction_date => transaction_date})
+    candidates = candidates.reject{ |candidate| candidate == self }
+
+    candidates.first
   end
 
   def create_esr_booking
