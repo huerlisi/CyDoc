@@ -53,7 +53,6 @@ gem 'jquery-rails'
 
 # Styling
 gem 'lyb_sidebar'
-gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 
@@ -116,7 +115,6 @@ gem 'carrierwave'
 gem 'prawn', :git => 'https://github.com/prawnpdf/prawn.git'
 gem 'prawnto'
 
-gem 'csv-mapper'
 
 # Locale setting
 gem 'routing-filter'
