@@ -8,16 +8,16 @@
         = render 'service_items/form', :f => s
       %th
       %th
-      %th{:style => "text-align: left"}
+      %th.right
         = resource.service_items.count
         \&nbsp;Positionen
-      %th{:style => "text-align: right"}
+      %th.right
         = sprintf('%.2f', resource.amount_mt)
         \&nbsp;AL
-      %th{:style => "text-align: right"}
+      %th.right
         = sprintf('%.2f', resource.amount_mt)
         \&nbsp;TL
-      %th{:style => "text-align: right"}
+      %th.right
         = sprintf('%.2f', resource.amount)
         \&nbsp;CHF
       %th
