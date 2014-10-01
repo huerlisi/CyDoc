@@ -16,6 +16,8 @@
     = sprintf('%.2f', service_item.amount_tt)
     \&nbsp;TL
   %td.right
-    %b>= sprintf('%.2f', service_item.amount)
+    %b= currency_fmt(service_item.amount('Krankheit'))
+    = "/"
+    %b= currency_fmt(service_item.amount('Unfall'))
   %td
     = link_to image_tag('delete.png'), service_item, :method => :delete, :remote => true

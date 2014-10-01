@@ -34,8 +34,8 @@ class TariffItemGroup < TariffItem
     service_items.map{|s| s.amount_tt}.sum
   end
 
-  def amount
-    service_items.map{|s| s.amount}.sum
+  def amount(reason)
+    service_items.map{|s| s.amount(reason)}.sum
   end
 
   def create_service_record(session)

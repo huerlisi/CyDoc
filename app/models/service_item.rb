@@ -18,8 +18,8 @@ class ServiceItem < ActiveRecord::Base
     quantity * tariff_item.amount_tt
   end
 
-  def amount
-    quantity * tariff_item.amount
+  def amount(reason)
+    quantity * tariff_item.amount(reason)
   end
 
   def code

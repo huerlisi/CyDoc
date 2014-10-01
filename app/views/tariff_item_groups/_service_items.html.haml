@@ -18,8 +18,9 @@
         = sprintf('%.2f', resource.amount_mt)
         \&nbsp;TL
       %th.right
-        = sprintf('%.2f', resource.amount)
-        \&nbsp;CHF
+        = currency_fmt(tariff_item.amount('Krankheit'))
+        = "/"
+        = currency_fmt(tariff_item.amount('Unfall'))
       %th
 
     = f.button :submit
