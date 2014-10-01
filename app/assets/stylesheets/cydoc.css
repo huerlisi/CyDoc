@@ -1,9 +1,9 @@
 /* Misc */
-.right {
+.right, .table td.right, .table th.right {
   text-align: right
 }
 
-.currency {
+.currency, .table td.currency, .table th.currency {
   text-align: right
 }
 
