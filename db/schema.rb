@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140425053158) do
+ActiveRecord::Schema.define(:version => 20141002214544) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -698,9 +698,13 @@ ActiveRecord::Schema.define(:version => 20140425053158) do
     t.integer  "vat_class_id"
     t.integer  "imported_id"
     t.string   "imported_type"
+    t.date     "duration_from"
+    t.date     "duration_to"
   end
 
   add_index "tariff_items", ["code"], :name => "index_tariff_items_on_code"
+  add_index "tariff_items", ["duration_from"], :name => "index_tariff_items_on_duration_from"
+  add_index "tariff_items", ["duration_to"], :name => "index_tariff_items_on_duration_to"
   add_index "tariff_items", ["tariff_type"], :name => "index_tariff_items_on_tariff_type"
   add_index "tariff_items", ["type"], :name => "index_tariff_items_on_type"
   add_index "tariff_items", ["vat_class_id"], :name => "index_tariff_items_on_vat_class_id"
