@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141002214544) do
+ActiveRecord::Schema.define(:version => 20141002215047) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -614,6 +614,7 @@ ActiveRecord::Schema.define(:version => 20141002214544) do
     t.decimal  "unit_tt",                           :precision => 8, :scale => 2
     t.integer  "vat_class_id"
     t.integer  "imported_id"
+    t.integer  "tariff_item_id"
   end
 
   add_index "service_records", ["patient_id"], :name => "index_service_records_on_patient_id"

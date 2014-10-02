@@ -74,7 +74,7 @@ class ServiceRecord < ActiveRecord::Base
   end
 
   # Calculated field
-  belongs_to :tariff_item, :foreign_key => :code, :primary_key => :code
+  belongs_to :tariff_item
 
   def amount
     self.quantity * ((self.amount_mt * self.unit_factor_mt * self.unit_mt).round(2) + (self.amount_tt * self.unit_factor_tt * self.unit_tt).round(2))
