@@ -11,6 +11,18 @@ class TariffItem < ActiveRecord::Base
   # Validations
   validates_presence_of :code, :remark
 
+  # Validity
+  scope :valid_at, lambda {|value|
+    where(
+      "(duration_from <= :date AND duration_to >= :date) OR " \
+      "(duration_from IS NULL AND duration_to >= :date)  OR" \
+      "(duration_from <= :date AND duration_to IS NULL) OR" \
+      "(duration_from IS NULL AND duration_to IS NULL)",
+      :date => value
+    )
+  }
+  scope :valid, lambda { valid_at(Date.today) }
+
   #TODO
   def self.to_string
     I18n.translate(self.name.underscore, :scope => [:activerecord, :models])

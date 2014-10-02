@@ -42,7 +42,7 @@ class ServiceRecordsController < AuthorizedController
     @session = Session.find(params[:session_id])
 
     @tariff_items = TariffItem.clever_find(query).page params['page']
-    params[:tariff_item_id] = TariffItem.find_by_code(query)
+    params[:tariff_item_id] = TariffItem.valid_at(@session.date).order('duration_from DESC').find_by_code(query)
     create && return
   end
 
