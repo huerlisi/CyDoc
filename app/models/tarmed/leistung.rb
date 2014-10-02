@@ -30,6 +30,13 @@ class Tarmed::Leistung < Tarmed::Base
     read_attribute('F_TL')
   end
 
+  def duration_from
+    read_attribute('GUELTIG_VON')
+  end
+
+  def duration_to
+    read_attribute('GUELTIG_BIS')
+  end
 
   # From Hozr
   def name

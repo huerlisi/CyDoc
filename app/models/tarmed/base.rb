@@ -54,19 +54,23 @@ class Tarmed::Base < ActiveRecord::Base
   def self.import_all(do_clean)
     TarmedTariffItem.delete_all if do_clean
 
-    for tarmed_tariff_item in Tarmed::Leistung.all(:conditions => self.condition_validity)
-      begin
-        tariff_item = TarmedTariffItem.new
+    TarmedTariffItem.transaction do
+      Tarmed::Leistung.uniq.where(self.condition_validity).find_each do |tarmed_tariff_item|
+        begin
+          tariff_item = TarmedTariffItem.new
 
-        tariff_item.code = tarmed_tariff_item.code
-        tariff_item.amount_mt = tarmed_tariff_item.amount_mt
-        tariff_item.amount_tt = tarmed_tariff_item.amount_tt
-        tariff_item.remark = tarmed_tariff_item.name
+          tariff_item.code = tarmed_tariff_item.code
+          tariff_item.amount_mt = tarmed_tariff_item.amount_mt
+          tariff_item.amount_tt = tarmed_tariff_item.amount_tt
+          tariff_item.duration_from = tarmed_tariff_item.duration_from
+          tariff_item.duration_to = tarmed_tariff_item.duration_to
+          tariff_item.remark = tarmed_tariff_item.name
 
-        tariff_item.save
-        print "ID: #{tarmed_tariff_item.id} OK\n"
-      rescue Exception => ex
-        print "ID: #{tarmed_tariff_item.id} => #{ex.message}\n\n"
+          tariff_item.save
+          print "ID: #{tarmed_tariff_item.id} OK\n"
+        rescue Exception => ex
+          print "ID: #{tarmed_tariff_item.id} => #{ex.message}\n\n"
+        end
       end
     end
 
