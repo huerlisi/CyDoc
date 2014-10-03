@@ -5,11 +5,11 @@ class ServiceItemsController < AuthorizedController
     query = params[:query]
     query ||= params[:search][:query] if params[:search]
 
-    @tariff_items = TariffItem.clever_find(query).page params['page']
+    @tariff_items = TariffItem.valid.order('duration_from DESC').clever_find(query)
     @tariff_item = TariffItem.find(params[:tariff_item_id])
 
     # Show selection list only if more than one hit
-    if @tariff_items.size == 1
+    if @tariff_items.pluck(:code).uniq.size == 1
       params[:tariff_item_id] = @tariff_item.id
       params[:select_item_id] = @tariff_items.first.id
       create
