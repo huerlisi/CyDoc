@@ -51,7 +51,7 @@ function convert() {
 local input="${1:-$NAME.mdb}"
 local output="${2:-$NAME.sqlite3}"
 
-	./tarmed_convert.sh --sqlite3 "$input" | sqlite3 "$output"
+	./tarmed_convert.sh --sqlite3 "$input" | sqlite3 "$output" || true
 
 	# Create links
 	ln -fs "../data/$output" ../db/${NAME}_development.sqlite3
