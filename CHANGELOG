@@ -1,3 +1,17 @@
+2.0.0.rc5
+=========
+We now support validity ranges for tariff items.
+
+Features:
+* Add duration to tariff_items.
+* Use duration to lookup tariff item when creating service_records.
+* Import duration for tarmed tariff items.
+* Newest Tarmed MDB gives warning, continue with import anyway.
+
+Fixes:
+* Fix tariff group items to work with reason codes.
+* Fix contextual_link_to and contextual_links_for calls.
+
 2.0.0.rc4
 =========
 This release fixes the interface to administer tariff items that
