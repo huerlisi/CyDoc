@@ -37,7 +37,7 @@ class ServiceItemsController < AuthorizedController
       @tariff_item.service_items << tariff_item.service_items
     else
       service_item = @tariff_item.service_items.build(params[:service_item])
-      service_item.tariff_item = tariff_item
+      service_item.code = tariff_item.code
       service_item.quantity = 1
 
       service_item.save!

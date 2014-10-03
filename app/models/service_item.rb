@@ -4,10 +4,15 @@ class ServiceItem < ActiveRecord::Base
   attr_accessible :quantity, :ref_code
 
   belongs_to :tariff_item_group
-  belongs_to :tariff_item
 
   def to_s
     "#{quantity} x #{tariff_item.to_s}"
+  end
+
+  def tariff_item(value_date = nil)
+    value_date ||= Date.today
+
+    TariffItem.valid_at(value_date).order('duration_from DESC').where(:code => code).first
   end
 
   def amount_mt
@@ -20,10 +25,6 @@ class ServiceItem < ActiveRecord::Base
 
   def amount(reason)
     quantity * tariff_item.amount(reason)
-  end
-
-  def code
-    tariff_item.code
   end
 
   def text
@@ -45,7 +46,7 @@ class ServiceItem < ActiveRecord::Base
 
   def create_service_record(session)
     # Create service_record based on associated tariff_item
-    service_record = tariff_item.create_service_record(session)
+    service_record = tariff_item(session.date).create_service_record(session)
 
     # Fill in instance attributes
     service_record.ref_code = ref_code if ref_code

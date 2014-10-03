@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141002215047) do
+ActiveRecord::Schema.define(:version => 20141003081222) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -566,16 +566,16 @@ ActiveRecord::Schema.define(:version => 20141002215047) do
   add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
   create_table "service_items", :force => true do |t|
-    t.integer "tariff_item_id"
     t.integer "tariff_item_group_id"
     t.decimal "quantity",                           :precision => 8, :scale => 2
     t.string  "ref_code",             :limit => 10
     t.integer "position"
+    t.string  "code"
   end
 
+  add_index "service_items", ["code"], :name => "index_service_items_on_code"
   add_index "service_items", ["ref_code"], :name => "index_service_items_on_ref_code"
   add_index "service_items", ["tariff_item_group_id"], :name => "index_service_items_on_tariff_item_group_id"
-  add_index "service_items", ["tariff_item_id"], :name => "index_service_items_on_tariff_item_id"
 
   create_table "service_records", :force => true do |t|
     t.string   "treatment",                                                       :default => "ambulatory"
