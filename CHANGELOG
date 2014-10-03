@@ -1,3 +1,8 @@
+2.0.0.rc6
+=========
+Fixes:
+* Adapt tariff item groups to use date ranges.
+
 2.0.0.rc5
 =========
 We now support validity ranges for tariff items.
