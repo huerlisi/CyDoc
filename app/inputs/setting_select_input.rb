@@ -2,7 +2,7 @@
 class SettingSelectInput < SimpleForm::Inputs::CollectionInput
   def input
     @builder.fields_for :settings do |s|
-      s.select(attribute_name, collection, :selected => object.settings[attribute_name])
+      s.select(attribute_name, collection.collect {|c| [ c.to_s, c.id ] }, :selected => object.settings[attribute_name])
     end
   end
 
