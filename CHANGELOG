@@ -1,3 +1,10 @@
+2.0.0.rc8
+=========
+Some gems got updated, mainly Rails.
+
+Fixes:
+* Fix text for reminders.
+
 2.0.0.rc7
 =========
 Fixes:
