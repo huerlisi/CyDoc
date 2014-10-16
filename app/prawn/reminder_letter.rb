@@ -15,10 +15,10 @@ class ReminderLetter < PatientLetter
 
     greeting(invoice.patient)
 
-    text "Bei der Durchsicht meiner Buchhaltung habe ich festgestellt, dass die Zahlung der oben erwähnten Rechnung noch nicht verbucht ist. Falls Sie per E-Banking bezahlt haben, bitte ich Sie nochmals zu überpürfen, ob Sie die korrekte Konto- und Referenznummer angegeben haben."
+    text "Bei der Durchsicht meiner Buchhaltung habe ich festgestellt, dass die Zahlung der oben erwähnten Rechnung noch nicht verbucht ist. Falls Sie per E-Banking bezahlt haben, bitte ich Sie nochmals zu überprüfen, ob Sie die korrekte Konto- und Referenznummer angegeben haben."
     text " "
     text "- Wenn Sie tatsächlich noch nicht bezahlt haben, möchte ich Sie bitten, den Betrag in den nächsten Tagen zu überweisen."
-    text "- Sollte sich Ihre Zahlung mit der Mahnung kreuzen, betrachten Sie dieses Schreiben als gegenstandslos."
+    text "- Sollte sich Ihre Zahlung mit der Mahnung kreuzen, betrachten Sie dieses Schreiben bitte als gegenstandslos."
     text "- Wir möchten Sie darauf aufmerksam machen, dass die nächste Mahnung gebührenpflichtig ist."
     text " "
   end
@@ -34,8 +34,8 @@ class ReminderLetter < PatientLetter
 
     text "Bei der Durchsicht meiner Buchhaltung habe ich festgestellt, dass die oben erwähnte Rechnung trotz Mahnung noch nicht beglichen ist."
     text " "
-    text "- Ich möchte Sie bitten, den Betrag sofort zu überweisen. Andernfalls werden wir unsere Forderung dem Inkasso zu übergeben."
-    text "- Sollte sich Ihre Zahlung mit der Mahnung kreuzen, betrachten Sie dieses Schreiben als gegenstandslos."
+    text "- Ich möchte Sie bitten, den Betrag sofort zu überweisen. Andernfalls werden wir unsere Forderung dem Inkasso übergeben."
+    text "- Sollte sich Ihre Zahlung mit der Mahnung kreuzen, betrachten Sie dieses Schreiben bitte als gegenstandslos."
     text "- Für die Bezahlung benützen Sie unbedingt den beiligenden Einzahlungschein."
     text " "
   end
