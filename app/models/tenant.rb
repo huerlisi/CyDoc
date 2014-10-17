@@ -7,6 +7,7 @@ class Tenant < ActiveRecord::Base
   # Person
   # ======
   belongs_to :person
+  attr_accessible :person
   accepts_nested_attributes_for :person
   attr_accessible :person_attributes
 
