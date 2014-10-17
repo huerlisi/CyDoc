@@ -65,6 +65,8 @@ Initialize the database:
 bundle exec rake db:setup
 </pre>
 
+An initial tenant and user has been created for you. Please change your password as soon as possible. 
+
 h3. Run
 
 You should now be able to start CyDoc:
@@ -74,5 +76,7 @@ bundle exec rails server
 </pre>
 
 CyDoc is now available at http://localhost:3000
+
+You can login with username 'doctor' and password 'doctor1234'.
 
 Enjoy!
