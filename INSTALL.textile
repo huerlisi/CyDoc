@@ -2,7 +2,7 @@ We currently support installing on Debian 5.0 Lenny and Ubuntu 12.04 systems.
 
 h2. Install Ruby'n'Rails
 
-CyDoc is developed and tested using Rails 2.3 and Ruby 1.8.
+CyDoc is developed and tested using Rails 3.2 and Ruby 1.9.
 
 Install packages to needed:
 
@@ -50,16 +50,6 @@ Install dependency gems:
 bundle
 </pre>
 
-Install dependency plugins:
-
-<pre>
-# Install plugin package dependencies
-git submodule update --init
-
-# Run post-installation hooks
-bundle exec rake auth:gen:site_key
-</pre>
-
 Setup database:
 
 Copy database.yml.example to database.yml and edit as needed
@@ -80,7 +70,7 @@ h3. Run
 You should now be able to start CyDoc:
 
 <pre>
-script/server
+bundle exec rails server
 </pre>
 
 CyDoc is now available at http://localhost:3000
