@@ -12,8 +12,10 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
 
   def set_locale
-    locale = params[:locale] || cookies[:locale]
-    I18n.locale = locale.to_s
+    locale = params[:locale].presence || cookies[:locale].presence || I18n.default_locale
+    locale = I18n.available_locales.include?(locale.to_sym) ? locale : I18n.default_locale
+    I18n.locale = locale
+
     cookies[:locale] = locale unless (cookies[:locale] && cookies[:locale] == locale.to_s)
   end
 
