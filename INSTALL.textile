@@ -7,7 +7,7 @@ CyDoc is developed and tested using Rails 3.2 and Ruby 1.9.
 Install packages to needed:
 
 <pre>
-sudo apt-get install rubygems irb libruby-extras recode sqlite3 libsqlite3-dev libmysqlclient-dev libxml2-dev libxslt-dev cups-bsd cupsys-client libcupsys2-dev ruby-dev build-essential
+sudo apt-get install rubygems irb recode sqlite3 libsqlite3-dev libmysqlclient-dev libxml2-dev libxslt-dev cups-bsd cups-client libcups2-dev ruby-dev build-essential
 sudo apt-get install git
 sudo apt-get install sphinxsearch
 </pre>
