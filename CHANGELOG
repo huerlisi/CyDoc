@@ -1,9 +1,20 @@
 2.0.0.rc8
 =========
-Some gems got updated, mainly Rails.
+Some gems got updated, mainly Rails. The installation instructions
+have been updated and extended. Some issues in the insurance
+recipe regarding summing are fixed.
 
 Fixes:
 * Fix text for reminders.
+* Mark Tenant#person as attr_accessible.
+* Create initial tenant, user and doctor in database seeds.
+* Mention initial credentials in INSTALL.
+* Document setup for freetext search daemon.
+* Update ubuntu packages in INSTALL docs.
+* Fix locale setup.
+* Do not fails in tariff_items#index for direct TariffItem instances.
+* Fix tarmed overview amounts.
+* Fix total of technical amount in tariff item group view.
 
 2.0.0.rc7
 =========
