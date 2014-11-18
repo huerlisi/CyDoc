@@ -506,11 +506,11 @@ class Invoice < ActiveRecord::Base
   end
 
   # Calculated fields
-  def amount_mt(tariff_type = nil, options = {})
+  def amount_mt(tariff_type = nil)
     service_records.by_tariff_type(tariff_type).to_a.sum(&:amount_mt)
   end
 
-  def amount_tt(tariff_type = nil, options = {})
+  def amount_tt(tariff_type = nil)
     service_records.by_tariff_type(tariff_type).to_a.sum(&:amount_tt)
   end
 
@@ -520,7 +520,7 @@ class Invoice < ActiveRecord::Base
   #
   # tariff_type::
   #   Only use service_records with these types. Can be an array
-  def amount(tariff_type = nil, options = {})
+  def amount(tariff_type = nil)
     value = service_records.by_tariff_type(tariff_type).to_a.sum(&:amount)
 
     value.currency_round
@@ -530,15 +530,15 @@ class Invoice < ActiveRecord::Base
     service_records.obligate.to_a.sum(&:amount)
   end
 
-  def tax_points_mt(tariff_type = nil, options = {})
+  def tax_points_mt(tariff_type = nil)
     service_records.by_tariff_type(tariff_type).to_a.sum(&:tax_points_mt)
   end
 
-  def tax_points_tt(tariff_type = nil, options = {})
+  def tax_points_tt(tariff_type = nil)
     service_records.by_tariff_type(tariff_type).to_a.sum(&:tax_points_tt)
   end
 
-  def tax_points(tariff_type = nil, options = {})
+  def tax_points(tariff_type = nil)
     service_records.by_tariff_type(tariff_type).to_a.sum(&:tax_points)
   end
 
