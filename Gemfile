@@ -97,9 +97,6 @@ gem 'use_db'
 gem 'in_place_editing'
 gem 'select2-rails'
 
-# CRUD helpers
-gem 'inherited_resources_views'
-
 # Authentication
 gem 'devise'
 gem 'cancan'
