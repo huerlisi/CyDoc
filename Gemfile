@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 
 # Rails
 # =====
-gem 'rails'
+gem 'rails', '~> 3.2'
 
 # Unicorn
 # =======
@@ -66,20 +66,21 @@ gem 'simple-navigation'
 # CyDoc
 # =====
 # Authentication
-gem 'aasm'
+gem 'aasm', '~> 3.0' # Changed API
 
 # Date/Time handling
 gem 'validates_timeliness'
 
 # Addresses
 gem 'unicode_utils'
-gem 'has_vcards'
+gem 'has_vcards', '~> 0.20' # Data model changes, needs synced release with CyDoc
 gem 'autocompletion'
 gem 'swissmatch'
+gem 'swissmatch-location', :require => 'swissmatch/location/autoload'
 
 # Billing
-gem 'has_accounts'
-gem 'has_accounts_engine'
+gem 'has_accounts', '~> 1.1' # Changed API
+gem 'has_accounts_engine', '~> 1.1' # Changed API
 gem 'acts-as-taggable-on'
 
 # Import
@@ -94,18 +95,18 @@ gem 'in_place_editing'
 gem 'select2-rails'
 
 # Authentication
-gem 'devise'
-gem 'cancan'
+gem 'devise', '~> 2.2' # Changed API
+gem 'cancan', '1.6.8' # Issue with aliases
 gem 'lyb_devise_admin'
 
 # Search
-gem 'thinking-sphinx'
+gem 'thinking-sphinx', '~> 2.0' # Changed API
 
 # Uploads
 gem 'carrierwave'
 
 # PDF
-gem 'prawn', :git => 'https://github.com/prawnpdf/prawn.git'
+gem 'prawn', '1.0.0.rc2' # table support needs porting, group has been dropped
 gem 'prawnto'
 
 
@@ -113,7 +114,7 @@ gem 'prawnto'
 gem 'routing-filter'
 
 # Settings
-gem 'ledermann-rails-settings', :require => 'rails-settings'
+gem 'ledermann-rails-settings', '~> 1.2', :require => 'rails-settings' # Changed API
 
 # ESR support
 gem 'vesr'
