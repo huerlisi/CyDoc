@@ -1,8 +1,11 @@
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     Ascii85 (1.0.2)
     aasm (3.4.0)
+    accept_values_for (0.7.1)
+      activemodel (>= 3, < 5)
+      rspec (>= 2.0, < 4.0)
     actionmailer (3.2.21)
       actionpack (= 3.2.21)
       mail (~> 2.5.4)
@@ -34,13 +37,24 @@ GEM
       multi_json (~> 1.0)
     acts-as-taggable-on (3.4.2)
       activerecord (>= 3.2, < 5)
+    addressable (2.3.6)
     afm (0.2.2)
     arel (3.0.3)
     autocompletion (0.0.3)
     bcrypt (3.1.9)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
+    better_errors (2.1.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.0.4)
+    byebug (3.5.1)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
+      slop (~> 3.6)
     cancan (1.6.8)
     cap-recipes (0.3.39)
     capistrano (2.15.5)
@@ -57,11 +71,24 @@ GEM
       capistrano (~> 2.0)
       capistrano-ext
       capistrano_colors
+    capybara (2.4.4)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+    capybara-screenshot (1.0.3)
+      capybara (>= 1.0, < 3)
+      colored
+      launchy
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    childprocess (0.5.5)
+      ffi (~> 1.0, >= 1.0.11)
+    cliver (0.3.2)
     coderay (1.1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -70,25 +97,30 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    colored (1.2)
     columnize (0.9.0)
     commonjs (0.2.7)
+    connection_pool (2.1.0)
     csv-mapper (0.5.1)
       fastercsv
     cupsffi (0.1.4)
       ffi
-    debugger (1.6.8)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.3.5)
+    database_cleaner (1.3.0)
+    debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.3.7)
     devise (2.2.8)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
+    diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.2)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
     fastercsv (1.5.5)
     ffi (1.9.6)
     haml (4.0.6)
@@ -132,6 +164,8 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.2)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     ledermann-rails-settings (1.2.1)
       activerecord (>= 2.3)
     less (2.6.0)
@@ -167,6 +201,11 @@ GEM
       hashery (~> 2.0)
       ruby-rc4
       ttfunk
+    poltergeist (1.5.1)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      multi_json (~> 1.0)
+      websocket-driver (>= 0.2.0)
     polyglot (0.3.5)
     prawn (1.0.0.rc2)
       afm
@@ -180,14 +219,13 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-debugger (0.2.3)
-      debugger (~> 1.3)
-      pry (>= 0.9.10, < 0.11.0)
-    pry-doc (0.6.0)
-      pry (~> 0.9)
-      yard (~> 0.8)
+    pry-byebug (2.0.0)
+      byebug (~> 3.4)
+      pry (~> 0.10)
     pry-rails (0.3.2)
       pry (>= 0.9.10)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -220,11 +258,44 @@ GEM
     riddle (1.5.11)
     routing-filter (0.3.1)
       actionpack
+    rspec (3.1.0)
+      rspec-core (~> 3.1.0)
+      rspec-expectations (~> 3.1.0)
+      rspec-mocks (~> 3.1.0)
+    rspec-activemodel-mocks (1.0.1)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      rspec-mocks (>= 2.99, < 4.0)
+    rspec-core (3.1.7)
+      rspec-support (~> 3.1.0)
+    rspec-expectations (3.1.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.1.0)
+    rspec-mocks (3.1.3)
+      rspec-support (~> 3.1.0)
+    rspec-rails (3.1.0)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.1.0)
+      rspec-expectations (~> 3.1.0)
+      rspec-mocks (~> 3.1.0)
+      rspec-support (~> 3.1.0)
+    rspec-support (3.1.2)
     ruby-rc4 (0.1.5)
     rubyzip (1.1.6)
     sass (3.4.9)
+    sass-rails (3.2.6)
+      railties (~> 3.2.0)
+      sass (>= 3.1.10)
+      tilt (~> 1.3)
     select2-rails (3.5.9.1)
       thor (~> 0.14)
+    selenium-webdriver (2.44.0)
+      childprocess (~> 0.5)
+      multi_json (~> 1.0)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     show_for (0.3.0)
       actionpack (>= 3.2, < 5)
       activemodel (>= 3.2, < 5)
@@ -289,25 +360,37 @@ GEM
     vesr (0.13.1)
     warden (1.2.3)
       rack (>= 1.0)
-    yard (0.8.7.6)
+    websocket (1.2.1)
+    websocket-driver (0.5.1)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.1)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   aasm (~> 3.0)
+  accept_values_for
   activerecord-sqlserver-adapter
   acts-as-taggable-on
   autocompletion
+  better_errors
+  binding_of_caller
   cancan (= 1.6.8)
   capones_recipes
+  capybara
+  capybara-screenshot
   carrierwave
   coffee-rails
+  connection_pool
   csv-mapper
   cupsffi
+  database_cleaner
   devise (~> 2.2)
+  factory_girl_rails
   fastercsv
-  ffi
   haml
   has_accounts (~> 1.1)
   has_accounts_engine (~> 1.1)
@@ -323,16 +406,20 @@ DEPENDENCIES
   lyb_devise_admin
   lyb_sidebar
   mysql2
+  poltergeist
   prawn (= 1.0.0.rc2)
   prawnto
-  pry-debugger
-  pry-doc
+  pry-byebug
   pry-rails
+  quiet_assets
   rails (~> 3.2)
   rdoc
   routing-filter
-  sass
+  rspec-activemodel-mocks
+  rspec-rails
+  sass-rails
   select2-rails
+  selenium-webdriver
   show_for
   simple-navigation
   simple_form

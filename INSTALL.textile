@@ -2,7 +2,7 @@ We currently support installing on Debian 5.0 Lenny and Ubuntu 12.04 systems.
 
 h2. Install Ruby'n'Rails
 
-CyDoc is developed and tested using Rails 3.2 and Ruby 1.9.
+CyDoc is developed and tested using Rails 3.2 and Ruby 2.1.
 
 Install packages to needed:
 
