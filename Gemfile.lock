@@ -91,8 +91,6 @@ GEM
     execjs (2.2.2)
     fastercsv (1.5.5)
     ffi (1.9.6)
-    formtastic (3.1.2)
-      actionpack (>= 3.2.13)
     haml (4.0.6)
       tilt
     has_accounts (1.1.3)
@@ -310,7 +308,6 @@ DEPENDENCIES
   devise (~> 2.2)
   fastercsv
   ffi
-  formtastic
   haml
   has_accounts (~> 1.1)
   has_accounts_engine (~> 1.1)
