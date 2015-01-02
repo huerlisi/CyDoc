@@ -124,6 +124,3 @@ gem 'ffi'
 
 # CSV Export
 gem 'csv-mapper'
-
-# XML
-gem 'nokogiri'
