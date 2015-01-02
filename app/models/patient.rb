@@ -45,7 +45,6 @@ class Patient < ActiveRecord::Base
 
   has_many :sessions
   has_many :recalls, :order => 'due_date', :dependent => :destroy
-  has_many :appointments, :order => 'date', :dependent => :destroy
 
   # Vcards
   has_vcards
