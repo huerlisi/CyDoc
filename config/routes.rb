@@ -106,13 +106,6 @@ CyDoc::Application.routes.draw do
       end
     end
 
-    resources :appointments do
-      member do
-        post :obey
-        post :accept
-      end
-    end
-
     resources :sessions do
       resources :tariff_items
       resources :service_records do
