@@ -46,9 +46,9 @@ SimpleNavigation::Configuration.run do |navigation|
       entry.item :new_esr_file, t_title(:new, EsrFile), new_esr_file_path
       entry.item :esr_files, t_title(:index, EsrFile), esr_files_path
 
-      entry.item :divider, "", :class => 'divider'
-
       if current_tenant.settings['modules.returned_invoices']
+        entry.item :divider, "", :class => 'divider'
+
         entry.item :returned_invoices, t_model(ReturnedInvoice), returned_invoices_path
       end
     end
