@@ -52,7 +52,6 @@ gem 'lyb_sidebar'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 
-gem 'formtastic'
 gem 'simple_form'
 gem 'kaminari'
 gem 'inherited_resources'

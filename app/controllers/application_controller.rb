@@ -112,33 +112,6 @@ module ActionView
   end
 end
 
-# Monkay patch formtastic
-class Formtastic::SemanticFormBuilder
-  # Outputs a label and standard Rails text field inside the wrapper.
-  def date_field_input(method, options)
-    basic_input_helper(:date_field, :string, method, options)
-  end
-
-  def time_field_input(method, options)
-    basic_input_helper(:time_field, :string, method, options)
-  end
-
-  # Add :validates_date to requiring validations
-  def method_required?(attribute)
-    if @object && @object.class.respond_to?(:reflect_on_validations_for)
-      attribute_sym = attribute.to_s.sub(/_id$/, '').to_sym
-
-      @object.class.reflect_on_validations_for(attribute_sym).any? do |validation|
-        [:validates_presence_of, :validates_date, :validates_time].include?(validation.macro) &&
-        validation.name == attribute_sym && !(validation.options.present? && (validation.options[:allow_nil] || validation.options[:allow_blank])) &&
-        (validation.options.present? ? options_require_validation?(validation.options) : true)
-      end
-    else
-      false
-    end
-  end
-end
-
 # Monkey patching Date class
 class Date
   # Date helpers
