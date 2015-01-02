@@ -323,7 +323,6 @@ DEPENDENCIES
   lyb_devise_admin
   lyb_sidebar
   mysql2
-  nokogiri
   prawn (= 1.0.0.rc2)
   prawnto
   pry-debugger
