@@ -34,10 +34,6 @@ end
 
 # Test
 # ====
-group :test do
-  gem 'cucumber'
-end
-
 group :test, :development do
   # Console
   gem 'pry-rails'
