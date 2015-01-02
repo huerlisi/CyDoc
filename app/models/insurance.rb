@@ -13,6 +13,7 @@ class Insurance < ActiveRecord::Base
 
   # Vcard
   has_vcards
+  has_one :vcard, :as => :object
   accepts_nested_attributes_for :vcard
   attr_accessible :vcard, :vcard_attributes
   def name
