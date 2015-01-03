@@ -37,4 +37,5 @@ module Insurances
   end
 end
 
-Insurance.send :include, Insurances::Import
+# TODO: fix as this triggeres stack level too deep
+# Insurance.send :include, Insurances::Import
