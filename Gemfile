@@ -100,7 +100,6 @@ gem 'use_db'
 
 # PDF generation
 gem 'prawn', '1.0.0.rc2' # table support needs porting, group has been dropped
-gem 'prawnto'
 
 # Printing
 gem 'cupsffi'
