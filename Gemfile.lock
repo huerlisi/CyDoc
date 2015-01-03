@@ -212,9 +212,6 @@ GEM
       pdf-reader (>= 0.9.0, < 2.0)
       ruby-rc4
       ttfunk (~> 1.0.3)
-    prawnto (0.1.1)
-      prawn
-      rails (>= 2.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -408,7 +405,6 @@ DEPENDENCIES
   mysql2
   poltergeist
   prawn (= 1.0.0.rc2)
-  prawnto
   pry-byebug
   pry-rails
   quiet_assets
