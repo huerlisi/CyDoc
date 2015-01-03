@@ -66,7 +66,7 @@ gem 'cancan', '1.6.8' # Issue with aliases
 gem 'lyb_devise_admin'
 
 # State Machine
-gem 'aasm', '~> 3.0' # Changed API
+gem 'aasm'
 
 # Date/Time handling
 gem 'validates_timeliness'

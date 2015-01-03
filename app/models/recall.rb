@@ -16,27 +16,30 @@ class Recall < ActiveRecord::Base
 
   # State Machine
   include AASM
-  aasm_column :state
+  aasm do
+    initial_state = :scheduled
 
-  aasm_initial_state :scheduled
+    state :scheduled
+    state :canceled
+    state :prepared
+    state :sent
+    state :obeyed
 
-  aasm_state :scheduled
-  aasm_state :canceled
-  aasm_state :prepared
-  aasm_state :sent
-  aasm_state :obeyed
+    event :cancel do
+      transitions :to => :canceled, :from => [:scheduled, :sent]
+    end
 
-  aasm_event :cancel do
-    transitions :to => :canceled, :from => [:scheduled, :sent]
-  end
-  aasm_event :prepare do
-    transitions :to => :prepared, :from => :scheduled
-  end
-  aasm_event :send_notice do
-    transitions :to => :sent, :from => [:prepared, :scheduled], :on_transition => :sending
-  end
-  aasm_event :obey do
-    transitions :to => :obeyed, :from => :sent
+    event :prepare do
+      transitions :to => :prepared, :from => :scheduled
+    end
+
+    event :send_notice do
+      transitions :to => :sent, :from => [:prepared, :scheduled], :on_transition => :sending
+    end
+
+    event :obey do
+      transitions :to => :obeyed, :from => :sent
+    end
   end
 
   # Scopes
