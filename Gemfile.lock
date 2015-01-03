@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     Ascii85 (1.0.2)
-    aasm (3.4.0)
+    aasm (4.0.8)
     accept_values_for (0.7.1)
       activemodel (>= 3, < 5)
       rspec (>= 2.0, < 4.0)
@@ -371,7 +371,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aasm (~> 3.0)
+  aasm
   accept_values_for
   activerecord-sqlserver-adapter
   acts-as-taggable-on

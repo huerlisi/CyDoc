@@ -13,25 +13,25 @@ class ReturnedInvoice < ActiveRecord::Base
 
   # State Machine
   include AASM
-  aasm_column :state
+  aasm do
+    initial_state = :ready
+    state :ready
+    state :request_pending
+    state :resolved
+
+    event :queue_request do
+      transitions :from => :ready, :to => :request_pending
+    end
+
+    event :reactivate do
+      transitions :from => [:ready, :request_pending], :to => :resolved
+    end
+
+    event :write_off do
+      transitions :from => [:ready, :request_pending], :to => :resolved
+    end
+  end
   validates :state , :presence => true
-
-  aasm_initial_state :ready
-  aasm_state :ready
-  aasm_state :request_pending
-  aasm_state :resolved
-
-  aasm_event :queue_request do
-    transitions :from => :ready, :to => :request_pending
-  end
-
-  aasm_event :reactivate do
-    transitions :from => [:ready, :request_pending], :to => :resolved
-  end
-
-  aasm_event :write_off do
-    transitions :from => [:ready, :request_pending], :to => :resolved
-  end
 
   scope :by_state, lambda {|value| {:conditions => {:state => value} } }
   scope :active, :conditions => {:state => ["ready", "request_pending"]}

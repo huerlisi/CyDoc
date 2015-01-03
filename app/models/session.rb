@@ -20,18 +20,19 @@ class Session < ActiveRecord::Base
 
   # State Machine
   include AASM
-  aasm_column :state
+  aasm do
+    initial_state = :active
 
-  aasm_initial_state :active
+    state :active
+    state :charged
 
-  aasm_state :active
-  aasm_state :charged
+    event :charge do
+      transitions :to => :charged, :from => :active
+    end
 
-  aasm_event :charge do
-    transitions :to => :charged, :from => :active
-  end
-  aasm_event :reactivate do
-    transitions :to => :active, :from => :charged
+    event :reactivate do
+      transitions :to => :active, :from => :charged
+    end
   end
 
   def to_s(format = :default)
