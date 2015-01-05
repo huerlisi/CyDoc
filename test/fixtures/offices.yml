@@ -1,7 +1,0 @@
-praxis_one:
-  name: Praxis Eins
-  doctors: test
-
-praxis_two:
-  name: Gemeinschafts Praxis
-  doctors: colleague_one

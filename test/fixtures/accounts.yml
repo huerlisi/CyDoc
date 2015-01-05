@@ -1,7 +1,0 @@
-test_account:
-  number: 777
-  bank_id: test_bank
-  holder: doctor_test (Doctor)
-  esr_id: 999999
-  pc_id: 01-01234-1
-  type: BankAccount
