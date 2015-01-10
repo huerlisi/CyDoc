@@ -1,136 +1,153 @@
+# Gemfile
+# =======
+# Policies:
+# * We do not add versioned dependencies unless needed
+# * If we add versioned dependencies, we document the reason
+# * We use single quotes
+# * We use titles to group related gems
+
 # Settings
 # ========
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 # Rails
 # =====
-gem 'rails'
+gem 'rails', '~> 3.2'
 
 # Unicorn
 # =======
 gem 'unicorn'
 
 # Database
-gem 'sqlite3'
+# ========
 gem 'mysql2'
+gem 'sqlite3'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'coffee-rails'
-  gem 'therubyracer'
-  gem 'uglifier'
-end
-
-# Development
-# ===========
-group :development do
-  # RDoc
-  gem 'rdoc'
-
-  # Deployment
-  gem 'capones_recipes'
-end
-
-# Test
-# ====
-group :test do
-  gem 'cucumber'
-end
-
-group :test, :development do
-  # Console
-  gem 'pry-rails'
-  gem 'pry-doc'
-  gem 'pry-debugger'
-end
-
-# Standard helpers
-# ================
-gem 'haml'
-gem 'sass'
-gem 'jquery-rails'
-
-# Styling
-gem 'lyb_sidebar'
+# Asset Pipeline
+# ==============
 gem 'less-rails'
-gem 'twitter-bootstrap-rails'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
+gem 'therubyracer'
+gem 'quiet_assets'
 
-gem 'formtastic'
-gem 'simple_form'
-gem 'kaminari'
+# CRUD
+# ====
 gem 'inherited_resources'
 gem 'has_scope'
-gem 'i18n_rails_helpers'
+gem 'kaminari'
 gem 'show_for'
+gem 'i18n_rails_helpers'
 
-# Navigation
+# I18n
+# ====
+gem 'routing-filter'
+
+# UI
+# ==
+gem 'jquery-rails'
+gem 'haml'
+gem 'twitter-bootstrap-rails'
+gem 'lyb_sidebar'
 gem 'simple-navigation'
 
-# CyDoc
+# Forms
 # =====
-# Authentication
+gem 'simple_form'
+gem 'select2-rails'
+gem 'in_place_editing'
+
+
+# Access Control
+# ==============
+gem 'devise', '~> 2.2' # Changed API
+gem 'cancan', '1.6.8' # Issue with aliases
+gem 'lyb_devise_admin'
+
+# State Machine
 gem 'aasm'
 
 # Date/Time handling
 gem 'validates_timeliness'
 
+# Application Settings
+gem 'ledermann-rails-settings', '~> 1.2', :require => 'rails-settings' # Changed API
+
 # Addresses
 gem 'unicode_utils'
-gem 'has_vcards'
+gem 'has_vcards', '~> 0.20' # Data model changes, needs synced release with CyDoc
 gem 'autocompletion'
 gem 'swissmatch'
+gem 'swissmatch-location', :require => 'swissmatch/location/autoload'
+
+# Files
+gem 'carrierwave'
 
 # Billing
-gem 'has_accounts'
-gem 'has_accounts_engine'
+gem 'has_accounts', '~> 1.1' # Changed API
+gem 'has_accounts_engine', '~> 1.1' # Changed API
 gem 'acts-as-taggable-on'
+gem 'vesr'
 
-# Import
+# Import / Export
 gem 'fastercsv'
 gem 'activerecord-sqlserver-adapter'
+gem 'csv-mapper'
 
 # Multiple Databases
 gem 'use_db'
 
-# Forms
-gem 'in_place_editing'
-gem 'select2-rails'
-
-# CRUD helpers
-gem 'inherited_resources_views'
-
-# Authentication
-gem 'devise'
-gem 'cancan'
-gem 'lyb_devise_admin'
-
-# Search
-gem 'thinking-sphinx'
-
-# Uploads
-gem 'carrierwave'
-
-# PDF
-gem 'prawn', :git => 'https://github.com/prawnpdf/prawn.git'
-gem 'prawnto'
-
-
-# Locale setting
-gem 'routing-filter'
-
-# Settings
-gem 'ledermann-rails-settings', :require => 'rails-settings'
-
-# ESR support
-gem 'vesr'
+# PDF generation
+gem 'prawn', '1.0.0.rc2' # table support needs porting, group has been dropped
 
 # Printing
 gem 'cupsffi'
-gem 'ffi'
 
-# CSV Export
-gem 'csv-mapper'
+# Search
+gem 'thinking-sphinx', '~> 2.0' # Changed API
 
-# XML
-gem 'nokogiri'
+
+# Development
+# ===========
+group :development do
+  # Debugging
+  gem 'better_errors'
+  gem 'binding_of_caller'  # Needed by binding_of_caller to enable html console
+
+  # Deployment
+  gem 'capones_recipes'
+end
+
+# Dev and Test
+# ============
+group :development, :test do
+  # Testing Framework
+  gem 'rspec-rails'
+  gem 'rspec-activemodel-mocks'
+
+  # Browser
+  gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'poltergeist'
+  gem 'selenium-webdriver'
+
+  # Matchers/Helpers
+  gem 'accept_values_for'
+
+  # Debugger
+  gem 'pry-rails'
+  gem 'pry-byebug'
+
+  # Fixtures
+  gem 'database_cleaner'
+  gem 'connection_pool'
+  gem "factory_girl_rails"
+end
+
+# Docs
+# ====
+group :doc do
+  # Docs
+  gem 'rdoc'
+end

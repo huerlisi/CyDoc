@@ -1,5 +1,5 @@
 jQuery(document).ready(function(){
-  jQuery('.reset-updated-attribute').live('click', function(){
+  jQuery(document).on('click', '.reset-updated-attribute', function(){
     var link = jQuery(this)
     var value = link.attr('data-value');
     var input = link.prev();

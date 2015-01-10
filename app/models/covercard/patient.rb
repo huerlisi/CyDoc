@@ -2,7 +2,6 @@
 require 'net/http'
 require 'net/https'
 require 'uri'
-require 'nokogiri'
 
 module Covercard
   class Patient < ActiveRecord::Base
