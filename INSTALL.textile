@@ -42,7 +42,7 @@ h2. Install CyDoc
 Install current CyDoc from git repostory. We'll use this checkout as working directory from now on:
 
 <pre>
-sudo git clone http://github.com/huerlisi/CyDoc.git
+git clone http://github.com/huerlisi/CyDoc.git
 cd CyDoc
 </pre>
 
