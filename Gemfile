@@ -62,6 +62,7 @@ gem 'in_place_editing'
 # Access Control
 # ==============
 gem 'devise', '~> 2.2' # Changed API
+gem 'devise-i18n'
 gem 'cancan', '1.6.8' # Issue with aliases
 gem 'lyb_devise_admin'
 
