@@ -3,6 +3,9 @@
 
 Fixes:
 * Drop currency formatting in insurance recipe as it broke on amounts > 1000.
+* Add role translations from Hozr.
+* Restrict access to bookkeeping controller actions.
+
 
 2.0.0.rc8
 =========
