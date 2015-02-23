@@ -534,7 +534,10 @@ de-CH:
       admin:    Administrator
       sysadmin: System Administration
       employee:   Mitarbeiter
+      zyto:     Zytologie
       doctor:   Arzt
+      client:   Zuweisender Arzt
+
   flash:
     action:
       dunning_stop:     Mahnstopp gesetzt
