@@ -1,6 +1,12 @@
 # -*- encoding : utf-8 -*-
-class BookkeepingController < ApplicationController
+class BookkeepingController < AuthorizedController
+  skip_load_and_authorize_resource
+
   before_filter :set_value_period
+
+  def index
+    authorize! :read, Account
+  end
 
   def set_value_period
     if by_value_period = params[:by_value_period]
@@ -14,6 +20,8 @@ class BookkeepingController < ApplicationController
   end
 
   def report
+    authorize! :read, Account
+
     @total_invoiced    = Account.find_by_code(current_tenant.settings['invoices.profit_account_code']).saldo(@value_date_range)
     @total_paid        = Account.find_by_code('1000').saldo(@value_date_range) + Account.find_by_code('1020').saldo(@value_date_range)
     @open_items        = Account.find_by_code(current_tenant.settings['invoices.balance_account_code']).saldo(@value_date_end)
@@ -24,6 +32,8 @@ class BookkeepingController < ApplicationController
   end
 
   def open_invoices
+    authorize! :read, Account
+
     debit_account_id = Account.find_by_code(current_tenant.settings['invoices.balance_account_code']).id
     @invoices = Invoice
       .joins(:bookings)
@@ -34,6 +44,8 @@ class BookkeepingController < ApplicationController
   end
 
   def open_invoices_csv
+    authorize! :read, Account
+
     debit_account_id = Account.find_by_code(current_tenant.settings['invoices.balance_account_code']).id
     @invoices = Invoice.all(
       :select => "invoices.*, sum(IF(bookings.debit_account_id = #{debit_account_id}, -bookings.amount, bookings.amount)) AS current_due_amount",
