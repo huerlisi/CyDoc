@@ -1,3 +1,9 @@
+2.0.0 (unreleased)
+=====
+
+Fixes:
+* Drop currency formatting in insurance recipe as it broke on amounts > 1000.
+
 2.0.0.rc8
 =========
 Some gems got updated, mainly Rails. The installation instructions
