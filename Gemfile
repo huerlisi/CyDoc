@@ -73,7 +73,7 @@ gem 'aasm'
 gem 'validates_timeliness'
 
 # Application Settings
-gem 'ledermann-rails-settings', '~> 1.2', :require => 'rails-settings' # Changed API
+gem 'ledermann-rails-settings', '1.2.0', :require => 'rails-settings' # Changed API, 1.2.1 broken
 
 # Addresses
 gem 'unicode_utils'

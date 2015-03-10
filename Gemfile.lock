@@ -167,7 +167,7 @@ GEM
     kgio (2.9.2)
     launchy (2.4.3)
       addressable (~> 2.3)
-    ledermann-rails-settings (1.2.1)
+    ledermann-rails-settings (1.2.0)
       activerecord (>= 2.3)
     less (2.6.0)
       commonjs (~> 0.2.7)
@@ -400,7 +400,7 @@ DEPENDENCIES
   inherited_resources
   jquery-rails
   kaminari
-  ledermann-rails-settings (~> 1.2)
+  ledermann-rails-settings (= 1.2.0)
   less-rails
   lyb_devise_admin
   lyb_sidebar
