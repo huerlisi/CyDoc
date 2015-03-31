@@ -1,3 +1,23 @@
+2.0.0 (unreleased)
+=====
+This is a major release of CyDoc. It has a fresh look, better Tarmed support and
+lots of small fixes.
+
+We now provide more settings in the user interface, remote printing among them.
+There is now a much better patient search and forms have been improved.
+
+We actualy rewrote most parts. Mainly porting to Rails 3, switching UI to be
+built on Twitter Bootstrap, and providing fulltext search for patients
+and more.
+
+CyDoc also uses more common code with other projects like Bookyt and Hozr
+by using factored out code.
+
+Fixes since RC8:
+* Drop currency formatting in insurance recipe as it broke on amounts > 1000.
+* Add role translations from Hozr.
+* Restrict access to bookkeeping controller actions.
+
 2.0.0.rc8
 =========
 Some gems got updated, mainly Rails. The installation instructions

@@ -201,13 +201,13 @@ class InsuranceRecipe < LetterDocument
       [
         "▪ " + I18n::translate(:pfl, :scope => "activerecord.attributes.invoice"),
         I18n::translate(:tarmed_al, :scope => "activerecord.attributes.invoice"),
-        currency_fmt(invoice.value_mt("001")),
+        invoice.amount_mt("001").currency_round,
         tax_points_mt(invoice, "001"),
         I18n::translate(:physio, :scope => "activerecord.attributes.invoice"),
-        currency_fmt(invoice.value("311")),
+        invoice.amount("311").currency_round,
         tax_points(invoice, "311"),
         I18n::translate(:mi_gel, :scope => "activerecord.attributes.invoice"),
-        currency_fmt(invoice.value("452")),
+        invoice.amount("452").currency_round,
         tax_points(invoice, "452"),
         I18n::translate(:others, :scope => "activerecord.attributes.invoice"),
         "0.00",
@@ -216,13 +216,13 @@ class InsuranceRecipe < LetterDocument
       [
         '',
         I18n::translate(:tarmed_tl, :scope => "activerecord.attributes.invoice"),
-        currency_fmt(invoice.value_tt("001")),
+        invoice.amount_tt("001").currency_round,
         tax_points_tt(invoice, "001"),
         I18n::translate(:laboratory, :scope => "activerecord.attributes.invoice"),
-        currency_fmt(invoice.value(["316", "317"])),
+        invoice.amount(["316", "317"]).currency_round,
         tax_points(invoice, ["316", "317"]),
         I18n::translate(:medi, :scope => "activerecord.attributes.invoice"),
-        currency_fmt(invoice.value("400")),
+        invoice.amount("400").currency_round,
         tax_points(invoice, "400"),
         I18n::translate(:cantonal, :scope => "activerecord.attributes.invoice"),
         "0.00",
@@ -230,16 +230,16 @@ class InsuranceRecipe < LetterDocument
       ],
       [
         {:content => "▪ " + I18n::translate(:total_amount, :scope => "activerecord.attributes.invoice"), :colspan => 2},
-        currency_fmt(invoice.amount.currency_round),
+        invoice.amount.currency_round,
         '',
         I18n::translate(:amount_pfl, :scope => "activerecord.attributes.invoice"),
-        currency_fmt(invoice.obligation_amount.currency_round),
+        invoice.obligation_amount.currency_round,
         '',
         I18n::translate(:prepayment, :scope => "activerecord.attributes.invoice"),
         "0.00",
         '',
         I18n::translate(:amount_due, :scope => "activerecord.attributes.invoice"),
-        currency_fmt(invoice.amount.currency_round),
+        invoice.amount.currency_round,
         ''
       ]
     ]
@@ -312,7 +312,7 @@ class InsuranceRecipe < LetterDocument
       temp_cursor = cursor
       text_box "Zwischentotal", :style => :bold, :at => [0, temp_cursor]
       text_box "CHF", :at => [RECORD_INDENT, temp_cursor], :style => :bold
-      text_box "#{currency_fmt(records.sum(&:amount).currency_round)}", :width => 5.cm,
+      text_box "#{records.sum(&:amount).currency_round}", :width => 5.cm,
                                            :at => [bounds.width - 5.cm, temp_cursor],
                                            :align => :right,
                                            :style => :bold
@@ -345,7 +345,7 @@ class InsuranceRecipe < LetterDocument
           1,
           0,
           0,
-          currency_fmt(record.amount)
+          record.amount
         ]
 
         table [data], :cell_style => {:overflow => :shrink_to_fit} do
@@ -453,7 +453,7 @@ class InsuranceRecipe < LetterDocument
       [
         "0",
         "0.00",
-        currency_fmt(invoice.amount.currency_round),
+        invoice.amount.currency_round,
         "0.00"
       ]
     ]
@@ -462,7 +462,7 @@ class InsuranceRecipe < LetterDocument
       [
         I18n::translate(:total, :scope => "activerecord.attributes.invoice"),
         '',
-        currency_fmt(invoice.amount.currency_round),
+        invoice.amount.currency_round,
         "0.00"
       ]
     ]
