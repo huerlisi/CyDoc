@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-Class Case < ActiveRecord::Base
+class Case < ActiveRecord::Base
   belongs_to :classification
   belongs_to :patient
   belongs_to :doctor
