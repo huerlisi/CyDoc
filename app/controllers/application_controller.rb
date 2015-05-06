@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
   # Localization
   # Code snippet from: https://github.com/svenfuchs/routing-filter/wiki/Localize-filter
-  before_filter :set_locale
+  # before_filter :set_locale
 
   def set_locale
     locale = params[:locale] || cookies[:locale]
