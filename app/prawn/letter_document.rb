@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'prawn/measurement_extensions'
 
 module Prawn
@@ -42,13 +43,13 @@ module Prawn
       # Set the template
       letter_template = Attachment.for_class(self.class)
       opts.reverse_merge!(:template => letter_template.file.current_path) if letter_template
-      
+
       super
-      
+
       # Default Font
       initialize_fonts
     end
-    
+
     # Letter header with company logo, receiver address and place'n'date
     def letter_header(sender, receiver, subject, date = Date.today)
       move_down 60
@@ -71,7 +72,7 @@ module Prawn
       move_down 60
       text subject, :style => :bold
     end
-    
+
     # Freetext
     def free_text(text = "")
       return unless text.present?
@@ -79,7 +80,7 @@ module Prawn
       text " "
       text html_unescape(text), :inline_format => true
     end
-    
+
     # Draws the full address of a vcard
     def draw_address(vcard, include_honorific_prefix = false)
       lines = [vcard.full_name, vcard.extended_address, vcard.street_address, vcard.post_office_box, "#{vcard.postal_code} #{vcard.locality}"]

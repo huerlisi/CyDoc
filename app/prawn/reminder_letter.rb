@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Prawn
   class ReminderLetter < PatientLetter
     # Title
@@ -115,13 +116,13 @@ module Prawn
         # Text
         bounding_box [0, bounds.top - 9.cm], :width => bounds.width - 3.cm do
           case invoice.state
-            when 'reminded':
+            when 'reminded'
               first_reminder_text(invoice)
-            when '2xreminded':
+            when '2xreminded'
               second_reminder_text(invoice)
-            when '3xreminded':
+            when '3xreminded'
               third_reminder_text(invoice)
-            when 'encashment':
+            when 'encashment'
               encashment_text(invoice)
           end
 

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Prawn
   class InsuranceRecipe < Prawn::LetterDocument
     include InvoicesHelper
@@ -52,9 +53,9 @@ module Prawn
       repeat :all do
         font_size 10
         font Rails.root.join('data', 'ocrb10.ttf')
-        text_box invoice.esr9(invoice.biller.esr_account), :width => bounds.width, 
-                                                           :height => 1.cm, 
-                                                           :at => [0.cm, 0.cm], 
+        text_box invoice.esr9(invoice.biller.esr_account), :width => bounds.width,
+                                                           :height => 1.cm,
+                                                           :at => [0.cm, 0.cm],
                                                            :align => :right
       end
 
@@ -121,7 +122,7 @@ module Prawn
         # General
         cells.border_width = 0
         cells.padding = [0.5, 2, 0.5, 2]
-        
+
         # Surrounding Border
         row(0).border_top_width = BORDER_WIDTH
         row(-1).border_bottom_width = BORDER_WIDTH
@@ -310,14 +311,14 @@ module Prawn
 
     def sub_total(records)
       new_line
-      
+
       font_size(MEDIUM_FONT_SIZE) do
         temp_cursor = cursor
         text_box "Zwischentotal", :style => :bold, :at => [0, temp_cursor]
         text_box "CHF", :at => [RECORD_INDENT, temp_cursor], :style => :bold
-        text_box "#{currency_fmt(records.sum(&:amount).currency_round)}", :width => 5.cm, 
-                                             :at => [bounds.width - 5.cm, temp_cursor], 
-                                             :align => :right, 
+        text_box "#{currency_fmt(records.sum(&:amount).currency_round)}", :width => 5.cm,
+                                             :at => [bounds.width - 5.cm, temp_cursor],
+                                             :align => :right,
                                              :style => :bold
       end
     end

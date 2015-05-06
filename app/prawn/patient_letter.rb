@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Prawn
   class PatientLetter < Prawn::LetterDocument
     include InvoicesHelper
