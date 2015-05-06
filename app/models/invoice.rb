@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Invoice < ActiveRecord::Base
   # Override touch to not use validation
   # This is similar to Rails 3 and should be dropped
@@ -108,7 +109,7 @@ class Invoice < ActiveRecord::Base
   def active
     !(state == 'canceled' or state == 'reactivated' or state == 'written_off')
   end
-  
+
   named_scope :open, :conditions => "NOT(invoices.state IN ('reactivated', 'canceled', 'written_off', 'paid'))"
   def open
     !(state == 'canceled' or state == 'reactivated' or state == 'written_off' or state == 'paid')
@@ -171,24 +172,35 @@ class Invoice < ActiveRecord::Base
   def state_adverb
     I18n.t state, :scope => 'invoice.state'
   end
-  
+
   def state_noun(for_state = nil)
     for_state ||= state
     case for_state
-      when 'prepared':    "Offene Rechnung"
-      when 'booked':      "Verbuchte Rechnung"
-      when 'printed':     "Gedruckte Rechnung"
-      when 'canceled':    "Stornierte Rechnung"
-      when 'reactivated': "Reaktivierte Rechnung"
-      when 'reminded':    "1. Mahnung"
-      when '2xreminded':  "2. Mahnung"
-      when '3xreminded':  "3. Mahnung"
-      when 'encashment':  "Inkasso"
-      when 'paid':        "Bezahlte Rechnung"
-      when 'written_off': "Abgeschriebene Rechnung"
+      when 'prepared'
+        "Offene Rechnung"
+      when 'booked'
+        "Verbuchte Rechnung"
+      when 'printed'
+        "Gedruckte Rechnung"
+      when 'canceled'
+        "Stornierte Rechnung"
+      when 'reactivated'
+        "Reaktivierte Rechnung"
+      when 'reminded'
+        "1. Mahnung"
+      when '2xreminded'
+        "2. Mahnung"
+      when '3xreminded'
+        "3. Mahnung"
+      when 'encashment'
+        "Inkasso"
+      when 'paid'
+        "Bezahlte Rechnung"
+      when 'written_off'
+        "Abgeschriebene Rechnung"
     end
   end
-  
+
   # Actions
   def reactivate(comments = nil)
     unless state == 'canceled'
@@ -209,16 +221,16 @@ class Invoice < ActiveRecord::Base
                        :value_date => Date.today)
       end
     end
-    
+
     self.state = 'reactivated'
 
     for session in sessions
       session.reactivate
     end
-    
+
     return self
   end
-  
+
   def write_off(comments = nil)
     if due_amount > 0
       bookings.build(:title => "Debitorenverlust",
@@ -270,7 +282,7 @@ class Invoice < ActiveRecord::Base
 
     return booking
   end
-  
+
   def build_booking
     bookings.build(:title => "Rechnung",
                    :amount => amount,
@@ -285,7 +297,7 @@ class Invoice < ActiveRecord::Base
 
     return booking
   end
-  
+
   def build_reminder_booking
     bookings.build(:title => self.state_noun,
                    :amount => reminder_fee,
@@ -293,22 +305,26 @@ class Invoice < ActiveRecord::Base
                    :debit_account => profit_account,
                    :value_date => Date.today)
   end
-  
+
   def remind
     case state
-      when 'booked', 'printed': remind_first_time
-      when 'reminded':          remind_second_time
-      when '2xreminded':        remind_third_time
-      when '3xreminded':        encash
+      when 'booked', 'printed'
+        remind_first_time
+      when 'reminded'
+        remind_second_time
+      when '2xreminded'
+        remind_third_time
+      when '3xreminded'
+        encash
     end
   end
-  
+
   def remind_first_time
     self.state = 'reminded'
     self.reminder_due_date = Date.today.in(reminder_payment_period)
     build_reminder_booking
   end
-  
+
   def latest_reminder_value_date
     reminder_booking = bookings.find_by_title(state_noun)
     return reminder_booking.try(:value_date)
@@ -319,18 +335,18 @@ class Invoice < ActiveRecord::Base
     self.second_reminder_due_date = Date.today.in(reminder_payment_period)
     build_reminder_booking
   end
-  
+
   def remind_third_time
     self.state = '3xreminded'
     self.third_reminder_due_date = Date.today.in(reminder_payment_period)
     build_reminder_booking
   end
-  
+
   def encash
     self.state = 'encashment'
     build_reminder_booking
   end
-  
+
   has_and_belongs_to_many :sessions, :autosave => true
   has_and_belongs_to_many :service_records, :order => 'tariff_type, date DESC, if(ref_code IS NULL, code, ref_code), concat(code,ref_code)'
 
@@ -340,12 +356,12 @@ class Invoice < ActiveRecord::Base
 
   validates_presence_of :service_records, :message => 'Keine Leistung eingegeben.'
   validate :valid_service_records?
-  
+
   validates_presence_of :treatment
   validate :valid_treatment?
 
   validate :valid_patient?
-  
+
   def valid_service_records?
     service_records.map{|service_record|
       errors.add_to_base(service_record.errors.full_messages.join('</li><li>')) unless service_record.valid_for_invoice?(self)
@@ -353,7 +369,7 @@ class Invoice < ActiveRecord::Base
 
     return errors.empty?
   end
-  
+
   def valid_treatment?
     errors.add_to_base(treatment.errors.full_messages.join('</li><li>')) unless treatment.valid_for_invoice?(self)
 
@@ -369,7 +385,7 @@ class Invoice < ActiveRecord::Base
 
     return errors.empty?
   end
-  
+
   # Accounting
   def profit_account
     Account.find_by_code(settings['invoices.profit_account_code'])
@@ -392,7 +408,7 @@ class Invoice < ActiveRecord::Base
     end
     included_bookings.to_a.sum{|b| b.accounted_amount(balance_account)}
   end
-  
+
   # HasAccount compatibility
   alias customer patient
   alias balance due_amount
@@ -412,9 +428,9 @@ class Invoice < ActiveRecord::Base
       update_attribute(:state, 'booked')
     end
   end
-  
+
   public
-  
+
   # Standard methods
   def to_s(format = :default)
     case format
@@ -424,7 +440,7 @@ class Invoice < ActiveRecord::Base
       "#{patient.name}, Rechnung ##{id} #{I18n.l(value_date)} über #{sprintf('%0.2f', amount)} CHF"
     end
   end
-  
+
   # Convenience methods
   delegate :biller, :to => :tiers, :allow_nil => true
 
@@ -451,11 +467,11 @@ class Invoice < ActiveRecord::Base
   def date_begin
     service_records.minimum(:date).to_date
   end
-  
+
   def date_end
     service_records.maximum(:date).to_date
   end
-  
+
   # Search
   def self.clever_find(query, args = {})
     return [] if query.blank?
@@ -484,16 +500,16 @@ class Invoice < ActiveRecord::Base
     args.merge!(:include => {:tiers => {:patient => {:vcards => :addresses}}}, :conditions => ["(#{patient_condition}) OR (#{invoice_condition})", query_params], :order => 'vcards.family_name, vcards.given_name')
     find(:all, args)
   end
-  
+
   # Calculated fields
   def amount_mt(tariff_type = nil, options = {})
     service_records.by_tariff_type(tariff_type).to_a.sum(&:amount_mt)
   end
-  
+
   def amount_tt(tariff_type = nil, options = {})
     service_records.by_tariff_type(tariff_type).to_a.sum(&:amount_tt)
   end
-  
+
   # Returns rounded total amount
   #
   # The total is rounded according to currency rounding rules.
@@ -535,7 +551,7 @@ class Invoice < ActiveRecord::Base
     write_attribute(:value_date, Date.parse_europe(value))
     self.due_date = value_date.in(payment_period).to_date unless value_date.nil?
   end
-  
+
   def esr9(bank_account)
     esr9_build(due_amount.currency_round, id, bank_account.pc_id, bank_account.esr_id) # TODO: it's biller.esr_id
   end
@@ -554,10 +570,10 @@ class Invoice < ActiveRecord::Base
   def esr9_add_validation_digit(value)
     # Defined at http://www.pruefziffernberechnung.de/E/Einzahlungsschein-CH.shtml
     esr9_table = [0, 9, 4, 6, 8, 2, 7, 1, 3, 5]
-    
+
     digit = 0
     value.split('').map{|c| digit = esr9_table[(digit + c.to_i) % 10]}
-    
+
     digit = (10 - digit) % 10
     return "#{value}#{digit}"
   end
@@ -585,7 +601,7 @@ class Invoice < ActiveRecord::Base
     biller_string = esr9_format_account_id(biller_id)
     return "#{esr9_add_validation_digit(amount_string)}>#{esr9_add_validation_digit(id_string)}+ #{biller_string}>"
   end
-  
+
   # PDF/Print
   include ActsAsDocument
   def print_insurance_recipe(printer)

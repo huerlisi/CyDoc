@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Treatment < ActiveRecord::Base
   # Associations
   has_many :invoices, :dependent => :destroy, :order => 'value_date DESC, created_at DESC'
@@ -9,38 +10,38 @@ class Treatment < ActiveRecord::Base
 
   has_many :sessions, :order => 'duration_from DESC', :dependent => :destroy
   has_many :medical_cases, :order => 'type', :dependent => :destroy
-  
+
   # Validation
   validates_presence_of :reason, :place_type
   validates_date :date_begin
   validates_date :date_end, :allow_blank => true
-  
+
   def validate_for_invoice(invoice)
     if invoice.settings['validation.medical_case_present']
       errors.add_to_base("Keine Diagnose eingegeben.") if medical_cases.empty?
     end
   end
-  
+
   def valid_for_invoice?(invoice)
     valid?
     validate_for_invoice(invoice)
-    
+
     errors.empty?
   end
 
   # State
   named_scope :open, :conditions => "treatments.state = 'open'", :order => 'date_begin'
   named_scope :charged, :conditions => "treatments.state = 'charged'", :order => 'date_begin'
-  
+
   def open?
     state == 'open'
   end
-  
+
   def chargeable?
     sessions.open.present?
     # Checking for valid_for_invoice? would be a nice thing, too. But links depending on this would need AJAX updates.
   end
-  
+
   # Callback hook for invoice
   def update_state
     if sessions.empty?
@@ -70,19 +71,24 @@ class Treatment < ActiveRecord::Base
       "#{patient.nil? ? 'Patient unbekannt' : patient.name} #{reason}: #{I18n.l(date_begin) if date_begin} - #{I18n.l(date_end) if date_end}"
     end
   end
-  
+
   def amount
     sessions.to_a.sum(&:amount)
   end
-  
+
   # XML Invoices
   def reason_xml
     case reason
-      when 'Unfall': 'accident'
-      when 'Krankheit': 'disease'
-      when 'Mutterschaft': 'maternity'
-      when 'Prävention': 'prevention'
-      when 'Geburtsfehler': 'birthdefect'
+      when 'Unfall'
+        'accident'
+      when 'Krankheit'
+        'disease'
+      when 'Mutterschaft'
+        'maternity'
+      when 'Prävention'
+        'prevention'
+      when 'Geburtsfehler'
+        'birthdefect'
     end
   end
 

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class EsrRecordsController < ApplicationController
   # Inherited Resources
   inherit_resources

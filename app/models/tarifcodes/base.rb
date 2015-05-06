@@ -3,29 +3,31 @@ require 'fastercsv'
 module Tarifcodes
   class Base
     include Importer
-    
+
     def self.path
       case ENV['RAILS_ENV']
-        when 'production': File.join(RAILS_ROOT, 'data', 'tarifcodes.csv')
-        when 'development', 'test': File.join(RAILS_ROOT, 'test', 'fixtures', 'tarifcodes', 'tarifcodes.csv')
+        when 'production'
+          File.join(RAILS_ROOT, 'data', 'tarifcodes.csv')
+        when 'development', 'test'
+          File.join(RAILS_ROOT, 'test', 'fixtures', 'tarifcodes', 'tarifcodes.csv')
       end
     end
 
     def self.header_rows
       2
     end
-    
+
     def self.footer_rows
       0
     end
-    
+
     def self.load
       # Sheets are seperated using form feed (\f) by xls2csv
       sheets = File.read(path).split("\f")
-      
+
       # Subclasses shall define sheet_number
       selected_sheets = sheets[sheet_range]
-      
+
       # Dirty hack... Should probably some heuristics
       rows = [2..-5, 2..-1, 2..-1, 2..-1, 2..-1]
 

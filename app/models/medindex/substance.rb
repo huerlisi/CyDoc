@@ -8,11 +8,11 @@ module Medindex
     def self.id_element
       'SUBNO'
     end
-    
+
     def self.int_id
       'id'
     end
-    
+
     def record_name
       'SB'
     end
@@ -20,10 +20,12 @@ module Medindex
     # Stream handlers
     def tag_end(name)
       super
-      
+
       case name
-        when 'SUBNO': @int_record.id   = @text.to_i
-        when 'NAMD':  @int_record.name = @text
+        when 'SUBNO'
+          @int_record.id   = @text.to_i
+        when 'NAMD'
+          @int_record.name = @text
       end
     end
   end

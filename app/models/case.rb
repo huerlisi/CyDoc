@@ -1,4 +1,6 @@
-class Case < ActiveRecord::Base
+# encoding: UTF-8
+
+Class Case < ActiveRecord::Base
   belongs_to :classification
   belongs_to :patient
   belongs_to :doctor
@@ -14,7 +16,7 @@ class Case < ActiveRecord::Base
 
     # Law
     law = Law.new(:code => 'LawKvg', :insured_id => patient.insurance_policies.by_policy_type('KVG').first.number)
-    
+
     # Treatment
     treatment = patient.treatments.build(
       :date_begin => examination_date,
@@ -24,7 +26,7 @@ class Case < ActiveRecord::Base
       :law        => law,
       :referrer   => doctor
     )
-    
+
     # Session
     session = treatment.sessions.build(
       :duration_from => examination_date,
@@ -36,7 +38,7 @@ class Case < ActiveRecord::Base
       # TariffItem
       tariff_code = "#{classification.name} (#{classification.examination_method.name})"
       tariff_item = TariffItem.clever_find(tariff_code).first
-      
+
       raise "Tarif für code '#{classification.name} (#{classification.examination_method.name})' nicht gefunden" unless tariff_item
 
       # Service Records
@@ -47,12 +49,12 @@ class Case < ActiveRecord::Base
     if treatment.save
       self.session = session
       self.save
-      
+
       return nil
     else
       logger.info("[Error] Failed to create treatment for case #{self.praxistar_eingangsnr}:")
       logger.info(treatment.errors.full_messages.join("\n"))
-      
+
       return self
     end
 

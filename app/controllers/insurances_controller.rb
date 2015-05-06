@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class InsurancesController < ApplicationController
   # GET /insurances
   def index
@@ -12,7 +13,7 @@ class InsurancesController < ApplicationController
 
     # Show selection list only if more than one hit
     return if !params[:all] && redirect_if_match(@insurances)
-    
+
     respond_to do |format|
       format.html {
         render :action => 'list'

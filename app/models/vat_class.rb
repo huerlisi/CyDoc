@@ -8,25 +8,28 @@ class VatClass < ActiveRecord::Base
   def to_s
     "#{'%.1f' % rate}% (#{code_name})"
   end
-  
+
   # Shortcuts
   def self.full
     valid.full.first
   end
-  
+
   def self.reduced
     valid.reduced.first
   end
-  
+
   def self.excluded
     valid.excluded.first
   end
-  
+
   def code_name
     case code
-      when 'full': "Normal"
-      when 'reduced': "Reduziert"
-      when 'excluded': "Ausgenommen"
+      when 'full'
+        "Normal"
+      when 'reduced'
+        "Reduziert"
+      when 'excluded'
+        "Ausgenommen"
     end
   end
 end

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class BookingsController < ApplicationController
   in_place_edit_for :booking, :amount_as_string
   in_place_edit_for :booking, :value_date
@@ -6,11 +7,11 @@ class BookingsController < ApplicationController
 
   # Scopes
   has_scope :by_value_period, :using => [:from, :to], :default => proc { |c| c.session[:has_scope] }
-  
+
   # GET /bookings
   def index
     @bookings = apply_scopes(Booking).paginate(:page => params['page'], :per_page => 20, :order => 'value_date DESC')
-    
+
     respond_to do |format|
       format.html {
         render :action => 'list'
@@ -30,7 +31,7 @@ class BookingsController < ApplicationController
   def show
     @booking = Booking.find(params[:id])
   end
-  
+
   # GET /bookings/new
   def new
     if params[:invoice_id]
@@ -39,9 +40,9 @@ class BookingsController < ApplicationController
     else
       @booking = Booking.new
     end
-    
+
     @booking.value_date = Date.today
-    
+
     respond_to do |format|
       format.html { }
       format.js {
@@ -63,24 +64,24 @@ class BookingsController < ApplicationController
     else
       @booking = Booking.new(params[:booking])
     end
-    
+
     case @booking.title
-      when "Barzahlung":
+      when "Barzahlung"
         @booking.credit_account = Account.find_by_code('1000')
         @booking.debit_account = Account.find_by_code('1100')
-      when "Bankzahlung":
+      when "Bankzahlung"
         @booking.credit_account = Account.find_by_code('1020')
         @booking.debit_account = Account.find_by_code('1100')
-      when "Skonto/Rabatt":
+      when "Skonto/Rabatt"
         @booking.credit_account = Account.find_by_code('3200')
         @booking.debit_account = Account.find_by_code('1100')
-      when "Zusatzleistung":
+      when "Zusatzleistung"
         @booking.credit_account = Account.find_by_code('1100')
         @booking.debit_account = Account.find_by_code('3200')
-      when "Debitorenverlust":
+      when "Debitorenverlust"
         @booking.credit_account = Account.find_by_code('3900') # Debitorenverlust
         @booking.debit_account = Account.find_by_code('1100') # Debitor
-      when "Rückerstattung":
+      when "Rückerstattung"
         if extra_earning_booking = @invoice.bookings.find_by_debit_account_id(Account.find_by_code('8000'))
           @booking.credit_account = Account.find_by_code('8000') # Ausserordentlicher Ertrag
         else
@@ -88,7 +89,7 @@ class BookingsController < ApplicationController
         end
         @booking.debit_account = Account.find_by_code('1020') # Bank
     end
-    
+
     if @booking.save
       flash[:notice] = 'Buchung erfasst.'
 
@@ -132,7 +133,7 @@ class BookingsController < ApplicationController
   def edit
     @booking = Booking.find(params[:id])
     @account = Account.find(params[:account_id]) if params[:account_id]
-    
+
     respond_to do |format|
       format.html {}
       format.js {
@@ -148,13 +149,13 @@ class BookingsController < ApplicationController
   def update
     @booking = Booking.find(params[:id])
     @account = Account.find(params[:account_id]) if params[:account_id]
-    
+
     @booking.reference.touch if @booking.reference
     if @booking.update_attributes(params[:booking])
       @booking.reference.touch if @booking.reference
       respond_to do |format|
         # Booking edit
-        format.html { 
+        format.html {
           redirect_to @booking
         }
         # Inline edit in account view
@@ -177,20 +178,20 @@ class BookingsController < ApplicationController
       end
     end
   end
-  
+
   # DELETE /booking/1
   def destroy
     @booking = Booking.find(params[:id])
 
     @booking.destroy
-    
+
     if params[:account_id]
       @account = Account.find(params[:account_id])
       @bookings = @account.bookings.paginate(:page => params['page'], :per_page => 20, :order => 'value_date, id')
     else
       @bookings = apply_scopes(Booking).paginate(:page => params['page'], :per_page => 20, :order => 'value_date DESC')
     end
-    
+
     respond_to do |format|
       format.html { redirect_to bookings_path }
       format.js {
