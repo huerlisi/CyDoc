@@ -130,4 +130,16 @@ class TariffItem < ActiveRecord::Base
 
     @session.treatment.reason
   end
+
+  def new_reason?
+    return nil unless @session
+
+    @session.treatment.new_reason?
+  end
+
+  def law
+    return nil unless @session
+
+    @session.treatment.law
+  end
 end

@@ -11,7 +11,7 @@
     </tr>
     <tr>
       <th><%= t_attr(:date_end, Treatment) %>:</th><td><%= l(@treatment.date_end) if @treatment.date_end %></td>
-      <th><%= t_attr(:reason, Treatment) %>:</th><td><%= @treatment.reason %></td>
+      <th><%= t_attr(:reason, Treatment) %>:</th><td><%= @treatment.reason %> <%= @treatment.new_reason? ? '(neu)' : '' %></td>
     </tr>
     <tr>
       <th><%= t_attr(:referrer, Treatment) %>:</th><td><%= @treatment.referrer.to_s if @treatment.referrer %></td>

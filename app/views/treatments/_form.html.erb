@@ -7,7 +7,7 @@
       <% form.fields_for :law do |law| %>
         <%= law.input :code, :collection => [['KVG', 'LawKvg'], ['UVG', 'LawUvg'], ['IVG', 'LawIvg'], ['MVG', 'LawMvg'], ['VVG', 'LawVvg'], ['ORG', 'LawOrg']], :include_blank => false %>
       <% end %>
-      <%= form.input :reason, :collection => ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler'], :include_blank => false %>
+      <%= form.input :reason, :collection => ['Krankheit', 'Mutterschaft', 'Prävention', 'Unfall', 'Geburtsfehler', 'Krankheit (neu)', 'Prävention (neu)', 'Geburtsfehler (neu)'], :include_blank => false %>
       <%= form.input :place_type, :collection => ['Praxis', 'Spital'] %>
       <%= form.input :referrer %>
     <% end %>

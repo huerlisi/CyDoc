@@ -76,6 +76,14 @@ class Treatment < ActiveRecord::Base
     sessions.to_a.sum(&:amount)
   end
 
+  def reason
+    self[:reason].gsub(/ \(neu\)/, '')
+  end
+
+  def new_reason?
+    self[:reason].ends_with? '(neu)'
+  end
+
   # XML Invoices
   def reason_xml
     case reason
