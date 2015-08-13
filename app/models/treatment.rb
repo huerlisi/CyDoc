@@ -77,10 +77,14 @@ class Treatment < ActiveRecord::Base
   end
 
   def reason
+    return unless self[:reason]
+
     self[:reason].gsub(/ \(neu\)/, '')
   end
 
   def new_reason?
+    return false unless self[:reason]
+
     self[:reason].ends_with? '(neu)'
   end
 
