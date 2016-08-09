@@ -132,6 +132,54 @@ module Prawn
       end
     end
 
+    def esr_recipe(invoice, account, sender, print_payment_for)
+      bounding_box [cm2pt(0.4), cm2pt(9.6)], :width => cm2pt(5) do
+        indent cm2pt(0.4) do
+          draw_account_detail(account.bank, sender, print_payment_for)
+        end
+        draw_account(account)
+        draw_amount(invoice.balance.currency_round)
+
+        bounding_box [cm2pt(0.4), bounds.top - cm2pt(5.2)], :width => cm2pt(5) do
+          text esr9_reference(invoice, account), :size => 7
+
+          text " "
+
+          draw_address invoice.customer.billing_vcard
+        end
+      end
+
+      bounding_box [cm2pt(6.4), cm2pt(9.6)], :width => cm2pt(5) do
+        draw_account_detail(account.bank, sender, print_payment_for)
+        draw_account(account)
+        draw_amount(invoice.balance.currency_round)
+      end
+
+      font_size 10 do
+        character_spacing 1.1 do
+          draw_text esr9_reference(invoice, account), :at => [cm2pt(12.7), cm2pt(6.8)]
+        end
+      end
+
+      bounding_box [cm2pt(12.7), cm2pt(5.5)], :width => cm2pt(7.5) do
+        draw_address(invoice.customer.billing_vcard)
+      end
+
+      # ESR-Reference
+      if ::Rails.root.join('data/ocrb10.ttf').exist?
+        ocr_font = ::Rails.root.join('data/ocrb10.ttf')
+      else
+        ocr_font = "Helvetica"
+        ::Rails.logger.warn("No ocrb10.ttf found for ESR reference in #{::Rails.root.join('data')}!")
+      end
+
+      font ocr_font, :size => 11 do
+        character_spacing 0.5 do
+          draw_text esr9(invoice, account), :at => [cm2pt(6.7), cm2pt(1.7)]
+        end
+      end
+    end
+
     def to_pdf(invoice, params = {})
       bounding_box [1.cm, bounds.top], :width => bounds.width do
         title(invoice)
